@@ -2,6 +2,7 @@
   "name": "vue-laravel-crud",
   "version": "1.0.24",
   "description": "",
+  "homepage": "https://github.com/clonixdev/vue-laravel-crud",
   "main": "dist/vue-laravel-crud.ssr.js",
   "browser": "dist/vue-laravel-crud.esm.js",
   "module": "dist/vue-laravel-crud.esm.js",
