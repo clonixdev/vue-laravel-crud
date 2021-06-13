@@ -1,4 +1,4 @@
-'use strict';var draggable=require('vuedraggable');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}var draggable__default=/*#__PURE__*/_interopDefaultLegacy(draggable);function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+'use strict';var draggable=require('vuedraggable'),axios=require('axios');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}var draggable__default=/*#__PURE__*/_interopDefaultLegacy(draggable);var axios__default=/*#__PURE__*/_interopDefaultLegacy(axios);function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -251,7 +251,7 @@ function _nonIterableRest() {
       var _this = this;
 
       _this.loading = true;
-      axios.get(this.apiUrl + "/" + this.modelName, {
+      axios__default['default'].get(this.apiUrl + "/" + this.modelName, {
         params: {
           page: page,
           limit: this.limit,
@@ -282,7 +282,7 @@ function _nonIterableRest() {
       }).then(function (value) {
         if (value) {
           _this.loading = true;
-          axios.delete(apiUrl + "/" + _this.modelName + "/" + id).then(function (response) {
+          axios__default['default'].delete(apiUrl + "/" + _this.modelName + "/" + id).then(function (response) {
             _this.items.splice(index, 1);
 
             _this.loading = false;
@@ -309,7 +309,7 @@ function _nonIterableRest() {
           });
           v.order = k + 1;
         });
-        axios.post(this.apiUrl + "/" + _this.modelName + "/sort", {
+        axios__default['default'].post(this.apiUrl + "/" + _this.modelName + "/sort", {
           order: order
         }).then(function (response) {
           response.data;
@@ -336,7 +336,7 @@ function _nonIterableRest() {
                 _this.loading = true;
 
                 if (_this2.item.id) {
-                  axios.put(_this2.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
+                  axios__default['default'].put(_this2.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
                     _this.$bvModal.hide("modal-form-item-" + _this.modelName);
 
                     var itemSv = response.data;
@@ -354,7 +354,7 @@ function _nonIterableRest() {
                     _this.loading = false;
                   });
                 } else {
-                  axios.post(_this2.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
+                  axios__default['default'].post(_this2.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
                     _this.loading = false;
 
                     _this.$bvModal.hide("modal-form-item-" + _this.modelName);
@@ -546,7 +546,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"table-options\" data-v-6ad9d352>", "</div>", [_c('b-row', [_c('b-col', [_c('b-button-group', [_vm._t("tableActions", [_c('b-button', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"table-options\" data-v-305ca37a>", "</div>", [_c('b-row', [_c('b-col', [_c('b-button-group', [_vm._t("tableActions", [_c('b-button', {
     attrs: {
       "variant": "success",
       "disabled": _vm.loading
@@ -814,8 +814,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-6ad9d352_0", {
-    source: "tr td[data-v-6ad9d352]:first-child,tr td[data-v-6ad9d352]:last-child{width:1%;white-space:nowrap}.table-options[data-v-6ad9d352]{margin-bottom:1rem}",
+  inject("data-v-305ca37a_0", {
+    source: "tr td[data-v-305ca37a]:first-child,tr td[data-v-305ca37a]:last-child{width:1%;white-space:nowrap}.table-options[data-v-305ca37a]{margin-bottom:1rem}",
     map: undefined,
     media: undefined
   });
@@ -823,10 +823,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-6ad9d352";
+var __vue_scope_id__ = "data-v-305ca37a";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-6ad9d352";
+var __vue_module_identifier__ = "data-v-305ca37a";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

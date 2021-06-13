@@ -1,4 +1,5 @@
 import draggable from 'vuedraggable';
+import axios from 'axios';
 
 var script = /*#__PURE__*/{
   name: "VueLaravelCrud",
@@ -745,8 +746,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-6ad9d352_0", {
-    source: "tr td[data-v-6ad9d352]:first-child,tr td[data-v-6ad9d352]:last-child{width:1%;white-space:nowrap}.table-options[data-v-6ad9d352]{margin-bottom:1rem}",
+  inject("data-v-305ca37a_0", {
+    source: "tr td[data-v-305ca37a]:first-child,tr td[data-v-305ca37a]:last-child{width:1%;white-space:nowrap}.table-options[data-v-305ca37a]{margin-bottom:1rem}",
     map: undefined,
     media: undefined
   });
@@ -754,7 +755,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-6ad9d352";
+const __vue_scope_id__ = "data-v-305ca37a";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
