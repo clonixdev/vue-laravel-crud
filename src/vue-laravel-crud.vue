@@ -1,5 +1,6 @@
 <script>
 import draggable from "vuedraggable";
+import axios from "axios";
 
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud", // vue component name
