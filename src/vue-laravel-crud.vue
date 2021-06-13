@@ -137,9 +137,6 @@ export default /*#__PURE__*/ {
       type: String,
       default: "Buscar...",
     },
-
-
-    
   },
 
   mounted() {
@@ -395,27 +392,29 @@ export default /*#__PURE__*/ {
                 v-if="displayMode == displayModes.MODE_CARDS"
               ></b-icon-table>
             </b-button>
+
+            <div class="crud-search form-group m-0">
+              <b-input-group>
+                <b-input-group-prepend>
+                  <b-button
+                    @click="displaySearch = !displaySearch"
+                    :class="{ open: displaySearch }"
+                    ><b-icon-search></b-icon-search
+                  ></b-button>
+                </b-input-group-prepend>
+                <b-form-input
+                  v-if="displaySearch"
+                  v-model="search"
+                  class="pl-2"
+                  type="search"
+                  required
+                  :placeholder="searchPlaceholder"
+                  debounce="500"
+                ></b-form-input>
+              </b-input-group>
+            </div>
           </slot>
         </b-button-group>
-
-        <div class="crud-search form-group m-0">
-          <b-input-group>
-            <b-input-group-prepend>
-              <b-button @click="displaySearch = !displaySearch"
-                ><b-icon-search></b-icon-search
-              ></b-button>
-            </b-input-group-prepend>
-            <b-form-input
-              v-if="displaySearch"
-              v-model="search"
-              class="pl-2"
-              type="search"
-              required
-              :placeholder="searchPlaceholder"
-              debounce="500"
-            ></b-form-input>
-          </b-input-group>
-        </div>
       </div>
     </div>
     <b-overlay :show="loading" rounded="sm">
@@ -621,27 +620,35 @@ tr td:first-child {
   white-space: nowrap;
 }
 
-.crud-header{
+.crud-header {
+  display: flex;
+  justify-content: space-between;
+  max-height: 3rem;
+
+  .crud-title {
+    margin: 0;
+  }
+
+  .crud-search {
+    max-width: 15rem;
+
+    .btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 0.375rem;
+      border-bottom-right-radius: 0.375rem;
+
+      &.open {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+  .table-options {
+    margin-bottom: 1rem;
     display: flex;
-    justify-content: space-between;
-    max-height: 3rem;
-
-    .crud-title{
-          margin: 0;
-    }
-
-    .crud-search{
-          max-width: 15rem;
-    }
-    .table-options {
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
-
-
+    align-items: center;
+    justify-content: flex-end;
+  }
 }
-
-
 </style>
