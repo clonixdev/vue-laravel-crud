@@ -133,6 +133,13 @@ export default /*#__PURE__*/ {
       type: String,
       default: "Guardar",
     },
+    searchPlaceholder: {
+      type: String,
+      default: "Buscar...",
+    },
+
+
+    
   },
 
   mounted() {
@@ -391,7 +398,7 @@ export default /*#__PURE__*/ {
           </slot>
         </b-button-group>
 
-        <div class="form-control m-0">
+        <div class="crud-search form-group m-0">
           <b-input-group>
             <b-input-group-prepend>
               <b-button @click="displaySearch = !displaySearch"
@@ -404,7 +411,7 @@ export default /*#__PURE__*/ {
               class="pl-2"
               type="search"
               required
-              placeholder="Buscar..."
+              :placeholder="searchPlaceholder"
               debounce="500"
             ></b-form-input>
           </b-input-group>
@@ -614,10 +621,27 @@ tr td:first-child {
   white-space: nowrap;
 }
 
-.table-options {
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+.crud-header{
+    display: flex;
+    justify-content: space-between;
+    max-height: 3rem;
+
+    .crud-title{
+          margin: 0;
+    }
+
+    .crud-search{
+          max-width: 15rem;
+    }
+    .table-options {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+
 }
+
+
 </style>

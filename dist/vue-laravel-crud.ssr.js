@@ -210,6 +210,10 @@ function _nonIterableRest() {
     messageSave: {
       type: String,
       default: "Guardar"
+    },
+    searchPlaceholder: {
+      type: String,
+      default: "Buscar..."
     }
   },
   mounted: function mounted() {
@@ -561,7 +565,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-10898c76>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-10898c76>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-10898c76>", "</div>", [_c('b-button-group', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-7ab3b626>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-7ab3b626>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-7ab3b626>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
@@ -587,7 +591,7 @@ var __vue_render__ = function __vue_render__() {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"form-control m-0\" data-v-10898c76>", "</div>", [_c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-search form-group m-0\" data-v-7ab3b626>", "</div>", [_c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
     on: {
       "click": function click($event) {
         _vm.displaySearch = !_vm.displaySearch;
@@ -598,7 +602,7 @@ var __vue_render__ = function __vue_render__() {
     attrs: {
       "type": "search",
       "required": "",
-      "placeholder": "Buscar...",
+      "placeholder": _vm.searchPlaceholder,
       "debounce": "500"
     },
     model: {
@@ -845,8 +849,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-10898c76_0", {
-    source: "tr td[data-v-10898c76]:first-child,tr td[data-v-10898c76]:last-child{width:1%;white-space:nowrap}.table-options[data-v-10898c76]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-7ab3b626_0", {
+    source: "tr td[data-v-7ab3b626]:first-child,tr td[data-v-7ab3b626]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-7ab3b626]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-7ab3b626]{margin:0}.crud-header .crud-search[data-v-7ab3b626]{max-width:15rem}.crud-header .table-options[data-v-7ab3b626]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -854,10 +858,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-10898c76";
+var __vue_scope_id__ = "data-v-7ab3b626";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-10898c76";
+var __vue_module_identifier__ = "data-v-7ab3b626";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

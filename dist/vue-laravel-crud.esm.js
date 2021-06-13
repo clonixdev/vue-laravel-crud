@@ -126,6 +126,10 @@ var script = /*#__PURE__*/{
     messageSave: {
       type: String,
       default: "Guardar"
+    },
+    searchPlaceholder: {
+      type: String,
+      default: "Buscar..."
     }
   },
 
@@ -525,7 +529,7 @@ var __vue_render__ = function () {
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading
   })], 2), _vm._v(" "), _c('div', {
-    staticClass: "form-control m-0"
+    staticClass: "crud-search form-group m-0"
   }, [_c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
     on: {
       "click": function ($event) {
@@ -537,7 +541,7 @@ var __vue_render__ = function () {
     attrs: {
       "type": "search",
       "required": "",
-      "placeholder": "Buscar...",
+      "placeholder": _vm.searchPlaceholder,
       "debounce": "500"
     },
     model: {
@@ -784,8 +788,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-10898c76_0", {
-    source: "tr td[data-v-10898c76]:first-child,tr td[data-v-10898c76]:last-child{width:1%;white-space:nowrap}.table-options[data-v-10898c76]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-7ab3b626_0", {
+    source: "tr td[data-v-7ab3b626]:first-child,tr td[data-v-7ab3b626]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-7ab3b626]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-7ab3b626]{margin:0}.crud-header .crud-search[data-v-7ab3b626]{max-width:15rem}.crud-header .table-options[data-v-7ab3b626]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -793,7 +797,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-10898c76";
+const __vue_scope_id__ = "data-v-7ab3b626";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
