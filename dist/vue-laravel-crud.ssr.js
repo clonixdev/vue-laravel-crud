@@ -163,6 +163,10 @@ function _nonIterableRest() {
       type: Boolean,
       default: true
     },
+    showTitle: {
+      type: Boolean,
+      default: true
+    },
     limit: {
       type: Number,
       default: 20
@@ -557,7 +561,9 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"table-options\" data-v-448d29f7>", "</div>", [_c('b-button-group', [_vm._t("tableActions", [_c('b-button', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-10898c76>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-10898c76>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-10898c76>", "</div>", [_c('b-button-group', {
+    staticClass: "mr-1"
+  }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
       "variant": "success",
       "disabled": _vm.loading
@@ -567,7 +573,7 @@ var __vue_render__ = function __vue_render__() {
         return _vm.createItem();
       }
     }
-  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n        ")], 1), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
+  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
     attrs: {
       "variant": "info",
       "disabled": _vm.loading
@@ -581,13 +587,14 @@ var __vue_render__ = function __vue_render__() {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading
-  })], 2), _vm._ssrNode(" "), _c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"form-control m-0\" data-v-10898c76>", "</div>", [_c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
     on: {
       "click": function click($event) {
         _vm.displaySearch = !_vm.displaySearch;
       }
     }
   }, [_c('b-icon-search')], 1)], 1), _vm._v(" "), _vm.displaySearch ? _c('b-form-input', {
+    staticClass: "pl-2",
     attrs: {
       "type": "search",
       "required": "",
@@ -601,7 +608,7 @@ var __vue_render__ = function __vue_render__() {
       },
       expression: "search"
     }
-  }) : _vm._e()], 1)], 2) : _vm._e(), _vm._ssrNode(" "), _c('b-overlay', {
+  }) : _vm._e()], 1)], 1)], 2)], 2) : _vm._e(), _vm._ssrNode(" "), _c('b-overlay', {
     attrs: {
       "show": _vm.loading,
       "rounded": "sm"
@@ -611,7 +618,7 @@ var __vue_render__ = function __vue_render__() {
   }, [_c('table', {
     staticClass: "table table-hover table-striped w-100"
   }, [_c('thead', {
-    staticClass: "thead-dark"
+    staticClass: "thead-light"
   }, [_c('tr', [_vm._t("rowHead", _vm._l(_vm.columns, function (column, indexc) {
     return _c('th', {
       key: indexc
@@ -838,8 +845,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-448d29f7_0", {
-    source: "tr td[data-v-448d29f7]:first-child,tr td[data-v-448d29f7]:last-child{width:1%;white-space:nowrap}.table-options[data-v-448d29f7]{margin-bottom:1rem}",
+  inject("data-v-10898c76_0", {
+    source: "tr td[data-v-10898c76]:first-child,tr td[data-v-10898c76]:last-child{width:1%;white-space:nowrap}.table-options[data-v-10898c76]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -847,10 +854,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-448d29f7";
+var __vue_scope_id__ = "data-v-10898c76";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-448d29f7";
+var __vue_module_identifier__ = "data-v-10898c76";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

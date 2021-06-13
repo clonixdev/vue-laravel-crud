@@ -79,6 +79,10 @@ var script = /*#__PURE__*/{
       type: Boolean,
       default: true
     },
+    showTitle: {
+      type: Boolean,
+      default: true
+    },
     limit: {
       type: Number,
       default: 20
@@ -489,8 +493,14 @@ var __vue_render__ = function () {
   return _c('div', {
     staticClass: "crud"
   }, [_vm.showHeader ? _c('div', {
+    staticClass: "crud-header"
+  }, [_vm.showTitle ? _c('h4', {
+    staticClass: "crud-title"
+  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "table-options"
-  }, [_c('b-button-group', [_vm._t("tableActions", [_c('b-button', {
+  }, [_c('b-button-group', {
+    staticClass: "mr-1"
+  }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
       "variant": "success",
       "disabled": _vm.loading
@@ -500,7 +510,7 @@ var __vue_render__ = function () {
         return _vm.createItem();
       }
     }
-  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n        ")], 1), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
+  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
     attrs: {
       "variant": "info",
       "disabled": _vm.loading
@@ -514,13 +524,16 @@ var __vue_render__ = function () {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading
-  })], 2), _vm._v(" "), _c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
+  })], 2), _vm._v(" "), _c('div', {
+    staticClass: "form-control m-0"
+  }, [_c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
     on: {
       "click": function ($event) {
         _vm.displaySearch = !_vm.displaySearch;
       }
     }
   }, [_c('b-icon-search')], 1)], 1), _vm._v(" "), _vm.displaySearch ? _c('b-form-input', {
+    staticClass: "pl-2",
     attrs: {
       "type": "search",
       "required": "",
@@ -534,7 +547,7 @@ var __vue_render__ = function () {
       },
       expression: "search"
     }
-  }) : _vm._e()], 1)], 1) : _vm._e(), _vm._v(" "), _c('b-overlay', {
+  }) : _vm._e()], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _c('b-overlay', {
     attrs: {
       "show": _vm.loading,
       "rounded": "sm"
@@ -544,7 +557,7 @@ var __vue_render__ = function () {
   }, [_c('table', {
     staticClass: "table table-hover table-striped w-100"
   }, [_c('thead', {
-    staticClass: "thead-dark"
+    staticClass: "thead-light"
   }, [_c('tr', [_vm._t("rowHead", _vm._l(_vm.columns, function (column, indexc) {
     return _c('th', {
       key: indexc
@@ -771,8 +784,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-448d29f7_0", {
-    source: "tr td[data-v-448d29f7]:first-child,tr td[data-v-448d29f7]:last-child{width:1%;white-space:nowrap}.table-options[data-v-448d29f7]{margin-bottom:1rem}",
+  inject("data-v-10898c76_0", {
+    source: "tr td[data-v-10898c76]:first-child,tr td[data-v-10898c76]:last-child{width:1%;white-space:nowrap}.table-options[data-v-10898c76]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -780,7 +793,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-448d29f7";
+const __vue_scope_id__ = "data-v-10898c76";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

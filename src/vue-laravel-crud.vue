@@ -73,7 +73,12 @@ export default /*#__PURE__*/ {
       type: Boolean,
       default: true,
     },
+
     showHeader: {
+      type: Boolean,
+      default: true,
+    },
+    showTitle: {
       type: Boolean,
       default: true,
     },
@@ -351,59 +356,68 @@ export default /*#__PURE__*/ {
 
 <template>
   <div class="crud">
-    <div class="table-options" v-if="showHeader">
-      
-      <b-button-group>
-        <slot
-          name="tableActions"
-          v-bind:createItem="createItem"
-          v-bind:toggleDisplayMode="toggleDisplayMode"
-          v-bind:loading="loading"
-        >
-          <b-button variant="success" @click="createItem()" :disabled="loading">
-            <b-icon-plus></b-icon-plus>{{ messageNew }}
-          </b-button>
+    <div class="crud-header" v-if="showHeader">
+      <h4 class="crud-title" v-if="showTitle">{{ title }}</h4>
 
-          <b-button
-            variant="info"
-            @click="toggleDisplayMode()"
-            :disabled="loading"
-            v-if="displayModeToggler"
+      <div class="table-options">
+        <b-button-group class="mr-1">
+          <slot
+            name="tableActions"
+            v-bind:createItem="createItem"
+            v-bind:toggleDisplayMode="toggleDisplayMode"
+            v-bind:loading="loading"
           >
-            <b-icon-card-list
-              v-if="displayMode == displayModes.MODE_TABLE"
-            ></b-icon-card-list>
-            <b-icon-table
-              v-if="displayMode == displayModes.MODE_CARDS"
-            ></b-icon-table>
-          </b-button>
-        </slot>
-      </b-button-group>
+            <b-button
+              variant="success"
+              @click="createItem()"
+              :disabled="loading"
+            >
+              <b-icon-plus></b-icon-plus>{{ messageNew }}
+            </b-button>
 
-      <b-input-group>
-        <b-input-group-prepend>
-          <b-button @click="displaySearch = !displaySearch"
-            ><b-icon-search></b-icon-search
-          ></b-button>
-        </b-input-group-prepend>
-        <b-form-input
-          v-if="displaySearch"
-          v-model="search"
-          type="search"
-          required
-          placeholder="Buscar..."
-          debounce="500"
-        ></b-form-input>
-      </b-input-group>
+            <b-button
+              variant="info"
+              @click="toggleDisplayMode()"
+              :disabled="loading"
+              v-if="displayModeToggler"
+            >
+              <b-icon-card-list
+                v-if="displayMode == displayModes.MODE_TABLE"
+              ></b-icon-card-list>
+              <b-icon-table
+                v-if="displayMode == displayModes.MODE_CARDS"
+              ></b-icon-table>
+            </b-button>
+          </slot>
+        </b-button-group>
+
+        <div class="form-control m-0">
+          <b-input-group>
+            <b-input-group-prepend>
+              <b-button @click="displaySearch = !displaySearch"
+                ><b-icon-search></b-icon-search
+              ></b-button>
+            </b-input-group-prepend>
+            <b-form-input
+              v-if="displaySearch"
+              v-model="search"
+              class="pl-2"
+              type="search"
+              required
+              placeholder="Buscar..."
+              debounce="500"
+            ></b-form-input>
+          </b-input-group>
+        </div>
+      </div>
     </div>
-
     <b-overlay :show="loading" rounded="sm">
       <div
         class="table-responsive"
         v-if="displayMode == displayModes.MODE_TABLE"
       >
         <table class="table table-hover table-striped w-100">
-          <thead class="thead-dark">
+          <thead class="thead-light">
             <tr>
               <slot name="rowHead">
                 <th v-for="(column, indexc) in columns" :key="indexc">
@@ -602,5 +616,8 @@ tr td:first-child {
 
 .table-options {
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 </style>
