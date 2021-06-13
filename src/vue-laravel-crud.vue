@@ -11,7 +11,7 @@ export default /*#__PURE__*/ {
     return {
       loading: false,
       items: [],
-      search: "",
+      displaySearch: false,
 
       // modelName: "products",
       pagination: {
@@ -63,6 +63,12 @@ export default /*#__PURE__*/ {
       type: String,
       default: "/api",
     },
+
+    search: {
+      type: String,
+      default: "",
+    },
+
     showPaginator: {
       type: Boolean,
       default: true,
@@ -79,6 +85,11 @@ export default /*#__PURE__*/ {
     displayMode: {
       type: Number,
       default: 1,
+    },
+
+    displayModeToggler: {
+      type: Boolean,
+      default: false,
     },
 
     enableDraggable: {
@@ -130,19 +141,23 @@ export default /*#__PURE__*/ {
     },
   },
   methods: {
+    toggleDisplayMode() {
+      if (this.displayMode == this.displayModes.MODE_TABLE)
+        this.displayMode = this.displayModes.MODE_CARDS;
+      else if (this.displayMode == this.displayModes.MODE_CARDS)
+        this.displayMode = this.displayModes.MODE_TABLE;
+    },
     onRowHover(item, itemIndex) {
       if (this.selectHover) {
         this.item = this.items[itemIndex];
         this.onSelect();
       }
-  
     },
     onRowClick(item, itemIndex) {
       if (this.selectClick) {
         this.item = this.items[itemIndex];
         this.onSelect();
       }
-     
     },
 
     onSelect() {
@@ -337,39 +352,57 @@ export default /*#__PURE__*/ {
 <template>
   <div class="crud">
     <div class="table-options" v-if="showHeader">
-      <b-row>
-        <b-col>
-          <b-button-group>
-            <slot
-              name="tableActions"
-              v-bind:createItem="createItem"
-              v-bind:loading="loading"
-            >
-              <b-button
-                variant="success"
-                @click="createItem()"
-                :disabled="loading"
-              >
-                <b-icon-plus></b-icon-plus>{{ messageNew }}
-              </b-button>
-            </slot>
-          </b-button-group>
-        </b-col>
-        <b-col xs="6" md="4" xl="3">
-          <b-form-input
-            v-model="search"
-            type="search"
-            required
-            placeholder="Buscar..."
-            debounce="500"
-          ></b-form-input>
-        </b-col>
-      </b-row>
+      
+      <b-button-group>
+        <slot
+          name="tableActions"
+          v-bind:createItem="createItem"
+          v-bind:toggleDisplayMode="toggleDisplayMode"
+          v-bind:loading="loading"
+        >
+          <b-button variant="success" @click="createItem()" :disabled="loading">
+            <b-icon-plus></b-icon-plus>{{ messageNew }}
+          </b-button>
+
+          <b-button
+            variant="info"
+            @click="toggleDisplayMode()"
+            :disabled="loading"
+            v-if="displayModeToggler"
+          >
+            <b-icon-card-list
+              v-if="displayMode == displayModes.MODE_TABLE"
+            ></b-icon-card-list>
+            <b-icon-table
+              v-if="displayMode == displayModes.MODE_CARDS"
+            ></b-icon-table>
+          </b-button>
+        </slot>
+      </b-button-group>
+
+      <b-input-group>
+        <b-input-group-prepend>
+          <b-button @click="displaySearch = !displaySearch"
+            ><b-icon-search></b-icon-search
+          ></b-button>
+        </b-input-group-prepend>
+        <b-form-input
+          v-if="displaySearch"
+          v-model="search"
+          type="search"
+          required
+          placeholder="Buscar..."
+          debounce="500"
+        ></b-form-input>
+      </b-input-group>
     </div>
 
     <b-overlay :show="loading" rounded="sm">
-      <div v-if="displayMode == displayModes.MODE_TABLE">
-        <table class="table table-responsive table-hover table-striped w-100">
+      <div
+        class="table-responsive"
+        v-if="displayMode == displayModes.MODE_TABLE"
+      >
+        <table class="table table-hover table-striped w-100">
           <thead class="thead-dark">
             <tr>
               <slot name="rowHead">
@@ -381,9 +414,6 @@ export default /*#__PURE__*/ {
           </thead>
 
           <tbody>
-            <p v-if="items.length == 0" class="p-3">
-              {{ messageEmptyResults }}
-            </p>
             <tr
               v-for="(item, index) in filteredItems"
               v-bind:key="index"
@@ -393,7 +423,13 @@ export default /*#__PURE__*/ {
               <slot name="row" v-bind:item="item">
                 <td v-for="(column, indexc) in columns" :key="indexc">
                   <slot :name="'cell-' + column.prop" v-bind:item="item">
-                    <span v-if="column.prop &&  column.prop.split('.').length > 1 && column.prop.split('.')[1]">
+                    <span
+                      v-if="
+                        column.prop &&
+                        column.prop.split('.').length > 1 &&
+                        column.prop.split('.')[1]
+                      "
+                    >
                       {{
                         item[column.prop.split(".")[0]][
                           column.prop.split(".")[1]
@@ -437,6 +473,9 @@ export default /*#__PURE__*/ {
             </tr>
           </tbody>
         </table>
+        <p v-if="items.length == 0" class="p-3">
+          {{ messageEmptyResults }}
+        </p>
       </div>
 
       <div v-if="displayMode == displayModes.MODE_CARDS">

@@ -12,7 +12,7 @@ var script = /*#__PURE__*/{
     return {
       loading: false,
       items: [],
-      search: "",
+      displaySearch: false,
       // modelName: "products",
       pagination: {
         current_page: 1,
@@ -67,6 +67,10 @@ var script = /*#__PURE__*/{
       type: String,
       default: "/api"
     },
+    search: {
+      type: String,
+      default: ""
+    },
     showPaginator: {
       type: Boolean,
       default: true
@@ -82,6 +86,10 @@ var script = /*#__PURE__*/{
     displayMode: {
       type: Number,
       default: 1
+    },
+    displayModeToggler: {
+      type: Boolean,
+      default: false
     },
     enableDraggable: {
       type: Boolean,
@@ -130,6 +138,10 @@ var script = /*#__PURE__*/{
 
   },
   methods: {
+    toggleDisplayMode() {
+      if (this.displayMode == this.displayModes.MODE_TABLE) this.displayMode = this.displayModes.MODE_CARDS;else if (this.displayMode == this.displayModes.MODE_CARDS) this.displayMode = this.displayModes.MODE_TABLE;
+    },
+
     onRowHover(item, itemIndex) {
       if (this.selectHover) {
         this.item = this.items[itemIndex];
@@ -478,7 +490,7 @@ var __vue_render__ = function () {
     staticClass: "crud"
   }, [_vm.showHeader ? _c('div', {
     staticClass: "table-options"
-  }, [_c('b-row', [_c('b-col', [_c('b-button-group', [_vm._t("tableActions", [_c('b-button', {
+  }, [_c('b-button-group', [_vm._t("tableActions", [_c('b-button', {
     attrs: {
       "variant": "success",
       "disabled": _vm.loading
@@ -488,16 +500,27 @@ var __vue_render__ = function () {
         return _vm.createItem();
       }
     }
-  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n            ")], 1)], {
-    "createItem": _vm.createItem,
-    "loading": _vm.loading
-  })], 2)], 1), _vm._v(" "), _c('b-col', {
+  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n        ")], 1), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
     attrs: {
-      "xs": "6",
-      "md": "4",
-      "xl": "3"
+      "variant": "info",
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.toggleDisplayMode();
+      }
     }
-  }, [_c('b-form-input', {
+  }, [_vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('b-icon-card-list') : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('b-icon-table') : _vm._e()], 1) : _vm._e()], {
+    "createItem": _vm.createItem,
+    "toggleDisplayMode": _vm.toggleDisplayMode,
+    "loading": _vm.loading
+  })], 2), _vm._v(" "), _c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
+    on: {
+      "click": function ($event) {
+        _vm.displaySearch = !_vm.displaySearch;
+      }
+    }
+  }, [_c('b-icon-search')], 1)], 1), _vm._v(" "), _vm.displaySearch ? _c('b-form-input', {
     attrs: {
       "type": "search",
       "required": "",
@@ -511,22 +534,22 @@ var __vue_render__ = function () {
       },
       expression: "search"
     }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _c('b-overlay', {
+  }) : _vm._e()], 1)], 1) : _vm._e(), _vm._v(" "), _c('b-overlay', {
     attrs: {
       "show": _vm.loading,
       "rounded": "sm"
     }
-  }, [_vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('div', [_c('table', {
-    staticClass: "table table-responsive table-hover table-striped w-100"
+  }, [_vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('div', {
+    staticClass: "table-responsive"
+  }, [_c('table', {
+    staticClass: "table table-hover table-striped w-100"
   }, [_c('thead', {
     staticClass: "thead-dark"
   }, [_c('tr', [_vm._t("rowHead", _vm._l(_vm.columns, function (column, indexc) {
     return _c('th', {
       key: indexc
     }, [_vm._v("\n                " + _vm._s(column.label) + "\n              ")]);
-  }))], 2)]), _vm._v(" "), _c('tbody', [_vm.items.length == 0 ? _c('p', {
-    staticClass: "p-3"
-  }, [_vm._v("\n            " + _vm._s(_vm.messageEmptyResults) + "\n          ")]) : _vm._e(), _vm._v(" "), _vm._l(_vm.filteredItems, function (item, index) {
+  }))], 2)]), _vm._v(" "), _c('tbody', _vm._l(_vm.filteredItems, function (item, index) {
     return _c('tr', {
       key: index,
       on: {
@@ -579,7 +602,9 @@ var __vue_render__ = function () {
     }), {
       "item": item
     })], 2);
-  })], 2)])]) : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.items.length == 0 ? _c('p', {
+  }), 0)]), _vm._v(" "), _vm.items.length == 0 ? _c('p', {
+    staticClass: "p-3"
+  }, [_vm._v("\n        " + _vm._s(_vm.messageEmptyResults) + "\n      ")]) : _vm._e()]) : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.items.length == 0 ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v("\n        " + _vm._s(_vm.messageEmptyResults) + "\n      ")]) : _vm._e(), _vm._v(" "), _c('draggable', {
     staticClass: "row",
@@ -746,8 +771,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-305ca37a_0", {
-    source: "tr td[data-v-305ca37a]:first-child,tr td[data-v-305ca37a]:last-child{width:1%;white-space:nowrap}.table-options[data-v-305ca37a]{margin-bottom:1rem}",
+  inject("data-v-448d29f7_0", {
+    source: "tr td[data-v-448d29f7]:first-child,tr td[data-v-448d29f7]:last-child{width:1%;white-space:nowrap}.table-options[data-v-448d29f7]{margin-bottom:1rem}",
     map: undefined,
     media: undefined
   });
@@ -755,7 +780,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-305ca37a";
+const __vue_scope_id__ = "data-v-448d29f7";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
