@@ -97,6 +97,27 @@ export default /*#__PURE__*/ {
       default: false,
     },
 
+    colXs: {
+      default: 12,
+      type: Number,
+    },
+    colSm: {
+      default: 12,
+      type: Number,
+    },
+    colMd: {
+      default: 6,
+      type: Number,
+    },
+    colLg: {
+      default: 4,
+      type: Number,
+    },
+    colXl: {
+      default: 3,
+      type: Number,
+    },
+
     enableDraggable: {
       type: Boolean,
       default: false,
@@ -512,8 +533,15 @@ export default /*#__PURE__*/ {
           @sort="onSort()"
         >
           <b-row>
-            <!-- :cols="colXs" :sm="colSm" :md="colMd" :lg="colMd" :xl="colXl" -->
-            <b-col v-for="(item, index) in filteredItems" v-bind:key="index">
+            <b-col
+              v-for="(item, index) in filteredItems"
+              v-bind:key="index"
+              :cols="colXs"
+              :sm="colSm"
+              :md="colMd"
+              :lg="colMd"
+              :xl="colXl"
+            >
               <b-card :title="item.title" tag="article" class="mb-2">
                 <slot name="row" v-bind:item="item">
                   <div v-for="(column, indexc) in columns" :key="indexc">
@@ -564,13 +592,13 @@ export default /*#__PURE__*/ {
       </div>
     </b-overlay>
     <div class="text-center crud-paginator">
-    <b-pagination
-      v-if="showPaginator"
-      v-model="pagination.current_page"
-      :total-rows="pagination.total"
-      :per-page="pagination.per_page"
-      @change="onPaginationChange($event)"
-    ></b-pagination>
+      <b-pagination
+        v-if="showPaginator"
+        v-model="pagination.current_page"
+        :total-rows="pagination.total"
+        :per-page="pagination.per_page"
+        @change="onPaginationChange($event)"
+      ></b-pagination>
     </div>
     <b-modal
       :id="'modal-form-item-' + modelName"

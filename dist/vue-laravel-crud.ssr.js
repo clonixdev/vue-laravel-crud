@@ -179,6 +179,26 @@ function _nonIterableRest() {
       type: Boolean,
       default: false
     },
+    colXs: {
+      default: 12,
+      type: Number
+    },
+    colSm: {
+      default: 12,
+      type: Number
+    },
+    colMd: {
+      default: 6,
+      type: Number
+    },
+    colLg: {
+      default: 4,
+      type: Number
+    },
+    colXl: {
+      default: 3,
+      type: Number
+    },
     enableDraggable: {
       type: Boolean,
       default: false
@@ -565,7 +585,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-509972ce>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-509972ce>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-509972ce>", "</div>", [_c('b-button-group', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-6ff1f16d>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-6ff1f16d>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-6ff1f16d>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
@@ -714,7 +734,14 @@ var __vue_render__ = function __vue_render__() {
     }
   }, [_c('b-row', _vm._l(_vm.filteredItems, function (item, index) {
     return _c('b-col', {
-      key: index
+      key: index,
+      attrs: {
+        "cols": _vm.colXs,
+        "sm": _vm.colSm,
+        "md": _vm.colMd,
+        "lg": _vm.colMd,
+        "xl": _vm.colXl
+      }
     }, [_c('b-card', {
       staticClass: "mb-2",
       attrs: {
@@ -770,7 +797,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"text-center crud-paginator\" data-v-6ff1f16d>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -787,7 +814,7 @@ var __vue_render__ = function __vue_render__() {
       },
       expression: "pagination.current_page"
     }
-  }) : _vm._e(), _vm._ssrNode(" "), _c('b-modal', {
+  }) : _vm._e()], 1), _vm._ssrNode(" "), _c('b-modal', {
     attrs: {
       "id": 'modal-form-item-' + _vm.modelName,
       "hide-footer": "",
@@ -854,8 +881,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-509972ce_0", {
-    source: "tr td[data-v-509972ce]:first-child,tr td[data-v-509972ce]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-509972ce]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-509972ce]{margin:0}.crud-header .crud-search[data-v-509972ce]{max-width:15rem}.crud-header .crud-search .btn[data-v-509972ce]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-509972ce]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-509972ce]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-6ff1f16d_0", {
+    source: "tr td[data-v-6ff1f16d]:first-child,tr td[data-v-6ff1f16d]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-6ff1f16d]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-6ff1f16d]{margin:0}.crud-header .crud-search[data-v-6ff1f16d]{max-width:15rem}.crud-header .crud-search .btn[data-v-6ff1f16d]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-6ff1f16d]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-6ff1f16d]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -863,10 +890,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-509972ce";
+var __vue_scope_id__ = "data-v-6ff1f16d";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-509972ce";
+var __vue_module_identifier__ = "data-v-6ff1f16d";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

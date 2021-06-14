@@ -95,6 +95,26 @@ var script = /*#__PURE__*/{
       type: Boolean,
       default: false
     },
+    colXs: {
+      default: 12,
+      type: Number
+    },
+    colSm: {
+      default: 12,
+      type: Number
+    },
+    colMd: {
+      default: 6,
+      type: Number
+    },
+    colLg: {
+      default: 4,
+      type: Number
+    },
+    colXl: {
+      default: 3,
+      type: Number
+    },
     enableDraggable: {
       type: Boolean,
       default: false
@@ -651,7 +671,14 @@ var __vue_render__ = function () {
     }
   }, [_c('b-row', _vm._l(_vm.filteredItems, function (item, index) {
     return _c('b-col', {
-      key: index
+      key: index,
+      attrs: {
+        "cols": _vm.colXs,
+        "sm": _vm.colSm,
+        "md": _vm.colMd,
+        "lg": _vm.colMd,
+        "xl": _vm.colXl
+      }
     }, [_c('b-card', {
       staticClass: "mb-2",
       attrs: {
@@ -707,7 +734,9 @@ var __vue_render__ = function () {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1)], 1) : _vm._e()]), _vm._v(" "), _vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1)], 1) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "text-center crud-paginator"
+  }, [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -724,7 +753,7 @@ var __vue_render__ = function () {
       },
       expression: "pagination.current_page"
     }
-  }) : _vm._e(), _vm._v(" "), _c('b-modal', {
+  }) : _vm._e()], 1), _vm._v(" "), _c('b-modal', {
     attrs: {
       "id": 'modal-form-item-' + _vm.modelName,
       "hide-footer": "",
@@ -791,8 +820,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-509972ce_0", {
-    source: "tr td[data-v-509972ce]:first-child,tr td[data-v-509972ce]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-509972ce]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-509972ce]{margin:0}.crud-header .crud-search[data-v-509972ce]{max-width:15rem}.crud-header .crud-search .btn[data-v-509972ce]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-509972ce]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-509972ce]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-6ff1f16d_0", {
+    source: "tr td[data-v-6ff1f16d]:first-child,tr td[data-v-6ff1f16d]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-6ff1f16d]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-6ff1f16d]{margin:0}.crud-header .crud-search[data-v-6ff1f16d]{max-width:15rem}.crud-header .crud-search .btn[data-v-6ff1f16d]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-6ff1f16d]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-6ff1f16d]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -800,7 +829,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-509972ce";
+const __vue_scope_id__ = "data-v-6ff1f16d";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
