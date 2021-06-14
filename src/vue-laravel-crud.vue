@@ -563,6 +563,7 @@ export default /*#__PURE__*/ {
         </draggable>
       </div>
     </b-overlay>
+    <div class="text-center crud-paginator">
     <b-pagination
       v-if="showPaginator"
       v-model="pagination.current_page"
@@ -570,7 +571,7 @@ export default /*#__PURE__*/ {
       :per-page="pagination.per_page"
       @change="onPaginationChange($event)"
     ></b-pagination>
-
+    </div>
     <b-modal
       :id="'modal-form-item-' + modelName"
       hide-footer
