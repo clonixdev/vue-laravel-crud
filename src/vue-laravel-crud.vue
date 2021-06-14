@@ -539,7 +539,7 @@ export default /*#__PURE__*/ {
               :cols="colXs"
               :sm="colSm"
               :md="colMd"
-              :lg="colMd"
+              :lg="colLg"
               :xl="colXl"
             >
               <b-card :title="item.title" tag="article" class="mb-2">
