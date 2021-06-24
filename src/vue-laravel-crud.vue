@@ -414,10 +414,11 @@ export default /*#__PURE__*/ {
               ></b-icon-table>
             </b-button>
 
-            <div class="crud-search form-group m-0">
+            <div class="crud-search m-0">
               <b-input-group>
                 <b-input-group-prepend>
                   <b-button
+                   variant="info"
                     @click="displaySearch = !displaySearch"
                     :class="{ open: displaySearch }"
                     ><b-icon-search></b-icon-search

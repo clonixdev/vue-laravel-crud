@@ -585,7 +585,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-6ff1f16d>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-6ff1f16d>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-6ff1f16d>", "</div>", [_c('b-button-group', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-5e9f475f>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-5e9f475f>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-5e9f475f>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
@@ -608,10 +608,13 @@ var __vue_render__ = function __vue_render__() {
       }
     }
   }, [_vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('b-icon-card-list') : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('b-icon-table') : _vm._e()], 1) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "crud-search form-group m-0"
+    staticClass: "crud-search m-0"
   }, [_c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
     class: {
       open: _vm.displaySearch
+    },
+    attrs: {
+      "variant": "info"
     },
     on: {
       "click": function click($event) {
@@ -739,7 +742,7 @@ var __vue_render__ = function __vue_render__() {
         "cols": _vm.colXs,
         "sm": _vm.colSm,
         "md": _vm.colMd,
-        "lg": _vm.colMd,
+        "lg": _vm.colLg,
         "xl": _vm.colXl
       }
     }, [_c('b-card', {
@@ -797,7 +800,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"text-center crud-paginator\" data-v-6ff1f16d>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"text-center crud-paginator\" data-v-5e9f475f>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -881,8 +884,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-6ff1f16d_0", {
-    source: "tr td[data-v-6ff1f16d]:first-child,tr td[data-v-6ff1f16d]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-6ff1f16d]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-6ff1f16d]{margin:0}.crud-header .crud-search[data-v-6ff1f16d]{max-width:15rem}.crud-header .crud-search .btn[data-v-6ff1f16d]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-6ff1f16d]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-6ff1f16d]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-5e9f475f_0", {
+    source: "tr td[data-v-5e9f475f]:first-child,tr td[data-v-5e9f475f]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-5e9f475f]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-5e9f475f]{margin:0}.crud-header .crud-search[data-v-5e9f475f]{max-width:15rem}.crud-header .crud-search .btn[data-v-5e9f475f]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-5e9f475f]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-5e9f475f]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -890,10 +893,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-6ff1f16d";
+var __vue_scope_id__ = "data-v-5e9f475f";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-6ff1f16d";
+var __vue_module_identifier__ = "data-v-5e9f475f";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
