@@ -418,7 +418,7 @@ export default /*#__PURE__*/ {
               <b-input-group>
                 <b-input-group-prepend>
                   <b-button
-                   variant="info"
+                    variant="info"
                     @click="displaySearch = !displaySearch"
                     :class="{ open: displaySearch }"
                     ><b-icon-search></b-icon-search
@@ -533,62 +533,60 @@ export default /*#__PURE__*/ {
           @end="drag = false"
           @sort="onSort()"
         >
-          <b-row>
-            <b-col
-              v-for="(item, index) in filteredItems"
-              v-bind:key="index"
-              :cols="colXs"
-              :sm="colSm"
-              :md="colMd"
-              :lg="colLg"
-              :xl="colXl"
-            >
-              <b-card :title="item.title" tag="article" class="mb-2">
-                <slot name="row" v-bind:item="item">
-                  <div v-for="(column, indexc) in columns" :key="indexc">
-                    <b-card-text v-if="column.type != 'actions'"
-                      >{{ column.label }}:
-                      <slot :name="'cell-' + column.prop" v-bind:item="item">
-                        {{ item[column.prop] }}
-                      </slot>
-                    </b-card-text>
-                  </div>
-                </slot>
-
-                <template v-slot:footer>
-                  <b-button-group>
-                    <slot
-                      name="rowAction"
-                      v-bind:item="item"
-                      v-bind:index="index"
-                      v-bind:showItem="showItem"
-                      v-bind:updateItem="updateItem"
-                      v-bind:removeItem="removeItem"
-                    >
-                      <b-button
-                        variant="primary"
-                        @click="showItem(item.id, index)"
-                      >
-                        <b-icon-eye></b-icon-eye>
-                      </b-button>
-                      <b-button
-                        variant="secondary"
-                        @click="updateItem(item.id, index)"
-                      >
-                        <b-icon-pencil></b-icon-pencil>
-                      </b-button>
-                      <b-button
-                        variant="danger"
-                        @click="removeItem(item.id, index)"
-                      >
-                        <b-icon-trash></b-icon-trash>
-                      </b-button>
+          <b-col
+            v-for="(item, index) in filteredItems"
+            v-bind:key="index"
+            :cols="colXs"
+            :sm="colSm"
+            :md="colMd"
+            :lg="colLg"
+            :xl="colXl"
+          >
+            <b-card :title="item.title" tag="article" class="mb-2">
+              <slot name="row" v-bind:item="item">
+                <div v-for="(column, indexc) in columns" :key="indexc">
+                  <b-card-text v-if="column.type != 'actions'"
+                    >{{ column.label }}:
+                    <slot :name="'cell-' + column.prop" v-bind:item="item">
+                      {{ item[column.prop] }}
                     </slot>
-                  </b-button-group>
-                </template>
-              </b-card>
-            </b-col>
-          </b-row>
+                  </b-card-text>
+                </div>
+              </slot>
+
+              <template v-slot:footer>
+                <b-button-group>
+                  <slot
+                    name="rowAction"
+                    v-bind:item="item"
+                    v-bind:index="index"
+                    v-bind:showItem="showItem"
+                    v-bind:updateItem="updateItem"
+                    v-bind:removeItem="removeItem"
+                  >
+                    <b-button
+                      variant="primary"
+                      @click="showItem(item.id, index)"
+                    >
+                      <b-icon-eye></b-icon-eye>
+                    </b-button>
+                    <b-button
+                      variant="secondary"
+                      @click="updateItem(item.id, index)"
+                    >
+                      <b-icon-pencil></b-icon-pencil>
+                    </b-button>
+                    <b-button
+                      variant="danger"
+                      @click="removeItem(item.id, index)"
+                    >
+                      <b-icon-trash></b-icon-trash>
+                    </b-button>
+                  </slot>
+                </b-button-group>
+              </template>
+            </b-card>
+          </b-col>
         </draggable>
       </div>
     </b-overlay>
