@@ -736,7 +736,7 @@ var __vue_render__ = function () {
         },
         proxy: true
       }], null, true)
-    }, [_vm._t("row", _vm._l(_vm.columns, function (column, indexc) {
+    }, [_vm._t("card", _vm._l(_vm.columns, function (column, indexc) {
       return _c('div', {
         key: indexc
       }, [column.type != 'actions' ? _c('b-card-text', [_vm._v(_vm._s(column.label) + ":\n                  "), _vm._t('cell-' + column.prop, [_vm._v("\n                    " + _vm._s(item[column.prop]) + "\n                  ")], {
@@ -831,8 +831,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-b2893bc6_0", {
-    source: "tr td[data-v-b2893bc6]:first-child,tr td[data-v-b2893bc6]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-b2893bc6]{display:flex;justify-content:center}.crud-header[data-v-b2893bc6]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-b2893bc6]{margin:0}.crud-header .crud-search[data-v-b2893bc6]{max-width:15rem}.crud-header .crud-search .btn[data-v-b2893bc6]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-b2893bc6]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-b2893bc6]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-d97e9c46_0", {
+    source: "tr td[data-v-d97e9c46]:first-child,tr td[data-v-d97e9c46]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-d97e9c46]{display:flex;justify-content:center}.crud-header[data-v-d97e9c46]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-d97e9c46]{margin:0}.crud-header .crud-search[data-v-d97e9c46]{max-width:15rem}.crud-header .crud-search .btn[data-v-d97e9c46]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-d97e9c46]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-d97e9c46]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -840,7 +840,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-b2893bc6";
+const __vue_scope_id__ = "data-v-d97e9c46";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

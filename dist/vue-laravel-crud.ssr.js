@@ -592,7 +592,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-b2893bc6>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-b2893bc6>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-b2893bc6>", "</div>", [_c('b-button-group', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-d97e9c46>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-d97e9c46>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-d97e9c46>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
@@ -798,7 +798,7 @@ var __vue_render__ = function __vue_render__() {
         },
         proxy: true
       }], null, true)
-    }, [_vm._t("row", _vm._l(_vm.columns, function (column, indexc) {
+    }, [_vm._t("card", _vm._l(_vm.columns, function (column, indexc) {
       return _c('div', {
         key: indexc
       }, [column.type != 'actions' ? _c('b-card-text', [_vm._v(_vm._s(column.label) + ":\n                  "), _vm._t('cell-' + column.prop, [_vm._v("\n                    " + _vm._s(item[column.prop]) + "\n                  ")], {
@@ -807,7 +807,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-b2893bc6>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-d97e9c46>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -891,8 +891,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-b2893bc6_0", {
-    source: "tr td[data-v-b2893bc6]:first-child,tr td[data-v-b2893bc6]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-b2893bc6]{display:flex;justify-content:center}.crud-header[data-v-b2893bc6]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-b2893bc6]{margin:0}.crud-header .crud-search[data-v-b2893bc6]{max-width:15rem}.crud-header .crud-search .btn[data-v-b2893bc6]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-b2893bc6]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-b2893bc6]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-d97e9c46_0", {
+    source: "tr td[data-v-d97e9c46]:first-child,tr td[data-v-d97e9c46]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-d97e9c46]{display:flex;justify-content:center}.crud-header[data-v-d97e9c46]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-d97e9c46]{margin:0}.crud-header .crud-search[data-v-d97e9c46]{max-width:15rem}.crud-header .crud-search .btn[data-v-d97e9c46]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-d97e9c46]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-d97e9c46]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -900,10 +900,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-b2893bc6";
+var __vue_scope_id__ = "data-v-d97e9c46";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-b2893bc6";
+var __vue_module_identifier__ = "data-v-d97e9c46";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

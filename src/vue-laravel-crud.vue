@@ -558,7 +558,7 @@ export default /*#__PURE__*/ {
             :xl="colXl"
           >
             <b-card :title="item.title" tag="article" class="mb-2">
-              <slot name="row" v-bind:item="item">
+              <slot name="card" v-bind:item="item">
                 <div v-for="(column, indexc) in columns" :key="indexc">
                   <b-card-text v-if="column.type != 'actions'"
                     >{{ column.label }}:
