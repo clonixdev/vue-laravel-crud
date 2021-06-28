@@ -55,6 +55,12 @@ export default /*#__PURE__*/ {
       type: Array,
       default: [{ label: "Id", prop: "id", type: "number" }],
     },
+
+    filter: {
+      type: Array,
+      default: [],
+    },
+
     sorteable: {
       type: Boolean,
       default: false,
@@ -169,6 +175,12 @@ export default /*#__PURE__*/ {
     filteredItems() {
       return this.items;
     },
+
+    finalFilters(){
+
+      return this.filters.concat(this.filter);
+
+    }
   },
   methods: {
     toggleDisplayMode() {
@@ -213,6 +225,9 @@ export default /*#__PURE__*/ {
     refresh() {
       this.fetchItems();
     },
+
+
+
     fetchItems(page = 1) {
       let _this = this;
       _this.loading = true;
@@ -221,7 +236,7 @@ export default /*#__PURE__*/ {
           params: {
             page: page,
             limit: this.limit,
-            filters: JSON.stringify(this.filters),
+            filters: JSON.stringify(this.finalFilters),
           },
         })
         .then(function (response) {

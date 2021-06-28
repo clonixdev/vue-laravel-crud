@@ -143,6 +143,10 @@ function _nonIterableRest() {
         type: "number"
       }]
     },
+    filter: {
+      type: Array,
+      default: []
+    },
     sorteable: {
       type: Boolean,
       default: false
@@ -244,6 +248,9 @@ function _nonIterableRest() {
   computed: {
     filteredItems: function filteredItems() {
       return this.items;
+    },
+    finalFilters: function finalFilters() {
+      return this.filters.concat(this.filter);
     }
   },
   methods: {
@@ -294,7 +301,7 @@ function _nonIterableRest() {
         params: {
           page: page,
           limit: this.limit,
-          filters: JSON.stringify(this.filters)
+          filters: JSON.stringify(this.finalFilters)
         }
       }).then(function (response) {
         _this.makePagination(response.data);
@@ -585,7 +592,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-0b73356e>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-0b73356e>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-0b73356e>", "</div>", [_c('b-button-group', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-02acab53>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-02acab53>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-02acab53>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
@@ -800,7 +807,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"text-center crud-paginator\" data-v-0b73356e>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"text-center crud-paginator\" data-v-02acab53>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -884,8 +891,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-0b73356e_0", {
-    source: "tr td[data-v-0b73356e]:first-child,tr td[data-v-0b73356e]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-0b73356e]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-0b73356e]{margin:0}.crud-header .crud-search[data-v-0b73356e]{max-width:15rem}.crud-header .crud-search .btn[data-v-0b73356e]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-0b73356e]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-0b73356e]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-02acab53_0", {
+    source: "tr td[data-v-02acab53]:first-child,tr td[data-v-02acab53]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-02acab53]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-02acab53]{margin:0}.crud-header .crud-search[data-v-02acab53]{max-width:15rem}.crud-header .crud-search .btn[data-v-02acab53]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-02acab53]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-02acab53]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -893,10 +900,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-0b73356e";
+var __vue_scope_id__ = "data-v-02acab53";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-0b73356e";
+var __vue_module_identifier__ = "data-v-02acab53";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
