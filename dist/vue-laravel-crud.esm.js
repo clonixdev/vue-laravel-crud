@@ -746,7 +746,7 @@ var __vue_render__ = function () {
       "item": item
     })], 2)], 1);
   }), 1)], 1) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "text-center crud-paginator"
+    staticClass: "crud-paginator"
   }, [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
@@ -831,8 +831,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-02acab53_0", {
-    source: "tr td[data-v-02acab53]:first-child,tr td[data-v-02acab53]:last-child{width:1%;white-space:nowrap}.crud-header[data-v-02acab53]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-02acab53]{margin:0}.crud-header .crud-search[data-v-02acab53]{max-width:15rem}.crud-header .crud-search .btn[data-v-02acab53]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-02acab53]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-02acab53]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-b2893bc6_0", {
+    source: "tr td[data-v-b2893bc6]:first-child,tr td[data-v-b2893bc6]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-b2893bc6]{display:flex;justify-content:center}.crud-header[data-v-b2893bc6]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-b2893bc6]{margin:0}.crud-header .crud-search[data-v-b2893bc6]{max-width:15rem}.crud-header .crud-search .btn[data-v-b2893bc6]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-b2893bc6]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-b2893bc6]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -840,7 +840,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-02acab53";
+const __vue_scope_id__ = "data-v-b2893bc6";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
