@@ -605,7 +605,7 @@ export default /*#__PURE__*/ {
         </draggable>
       </div>
     </b-overlay>
-    <div class="text-center crud-paginator">
+    <div class="crud-paginator">
       <b-pagination
         v-if="showPaginator"
         v-model="pagination.current_page"
@@ -662,7 +662,10 @@ tr td:first-child {
   width: 1%;
   white-space: nowrap;
 }
-
+.crud-pagination{
+  display:flex;
+  justify-content: center;
+}
 .crud-header {
   display: flex;
   justify-content: space-between;
