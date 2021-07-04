@@ -63,7 +63,7 @@ export default /*#__PURE__*/ {
       default: [],
     },
 
-    filterSidebar: {
+    enableFilters: {
       type: Boolean,
       default: false,
     },
@@ -183,16 +183,15 @@ export default /*#__PURE__*/ {
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
 
-    this.internalFilters =[];
-     this.columns.forEach((column) => {
-       if(this.isColumnHasFilter(column)){
-         this.internalFilters.push({
-            column: column.prop,
-            op: column.filterOp ? column.filterOp : "=",
-            value: -1,
-          });
-       }
-
+    this.internalFilters = [];
+    this.columns.forEach((column) => {
+      if (this.isColumnHasFilter(column)) {
+        this.internalFilters.push({
+          column: column.prop,
+          op: column.filterOp ? column.filterOp : "=",
+          value: -1,
+        });
+      }
     });
     this.fetchItems();
   },
@@ -493,7 +492,7 @@ export default /*#__PURE__*/ {
             <div v-for="(column, indexc) in columns" :key="indexc">
               <div v-if="isColumnHasFilter(column)">
                 <slot
-                  :name="'filter-' + column.prop"
+                  :name="'sidebar-filter-' + column.prop"
                   v-bind:column="column"
                   v-bind:filter="filter"
                   v-bind:getInternalFilterByProp="getInternalFilterByProp"
@@ -528,7 +527,7 @@ export default /*#__PURE__*/ {
               <b-icon-plus></b-icon-plus>{{ messageNew }}
             </b-button>
 
-            <b-button v-if="filterSidebar" v-b-toggle.sidebar-filters
+            <b-button v-if="enableFilters" v-b-toggle.sidebar-filters
               >Filtros</b-button
             >
 
@@ -581,7 +580,24 @@ export default /*#__PURE__*/ {
             <tr>
               <slot name="rowHead">
                 <th v-for="(column, indexc) in columns" :key="indexc">
-                  {{ column.label }}
+                  <slot
+                    :name="'filter-' + column.prop"
+                    v-bind:column="column"
+                    v-bind:filter="filter"
+                    v-bind:getInternalFilterByProp="getInternalFilterByProp"
+                    v-if="enableFilters && filtersVisible && isColumnHasFilter(column)"
+                  >
+                    <input
+                      class="form-control"
+                      v-model="getInternalFilterByProp(column.prop).value"
+                      :placeholder="column.label"
+                    />
+                  </slot>
+
+                  <span
+                    v-if="!enableFilters || (enableFilters && !filtersVisible) || !isColumnHasFilter(column)"
+                    >{{ column.label }}</span
+                  >
                 </th>
               </slot>
             </tr>

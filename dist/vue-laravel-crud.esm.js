@@ -65,7 +65,7 @@ var script = /*#__PURE__*/{
       type: Array,
       default: []
     },
-    filterSidebar: {
+    enableFilters: {
       type: Boolean,
       default: false
     },
@@ -618,7 +618,7 @@ var __vue_render__ = function () {
   }, _vm._l(_vm.columns, function (column, indexc) {
     return _c('div', {
       key: indexc
-    }, [_vm.isColumnHasFilter(column) ? _c('div', [_vm._t('filter-' + column.prop, [_c('div', {
+    }, [_vm.isColumnHasFilter(column) ? _c('div', [_vm._t('sidebar-filter-' + column.prop, [_c('div', {
       staticClass: "form-group"
     }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('input', {
       directives: [{
@@ -665,7 +665,7 @@ var __vue_render__ = function () {
         return _vm.createItem();
       }
     }
-  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.filterSidebar ? _c('b-button', {
+  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.enableFilters ? _c('b-button', {
     directives: [{
       name: "b-toggle",
       rawName: "v-b-toggle.sidebar-filters",
@@ -730,7 +730,34 @@ var __vue_render__ = function () {
   }, [_c('tr', [_vm._t("rowHead", _vm._l(_vm.columns, function (column, indexc) {
     return _c('th', {
       key: indexc
-    }, [_vm._v("\n                " + _vm._s(column.label) + "\n              ")]);
+    }, [_vm.enableFilters && _vm.filtersVisible && _vm.isColumnHasFilter(column) ? _vm._t('filter-' + column.prop, [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.getInternalFilterByProp(column.prop).value,
+        expression: "getInternalFilterByProp(column.prop).value"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        "placeholder": column.label
+      },
+      domProps: {
+        "value": _vm.getInternalFilterByProp(column.prop).value
+      },
+      on: {
+        "input": function ($event) {
+          if ($event.target.composing) {
+            return;
+          }
+
+          _vm.$set(_vm.getInternalFilterByProp(column.prop), "value", $event.target.value);
+        }
+      }
+    })], {
+      "column": column,
+      "filter": _vm.filter,
+      "getInternalFilterByProp": _vm.getInternalFilterByProp
+    }) : _vm._e(), _vm._v(" "), !_vm.enableFilters || _vm.enableFilters && !_vm.filtersVisible || !_vm.isColumnHasFilter(column) ? _c('span', [_vm._v(_vm._s(column.label))]) : _vm._e()], 2);
   }))], 2)]), _vm._v(" "), _c('tbody', _vm._l(_vm.filteredItems, function (item, index) {
     return _c('tr', {
       key: index,
@@ -962,8 +989,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-33636f9c_0", {
-    source: "tr td[data-v-33636f9c]:first-child,tr td[data-v-33636f9c]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-33636f9c]{display:flex;justify-content:center}.crud-header[data-v-33636f9c]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-33636f9c]{margin:0}.crud-header .crud-search[data-v-33636f9c]{max-width:15rem}.crud-header .crud-search .btn[data-v-33636f9c]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-33636f9c]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-33636f9c]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-9b3ee088_0", {
+    source: "tr td[data-v-9b3ee088]:first-child,tr td[data-v-9b3ee088]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-9b3ee088]{display:flex;justify-content:center}.crud-header[data-v-9b3ee088]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-9b3ee088]{margin:0}.crud-header .crud-search[data-v-9b3ee088]{max-width:15rem}.crud-header .crud-search .btn[data-v-9b3ee088]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-9b3ee088]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-9b3ee088]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -971,7 +998,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-33636f9c";
+const __vue_scope_id__ = "data-v-9b3ee088";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
