@@ -170,12 +170,15 @@ var script = /*#__PURE__*/{
   mounted() {
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
-    this.internalFilters = this.columns.map(column => {
-      return this.isColumnHasFilter(column) ? {
-        column: column.prop,
-        op: column.filterOp ? column.filterOp : "=",
-        value: -1
-      } : null;
+    this.internalFilters = [];
+    this.columns.forEach(column => {
+      if (this.isColumnHasFilter(column)) {
+        this.internalFilters.push({
+          column: column.prop,
+          op: column.filterOp ? column.filterOp : "=",
+          value: -1
+        });
+      }
     });
     this.fetchItems();
   },
@@ -606,7 +609,7 @@ var __vue_render__ = function () {
   }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c('b-sidebar', {
     attrs: {
       "id": "sidebar-filters",
-      "title": "Filtrar Peligros",
+      "title": "Filtrar",
       "right": "",
       "shadow": ""
     }
@@ -959,8 +962,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-428a4d0f_0", {
-    source: "tr td[data-v-428a4d0f]:first-child,tr td[data-v-428a4d0f]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-428a4d0f]{display:flex;justify-content:center}.crud-header[data-v-428a4d0f]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-428a4d0f]{margin:0}.crud-header .crud-search[data-v-428a4d0f]{max-width:15rem}.crud-header .crud-search .btn[data-v-428a4d0f]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-428a4d0f]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-428a4d0f]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-33636f9c_0", {
+    source: "tr td[data-v-33636f9c]:first-child,tr td[data-v-33636f9c]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-33636f9c]{display:flex;justify-content:center}.crud-header[data-v-33636f9c]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-33636f9c]{margin:0}.crud-header .crud-search[data-v-33636f9c]{max-width:15rem}.crud-header .crud-search .btn[data-v-33636f9c]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-33636f9c]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-33636f9c]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -968,7 +971,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-428a4d0f";
+const __vue_scope_id__ = "data-v-33636f9c";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

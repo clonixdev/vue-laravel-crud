@@ -255,12 +255,15 @@ function _nonIterableRest() {
 
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
-    this.internalFilters = this.columns.map(function (column) {
-      return _this2.isColumnHasFilter(column) ? {
-        column: column.prop,
-        op: column.filterOp ? column.filterOp : "=",
-        value: -1
-      } : null;
+    this.internalFilters = [];
+    this.columns.forEach(function (column) {
+      if (_this2.isColumnHasFilter(column)) {
+        _this2.internalFilters.push({
+          column: column.prop,
+          op: column.filterOp ? column.filterOp : "=",
+          value: -1
+        });
+      }
     });
     this.fetchItems();
   },
@@ -671,10 +674,10 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-428a4d0f>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-428a4d0f>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-33636f9c>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-33636f9c>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "id": "sidebar-filters",
-      "title": "Filtrar Peligros",
+      "title": "Filtrar",
       "right": "",
       "shadow": ""
     }
@@ -716,7 +719,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-428a4d0f>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-33636f9c>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
@@ -939,7 +942,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-428a4d0f>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-33636f9c>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1023,8 +1026,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-428a4d0f_0", {
-    source: "tr td[data-v-428a4d0f]:first-child,tr td[data-v-428a4d0f]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-428a4d0f]{display:flex;justify-content:center}.crud-header[data-v-428a4d0f]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-428a4d0f]{margin:0}.crud-header .crud-search[data-v-428a4d0f]{max-width:15rem}.crud-header .crud-search .btn[data-v-428a4d0f]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-428a4d0f]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-428a4d0f]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-33636f9c_0", {
+    source: "tr td[data-v-33636f9c]:first-child,tr td[data-v-33636f9c]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-33636f9c]{display:flex;justify-content:center}.crud-header[data-v-33636f9c]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-33636f9c]{margin:0}.crud-header .crud-search[data-v-33636f9c]{max-width:15rem}.crud-header .crud-search .btn[data-v-33636f9c]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-33636f9c]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-33636f9c]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -1032,10 +1035,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-428a4d0f";
+var __vue_scope_id__ = "data-v-33636f9c";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-428a4d0f";
+var __vue_module_identifier__ = "data-v-33636f9c";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

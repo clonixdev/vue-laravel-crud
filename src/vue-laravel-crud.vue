@@ -183,14 +183,16 @@ export default /*#__PURE__*/ {
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
 
-    this.internalFilters = this.columns.map((column) => {
-      return this.isColumnHasFilter(column)
-        ? {
+    this.internalFilters =[];
+     this.columns.forEach((column) => {
+       if(this.isColumnHasFilter(column)){
+         this.internalFilters.push({
             column: column.prop,
             op: column.filterOp ? column.filterOp : "=",
             value: -1,
-          }
-        : null;
+          });
+       }
+
     });
     this.fetchItems();
   },
@@ -478,7 +480,7 @@ export default /*#__PURE__*/ {
     <div class="crud-header" v-if="showHeader">
       <h4 class="crud-title" v-if="showTitle">{{ title }}</h4>
 
-      <b-sidebar id="sidebar-filters" title="Filtrar Peligros" right shadow>
+      <b-sidebar id="sidebar-filters" title="Filtrar" right shadow>
         <slot
           name="sidebarFilters"
           v-bind:createItem="createItem"
