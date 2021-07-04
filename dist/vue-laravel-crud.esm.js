@@ -11,6 +11,7 @@ var script = /*#__PURE__*/{
   data() {
     return {
       forceRecomputeCounter: 0,
+      filtersVisible: false,
       loading: false,
       items: [],
       displaySearch: false,
@@ -203,6 +204,10 @@ var script = /*#__PURE__*/{
 
   },
   methods: {
+    toggleFilters() {
+      this.filtersVisible = !this.filtersVisible;
+    },
+
     getInternalFilterByProp(prop) {
       return this.internalFilters.find(inf => inf.prop == prop);
     },
@@ -367,8 +372,6 @@ var script = /*#__PURE__*/{
       } else {
         if (this.createMultipart) {
           const formData = new FormData();
-          formData.append("avatar", this.FILE, this.FILE.name);
-          formData.append("name", this.name);
           Object.keys(_this.item).forEach(key => {
             formData.append(key, _this.item[key]);
           });
@@ -666,13 +669,11 @@ var __vue_render__ = function () {
       }
     }
   }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.enableFilters ? _c('b-button', {
-    directives: [{
-      name: "b-toggle",
-      rawName: "v-b-toggle.sidebar-filters",
-      modifiers: {
-        "sidebar-filters": true
+    on: {
+      "click": function ($event) {
+        return _vm.toggleFilters();
       }
-    }]
+    }
   }, [_vm._v("Filtros")]) : _vm._e(), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
     attrs: {
       "variant": "info",
@@ -989,8 +990,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-b20396be_0", {
-    source: "tr td[data-v-b20396be]:first-child,tr td[data-v-b20396be]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-b20396be]{display:flex;justify-content:center}.crud-header[data-v-b20396be]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-b20396be]{margin:0}.crud-header .crud-search[data-v-b20396be]{max-width:15rem}.crud-header .crud-search .btn[data-v-b20396be]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-b20396be]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-b20396be]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-e0c60856_0", {
+    source: "tr td[data-v-e0c60856]:first-child,tr td[data-v-e0c60856]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-e0c60856]{display:flex;justify-content:center}.crud-header[data-v-e0c60856]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-e0c60856]{margin:0}.crud-header .crud-search[data-v-e0c60856]{max-width:15rem}.crud-header .crud-search .btn[data-v-e0c60856]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-e0c60856]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-e0c60856]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -998,7 +999,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-b20396be";
+const __vue_scope_id__ = "data-v-e0c60856";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

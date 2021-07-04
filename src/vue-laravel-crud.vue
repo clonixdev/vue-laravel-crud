@@ -10,6 +10,7 @@ export default /*#__PURE__*/ {
   data() {
     return {
       forceRecomputeCounter: 0,
+      filtersVisible:false,
       loading: false,
       items: [],
       displaySearch: false,
@@ -215,6 +216,10 @@ export default /*#__PURE__*/ {
     },
   },
   methods: {
+
+    toggleFilters(){
+      this.filtersVisible = !this.filtersVisible;
+    },
     getInternalFilterByProp(prop) {
       return this.internalFilters.find((inf) => inf.prop == prop);
     },
@@ -383,10 +388,10 @@ export default /*#__PURE__*/ {
         if (this.createMultipart) {
           const formData = new FormData();
 
-          formData.append("avatar", this.FILE, this.FILE.name);
-          formData.append("name", this.name);
 
           Object.keys(_this.item).forEach((key) => {
+
+         
             formData.append(key, _this.item[key]);
           });
 
@@ -527,7 +532,7 @@ export default /*#__PURE__*/ {
               <b-icon-plus></b-icon-plus>{{ messageNew }}
             </b-button>
 
-            <b-button v-if="enableFilters" v-b-toggle.sidebar-filters
+            <b-button v-if="enableFilters" @click="toggleFilters()"
               >Filtros</b-button
             >
 
