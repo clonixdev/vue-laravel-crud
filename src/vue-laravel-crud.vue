@@ -490,7 +490,7 @@ export default /*#__PURE__*/ {
         >
           <div class="px-3 py-2">
             <div v-for="(column, indexc) in columns" :key="indexc">
-              <div v-if="isColumnHasFilter(column)">
+              <div v-if="isColumnHasFilter(column) && getInternalFilterByProp(column.prop)">
                 <slot
                   :name="'sidebar-filter-' + column.prop"
                   v-bind:column="column"
