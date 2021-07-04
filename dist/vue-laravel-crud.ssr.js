@@ -271,18 +271,21 @@ function _nonIterableRest() {
     finalFilters: function finalFilters() {
       return this.filters.concat(this.filter).concat(this.internalFilter);
     },
-    computed: {
-      internalFilter: function internalFilter() {
-        var filter = [];
-        this.forceRecomputeCounter;
-        this.internalFilters.forEach(function (f) {
-          if (f.value > 0) filter.push([f.column, f.op, f.value]);
-        });
-        return filter;
-      }
+    internalFilter: function internalFilter() {
+      var filter = [];
+      this.forceRecomputeCounter;
+      this.internalFilters.forEach(function (f) {
+        if (f.value > 0) filter.push([f.column, f.op, f.value]);
+      });
+      return filter;
     }
   },
   methods: {
+    getInternalFilterByProp: function getInternalFilterByProp(prop) {
+      return this.internalFilters.find(function (inf) {
+        return inf.prop == prop;
+      });
+    },
     toggleDisplayMode: function toggleDisplayMode() {
       if (this.displayMode == this.displayModes.MODE_TABLE) this.displayMode = this.displayModes.MODE_CARDS;else if (this.displayMode == this.displayModes.MODE_CARDS) this.displayMode = this.displayModes.MODE_TABLE;
     },
@@ -668,7 +671,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-719ac255>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-719ac255>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-428a4d0f>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-428a4d0f>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "id": "sidebar-filters",
       "title": "Filtrar Peligros",
@@ -677,21 +680,21 @@ var __vue_render__ = function __vue_render__() {
     }
   }, [_vm._t("sidebarFilters", [_c('div', {
     staticClass: "px-3 py-2"
-  }, [_vm._l(_vm.columns, function (column, indexc) {
+  }, _vm._l(_vm.columns, function (column, indexc) {
     return _c('div', {
       key: indexc
-    }, [_vm.isColumnHasFilter(column) ? _c('div', [_c('h5', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('div', {
+    }, [_vm.isColumnHasFilter(column) ? _c('div', [_vm._t('filter-' + column.prop, [_c('div', {
       staticClass: "form-group"
-    }, [_c('label'), _vm._v(" "), _c('input', {
+    }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('input', {
       directives: [{
         name: "model",
         rawName: "v-model",
-        value: _vm.filter,
-        expression: "filter"
+        value: _vm.getInternalFilterByProp(column.prop).value,
+        expression: "getInternalFilterByProp(column.prop).value"
       }],
       staticClass: "form-control",
       domProps: {
-        "value": _vm.filter
+        "value": _vm.getInternalFilterByProp(column.prop).value
       },
       on: {
         "input": function input($event) {
@@ -699,41 +702,21 @@ var __vue_render__ = function __vue_render__() {
             return;
           }
 
-          _vm.filter = $event.target.value;
+          _vm.$set(_vm.getInternalFilterByProp(column.prop), "value", $event.target.value);
         }
       }
-    })])]) : _vm._e()]);
-  }), _vm._v(" "), _c('base-button', {
-    on: {
-      "click": function click($event) {
-        return _vm.setFilter('status', -1);
-      }
-    }
-  }, [_vm._v("Sin Filtrar")]), _vm._v(" "), _c('base-button', {
-    on: {
-      "click": function click($event) {
-        return _vm.setFilter('status', 1);
-      }
-    }
-  }, [_vm._v("Registrado")]), _vm._v(" "), _c('base-button', {
-    on: {
-      "click": function click($event) {
-        return _vm.setFilter('status', 2);
-      }
-    }
-  }, [_vm._v("Tramitado")]), _vm._v(" "), _c('base-button', {
-    on: {
-      "click": function click($event) {
-        return _vm.setFilter('status', 3);
-      }
-    }
-  }, [_vm._v("Resuelto")]), _vm._v(" "), _c('h5', [_vm._v("Código")]), _vm._v(" "), _c('h5', [_vm._v("Sede")]), _vm._v(" "), _c('h5', [_vm._v("Fecha")])], 2)], {
+    })])], {
+      "column": column,
+      "filter": _vm.filter,
+      "getInternalFilterByProp": _vm.getInternalFilterByProp
+    })], 2) : _vm._e()]);
+  }), 0)], {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-719ac255>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-428a4d0f>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
@@ -956,7 +939,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-719ac255>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-428a4d0f>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1040,8 +1023,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-719ac255_0", {
-    source: "tr td[data-v-719ac255]:first-child,tr td[data-v-719ac255]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-719ac255]{display:flex;justify-content:center}.crud-header[data-v-719ac255]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-719ac255]{margin:0}.crud-header .crud-search[data-v-719ac255]{max-width:15rem}.crud-header .crud-search .btn[data-v-719ac255]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-719ac255]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-719ac255]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-428a4d0f_0", {
+    source: "tr td[data-v-428a4d0f]:first-child,tr td[data-v-428a4d0f]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-428a4d0f]{display:flex;justify-content:center}.crud-header[data-v-428a4d0f]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-428a4d0f]{margin:0}.crud-header .crud-search[data-v-428a4d0f]{max-width:15rem}.crud-header .crud-search .btn[data-v-428a4d0f]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-428a4d0f]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-428a4d0f]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -1049,10 +1032,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-719ac255";
+var __vue_scope_id__ = "data-v-428a4d0f";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-719ac255";
+var __vue_module_identifier__ = "data-v-428a4d0f";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

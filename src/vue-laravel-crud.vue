@@ -183,12 +183,14 @@ export default /*#__PURE__*/ {
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
 
-    this.internalFilters = this.columns.map(column => {
-      return this.isColumnHasFilter(column) ? {
-        column: column.prop,
-        op: column.filterOp ? column.filterOp : "=",
-        value: -1
-      } : null;
+    this.internalFilters = this.columns.map((column) => {
+      return this.isColumnHasFilter(column)
+        ? {
+            column: column.prop,
+            op: column.filterOp ? column.filterOp : "=",
+            value: -1,
+          }
+        : null;
     });
     this.fetchItems();
   },
@@ -201,19 +203,21 @@ export default /*#__PURE__*/ {
       return this.filters.concat(this.filter).concat(this.internalFilter);
     },
 
-    computed: {
-      internalFilter() {
-        let filter = [];
-        this.forceRecomputeCounter;
-        this.internalFilters.forEach((f) => {
-          if (f.value > 0) filter.push([f.column, f.op, f.value]);
-        });
+    internalFilter() {
+      let filter = [];
+      this.forceRecomputeCounter;
+      this.internalFilters.forEach((f) => {
+        if (f.value > 0) filter.push([f.column, f.op, f.value]);
+      });
 
-        return filter;
-      },
+      return filter;
     },
   },
   methods: {
+    getInternalFilterByProp(prop) {
+      return this.internalFilters.find((inf) => inf.prop == prop);
+    },
+
     toggleDisplayMode() {
       if (this.displayMode == this.displayModes.MODE_TABLE)
         this.displayMode = this.displayModes.MODE_CARDS;
@@ -486,28 +490,22 @@ export default /*#__PURE__*/ {
           <div class="px-3 py-2">
             <div v-for="(column, indexc) in columns" :key="indexc">
               <div v-if="isColumnHasFilter(column)">
-                <h5>{{ column.label }}</h5>
-                <div class="form-group">
-                  <label></label>
-                  <input class="form-control" v-model="filter" />
-                </div>
+                <slot
+                  :name="'filter-' + column.prop"
+                  v-bind:column="column"
+                  v-bind:filter="filter"
+                  v-bind:getInternalFilterByProp="getInternalFilterByProp"
+                >
+                  <div class="form-group">
+                    <label>{{ column.label }}</label>
+                    <input
+                      class="form-control"
+                      v-model="getInternalFilterByProp(column.prop).value"
+                    />
+                  </div>
+                </slot>
               </div>
             </div>
-
-            <base-button @click="setFilter('status', -1)"
-              >Sin Filtrar</base-button
-            >
-            <base-button @click="setFilter('status', 1)"
-              >Registrado</base-button
-            >
-            <base-button @click="setFilter('status', 2)">Tramitado</base-button>
-            <base-button @click="setFilter('status', 3)">Resuelto</base-button>
-
-            <h5>Código</h5>
-
-            <h5>Sede</h5>
-
-            <h5>Fecha</h5>
           </div>
         </slot>
       </b-sidebar>
