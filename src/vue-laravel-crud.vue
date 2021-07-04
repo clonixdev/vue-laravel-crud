@@ -585,7 +585,12 @@ export default /*#__PURE__*/ {
                     v-bind:column="column"
                     v-bind:filter="filter"
                     v-bind:getInternalFilterByProp="getInternalFilterByProp"
-                    v-if="enableFilters && filtersVisible && isColumnHasFilter(column)"
+                    v-if="
+                      enableFilters &&
+                      filtersVisible &&
+                      isColumnHasFilter(column) &&
+                      getInternalFilterByProp(column.prop)
+                    "
                   >
                     <input
                       class="form-control"
@@ -594,10 +599,7 @@ export default /*#__PURE__*/ {
                     />
                   </slot>
 
-                  <span
-                    v-if="!enableFilters || (enableFilters && !filtersVisible) || !isColumnHasFilter(column)"
-                    >{{ column.label }}</span
-                  >
+                  <span v-else>{{ column.label }}</span>
                 </th>
               </slot>
             </tr>
