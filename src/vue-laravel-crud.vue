@@ -9,6 +9,7 @@ export default /*#__PURE__*/ {
   },
   data() {
     return {
+      forceRecomputeCounter: 0,
       loading: false,
       items: [],
       displaySearch: false,
@@ -24,6 +25,7 @@ export default /*#__PURE__*/ {
       },
       itemDefault: null,
       filters: [],
+      internalFilters: [],
       item: {
         id: null,
       },
@@ -61,10 +63,21 @@ export default /*#__PURE__*/ {
       default: [],
     },
 
+    filterSidebar: {
+      type: Boolean,
+      default: false,
+    },
+
     sorteable: {
       type: Boolean,
       default: false,
     },
+
+    createMultipart: {
+      type: Boolean,
+      default: false,
+    },
+
     apiUrl: {
       type: String,
       default: "/api",
@@ -169,6 +182,14 @@ export default /*#__PURE__*/ {
   mounted() {
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
+
+    this.internalFilters = this.columns.map(column => {
+      return this.isColumnHasFilter(column) ? {
+        column: column.prop,
+        op: column.filterOp ? column.filterOp : "=",
+        value: -1
+      } : null;
+    });
     this.fetchItems();
   },
   computed: {
@@ -176,11 +197,21 @@ export default /*#__PURE__*/ {
       return this.items;
     },
 
-    finalFilters(){
+    finalFilters() {
+      return this.filters.concat(this.filter).concat(this.internalFilter);
+    },
 
-      return this.filters.concat(this.filter);
+    computed: {
+      internalFilter() {
+        let filter = [];
+        this.forceRecomputeCounter;
+        this.internalFilters.forEach((f) => {
+          if (f.value > 0) filter.push([f.column, f.op, f.value]);
+        });
 
-    }
+        return filter;
+      },
+    },
   },
   methods: {
     toggleDisplayMode() {
@@ -225,9 +256,17 @@ export default /*#__PURE__*/ {
     refresh() {
       this.fetchItems();
     },
-
-
-
+    isColumnHasFilter(column) {
+      return column && column.type != "actions";
+    },
+    setFilter(column, value) {
+      let filter = this.filter.find((f) => f.column == column);
+      filter.value = value;
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.$refs.crud.refresh();
+      }, 1);
+    },
     fetchItems(page = 1) {
       let _this = this;
       _this.loading = true;
@@ -294,8 +333,11 @@ export default /*#__PURE__*/ {
           order.push({ id: v.id, order: k + 1 });
           v.order = k + 1;
         });
+
         axios
-          .post(this.apiUrl + "/" + _this.modelName + "/sort", { order: order })
+          .post(this.apiUrl + "/" + _this.modelName + "/sort", {
+            order: order,
+          })
           .then(function (response) {
             let data = response.data;
 
@@ -333,27 +375,60 @@ export default /*#__PURE__*/ {
             _this.loading = false;
           });
       } else {
-        axios
-          .post(this.apiUrl + "/" + _this.modelName, _this.item)
-          .then(function (response) {
-            _this.loading = false;
-            _this.$bvModal.hide("modal-form-item-" + _this.modelName);
-            if (response.data.success) {
-              if (response.data.message) {
-                _this.toastSuccess(response.data.message);
-              }
-              return;
-            }
+        if (this.createMultipart) {
+          const formData = new FormData();
 
-            let itemSv = response.data;
+          formData.append("avatar", this.FILE, this.FILE.name);
+          formData.append("name", this.name);
 
-            _this.items.push(itemSv);
-            _this.item = itemSv;
-          })
-          .catch(function (error) {
-            _this.toastError(error);
-            _this.loading = false;
+          Object.keys(_this.item).forEach((key) => {
+            formData.append(key, _this.item[key]);
           });
+
+          axios
+            .post(this.apiUrl + "/" + _this.modelName, formData)
+            .then(function (response) {
+              _this.loading = false;
+              _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+              if (response.data.success) {
+                if (response.data.message) {
+                  _this.toastSuccess(response.data.message);
+                }
+                return;
+              }
+
+              let itemSv = response.data;
+
+              _this.items.push(itemSv);
+              _this.item = itemSv;
+            })
+            .catch(function (error) {
+              _this.toastError(error);
+              _this.loading = false;
+            });
+        } else {
+          axios
+            .post(this.apiUrl + "/" + _this.modelName, _this.item)
+            .then(function (response) {
+              _this.loading = false;
+              _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+              if (response.data.success) {
+                if (response.data.message) {
+                  _this.toastSuccess(response.data.message);
+                }
+                return;
+              }
+
+              let itemSv = response.data;
+
+              _this.items.push(itemSv);
+              _this.item = itemSv;
+            })
+            .catch(function (error) {
+              _this.toastError(error);
+              _this.loading = false;
+            });
+        }
       }
     },
 
@@ -399,6 +474,44 @@ export default /*#__PURE__*/ {
     <div class="crud-header" v-if="showHeader">
       <h4 class="crud-title" v-if="showTitle">{{ title }}</h4>
 
+      <b-sidebar id="sidebar-filters" title="Filtrar Peligros" right shadow>
+        <slot
+          name="sidebarFilters"
+          v-bind:createItem="createItem"
+          v-bind:toggleDisplayMode="toggleDisplayMode"
+          v-bind:loading="loading"
+          v-bind:isColumnHasFilter="isColumnHasFilter"
+          v-bind:setFilter="setFilter"
+        >
+          <div class="px-3 py-2">
+            <div v-for="(column, indexc) in columns" :key="indexc">
+              <div v-if="isColumnHasFilter(column)">
+                <h5>{{ column.label }}</h5>
+                <div class="form-group">
+                  <label></label>
+                  <input class="form-control" v-model="filter" />
+                </div>
+              </div>
+            </div>
+
+            <base-button @click="setFilter('status', -1)"
+              >Sin Filtrar</base-button
+            >
+            <base-button @click="setFilter('status', 1)"
+              >Registrado</base-button
+            >
+            <base-button @click="setFilter('status', 2)">Tramitado</base-button>
+            <base-button @click="setFilter('status', 3)">Resuelto</base-button>
+
+            <h5>Código</h5>
+
+            <h5>Sede</h5>
+
+            <h5>Fecha</h5>
+          </div>
+        </slot>
+      </b-sidebar>
+
       <div class="table-options">
         <b-button-group class="mr-1">
           <slot
@@ -414,6 +527,10 @@ export default /*#__PURE__*/ {
             >
               <b-icon-plus></b-icon-plus>{{ messageNew }}
             </b-button>
+
+            <b-button v-if="filterSidebar" v-b-toggle.sidebar-filters
+              >Filtros</b-button
+            >
 
             <b-button
               variant="info"
@@ -662,8 +779,8 @@ tr td:first-child {
   width: 1%;
   white-space: nowrap;
 }
-.crud-pagination{
-  display:flex;
+.crud-pagination {
+  display: flex;
   justify-content: center;
 }
 .crud-header {

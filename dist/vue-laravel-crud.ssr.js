@@ -96,6 +96,7 @@ function _nonIterableRest() {
   },
   data: function data() {
     return {
+      forceRecomputeCounter: 0,
       loading: false,
       items: [],
       displaySearch: false,
@@ -110,6 +111,7 @@ function _nonIterableRest() {
       },
       itemDefault: null,
       filters: [],
+      internalFilters: [],
       item: {
         id: null
       },
@@ -147,7 +149,15 @@ function _nonIterableRest() {
       type: Array,
       default: []
     },
+    filterSidebar: {
+      type: Boolean,
+      default: false
+    },
     sorteable: {
+      type: Boolean,
+      default: false
+    },
+    createMultipart: {
       type: Boolean,
       default: false
     },
@@ -241,8 +251,17 @@ function _nonIterableRest() {
     }
   },
   mounted: function mounted() {
+    var _this2 = this;
+
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
+    this.internalFilters = this.columns.map(function (column) {
+      return _this2.isColumnHasFilter(column) ? {
+        column: column.prop,
+        op: column.filterOp ? column.filterOp : "=",
+        value: -1
+      } : null;
+    });
     this.fetchItems();
   },
   computed: {
@@ -250,7 +269,17 @@ function _nonIterableRest() {
       return this.items;
     },
     finalFilters: function finalFilters() {
-      return this.filters.concat(this.filter);
+      return this.filters.concat(this.filter).concat(this.internalFilter);
+    },
+    computed: {
+      internalFilter: function internalFilter() {
+        var filter = [];
+        this.forceRecomputeCounter;
+        this.internalFilters.forEach(function (f) {
+          if (f.value > 0) filter.push([f.column, f.op, f.value]);
+        });
+        return filter;
+      }
     }
   },
   methods: {
@@ -290,6 +319,21 @@ function _nonIterableRest() {
     },
     refresh: function refresh() {
       this.fetchItems();
+    },
+    isColumnHasFilter: function isColumnHasFilter(column) {
+      return column && column.type != "actions";
+    },
+    setFilter: function setFilter(column, value) {
+      var _this3 = this;
+
+      var filter = this.filter.find(function (f) {
+        return f.column == column;
+      });
+      filter.value = value;
+      this.forceRecomputeCounter++;
+      setTimeout(function () {
+        _this3.$refs.crud.refresh();
+      }, 1);
     },
     fetchItems: function fetchItems() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
@@ -369,20 +413,20 @@ function _nonIterableRest() {
       }
     },
     saveItem: function saveItem() {
-      var _this2 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _this;
+        var _this, formData;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this = _this2;
+                _this = _this4;
                 _this.loading = true;
 
-                if (_this2.item.id) {
-                  axios__default['default'].put(_this2.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
+                if (_this4.item.id) {
+                  axios__default['default'].put(_this4.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
                     _this.$bvModal.hide("modal-form-item-" + _this.modelName);
 
                     var itemSv = response.data;
@@ -400,29 +444,61 @@ function _nonIterableRest() {
                     _this.loading = false;
                   });
                 } else {
-                  axios__default['default'].post(_this2.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
-                    _this.loading = false;
+                  if (_this4.createMultipart) {
+                    formData = new FormData();
+                    formData.append("avatar", _this4.FILE, _this4.FILE.name);
+                    formData.append("name", _this4.name);
+                    Object.keys(_this.item).forEach(function (key) {
+                      formData.append(key, _this.item[key]);
+                    });
+                    axios__default['default'].post(_this4.apiUrl + "/" + _this.modelName, formData).then(function (response) {
+                      _this.loading = false;
 
-                    _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+                      _this.$bvModal.hide("modal-form-item-" + _this.modelName);
 
-                    if (response.data.success) {
-                      if (response.data.message) {
-                        _this.toastSuccess(response.data.message);
+                      if (response.data.success) {
+                        if (response.data.message) {
+                          _this.toastSuccess(response.data.message);
+                        }
+
+                        return;
                       }
 
-                      return;
-                    }
+                      var itemSv = response.data;
 
-                    var itemSv = response.data;
+                      _this.items.push(itemSv);
 
-                    _this.items.push(itemSv);
+                      _this.item = itemSv;
+                    }).catch(function (error) {
+                      _this.toastError(error);
 
-                    _this.item = itemSv;
-                  }).catch(function (error) {
-                    _this.toastError(error);
+                      _this.loading = false;
+                    });
+                  } else {
+                    axios__default['default'].post(_this4.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
+                      _this.loading = false;
 
-                    _this.loading = false;
-                  });
+                      _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+
+                      if (response.data.success) {
+                        if (response.data.message) {
+                          _this.toastSuccess(response.data.message);
+                        }
+
+                        return;
+                      }
+
+                      var itemSv = response.data;
+
+                      _this.items.push(itemSv);
+
+                      _this.item = itemSv;
+                    }).catch(function (error) {
+                      _this.toastError(error);
+
+                      _this.loading = false;
+                    });
+                  }
                 }
 
               case 3:
@@ -592,7 +668,72 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-d97e9c46>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-d97e9c46>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _vm._ssrNode("<div class=\"table-options\" data-v-d97e9c46>", "</div>", [_c('b-button-group', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-719ac255>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-719ac255>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+    attrs: {
+      "id": "sidebar-filters",
+      "title": "Filtrar Peligros",
+      "right": "",
+      "shadow": ""
+    }
+  }, [_vm._t("sidebarFilters", [_c('div', {
+    staticClass: "px-3 py-2"
+  }, [_vm._l(_vm.columns, function (column, indexc) {
+    return _c('div', {
+      key: indexc
+    }, [_vm.isColumnHasFilter(column) ? _c('div', [_c('h5', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('div', {
+      staticClass: "form-group"
+    }, [_c('label'), _vm._v(" "), _c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.filter,
+        expression: "filter"
+      }],
+      staticClass: "form-control",
+      domProps: {
+        "value": _vm.filter
+      },
+      on: {
+        "input": function input($event) {
+          if ($event.target.composing) {
+            return;
+          }
+
+          _vm.filter = $event.target.value;
+        }
+      }
+    })])]) : _vm._e()]);
+  }), _vm._v(" "), _c('base-button', {
+    on: {
+      "click": function click($event) {
+        return _vm.setFilter('status', -1);
+      }
+    }
+  }, [_vm._v("Sin Filtrar")]), _vm._v(" "), _c('base-button', {
+    on: {
+      "click": function click($event) {
+        return _vm.setFilter('status', 1);
+      }
+    }
+  }, [_vm._v("Registrado")]), _vm._v(" "), _c('base-button', {
+    on: {
+      "click": function click($event) {
+        return _vm.setFilter('status', 2);
+      }
+    }
+  }, [_vm._v("Tramitado")]), _vm._v(" "), _c('base-button', {
+    on: {
+      "click": function click($event) {
+        return _vm.setFilter('status', 3);
+      }
+    }
+  }, [_vm._v("Resuelto")]), _vm._v(" "), _c('h5', [_vm._v("Código")]), _vm._v(" "), _c('h5', [_vm._v("Sede")]), _vm._v(" "), _c('h5', [_vm._v("Fecha")])], 2)], {
+    "createItem": _vm.createItem,
+    "toggleDisplayMode": _vm.toggleDisplayMode,
+    "loading": _vm.loading,
+    "isColumnHasFilter": _vm.isColumnHasFilter,
+    "setFilter": _vm.setFilter
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-719ac255>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
@@ -604,7 +745,15 @@ var __vue_render__ = function __vue_render__() {
         return _vm.createItem();
       }
     }
-  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
+  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.filterSidebar ? _c('b-button', {
+    directives: [{
+      name: "b-toggle",
+      rawName: "v-b-toggle.sidebar-filters",
+      modifiers: {
+        "sidebar-filters": true
+      }
+    }]
+  }, [_vm._v("Filtros")]) : _vm._e(), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
     attrs: {
       "variant": "info",
       "disabled": _vm.loading
@@ -807,7 +956,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-d97e9c46>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-719ac255>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -891,8 +1040,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-d97e9c46_0", {
-    source: "tr td[data-v-d97e9c46]:first-child,tr td[data-v-d97e9c46]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-d97e9c46]{display:flex;justify-content:center}.crud-header[data-v-d97e9c46]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-d97e9c46]{margin:0}.crud-header .crud-search[data-v-d97e9c46]{max-width:15rem}.crud-header .crud-search .btn[data-v-d97e9c46]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-d97e9c46]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-d97e9c46]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-719ac255_0", {
+    source: "tr td[data-v-719ac255]:first-child,tr td[data-v-719ac255]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-719ac255]{display:flex;justify-content:center}.crud-header[data-v-719ac255]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-719ac255]{margin:0}.crud-header .crud-search[data-v-719ac255]{max-width:15rem}.crud-header .crud-search .btn[data-v-719ac255]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-719ac255]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-719ac255]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -900,10 +1049,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-d97e9c46";
+var __vue_scope_id__ = "data-v-719ac255";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-d97e9c46";
+var __vue_module_identifier__ = "data-v-719ac255";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

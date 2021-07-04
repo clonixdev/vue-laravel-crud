@@ -10,6 +10,7 @@ var script = /*#__PURE__*/{
 
   data() {
     return {
+      forceRecomputeCounter: 0,
       loading: false,
       items: [],
       displaySearch: false,
@@ -24,6 +25,7 @@ var script = /*#__PURE__*/{
       },
       itemDefault: null,
       filters: [],
+      internalFilters: [],
       item: {
         id: null
       },
@@ -63,7 +65,15 @@ var script = /*#__PURE__*/{
       type: Array,
       default: []
     },
+    filterSidebar: {
+      type: Boolean,
+      default: false
+    },
     sorteable: {
+      type: Boolean,
+      default: false
+    },
+    createMultipart: {
       type: Boolean,
       default: false
     },
@@ -160,6 +170,13 @@ var script = /*#__PURE__*/{
   mounted() {
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
+    this.internalFilters = this.columns.map(column => {
+      return this.isColumnHasFilter(column) ? {
+        column: column.prop,
+        op: column.filterOp ? column.filterOp : "=",
+        value: -1
+      } : null;
+    });
     this.fetchItems();
   },
 
@@ -169,9 +186,20 @@ var script = /*#__PURE__*/{
     },
 
     finalFilters() {
-      return this.filters.concat(this.filter);
-    }
+      return this.filters.concat(this.filter).concat(this.internalFilter);
+    },
 
+    computed: {
+      internalFilter() {
+        let filter = [];
+        this.forceRecomputeCounter;
+        this.internalFilters.forEach(f => {
+          if (f.value > 0) filter.push([f.column, f.op, f.value]);
+        });
+        return filter;
+      }
+
+    }
   },
   methods: {
     toggleDisplayMode() {
@@ -217,6 +245,19 @@ var script = /*#__PURE__*/{
 
     refresh() {
       this.fetchItems();
+    },
+
+    isColumnHasFilter(column) {
+      return column && column.type != "actions";
+    },
+
+    setFilter(column, value) {
+      let filter = this.filter.find(f => f.column == column);
+      filter.value = value;
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.$refs.crud.refresh();
+      }, 1);
     },
 
     fetchItems(page = 1) {
@@ -319,29 +360,61 @@ var script = /*#__PURE__*/{
           _this.loading = false;
         });
       } else {
-        axios.post(this.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
-          _this.loading = false;
+        if (this.createMultipart) {
+          const formData = new FormData();
+          formData.append("avatar", this.FILE, this.FILE.name);
+          formData.append("name", this.name);
+          Object.keys(_this.item).forEach(key => {
+            formData.append(key, _this.item[key]);
+          });
+          axios.post(this.apiUrl + "/" + _this.modelName, formData).then(function (response) {
+            _this.loading = false;
 
-          _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+            _this.$bvModal.hide("modal-form-item-" + _this.modelName);
 
-          if (response.data.success) {
-            if (response.data.message) {
-              _this.toastSuccess(response.data.message);
+            if (response.data.success) {
+              if (response.data.message) {
+                _this.toastSuccess(response.data.message);
+              }
+
+              return;
             }
 
-            return;
-          }
+            let itemSv = response.data;
 
-          let itemSv = response.data;
+            _this.items.push(itemSv);
 
-          _this.items.push(itemSv);
+            _this.item = itemSv;
+          }).catch(function (error) {
+            _this.toastError(error);
 
-          _this.item = itemSv;
-        }).catch(function (error) {
-          _this.toastError(error);
+            _this.loading = false;
+          });
+        } else {
+          axios.post(this.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
+            _this.loading = false;
 
-          _this.loading = false;
-        });
+            _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+
+            if (response.data.success) {
+              if (response.data.message) {
+                _this.toastSuccess(response.data.message);
+              }
+
+              return;
+            }
+
+            let itemSv = response.data;
+
+            _this.items.push(itemSv);
+
+            _this.item = itemSv;
+          }).catch(function (error) {
+            _this.toastError(error);
+
+            _this.loading = false;
+          });
+        }
       }
     },
 
@@ -528,7 +601,72 @@ var __vue_render__ = function () {
     staticClass: "crud-header"
   }, [_vm.showTitle ? _c('h4', {
     staticClass: "crud-title"
-  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c('b-sidebar', {
+    attrs: {
+      "id": "sidebar-filters",
+      "title": "Filtrar Peligros",
+      "right": "",
+      "shadow": ""
+    }
+  }, [_vm._t("sidebarFilters", [_c('div', {
+    staticClass: "px-3 py-2"
+  }, [_vm._l(_vm.columns, function (column, indexc) {
+    return _c('div', {
+      key: indexc
+    }, [_vm.isColumnHasFilter(column) ? _c('div', [_c('h5', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('div', {
+      staticClass: "form-group"
+    }, [_c('label'), _vm._v(" "), _c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.filter,
+        expression: "filter"
+      }],
+      staticClass: "form-control",
+      domProps: {
+        "value": _vm.filter
+      },
+      on: {
+        "input": function ($event) {
+          if ($event.target.composing) {
+            return;
+          }
+
+          _vm.filter = $event.target.value;
+        }
+      }
+    })])]) : _vm._e()]);
+  }), _vm._v(" "), _c('base-button', {
+    on: {
+      "click": function ($event) {
+        return _vm.setFilter('status', -1);
+      }
+    }
+  }, [_vm._v("Sin Filtrar")]), _vm._v(" "), _c('base-button', {
+    on: {
+      "click": function ($event) {
+        return _vm.setFilter('status', 1);
+      }
+    }
+  }, [_vm._v("Registrado")]), _vm._v(" "), _c('base-button', {
+    on: {
+      "click": function ($event) {
+        return _vm.setFilter('status', 2);
+      }
+    }
+  }, [_vm._v("Tramitado")]), _vm._v(" "), _c('base-button', {
+    on: {
+      "click": function ($event) {
+        return _vm.setFilter('status', 3);
+      }
+    }
+  }, [_vm._v("Resuelto")]), _vm._v(" "), _c('h5', [_vm._v("Código")]), _vm._v(" "), _c('h5', [_vm._v("Sede")]), _vm._v(" "), _c('h5', [_vm._v("Fecha")])], 2)], {
+    "createItem": _vm.createItem,
+    "toggleDisplayMode": _vm.toggleDisplayMode,
+    "loading": _vm.loading,
+    "isColumnHasFilter": _vm.isColumnHasFilter,
+    "setFilter": _vm.setFilter
+  })], 2), _vm._v(" "), _c('div', {
     staticClass: "table-options"
   }, [_c('b-button-group', {
     staticClass: "mr-1"
@@ -542,7 +680,15 @@ var __vue_render__ = function () {
         return _vm.createItem();
       }
     }
-  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
+  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.filterSidebar ? _c('b-button', {
+    directives: [{
+      name: "b-toggle",
+      rawName: "v-b-toggle.sidebar-filters",
+      modifiers: {
+        "sidebar-filters": true
+      }
+    }]
+  }, [_vm._v("Filtros")]) : _vm._e(), _vm._v(" "), _vm.displayModeToggler ? _c('b-button', {
     attrs: {
       "variant": "info",
       "disabled": _vm.loading
@@ -585,7 +731,7 @@ var __vue_render__ = function () {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading
-  })], 2)], 1)]) : _vm._e(), _vm._v(" "), _c('b-overlay', {
+  })], 2)], 1)], 1) : _vm._e(), _vm._v(" "), _c('b-overlay', {
     attrs: {
       "show": _vm.loading,
       "rounded": "sm"
@@ -831,8 +977,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-d97e9c46_0", {
-    source: "tr td[data-v-d97e9c46]:first-child,tr td[data-v-d97e9c46]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-d97e9c46]{display:flex;justify-content:center}.crud-header[data-v-d97e9c46]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-d97e9c46]{margin:0}.crud-header .crud-search[data-v-d97e9c46]{max-width:15rem}.crud-header .crud-search .btn[data-v-d97e9c46]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-d97e9c46]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-d97e9c46]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-719ac255_0", {
+    source: "tr td[data-v-719ac255]:first-child,tr td[data-v-719ac255]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-719ac255]{display:flex;justify-content:center}.crud-header[data-v-719ac255]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-719ac255]{margin:0}.crud-header .crud-search[data-v-719ac255]{max-width:15rem}.crud-header .crud-search .btn[data-v-719ac255]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-719ac255]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-719ac255]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -840,7 +986,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-d97e9c46";
+const __vue_scope_id__ = "data-v-719ac255";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
