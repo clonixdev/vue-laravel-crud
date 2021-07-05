@@ -388,7 +388,7 @@ export default /*#__PURE__*/ {
           const formData = new FormData();
 
           Object.keys(_this.item).forEach((key) => {
-            if (_this.item[key][0].filename) {
+            if (_this.item[key][0] && _this.item[key][0].filename) {
               let files = _this.item[key];
               for (var x = 0; x < files.length; x++) {
                 fd.append(

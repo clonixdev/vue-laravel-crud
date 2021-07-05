@@ -373,7 +373,7 @@ var script = /*#__PURE__*/{
         if (this.createMultipart) {
           const formData = new FormData();
           Object.keys(_this.item).forEach(key => {
-            if (_this.item[key][0].filename) {
+            if (_this.item[key][0] && _this.item[key][0].filename) {
               let files = _this.item[key];
 
               for (var x = 0; x < files.length; x++) {
@@ -996,8 +996,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-952197c2_0", {
-    source: "tr td[data-v-952197c2]:first-child,tr td[data-v-952197c2]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-952197c2]{display:flex;justify-content:center}.crud-header[data-v-952197c2]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-952197c2]{margin:0}.crud-header .crud-search[data-v-952197c2]{max-width:15rem}.crud-header .crud-search .btn[data-v-952197c2]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-952197c2]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-952197c2]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-22d0c91c_0", {
+    source: "tr td[data-v-22d0c91c]:first-child,tr td[data-v-22d0c91c]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-22d0c91c]{display:flex;justify-content:center}.crud-header[data-v-22d0c91c]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-22d0c91c]{margin:0}.crud-header .crud-search[data-v-22d0c91c]{max-width:15rem}.crud-header .crud-search .btn[data-v-22d0c91c]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-22d0c91c]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-22d0c91c]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -1005,7 +1005,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-952197c2";
+const __vue_scope_id__ = "data-v-22d0c91c";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
