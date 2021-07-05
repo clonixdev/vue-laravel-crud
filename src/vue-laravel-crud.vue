@@ -10,7 +10,7 @@ export default /*#__PURE__*/ {
   data() {
     return {
       forceRecomputeCounter: 0,
-      filtersVisible:false,
+      filtersVisible: false,
       loading: false,
       items: [],
       displaySearch: false,
@@ -216,8 +216,7 @@ export default /*#__PURE__*/ {
     },
   },
   methods: {
-
-    toggleFilters(){
+    toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
     },
     getInternalFilterByProp(prop) {
@@ -388,11 +387,10 @@ export default /*#__PURE__*/ {
         if (this.createMultipart) {
           const formData = new FormData();
 
-
           Object.keys(_this.item).forEach((key) => {
-
-         
-            formData.append(key, _this.item[key]);
+            if (_this.item[key].filename)
+              formData.append(key, _this.item[key], _this.item[key].filename);
+            else formData.append(key, _this.item[key]);
           });
 
           axios
@@ -495,7 +493,12 @@ export default /*#__PURE__*/ {
         >
           <div class="px-3 py-2">
             <div v-for="(column, indexc) in columns" :key="indexc">
-              <div v-if="isColumnHasFilter(column) && getInternalFilterByProp(column.prop)">
+              <div
+                v-if="
+                  isColumnHasFilter(column) &&
+                  getInternalFilterByProp(column.prop)
+                "
+              >
                 <slot
                   :name="'sidebar-filter-' + column.prop"
                   v-bind:column="column"
