@@ -388,9 +388,16 @@ export default /*#__PURE__*/ {
           const formData = new FormData();
 
           Object.keys(_this.item).forEach((key) => {
-            if (_this.item[key].filename)
-              formData.append(key, _this.item[key], _this.item[key].filename);
-            else formData.append(key, _this.item[key]);
+            if (_this.item[key][0].filename) {
+              let files = _this.item[key];
+              for (var x = 0; x < files.length; x++) {
+                fd.append(
+                  key + "[]",
+                  _this.item[key][x],
+                  _this.item[key][x].filename
+                );
+              }
+            } else formData.append(key, _this.item[key]);
           });
 
           axios
