@@ -9,6 +9,7 @@ export default /*#__PURE__*/ {
   },
   data() {
     return {
+      filterSidebarOpen: false,
       forceRecomputeCounter: 0,
       filtersVisible: false,
       loading: false,
@@ -90,6 +91,16 @@ export default /*#__PURE__*/ {
     },
 
     showPaginator: {
+      type: Boolean,
+      default: true,
+    },
+
+    showCreateBtn: {
+      type: Boolean,
+      default: true,
+    },
+
+    showSearch: {
       type: Boolean,
       default: true,
     },
@@ -218,6 +229,12 @@ export default /*#__PURE__*/ {
   methods: {
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
+
+      if (this.displayMode == this.displayModes.MODE_CARDS) {
+        this.filterSidebarOpen = this.filtersVisible;
+      } else {
+        this.filterSidebarOpen = false;
+      }
     },
     getInternalFilterByProp(prop) {
       return this.internalFilters.find((inf) => inf.prop == prop);
@@ -491,7 +508,7 @@ export default /*#__PURE__*/ {
     <div class="crud-header" v-if="showHeader">
       <h4 class="crud-title" v-if="showTitle">{{ title }}</h4>
 
-      <b-sidebar id="sidebar-filters" title="Filtrar" right shadow>
+      <b-sidebar v-model="filterSidebarOpen" title="Filtrar" right shadow>
         <slot
           name="sidebarFilters"
           v-bind:createItem="createItem"
@@ -538,6 +555,7 @@ export default /*#__PURE__*/ {
           >
             <b-button
               variant="success"
+              v-if="showCreateBtn"
               @click="createItem()"
               :disabled="loading"
             >
@@ -562,7 +580,7 @@ export default /*#__PURE__*/ {
               ></b-icon-table>
             </b-button>
 
-            <div class="crud-search m-0">
+            <div class="crud-search m-0" v-if="showSearch">
               <b-input-group>
                 <b-input-group-prepend>
                   <b-button
@@ -636,13 +654,19 @@ export default /*#__PURE__*/ {
                       v-if="
                         column.prop &&
                         column.prop.split('.').length > 1 &&
-                        column.prop.split('.')[1]
+                        column.prop.split('.')[1] 
+                       
                       "
                     >
                       {{
+
+                         item[column.prop.split('.')[0]] &&
+                        item[column.prop.split('.')[0]][
+                          column.prop.split('.')[1]
+                        ] ? 
                         item[column.prop.split(".")[0]][
                           column.prop.split(".")[1]
-                        ]
+                        ] : ''
                       }}</span
                     >
                     <span v-else> {{ item[column.prop] }}</span>

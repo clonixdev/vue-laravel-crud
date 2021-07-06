@@ -10,6 +10,7 @@ var script = /*#__PURE__*/{
 
   data() {
     return {
+      filterSidebarOpen: false,
       forceRecomputeCounter: 0,
       filtersVisible: false,
       loading: false,
@@ -87,6 +88,14 @@ var script = /*#__PURE__*/{
       default: ""
     },
     showPaginator: {
+      type: Boolean,
+      default: true
+    },
+    showCreateBtn: {
+      type: Boolean,
+      default: true
+    },
+    showSearch: {
       type: Boolean,
       default: true
     },
@@ -206,6 +215,12 @@ var script = /*#__PURE__*/{
   methods: {
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
+
+      if (this.displayMode == this.displayModes.MODE_CARDS) {
+        this.filterSidebarOpen = this.filtersVisible;
+      } else {
+        this.filterSidebarOpen = false;
+      }
     },
 
     getInternalFilterByProp(prop) {
@@ -618,10 +633,16 @@ var __vue_render__ = function () {
     staticClass: "crud-title"
   }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c('b-sidebar', {
     attrs: {
-      "id": "sidebar-filters",
       "title": "Filtrar",
       "right": "",
       "shadow": ""
+    },
+    model: {
+      value: _vm.filterSidebarOpen,
+      callback: function ($$v) {
+        _vm.filterSidebarOpen = $$v;
+      },
+      expression: "filterSidebarOpen"
     }
   }, [_vm._t("sidebarFilters", [_c('div', {
     staticClass: "px-3 py-2"
@@ -665,7 +686,7 @@ var __vue_render__ = function () {
     staticClass: "table-options"
   }, [_c('b-button-group', {
     staticClass: "mr-1"
-  }, [_vm._t("tableActions", [_c('b-button', {
+  }, [_vm._t("tableActions", [_vm.showCreateBtn ? _c('b-button', {
     attrs: {
       "variant": "success",
       "disabled": _vm.loading
@@ -675,7 +696,7 @@ var __vue_render__ = function () {
         return _vm.createItem();
       }
     }
-  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1), _vm._v(" "), _vm.enableFilters ? _c('b-button', {
+  }, [_c('b-icon-plus'), _vm._v(_vm._s(_vm.messageNew) + "\n          ")], 1) : _vm._e(), _vm._v(" "), _vm.enableFilters ? _c('b-button', {
     on: {
       "click": function ($event) {
         return _vm.toggleFilters();
@@ -691,7 +712,7 @@ var __vue_render__ = function () {
         return _vm.toggleDisplayMode();
       }
     }
-  }, [_vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('b-icon-card-list') : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('b-icon-table') : _vm._e()], 1) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('b-icon-card-list') : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('b-icon-table') : _vm._e()], 1) : _vm._e(), _vm._v(" "), _vm.showSearch ? _c('div', {
     staticClass: "crud-search m-0"
   }, [_c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
     class: {
@@ -720,7 +741,7 @@ var __vue_render__ = function () {
       },
       expression: "search"
     }
-  }) : _vm._e()], 1)], 1)], {
+  }) : _vm._e()], 1)], 1) : _vm._e()], {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading
@@ -780,7 +801,7 @@ var __vue_render__ = function () {
     }, [_vm._t("row", _vm._l(_vm.columns, function (column, indexc) {
       return _c('td', {
         key: indexc
-      }, [_vm._t('cell-' + column.prop, [column.prop && column.prop.split('.').length > 1 && column.prop.split('.')[1] ? _c('span', [_vm._v("\n                    " + _vm._s(item[column.prop.split(".")[0]][column.prop.split(".")[1]]))]) : _c('span', [_vm._v(" " + _vm._s(item[column.prop]))])], {
+      }, [_vm._t('cell-' + column.prop, [column.prop && column.prop.split('.').length > 1 && column.prop.split('.')[1] ? _c('span', [_vm._v("\n                    " + _vm._s(item[column.prop.split('.')[0]] && item[column.prop.split('.')[0]][column.prop.split('.')[1]] ? item[column.prop.split(".")[0]][column.prop.split(".")[1]] : ''))]) : _c('span', [_vm._v(" " + _vm._s(item[column.prop]))])], {
         "item": item
       }), _vm._v(" "), column.type == 'actions' ? _c('b-button-group', [_vm._t("rowAction", [_c('b-button', {
         attrs: {
@@ -997,8 +1018,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-10e2e5cc_0", {
-    source: "tr td[data-v-10e2e5cc]:first-child,tr td[data-v-10e2e5cc]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-10e2e5cc]{display:flex;justify-content:center}.crud-header[data-v-10e2e5cc]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-10e2e5cc]{margin:0}.crud-header .crud-search[data-v-10e2e5cc]{max-width:15rem}.crud-header .crud-search .btn[data-v-10e2e5cc]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-10e2e5cc]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-10e2e5cc]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-1a4df2ba_0", {
+    source: "tr td[data-v-1a4df2ba]:first-child,tr td[data-v-1a4df2ba]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-1a4df2ba]{display:flex;justify-content:center}.crud-header[data-v-1a4df2ba]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-1a4df2ba]{margin:0}.crud-header .crud-search[data-v-1a4df2ba]{max-width:15rem}.crud-header .crud-search .btn[data-v-1a4df2ba]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-1a4df2ba]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-1a4df2ba]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -1006,7 +1027,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-10e2e5cc";
+const __vue_scope_id__ = "data-v-1a4df2ba";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
