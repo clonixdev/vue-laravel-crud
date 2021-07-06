@@ -457,11 +457,12 @@ function _nonIterableRest() {
                   if (_this4.createMultipart) {
                     formData = new FormData();
                     Object.keys(_this.item).forEach(function (key) {
-                      if (_this.item[key][0] && _this.item[key][0].filename) {
+                      if (_this.item[key][0] && _this.item[key][0].name) {
+                        console.log(_this.item[key]);
                         var files = _this.item[key];
 
                         for (var x = 0; x < files.length; x++) {
-                          fd.append(key + "[]", _this.item[key][x], _this.item[key][x].filename);
+                          formData.append(key + "[]", _this.item[key][x], _this.item[key][x].name);
                         }
                       } else formData.append(key, _this.item[key]);
                     });
@@ -682,7 +683,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-22d0c91c>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-22d0c91c>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-10e2e5cc>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-10e2e5cc>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "id": "sidebar-filters",
       "title": "Filtrar",
@@ -727,7 +728,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-22d0c91c>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-10e2e5cc>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_c('b-button', {
     attrs: {
@@ -975,7 +976,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-22d0c91c>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-10e2e5cc>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1059,8 +1060,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-22d0c91c_0", {
-    source: "tr td[data-v-22d0c91c]:first-child,tr td[data-v-22d0c91c]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-22d0c91c]{display:flex;justify-content:center}.crud-header[data-v-22d0c91c]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-22d0c91c]{margin:0}.crud-header .crud-search[data-v-22d0c91c]{max-width:15rem}.crud-header .crud-search .btn[data-v-22d0c91c]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-22d0c91c]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-22d0c91c]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-10e2e5cc_0", {
+    source: "tr td[data-v-10e2e5cc]:first-child,tr td[data-v-10e2e5cc]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-10e2e5cc]{display:flex;justify-content:center}.crud-header[data-v-10e2e5cc]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-10e2e5cc]{margin:0}.crud-header .crud-search[data-v-10e2e5cc]{max-width:15rem}.crud-header .crud-search .btn[data-v-10e2e5cc]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-10e2e5cc]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-10e2e5cc]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -1068,10 +1069,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-22d0c91c";
+var __vue_scope_id__ = "data-v-10e2e5cc";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-22d0c91c";
+var __vue_module_identifier__ = "data-v-10e2e5cc";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
