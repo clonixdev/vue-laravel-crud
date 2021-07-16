@@ -387,11 +387,11 @@ function _nonIterableRest() {
     removeItem: function removeItem(id, index) {
       var _this = this;
 
-      this.$bvModal.msgBoxConfirm(messageRemoveConfirm, {
+      this.$bvModal.msgBoxConfirm(_this.messageRemoveConfirm, {
         size: "sm",
         buttonSize: "sm",
         okVariant: "danger",
-        okTitle: messageRemove,
+        okTitle: _this.messageRemove,
         cancelTitle: "NO",
         centered: true
       }).then(function (value) {
@@ -698,7 +698,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-1a4df2ba>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-1a4df2ba>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-70916085>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-70916085>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -749,7 +749,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-1a4df2ba>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-70916085>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm.showCreateBtn ? _c('b-button', {
     attrs: {
@@ -997,7 +997,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-1a4df2ba>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-70916085>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1081,8 +1081,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-1a4df2ba_0", {
-    source: "tr td[data-v-1a4df2ba]:first-child,tr td[data-v-1a4df2ba]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-1a4df2ba]{display:flex;justify-content:center}.crud-header[data-v-1a4df2ba]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-1a4df2ba]{margin:0}.crud-header .crud-search[data-v-1a4df2ba]{max-width:15rem}.crud-header .crud-search .btn[data-v-1a4df2ba]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-1a4df2ba]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-1a4df2ba]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-70916085_0", {
+    source: "tr td[data-v-70916085]:first-child,tr td[data-v-70916085]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-70916085]{display:flex;justify-content:center}.crud-header[data-v-70916085]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-70916085]{margin:0}.crud-header .crud-search[data-v-70916085]{max-width:15rem}.crud-header .crud-search .btn[data-v-70916085]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-70916085]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-70916085]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -1090,10 +1090,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-1a4df2ba";
+var __vue_scope_id__ = "data-v-70916085";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-1a4df2ba";
+var __vue_module_identifier__ = "data-v-70916085";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

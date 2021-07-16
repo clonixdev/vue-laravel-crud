@@ -320,11 +320,11 @@ export default /*#__PURE__*/ {
       let _this = this;
 
       this.$bvModal
-        .msgBoxConfirm(messageRemoveConfirm, {
+        .msgBoxConfirm(_this.messageRemoveConfirm, {
           size: "sm",
           buttonSize: "sm",
           okVariant: "danger",
-          okTitle: messageRemove,
+          okTitle: _this.messageRemove,
           cancelTitle: "NO",
           centered: true,
         })

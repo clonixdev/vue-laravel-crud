@@ -311,11 +311,11 @@ var script = /*#__PURE__*/{
     removeItem: function (id, index) {
       let _this = this;
 
-      this.$bvModal.msgBoxConfirm(messageRemoveConfirm, {
+      this.$bvModal.msgBoxConfirm(_this.messageRemoveConfirm, {
         size: "sm",
         buttonSize: "sm",
         okVariant: "danger",
-        okTitle: messageRemove,
+        okTitle: _this.messageRemove,
         cancelTitle: "NO",
         centered: true
       }).then(value => {
@@ -1018,8 +1018,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-1a4df2ba_0", {
-    source: "tr td[data-v-1a4df2ba]:first-child,tr td[data-v-1a4df2ba]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-1a4df2ba]{display:flex;justify-content:center}.crud-header[data-v-1a4df2ba]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-1a4df2ba]{margin:0}.crud-header .crud-search[data-v-1a4df2ba]{max-width:15rem}.crud-header .crud-search .btn[data-v-1a4df2ba]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-1a4df2ba]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-1a4df2ba]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-70916085_0", {
+    source: "tr td[data-v-70916085]:first-child,tr td[data-v-70916085]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-70916085]{display:flex;justify-content:center}.crud-header[data-v-70916085]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-70916085]{margin:0}.crud-header .crud-search[data-v-70916085]{max-width:15rem}.crud-header .crud-search .btn[data-v-70916085]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-70916085]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-70916085]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -1027,7 +1027,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-1a4df2ba";
+const __vue_scope_id__ = "data-v-70916085";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
