@@ -343,8 +343,9 @@ export default /*#__PURE__*/ {
               });
           }
         })
-        .catch((err) => {
+        .catch((error) => {
           _this.toastError(error);
+          _this.loading = false;
         });
     },
 
@@ -654,19 +655,18 @@ export default /*#__PURE__*/ {
                       v-if="
                         column.prop &&
                         column.prop.split('.').length > 1 &&
-                        column.prop.split('.')[1] 
-                       
+                        column.prop.split('.')[1]
                       "
                     >
                       {{
-
-                         item[column.prop.split('.')[0]] &&
-                        item[column.prop.split('.')[0]][
-                          column.prop.split('.')[1]
-                        ] ? 
+                        item[column.prop.split(".")[0]] &&
                         item[column.prop.split(".")[0]][
                           column.prop.split(".")[1]
-                        ] : ''
+                        ]
+                          ? item[column.prop.split(".")[0]][
+                              column.prop.split(".")[1]
+                            ]
+                          : ""
                       }}</span
                     >
                     <span v-else> {{ item[column.prop] }}</span>
