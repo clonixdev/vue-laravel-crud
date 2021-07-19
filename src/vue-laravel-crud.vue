@@ -603,6 +603,7 @@ export default /*#__PURE__*/ {
                   </div>
 
                   <div class="form-group" v-else-if="column.type == 'state'">
+                    <label>{{ column.label }}</label>
                     <select
                       class="form-control"
                       v-model="internalFilterByProp(column.prop).value"
@@ -614,7 +615,7 @@ export default /*#__PURE__*/ {
                         v-for="(option, indexo) in column.options"
                         :key="indexo"
                       >
-                        {{ option.text }}
+                        {{ (option.text ? option.text : (option.label ? option.label : '')) }}
                       </option>
                     </select>
                   </div>
@@ -768,7 +769,7 @@ export default /*#__PURE__*/ {
                         v-for="(option, indexo) in column.options"
                         :key="indexo"
                       >
-                        {{ option.text }}
+                        {{ (option.text ? option.text : (option.label ? option.label : '')) }}
                       </option>
                     </select>
 
