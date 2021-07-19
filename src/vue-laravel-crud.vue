@@ -867,7 +867,7 @@ tr td:first-child {
 
 @media (min-width: 992px) {
   .table {
-    table-layout: fixed;
+    table-layout: auto;
 
     tbody {
       td {
