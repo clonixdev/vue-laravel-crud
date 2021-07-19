@@ -300,7 +300,7 @@ export default /*#__PURE__*/ {
       filter.value = value;
       this.forceRecomputeCounter++;
       setTimeout(() => {
-        this.$refs.crud.refresh();
+        this.refresh();
       }, 1);
     },
     fetchItems(page = 1) {
@@ -517,7 +517,7 @@ export default /*#__PURE__*/ {
     onChangeFilter(event) {
       this.forceRecomputeCounter++;
       setTimeout(() => {
-        this.$refs.crud.refresh();
+        this.refresh();
       }, 1);
     },
     onPaginationChange(page) {
