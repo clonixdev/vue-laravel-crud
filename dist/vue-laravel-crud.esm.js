@@ -1037,8 +1037,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-55285d7c_0", {
-    source: "tr td[data-v-55285d7c]:first-child,tr td[data-v-55285d7c]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-55285d7c]{display:flex;justify-content:center}.crud-header[data-v-55285d7c]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-55285d7c]{margin:0}.crud-header .crud-search[data-v-55285d7c]{max-width:15rem}.crud-header .crud-search .btn[data-v-55285d7c]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-55285d7c]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-55285d7c]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-04f21eff_0", {
+    source: "tr td[data-v-04f21eff]:first-child,tr td[data-v-04f21eff]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-04f21eff]{display:flex;justify-content:center}.crud-header[data-v-04f21eff]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-04f21eff]{margin:0}.crud-header .crud-search[data-v-04f21eff]{max-width:15rem}.crud-header .crud-search .btn[data-v-04f21eff]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-04f21eff]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-04f21eff]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-04f21eff]{table-layout:fixed}.table tbody td[data-v-04f21eff]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-04f21eff]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1046,7 +1046,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-55285d7c";
+const __vue_scope_id__ = "data-v-04f21eff";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

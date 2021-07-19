@@ -864,4 +864,21 @@ tr td:first-child {
     justify-content: flex-end;
   }
 }
+
+@media (min-width: 992px) {
+  .table {
+    table-layout: fixed;
+
+    tbody {
+      td {
+        overflow: scroll;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+      td::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
 </style>

@@ -713,7 +713,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-55285d7c>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-55285d7c>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-04f21eff>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-04f21eff>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -764,7 +764,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-55285d7c>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-04f21eff>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm.showCreateBtn ? _c('b-button', {
     attrs: {
@@ -1018,7 +1018,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-55285d7c>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-04f21eff>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1102,8 +1102,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-55285d7c_0", {
-    source: "tr td[data-v-55285d7c]:first-child,tr td[data-v-55285d7c]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-55285d7c]{display:flex;justify-content:center}.crud-header[data-v-55285d7c]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-55285d7c]{margin:0}.crud-header .crud-search[data-v-55285d7c]{max-width:15rem}.crud-header .crud-search .btn[data-v-55285d7c]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-55285d7c]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-55285d7c]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-04f21eff_0", {
+    source: "tr td[data-v-04f21eff]:first-child,tr td[data-v-04f21eff]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-04f21eff]{display:flex;justify-content:center}.crud-header[data-v-04f21eff]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-04f21eff]{margin:0}.crud-header .crud-search[data-v-04f21eff]{max-width:15rem}.crud-header .crud-search .btn[data-v-04f21eff]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-04f21eff]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-04f21eff]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-04f21eff]{table-layout:fixed}.table tbody td[data-v-04f21eff]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-04f21eff]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1111,10 +1111,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-55285d7c";
+var __vue_scope_id__ = "data-v-04f21eff";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-55285d7c";
+var __vue_module_identifier__ = "data-v-04f21eff";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
