@@ -3,7 +3,7 @@ import draggable from "vuedraggable";
 import axios from "axios";
 
 export default /*#__PURE__*/ {
-  name: "VueLaravelCrud", // vue component name
+  name: "VueLaravelCrud",
   components: {
     draggable,
   },
@@ -15,8 +15,6 @@ export default /*#__PURE__*/ {
       loading: false,
       items: [],
       displaySearch: false,
-
-      // modelName: "products",
       pagination: {
         current_page: 1,
         last_page: 1,
@@ -52,59 +50,47 @@ export default /*#__PURE__*/ {
   props: {
     modelName: String,
     model: Object,
-
     title: String,
-
     columns: {
       type: Array,
       default: [{ label: "Id", prop: "id", type: "number" }],
     },
-
     filter: {
       type: Array,
       default: [],
     },
-
     enableFilters: {
       type: Boolean,
       default: false,
     },
-
     sorteable: {
       type: Boolean,
       default: false,
     },
-
     createMultipart: {
       type: Boolean,
       default: false,
     },
-
     apiUrl: {
       type: String,
       default: "/api",
     },
-
     search: {
       type: String,
       default: "",
     },
-
     showPaginator: {
       type: Boolean,
       default: true,
     },
-
     showCreateBtn: {
       type: Boolean,
       default: true,
     },
-
     showSearch: {
       type: Boolean,
       default: true,
     },
-
     showHeader: {
       type: Boolean,
       default: true,
@@ -117,12 +103,10 @@ export default /*#__PURE__*/ {
       type: Number,
       default: 20,
     },
-
     displayMode: {
       type: Number,
       default: 1,
     },
-
     displayModeToggler: {
       type: Boolean,
       default: false,
@@ -148,12 +132,10 @@ export default /*#__PURE__*/ {
       default: 3,
       type: Number,
     },
-
     enableDraggable: {
       type: Boolean,
       default: false,
     },
-
     selectHover: {
       type: Boolean,
       default: false,
@@ -166,17 +148,14 @@ export default /*#__PURE__*/ {
       type: String,
       default: "¿Esta seguro de borrar este elemento?",
     },
-
     messageRemove: {
       type: String,
       default: "BORRAR",
     },
-
     messageNew: {
       type: String,
       default: "Nuevo",
     },
-
     messageEmptyResults: {
       type: String,
       default: "No se han encontrado resultados",
@@ -194,7 +173,6 @@ export default /*#__PURE__*/ {
   mounted() {
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
-
     this.internalFilters = [];
     this.columns.forEach((column) => {
       if (this.isColumnHasFilter(column)) {
@@ -334,9 +312,10 @@ export default /*#__PURE__*/ {
           if (value) {
             _this.loading = true;
             axios
-              .delete(apiUrl + "/" + _this.modelName + "/" + id)
+              .delete(_this.apiUrl + "/" + _this.modelName + "/" + id)
               .then(function (response) {
                 _this.items.splice(index, 1);
+                _this.toastSuccess("Elemento eliminado.");
                 _this.loading = false;
               })
               .catch(function (error) {
@@ -369,7 +348,7 @@ export default /*#__PURE__*/ {
           })
           .then(function (response) {
             let data = response.data;
-
+            _this.toastSuccess("Orden Actualizado");
             _this.loading = false;
           })
           .catch(function (error) {
@@ -398,6 +377,7 @@ export default /*#__PURE__*/ {
             _this.items[itemIndex] = itemSv;
             _this.item = itemSv;
             _this.loading = false;
+            _this.toastSuccess("Elemento Modificado");
           })
           .catch(function (error) {
             _this.toastError(error);
@@ -438,6 +418,7 @@ export default /*#__PURE__*/ {
 
               _this.items.push(itemSv);
               _this.item = itemSv;
+              _this.toastSuccess("Elemento Creado");
             })
             .catch(function (error) {
               _this.toastError(error);
@@ -460,6 +441,7 @@ export default /*#__PURE__*/ {
 
               _this.items.push(itemSv);
               _this.item = itemSv;
+              _this.toastSuccess("Elemento Creado");
             })
             .catch(function (error) {
               _this.toastError(error);
@@ -524,8 +506,7 @@ export default /*#__PURE__*/ {
             <div v-for="(column, indexc) in columns" :key="indexc">
               <div
                 v-if="
-                  isColumnHasFilter(column) &&
-                  internalFilterByProp(column.prop)
+                  isColumnHasFilter(column) && internalFilterByProp(column.prop)
                 "
               >
                 <slot
