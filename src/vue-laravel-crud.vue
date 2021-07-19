@@ -228,7 +228,7 @@ export default /*#__PURE__*/ {
       let filter = [];
       this.forceRecomputeCounter;
       this.internalFilters.forEach((f) => {
-        if (f.value > 0) filter.push([f.column, f.op, f.value]);
+        if (f.value) filter.push([f.column, f.op, f.value]);
       });
 
       return filter;
