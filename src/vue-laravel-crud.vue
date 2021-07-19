@@ -205,7 +205,8 @@ export default /*#__PURE__*/ {
     },
     internalFilterByProp() {
       return (prop) => {
-        return this.internalFilters.find((inf) => inf.prop == prop);
+        return this.internalFilters.find((inf) => inf.column == prop);
+
       };
     },
   },
@@ -504,18 +505,17 @@ export default /*#__PURE__*/ {
         >
           <div class="px-3 py-2">
             <div v-for="(column, indexc) in columns" :key="indexc">
-              <div
-                v-if="
-                  isColumnHasFilter(column) && internalFilterByProp(column.prop)
-                "
-              >
+              <div v-if="isColumnHasFilter(column)">
                 <slot
                   :name="'sidebar-filter-' + column.prop"
                   v-bind:column="column"
                   v-bind:filter="filter"
                   v-bind:internalFilterByProp="internalFilterByProp"
                 >
-                  <div class="form-group">
+                  <div
+                    class="form-group"
+                    v-if="internalFilterByProp(column.prop)"
+                  >
                     <label>{{ column.label }}</label>
                     <input
                       class="form-control"

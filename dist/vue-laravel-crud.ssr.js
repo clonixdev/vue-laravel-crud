@@ -295,7 +295,7 @@ function _nonIterableRest() {
 
       return function (prop) {
         return _this3.internalFilters.find(function (inf) {
-          return inf.prop == prop;
+          return inf.column == prop;
         });
       };
     }
@@ -713,7 +713,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-ce53276e>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-ce53276e>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-075de5a7>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-075de5a7>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -731,7 +731,7 @@ var __vue_render__ = function __vue_render__() {
   }, _vm._l(_vm.columns, function (column, indexc) {
     return _c('div', {
       key: indexc
-    }, [_vm.isColumnHasFilter(column) && _vm.internalFilterByProp(column.prop) ? _c('div', [_vm._t('sidebar-filter-' + column.prop, [_c('div', {
+    }, [_vm.isColumnHasFilter(column) ? _c('div', [_vm._t('sidebar-filter-' + column.prop, [_vm.internalFilterByProp(column.prop) ? _c('div', {
       staticClass: "form-group"
     }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('input', {
       directives: [{
@@ -753,7 +753,7 @@ var __vue_render__ = function __vue_render__() {
           _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.value);
         }
       }
-    })])], {
+    })]) : _vm._e()], {
       "column": column,
       "filter": _vm.filter,
       "internalFilterByProp": _vm.internalFilterByProp
@@ -764,7 +764,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-ce53276e>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-075de5a7>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm.showCreateBtn ? _c('b-button', {
     attrs: {
@@ -1012,7 +1012,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-ce53276e>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-075de5a7>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1096,8 +1096,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-ce53276e_0", {
-    source: "tr td[data-v-ce53276e]:first-child,tr td[data-v-ce53276e]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-ce53276e]{display:flex;justify-content:center}.crud-header[data-v-ce53276e]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-ce53276e]{margin:0}.crud-header .crud-search[data-v-ce53276e]{max-width:15rem}.crud-header .crud-search .btn[data-v-ce53276e]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-ce53276e]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-ce53276e]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-075de5a7_0", {
+    source: "tr td[data-v-075de5a7]:first-child,tr td[data-v-075de5a7]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-075de5a7]{display:flex;justify-content:center}.crud-header[data-v-075de5a7]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-075de5a7]{margin:0}.crud-header .crud-search[data-v-075de5a7]{max-width:15rem}.crud-header .crud-search .btn[data-v-075de5a7]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-075de5a7]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-075de5a7]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -1105,10 +1105,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-ce53276e";
+var __vue_scope_id__ = "data-v-075de5a7";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-ce53276e";
+var __vue_module_identifier__ = "data-v-075de5a7";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
