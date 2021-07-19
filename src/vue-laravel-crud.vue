@@ -225,6 +225,11 @@ export default /*#__PURE__*/ {
 
       return filter;
     },
+    internalFilterByProp() {
+      return (prop) => {
+        return this.internalFilters.find((inf) => inf.prop == prop);
+      };
+    },
   },
   methods: {
     toggleFilters() {
@@ -235,9 +240,6 @@ export default /*#__PURE__*/ {
       } else {
         this.filterSidebarOpen = false;
       }
-    },
-    getInternalFilterByProp(prop) {
-      return this.internalFilters.find((inf) => inf.prop == prop);
     },
 
     toggleDisplayMode() {

@@ -209,6 +209,12 @@ var script = /*#__PURE__*/{
         if (f.value > 0) filter.push([f.column, f.op, f.value]);
       });
       return filter;
+    },
+
+    internalFilterByProp() {
+      return prop => {
+        return this.internalFilters.find(inf => inf.prop == prop);
+      };
     }
 
   },
@@ -221,10 +227,6 @@ var script = /*#__PURE__*/{
       } else {
         this.filterSidebarOpen = false;
       }
-    },
-
-    getInternalFilterByProp(prop) {
-      return this.internalFilters.find(inf => inf.prop == prop);
     },
 
     toggleDisplayMode() {
@@ -1020,8 +1022,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-5e44b98e_0", {
-    source: "tr td[data-v-5e44b98e]:first-child,tr td[data-v-5e44b98e]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-5e44b98e]{display:flex;justify-content:center}.crud-header[data-v-5e44b98e]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-5e44b98e]{margin:0}.crud-header .crud-search[data-v-5e44b98e]{max-width:15rem}.crud-header .crud-search .btn[data-v-5e44b98e]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-5e44b98e]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-5e44b98e]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
+  inject("data-v-e962ae5e_0", {
+    source: "tr td[data-v-e962ae5e]:first-child,tr td[data-v-e962ae5e]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-e962ae5e]{display:flex;justify-content:center}.crud-header[data-v-e962ae5e]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-e962ae5e]{margin:0}.crud-header .crud-search[data-v-e962ae5e]{max-width:15rem}.crud-header .crud-search .btn[data-v-e962ae5e]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-e962ae5e]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-e962ae5e]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}",
     map: undefined,
     media: undefined
   });
@@ -1029,7 +1031,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-5e44b98e";
+const __vue_scope_id__ = "data-v-e962ae5e";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
