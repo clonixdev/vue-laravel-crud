@@ -525,20 +525,20 @@ export default /*#__PURE__*/ {
               <div
                 v-if="
                   isColumnHasFilter(column) &&
-                  getInternalFilterByProp(column.prop)
+                  internalFilterByProp(column.prop)
                 "
               >
                 <slot
                   :name="'sidebar-filter-' + column.prop"
                   v-bind:column="column"
                   v-bind:filter="filter"
-                  v-bind:getInternalFilterByProp="getInternalFilterByProp"
+                  v-bind:internalFilterByProp="internalFilterByProp"
                 >
                   <div class="form-group">
                     <label>{{ column.label }}</label>
                     <input
                       class="form-control"
-                      v-model="getInternalFilterByProp(column.prop).value"
+                      v-model="internalFilterByProp(column.prop).value"
                     />
                   </div>
                 </slot>
@@ -622,17 +622,17 @@ export default /*#__PURE__*/ {
                     :name="'filter-' + column.prop"
                     v-bind:column="column"
                     v-bind:filter="filter"
-                    v-bind:getInternalFilterByProp="getInternalFilterByProp"
+                    v-bind:internalFilterByProp="internalFilterByProp"
                     v-if="
                       enableFilters &&
                       filtersVisible &&
                       isColumnHasFilter(column) &&
-                      getInternalFilterByProp(column.prop)
+                      internalFilterByProp(column.prop)
                     "
                   >
                     <input
                       class="form-control"
-                      v-model="getInternalFilterByProp(column.prop).value"
+                      v-model="internalFilterByProp(column.prop).value"
                       :placeholder="column.label"
                     />
                   </slot>
