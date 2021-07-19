@@ -176,16 +176,46 @@ export default /*#__PURE__*/ {
     this.internalFilters = [];
     this.columns.forEach((column) => {
       if (this.isColumnHasFilter(column)) {
-        this.internalFilters.push({
-          column: column.prop,
-          op: column.filterOp ? column.filterOp : "=",
-          value: null,
-        });
+        if (column.type == "date") {
+          this.internalFilters.push({
+            column: column.prop + "_from",
+            op: column.filterOp ? column.filterOp : "=",
+            value: null,
+          });
+
+          this.internalFilters.push({
+            column: column.prop + "_to",
+            op: column.filterOp ? column.filterOp : "=",
+            value: null,
+          });
+        } else {
+          this.internalFilters.push({
+            column: column.prop,
+            op: column.filterOp ? column.filterOp : "=",
+            value: null,
+          });
+        }
       }
     });
     this.fetchItems();
   },
   computed: {
+    itemValue() {
+      return (column, item) => {
+        if (
+          column.prop &&
+          column.prop.split(".").length > 1 &&
+          column.prop.split(".")[1]
+        ) {
+          return item[column.prop.split(".")[0]] &&
+            item[column.prop.split(".")[0]][column.prop.split(".")[1]]
+            ? item[column.prop.split(".")[0]][column.prop.split(".")[1]]
+            : "";
+        } else {
+          return item[column.prop];
+        }
+      };
+    },
     filteredItems() {
       return this.items;
     },
@@ -358,6 +388,20 @@ export default /*#__PURE__*/ {
           });
       }
     },
+
+    getStateValue(value, options) {
+      if (!options) return value;
+
+      let ops = options.filter((option) => {
+        if (Array.isArray(value)) {
+          return value.includes(option.id);
+        } else {
+          return option.id == value;
+        }
+      });
+
+      return ops.join(", ");
+    },
     async saveItem() {
       let _this = this;
       _this.loading = true;
@@ -510,11 +554,63 @@ export default /*#__PURE__*/ {
                   v-bind:column="column"
                   v-bind:filter="filter"
                   v-bind:internalFilterByProp="internalFilterByProp"
+                  v-if="internalFilterByProp(column.prop)"
                 >
-                  <div
-                    class="form-group"
-                    v-if="internalFilterByProp(column.prop)"
-                  >
+                  <div class="form-group" v-if="column.type == 'boolean'">
+                    <label>{{ column.label }}</label>
+
+                    <select
+                      class="form-control"
+                      v-model="internalFilterByProp(column.prop).value"
+                    >
+                      <option value=""></option>
+                      <option value="1">Sí</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                  <div class="form-group" v-else-if="column.type == 'date'">
+                    <div class="row">
+                      <div class="col-6">
+                        <b-form-datepicker
+                          v-model="
+                            internalFilterByProp(column.prop + '_from').value
+                          "
+                          today-button
+                          reset-button
+                          close-button
+                          locale="es"
+                        ></b-form-datepicker>
+                      </div>
+                      <div class="col-6">
+                        <b-form-datepicker
+                          v-model="
+                            internalFilterByProp(column.prop + '_to').value
+                          "
+                          today-button
+                          reset-button
+                          close-button
+                          locale="es"
+                        ></b-form-datepicker>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group" v-else-if="column.type == 'state'">
+                    <select
+                      class="form-control"
+                      v-model="internalFilterByProp(column.prop).value"
+                    >
+                      <option value=""></option>
+                      <option
+                        :value="option.id"
+                        v-for="(option, indexo) in column.options"
+                        :key="indexo"
+                      >
+                        {{ option.text }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group" v-else>
                     <label>{{ column.label }}</label>
 
                     <input
@@ -642,25 +738,27 @@ export default /*#__PURE__*/ {
                   :scope="column.prop == 'id' ? 'row' : ''"
                 >
                   <slot :name="'cell-' + column.prop" v-bind:item="item">
-                    <span
-                      v-if="
-                        column.prop &&
-                        column.prop.split('.').length > 1 &&
-                        column.prop.split('.')[1]
-                      "
-                    >
+                    <span v-if="column.type == 'boolean'">
+                      <b-badge
+                        variant="success"
+                        v-if="!!itemValue(column, item)"
+                        ><b-icon-check-circle></b-icon-check-circle
+                      ></b-badge>
+                      <b-badge variant="danger" v-if="!itemValue(column, item)"
+                        ><b-icon-x-circle></b-icon-x-circle
+                      ></b-badge>
+                    </span>
+                    <span v-else-if="column.type == 'date'">
+                      {{ itemValue(column, item) }}
+                    </span>
+                    <span v-else-if="column.type == 'state'">
                       {{
-                        item[column.prop.split(".")[0]] &&
-                        item[column.prop.split(".")[0]][
-                          column.prop.split(".")[1]
-                        ]
-                          ? item[column.prop.split(".")[0]][
-                              column.prop.split(".")[1]
-                            ]
-                          : ""
-                      }}</span
-                    >
-                    <span v-else> {{ item[column.prop] }}</span>
+                        getStateValue(itemValue(column, item), column.options)
+                      }}
+                    </span>
+                    <span v-else>
+                      {{ itemValue(column, item) }}
+                    </span>
                   </slot>
 
                   <b-button-group v-if="column.type == 'actions'">
@@ -730,7 +828,29 @@ export default /*#__PURE__*/ {
                   <b-card-text v-if="column.type != 'actions'"
                     >{{ column.label }}:
                     <slot :name="'cell-' + column.prop" v-bind:item="item">
-                      {{ item[column.prop] }}
+                      <span v-if="column.type == 'boolean'">
+                        <b-badge
+                          variant="success"
+                          v-if="!!itemValue(column, item)"
+                          ><b-icon-check-circle></b-icon-check-circle
+                        ></b-badge>
+                        <b-badge
+                          variant="danger"
+                          v-if="!itemValue(column, item)"
+                          ><b-icon-x-circle></b-icon-x-circle
+                        ></b-badge>
+                      </span>
+                      <span v-else-if="column.type == 'date'">
+                        {{ itemValue(column, item) }}
+                      </span>
+                      <span v-else-if="column.type == 'state'">
+                        {{
+                          getStateValue(itemValue(column, item), column.options)
+                        }}
+                      </span>
+                      <span v-else>
+                        {{ itemValue(column, item) }}
+                      </span>
                     </slot>
                   </b-card-text>
                 </div>

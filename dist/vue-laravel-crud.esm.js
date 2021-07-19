@@ -181,17 +181,40 @@ var script = /*#__PURE__*/{
     this.internalFilters = [];
     this.columns.forEach(column => {
       if (this.isColumnHasFilter(column)) {
-        this.internalFilters.push({
-          column: column.prop,
-          op: column.filterOp ? column.filterOp : "=",
-          value: null
-        });
+        if (column.type == "date") {
+          this.internalFilters.push({
+            column: column.prop + "_from",
+            op: column.filterOp ? column.filterOp : "=",
+            value: null
+          });
+          this.internalFilters.push({
+            column: column.prop + "_to",
+            op: column.filterOp ? column.filterOp : "=",
+            value: null
+          });
+        } else {
+          this.internalFilters.push({
+            column: column.prop,
+            op: column.filterOp ? column.filterOp : "=",
+            value: null
+          });
+        }
       }
     });
     this.fetchItems();
   },
 
   computed: {
+    itemValue() {
+      return (column, item) => {
+        if (column.prop && column.prop.split(".").length > 1 && column.prop.split(".")[1]) {
+          return item[column.prop.split(".")[0]] && item[column.prop.split(".")[0]][column.prop.split(".")[1]] ? item[column.prop.split(".")[0]][column.prop.split(".")[1]] : "";
+        } else {
+          return item[column.prop];
+        }
+      };
+    },
+
     filteredItems() {
       return this.items;
     },
@@ -368,6 +391,18 @@ var script = /*#__PURE__*/{
           _this.loading = false;
         });
       }
+    },
+
+    getStateValue(value, options) {
+      if (!options) return value;
+      let ops = options.filter(option => {
+        if (Array.isArray(value)) {
+          return value.includes(option.id);
+        } else {
+          return option.id == value;
+        }
+      });
+      return ops.join(", ");
     },
 
     async saveItem() {
@@ -662,7 +697,110 @@ var __vue_render__ = function () {
   }, _vm._l(_vm.columns, function (column, indexc) {
     return _c('div', {
       key: indexc
-    }, [_vm.isColumnHasFilter(column) ? _c('div', [_vm._t('sidebar-filter-' + column.prop, [_vm.internalFilterByProp(column.prop) ? _c('div', {
+    }, [_vm.isColumnHasFilter(column) ? _c('div', [_vm.internalFilterByProp(column.prop) ? _vm._t('sidebar-filter-' + column.prop, [column.type == 'boolean' ? _c('div', {
+      staticClass: "form-group"
+    }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('select', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.internalFilterByProp(column.prop).value,
+        expression: "internalFilterByProp(column.prop).value"
+      }],
+      staticClass: "form-control",
+      on: {
+        "change": function ($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+
+          _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        }
+      }
+    }, [_c('option', {
+      attrs: {
+        "value": ""
+      }
+    }), _vm._v(" "), _c('option', {
+      attrs: {
+        "value": "1"
+      }
+    }, [_vm._v("Sí")]), _vm._v(" "), _c('option', {
+      attrs: {
+        "value": "0"
+      }
+    }, [_vm._v("No")])])]) : column.type == 'date' ? _c('div', {
+      staticClass: "form-group"
+    }, [_c('div', {
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-6"
+    }, [_c('b-form-datepicker', {
+      attrs: {
+        "today-button": "",
+        "reset-button": "",
+        "close-button": "",
+        "locale": "es"
+      },
+      model: {
+        value: _vm.internalFilterByProp(column.prop + '_from').value,
+        callback: function ($$v) {
+          _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
+        },
+        expression: "\n                          internalFilterByProp(column.prop + '_from').value\n                        "
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "col-6"
+    }, [_c('b-form-datepicker', {
+      attrs: {
+        "today-button": "",
+        "reset-button": "",
+        "close-button": "",
+        "locale": "es"
+      },
+      model: {
+        value: _vm.internalFilterByProp(column.prop + '_to').value,
+        callback: function ($$v) {
+          _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
+        },
+        expression: "\n                          internalFilterByProp(column.prop + '_to').value\n                        "
+      }
+    })], 1)])]) : column.type == 'state' ? _c('div', {
+      staticClass: "form-group"
+    }, [_c('select', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.internalFilterByProp(column.prop).value,
+        expression: "internalFilterByProp(column.prop).value"
+      }],
+      staticClass: "form-control",
+      on: {
+        "change": function ($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+
+          _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        }
+      }
+    }, [_c('option', {
+      attrs: {
+        "value": ""
+      }
+    }), _vm._v(" "), _vm._l(column.options, function (option, indexo) {
+      return _c('option', {
+        key: indexo,
+        domProps: {
+          "value": option.id
+        }
+      }, [_vm._v("\n                      " + _vm._s(option.text) + "\n                    ")]);
+    })], 2)]) : _c('div', {
       staticClass: "form-group"
     }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('input', {
       directives: [{
@@ -684,11 +822,11 @@ var __vue_render__ = function () {
           _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.value);
         }
       }
-    })]) : _vm._e()], {
+    })])], {
       "column": column,
       "filter": _vm.filter,
       "internalFilterByProp": _vm.internalFilterByProp
-    })], 2) : _vm._e()]);
+    }) : _vm._e()], 2) : _vm._e()]);
   }), 0)], {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
@@ -820,7 +958,15 @@ var __vue_render__ = function () {
         attrs: {
           "scope": column.prop == 'id' ? 'row' : ''
         }
-      }, [_vm._t('cell-' + column.prop, [column.prop && column.prop.split('.').length > 1 && column.prop.split('.')[1] ? _c('span', [_vm._v("\n                    " + _vm._s(item[column.prop.split(".")[0]] && item[column.prop.split(".")[0]][column.prop.split(".")[1]] ? item[column.prop.split(".")[0]][column.prop.split(".")[1]] : ""))]) : _c('span', [_vm._v(" " + _vm._s(item[column.prop]))])], {
+      }, [_vm._t('cell-' + column.prop, [column.type == 'boolean' ? _c('span', [!!_vm.itemValue(column, item) ? _c('b-badge', {
+        attrs: {
+          "variant": "success"
+        }
+      }, [_c('b-icon-check-circle')], 1) : _vm._e(), _vm._v(" "), !_vm.itemValue(column, item) ? _c('b-badge', {
+        attrs: {
+          "variant": "danger"
+        }
+      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")]) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
         "item": item
       }), _vm._v(" "), column.type == 'actions' ? _c('b-button-group', [_vm._t("rowAction", [_c('b-button', {
         attrs: {
@@ -945,7 +1091,15 @@ var __vue_render__ = function () {
     }, [_vm._t("card", _vm._l(_vm.columns, function (column, indexc) {
       return _c('div', {
         key: indexc
-      }, [column.type != 'actions' ? _c('b-card-text', [_vm._v(_vm._s(column.label) + ":\n                  "), _vm._t('cell-' + column.prop, [_vm._v("\n                    " + _vm._s(item[column.prop]) + "\n                  ")], {
+      }, [column.type != 'actions' ? _c('b-card-text', [_vm._v(_vm._s(column.label) + ":\n                  "), _vm._t('cell-' + column.prop, [column.type == 'boolean' ? _c('span', [!!_vm.itemValue(column, item) ? _c('b-badge', {
+        attrs: {
+          "variant": "success"
+        }
+      }, [_c('b-icon-check-circle')], 1) : _vm._e(), _vm._v(" "), !_vm.itemValue(column, item) ? _c('b-badge', {
+        attrs: {
+          "variant": "danger"
+        }
+      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item)) + "\n                    ")]) : column.type == 'state' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                    ")]) : _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item)) + "\n                    ")])], {
         "item": item
       })], 2) : _vm._e()], 1);
     }), {
@@ -1037,8 +1191,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-47601e84_0", {
-    source: "tr td[data-v-47601e84]:first-child,tr td[data-v-47601e84]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-47601e84]{display:flex;justify-content:center}.crud-header[data-v-47601e84]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-47601e84]{margin:0}.crud-header .crud-search[data-v-47601e84]{max-width:15rem}.crud-header .crud-search .btn[data-v-47601e84]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-47601e84]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-47601e84]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-47601e84]{table-layout:auto}.table tbody td[data-v-47601e84]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-47601e84]::-webkit-scrollbar{display:none}}",
+  inject("data-v-3421cc4a_0", {
+    source: "tr td[data-v-3421cc4a]:first-child,tr td[data-v-3421cc4a]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-3421cc4a]{display:flex;justify-content:center}.crud-header[data-v-3421cc4a]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-3421cc4a]{margin:0}.crud-header .crud-search[data-v-3421cc4a]{max-width:15rem}.crud-header .crud-search .btn[data-v-3421cc4a]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-3421cc4a]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-3421cc4a]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-3421cc4a]{table-layout:auto}.table tbody td[data-v-3421cc4a]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-3421cc4a]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1046,7 +1200,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-47601e84";
+const __vue_scope_id__ = "data-v-3421cc4a";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
