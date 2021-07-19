@@ -179,7 +179,7 @@ export default /*#__PURE__*/ {
         this.internalFilters.push({
           column: column.prop,
           op: column.filterOp ? column.filterOp : "=",
-          value: -1,
+          value: null,
         });
       }
     });
@@ -206,7 +206,6 @@ export default /*#__PURE__*/ {
     internalFilterByProp() {
       return (prop) => {
         return this.internalFilters.find((inf) => inf.column == prop);
-
       };
     },
   },
@@ -264,7 +263,7 @@ export default /*#__PURE__*/ {
       this.fetchItems();
     },
     isColumnHasFilter(column) {
-      return column && column.type != "actions";
+      return column && !column.hideFilter && column.type != "actions";
     },
     setFilter(column, value) {
       let filter = this.filter.find((f) => f.column == column);
@@ -517,6 +516,7 @@ export default /*#__PURE__*/ {
                     v-if="internalFilterByProp(column.prop)"
                   >
                     <label>{{ column.label }}</label>
+
                     <input
                       class="form-control"
                       v-model="internalFilterByProp(column.prop).value"
@@ -598,7 +598,11 @@ export default /*#__PURE__*/ {
           <thead class="thead-light">
             <tr>
               <slot name="rowHead">
-                <th v-for="(column, indexc) in columns" :key="indexc">
+                <th
+                  v-for="(column, indexc) in columns"
+                  :key="indexc"
+                  scope="col"
+                >
                   <slot
                     :name="'filter-' + column.prop"
                     v-bind:column="column"
@@ -632,7 +636,11 @@ export default /*#__PURE__*/ {
               @click="onRowClick(item, index)"
             >
               <slot name="row" v-bind:item="item">
-                <td v-for="(column, indexc) in columns" :key="indexc">
+                <td
+                  v-for="(column, indexc) in columns"
+                  :key="indexc"
+                  :scope="column.prop == 'id' ? 'row' : ''"
+                >
                   <slot :name="'cell-' + column.prop" v-bind:item="item">
                     <span
                       v-if="
