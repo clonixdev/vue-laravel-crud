@@ -514,6 +514,12 @@ export default /*#__PURE__*/ {
       });
     },
 
+    onChangeFilter(event) {
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.$refs.crud.refresh();
+      }, 1);
+    },
     onPaginationChange(page) {
       this.fetchItems(page);
     },
@@ -562,6 +568,7 @@ export default /*#__PURE__*/ {
                     <select
                       class="form-control"
                       v-model="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)"
                     >
                       <option value=""></option>
                       <option value="1">Sí</option>
@@ -599,6 +606,7 @@ export default /*#__PURE__*/ {
                     <select
                       class="form-control"
                       v-model="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)"
                     >
                       <option value=""></option>
                       <option
@@ -615,7 +623,8 @@ export default /*#__PURE__*/ {
 
                     <input
                       class="form-control"
-                      v-model="internalFilterByProp(column.prop).value"
+                      v-model.lazy="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)"
                     />
                   </div>
                 </slot>
@@ -711,10 +720,64 @@ export default /*#__PURE__*/ {
                       internalFilterByProp(column.prop)
                     "
                   >
+                    <select
+                      v-if="column.type == 'boolean'"
+                      class="form-control"
+                      v-model="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)"
+                    >
+                      <option value="">{{ column.label }}</option>
+                      <option value="1">Sí</option>
+                      <option value="0">No</option>
+                    </select>
+
+                    <div class="row" v-else-if="column.type == 'date'">
+                      <div class="col-6">
+                        <b-form-datepicker
+                          v-model="
+                            internalFilterByProp(column.prop + '_from').value
+                          "
+                          today-button
+                          reset-button
+                          close-button
+                          locale="es"
+                        ></b-form-datepicker>
+                      </div>
+                      <div class="col-6">
+                        <b-form-datepicker
+                          v-model="
+                            internalFilterByProp(column.prop + '_to').value
+                          "
+                          today-button
+                          reset-button
+                          close-button
+                          locale="es"
+                        ></b-form-datepicker>
+                      </div>
+                    </div>
+
+                    <select
+                      v-else-if="column.type == 'state'"
+                      class="form-control"
+                      v-model="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)"
+                    >
+                      <option value="">{{ column.label }}</option>
+                      <option
+                        :value="option.id"
+                        v-for="(option, indexo) in column.options"
+                        :key="indexo"
+                      >
+                        {{ option.text }}
+                      </option>
+                    </select>
+
                     <input
+                      v-else
                       class="form-control"
                       v-model="internalFilterByProp(column.prop).value"
                       :placeholder="column.label"
+                      @change="onChangeFilter($event)"
                     />
                   </slot>
 

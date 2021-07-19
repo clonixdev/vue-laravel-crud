@@ -606,6 +606,14 @@ function _nonIterableRest() {
         appendToast: true
       });
     },
+    onChangeFilter: function onChangeFilter(event) {
+      var _this6 = this;
+
+      this.forceRecomputeCounter++;
+      setTimeout(function () {
+        _this6.$refs.crud.refresh();
+      }, 1);
+    },
     onPaginationChange: function onPaginationChange(page) {
       this.fetchItems(page);
     },
@@ -747,7 +755,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-3421cc4a>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-3421cc4a>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-94dc5c80>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-94dc5c80>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -776,7 +784,7 @@ var __vue_render__ = function __vue_render__() {
       }],
       staticClass: "form-control",
       on: {
-        "change": function change($event) {
+        "change": [function ($event) {
           var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
             return o.selected;
           }).map(function (o) {
@@ -785,7 +793,9 @@ var __vue_render__ = function __vue_render__() {
           });
 
           _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-        }
+        }, function ($event) {
+          return _vm.onChangeFilter($event);
+        }]
       }
     }, [_c('option', {
       attrs: {
@@ -846,7 +856,7 @@ var __vue_render__ = function __vue_render__() {
       }],
       staticClass: "form-control",
       on: {
-        "change": function change($event) {
+        "change": [function ($event) {
           var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
             return o.selected;
           }).map(function (o) {
@@ -855,7 +865,9 @@ var __vue_render__ = function __vue_render__() {
           });
 
           _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-        }
+        }, function ($event) {
+          return _vm.onChangeFilter($event);
+        }]
       }
     }, [_c('option', {
       attrs: {
@@ -873,22 +885,23 @@ var __vue_render__ = function __vue_render__() {
     }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('input', {
       directives: [{
         name: "model",
-        rawName: "v-model",
+        rawName: "v-model.lazy",
         value: _vm.internalFilterByProp(column.prop).value,
-        expression: "internalFilterByProp(column.prop).value"
+        expression: "internalFilterByProp(column.prop).value",
+        modifiers: {
+          "lazy": true
+        }
       }],
       staticClass: "form-control",
       domProps: {
         "value": _vm.internalFilterByProp(column.prop).value
       },
       on: {
-        "input": function input($event) {
-          if ($event.target.composing) {
-            return;
-          }
-
+        "change": [function ($event) {
           _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.value);
-        }
+        }, function ($event) {
+          return _vm.onChangeFilter($event);
+        }]
       }
     })])], {
       "column": column,
@@ -901,7 +914,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-3421cc4a>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-94dc5c80>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm.showCreateBtn ? _c('b-button', {
     attrs: {
@@ -979,7 +992,108 @@ var __vue_render__ = function __vue_render__() {
       attrs: {
         "scope": "col"
       }
-    }, [_vm.enableFilters && _vm.filtersVisible && _vm.isColumnHasFilter(column) && _vm.internalFilterByProp(column.prop) ? _vm._t('filter-' + column.prop, [_c('input', {
+    }, [_vm.enableFilters && _vm.filtersVisible && _vm.isColumnHasFilter(column) && _vm.internalFilterByProp(column.prop) ? _vm._t('filter-' + column.prop, [column.type == 'boolean' ? _c('select', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.internalFilterByProp(column.prop).value,
+        expression: "internalFilterByProp(column.prop).value"
+      }],
+      staticClass: "form-control",
+      on: {
+        "change": [function ($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+
+          _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        }, function ($event) {
+          return _vm.onChangeFilter($event);
+        }]
+      }
+    }, [_c('option', {
+      attrs: {
+        "value": ""
+      }
+    }, [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('option', {
+      attrs: {
+        "value": "1"
+      }
+    }, [_vm._v("Sí")]), _vm._v(" "), _c('option', {
+      attrs: {
+        "value": "0"
+      }
+    }, [_vm._v("No")])]) : column.type == 'date' ? _c('div', {
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-6"
+    }, [_c('b-form-datepicker', {
+      attrs: {
+        "today-button": "",
+        "reset-button": "",
+        "close-button": "",
+        "locale": "es"
+      },
+      model: {
+        value: _vm.internalFilterByProp(column.prop + '_from').value,
+        callback: function callback($$v) {
+          _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
+        },
+        expression: "\n                          internalFilterByProp(column.prop + '_from').value\n                        "
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "col-6"
+    }, [_c('b-form-datepicker', {
+      attrs: {
+        "today-button": "",
+        "reset-button": "",
+        "close-button": "",
+        "locale": "es"
+      },
+      model: {
+        value: _vm.internalFilterByProp(column.prop + '_to').value,
+        callback: function callback($$v) {
+          _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
+        },
+        expression: "\n                          internalFilterByProp(column.prop + '_to').value\n                        "
+      }
+    })], 1)]) : column.type == 'state' ? _c('select', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.internalFilterByProp(column.prop).value,
+        expression: "internalFilterByProp(column.prop).value"
+      }],
+      staticClass: "form-control",
+      on: {
+        "change": [function ($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+
+          _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        }, function ($event) {
+          return _vm.onChangeFilter($event);
+        }]
+      }
+    }, [_c('option', {
+      attrs: {
+        "value": ""
+      }
+    }, [_vm._v(_vm._s(column.label))]), _vm._v(" "), _vm._l(column.options, function (option, indexo) {
+      return _c('option', {
+        key: indexo,
+        domProps: {
+          "value": option.id
+        }
+      }, [_vm._v("\n                      " + _vm._s(option.text) + "\n                    ")]);
+    })], 2) : _c('input', {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -994,6 +1108,9 @@ var __vue_render__ = function __vue_render__() {
         "value": _vm.internalFilterByProp(column.prop).value
       },
       on: {
+        "change": function change($event) {
+          return _vm.onChangeFilter($event);
+        },
         "input": function input($event) {
           if ($event.target.composing) {
             return;
@@ -1171,7 +1288,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-3421cc4a>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-94dc5c80>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1255,8 +1372,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-3421cc4a_0", {
-    source: "tr td[data-v-3421cc4a]:first-child,tr td[data-v-3421cc4a]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-3421cc4a]{display:flex;justify-content:center}.crud-header[data-v-3421cc4a]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-3421cc4a]{margin:0}.crud-header .crud-search[data-v-3421cc4a]{max-width:15rem}.crud-header .crud-search .btn[data-v-3421cc4a]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-3421cc4a]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-3421cc4a]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-3421cc4a]{table-layout:auto}.table tbody td[data-v-3421cc4a]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-3421cc4a]::-webkit-scrollbar{display:none}}",
+  inject("data-v-94dc5c80_0", {
+    source: "tr td[data-v-94dc5c80]:first-child,tr td[data-v-94dc5c80]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-94dc5c80]{display:flex;justify-content:center}.crud-header[data-v-94dc5c80]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-94dc5c80]{margin:0}.crud-header .crud-search[data-v-94dc5c80]{max-width:15rem}.crud-header .crud-search .btn[data-v-94dc5c80]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-94dc5c80]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-94dc5c80]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-94dc5c80]{table-layout:auto}.table tbody td[data-v-94dc5c80]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-94dc5c80]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1264,10 +1381,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-3421cc4a";
+var __vue_scope_id__ = "data-v-94dc5c80";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-3421cc4a";
+var __vue_module_identifier__ = "data-v-94dc5c80";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
