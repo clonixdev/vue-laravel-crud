@@ -360,6 +360,19 @@ function _nonIterableRest() {
         this.onSelect();
       }
     },
+    onCheckSelect: function onCheckSelect(event, item) {
+      console.debug("ON CHECK SELECT", event, item);
+      this.item = item;
+      this.selectItem();
+      this.onSelect();
+    },
+    toggleAll: function toggleAll() {
+      if (this.selectedItems.length > 0) {
+        this.selectedItems = [];
+      } else {
+        this.selectedItems = this.items;
+      }
+    },
     selectItem: function selectItem() {
       var _this5 = this;
 
@@ -785,7 +798,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-33ec28a4>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-33ec28a4>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-64e08494>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-64e08494>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -944,7 +957,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-33ec28a4>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-64e08494>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm.showCreateBtn ? _c('b-button', {
     attrs: {
@@ -1126,6 +1139,11 @@ var __vue_render__ = function __vue_render__() {
     })], 2) : column.type == 'checkbox' ? _c('b-form-checkbox', {
       attrs: {
         "name": "select-all"
+      },
+      on: {
+        "change": function change($event) {
+          return _vm.toggleAll();
+        }
       }
     }) : _c('input', {
       directives: [{
@@ -1186,6 +1204,11 @@ var __vue_render__ = function __vue_render__() {
       }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")]) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
         attrs: {
           "value": _vm.isSelected(item)
+        },
+        on: {
+          "change": function change($event) {
+            return _vm.onCheckSelect($event, item);
+          }
         }
       })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
         "item": item
@@ -1326,7 +1349,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-33ec28a4>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-64e08494>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1410,8 +1433,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-33ec28a4_0", {
-    source: "tr td[data-v-33ec28a4]:first-child,tr td[data-v-33ec28a4]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-33ec28a4]{display:flex;justify-content:center}.crud-header[data-v-33ec28a4]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-33ec28a4]{margin:0}.crud-header .crud-search[data-v-33ec28a4]{max-width:15rem}.crud-header .crud-search .btn[data-v-33ec28a4]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-33ec28a4]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-33ec28a4]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-33ec28a4]{table-layout:auto}.table tbody td[data-v-33ec28a4]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-33ec28a4]::-webkit-scrollbar{display:none}}",
+  inject("data-v-64e08494_0", {
+    source: "tr td[data-v-64e08494]:first-child,tr td[data-v-64e08494]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-64e08494]{display:flex;justify-content:center}.crud-header[data-v-64e08494]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-64e08494]{margin:0}.crud-header .crud-search[data-v-64e08494]{max-width:15rem}.crud-header .crud-search .btn[data-v-64e08494]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-64e08494]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-64e08494]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-64e08494]{table-layout:auto}.table tbody td[data-v-64e08494]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-64e08494]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1419,10 +1442,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-33ec28a4";
+var __vue_scope_id__ = "data-v-64e08494";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-33ec28a4";
+var __vue_module_identifier__ = "data-v-64e08494";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
