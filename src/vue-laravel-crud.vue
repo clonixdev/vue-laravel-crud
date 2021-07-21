@@ -687,6 +687,12 @@ export default /*#__PURE__*/ {
             v-bind:toggleDisplayMode="toggleDisplayMode"
             v-bind:loading="loading"
           >
+                    <slot
+            name="tableActionsPrepend"
+            v-bind:loading="loading"
+          >
+
+                    </slot>
             <b-button
               variant="success"
               v-if="showCreateBtn"
@@ -734,6 +740,15 @@ export default /*#__PURE__*/ {
                   debounce="500"
                 ></b-form-input>
               </b-input-group>
+
+                          <slot
+            name="tableActionsAppend"
+            v-bind:loading="loading"
+          >
+
+                    </slot>
+
+
             </div>
           </slot>
         </b-button-group>
