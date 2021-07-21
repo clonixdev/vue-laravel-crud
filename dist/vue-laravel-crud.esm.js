@@ -224,12 +224,6 @@ var script = /*#__PURE__*/{
       return this.filters.concat(this.filter).concat(this.internalFilter);
     },
 
-    isSelected() {
-      return item => {
-        return this.selectedItems.find(e => e.id == item.id) ? true : false;
-      };
-    },
-
     internalFilter() {
       let filter = [];
       this.forceRecomputeCounter;
@@ -277,8 +271,8 @@ var script = /*#__PURE__*/{
       }
     },
 
-    onCheckSelect(event, item) {
-      console.debug("ON CHECK SELECT", event, item);
+    onCheckSelect(value, item) {
+      console.debug("ON CHECK SELECT", value, item);
       this.item = item;
       this.selectItem();
       this.onSelect();
@@ -296,10 +290,16 @@ var script = /*#__PURE__*/{
       let sitem = this.selectedItems.find(e => e.id == this.item.id);
 
       if (sitem) {
+        this.item.selected = false;
         this.selectedItems = this.selectedItems.filter(e => e.id != this.item.id);
       } else {
+        this.item.selected = true;
         this.selectedItems.push(this.item);
       }
+    },
+
+    getSelectedItems() {
+      return this.selectedItems;
     },
 
     onSelect() {
@@ -1129,13 +1129,17 @@ var __vue_render__ = function () {
           "variant": "danger"
         }
       }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")]) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
-        attrs: {
-          "value": _vm.isSelected(item)
-        },
         on: {
           "change": function ($event) {
             return _vm.onCheckSelect($event, item);
           }
+        },
+        model: {
+          value: item.selected,
+          callback: function ($$v) {
+            _vm.$set(item, "selected", $$v);
+          },
+          expression: "item.selected"
         }
       })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
         "item": item
@@ -1362,8 +1366,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-64e08494_0", {
-    source: "tr td[data-v-64e08494]:first-child,tr td[data-v-64e08494]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-64e08494]{display:flex;justify-content:center}.crud-header[data-v-64e08494]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-64e08494]{margin:0}.crud-header .crud-search[data-v-64e08494]{max-width:15rem}.crud-header .crud-search .btn[data-v-64e08494]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-64e08494]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-64e08494]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-64e08494]{table-layout:auto}.table tbody td[data-v-64e08494]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-64e08494]::-webkit-scrollbar{display:none}}",
+  inject("data-v-729a587e_0", {
+    source: "tr td[data-v-729a587e]:first-child,tr td[data-v-729a587e]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-729a587e]{display:flex;justify-content:center}.crud-header[data-v-729a587e]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-729a587e]{margin:0}.crud-header .crud-search[data-v-729a587e]{max-width:15rem}.crud-header .crud-search .btn[data-v-729a587e]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-729a587e]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-729a587e]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-729a587e]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-729a587e]{table-layout:auto}.table tbody td[data-v-729a587e]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-729a587e]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1371,7 +1375,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-64e08494";
+const __vue_scope_id__ = "data-v-729a587e";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

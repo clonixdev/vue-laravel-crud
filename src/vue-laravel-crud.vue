@@ -226,11 +226,6 @@ export default /*#__PURE__*/ {
       return this.filters.concat(this.filter).concat(this.internalFilter);
     },
 
-    isSelected() {
-      return (item) => {
-        return this.selectedItems.find((e) => e.id == item.id) ? true : false;
-      };
-    },
     internalFilter() {
       let filter = [];
       this.forceRecomputeCounter;
@@ -277,8 +272,9 @@ export default /*#__PURE__*/ {
         this.onSelect();
       }
     },
-    onCheckSelect(event, item) {
-      console.debug("ON CHECK SELECT", event, item);
+    onCheckSelect(value, item) {
+      console.debug("ON CHECK SELECT", value, item);
+
       this.item = item;
       this.selectItem();
       this.onSelect();
@@ -294,14 +290,19 @@ export default /*#__PURE__*/ {
       let sitem = this.selectedItems.find((e) => e.id == this.item.id);
 
       if (sitem) {
+        this.item.selected = false;
         this.selectedItems = this.selectedItems.filter(
           (e) => e.id != this.item.id
         );
       } else {
+        this.item.selected = true;
         this.selectedItems.push(this.item);
       }
     },
 
+    getSelectedItems(){
+      return this.selectedItems;
+    },
     onSelect() {
       this.$emit("select", this.item);
     },
@@ -871,7 +872,7 @@ export default /*#__PURE__*/ {
                     </span>
                     <span v-else-if="column.type == 'checkbox'">
                       <b-form-checkbox
-                        :value="isSelected(item)"
+                        v-model="item.selected"
                         @change="onCheckSelect($event, item)"
                       >
                       </b-form-checkbox>
@@ -1110,6 +1111,10 @@ tr td:first-child {
     align-items: center;
     justify-content: flex-end;
   }
+}
+.custom-control{
+  position: relative;
+    top: -15px;
 }
 
 @media (min-width: 992px) {

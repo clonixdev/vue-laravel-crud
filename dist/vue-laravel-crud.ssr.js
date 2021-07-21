@@ -306,15 +306,6 @@ function _nonIterableRest() {
     finalFilters: function finalFilters() {
       return this.filters.concat(this.filter).concat(this.internalFilter);
     },
-    isSelected: function isSelected() {
-      var _this3 = this;
-
-      return function (item) {
-        return _this3.selectedItems.find(function (e) {
-          return e.id == item.id;
-        }) ? true : false;
-      };
-    },
     internalFilter: function internalFilter() {
       var filter = [];
       this.forceRecomputeCounter;
@@ -324,10 +315,10 @@ function _nonIterableRest() {
       return filter;
     },
     internalFilterByProp: function internalFilterByProp() {
-      var _this4 = this;
+      var _this3 = this;
 
       return function (prop) {
-        return _this4.internalFilters.find(function (inf) {
+        return _this3.internalFilters.find(function (inf) {
           return inf.column == prop;
         });
       };
@@ -360,8 +351,8 @@ function _nonIterableRest() {
         this.onSelect();
       }
     },
-    onCheckSelect: function onCheckSelect(event, item) {
-      console.debug("ON CHECK SELECT", event, item);
+    onCheckSelect: function onCheckSelect(value, item) {
+      console.debug("ON CHECK SELECT", value, item);
       this.item = item;
       this.selectItem();
       this.onSelect();
@@ -374,19 +365,24 @@ function _nonIterableRest() {
       }
     },
     selectItem: function selectItem() {
-      var _this5 = this;
+      var _this4 = this;
 
       var sitem = this.selectedItems.find(function (e) {
-        return e.id == _this5.item.id;
+        return e.id == _this4.item.id;
       });
 
       if (sitem) {
+        this.item.selected = false;
         this.selectedItems = this.selectedItems.filter(function (e) {
-          return e.id != _this5.item.id;
+          return e.id != _this4.item.id;
         });
       } else {
+        this.item.selected = true;
         this.selectedItems.push(this.item);
       }
+    },
+    getSelectedItems: function getSelectedItems() {
+      return this.selectedItems;
     },
     onSelect: function onSelect() {
       this.$emit("select", this.item);
@@ -414,7 +410,7 @@ function _nonIterableRest() {
       return column && !column.hideFilter && column.type != "actions";
     },
     setFilter: function setFilter(column, value) {
-      var _this6 = this;
+      var _this5 = this;
 
       var filter = this.filter.find(function (f) {
         return f.column == column;
@@ -422,7 +418,7 @@ function _nonIterableRest() {
       filter.value = value;
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this6.refresh();
+        _this5.refresh();
       }, 1);
     },
     fetchItems: function fetchItems() {
@@ -524,7 +520,7 @@ function _nonIterableRest() {
       return ops.join(", ");
     },
     saveItem: function saveItem() {
-      var _this7 = this;
+      var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var _this, formData;
@@ -533,11 +529,11 @@ function _nonIterableRest() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this = _this7;
+                _this = _this6;
                 _this.loading = true;
 
-                if (_this7.item.id) {
-                  axios__default['default'].put(_this7.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
+                if (_this6.item.id) {
+                  axios__default['default'].put(_this6.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
                     _this.$bvModal.hide("modal-form-item-" + _this.modelName);
 
                     var itemSv = response.data;
@@ -557,7 +553,7 @@ function _nonIterableRest() {
                     _this.loading = false;
                   });
                 } else {
-                  if (_this7.createMultipart) {
+                  if (_this6.createMultipart) {
                     formData = new FormData();
                     Object.keys(_this.item).forEach(function (key) {
                       if (_this.item[key][0] && _this.item[key][0].name) {
@@ -569,7 +565,7 @@ function _nonIterableRest() {
                         }
                       } else formData.append(key, _this.item[key]);
                     });
-                    axios__default['default'].post(_this7.apiUrl + "/" + _this.modelName, formData).then(function (response) {
+                    axios__default['default'].post(_this6.apiUrl + "/" + _this.modelName, formData).then(function (response) {
                       _this.loading = false;
 
                       _this.$bvModal.hide("modal-form-item-" + _this.modelName);
@@ -595,7 +591,7 @@ function _nonIterableRest() {
                       _this.loading = false;
                     });
                   } else {
-                    axios__default['default'].post(_this7.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
+                    axios__default['default'].post(_this6.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
                       _this.loading = false;
 
                       _this.$bvModal.hide("modal-form-item-" + _this.modelName);
@@ -650,11 +646,11 @@ function _nonIterableRest() {
       });
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this8 = this;
+      var _this7 = this;
 
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this8.refresh();
+        _this7.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -798,7 +794,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-64e08494>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-64e08494>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-729a587e>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-729a587e>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -957,7 +953,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-64e08494>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-729a587e>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm.showCreateBtn ? _c('b-button', {
     attrs: {
@@ -1202,13 +1198,17 @@ var __vue_render__ = function __vue_render__() {
           "variant": "danger"
         }
       }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")]) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
-        attrs: {
-          "value": _vm.isSelected(item)
-        },
         on: {
           "change": function change($event) {
             return _vm.onCheckSelect($event, item);
           }
+        },
+        model: {
+          value: item.selected,
+          callback: function callback($$v) {
+            _vm.$set(item, "selected", $$v);
+          },
+          expression: "item.selected"
         }
       })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
         "item": item
@@ -1349,7 +1349,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-64e08494>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-729a587e>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1433,8 +1433,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-64e08494_0", {
-    source: "tr td[data-v-64e08494]:first-child,tr td[data-v-64e08494]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-64e08494]{display:flex;justify-content:center}.crud-header[data-v-64e08494]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-64e08494]{margin:0}.crud-header .crud-search[data-v-64e08494]{max-width:15rem}.crud-header .crud-search .btn[data-v-64e08494]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-64e08494]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-64e08494]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-64e08494]{table-layout:auto}.table tbody td[data-v-64e08494]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-64e08494]::-webkit-scrollbar{display:none}}",
+  inject("data-v-729a587e_0", {
+    source: "tr td[data-v-729a587e]:first-child,tr td[data-v-729a587e]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-729a587e]{display:flex;justify-content:center}.crud-header[data-v-729a587e]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-729a587e]{margin:0}.crud-header .crud-search[data-v-729a587e]{max-width:15rem}.crud-header .crud-search .btn[data-v-729a587e]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-729a587e]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-729a587e]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-729a587e]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-729a587e]{table-layout:auto}.table tbody td[data-v-729a587e]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-729a587e]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1442,10 +1442,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-64e08494";
+var __vue_scope_id__ = "data-v-729a587e";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-64e08494";
+var __vue_module_identifier__ = "data-v-729a587e";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
