@@ -300,7 +300,7 @@ export default /*#__PURE__*/ {
       }
     },
 
-    getSelectedItems(){
+    getSelectedItems() {
       return this.selectedItems;
     },
     onSelect() {
@@ -687,12 +687,7 @@ export default /*#__PURE__*/ {
             v-bind:toggleDisplayMode="toggleDisplayMode"
             v-bind:loading="loading"
           >
-                    <slot
-            name="tableActionsPrepend"
-            v-bind:loading="loading"
-          >
-
-                    </slot>
+            <slot name="tableActionsPrepend" v-bind:loading="loading"> </slot>
             <b-button
               variant="success"
               v-if="showCreateBtn"
@@ -741,14 +736,7 @@ export default /*#__PURE__*/ {
                 ></b-form-input>
               </b-input-group>
 
-                          <slot
-            name="tableActionsAppend"
-            v-bind:loading="loading"
-          >
-
-                    </slot>
-
-
+              <slot name="tableActionsAppend" v-bind:loading="loading"> </slot>
             </div>
           </slot>
         </b-button-group>
@@ -875,10 +863,20 @@ export default /*#__PURE__*/ {
                     <span v-if="column.type == 'boolean'">
                       <b-badge
                         variant="success"
-                        v-if="!!itemValue(column, item)"
+                        v-if="
+                          itemValue(column, item) == 'true' ||
+                          itemValue(column, item) == 1 ||
+                          itemValue(column, item) == '1'
+                        "
                         ><b-icon-check-circle></b-icon-check-circle
                       ></b-badge>
-                      <b-badge variant="danger" v-if="!itemValue(column, item)"
+                      <b-badge
+                        variant="danger"
+                        v-if="
+                          !itemValue(column, item) ||
+                          itemValue(column, item) == '0' ||
+                          itemValue(column, item) == 'false'
+                        "
                         ><b-icon-x-circle></b-icon-x-circle
                       ></b-badge>
                     </span>
@@ -973,12 +971,20 @@ export default /*#__PURE__*/ {
                       <span v-if="column.type == 'boolean'">
                         <b-badge
                           variant="success"
-                          v-if="!!itemValue(column, item)"
+                          v-if="
+                            itemValue(column, item) == 'true' ||
+                            itemValue(column, item) == 1 ||
+                            itemValue(column, item) == '1'
+                          "
                           ><b-icon-check-circle></b-icon-check-circle
                         ></b-badge>
                         <b-badge
                           variant="danger"
-                          v-if="!itemValue(column, item)"
+                          v-if="
+                            !itemValue(column, item) ||
+                            itemValue(column, item) == '0' ||
+                            itemValue(column, item) == 'false'
+                          "
                           ><b-icon-x-circle></b-icon-x-circle
                         ></b-badge>
                       </span>
@@ -1127,9 +1133,9 @@ tr td:first-child {
     justify-content: flex-end;
   }
 }
-.custom-control{
+.custom-control {
   position: relative;
-    top: -15px;
+  top: -15px;
 }
 
 @media (min-width: 992px) {

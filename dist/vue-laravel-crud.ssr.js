@@ -794,7 +794,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-7bf59e50>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-7bf59e50>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-3463cf92>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-3463cf92>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -953,7 +953,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-7bf59e50>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-3463cf92>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -1193,11 +1193,11 @@ var __vue_render__ = function __vue_render__() {
         attrs: {
           "scope": column.prop == 'id' ? 'row' : ''
         }
-      }, [_vm._t('cell-' + column.prop, [column.type == 'boolean' ? _c('span', [!!_vm.itemValue(column, item) ? _c('b-badge', {
+      }, [_vm._t('cell-' + column.prop, [column.type == 'boolean' ? _c('span', [_vm.itemValue(column, item) == 'true' || _vm.itemValue(column, item) == 1 || _vm.itemValue(column, item) == '1' ? _c('b-badge', {
         attrs: {
           "variant": "success"
         }
-      }, [_c('b-icon-check-circle')], 1) : _vm._e(), _vm._v(" "), !_vm.itemValue(column, item) ? _c('b-badge', {
+      }, [_c('b-icon-check-circle')], 1) : _vm._e(), _vm._v(" "), !_vm.itemValue(column, item) || _vm.itemValue(column, item) == '0' || _vm.itemValue(column, item) == 'false' ? _c('b-badge', {
         attrs: {
           "variant": "danger"
         }
@@ -1339,11 +1339,11 @@ var __vue_render__ = function __vue_render__() {
     }, [_vm._t("card", _vm._l(_vm.columns, function (column, indexc) {
       return _c('div', {
         key: indexc
-      }, [column.type != 'actions' ? _c('b-card-text', [_vm._v(_vm._s(column.label) + ":\n                  "), _vm._t('cell-' + column.prop, [column.type == 'boolean' ? _c('span', [!!_vm.itemValue(column, item) ? _c('b-badge', {
+      }, [column.type != 'actions' ? _c('b-card-text', [_vm._v(_vm._s(column.label) + ":\n                  "), _vm._t('cell-' + column.prop, [column.type == 'boolean' ? _c('span', [_vm.itemValue(column, item) == 'true' || _vm.itemValue(column, item) == 1 || _vm.itemValue(column, item) == '1' ? _c('b-badge', {
         attrs: {
           "variant": "success"
         }
-      }, [_c('b-icon-check-circle')], 1) : _vm._e(), _vm._v(" "), !_vm.itemValue(column, item) ? _c('b-badge', {
+      }, [_c('b-icon-check-circle')], 1) : _vm._e(), _vm._v(" "), !_vm.itemValue(column, item) || _vm.itemValue(column, item) == '0' || _vm.itemValue(column, item) == 'false' ? _c('b-badge', {
         attrs: {
           "variant": "danger"
         }
@@ -1353,7 +1353,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-7bf59e50>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-3463cf92>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -1437,8 +1437,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-7bf59e50_0", {
-    source: "tr td[data-v-7bf59e50]:first-child,tr td[data-v-7bf59e50]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-7bf59e50]{display:flex;justify-content:center}.crud-header[data-v-7bf59e50]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-7bf59e50]{margin:0}.crud-header .crud-search[data-v-7bf59e50]{max-width:15rem}.crud-header .crud-search .btn[data-v-7bf59e50]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-7bf59e50]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-7bf59e50]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-7bf59e50]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-7bf59e50]{table-layout:auto}.table tbody td[data-v-7bf59e50]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-7bf59e50]::-webkit-scrollbar{display:none}}",
+  inject("data-v-3463cf92_0", {
+    source: "tr td[data-v-3463cf92]:first-child,tr td[data-v-3463cf92]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-3463cf92]{display:flex;justify-content:center}.crud-header[data-v-3463cf92]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-3463cf92]{margin:0}.crud-header .crud-search[data-v-3463cf92]{max-width:15rem}.crud-header .crud-search .btn[data-v-3463cf92]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-3463cf92]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-3463cf92]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-3463cf92]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-3463cf92]{table-layout:auto}.table tbody td[data-v-3463cf92]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-3463cf92]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1446,10 +1446,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-7bf59e50";
+var __vue_scope_id__ = "data-v-3463cf92";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-7bf59e50";
+var __vue_module_identifier__ = "data-v-3463cf92";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
