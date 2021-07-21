@@ -14,6 +14,7 @@ var script = /*#__PURE__*/{
       filtersVisible: false,
       loading: false,
       items: [],
+      selectedItems: [],
       displaySearch: false,
       pagination: {
         current_page: 1,
@@ -223,6 +224,12 @@ var script = /*#__PURE__*/{
       return this.filters.concat(this.filter).concat(this.internalFilter);
     },
 
+    isSelected() {
+      return item => {
+        return this.selectedItems.find(e => e.id == item.id) ? true : false;
+      };
+    },
+
     internalFilter() {
       let filter = [];
       this.forceRecomputeCounter;
@@ -257,6 +264,7 @@ var script = /*#__PURE__*/{
     onRowHover(item, itemIndex) {
       if (this.selectHover) {
         this.item = this.items[itemIndex];
+        this.selectItem();
         this.onSelect();
       }
     },
@@ -264,7 +272,18 @@ var script = /*#__PURE__*/{
     onRowClick(item, itemIndex) {
       if (this.selectClick) {
         this.item = this.items[itemIndex];
+        this.selectItem();
         this.onSelect();
+      }
+    },
+
+    selectItem() {
+      let sitem = this.selectedItems.find(e => e.id == this.item.id);
+
+      if (sitem) {
+        this.selectedItems = this.selectedItems.filter(e => e.id != this.item.id);
+      } else {
+        this.selectedItems.push(this.item);
       }
     },
 
@@ -401,6 +420,9 @@ var script = /*#__PURE__*/{
         } else {
           return option.id == value;
         }
+      });
+      ops = ops.map(option => {
+        return option.text ? option.text : option.label ? option.label : "";
       });
       return ops.join(", ");
     },
@@ -810,7 +832,7 @@ var __vue_render__ = function () {
         domProps: {
           "value": option.id
         }
-      }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : '') + "\n                    ")]);
+      }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                    ")]);
     })], 2)]) : _c('div', {
       staticClass: "form-group"
     }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('input', {
@@ -1025,8 +1047,12 @@ var __vue_render__ = function () {
         domProps: {
           "value": option.id
         }
-      }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : '') + "\n                    ")]);
-    })], 2) : _c('input', {
+      }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                    ")]);
+    })], 2) : column.type == 'checkbox' ? _c('b-form-checkbox', {
+      attrs: {
+        "name": "select-all"
+      }
+    }) : _c('input', {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -1082,7 +1108,11 @@ var __vue_render__ = function () {
         attrs: {
           "variant": "danger"
         }
-      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")]) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
+      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")]) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
+        attrs: {
+          "value": _vm.isSelected(item)
+        }
+      })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
         "item": item
       }), _vm._v(" "), column.type == 'actions' ? _c('b-button-group', [_vm._t("rowAction", [_c('b-button', {
         attrs: {
@@ -1307,8 +1337,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-4b8ed0f7_0", {
-    source: "tr td[data-v-4b8ed0f7]:first-child,tr td[data-v-4b8ed0f7]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-4b8ed0f7]{display:flex;justify-content:center}.crud-header[data-v-4b8ed0f7]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-4b8ed0f7]{margin:0}.crud-header .crud-search[data-v-4b8ed0f7]{max-width:15rem}.crud-header .crud-search .btn[data-v-4b8ed0f7]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-4b8ed0f7]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-4b8ed0f7]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-4b8ed0f7]{table-layout:auto}.table tbody td[data-v-4b8ed0f7]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-4b8ed0f7]::-webkit-scrollbar{display:none}}",
+  inject("data-v-33ec28a4_0", {
+    source: "tr td[data-v-33ec28a4]:first-child,tr td[data-v-33ec28a4]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-33ec28a4]{display:flex;justify-content:center}.crud-header[data-v-33ec28a4]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-33ec28a4]{margin:0}.crud-header .crud-search[data-v-33ec28a4]{max-width:15rem}.crud-header .crud-search .btn[data-v-33ec28a4]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-33ec28a4]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-33ec28a4]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}@media (min-width:992px){.table[data-v-33ec28a4]{table-layout:auto}.table tbody td[data-v-33ec28a4]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-33ec28a4]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1316,7 +1346,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-4b8ed0f7";
+const __vue_scope_id__ = "data-v-33ec28a4";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

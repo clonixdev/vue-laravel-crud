@@ -14,6 +14,8 @@ export default /*#__PURE__*/ {
       filtersVisible: false,
       loading: false,
       items: [],
+      selectedItems: [],
+
       displaySearch: false,
       pagination: {
         current_page: 1,
@@ -224,6 +226,11 @@ export default /*#__PURE__*/ {
       return this.filters.concat(this.filter).concat(this.internalFilter);
     },
 
+    isSelected() {
+      return (item) => {
+        return this.selectedItems.find((e) => e.id == item.id) ? true : false;
+      };
+    },
     internalFilter() {
       let filter = [];
       this.forceRecomputeCounter;
@@ -259,13 +266,39 @@ export default /*#__PURE__*/ {
     onRowHover(item, itemIndex) {
       if (this.selectHover) {
         this.item = this.items[itemIndex];
+        this.selectItem();
         this.onSelect();
       }
     },
     onRowClick(item, itemIndex) {
       if (this.selectClick) {
         this.item = this.items[itemIndex];
+        this.selectItem();
         this.onSelect();
+      }
+    },
+    onCheckSelect(event, item) {
+      console.debug("ON CHECK SELECT", event, item);
+      this.item = item;
+      this.selectItem();
+      this.onSelect();
+    },
+    toggleAll() {
+      if (this.selectedItems.length > 0) {
+        this.selectedItems = [];
+      } else {
+        this.selectedItems = this.items;
+      }
+    },
+    selectItem() {
+      let sitem = this.selectedItems.find((e) => e.id == this.item.id);
+
+      if (sitem) {
+        this.selectedItems = this.selectedItems.filter(
+          (e) => e.id != this.item.id
+        );
+      } else {
+        this.selectedItems.push(this.item);
       }
     },
 
@@ -398,6 +431,10 @@ export default /*#__PURE__*/ {
         } else {
           return option.id == value;
         }
+      });
+
+      ops = ops.map((option) => {
+        return option.text ? option.text : option.label ? option.label : "";
       });
 
       return ops.join(", ");
@@ -615,7 +652,13 @@ export default /*#__PURE__*/ {
                         v-for="(option, indexo) in column.options"
                         :key="indexo"
                       >
-                        {{ (option.text ? option.text : (option.label ? option.label : '')) }}
+                        {{
+                          option.text
+                            ? option.text
+                            : option.label
+                            ? option.label
+                            : ""
+                        }}
                       </option>
                     </select>
                   </div>
@@ -769,10 +812,21 @@ export default /*#__PURE__*/ {
                         v-for="(option, indexo) in column.options"
                         :key="indexo"
                       >
-                        {{ (option.text ? option.text : (option.label ? option.label : '')) }}
+                        {{
+                          option.text
+                            ? option.text
+                            : option.label
+                            ? option.label
+                            : ""
+                        }}
                       </option>
                     </select>
-
+                    <b-form-checkbox
+                      v-else-if="column.type == 'checkbox'"
+                      name="select-all"
+                      @change="toggleAll()"
+                    >
+                    </b-form-checkbox>
                     <input
                       v-else
                       class="form-control"
@@ -815,6 +869,14 @@ export default /*#__PURE__*/ {
                     <span v-else-if="column.type == 'date'">
                       {{ itemValue(column, item) }}
                     </span>
+                    <span v-else-if="column.type == 'checkbox'">
+                      <b-form-checkbox
+                        :value="isSelected(item)"
+                        @change="onCheckSelect($event, item)"
+                      >
+                      </b-form-checkbox>
+                    </span>
+
                     <span v-else-if="column.type == 'state'">
                       {{
                         getStateValue(itemValue(column, item), column.options)
@@ -904,6 +966,7 @@ export default /*#__PURE__*/ {
                           ><b-icon-x-circle></b-icon-x-circle
                         ></b-badge>
                       </span>
+
                       <span v-else-if="column.type == 'date'">
                         {{ itemValue(column, item) }}
                       </span>
