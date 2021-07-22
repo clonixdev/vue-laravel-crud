@@ -417,7 +417,7 @@ export default /*#__PURE__*/ {
           .then(function (response) {
             let data = response.data;
             _this.toastSuccess("Orden Actualizado");
-            if(_this.refreshAfterSave)  _this.refresh();
+            if (_this.refreshAfterSave) _this.refresh();
             _this.loading = false;
           })
           .catch(function (error) {
@@ -464,7 +464,7 @@ export default /*#__PURE__*/ {
             _this.items[itemIndex] = itemSv;
             _this.item = itemSv;
             _this.loading = false;
-             if(_this.refreshAfterSave)_this.refresh();
+            if (_this.refreshAfterSave) _this.refresh();
             _this.toastSuccess("Elemento Modificado");
           })
           .catch(function (error) {
@@ -506,7 +506,7 @@ export default /*#__PURE__*/ {
 
               _this.items.push(itemSv);
               _this.item = itemSv;
-               if(_this.refreshAfterSave)_this.refresh();
+              if (_this.refreshAfterSave) _this.refresh();
               _this.toastSuccess("Elemento Creado");
             })
             .catch(function (error) {
@@ -530,7 +530,7 @@ export default /*#__PURE__*/ {
 
               _this.items.push(itemSv);
               _this.item = itemSv;
-               if(_this.refreshAfterSave)_this.refresh();
+              if (_this.refreshAfterSave) _this.refresh();
               _this.toastSuccess("Elemento Creado");
             })
             .catch(function (error) {
@@ -708,6 +708,10 @@ export default /*#__PURE__*/ {
             <b-button v-if="enableFilters" @click="toggleFilters()"
               >Filtros</b-button
             >
+
+            <b-button @click="refresh()"
+              ><b-icon-arrow-clockwise></b-icon-arrow-clockwise
+            ></b-button>
 
             <b-button
               variant="info"
@@ -993,7 +997,8 @@ export default /*#__PURE__*/ {
                             itemValue(column, item) == '0' ||
                             itemValue(column, item) == 'false'
                           "
-                          ><b-icon-x-circle></b-icon-x-circle></b-badge>
+                          ><b-icon-x-circle></b-icon-x-circle
+                        ></b-badge>
                       </span>
 
                       <span v-else-if="column.type == 'date'">
