@@ -1067,6 +1067,7 @@ export default /*#__PURE__*/ {
       hide-footer
       size="xl"
       :title="title"
+      no-close-on-backdrop
     >
       <b-overlay :show="loading" rounded="sm">
         <slot name="form" v-bind:item="item">
@@ -1096,6 +1097,7 @@ export default /*#__PURE__*/ {
       hide-footer
       size="xl"
       :title="title"
+      no-close-on-backdrop
     >
       <slot name="show" v-bind:item="item">
         <p class="my-4">Show</p>
