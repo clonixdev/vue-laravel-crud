@@ -660,6 +660,8 @@ export default /*#__PURE__*/ {
 
                   <div class="form-group" v-else-if="column.type == 'state'">
                     <label>{{ column.label }}</label>
+    <div class="d-none">{{ column.options }}</div>
+                    
                     <select
                       class="form-control"
                       v-model="internalFilterByProp(column.prop).value"
