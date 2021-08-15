@@ -180,29 +180,7 @@ export default /*#__PURE__*/ {
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
     this.internalFilters = [];
-    this.columns.forEach((column) => {
-      if (this.isColumnHasFilter(column)) {
-        if (column.type == "date") {
-          this.internalFilters.push({
-            column: column.prop + "_from",
-            op: column.filterOp ? column.filterOp : "=",
-            value: null,
-          });
-
-          this.internalFilters.push({
-            column: column.prop + "_to",
-            op: column.filterOp ? column.filterOp : "=",
-            value: null,
-          });
-        } else {
-          this.internalFilters.push({
-            column: column.prop,
-            op: column.filterOp ? column.filterOp : "=",
-            value: null,
-          });
-        }
-      }
-    });
+    this.setupFilters();
     this.fetchItems();
   },
   computed: {
@@ -246,6 +224,31 @@ export default /*#__PURE__*/ {
     },
   },
   methods: {
+    setupFilters() {
+      this.columns.forEach((column) => {
+        if (this.isColumnHasFilter(column)) {
+          if (column.type == "date") {
+            this.internalFilters.push({
+              column: column.prop + "_from",
+              op: column.filterOp ? column.filterOp : "=",
+              value: null,
+            });
+
+            this.internalFilters.push({
+              column: column.prop + "_to",
+              op: column.filterOp ? column.filterOp : "=",
+              value: null,
+            });
+          } else {
+            this.internalFilters.push({
+              column: column.prop,
+              op: column.filterOp ? column.filterOp : "=",
+              value: null,
+            });
+          }
+        }
+      });
+    },
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
 
@@ -255,7 +258,14 @@ export default /*#__PURE__*/ {
         this.filterSidebarOpen = false;
       }
     },
-
+    resetFilters() {
+      this.internalFilters = [];
+      this.setupFilters();
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
+    },
     toggleDisplayMode() {
       if (this.displayMode == this.displayModes.MODE_TABLE)
         this.displayMode = this.displayModes.MODE_CARDS;
@@ -658,8 +668,8 @@ export default /*#__PURE__*/ {
                       <option value=""></option>
                       <option
                         :value="option.id"
-                        v-for="(option, indexo) in column.options"
-                        :key="indexo"
+                        v-for="(option) in column.options"
+                        :key="option.id"
                       >
                         {{
                           option.text
@@ -682,6 +692,15 @@ export default /*#__PURE__*/ {
                   </div>
                 </slot>
               </div>
+            </div>
+
+            <div class="mt-3 d-flex justify-content-center">
+              <button class="btn btn-light" @click="resetFilters()">
+                Reset
+              </button>
+              <button class="btn btn-info" @click="onChangeFilter($event)">
+                Filtrar
+              </button>
             </div>
           </div>
         </slot>
