@@ -184,28 +184,7 @@ var script = /*#__PURE__*/{
     this.item = this.model;
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
     this.internalFilters = [];
-    this.columns.forEach(column => {
-      if (this.isColumnHasFilter(column)) {
-        if (column.type == "date") {
-          this.internalFilters.push({
-            column: column.prop + "_from",
-            op: column.filterOp ? column.filterOp : "=",
-            value: null
-          });
-          this.internalFilters.push({
-            column: column.prop + "_to",
-            op: column.filterOp ? column.filterOp : "=",
-            value: null
-          });
-        } else {
-          this.internalFilters.push({
-            column: column.prop,
-            op: column.filterOp ? column.filterOp : "=",
-            value: null
-          });
-        }
-      }
-    });
+    this.setupFilters();
     this.fetchItems();
   },
 
@@ -245,6 +224,31 @@ var script = /*#__PURE__*/{
 
   },
   methods: {
+    setupFilters() {
+      this.columns.forEach(column => {
+        if (this.isColumnHasFilter(column)) {
+          if (column.type == "date") {
+            this.internalFilters.push({
+              column: column.prop + "_from",
+              op: column.filterOp ? column.filterOp : "=",
+              value: null
+            });
+            this.internalFilters.push({
+              column: column.prop + "_to",
+              op: column.filterOp ? column.filterOp : "=",
+              value: null
+            });
+          } else {
+            this.internalFilters.push({
+              column: column.prop,
+              op: column.filterOp ? column.filterOp : "=",
+              value: null
+            });
+          }
+        }
+      });
+    },
+
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
 
@@ -253,6 +257,15 @@ var script = /*#__PURE__*/{
       } else {
         this.filterSidebarOpen = false;
       }
+    },
+
+    resetFilters() {
+      this.internalFilters = [];
+      this.setupFilters();
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
     },
 
     toggleDisplayMode() {
@@ -746,7 +759,7 @@ var __vue_render__ = function () {
     }
   }, [_vm._t("sidebarFilters", [_c('div', {
     staticClass: "px-3 py-2"
-  }, _vm._l(_vm.columns, function (column, indexc) {
+  }, [_vm._l(_vm.columns, function (column, indexc) {
     return _c('div', {
       key: indexc
     }, [_vm.isColumnHasFilter(column) ? _c('div', [_vm.internalFilterByProp(column.prop) ? _vm._t('sidebar-filter-' + column.prop, [column.type == 'boolean' ? _c('div', {
@@ -849,9 +862,9 @@ var __vue_render__ = function () {
       attrs: {
         "value": ""
       }
-    }), _vm._v(" "), _vm._l(column.options, function (option, indexo) {
+    }), _vm._v(" "), _vm._l(column.options, function (option) {
       return _c('option', {
-        key: indexo,
+        key: option.id,
         domProps: {
           "value": option.id
         }
@@ -884,7 +897,23 @@ var __vue_render__ = function () {
       "filter": _vm.filter,
       "internalFilterByProp": _vm.internalFilterByProp
     }) : _vm._e()], 2) : _vm._e()]);
-  }), 0)], {
+  }), _vm._v(" "), _c('div', {
+    staticClass: "mt-3 d-flex justify-content-center"
+  }, [_c('button', {
+    staticClass: "btn btn-light",
+    on: {
+      "click": function ($event) {
+        return _vm.resetFilters();
+      }
+    }
+  }, [_vm._v("\n              Reset\n            ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-info",
+    on: {
+      "click": function ($event) {
+        return _vm.onChangeFilter($event);
+      }
+    }
+  }, [_vm._v("\n              Filtrar\n            ")])])], 2)], {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading,
@@ -1386,8 +1415,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-0ba5f000_0", {
-    source: "tr td[data-v-0ba5f000]:first-child,tr td[data-v-0ba5f000]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-0ba5f000]{display:flex;justify-content:center}.crud-header[data-v-0ba5f000]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-0ba5f000]{margin:0}.crud-header .crud-search[data-v-0ba5f000]{max-width:15rem}.crud-header .crud-search .btn[data-v-0ba5f000]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-0ba5f000]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-0ba5f000]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-0ba5f000]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-0ba5f000]{table-layout:auto}.table tbody td[data-v-0ba5f000]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-0ba5f000]::-webkit-scrollbar{display:none}}",
+  inject("data-v-3ff12f78_0", {
+    source: "tr td[data-v-3ff12f78]:first-child,tr td[data-v-3ff12f78]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-3ff12f78]{display:flex;justify-content:center}.crud-header[data-v-3ff12f78]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-3ff12f78]{margin:0}.crud-header .crud-search[data-v-3ff12f78]{max-width:15rem}.crud-header .crud-search .btn[data-v-3ff12f78]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-3ff12f78]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-3ff12f78]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-3ff12f78]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-3ff12f78]{table-layout:auto}.table tbody td[data-v-3ff12f78]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-3ff12f78]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -1395,7 +1424,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-0ba5f000";
+const __vue_scope_id__ = "data-v-3ff12f78";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
