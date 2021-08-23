@@ -1,6 +1,7 @@
 <script>
 import draggable from "vuedraggable";
 import axios from "axios";
+import moment from "moment";
 
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
@@ -15,7 +16,7 @@ export default /*#__PURE__*/ {
       loading: false,
       items: [],
       selectedItems: [],
-
+      moment: moment,
       displaySearch: false,
       pagination: {
         current_page: 1,
@@ -200,6 +201,7 @@ export default /*#__PURE__*/ {
         }
       };
     },
+
     filteredItems() {
       return this.items;
     },
@@ -439,7 +441,14 @@ export default /*#__PURE__*/ {
     },
 
     getStateValue(value, options) {
-      if (!options) return value;
+      if (!options) {
+        console.debug(
+          "State Column Not hast options returning value",
+          value,
+          options
+        );
+        return value;
+      }
 
       let ops = options.filter((option) => {
         if (Array.isArray(value)) {
@@ -660,8 +669,8 @@ export default /*#__PURE__*/ {
 
                   <div class="form-group" v-else-if="column.type == 'state'">
                     <label>{{ column.label }}</label>
-    <div class="d-none">{{ column.options }}</div>
-                    
+                    <div class="d-none">{{ column.options }}</div>
+
                     <select
                       class="form-control"
                       v-model="internalFilterByProp(column.prop).value"
@@ -670,7 +679,7 @@ export default /*#__PURE__*/ {
                       <option value=""></option>
                       <option
                         :value="option.id"
-                        v-for="(option) in column.options"
+                        v-for="option in column.options"
                         :key="option.id"
                       >
                         {{
@@ -914,7 +923,11 @@ export default /*#__PURE__*/ {
                       ></b-badge>
                     </span>
                     <span v-else-if="column.type == 'date'">
-                      {{ itemValue(column, item) }}
+                      {{
+                        column.format
+                          ?  moment(itemValue(column, item)).format( column.format ) 
+                          : itemValue(column, item)
+                      }}
                     </span>
                     <span v-else-if="column.type == 'checkbox'">
                       <b-form-checkbox
