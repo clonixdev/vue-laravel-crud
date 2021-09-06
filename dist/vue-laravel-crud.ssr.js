@@ -5910,6 +5910,14 @@ function commonjsRequire (target) {
       type: Boolean,
       default: false
     },
+    cardClass: {
+      type: String,
+      default: ""
+    },
+    cardHideFooter: {
+      type: Boolean,
+      default: false
+    },
     messageRemoveConfirm: {
       type: String,
       default: "¿Esta seguro de borrar este elemento?"
@@ -6491,7 +6499,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-41d94ca2>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-41d94ca2>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-5c8515a9>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-5c8515a9>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -6668,7 +6676,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-41d94ca2>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-5c8515a9>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -7012,10 +7020,12 @@ var __vue_render__ = function __vue_render__() {
         "xl": _vm.colXl
       }
     }, [_c('b-card', {
-      staticClass: "mb-2",
+      staticClass: "mb-2 card-crud",
+      class: _vm.cardClass,
       attrs: {
         "title": item.title,
-        "tag": "article"
+        "tag": "article",
+        "hide-footer": _vm.cardHideFooter
       },
       scopedSlots: _vm._u([{
         key: "footer",
@@ -7074,7 +7084,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-41d94ca2>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-5c8515a9>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -7160,8 +7170,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-41d94ca2_0", {
-    source: "tr td[data-v-41d94ca2]:first-child,tr td[data-v-41d94ca2]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-41d94ca2]{display:flex;justify-content:center}.crud-header[data-v-41d94ca2]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-41d94ca2]{margin:0}.crud-header .crud-search[data-v-41d94ca2]{max-width:15rem}.crud-header .crud-search .btn[data-v-41d94ca2]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-41d94ca2]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-41d94ca2]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-41d94ca2]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-41d94ca2]{table-layout:auto}.table tbody td[data-v-41d94ca2]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-41d94ca2]::-webkit-scrollbar{display:none}}",
+  inject("data-v-5c8515a9_0", {
+    source: "tr td[data-v-5c8515a9]:first-child,tr td[data-v-5c8515a9]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-5c8515a9]{display:flex;justify-content:center}.crud-header[data-v-5c8515a9]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-5c8515a9]{margin:0}.crud-header .crud-search[data-v-5c8515a9]{max-width:15rem}.crud-header .crud-search .btn[data-v-5c8515a9]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-5c8515a9]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-5c8515a9]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-5c8515a9]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-5c8515a9]{table-layout:auto}.table tbody td[data-v-5c8515a9]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-5c8515a9]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7169,10 +7179,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-41d94ca2";
+var __vue_scope_id__ = "data-v-5c8515a9";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-41d94ca2";
+var __vue_module_identifier__ = "data-v-5c8515a9";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
