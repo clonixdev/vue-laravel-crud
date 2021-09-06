@@ -1020,7 +1020,7 @@ export default /*#__PURE__*/ {
             :lg="colLg"
             :xl="colXl"
           >
-            <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass" :hide-footer="cardHideFooter">
+            <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass" :hideFooter="cardHideFooter">
               <slot name="card" v-bind:item="item">
                 <div v-for="(column, indexc) in columns" :key="indexc">
                   <b-card-text v-if="column.type != 'actions'"
