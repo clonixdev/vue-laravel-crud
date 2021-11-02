@@ -152,16 +152,14 @@ export default /*#__PURE__*/ {
       default: false,
     },
 
-        cardClass: {
+    cardClass: {
       type: String,
       default: "",
     },
-        cardHideFooter: {
+    cardHideFooter: {
       type: Boolean,
       default: false,
     },
-
-
 
     messageRemoveConfirm: {
       type: String,
@@ -573,7 +571,31 @@ export default /*#__PURE__*/ {
     },
 
     toastError(error) {
-      this.$bvToast.toast(error.message, {
+      console.warn(error);
+      let errormsg = "";
+      if (error.response) {
+        if (error.response.data && error.response.data.message) {
+          errormsg = error.response.data.message;
+        } else if (error.response.data && error.response.data.error) {
+          errormsg = error.response.data.error;
+        } else if (error.response.data && error.response.data.errors) {
+          errormsg = error.response.data.errors;
+        } else if (error.response.data) {
+          errormsg = error.response.data;
+        }
+      } else if (error.message) {
+        errormsg = error.message;
+      } else if (error) {
+        if (typeof error === "string" || myVar instanceof String) {
+          errormsg = error;
+        } else {
+          errormsg = "Error: Hubo un problema procesando la solicitud.";
+        }
+      } else {
+        errormsg = "Error: Hubo un problema procesando la solicitud.";
+      }
+
+      this.$bvToast.toast(errormsg, {
         title: `Error`,
         toaster: "b-toaster-bottom-right",
         variant: "danger",
@@ -937,7 +959,9 @@ export default /*#__PURE__*/ {
                     <span v-else-if="column.type == 'date'">
                       {{
                         column.format
-                          ?  moment(itemValue(column, item)).format( column.format ) 
+                          ? moment(itemValue(column, item)).format(
+                              column.format
+                            )
                           : itemValue(column, item)
                       }}
                     </span>
@@ -1020,7 +1044,13 @@ export default /*#__PURE__*/ {
             :lg="colLg"
             :xl="colXl"
           >
-            <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass" :hideFooter="cardHideFooter">
+            <b-card
+              :title="item.title"
+              tag="article"
+              class="mb-2 card-crud"
+              :class="cardClass"
+              :hideFooter="cardHideFooter"
+            >
               <slot name="card" v-bind:item="item">
                 <div v-for="(column, indexc) in columns" :key="indexc">
                   <b-card-text v-if="column.type != 'actions'"
