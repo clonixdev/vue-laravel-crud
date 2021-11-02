@@ -830,6 +830,8 @@ export default /*#__PURE__*/ {
                 <th
                   v-for="(column, indexc) in columns"
                   :key="indexc"
+
+                  :style="{ width:  column.width ? column.width : 'inherit', }"
                   scope="col"
                 >
                   <slot

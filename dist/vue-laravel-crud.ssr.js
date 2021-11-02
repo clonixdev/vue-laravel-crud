@@ -6524,7 +6524,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-2faeaf32>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-2faeaf32>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-00ab5b32>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-00ab5b32>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -6701,7 +6701,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-2faeaf32>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-00ab5b32>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -6786,6 +6786,9 @@ var __vue_render__ = function __vue_render__() {
   }, [_c('tr', [_vm._t("rowHead", _vm._l(_vm.columns, function (column, indexc) {
     return _c('th', {
       key: indexc,
+      style: {
+        width: column.width ? column.width : 'inherit'
+      },
       attrs: {
         "scope": "col"
       }
@@ -7109,7 +7112,7 @@ var __vue_render__ = function __vue_render__() {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-2faeaf32>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  }), 1)], 1) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-00ab5b32>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -7195,8 +7198,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-2faeaf32_0", {
-    source: "tr td[data-v-2faeaf32]:first-child,tr td[data-v-2faeaf32]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-2faeaf32]{display:flex;justify-content:center}.crud-header[data-v-2faeaf32]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-2faeaf32]{margin:0}.crud-header .crud-search[data-v-2faeaf32]{max-width:15rem}.crud-header .crud-search .btn[data-v-2faeaf32]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-2faeaf32]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-2faeaf32]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-2faeaf32]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-2faeaf32]{table-layout:auto}.table tbody td[data-v-2faeaf32]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-2faeaf32]::-webkit-scrollbar{display:none}}",
+  inject("data-v-00ab5b32_0", {
+    source: "tr td[data-v-00ab5b32]:first-child,tr td[data-v-00ab5b32]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-00ab5b32]{display:flex;justify-content:center}.crud-header[data-v-00ab5b32]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-00ab5b32]{margin:0}.crud-header .crud-search[data-v-00ab5b32]{max-width:15rem}.crud-header .crud-search .btn[data-v-00ab5b32]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-00ab5b32]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-00ab5b32]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-00ab5b32]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-00ab5b32]{table-layout:auto}.table tbody td[data-v-00ab5b32]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-00ab5b32]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7204,10 +7207,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-2faeaf32";
+var __vue_scope_id__ = "data-v-00ab5b32";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-2faeaf32";
+var __vue_module_identifier__ = "data-v-00ab5b32";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
