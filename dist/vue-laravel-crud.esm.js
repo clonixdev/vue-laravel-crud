@@ -5708,7 +5708,8 @@ var script = /*#__PURE__*/{
       },
       displayModes: {
         MODE_TABLE: 1,
-        MODE_CARDS: 2
+        MODE_CARDS: 2,
+        MODE_CUSTOM: 3
       }
     };
   },
@@ -5831,6 +5832,14 @@ var script = /*#__PURE__*/{
       default: false
     },
     cardClass: {
+      type: String,
+      default: ""
+    },
+    listContainerClass: {
+      type: String,
+      default: ""
+    },
+    listItemClass: {
       type: String,
       default: ""
     },
@@ -6867,7 +6876,7 @@ var __vue_render__ = function () {
       "column": column,
       "filter": _vm.filter,
       "internalFilterByProp": _vm.internalFilterByProp
-    }) : _c('span', [_vm._v(_vm._s(column.label))])], 2);
+    }) : _c('span', [_vm._v(_vm._s(column.label))]), _vm._v("internalFilterByProp\n              ")], 2);
   }))], 2)]), _vm._v(" "), _c('tbody', _vm._l(_vm.filteredItems, function (item, index) {
     return _c('tr', {
       key: index,
@@ -7047,7 +7056,18 @@ var __vue_render__ = function () {
     }), {
       "item": item
     })], 2)], 1);
-  }), 1)], 1) : _vm._e()]), _vm._v(" "), _c('div', {
+  }), 1)], 1) : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CUSTOM ? _c('div', [_c('div', {
+    class: _vm.listContainerClass
+  }, [_vm.items.length == 0 ? _c('p', {
+    staticClass: "p-3"
+  }, [_vm._v("\n          " + _vm._s(_vm.messageEmptyResults) + "\n        ")]) : _vm._e(), _vm._v(" "), _vm._l(_vm.filteredItems, function (item, index) {
+    return _c('div', {
+      key: index,
+      class: _vm.listItemClass
+    }, [_vm._t("card", null, {
+      "item": item
+    })], 2);
+  })], 2)]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "crud-paginator"
   }, [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
@@ -7135,8 +7155,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-00ab5b32_0", {
-    source: "tr td[data-v-00ab5b32]:first-child,tr td[data-v-00ab5b32]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-00ab5b32]{display:flex;justify-content:center}.crud-header[data-v-00ab5b32]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-00ab5b32]{margin:0}.crud-header .crud-search[data-v-00ab5b32]{max-width:15rem}.crud-header .crud-search .btn[data-v-00ab5b32]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-00ab5b32]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-00ab5b32]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-00ab5b32]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-00ab5b32]{table-layout:auto}.table tbody td[data-v-00ab5b32]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-00ab5b32]::-webkit-scrollbar{display:none}}",
+  inject("data-v-6c3ef010_0", {
+    source: "tr td[data-v-6c3ef010]:first-child,tr td[data-v-6c3ef010]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-6c3ef010]{display:flex;justify-content:center}.crud-header[data-v-6c3ef010]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-6c3ef010]{margin:0}.crud-header .crud-search[data-v-6c3ef010]{max-width:15rem}.crud-header .crud-search .btn[data-v-6c3ef010]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-6c3ef010]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-6c3ef010]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-6c3ef010]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-6c3ef010]{table-layout:auto}.table tbody td[data-v-6c3ef010]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-6c3ef010]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7144,7 +7164,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-00ab5b32";
+const __vue_scope_id__ = "data-v-6c3ef010";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

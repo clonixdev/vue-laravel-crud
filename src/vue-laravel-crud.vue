@@ -35,6 +35,7 @@ export default /*#__PURE__*/ {
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
+        MODE_CUSTOM: 3,
       },
     };
   },
@@ -156,6 +157,17 @@ export default /*#__PURE__*/ {
       type: String,
       default: "",
     },
+
+    listContainerClass: {
+      type: String,
+      default: "",
+    },
+
+    listItemClass: {
+      type: String,
+      default: "",
+    },
+
     cardHideFooter: {
       type: Boolean,
       default: false,
@@ -830,8 +842,7 @@ export default /*#__PURE__*/ {
                 <th
                   v-for="(column, indexc) in columns"
                   :key="indexc"
-
-                  :style="{ width:  column.width ? column.width : 'inherit', }"
+                  :style="{ width: column.width ? column.width : 'inherit' }"
                   scope="col"
                 >
                   <slot
@@ -918,7 +929,8 @@ export default /*#__PURE__*/ {
                     />
                   </slot>
 
-                  <span v-else>{{ column.label }}</span>
+                  <span v-else>{{ column.label }}</span
+                  >internalFilterByProp
                 </th>
               </slot>
             </tr>
@@ -1129,6 +1141,22 @@ export default /*#__PURE__*/ {
             </b-card>
           </b-col>
         </draggable>
+      </div>
+
+      <div v-if="displayMode == displayModes.MODE_CUSTOM">
+        <div :class="listContainerClass">
+          <p v-if="items.length == 0" class="p-3">
+            {{ messageEmptyResults }}
+          </p>
+
+          <div
+            :class="listItemClass"
+            v-for="(item, index) in filteredItems"
+            v-bind:key="index"
+          >
+            <slot name="card" v-bind:item="item"> </slot>
+          </div>
+        </div>
       </div>
     </b-overlay>
     <div class="crud-paginator">
