@@ -930,7 +930,7 @@ export default /*#__PURE__*/ {
                   </slot>
 
                   <span v-else>{{ column.label }}</span
-                  >internalFilterByProp
+                  >
                 </th>
               </slot>
             </tr>
