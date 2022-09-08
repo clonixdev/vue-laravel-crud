@@ -461,7 +461,21 @@ export default /*#__PURE__*/ {
           });
       }
     },
+getArrayValue(value, displayProp) {
+  if(!Array.isArray(value)) return 'N/A';
 
+  if(value.length > 0){
+    if(typeof value[0] === 'object' && displayProp){
+      return value.map(vv => vv[displayProp]).join(',');
+    }else{
+            return value.join(',');
+    }
+  }else{
+    return '';
+  }
+
+
+},
     getStateValue(value, options) {
       if (!options) {
         console.debug(
@@ -738,6 +752,34 @@ export default /*#__PURE__*/ {
                       </option>
                     </select>
                   </div>
+
+                                <div class="form-group" v-else-if="column.type == 'array'">
+                    <label>{{ column.label }}</label>
+                    <div class="d-none">{{ column.options }}</div>
+
+                    <select
+                      class="form-control"
+                      v-model="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)"
+                    >
+                      <option value=""></option>
+                      <option
+                        :value="option.id"
+                        v-for="option in column.options"
+                        :key="option.id"
+                      >
+                        {{
+                          option.text
+                            ? option.text
+                            : option.label
+                            ? option.label
+                            : ""
+                        }}
+                      </option>
+                    </select>
+                  </div>
+
+
                   <div class="form-group" v-else>
                     <label>{{ column.label }}</label>
 
@@ -914,6 +956,31 @@ export default /*#__PURE__*/ {
                         }}
                       </option>
                     </select>
+
+
+                                <select
+                      v-else-if="column.type == 'array'"
+                      class="form-control"
+                      v-model="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)"
+                    >
+                      <option value="">{{ column.label }}</option>
+                      <option
+                        :value="option.id"
+                        v-for="(option, indexo) in column.options"
+                        :key="indexo"
+                      >
+                        {{
+                          option.text
+                            ? option.text
+                            : option.label
+                            ? option.label
+                            : ""
+                        }}
+                      </option>
+                    </select>
+
+
                     <b-form-checkbox
                       v-else-if="column.type == 'checkbox'"
                       name="select-all"
@@ -992,6 +1059,15 @@ export default /*#__PURE__*/ {
                         getStateValue(itemValue(column, item), column.options)
                       }}
                     </span>
+
+
+                                   <span v-else-if="column.type == 'array'">
+                      {{
+                        getArrayValue(itemValue(column, item), column.displayProp)
+                      }}
+                    </span>
+
+
                     <span v-else>
                       {{ itemValue(column, item) }}
                     </span>
@@ -1097,6 +1173,11 @@ export default /*#__PURE__*/ {
                       <span v-else-if="column.type == 'state'">
                         {{
                           getStateValue(itemValue(column, item), column.options)
+                        }}
+                      </span>
+                                 <span v-else-if="column.type == 'array'">
+                        {{
+                          getArrayValue(itemValue(column, item), column.displayProp)
                         }}
                       </span>
                       <span v-else>
