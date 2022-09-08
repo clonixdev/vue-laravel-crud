@@ -1,4 +1,20 @@
-'use strict';var draggable=require('vuedraggable'),axios=require('axios');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}var draggable__default=/*#__PURE__*/_interopDefaultLegacy(draggable);var axios__default=/*#__PURE__*/_interopDefaultLegacy(axios);function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+'use strict';var draggable=require('vuedraggable'),axios=require('axios');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}var draggable__default=/*#__PURE__*/_interopDefaultLegacy(draggable);var axios__default=/*#__PURE__*/_interopDefaultLegacy(axios);function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -6212,6 +6228,21 @@ function commonjsRequire (target) {
         });
       }
     },
+    getArrayValue: function getArrayValue(value, displayProp) {
+      if (!Array.isArray(value)) return 'N/A';
+
+      if (value.length > 0) {
+        if (_typeof(value[0]) === 'object' && displayProp) {
+          return value.map(function (vv) {
+            return vv[displayProp];
+          }).join(',');
+        } else {
+          return value.join(',');
+        }
+      } else {
+        return '';
+      }
+    },
     getStateValue: function getStateValue(value, options) {
       if (!options) {
         console.debug("State Column Not hast options returning value", value, options);
@@ -6533,7 +6564,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-4e948c7e>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-4e948c7e>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-56e77cbe>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-56e77cbe>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -6660,6 +6691,43 @@ var __vue_render__ = function __vue_render__() {
           "value": option.id
         }
       }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                    ")]);
+    })], 2)]) : column.type == 'array' ? _c('div', {
+      staticClass: "form-group"
+    }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('div', {
+      staticClass: "d-none"
+    }, [_vm._v(_vm._s(column.options))]), _vm._v(" "), _c('select', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.internalFilterByProp(column.prop).value,
+        expression: "internalFilterByProp(column.prop).value"
+      }],
+      staticClass: "form-control",
+      on: {
+        "change": [function ($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+
+          _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        }, function ($event) {
+          return _vm.onChangeFilter($event);
+        }]
+      }
+    }, [_c('option', {
+      attrs: {
+        "value": ""
+      }
+    }), _vm._v(" "), _vm._l(column.options, function (option) {
+      return _c('option', {
+        key: option.id,
+        domProps: {
+          "value": option.id
+        }
+      }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                    ")]);
     })], 2)]) : _c('div', {
       staticClass: "form-group"
     }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('input', {
@@ -6710,7 +6778,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-4e948c7e>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-56e77cbe>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -6902,6 +6970,39 @@ var __vue_render__ = function __vue_render__() {
           "value": option.id
         }
       }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                    ")]);
+    })], 2) : column.type == 'array' ? _c('select', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.internalFilterByProp(column.prop).value,
+        expression: "internalFilterByProp(column.prop).value"
+      }],
+      staticClass: "form-control",
+      on: {
+        "change": [function ($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+
+          _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        }, function ($event) {
+          return _vm.onChangeFilter($event);
+        }]
+      }
+    }, [_c('option', {
+      attrs: {
+        "value": ""
+      }
+    }, [_vm._v(_vm._s(column.label))]), _vm._v(" "), _vm._l(column.options, function (option, indexo) {
+      return _c('option', {
+        key: indexo,
+        domProps: {
+          "value": option.id
+        }
+      }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                    ")]);
     })], 2) : column.type == 'checkbox' ? _c('b-form-checkbox', {
       attrs: {
         "name": "select-all"
@@ -6980,7 +7081,7 @@ var __vue_render__ = function __vue_render__() {
           },
           expression: "item.selected"
         }
-      })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
+      })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : column.type == 'array' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
         "item": item
       }), _vm._v(" "), column.type == 'actions' ? _c('b-button-group', [_vm._t("rowAction", [_c('b-button', {
         attrs: {
@@ -7115,7 +7216,7 @@ var __vue_render__ = function __vue_render__() {
         attrs: {
           "variant": "danger"
         }
-      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item)) + "\n                    ")]) : column.type == 'state' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                    ")]) : _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item)) + "\n                    ")])], {
+      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item)) + "\n                    ")]) : column.type == 'state' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                    ")]) : column.type == 'array' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp)) + "\n                    ")]) : _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item)) + "\n                    ")])], {
         "item": item
       })], 2) : _vm._e()], 1);
     }), {
@@ -7132,7 +7233,7 @@ var __vue_render__ = function __vue_render__() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-4e948c7e>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-56e77cbe>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -7218,8 +7319,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-4e948c7e_0", {
-    source: "tr td[data-v-4e948c7e]:first-child,tr td[data-v-4e948c7e]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-4e948c7e]{display:flex;justify-content:center}.crud-header[data-v-4e948c7e]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-4e948c7e]{margin:0}.crud-header .crud-search[data-v-4e948c7e]{max-width:15rem}.crud-header .crud-search .btn[data-v-4e948c7e]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-4e948c7e]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-4e948c7e]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-4e948c7e]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-4e948c7e]{table-layout:auto}.table tbody td[data-v-4e948c7e]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-4e948c7e]::-webkit-scrollbar{display:none}}",
+  inject("data-v-56e77cbe_0", {
+    source: "tr td[data-v-56e77cbe]:first-child,tr td[data-v-56e77cbe]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-56e77cbe]{display:flex;justify-content:center}.crud-header[data-v-56e77cbe]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-56e77cbe]{margin:0}.crud-header .crud-search[data-v-56e77cbe]{max-width:15rem}.crud-header .crud-search .btn[data-v-56e77cbe]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-56e77cbe]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-56e77cbe]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-56e77cbe]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-56e77cbe]{table-layout:auto}.table tbody td[data-v-56e77cbe]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-56e77cbe]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7227,10 +7328,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-4e948c7e";
+var __vue_scope_id__ = "data-v-56e77cbe";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-4e948c7e";
+var __vue_module_identifier__ = "data-v-56e77cbe";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
