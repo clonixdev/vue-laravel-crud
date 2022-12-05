@@ -353,8 +353,16 @@ export default /*#__PURE__*/ {
     onSelect() {
       this.$emit("select", this.item);
     },
-    showItem(id, itemIndex) {
-      this.item = this.items[itemIndex];
+    showItem(id, itemIndex = null) {
+
+
+      if(itemIndex == null){
+        let item = this.items.find(it => it.id == id);
+        this.item = item;
+      }else{
+        this.item = this.items[itemIndex];
+      }
+     
       this.onSelect();
       this.$bvModal.show("modal-show-item-" + this.modelName);
     },
@@ -363,8 +371,13 @@ export default /*#__PURE__*/ {
       this.onSelect();
       this.$bvModal.show("modal-form-item-" + this.modelName);
     },
-    updateItem(id, itemIndex) {
-      this.item = this.items[itemIndex];
+    updateItem(id, itemIndex = null) {
+     if(itemIndex == null){
+        let item = this.items.find(it => it.id == id);
+        this.item = item;
+      }else{
+        this.item = this.items[itemIndex];
+      }
       //console.debug(itemIndex);
       this.onSelect();
       this.$bvModal.show("modal-form-item-" + this.modelName);
@@ -1010,6 +1023,9 @@ getArrayValue(value, displayProp) {
 
                   <span v-else>{{ column.label }}</span
                   >
+
+
+        
                 </th>
               </slot>
             </tr>
@@ -1028,7 +1044,7 @@ getArrayValue(value, displayProp) {
                   :key="indexc"
                   :scope="column.prop == 'id' ? 'row' : ''"
                 >
-                  <slot :name="'cell-' + column.prop" v-bind:item="item"          v-bind:index="index">
+                  <slot :name="'cell-' + column.prop" v-bind:item="item"  v-bind:index="index" v-bind:itemindex="index" v-bind:columnindex="indexc">
                     <span v-if="column.type == 'boolean'">
                       <b-badge
                         variant="success"
@@ -1051,7 +1067,7 @@ getArrayValue(value, displayProp) {
                     </span>
                     <span v-else-if="column.type == 'date'">
                       {{
-                        column.format
+                        itemValue(column, item) && column.format
                           ? moment(itemValue(column, item)).format(
                               column.format
                             )
@@ -1157,7 +1173,7 @@ getArrayValue(value, displayProp) {
                 <div v-for="(column, indexc) in columns" :key="indexc">
                   <b-card-text v-if="column.type != 'actions'"
                     >{{ column.label }}:
-                    <slot :name="'cell-' + column.prop" v-bind:item="item">
+                    <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index" v-bind:columnindex="indexc">
                       <span v-if="column.type == 'boolean'">
                         <b-badge
                           variant="success"
