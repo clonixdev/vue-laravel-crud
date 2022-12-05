@@ -1028,7 +1028,7 @@ getArrayValue(value, displayProp) {
                   :key="indexc"
                   :scope="column.prop == 'id' ? 'row' : ''"
                 >
-                  <slot :name="'cell-' + column.prop" v-bind:item="item">
+                  <slot :name="'cell-' + column.prop" v-bind:item="item"          v-bind:index="index">
                     <span v-if="column.type == 'boolean'">
                       <b-badge
                         variant="success"
