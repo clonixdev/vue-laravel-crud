@@ -60,10 +60,35 @@ export default {
 ```
 
 
+
+```html
+<vue-laravel-crud :title="title" :modelName="modelName" :model="model" :columns="columns">
+    <template v-slot:form="slotProps">
+        <b-form-group label="Name:" description="Your Name">
+            <b-form-input
+            v-model="slotProps.item.name"
+            type="text"
+            required
+            placeholder="Name"
+            ></b-form-input>
+        </b-form-group>
+    </template>
+    <template v-slot:show="slotProps">
+        <b-list-group>
+            <b-list-group-item class="d-flex justify-content-between align-items-center">Id<b-badge variant="primary" pill>{{ slotProps.item.id }}</b-badge></b-list-group-item>
+            <b-list-group-item class="d-flex justify-content-between align-items-center">Nombre<b-badge variant="primary" pill>{{ slotProps.item.title }}</b-badge></b-list-group-item>
+        </b-list-group>
+    </template>
+</vue-laravel-crud>
+
+```
+
+
+
 ```html
 
 Selected: {{ selected ? selected.name : 'none' }}
-<vue-laravel-crud :title="title" :modelName="modelName" :model="item" :columns="columns" @select="onSelect($event)">
+<vue-laravel-crud :title="title" :modelName="modelName" :model="model" :columns="columns" @select="onSelect($event)">
 
     <template slot="cell-name" slot-scope="slotProps">
             <!-- Custom Cell Template cell-(prop) -->
