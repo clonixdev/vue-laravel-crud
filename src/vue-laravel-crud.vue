@@ -197,6 +197,15 @@ export default /*#__PURE__*/ {
       type: String,
       default: "Buscar...",
     },
+
+    tableContainerClass :{
+      type: String,
+      default: "",
+    },
+        tableClass :{
+      type: String,
+      default: "",
+    },
   },
 
   mounted() {
@@ -763,6 +772,7 @@ getArrayValue(value, displayProp) {
                       @change="onChangeFilter($event)"
                     >
                       <option value=""></option>
+                      <template v-if="column.options">
                       <option
                         :value="option.id"
                         v-for="option in column.options"
@@ -776,6 +786,7 @@ getArrayValue(value, displayProp) {
                             : ""
                         }}
                       </option>
+                      </template>
                     </select>
                   </div>
 
@@ -874,10 +885,11 @@ getArrayValue(value, displayProp) {
     </div>
     <b-overlay :show="loading" rounded="sm">
       <div
-        class="table-responsive"
+  
+        :class="[ 'table-responsive' , tableContainerClass ]"
         v-if="displayMode == displayModes.MODE_TABLE"
       >
-        <table class="table table-hover table-striped w-100">
+        <table  :class="[ 'table table-hover table-striped w-100' , tableClass ]">
           <thead class="thead-light">
             <tr>
               <slot name="rowHead">
