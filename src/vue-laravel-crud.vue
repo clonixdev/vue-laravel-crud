@@ -67,7 +67,11 @@ export default /*#__PURE__*/ {
       type: Boolean,
       default: false,
     },
-    sorteable: {
+    sortable: {
+      type: Boolean,
+      default: false,
+    },
+    orderable: {
       type: Boolean,
       default: false,
     },
@@ -198,13 +202,21 @@ export default /*#__PURE__*/ {
       default: "Buscar...",
     },
 
-    tableContainerClass :{
+    tableContainerClass: {
       type: String,
       default: "",
     },
-        tableClass :{
+    tableClass: {
       type: String,
       default: "",
+    },
+    grouped: {
+      type: Boolean,
+      default: false,
+    },
+    groupedAttribute: {
+      type: String,
+      default: "name",
     },
   },
 
@@ -354,15 +366,13 @@ export default /*#__PURE__*/ {
       this.$emit("select", this.item);
     },
     showItem(id, itemIndex = null) {
-
-
-      if(itemIndex == null){
-        let item = this.items.find(it => it.id == id);
+      if (itemIndex == null) {
+        let item = this.items.find((it) => it.id == id);
         this.item = item;
-      }else{
+      } else {
         this.item = this.items[itemIndex];
       }
-     
+
       this.onSelect();
       this.$bvModal.show("modal-show-item-" + this.modelName);
     },
@@ -372,10 +382,10 @@ export default /*#__PURE__*/ {
       this.$bvModal.show("modal-form-item-" + this.modelName);
     },
     updateItem(id, itemIndex = null) {
-     if(itemIndex == null){
-        let item = this.items.find(it => it.id == id);
+      if (itemIndex == null) {
+        let item = this.items.find((it) => it.id == id);
         this.item = item;
-      }else{
+      } else {
         this.item = this.items[itemIndex];
       }
       //console.debug(itemIndex);
@@ -399,7 +409,7 @@ export default /*#__PURE__*/ {
     },
     fetchItems(page = 1) {
       let _this = this;
-      _this.loading = true;
+      this.loading = true;
       axios
         .get(this.apiUrl + "/" + this.modelName, {
           params: {
@@ -408,15 +418,36 @@ export default /*#__PURE__*/ {
             filters: JSON.stringify(this.finalFilters),
           },
         })
-        .then(function (response) {
-          _this.makePagination(response.data);
-          _this.items = response.data.data;
-          _this.loading = false;
+        .then((response) => {
+          this.makePagination(response.data);
+          let items = response.data.data;
+          if (this.grouped) {
+            let itemswithgroup = [];
+            let lastcomparevalue = null;
+            let compareattr = this.groupedAttribute;
+            items.forEach((item) => {
+              if (Array.isArray(item)) {
+                itemswithgroup.push({ label: "Group", group: true });
+
+                item.forEach((sitem) => {
+                  itemswithgroup.push(sitem);
+                });
+              } else {
+                if (lastcomparevalue != item[compareattr]) {
+                  lastcomparevalue = item[compareattr];
+                  itemswithgroup.push({ label: "Group", group: true });
+                }
+                itemswithgroup.push(item);
+              }
+            });
+          }
+          this.items = items;
+          this.loading = false;
         })
-        .catch(function (error) {
+        .catch((error) => {
           //console.debug(error);
-          _this.toastError(error);
-          _this.loading = false;
+          this.toastError(error);
+          this.loading = false;
         });
     },
 
@@ -455,7 +486,7 @@ export default /*#__PURE__*/ {
     },
 
     saveSort() {
-      if (this.sorteable) {
+      if (this.orderable) {
         let _this = this;
         _this.loading = true;
 
@@ -483,21 +514,19 @@ export default /*#__PURE__*/ {
           });
       }
     },
-getArrayValue(value, displayProp) {
-  if(!Array.isArray(value)) return 'N/A';
+    getArrayValue(value, displayProp) {
+      if (!Array.isArray(value)) return "N/A";
 
-  if(value.length > 0){
-    if(typeof value[0] === 'object' && displayProp){
-      return value.map(vv => vv[displayProp]).join(',');
-    }else{
-            return value.join(',');
-    }
-  }else{
-    return '';
-  }
-
-
-},
+      if (value.length > 0) {
+        if (typeof value[0] === "object" && displayProp) {
+          return value.map((vv) => vv[displayProp]).join(",");
+        } else {
+          return value.join(",");
+        }
+      } else {
+        return "";
+      }
+    },
     getStateValue(value, options) {
       if (!options) {
         console.debug(
@@ -775,7 +804,7 @@ getArrayValue(value, displayProp) {
                     </select>
                   </div>
 
-                                <div class="form-group" v-else-if="column.type == 'array'">
+                  <div class="form-group" v-else-if="column.type == 'array'">
                     <label>{{ column.label }}</label>
                     <div class="d-none">{{ column.options }}</div>
 
@@ -786,23 +815,22 @@ getArrayValue(value, displayProp) {
                     >
                       <option value=""></option>
                       <template v-if="column.options">
-                      <option
-                        :value="option.id"
-                        v-for="option in column.options"
-                        :key="option.id"
-                      >
-                        {{
-                          option.text
-                            ? option.text
-                            : option.label
-                            ? option.label
-                            : ""
-                        }}
-                      </option>
+                        <option
+                          :value="option.id"
+                          v-for="option in column.options"
+                          :key="option.id"
+                        >
+                          {{
+                            option.text
+                              ? option.text
+                              : option.label
+                              ? option.label
+                              : ""
+                          }}
+                        </option>
                       </template>
                     </select>
                   </div>
-
 
                   <div class="form-group" v-else>
                     <label>{{ column.label }}</label>
@@ -898,11 +926,10 @@ getArrayValue(value, displayProp) {
     </div>
     <b-overlay :show="loading" rounded="sm">
       <div
-  
-        :class="[ 'table-responsive' , tableContainerClass ]"
+        :class="['table-responsive', tableContainerClass]"
         v-if="displayMode == displayModes.MODE_TABLE"
       >
-        <table  :class="[ 'table table-hover table-striped w-100' , tableClass ]">
+        <table :class="['table table-hover table-striped w-100', tableClass]">
           <thead class="thead-light">
             <tr>
               <slot name="rowHead">
@@ -982,8 +1009,7 @@ getArrayValue(value, displayProp) {
                       </option>
                     </select>
 
-
-                                <select
+                    <select
                       v-else-if="column.type == 'array'"
                       class="form-control"
                       v-model="internalFilterByProp(column.prop).value"
@@ -1005,7 +1031,6 @@ getArrayValue(value, displayProp) {
                       </option>
                     </select>
 
-
                     <b-form-checkbox
                       v-else-if="column.type == 'checkbox'"
                       name="select-all"
@@ -1021,11 +1046,10 @@ getArrayValue(value, displayProp) {
                     />
                   </slot>
 
-                  <span v-else>{{ column.label }}</span
-                  >
+                  <span v-else>{{ column.label }}</span>
 
 
-        
+                  <span v-if="sortable" class="sort-filter"><b-icon-sort v-if="!internalFilterByProp(column.prop+'_sort').value  "></b-icon-sort><b-icon-sort-up v-if="internalFilterByProp(column.prop+'_sort').value == 'ASC' "></b-icon-sort-up><b-icon-sort-down v-if="internalFilterByProp(column.prop+'_sort').value == 'DESC' "></b-icon-sort-down></span>
                 </th>
               </slot>
             </tr>
@@ -1038,100 +1062,115 @@ getArrayValue(value, displayProp) {
               @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)"
             >
-              <slot name="row" v-bind:item="item">
-                <td
-                  v-for="(column, indexc) in columns"
-                  :key="indexc"
-                  :scope="column.prop == 'id' ? 'row' : ''"
-                >
-                  <slot :name="'cell-' + column.prop" v-bind:item="item"  v-bind:index="index" v-bind:itemindex="index" v-bind:columnindex="indexc">
-                    <span v-if="column.type == 'boolean'">
-                      <b-badge
-                        variant="success"
-                        v-if="
-                          itemValue(column, item) == 'true' ||
-                          itemValue(column, item) == 1 ||
-                          itemValue(column, item) == '1'
-                        "
-                        ><b-icon-check-circle></b-icon-check-circle
-                      ></b-badge>
-                      <b-badge
-                        variant="danger"
-                        v-if="
-                          !itemValue(column, item) ||
-                          itemValue(column, item) == '0' ||
-                          itemValue(column, item) == 'false'
-                        "
-                        ><b-icon-x-circle></b-icon-x-circle
-                      ></b-badge>
-                    </span>
-                    <span v-else-if="column.type == 'date'">
-                      {{
-                        itemValue(column, item) && column.format
-                          ? moment(itemValue(column, item)).format(
-                              column.format
-                            )
-                          : itemValue(column, item)
-                      }}
-                    </span>
-                    <span v-else-if="column.type == 'checkbox'">
-                      <b-form-checkbox
-                        v-model="item.selected"
-                        @change="onCheckSelect($event, item)"
-                      >
-                      </b-form-checkbox>
-                    </span>
+              <template v-if="item.group"> 
+                <th :colspan="columns.length">
+                  <span>{{ item.label }}</span>
+                </th>
 
-                    <span v-else-if="column.type == 'state'">
-                      {{
-                        getStateValue(itemValue(column, item), column.options)
-                      }}
-                    </span>
-
-
-                                   <span v-else-if="column.type == 'array'">
-                      {{
-                        getArrayValue(itemValue(column, item), column.displayProp)
-                      }}
-                    </span>
-
-
-                    <span v-else>
-                      {{ itemValue(column, item) }}
-                    </span>
-                  </slot>
-
-                  <b-button-group v-if="column.type == 'actions'">
+              </template>
+              <template v-else>
+                <slot name="row" v-bind:item="item">
+                  <td
+                    v-for="(column, indexc) in columns"
+                    :key="indexc"
+                    :scope="column.prop == 'id' ? 'row' : ''"
+                  >
                     <slot
-                      name="rowAction"
+                      :name="'cell-' + column.prop"
                       v-bind:item="item"
                       v-bind:index="index"
-                      v-bind:showItem="showItem"
-                      v-bind:updateItem="updateItem"
-                      v-bind:removeItem="removeItem"
+                      v-bind:itemindex="index"
+                      v-bind:columnindex="indexc"
                     >
-                      <b-button
-                        variant="primary"
-                        @click="showItem(item.id, index)"
-                      >
-                        <b-icon-eye></b-icon-eye>
-                      </b-button>
-                      <b-button
-                        variant="secondary"
-                        @click="updateItem(item.id, index)"
-                      >
-                        <b-icon-pencil></b-icon-pencil>
-                      </b-button>
-                      <b-button
-                        variant="danger"
-                        @click="removeItem(item.id, index)"
-                      >
-                        <b-icon-trash></b-icon-trash>
-                      </b-button>
+                      <span v-if="column.type == 'boolean'">
+                        <b-badge
+                          variant="success"
+                          v-if="
+                            itemValue(column, item) == 'true' ||
+                            itemValue(column, item) == 1 ||
+                            itemValue(column, item) == '1'
+                          "
+                          ><b-icon-check-circle></b-icon-check-circle
+                        ></b-badge>
+                        <b-badge
+                          variant="danger"
+                          v-if="
+                            !itemValue(column, item) ||
+                            itemValue(column, item) == '0' ||
+                            itemValue(column, item) == 'false'
+                          "
+                          ><b-icon-x-circle></b-icon-x-circle
+                        ></b-badge>
+                      </span>
+                      <span v-else-if="column.type == 'date'">
+                        {{
+                          itemValue(column, item) && column.format
+                            ? moment(itemValue(column, item)).format(
+                                column.format
+                              )
+                            : itemValue(column, item)
+                        }}
+                      </span>
+                      <span v-else-if="column.type == 'checkbox'">
+                        <b-form-checkbox
+                          v-model="item.selected"
+                          @change="onCheckSelect($event, item)"
+                        >
+                        </b-form-checkbox>
+                      </span>
+
+                      <span v-else-if="column.type == 'state'">
+                        {{
+                          getStateValue(itemValue(column, item), column.options)
+                        }}
+                      </span>
+
+                      <span v-else-if="column.type == 'array'">
+                        {{
+                          getArrayValue(
+                            itemValue(column, item),
+                            column.displayProp
+                          )
+                        }}
+                      </span>
+
+                      <span v-else>
+                        {{ itemValue(column, item) }}
+                      </span>
                     </slot>
-                  </b-button-group>
-                </td>
-              </slot>
+
+                    <b-button-group v-if="column.type == 'actions'">
+                      <slot
+                        name="rowAction"
+                        v-bind:item="item"
+                        v-bind:index="index"
+                        v-bind:showItem="showItem"
+                        v-bind:updateItem="updateItem"
+                        v-bind:removeItem="removeItem"
+                      >
+                        <b-button
+                          variant="primary"
+                          @click="showItem(item.id, index)"
+                        >
+                          <b-icon-eye></b-icon-eye>
+                        </b-button>
+                        <b-button
+                          variant="secondary"
+                          @click="updateItem(item.id, index)"
+                        >
+                          <b-icon-pencil></b-icon-pencil>
+                        </b-button>
+                        <b-button
+                          variant="danger"
+                          @click="removeItem(item.id, index)"
+                        >
+                          <b-icon-trash></b-icon-trash>
+                        </b-button>
+                      </slot>
+                    </b-button-group>
+                  </td>
+                </slot>
+              </template>
             </tr>
           </tbody>
         </table>
@@ -1173,7 +1212,13 @@ getArrayValue(value, displayProp) {
                 <div v-for="(column, indexc) in columns" :key="indexc">
                   <b-card-text v-if="column.type != 'actions'"
                     >{{ column.label }}:
-                    <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index" v-bind:columnindex="indexc">
+                    <slot
+                      :name="'cell-' + column.prop"
+                      v-bind:item="item"
+                      v-bind:index="index"
+                      v-bind:itemindex="index"
+                      v-bind:columnindex="indexc"
+                    >
                       <span v-if="column.type == 'boolean'">
                         <b-badge
                           variant="success"
@@ -1203,9 +1248,12 @@ getArrayValue(value, displayProp) {
                           getStateValue(itemValue(column, item), column.options)
                         }}
                       </span>
-                                 <span v-else-if="column.type == 'array'">
+                      <span v-else-if="column.type == 'array'">
                         {{
-                          getArrayValue(itemValue(column, item), column.displayProp)
+                          getArrayValue(
+                            itemValue(column, item),
+                            column.displayProp
+                          )
                         }}
                       </span>
                       <span v-else>
