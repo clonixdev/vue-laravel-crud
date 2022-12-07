@@ -225,6 +225,14 @@ export default /*#__PURE__*/ {
       type: String,
       default: "name",
     },
+        groupedLabelPre: {
+      type: String,
+      default: "",
+    },
+        groupedLabelAfter: {
+      type: String,
+      default: "",
+    },
   },
 
   mounted() {
@@ -444,9 +452,11 @@ export default /*#__PURE__*/ {
             let itemswithgroup = [];
             let lastcomparevalue = null;
             let compareattr = this.groupedAttribute;
-            items.forEach((item) => {
+            let groupLabelPre = this.groupedLabelPre;
+            let groupLabelAfter = this.groupedLabelAfter;
+            items.forEach((item,key) => {
               if (Array.isArray(item)) {
-                itemswithgroup.push({ label: "Group", group: true });
+                itemswithgroup.push({ label: groupLabelPre+key+groupLabelAfter, group: true });
 
                 item.forEach((sitem) => {
                   itemswithgroup.push(sitem);
@@ -454,7 +464,7 @@ export default /*#__PURE__*/ {
               } else {
                 if (lastcomparevalue != item[compareattr]) {
                   lastcomparevalue = item[compareattr];
-                  itemswithgroup.push({ label: "Group", group: true });
+                  itemswithgroup.push({ label: groupLabelPre+lastcomparevalue+groupLabelAfter, group: true });
                 }
                 itemswithgroup.push(item);
               }
