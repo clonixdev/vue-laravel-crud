@@ -57,11 +57,18 @@ export default /*#__PURE__*/ {
     title: String,
     columns: {
       type: Array,
-      default: [{ label: "Id", prop: "id", type: "number" }],
+
+            default() {
+            return [{ label: "Id", prop: "id", type: "number" }]
+        }
+
+
     },
     filter: {
       type: Array,
-      default: [],
+      default() {
+            return []
+        }
     },
     enableFilters: {
       type: Boolean,
@@ -452,8 +459,11 @@ export default /*#__PURE__*/ {
                 itemswithgroup.push(item);
               }
             });
+                  this.items = itemswithgroup;
+          }else{
+      this.items = items;
           }
-          this.items = items;
+    
           this.loading = false;
         })
         .catch((error) => {
