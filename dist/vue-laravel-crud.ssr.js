@@ -5843,7 +5843,11 @@ function commonjsRequire (target) {
       type: Boolean,
       default: false
     },
-    sorteable: {
+    sortable: {
+      type: Boolean,
+      default: false
+    },
+    orderable: {
       type: Boolean,
       default: false
     },
@@ -5974,6 +5978,14 @@ function commonjsRequire (target) {
     tableClass: {
       type: String,
       default: ""
+    },
+    grouped: {
+      type: Boolean,
+      default: false
+    },
+    groupedAttribute: {
+      type: String,
+      default: "name"
     }
   },
   mounted: function mounted() {
@@ -6044,6 +6056,17 @@ function commonjsRequire (target) {
           }
         }
       });
+    },
+    toggleSortFilter: function toggleSortFilter(column) {
+      var value = this.internalFilterByProp(column.prop + '_sort').value;
+
+      if (!value) {
+        this.internalFilterByProp(column.prop + '_sort').value = 'ASC';
+      } else if (value == 'ASC') {
+        this.internalFilterByProp(column.prop + '_sort').value = 'DESC';
+      } else if (value == 'DESC') {
+        this.internalFilterByProp(column.prop + '_sort').value = null;
+      }
     },
     toggleFilters: function toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
@@ -6172,11 +6195,11 @@ function commonjsRequire (target) {
       }, 1);
     },
     fetchItems: function fetchItems() {
+      var _this7 = this;
+
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-      var _this = this;
-
-      _this.loading = true;
+      this.loading = true;
       axios__default['default'].get(this.apiUrl + "/" + this.modelName, {
         params: {
           page: page,
@@ -6184,15 +6207,44 @@ function commonjsRequire (target) {
           filters: JSON.stringify(this.finalFilters)
         }
       }).then(function (response) {
-        _this.makePagination(response.data);
+        _this7.makePagination(response.data);
 
-        _this.items = response.data.data;
-        _this.loading = false;
+        var items = response.data.data;
+
+        if (_this7.grouped) {
+          var itemswithgroup = [];
+          var lastcomparevalue = null;
+          var compareattr = _this7.groupedAttribute;
+          items.forEach(function (item) {
+            if (Array.isArray(item)) {
+              itemswithgroup.push({
+                label: "Group",
+                group: true
+              });
+              item.forEach(function (sitem) {
+                itemswithgroup.push(sitem);
+              });
+            } else {
+              if (lastcomparevalue != item[compareattr]) {
+                lastcomparevalue = item[compareattr];
+                itemswithgroup.push({
+                  label: "Group",
+                  group: true
+                });
+              }
+
+              itemswithgroup.push(item);
+            }
+          });
+        }
+
+        _this7.items = items;
+        _this7.loading = false;
       }).catch(function (error) {
         //console.debug(error);
-        _this.toastError(error);
+        _this7.toastError(error);
 
-        _this.loading = false;
+        _this7.loading = false;
       });
     },
     removeItem: function removeItem(id, index) {
@@ -6227,7 +6279,7 @@ function commonjsRequire (target) {
       });
     },
     saveSort: function saveSort() {
-      if (this.sorteable) {
+      if (this.orderable) {
         var _this = this;
 
         _this.loading = true;
@@ -6257,18 +6309,18 @@ function commonjsRequire (target) {
       }
     },
     getArrayValue: function getArrayValue(value, displayProp) {
-      if (!Array.isArray(value)) return 'N/A';
+      if (!Array.isArray(value)) return "N/A";
 
       if (value.length > 0) {
-        if (_typeof(value[0]) === 'object' && displayProp) {
+        if (_typeof(value[0]) === "object" && displayProp) {
           return value.map(function (vv) {
             return vv[displayProp];
-          }).join(',');
+          }).join(",");
         } else {
-          return value.join(',');
+          return value.join(",");
         }
       } else {
-        return '';
+        return "";
       }
     },
     getStateValue: function getStateValue(value, options) {
@@ -6290,7 +6342,7 @@ function commonjsRequire (target) {
       return ops.join(", ");
     },
     saveItem: function saveItem() {
-      var _this7 = this;
+      var _this8 = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var _this, formData;
@@ -6299,11 +6351,11 @@ function commonjsRequire (target) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this = _this7;
+                _this = _this8;
                 _this.loading = true;
 
-                if (_this7.item.id) {
-                  axios__default['default'].put(_this7.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
+                if (_this8.item.id) {
+                  axios__default['default'].put(_this8.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
                     _this.$bvModal.hide("modal-form-item-" + _this.modelName);
 
                     var itemSv = response.data;
@@ -6324,7 +6376,7 @@ function commonjsRequire (target) {
                     _this.loading = false;
                   });
                 } else {
-                  if (_this7.createMultipart) {
+                  if (_this8.createMultipart) {
                     formData = new FormData();
                     Object.keys(_this.item).forEach(function (key) {
                       if (_this.item[key][0] && _this.item[key][0].name) {
@@ -6336,7 +6388,7 @@ function commonjsRequire (target) {
                         }
                       } else formData.append(key, _this.item[key]);
                     });
-                    axios__default['default'].post(_this7.apiUrl + "/" + _this.modelName, formData).then(function (response) {
+                    axios__default['default'].post(_this8.apiUrl + "/" + _this.modelName, formData).then(function (response) {
                       _this.loading = false;
 
                       _this.$bvModal.hide("modal-form-item-" + _this.modelName);
@@ -6363,7 +6415,7 @@ function commonjsRequire (target) {
                       _this.loading = false;
                     });
                   } else {
-                    axios__default['default'].post(_this7.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
+                    axios__default['default'].post(_this8.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
                       _this.loading = false;
 
                       _this.$bvModal.hide("modal-form-item-" + _this.modelName);
@@ -6444,11 +6496,11 @@ function commonjsRequire (target) {
       });
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this8 = this;
+      var _this9 = this;
 
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this8.refresh();
+        _this9.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -6592,7 +6644,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-423f69db>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-423f69db>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-7593c348>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-7593c348>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -6755,7 +6807,7 @@ var __vue_render__ = function __vue_render__() {
         domProps: {
           "value": option.id
         }
-      }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                    ")]);
+      }, [_vm._v("\n                        " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                      ")]);
     }) : _vm._e()], 2)]) : _c('div', {
       staticClass: "form-group"
     }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('input', {
@@ -6806,7 +6858,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-423f69db>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-7593c348>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -7070,7 +7122,14 @@ var __vue_render__ = function __vue_render__() {
       "column": column,
       "filter": _vm.filter,
       "internalFilterByProp": _vm.internalFilterByProp
-    }) : _c('span', [_vm._v(_vm._s(column.label))])], 2);
+    }) : _c('span', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _vm.sortable ? _c('span', {
+      staticClass: "sort-filter",
+      on: {
+        "click": function click($event) {
+          return _vm.toggleSortFilter(column);
+        }
+      }
+    }, [!_vm.internalFilterByProp(column.prop + '_sort').value ? _c('b-icon-sort') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'ASC' ? _c('b-icon-sort-up') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'DESC' ? _c('b-icon-sort-down') : _vm._e()], 1) : _vm._e()], 2);
   }))], 2)]), _vm._v(" "), _c('tbody', _vm._l(_vm.filteredItems, function (item, index) {
     return _c('tr', {
       key: index,
@@ -7082,7 +7141,11 @@ var __vue_render__ = function __vue_render__() {
           return _vm.onRowClick(item, index);
         }
       }
-    }, [_vm._t("row", _vm._l(_vm.columns, function (column, indexc) {
+    }, [item.group ? [_c('th', {
+      attrs: {
+        "colspan": _vm.columns.length
+      }
+    }, [_c('span', [_vm._v(_vm._s(item.label))])])] : [_vm._t("row", _vm._l(_vm.columns, function (column, indexc) {
       return _c('td', {
         key: indexc,
         attrs: {
@@ -7096,7 +7159,7 @@ var __vue_render__ = function __vue_render__() {
         attrs: {
           "variant": "danger"
         }
-      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item) && column.format ? _vm.moment(_vm.itemValue(column, item)).format(column.format) : _vm.itemValue(column, item)) + "\n                  ")]) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
+      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item) && column.format ? _vm.moment(_vm.itemValue(column, item)).format(column.format) : _vm.itemValue(column, item)) + "\n                    ")]) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
         on: {
           "change": function change($event) {
             return _vm.onCheckSelect($event, item);
@@ -7109,7 +7172,7 @@ var __vue_render__ = function __vue_render__() {
           },
           expression: "item.selected"
         }
-      })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : column.type == 'array' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
+      })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                    ")]) : column.type == 'array' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp)) + "\n                    ")]) : _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item)) + "\n                    ")])], {
         "item": item,
         "index": index,
         "itemindex": index,
@@ -7150,7 +7213,7 @@ var __vue_render__ = function __vue_render__() {
       })], 2) : _vm._e()], 2);
     }), {
       "item": item
-    })], 2);
+    })]], 2);
   }), 0)]), _vm._v(" "), _vm.items.length == 0 ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v("\n        " + _vm._s(_vm.messageEmptyResults) + "\n      ")]) : _vm._e()]) : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.items.length == 0 ? _c('p', {
@@ -7267,7 +7330,7 @@ var __vue_render__ = function __vue_render__() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-423f69db>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-7593c348>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -7353,8 +7416,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-423f69db_0", {
-    source: "tr td[data-v-423f69db]:first-child,tr td[data-v-423f69db]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-423f69db]{display:flex;justify-content:center}.crud-header[data-v-423f69db]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-423f69db]{margin:0}.crud-header .crud-search[data-v-423f69db]{max-width:15rem}.crud-header .crud-search .btn[data-v-423f69db]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-423f69db]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-423f69db]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-423f69db]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-423f69db]{table-layout:auto}.table tbody td[data-v-423f69db]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-423f69db]::-webkit-scrollbar{display:none}}",
+  inject("data-v-7593c348_0", {
+    source: "tr td[data-v-7593c348]:first-child,tr td[data-v-7593c348]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-7593c348]{display:flex;justify-content:center}.crud-header[data-v-7593c348]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-7593c348]{margin:0}.crud-header .crud-search[data-v-7593c348]{max-width:15rem}.crud-header .crud-search .btn[data-v-7593c348]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-7593c348]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-7593c348]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-7593c348]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-7593c348]{table-layout:auto}.table tbody td[data-v-7593c348]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-7593c348]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7362,10 +7425,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-423f69db";
+var __vue_scope_id__ = "data-v-7593c348";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-423f69db";
+var __vue_module_identifier__ = "data-v-7593c348";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

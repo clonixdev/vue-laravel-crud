@@ -294,6 +294,18 @@ export default /*#__PURE__*/ {
         }
       });
     },
+
+    toggleSortFilter(column){
+        let value = this.internalFilterByProp(column.prop+'_sort').value;
+
+        if(!value){
+          this.internalFilterByProp(column.prop+'_sort').value = 'ASC';
+        }else if(value == 'ASC'){
+          this.internalFilterByProp(column.prop+'_sort').value = 'DESC';
+        }else if(value == 'DESC'){
+        this.internalFilterByProp(column.prop+'_sort').value = null;
+        }
+    },
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
 
@@ -1049,7 +1061,7 @@ export default /*#__PURE__*/ {
                   <span v-else>{{ column.label }}</span>
 
 
-                  <span v-if="sortable" class="sort-filter"><b-icon-sort v-if="!internalFilterByProp(column.prop+'_sort').value  "></b-icon-sort><b-icon-sort-up v-if="internalFilterByProp(column.prop+'_sort').value == 'ASC' "></b-icon-sort-up><b-icon-sort-down v-if="internalFilterByProp(column.prop+'_sort').value == 'DESC' "></b-icon-sort-down></span>
+                  <span v-if="sortable" class="sort-filter" @click="toggleSortFilter(column)"><b-icon-sort v-if="!internalFilterByProp(column.prop+'_sort').value  "></b-icon-sort><b-icon-sort-up v-if="internalFilterByProp(column.prop+'_sort').value == 'ASC' "></b-icon-sort-up><b-icon-sort-down v-if="internalFilterByProp(column.prop+'_sort').value == 'DESC' "></b-icon-sort-down></span>
                 </th>
               </slot>
             </tr>
@@ -1066,7 +1078,6 @@ export default /*#__PURE__*/ {
                 <th :colspan="columns.length">
                   <span>{{ item.label }}</span>
                 </th>
-
               </template>
               <template v-else>
                 <slot name="row" v-bind:item="item">

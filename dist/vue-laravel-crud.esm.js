@@ -5747,7 +5747,11 @@ var script = /*#__PURE__*/{
       type: Boolean,
       default: false
     },
-    sorteable: {
+    sortable: {
+      type: Boolean,
+      default: false
+    },
+    orderable: {
       type: Boolean,
       default: false
     },
@@ -5878,6 +5882,14 @@ var script = /*#__PURE__*/{
     tableClass: {
       type: String,
       default: ""
+    },
+    grouped: {
+      type: Boolean,
+      default: false
+    },
+    groupedAttribute: {
+      type: String,
+      default: "name"
     }
   },
 
@@ -5948,6 +5960,18 @@ var script = /*#__PURE__*/{
           }
         }
       });
+    },
+
+    toggleSortFilter(column) {
+      let value = this.internalFilterByProp(column.prop + '_sort').value;
+
+      if (!value) {
+        this.internalFilterByProp(column.prop + '_sort').value = 'ASC';
+      } else if (value == 'ASC') {
+        this.internalFilterByProp(column.prop + '_sort').value = 'DESC';
+      } else if (value == 'DESC') {
+        this.internalFilterByProp(column.prop + '_sort').value = null;
+      }
     },
 
     toggleFilters() {
@@ -6073,25 +6097,39 @@ var script = /*#__PURE__*/{
     },
 
     fetchItems(page = 1) {
-      let _this = this;
 
-      _this.loading = true;
+      this.loading = true;
       axios.get(this.apiUrl + "/" + this.modelName, {
         params: {
           page: page,
           limit: this.limit,
           filters: JSON.stringify(this.finalFilters)
         }
-      }).then(function (response) {
-        _this.makePagination(response.data);
+      }).then(response => {
+        this.makePagination(response.data);
+        let items = response.data.data;
 
-        _this.items = response.data.data;
-        _this.loading = false;
-      }).catch(function (error) {
+        if (this.grouped) {
+          let lastcomparevalue = null;
+          let compareattr = this.groupedAttribute;
+          items.forEach(item => {
+            if (Array.isArray(item)) {
+              item.forEach(sitem => {
+              });
+            } else {
+              if (lastcomparevalue != item[compareattr]) {
+                lastcomparevalue = item[compareattr];
+              }
+            }
+          });
+        }
+
+        this.items = items;
+        this.loading = false;
+      }).catch(error => {
         //console.debug(error);
-        _this.toastError(error);
-
-        _this.loading = false;
+        this.toastError(error);
+        this.loading = false;
       });
     },
 
@@ -6128,7 +6166,7 @@ var script = /*#__PURE__*/{
     },
 
     saveSort() {
-      if (this.sorteable) {
+      if (this.orderable) {
         let _this = this;
 
         _this.loading = true;
@@ -6159,16 +6197,16 @@ var script = /*#__PURE__*/{
     },
 
     getArrayValue(value, displayProp) {
-      if (!Array.isArray(value)) return 'N/A';
+      if (!Array.isArray(value)) return "N/A";
 
       if (value.length > 0) {
-        if (typeof value[0] === 'object' && displayProp) {
-          return value.map(vv => vv[displayProp]).join(',');
+        if (typeof value[0] === "object" && displayProp) {
+          return value.map(vv => vv[displayProp]).join(",");
         } else {
-          return value.join(',');
+          return value.join(",");
         }
       } else {
-        return '';
+        return "";
       }
     },
 
@@ -6663,7 +6701,7 @@ var __vue_render__ = function () {
         domProps: {
           "value": option.id
         }
-      }, [_vm._v("\n                      " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                    ")]);
+      }, [_vm._v("\n                        " + _vm._s(option.text ? option.text : option.label ? option.label : "") + "\n                      ")]);
     }) : _vm._e()], 2)]) : _c('div', {
       staticClass: "form-group"
     }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _c('input', {
@@ -6980,7 +7018,14 @@ var __vue_render__ = function () {
       "column": column,
       "filter": _vm.filter,
       "internalFilterByProp": _vm.internalFilterByProp
-    }) : _c('span', [_vm._v(_vm._s(column.label))])], 2);
+    }) : _c('span', [_vm._v(_vm._s(column.label))]), _vm._v(" "), _vm.sortable ? _c('span', {
+      staticClass: "sort-filter",
+      on: {
+        "click": function ($event) {
+          return _vm.toggleSortFilter(column);
+        }
+      }
+    }, [!_vm.internalFilterByProp(column.prop + '_sort').value ? _c('b-icon-sort') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'ASC' ? _c('b-icon-sort-up') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'DESC' ? _c('b-icon-sort-down') : _vm._e()], 1) : _vm._e()], 2);
   }))], 2)]), _vm._v(" "), _c('tbody', _vm._l(_vm.filteredItems, function (item, index) {
     return _c('tr', {
       key: index,
@@ -6992,7 +7037,11 @@ var __vue_render__ = function () {
           return _vm.onRowClick(item, index);
         }
       }
-    }, [_vm._t("row", _vm._l(_vm.columns, function (column, indexc) {
+    }, [item.group ? [_c('th', {
+      attrs: {
+        "colspan": _vm.columns.length
+      }
+    }, [_c('span', [_vm._v(_vm._s(item.label))])])] : [_vm._t("row", _vm._l(_vm.columns, function (column, indexc) {
       return _c('td', {
         key: indexc,
         attrs: {
@@ -7006,7 +7055,7 @@ var __vue_render__ = function () {
         attrs: {
           "variant": "danger"
         }
-      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item) && column.format ? _vm.moment(_vm.itemValue(column, item)).format(column.format) : _vm.itemValue(column, item)) + "\n                  ")]) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
+      }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item) && column.format ? _vm.moment(_vm.itemValue(column, item)).format(column.format) : _vm.itemValue(column, item)) + "\n                    ")]) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
         on: {
           "change": function ($event) {
             return _vm.onCheckSelect($event, item);
@@ -7019,7 +7068,7 @@ var __vue_render__ = function () {
           },
           expression: "item.selected"
         }
-      })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                  ")]) : column.type == 'array' ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp)) + "\n                  ")]) : _c('span', [_vm._v("\n                    " + _vm._s(_vm.itemValue(column, item)) + "\n                  ")])], {
+      })], 1) : column.type == 'state' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + "\n                    ")]) : column.type == 'array' ? _c('span', [_vm._v("\n                      " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp)) + "\n                    ")]) : _c('span', [_vm._v("\n                      " + _vm._s(_vm.itemValue(column, item)) + "\n                    ")])], {
         "item": item,
         "index": index,
         "itemindex": index,
@@ -7060,7 +7109,7 @@ var __vue_render__ = function () {
       })], 2) : _vm._e()], 2);
     }), {
       "item": item
-    })], 2);
+    })]], 2);
   }), 0)]), _vm._v(" "), _vm.items.length == 0 ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v("\n        " + _vm._s(_vm.messageEmptyResults) + "\n      ")]) : _vm._e()]) : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.items.length == 0 ? _c('p', {
@@ -7265,8 +7314,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-423f69db_0", {
-    source: "tr td[data-v-423f69db]:first-child,tr td[data-v-423f69db]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-423f69db]{display:flex;justify-content:center}.crud-header[data-v-423f69db]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-423f69db]{margin:0}.crud-header .crud-search[data-v-423f69db]{max-width:15rem}.crud-header .crud-search .btn[data-v-423f69db]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-423f69db]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-423f69db]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-423f69db]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-423f69db]{table-layout:auto}.table tbody td[data-v-423f69db]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-423f69db]::-webkit-scrollbar{display:none}}",
+  inject("data-v-7593c348_0", {
+    source: "tr td[data-v-7593c348]:first-child,tr td[data-v-7593c348]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-7593c348]{display:flex;justify-content:center}.crud-header[data-v-7593c348]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-7593c348]{margin:0}.crud-header .crud-search[data-v-7593c348]{max-width:15rem}.crud-header .crud-search .btn[data-v-7593c348]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-7593c348]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-7593c348]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-7593c348]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-7593c348]{table-layout:auto}.table tbody td[data-v-7593c348]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-7593c348]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7274,7 +7323,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-423f69db";
+const __vue_scope_id__ = "data-v-7593c348";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
