@@ -306,6 +306,15 @@ export default /*#__PURE__*/ {
               value: null,
             });
           }
+
+
+          if(this.sortable){
+                      this.internalFilters.push({
+              column: column.prop + "_sort",
+              op: column.filterOp ? column.filterOp : "=",
+              value: null,
+            });
+          }
         }
       });
     },
