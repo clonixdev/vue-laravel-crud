@@ -58,17 +58,15 @@ export default /*#__PURE__*/ {
     columns: {
       type: Array,
 
-            default() {
-            return [{ label: "Id", prop: "id", type: "number" }]
-        }
-
-
+      default() {
+        return [{ label: "Id", prop: "id", type: "number" }];
+      },
     },
     filter: {
       type: Array,
       default() {
-            return []
-        }
+        return [];
+      },
     },
     enableFilters: {
       type: Boolean,
@@ -225,11 +223,11 @@ export default /*#__PURE__*/ {
       type: String,
       default: "name",
     },
-        groupedLabelPre: {
+    groupedLabelPre: {
       type: String,
       default: "",
     },
-        groupedLabelAfter: {
+    groupedLabelAfter: {
       type: String,
       default: "",
     },
@@ -306,29 +304,28 @@ export default /*#__PURE__*/ {
               value: null,
             });
           }
+        }
 
-
-          if(this.sortable){
-                      this.internalFilters.push({
-              column: column.prop + "_sort",
-              op: column.filterOp ? column.filterOp : "=",
-              value: null,
-            });
-          }
+        if (this.sortable) {
+          this.internalFilters.push({
+            column: column.prop + "_sort",
+            op: column.filterOp ? column.filterOp : "=",
+            value: null,
+          });
         }
       });
     },
 
-    toggleSortFilter(column){
-        let value = this.internalFilterByProp(column.prop+'_sort').value;
+    toggleSortFilter(column) {
+      let value = this.internalFilterByProp(column.prop + "_sort").value;
 
-        if(!value){
-          this.internalFilterByProp(column.prop+'_sort').value = 'ASC';
-        }else if(value == 'ASC'){
-          this.internalFilterByProp(column.prop+'_sort').value = 'DESC';
-        }else if(value == 'DESC'){
-        this.internalFilterByProp(column.prop+'_sort').value = null;
-        }
+      if (!value) {
+        this.internalFilterByProp(column.prop + "_sort").value = "ASC";
+      } else if (value == "ASC") {
+        this.internalFilterByProp(column.prop + "_sort").value = "DESC";
+      } else if (value == "DESC") {
+        this.internalFilterByProp(column.prop + "_sort").value = null;
+      }
     },
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
@@ -463,9 +460,12 @@ export default /*#__PURE__*/ {
             let compareattr = this.groupedAttribute;
             let groupLabelPre = this.groupedLabelPre;
             let groupLabelAfter = this.groupedLabelAfter;
-            items.forEach((item,key) => {
+            items.forEach((item, key) => {
               if (Array.isArray(item)) {
-                itemswithgroup.push({ label: groupLabelPre+key+groupLabelAfter, group: true });
+                itemswithgroup.push({
+                  label: groupLabelPre + key + groupLabelAfter,
+                  group: true,
+                });
 
                 item.forEach((sitem) => {
                   itemswithgroup.push(sitem);
@@ -473,16 +473,19 @@ export default /*#__PURE__*/ {
               } else {
                 if (lastcomparevalue != item[compareattr]) {
                   lastcomparevalue = item[compareattr];
-                  itemswithgroup.push({ label: groupLabelPre+lastcomparevalue+groupLabelAfter, group: true });
+                  itemswithgroup.push({
+                    label: groupLabelPre + lastcomparevalue + groupLabelAfter,
+                    group: true,
+                  });
                 }
                 itemswithgroup.push(item);
               }
             });
-                  this.items = itemswithgroup;
-          }else{
-      this.items = items;
+            this.items = itemswithgroup;
+          } else {
+            this.items = items;
           }
-    
+
           this.loading = false;
         })
         .catch((error) => {
@@ -1089,8 +1092,26 @@ export default /*#__PURE__*/ {
 
                   <span v-else>{{ column.label }}</span>
 
-
-                  <span v-if="sortable" class="sort-filter" @click="toggleSortFilter(column)"><b-icon-sort v-if="!internalFilterByProp(column.prop+'_sort').value  "></b-icon-sort><b-icon-sort-up v-if="internalFilterByProp(column.prop+'_sort').value == 'ASC' "></b-icon-sort-up><b-icon-sort-down v-if="internalFilterByProp(column.prop+'_sort').value == 'DESC' "></b-icon-sort-down></span>
+                  <span
+                    v-if="sortable && internalFilterByProp(column.prop + '_sort')"
+                    class="sort-filter"
+                    @click="toggleSortFilter(column)"
+                    ><b-icon-sort
+                      v-if="!internalFilterByProp(column.prop + '_sort').value"
+                    ></b-icon-sort
+                    ><b-icon-sort-up
+                      v-if="
+                        internalFilterByProp(column.prop + '_sort').value ==
+                        'ASC'
+                      "
+                    ></b-icon-sort-up
+                    ><b-icon-sort-down
+                      v-if="
+                        internalFilterByProp(column.prop + '_sort').value ==
+                        'DESC'
+                      "
+                    ></b-icon-sort-down
+                  ></span>
                 </th>
               </slot>
             </tr>
@@ -1103,7 +1124,7 @@ export default /*#__PURE__*/ {
               @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)"
             >
-              <template v-if="item.group"> 
+              <template v-if="item.group">
                 <th :colspan="columns.length">
                   <span>{{ item.label }}</span>
                 </th>
