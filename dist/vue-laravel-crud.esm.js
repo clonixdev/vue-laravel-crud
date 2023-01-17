@@ -7066,9 +7066,34 @@ var __vue_render__ = function () {
         }
       }
     }, [!_vm.internalFilterByProp(column.prop + '_sort').value ? _c('b-icon-sort') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'ASC' ? _c('b-icon-sort-up') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'DESC' ? _c('b-icon-sort-down') : _vm._e()], 1) : _vm._e()], 2);
-  }))], 2)]), _vm._v(" "), _c('tbody', _vm._l(_vm.filteredItems, function (item, index) {
+  }))], 2)]), _vm._v(" "), _c('draggable', {
+    attrs: {
+      "group": "people",
+      "tag": "tbody",
+      "draggable": _vm.sortable ? '.item' : '.none'
+    },
+    on: {
+      "start": function ($event) {
+        _vm.drag = true;
+      },
+      "end": function ($event) {
+        _vm.drag = false;
+      },
+      "sort": function ($event) {
+        return _vm.onSort();
+      }
+    },
+    model: {
+      value: _vm.filteredItems,
+      callback: function ($$v) {
+        _vm.filteredItems = $$v;
+      },
+      expression: "filteredItems"
+    }
+  }, _vm._l(_vm.filteredItems, function (item, index) {
     return _c('tr', {
       key: index,
+      staticClass: "item",
       on: {
         "mouseover": function ($event) {
           return _vm.onRowHover(item, index);
@@ -7150,14 +7175,15 @@ var __vue_render__ = function () {
     }), {
       "item": item
     })]], 2);
-  }), 0)]), _vm._v(" "), _vm.items.length == 0 ? _c('p', {
+  }), 0)], 1), _vm._v(" "), _vm.items.length == 0 ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v("\n        " + _vm._s(_vm.messageEmptyResults) + "\n      ")]) : _vm._e()]) : _vm._e(), _vm._v(" "), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.items.length == 0 ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v("\n        " + _vm._s(_vm.messageEmptyResults) + "\n      ")]) : _vm._e(), _vm._v(" "), _c('draggable', {
     staticClass: "row",
     attrs: {
-      "group": "people"
+      "group": "people",
+      "draggable": _vm.sortable ? '.item' : '.none'
     },
     on: {
       "start": function ($event) {
@@ -7171,15 +7197,16 @@ var __vue_render__ = function () {
       }
     },
     model: {
-      value: _vm.items,
+      value: _vm.filteredItems,
       callback: function ($$v) {
-        _vm.items = $$v;
+        _vm.filteredItems = $$v;
       },
-      expression: "items"
+      expression: "filteredItems"
     }
   }, _vm._l(_vm.filteredItems, function (item, index) {
     return _c('b-col', {
       key: index,
+      staticClass: "item",
       attrs: {
         "cols": _vm.colXs,
         "sm": _vm.colSm,
@@ -7354,8 +7381,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-6b2d30da_0", {
-    source: "tr td[data-v-6b2d30da]:first-child,tr td[data-v-6b2d30da]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-6b2d30da]{display:flex;justify-content:center}.crud-header[data-v-6b2d30da]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-6b2d30da]{margin:0}.crud-header .crud-search[data-v-6b2d30da]{max-width:15rem}.crud-header .crud-search .btn[data-v-6b2d30da]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-6b2d30da]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-6b2d30da]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-6b2d30da]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-6b2d30da]{table-layout:auto}.table tbody td[data-v-6b2d30da]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-6b2d30da]::-webkit-scrollbar{display:none}}",
+  inject("data-v-81a30b78_0", {
+    source: "tr td[data-v-81a30b78]:first-child,tr td[data-v-81a30b78]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-81a30b78]{display:flex;justify-content:center}.crud-header[data-v-81a30b78]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-81a30b78]{margin:0}.crud-header .crud-search[data-v-81a30b78]{max-width:15rem}.crud-header .crud-search .btn[data-v-81a30b78]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-81a30b78]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-81a30b78]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-81a30b78]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-81a30b78]{table-layout:auto}.table tbody td[data-v-81a30b78]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-81a30b78]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7363,7 +7390,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-6b2d30da";
+const __vue_scope_id__ = "data-v-81a30b78";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

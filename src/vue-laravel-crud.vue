@@ -1117,12 +1117,22 @@ export default /*#__PURE__*/ {
             </tr>
           </thead>
 
-          <tbody>
+     
+                    <draggable
+          v-model="filteredItems"
+          group="people"
+          tag="tbody"
+                    :draggable="sortable ? '.item' : '.none'"
+          @start="drag = true"
+          @end="drag = false"
+          @sort="onSort()"
+        >
             <tr
               v-for="(item, index) in filteredItems"
               v-bind:key="index"
               @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)"
+              class="item"
             >
               <template v-if="item.group">
                 <th :colspan="columns.length">
@@ -1233,7 +1243,8 @@ export default /*#__PURE__*/ {
                 </slot>
               </template>
             </tr>
-          </tbody>
+                    </draggable>
+ 
         </table>
         <p v-if="items.length == 0" class="p-3">
           {{ messageEmptyResults }}
@@ -1246,9 +1257,10 @@ export default /*#__PURE__*/ {
         </p>
 
         <draggable
-          v-model="items"
+          v-model="filteredItems"
           group="people"
           class="row"
+                              :draggable="sortable ? '.item' : '.none'"
           @start="drag = true"
           @end="drag = false"
           @sort="onSort()"
@@ -1261,6 +1273,7 @@ export default /*#__PURE__*/ {
             :md="colMd"
             :lg="colLg"
             :xl="colXl"
+            class="item"
           >
             <b-card
               :title="item.title"
