@@ -153,6 +153,10 @@ export default /*#__PURE__*/ {
       type: Boolean,
       default: false,
     },
+        orderProp: {
+      type: String,
+      default: 'order',
+    },
     selectHover: {
       type: Boolean,
       default: false,
@@ -258,9 +262,9 @@ export default /*#__PURE__*/ {
       };
     },
 
-    filteredItems() {
+   /* filteredItems() {
       return this.items;
-    },
+    },*/
 
     finalFilters() {
       return this.filters.concat(this.filter).concat(this.internalFilter);
@@ -364,9 +368,18 @@ export default /*#__PURE__*/ {
         this.onSelect();
       }
     },
+    onSort(){
+      let event = {};
+        let i = pagination.current_page * pagination.per_page;
+        this.items.forEach((item, index) => {
+          //console.debug(s, i);
+          item[this.orderProp] = i;
+          i++;
+        });
+      this.$emit("sort", event);
+    },
     onCheckSelect(value, item) {
       console.debug("ON CHECK SELECT", value, item);
-
       this.item = item;
       this.selectItem();
       this.onSelect();
@@ -1119,16 +1132,16 @@ export default /*#__PURE__*/ {
 
      
                     <draggable
-          v-model="filteredItems"
+          v-model="items"
           group="people"
           tag="tbody"
-                    :draggable="sortable ? '.item' : '.none'"
+                    :draggable="enableDraggable ? '.item' : '.none'"
           @start="drag = true"
           @end="drag = false"
           @sort="onSort()"
         >
             <tr
-              v-for="(item, index) in filteredItems"
+              v-for="(item, index) in items"
               v-bind:key="index"
               @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)"
@@ -1257,16 +1270,16 @@ export default /*#__PURE__*/ {
         </p>
 
         <draggable
-          v-model="filteredItems"
+          v-model="items"
           group="people"
           class="row"
-                              :draggable="sortable ? '.item' : '.none'"
+                              :draggable="enableDraggable ? '.item' : '.none'"
           @start="drag = true"
           @end="drag = false"
           @sort="onSort()"
         >
           <b-col
-            v-for="(item, index) in filteredItems"
+            v-for="(item, index) in items"
             v-bind:key="index"
             :cols="colXs"
             :sm="colSm"
@@ -1382,7 +1395,7 @@ export default /*#__PURE__*/ {
 
           <div
             :class="listItemClass"
-            v-for="(item, index) in filteredItems"
+            v-for="(item, index) in items"
             v-bind:key="index"
           >
             <slot name="card" v-bind:item="item"> </slot>
