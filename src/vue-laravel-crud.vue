@@ -80,6 +80,10 @@ export default /*#__PURE__*/ {
       type: Boolean,
       default: false,
     },
+    validate: {
+      type: Boolean,
+      default: false,
+    },
     orderProp: {
       type: String,
       default: "order",
@@ -202,6 +206,10 @@ export default /*#__PURE__*/ {
     messageSave: {
       type: String,
       default: "Guardar",
+    },
+    messageDefaultValidationError: {
+      type: String,
+      default: "Por favor controle el formulario, contiene errores.",
     },
     searchPlaceholder: {
       type: String,
@@ -547,7 +555,7 @@ export default /*#__PURE__*/ {
         let order = [];
 
         this.items.forEach((v, k) => {
-          order.push({ id: v.id, order: v[this.orderProp]});
+          order.push({ id: v.id, order: v[this.orderProp] });
         });
 
         axios
@@ -604,9 +612,23 @@ export default /*#__PURE__*/ {
 
       return ops.join(", ");
     },
-    async saveItem() {
+    async saveItem(event = null) {
       let _this = this;
       _this.loading = true;
+
+      if (this.validate) {
+        
+        let validation_result = true;
+        let validation_error_message = this.messageDefaultValidationError;
+
+        if (!validation_result) {
+          this.toastError(validation_error_message);
+          return;
+        }
+      }else{
+        if(event)
+         event.preventDefault();
+      }
 
       if (this.item.id) {
         axios
@@ -698,6 +720,8 @@ export default /*#__PURE__*/ {
             });
         }
       }
+      if(event)
+      event.preventDefault();
     },
 
     toastError(error) {
@@ -1416,26 +1440,21 @@ export default /*#__PURE__*/ {
       no-close-on-backdrop
     >
       <b-overlay :show="loading" rounded="sm">
-        <slot name="form" v-bind:item="item">
-          <b-form-group label="Nombre:" description="Nombre ">
-            <b-form-input
-              v-model="item.title"
-              type="text"
-              required
-              placeholder="Nombre"
-            ></b-form-input>
-          </b-form-group>
-        </slot>
-
-        <b-button
-          block
-          type="submit"
-          variant="success"
-          @click="saveItem()"
-          :disabled="loading"
-        >
-          <b-spinner small v-if="loading"></b-spinner>{{ messageSave }}
-        </b-button>
+        <form @submit="saveItem">
+          <slot name="form" v-bind:item="item">
+            <b-form-group label="Nombre:" description="Nombre ">
+              <b-form-input
+                v-model="item.title"
+                type="text"
+                required
+                placeholder="Nombre"
+              ></b-form-input>
+            </b-form-group>
+          </slot>
+          <b-button block type="submit" variant="success" :disabled="loading">
+            <b-spinner small v-if="loading"></b-spinner>{{ messageSave }}
+          </b-button>
+        </form>
       </b-overlay>
     </b-modal>
     <b-modal
