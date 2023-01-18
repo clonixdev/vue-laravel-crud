@@ -80,6 +80,10 @@ export default /*#__PURE__*/ {
       type: Boolean,
       default: false,
     },
+    orderProp: {
+      type: String,
+      default: "order",
+    },
     createMultipart: {
       type: Boolean,
       default: false,
@@ -149,14 +153,7 @@ export default /*#__PURE__*/ {
       default: 3,
       type: Number,
     },
-    enableDraggable: {
-      type: Boolean,
-      default: false,
-    },
-        orderProp: {
-      type: String,
-      default: 'order',
-    },
+
     selectHover: {
       type: Boolean,
       default: false,
@@ -262,7 +259,7 @@ export default /*#__PURE__*/ {
       };
     },
 
-   /* filteredItems() {
+    /* filteredItems() {
       return this.items;
     },*/
 
@@ -368,14 +365,14 @@ export default /*#__PURE__*/ {
         this.onSelect();
       }
     },
-    onSort(){
+    onSort() {
       let event = {};
-        let i = this.pagination.current_page * this.pagination.per_page;
-        this.items.forEach((item, index) => {
-          //console.debug(s, i);
-          item[this.orderProp] = i;
-          i++;
-        });
+      let i = 1 + (this.pagination.current_page - 1 * this.pagination.per_page);
+      this.items.forEach((item, index) => {
+        //console.debug(s, i);
+        item[this.orderProp] = i;
+        i++;
+      });
       this.$emit("sort", event);
     },
     onCheckSelect(value, item) {
@@ -550,8 +547,7 @@ export default /*#__PURE__*/ {
         let order = [];
 
         this.items.forEach((v, k) => {
-          order.push({ id: v.id, order: k + 1 });
-          v.order = k + 1;
+          order.push({ id: v.id, order: v[this.orderProp]});
         });
 
         axios
@@ -1106,7 +1102,9 @@ export default /*#__PURE__*/ {
                   <span v-else>{{ column.label }}</span>
 
                   <span
-                    v-if="sortable && internalFilterByProp(column.prop + '_sort')"
+                    v-if="
+                      sortable && internalFilterByProp(column.prop + '_sort')
+                    "
                     class="sort-filter"
                     @click="toggleSortFilter(column)"
                     ><b-icon-sort
@@ -1130,16 +1128,15 @@ export default /*#__PURE__*/ {
             </tr>
           </thead>
 
-     
-                    <draggable
-          v-model="items"
-          group="people"
-          tag="tbody"
-                    :draggable="enableDraggable ? '.item' : '.none'"
-          @start="drag = true"
-          @end="drag = false"
-          @sort="onSort()"
-        >
+          <draggable
+            v-model="items"
+            group="people"
+            tag="tbody"
+            :draggable="orderable ? '.item' : '.none'"
+            @start="drag = true"
+            @end="drag = false"
+            @sort="onSort()"
+          >
             <tr
               v-for="(item, index) in items"
               v-bind:key="index"
@@ -1256,8 +1253,7 @@ export default /*#__PURE__*/ {
                 </slot>
               </template>
             </tr>
-                    </draggable>
- 
+          </draggable>
         </table>
         <p v-if="items.length == 0" class="p-3">
           {{ messageEmptyResults }}
@@ -1273,7 +1269,7 @@ export default /*#__PURE__*/ {
           v-model="items"
           group="people"
           class="row"
-                              :draggable="enableDraggable ? '.item' : '.none'"
+          :draggable="orderable ? '.item' : '.none'"
           @start="drag = true"
           @end="drag = false"
           @sort="onSort()"

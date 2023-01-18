@@ -5855,6 +5855,10 @@ function commonjsRequire (target) {
       type: Boolean,
       default: false
     },
+    orderProp: {
+      type: String,
+      default: "order"
+    },
     createMultipart: {
       type: Boolean,
       default: false
@@ -5922,14 +5926,6 @@ function commonjsRequire (target) {
     colXl: {
       default: 3,
       type: Number
-    },
-    enableDraggable: {
-      type: Boolean,
-      default: false
-    },
-    orderProp: {
-      type: String,
-      default: 'order'
     },
     selectHover: {
       type: Boolean,
@@ -6023,8 +6019,8 @@ function commonjsRequire (target) {
     },
 
     /* filteredItems() {
-       return this.items;
-     },*/
+      return this.items;
+    },*/
     finalFilters: function finalFilters() {
       return this.filters.concat(this.filter).concat(this.internalFilter);
     },
@@ -6133,7 +6129,7 @@ function commonjsRequire (target) {
       var _this5 = this;
 
       var event = {};
-      var i = this.pagination.current_page * this.pagination.per_page;
+      var i = 1 + (this.pagination.current_page - 1 * this.pagination.per_page);
       this.items.forEach(function (item, index) {
         //console.debug(s, i);
         item[_this5.orderProp] = i;
@@ -6320,6 +6316,8 @@ function commonjsRequire (target) {
       });
     },
     saveSort: function saveSort() {
+      var _this9 = this;
+
       if (this.orderable) {
         var _this = this;
 
@@ -6328,9 +6326,8 @@ function commonjsRequire (target) {
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: k + 1
+            order: v[_this9.orderProp]
           });
-          v.order = k + 1;
         });
         axios__default['default'].post(this.apiUrl + "/" + _this.modelName + "/sort", {
           order: order
@@ -6383,7 +6380,7 @@ function commonjsRequire (target) {
       return ops.join(", ");
     },
     saveItem: function saveItem() {
-      var _this9 = this;
+      var _this10 = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var _this, formData;
@@ -6392,11 +6389,11 @@ function commonjsRequire (target) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this = _this9;
+                _this = _this10;
                 _this.loading = true;
 
-                if (_this9.item.id) {
-                  axios__default['default'].put(_this9.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
+                if (_this10.item.id) {
+                  axios__default['default'].put(_this10.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
                     _this.$bvModal.hide("modal-form-item-" + _this.modelName);
 
                     var itemSv = response.data;
@@ -6417,7 +6414,7 @@ function commonjsRequire (target) {
                     _this.loading = false;
                   });
                 } else {
-                  if (_this9.createMultipart) {
+                  if (_this10.createMultipart) {
                     formData = new FormData();
                     Object.keys(_this.item).forEach(function (key) {
                       if (_this.item[key][0] && _this.item[key][0].name) {
@@ -6429,7 +6426,7 @@ function commonjsRequire (target) {
                         }
                       } else formData.append(key, _this.item[key]);
                     });
-                    axios__default['default'].post(_this9.apiUrl + "/" + _this.modelName, formData).then(function (response) {
+                    axios__default['default'].post(_this10.apiUrl + "/" + _this.modelName, formData).then(function (response) {
                       _this.loading = false;
 
                       _this.$bvModal.hide("modal-form-item-" + _this.modelName);
@@ -6456,7 +6453,7 @@ function commonjsRequire (target) {
                       _this.loading = false;
                     });
                   } else {
-                    axios__default['default'].post(_this9.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
+                    axios__default['default'].post(_this10.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
                       _this.loading = false;
 
                       _this.$bvModal.hide("modal-form-item-" + _this.modelName);
@@ -6537,11 +6534,11 @@ function commonjsRequire (target) {
       });
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this10 = this;
+      var _this11 = this;
 
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this10.refresh();
+        _this11.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -6685,7 +6682,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-9fe947b8>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-9fe947b8>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-365d7d20>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-365d7d20>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -6899,7 +6896,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-9fe947b8>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-365d7d20>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -7175,7 +7172,7 @@ var __vue_render__ = function __vue_render__() {
     attrs: {
       "group": "people",
       "tag": "tbody",
-      "draggable": _vm.enableDraggable ? '.item' : '.none'
+      "draggable": _vm.orderable ? '.item' : '.none'
     },
     on: {
       "start": function start($event) {
@@ -7288,7 +7285,7 @@ var __vue_render__ = function __vue_render__() {
     staticClass: "row",
     attrs: {
       "group": "people",
-      "draggable": _vm.enableDraggable ? '.item' : '.none'
+      "draggable": _vm.orderable ? '.item' : '.none'
     },
     on: {
       "start": function start($event) {
@@ -7398,7 +7395,7 @@ var __vue_render__ = function __vue_render__() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-9fe947b8>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-365d7d20>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -7484,8 +7481,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-9fe947b8_0", {
-    source: "tr td[data-v-9fe947b8]:first-child,tr td[data-v-9fe947b8]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-9fe947b8]{display:flex;justify-content:center}.crud-header[data-v-9fe947b8]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-9fe947b8]{margin:0}.crud-header .crud-search[data-v-9fe947b8]{max-width:15rem}.crud-header .crud-search .btn[data-v-9fe947b8]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-9fe947b8]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-9fe947b8]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-9fe947b8]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-9fe947b8]{table-layout:auto}.table tbody td[data-v-9fe947b8]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-9fe947b8]::-webkit-scrollbar{display:none}}",
+  inject("data-v-365d7d20_0", {
+    source: "tr td[data-v-365d7d20]:first-child,tr td[data-v-365d7d20]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-365d7d20]{display:flex;justify-content:center}.crud-header[data-v-365d7d20]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-365d7d20]{margin:0}.crud-header .crud-search[data-v-365d7d20]{max-width:15rem}.crud-header .crud-search .btn[data-v-365d7d20]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-365d7d20]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-365d7d20]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-365d7d20]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-365d7d20]{table-layout:auto}.table tbody td[data-v-365d7d20]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-365d7d20]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7493,10 +7490,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-9fe947b8";
+var __vue_scope_id__ = "data-v-365d7d20";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-9fe947b8";
+var __vue_module_identifier__ = "data-v-365d7d20";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

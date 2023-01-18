@@ -5763,6 +5763,10 @@ var script = /*#__PURE__*/{
       type: Boolean,
       default: false
     },
+    orderProp: {
+      type: String,
+      default: "order"
+    },
     createMultipart: {
       type: Boolean,
       default: false
@@ -5830,14 +5834,6 @@ var script = /*#__PURE__*/{
     colXl: {
       default: 3,
       type: Number
-    },
-    enableDraggable: {
-      type: Boolean,
-      default: false
-    },
-    orderProp: {
-      type: String,
-      default: 'order'
     },
     selectHover: {
       type: Boolean,
@@ -5933,8 +5929,8 @@ var script = /*#__PURE__*/{
     },
 
     /* filteredItems() {
-       return this.items;
-     },*/
+      return this.items;
+    },*/
     finalFilters() {
       return this.filters.concat(this.filter).concat(this.internalFilter);
     },
@@ -6042,7 +6038,7 @@ var script = /*#__PURE__*/{
 
     onSort() {
       let event = {};
-      let i = this.pagination.current_page * this.pagination.per_page;
+      let i = 1 + (this.pagination.current_page - 1 * this.pagination.per_page);
       this.items.forEach((item, index) => {
         //console.debug(s, i);
         item[this.orderProp] = i;
@@ -6228,9 +6224,8 @@ var script = /*#__PURE__*/{
         this.items.forEach((v, k) => {
           order.push({
             id: v.id,
-            order: k + 1
+            order: v[this.orderProp]
           });
-          v.order = k + 1;
         });
         axios.post(this.apiUrl + "/" + _this.modelName + "/sort", {
           order: order
@@ -7084,7 +7079,7 @@ var __vue_render__ = function () {
     attrs: {
       "group": "people",
       "tag": "tbody",
-      "draggable": _vm.enableDraggable ? '.item' : '.none'
+      "draggable": _vm.orderable ? '.item' : '.none'
     },
     on: {
       "start": function ($event) {
@@ -7197,7 +7192,7 @@ var __vue_render__ = function () {
     staticClass: "row",
     attrs: {
       "group": "people",
-      "draggable": _vm.enableDraggable ? '.item' : '.none'
+      "draggable": _vm.orderable ? '.item' : '.none'
     },
     on: {
       "start": function ($event) {
@@ -7395,8 +7390,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-9fe947b8_0", {
-    source: "tr td[data-v-9fe947b8]:first-child,tr td[data-v-9fe947b8]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-9fe947b8]{display:flex;justify-content:center}.crud-header[data-v-9fe947b8]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-9fe947b8]{margin:0}.crud-header .crud-search[data-v-9fe947b8]{max-width:15rem}.crud-header .crud-search .btn[data-v-9fe947b8]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-9fe947b8]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-9fe947b8]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-9fe947b8]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-9fe947b8]{table-layout:auto}.table tbody td[data-v-9fe947b8]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-9fe947b8]::-webkit-scrollbar{display:none}}",
+  inject("data-v-365d7d20_0", {
+    source: "tr td[data-v-365d7d20]:first-child,tr td[data-v-365d7d20]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-365d7d20]{display:flex;justify-content:center}.crud-header[data-v-365d7d20]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-365d7d20]{margin:0}.crud-header .crud-search[data-v-365d7d20]{max-width:15rem}.crud-header .crud-search .btn[data-v-365d7d20]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-365d7d20]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-365d7d20]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-365d7d20]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-365d7d20]{table-layout:auto}.table tbody td[data-v-365d7d20]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-365d7d20]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7404,7 +7399,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-9fe947b8";
+const __vue_scope_id__ = "data-v-365d7d20";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
