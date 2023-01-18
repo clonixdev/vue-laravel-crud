@@ -5855,6 +5855,10 @@ function commonjsRequire (target) {
       type: Boolean,
       default: false
     },
+    validate: {
+      type: Boolean,
+      default: false
+    },
     orderProp: {
       type: String,
       default: "order"
@@ -5970,6 +5974,10 @@ function commonjsRequire (target) {
     messageSave: {
       type: String,
       default: "Guardar"
+    },
+    messageDefaultValidationError: {
+      type: String,
+      default: "Por favor controle el formulario, contiene errores."
     },
     searchPlaceholder: {
       type: String,
@@ -6380,18 +6388,45 @@ function commonjsRequire (target) {
       return ops.join(", ");
     },
     saveItem: function saveItem() {
-      var _this10 = this;
+      var _arguments = arguments,
+          _this10 = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _this, formData;
+        var event, _this, validation_result, validation_error_message, formData;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                event = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : null;
                 _this = _this10;
                 _this.loading = true;
 
+                if (!_this10.validate) {
+                  _context.next = 11;
+                  break;
+                }
+
+                validation_result = true;
+                validation_error_message = _this10.messageDefaultValidationError;
+
+                if (validation_result) {
+                  _context.next = 9;
+                  break;
+                }
+
+                _this10.toastError(validation_error_message);
+
+                return _context.abrupt("return");
+
+              case 9:
+                _context.next = 12;
+                break;
+
+              case 11:
+                if (event) event.preventDefault();
+
+              case 12:
                 if (_this10.item.id) {
                   axios__default['default'].put(_this10.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
                     _this.$bvModal.hide("modal-form-item-" + _this.modelName);
@@ -6482,7 +6517,9 @@ function commonjsRequire (target) {
                   }
                 }
 
-              case 3:
+                if (event) event.preventDefault();
+
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -6682,7 +6719,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-365d7d20>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-365d7d20>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-4c144c7a>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-4c144c7a>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -6896,7 +6933,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-365d7d20>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-4c144c7a>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -7395,7 +7432,7 @@ var __vue_render__ = function __vue_render__() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-365d7d20>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-4c144c7a>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -7425,6 +7462,10 @@ var __vue_render__ = function __vue_render__() {
       "show": _vm.loading,
       "rounded": "sm"
     }
+  }, [_c('form', {
+    on: {
+      "submit": _vm.saveItem
+    }
   }, [_vm._t("form", [_c('b-form-group', {
     attrs: {
       "label": "Nombre:",
@@ -7451,17 +7492,12 @@ var __vue_render__ = function __vue_render__() {
       "type": "submit",
       "variant": "success",
       "disabled": _vm.loading
-    },
-    on: {
-      "click": function click($event) {
-        return _vm.saveItem();
-      }
     }
   }, [_vm.loading ? _c('b-spinner', {
     attrs: {
       "small": ""
     }
-  }) : _vm._e(), _vm._v(_vm._s(_vm.messageSave) + "\n      ")], 1)], 2)], 1), _vm._ssrNode(" "), _c('b-modal', {
+  }) : _vm._e(), _vm._v(_vm._s(_vm.messageSave) + "\n        ")], 1)], 2)])], 1), _vm._ssrNode(" "), _c('b-modal', {
     attrs: {
       "id": 'modal-show-item-' + _vm.modelName,
       "hide-footer": "",
@@ -7481,8 +7517,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-365d7d20_0", {
-    source: "tr td[data-v-365d7d20]:first-child,tr td[data-v-365d7d20]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-365d7d20]{display:flex;justify-content:center}.crud-header[data-v-365d7d20]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-365d7d20]{margin:0}.crud-header .crud-search[data-v-365d7d20]{max-width:15rem}.crud-header .crud-search .btn[data-v-365d7d20]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-365d7d20]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-365d7d20]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-365d7d20]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-365d7d20]{table-layout:auto}.table tbody td[data-v-365d7d20]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-365d7d20]::-webkit-scrollbar{display:none}}",
+  inject("data-v-4c144c7a_0", {
+    source: "tr td[data-v-4c144c7a]:first-child,tr td[data-v-4c144c7a]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-4c144c7a]{display:flex;justify-content:center}.crud-header[data-v-4c144c7a]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-4c144c7a]{margin:0}.crud-header .crud-search[data-v-4c144c7a]{max-width:15rem}.crud-header .crud-search .btn[data-v-4c144c7a]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-4c144c7a]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-4c144c7a]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-4c144c7a]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-4c144c7a]{table-layout:auto}.table tbody td[data-v-4c144c7a]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-4c144c7a]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7490,10 +7526,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-365d7d20";
+var __vue_scope_id__ = "data-v-4c144c7a";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-365d7d20";
+var __vue_module_identifier__ = "data-v-4c144c7a";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

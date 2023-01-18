@@ -5763,6 +5763,10 @@ var script = /*#__PURE__*/{
       type: Boolean,
       default: false
     },
+    validate: {
+      type: Boolean,
+      default: false
+    },
     orderProp: {
       type: String,
       default: "order"
@@ -5878,6 +5882,10 @@ var script = /*#__PURE__*/{
     messageSave: {
       type: String,
       default: "Guardar"
+    },
+    messageDefaultValidationError: {
+      type: String,
+      default: "Por favor controle el formulario, contiene errores."
     },
     searchPlaceholder: {
       type: String,
@@ -6278,10 +6286,16 @@ var script = /*#__PURE__*/{
       return ops.join(", ");
     },
 
-    async saveItem() {
+    async saveItem(event = null) {
       let _this = this;
 
       _this.loading = true;
+
+      if (this.validate) {
+        this.messageDefaultValidationError;
+      } else {
+        if (event) event.preventDefault();
+      }
 
       if (this.item.id) {
         axios.put(this.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
@@ -6370,6 +6384,8 @@ var script = /*#__PURE__*/{
           });
         }
       }
+
+      if (event) event.preventDefault();
     },
 
     toastError(error) {
@@ -7334,6 +7350,10 @@ var __vue_render__ = function () {
       "show": _vm.loading,
       "rounded": "sm"
     }
+  }, [_c('form', {
+    on: {
+      "submit": _vm.saveItem
+    }
   }, [_vm._t("form", [_c('b-form-group', {
     attrs: {
       "label": "Nombre:",
@@ -7360,17 +7380,12 @@ var __vue_render__ = function () {
       "type": "submit",
       "variant": "success",
       "disabled": _vm.loading
-    },
-    on: {
-      "click": function ($event) {
-        return _vm.saveItem();
-      }
     }
   }, [_vm.loading ? _c('b-spinner', {
     attrs: {
       "small": ""
     }
-  }) : _vm._e(), _vm._v(_vm._s(_vm.messageSave) + "\n      ")], 1)], 2)], 1), _vm._v(" "), _c('b-modal', {
+  }) : _vm._e(), _vm._v(_vm._s(_vm.messageSave) + "\n        ")], 1)], 2)])], 1), _vm._v(" "), _c('b-modal', {
     attrs: {
       "id": 'modal-show-item-' + _vm.modelName,
       "hide-footer": "",
@@ -7390,8 +7405,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-365d7d20_0", {
-    source: "tr td[data-v-365d7d20]:first-child,tr td[data-v-365d7d20]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-365d7d20]{display:flex;justify-content:center}.crud-header[data-v-365d7d20]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-365d7d20]{margin:0}.crud-header .crud-search[data-v-365d7d20]{max-width:15rem}.crud-header .crud-search .btn[data-v-365d7d20]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-365d7d20]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-365d7d20]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-365d7d20]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-365d7d20]{table-layout:auto}.table tbody td[data-v-365d7d20]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-365d7d20]::-webkit-scrollbar{display:none}}",
+  inject("data-v-4c144c7a_0", {
+    source: "tr td[data-v-4c144c7a]:first-child,tr td[data-v-4c144c7a]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-4c144c7a]{display:flex;justify-content:center}.crud-header[data-v-4c144c7a]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-4c144c7a]{margin:0}.crud-header .crud-search[data-v-4c144c7a]{max-width:15rem}.crud-header .crud-search .btn[data-v-4c144c7a]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-4c144c7a]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-4c144c7a]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-4c144c7a]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-4c144c7a]{table-layout:auto}.table tbody td[data-v-4c144c7a]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-4c144c7a]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7399,7 +7414,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-365d7d20";
+const __vue_scope_id__ = "data-v-4c144c7a";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
