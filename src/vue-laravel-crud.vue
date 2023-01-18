@@ -370,7 +370,7 @@ export default /*#__PURE__*/ {
     },
     onSort(){
       let event = {};
-        let i = pagination.current_page * pagination.per_page;
+        let i = this.pagination.current_page * this.pagination.per_page;
         this.items.forEach((item, index) => {
           //console.debug(s, i);
           item[this.orderProp] = i;
