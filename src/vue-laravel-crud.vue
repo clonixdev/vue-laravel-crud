@@ -375,7 +375,7 @@ export default /*#__PURE__*/ {
     },
     onSort() {
       let event = {};
-      let i = 1 + (this.pagination.current_page - 1 * this.pagination.per_page);
+      let i = 1 + (this.pagination.current_page  * this.pagination.per_page - this.pagination.per_page);
       this.items.forEach((item, index) => {
         //console.debug(s, i);
         item[this.orderProp] = i;
