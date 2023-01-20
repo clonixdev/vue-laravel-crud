@@ -375,7 +375,10 @@ export default /*#__PURE__*/ {
     },
     onSort() {
       let event = {};
-      let i = 1 + (this.pagination.current_page  * this.pagination.per_page - this.pagination.per_page);
+      let i =
+        1 +
+        (this.pagination.current_page * this.pagination.per_page -
+          this.pagination.per_page);
       this.items.forEach((item, index) => {
         //console.debug(s, i);
         item[this.orderProp] = i;
@@ -617,7 +620,6 @@ export default /*#__PURE__*/ {
       _this.loading = true;
 
       if (this.validate) {
-        
         let validation_result = true;
         let validation_error_message = this.messageDefaultValidationError;
 
@@ -625,9 +627,8 @@ export default /*#__PURE__*/ {
           this.toastError(validation_error_message);
           return;
         }
-      }else{
-        if(event)
-         event.preventDefault();
+      } else {
+        if (event) event.preventDefault();
       }
 
       if (this.item.id) {
@@ -720,8 +721,7 @@ export default /*#__PURE__*/ {
             });
         }
       }
-      if(event)
-      event.preventDefault();
+      if (event) event.preventDefault();
     },
 
     toastError(error) {
@@ -1440,7 +1440,24 @@ export default /*#__PURE__*/ {
       no-close-on-backdrop
     >
       <b-overlay :show="loading" rounded="sm">
-        <form @submit="saveItem">
+        <template v-if="validate">
+          <form @submit="saveItem">
+            <slot name="form" v-bind:item="item">
+              <b-form-group label="Nombre:" description="Nombre ">
+                <b-form-input
+                  v-model="item.title"
+                  type="text"
+                  required
+                  placeholder="Nombre"
+                ></b-form-input>
+              </b-form-group>
+            </slot>
+            <b-button block type="submit" variant="success" :disabled="loading">
+              <b-spinner small v-if="loading"></b-spinner>{{ messageSave }}
+            </b-button>
+          </form>
+        </template>
+        <template v-if="!validate">
           <slot name="form" v-bind:item="item">
             <b-form-group label="Nombre:" description="Nombre ">
               <b-form-input
@@ -1451,10 +1468,16 @@ export default /*#__PURE__*/ {
               ></b-form-input>
             </b-form-group>
           </slot>
-          <b-button block type="submit" variant="success" :disabled="loading">
+          <b-button
+            block
+            type="submit"
+            variant="success"
+            :disabled="loading"
+            @click="saveItem()"
+          >
             <b-spinner small v-if="loading"></b-spinner>{{ messageSave }}
           </b-button>
-        </form>
+        </template>
       </b-overlay>
     </b-modal>
     <b-modal
