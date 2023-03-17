@@ -100,6 +100,10 @@ export default /*#__PURE__*/ {
       type: String,
       default: "",
     },
+    hideModalAfterSave: {
+      type: Boolean,
+      default: true,
+    },
     refreshAfterSave: {
       type: Boolean,
       default: true,
@@ -462,7 +466,7 @@ export default /*#__PURE__*/ {
       }, 1);
     },
     fetchItems(page = 1) {
-      let _this = this;
+
       this.loading = true;
       axios
         .get(this.apiUrl + "/" + this.modelName, {
@@ -517,64 +521,59 @@ export default /*#__PURE__*/ {
     },
 
     removeItem: function (id, index) {
-      let _this = this;
-
       this.$bvModal
-        .msgBoxConfirm(_this.messageRemoveConfirm, {
+        .msgBoxConfirm(this.messageRemoveConfirm, {
           size: "sm",
           buttonSize: "sm",
           okVariant: "danger",
-          okTitle: _this.messageRemove,
+          okTitle: this.messageRemove,
           cancelTitle: "NO",
           centered: true,
         })
         .then((value) => {
           if (value) {
-            _this.loading = true;
+            this.loading = true;
             axios
-              .delete(_this.apiUrl + "/" + _this.modelName + "/" + id)
-              .then(function (response) {
-                _this.items.splice(index, 1);
-                _this.toastSuccess("Elemento eliminado.");
-                _this.loading = false;
+              .delete(this.apiUrl + "/" + this.modelName + "/" + id)
+              .then( (response) => {
+                this.items.splice(index, 1);
+                this.toastSuccess("Elemento eliminado.");
+                this.loading = false;
               })
-              .catch(function (error) {
-                _this.toastError(error);
-                _this.loading = false;
+              .catch( (error) => {
+                this.toastError(error);
+                this.loading = false;
               });
           }
         })
         .catch((error) => {
-          _this.toastError(error);
-          _this.loading = false;
+          this.toastError(error);
+          this.loading = false;
         });
     },
 
     saveSort() {
       if (this.orderable) {
-        let _this = this;
-        _this.loading = true;
-
+        this.loading = true;
         let order = [];
-
         this.items.forEach((v, k) => {
           order.push({ id: v.id, order: v[this.orderProp] });
         });
 
         axios
-          .post(this.apiUrl + "/" + _this.modelName + "/sort", {
+          .post(this.apiUrl + "/" + this.modelName + "/sort", {
             order: order,
           })
-          .then(function (response) {
+          .then( (response) => {
             let data = response.data;
-            _this.toastSuccess("Orden Actualizado");
-            if (_this.refreshAfterSave) _this.refresh();
-            _this.loading = false;
+            this.toastSuccess("Orden Actualizado");
+            if (this.refreshAfterSave) this.refresh();
+            this.loading = false;
           })
-          .catch(function (error) {
+          .catch( (error) => {
             //console.debug(error);
-            _this.toastError(error);
-            _this.loading = false;
+            this.toastError(error);
+            this.loading = false;
           });
       }
     },
@@ -616,8 +615,7 @@ export default /*#__PURE__*/ {
       return ops.join(", ");
     },
     async saveItem(event = null) {
-      let _this = this;
-      _this.loading = true;
+      this.loading = true;
 
       if (this.validate) {
         let validation_result = true;
@@ -634,90 +632,95 @@ export default /*#__PURE__*/ {
       if (this.item.id) {
         axios
           .put(
-            this.apiUrl + "/" + _this.modelName + "/" + _this.item.id,
-            _this.item
+            this.apiUrl + "/" + this.modelName + "/" + this.item.id,
+            this.item
           )
-          .then(function (response) {
-            _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+          .then((response) => {
+            if(this.hideModalAfterSave){
+              this.$bvModal.hide("modal-form-item-" + this.modelName);
+            }
+
             let itemSv = response.data;
-            let itemIndex = _this.items.findIndex(
-              (item) => item.id == _this.item.id
+            let itemIndex = this.items.findIndex(
+              (item) => item.id == this.item.id
             );
-            _this.items[itemIndex] = itemSv;
-            _this.item = itemSv;
-            _this.loading = false;
-            if (_this.refreshAfterSave) _this.refresh();
-            _this.toastSuccess("Elemento Modificado");
+            this.items[itemIndex] = itemSv;
+            this.item = itemSv;
+            this.loading = false;
+            if (this.refreshAfterSave) this.refresh();
+            this.toastSuccess("Elemento Modificado");
           })
-          .catch(function (error) {
-            _this.toastError(error);
-            _this.loading = false;
+          .catch((error) => {
+            this.toastError(error);
+            this.loading = false;
           });
       } else {
         if (this.createMultipart) {
           const formData = new FormData();
 
-          Object.keys(_this.item).forEach((key) => {
-            if (_this.item[key][0] && _this.item[key][0].name) {
-              console.log(_this.item[key]);
-
-              let files = _this.item[key];
+          Object.keys(this.item).forEach((key) => {
+            if (this.item[key][0] && this.item[key][0].name) {
+              let files = this.item[key];
               for (var x = 0; x < files.length; x++) {
                 formData.append(
                   key + "[]",
-                  _this.item[key][x],
-                  _this.item[key][x].name
+                  this.item[key][x],
+                  this.item[key][x].name
                 );
               }
-            } else formData.append(key, _this.item[key]);
+            } else formData.append(key, this.item[key]);
           });
 
           axios
-            .post(this.apiUrl + "/" + _this.modelName, formData)
-            .then(function (response) {
-              _this.loading = false;
-              _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+            .post(this.apiUrl + "/" + this.modelName, formData)
+            .then( (response) => {
+              this.loading = false;
+              if(this.hideModalAfterSave){
+                this.$bvModal.hide("modal-form-item-" + this.modelName);
+              }
               if (response.data.success) {
                 if (response.data.message) {
-                  _this.toastSuccess(response.data.message);
+                  this.toastSuccess(response.data.message);
                 }
                 return;
               }
 
               let itemSv = response.data;
 
-              _this.items.push(itemSv);
-              _this.item = itemSv;
-              if (_this.refreshAfterSave) _this.refresh();
-              _this.toastSuccess("Elemento Creado");
+              this.items.push(itemSv);
+              this.item = itemSv;
+              if (this.refreshAfterSave) this.refresh();
+              this.toastSuccess("Elemento Creado");
             })
-            .catch(function (error) {
-              _this.toastError(error);
-              _this.loading = false;
+            .catch( (error) => {
+              this.toastError(error);
+              this.loading = false;
             });
         } else {
           axios
-            .post(this.apiUrl + "/" + _this.modelName, _this.item)
-            .then(function (response) {
-              _this.loading = false;
-              _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+            .post(this.apiUrl + "/" + this.modelName, this.item)
+            .then( (response) => {
+              this.loading = false;
+              if(this.hideModalAfterSave){
+                this.$bvModal.hide("modal-form-item-" + this.modelName);
+              }
               if (response.data.success) {
                 if (response.data.message) {
-                  _this.toastSuccess(response.data.message);
+                  this.toastSuccess(response.data.message);
                 }
                 return;
               }
 
               let itemSv = response.data;
 
-              _this.items.push(itemSv);
-              _this.item = itemSv;
-              if (_this.refreshAfterSave) _this.refresh();
-              _this.toastSuccess("Elemento Creado");
+              this.items.push(itemSv);
+              this.item = itemSv;
+              if (this.refreshAfterSave) this.refresh();
+              this.toastSuccess("Elemento Creado");
             })
-            .catch(function (error) {
-              _this.toastError(error);
-              _this.loading = false;
+            .catch( (error) => {
+              this.toastError(error);
+              this.loading = false;
             });
         }
       }
