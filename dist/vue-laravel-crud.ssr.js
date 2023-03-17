@@ -5875,6 +5875,10 @@ function commonjsRequire (target) {
       type: String,
       default: ""
     },
+    hideModalAfterSave: {
+      type: Boolean,
+      default: true
+    },
     refreshAfterSave: {
       type: Boolean,
       default: true
@@ -6041,10 +6045,10 @@ function commonjsRequire (target) {
       return filter;
     },
     internalFilterByProp: function internalFilterByProp() {
-      var _this2 = this;
+      var _this = this;
 
       return function (prop) {
-        return _this2.internalFilters.find(function (inf) {
+        return _this.internalFilters.find(function (inf) {
           return inf.column == prop;
         });
       };
@@ -6052,24 +6056,24 @@ function commonjsRequire (target) {
   },
   methods: {
     setupFilters: function setupFilters() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.columns.forEach(function (column) {
-        if (_this3.isColumnHasFilter(column)) {
+        if (_this2.isColumnHasFilter(column)) {
           if (column.type == "date") {
-            _this3.internalFilters.push({
+            _this2.internalFilters.push({
               column: column.prop + "_from",
               op: column.filterOp ? column.filterOp : "=",
               value: null
             });
 
-            _this3.internalFilters.push({
+            _this2.internalFilters.push({
               column: column.prop + "_to",
               op: column.filterOp ? column.filterOp : "=",
               value: null
             });
           } else {
-            _this3.internalFilters.push({
+            _this2.internalFilters.push({
               column: column.prop,
               op: column.filterOp ? column.filterOp : "=",
               value: null
@@ -6077,8 +6081,8 @@ function commonjsRequire (target) {
           }
         }
 
-        if (_this3.sortable) {
-          _this3.internalFilters.push({
+        if (_this2.sortable) {
+          _this2.internalFilters.push({
             column: column.prop + "_sort",
             op: column.filterOp ? column.filterOp : "=",
             value: null
@@ -6107,13 +6111,13 @@ function commonjsRequire (target) {
       }
     },
     resetFilters: function resetFilters() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.internalFilters = [];
       this.setupFilters();
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this4.refresh();
+        _this3.refresh();
       }, 1);
     },
     toggleDisplayMode: function toggleDisplayMode() {
@@ -6134,13 +6138,13 @@ function commonjsRequire (target) {
       }
     },
     onSort: function onSort() {
-      var _this5 = this;
+      var _this4 = this;
 
       var event = {};
       var i = 1 + (this.pagination.current_page * this.pagination.per_page - this.pagination.per_page);
       this.items.forEach(function (item, index) {
         //console.debug(s, i);
-        item[_this5.orderProp] = i;
+        item[_this4.orderProp] = i;
         i++;
       });
       this.$emit("sort", event);
@@ -6159,16 +6163,16 @@ function commonjsRequire (target) {
       }
     },
     selectItem: function selectItem() {
-      var _this6 = this;
+      var _this5 = this;
 
       var sitem = this.selectedItems.find(function (e) {
-        return e.id == _this6.item.id;
+        return e.id == _this5.item.id;
       });
 
       if (sitem) {
         this.item.selected = false;
         this.selectedItems = this.selectedItems.filter(function (e) {
-          return e.id != _this6.item.id;
+          return e.id != _this5.item.id;
         });
       } else {
         this.item.selected = true;
@@ -6224,7 +6228,7 @@ function commonjsRequire (target) {
       return column && !column.hideFilter && column.type != "actions";
     },
     setFilter: function setFilter(column, value) {
-      var _this7 = this;
+      var _this6 = this;
 
       var filter = this.filter.find(function (f) {
         return f.column == column;
@@ -6232,14 +6236,13 @@ function commonjsRequire (target) {
       filter.value = value;
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this7.refresh();
+        _this6.refresh();
       }, 1);
     },
     fetchItems: function fetchItems() {
-      var _this8 = this;
+      var _this7 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
       this.loading = true;
       axios__default['default'].get(this.apiUrl + "/" + this.modelName, {
         params: {
@@ -6248,16 +6251,16 @@ function commonjsRequire (target) {
           filters: JSON.stringify(this.finalFilters)
         }
       }).then(function (response) {
-        _this8.makePagination(response.data);
+        _this7.makePagination(response.data);
 
         var items = response.data.data;
 
-        if (_this8.grouped) {
+        if (_this7.grouped) {
           var itemswithgroup = [];
           var lastcomparevalue = null;
-          var compareattr = _this8.groupedAttribute;
-          var groupLabelPre = _this8.groupedLabelPre;
-          var groupLabelAfter = _this8.groupedLabelAfter;
+          var compareattr = _this7.groupedAttribute;
+          var groupLabelPre = _this7.groupedLabelPre;
+          var groupLabelAfter = _this7.groupedLabelAfter;
           items.forEach(function (item, key) {
             if (Array.isArray(item)) {
               itemswithgroup.push({
@@ -6279,57 +6282,55 @@ function commonjsRequire (target) {
               itemswithgroup.push(item);
             }
           });
-          _this8.items = itemswithgroup;
+          _this7.items = itemswithgroup;
         } else {
-          _this8.items = items;
+          _this7.items = items;
         }
 
-        _this8.loading = false;
+        _this7.loading = false;
       }).catch(function (error) {
         //console.debug(error);
-        _this8.toastError(error);
+        _this7.toastError(error);
 
-        _this8.loading = false;
+        _this7.loading = false;
       });
     },
     removeItem: function removeItem(id, index) {
-      var _this = this;
+      var _this8 = this;
 
-      this.$bvModal.msgBoxConfirm(_this.messageRemoveConfirm, {
+      this.$bvModal.msgBoxConfirm(this.messageRemoveConfirm, {
         size: "sm",
         buttonSize: "sm",
         okVariant: "danger",
-        okTitle: _this.messageRemove,
+        okTitle: this.messageRemove,
         cancelTitle: "NO",
         centered: true
       }).then(function (value) {
         if (value) {
-          _this.loading = true;
-          axios__default['default'].delete(_this.apiUrl + "/" + _this.modelName + "/" + id).then(function (response) {
-            _this.items.splice(index, 1);
+          _this8.loading = true;
+          axios__default['default'].delete(_this8.apiUrl + "/" + _this8.modelName + "/" + id).then(function (response) {
+            _this8.items.splice(index, 1);
 
-            _this.toastSuccess("Elemento eliminado.");
+            _this8.toastSuccess("Elemento eliminado.");
 
-            _this.loading = false;
+            _this8.loading = false;
           }).catch(function (error) {
-            _this.toastError(error);
+            _this8.toastError(error);
 
-            _this.loading = false;
+            _this8.loading = false;
           });
         }
       }).catch(function (error) {
-        _this.toastError(error);
+        _this8.toastError(error);
 
-        _this.loading = false;
+        _this8.loading = false;
       });
     },
     saveSort: function saveSort() {
       var _this9 = this;
 
       if (this.orderable) {
-        var _this = this;
-
-        _this.loading = true;
+        this.loading = true;
         var order = [];
         this.items.forEach(function (v, k) {
           order.push({
@@ -6337,20 +6338,20 @@ function commonjsRequire (target) {
             order: v[_this9.orderProp]
           });
         });
-        axios__default['default'].post(this.apiUrl + "/" + _this.modelName + "/sort", {
+        axios__default['default'].post(this.apiUrl + "/" + this.modelName + "/sort", {
           order: order
         }).then(function (response) {
           response.data;
 
-          _this.toastSuccess("Orden Actualizado");
+          _this9.toastSuccess("Orden Actualizado");
 
-          if (_this.refreshAfterSave) _this.refresh();
-          _this.loading = false;
+          if (_this9.refreshAfterSave) _this9.refresh();
+          _this9.loading = false;
         }).catch(function (error) {
           //console.debug(error);
-          _this.toastError(error);
+          _this9.toastError(error);
 
-          _this.loading = false;
+          _this9.loading = false;
         });
       }
     },
@@ -6392,18 +6393,16 @@ function commonjsRequire (target) {
           _this10 = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var event, _this, validation_result, validation_error_message, formData;
-
+        var event, validation_result, validation_error_message, formData;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 event = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : null;
-                _this = _this10;
-                _this.loading = true;
+                _this10.loading = true;
 
                 if (!_this10.validate) {
-                  _context.next = 11;
+                  _context.next = 10;
                   break;
                 }
 
@@ -6411,7 +6410,7 @@ function commonjsRequire (target) {
                 validation_error_message = _this10.messageDefaultValidationError;
 
                 if (validation_result) {
-                  _context.next = 9;
+                  _context.next = 8;
                   break;
                 }
 
@@ -6419,56 +6418,59 @@ function commonjsRequire (target) {
 
                 return _context.abrupt("return");
 
-              case 9:
-                _context.next = 12;
+              case 8:
+                _context.next = 11;
                 break;
 
-              case 11:
+              case 10:
                 if (event) event.preventDefault();
 
-              case 12:
+              case 11:
                 if (_this10.item.id) {
-                  axios__default['default'].put(_this10.apiUrl + "/" + _this.modelName + "/" + _this.item.id, _this.item).then(function (response) {
-                    _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+                  axios__default['default'].put(_this10.apiUrl + "/" + _this10.modelName + "/" + _this10.item.id, _this10.item).then(function (response) {
+                    if (_this10.hideModalAfterSave) {
+                      _this10.$bvModal.hide("modal-form-item-" + _this10.modelName);
+                    }
 
                     var itemSv = response.data;
 
-                    var itemIndex = _this.items.findIndex(function (item) {
-                      return item.id == _this.item.id;
+                    var itemIndex = _this10.items.findIndex(function (item) {
+                      return item.id == _this10.item.id;
                     });
 
-                    _this.items[itemIndex] = itemSv;
-                    _this.item = itemSv;
-                    _this.loading = false;
-                    if (_this.refreshAfterSave) _this.refresh();
+                    _this10.items[itemIndex] = itemSv;
+                    _this10.item = itemSv;
+                    _this10.loading = false;
+                    if (_this10.refreshAfterSave) _this10.refresh();
 
-                    _this.toastSuccess("Elemento Modificado");
+                    _this10.toastSuccess("Elemento Modificado");
                   }).catch(function (error) {
-                    _this.toastError(error);
+                    _this10.toastError(error);
 
-                    _this.loading = false;
+                    _this10.loading = false;
                   });
                 } else {
                   if (_this10.createMultipart) {
                     formData = new FormData();
-                    Object.keys(_this.item).forEach(function (key) {
-                      if (_this.item[key][0] && _this.item[key][0].name) {
-                        console.log(_this.item[key]);
-                        var files = _this.item[key];
+                    Object.keys(_this10.item).forEach(function (key) {
+                      if (_this10.item[key][0] && _this10.item[key][0].name) {
+                        var files = _this10.item[key];
 
                         for (var x = 0; x < files.length; x++) {
-                          formData.append(key + "[]", _this.item[key][x], _this.item[key][x].name);
+                          formData.append(key + "[]", _this10.item[key][x], _this10.item[key][x].name);
                         }
-                      } else formData.append(key, _this.item[key]);
+                      } else formData.append(key, _this10.item[key]);
                     });
-                    axios__default['default'].post(_this10.apiUrl + "/" + _this.modelName, formData).then(function (response) {
-                      _this.loading = false;
+                    axios__default['default'].post(_this10.apiUrl + "/" + _this10.modelName, formData).then(function (response) {
+                      _this10.loading = false;
 
-                      _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+                      if (_this10.hideModalAfterSave) {
+                        _this10.$bvModal.hide("modal-form-item-" + _this10.modelName);
+                      }
 
                       if (response.data.success) {
                         if (response.data.message) {
-                          _this.toastSuccess(response.data.message);
+                          _this10.toastSuccess(response.data.message);
                         }
 
                         return;
@@ -6476,26 +6478,28 @@ function commonjsRequire (target) {
 
                       var itemSv = response.data;
 
-                      _this.items.push(itemSv);
+                      _this10.items.push(itemSv);
 
-                      _this.item = itemSv;
-                      if (_this.refreshAfterSave) _this.refresh();
+                      _this10.item = itemSv;
+                      if (_this10.refreshAfterSave) _this10.refresh();
 
-                      _this.toastSuccess("Elemento Creado");
+                      _this10.toastSuccess("Elemento Creado");
                     }).catch(function (error) {
-                      _this.toastError(error);
+                      _this10.toastError(error);
 
-                      _this.loading = false;
+                      _this10.loading = false;
                     });
                   } else {
-                    axios__default['default'].post(_this10.apiUrl + "/" + _this.modelName, _this.item).then(function (response) {
-                      _this.loading = false;
+                    axios__default['default'].post(_this10.apiUrl + "/" + _this10.modelName, _this10.item).then(function (response) {
+                      _this10.loading = false;
 
-                      _this.$bvModal.hide("modal-form-item-" + _this.modelName);
+                      if (_this10.hideModalAfterSave) {
+                        _this10.$bvModal.hide("modal-form-item-" + _this10.modelName);
+                      }
 
                       if (response.data.success) {
                         if (response.data.message) {
-                          _this.toastSuccess(response.data.message);
+                          _this10.toastSuccess(response.data.message);
                         }
 
                         return;
@@ -6503,23 +6507,23 @@ function commonjsRequire (target) {
 
                       var itemSv = response.data;
 
-                      _this.items.push(itemSv);
+                      _this10.items.push(itemSv);
 
-                      _this.item = itemSv;
-                      if (_this.refreshAfterSave) _this.refresh();
+                      _this10.item = itemSv;
+                      if (_this10.refreshAfterSave) _this10.refresh();
 
-                      _this.toastSuccess("Elemento Creado");
+                      _this10.toastSuccess("Elemento Creado");
                     }).catch(function (error) {
-                      _this.toastError(error);
+                      _this10.toastError(error);
 
-                      _this.loading = false;
+                      _this10.loading = false;
                     });
                   }
                 }
 
                 if (event) event.preventDefault();
 
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -6719,7 +6723,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-875a1cc4>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-875a1cc4>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-3100d769>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-3100d769>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -6933,7 +6937,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-875a1cc4>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-3100d769>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -7432,7 +7436,7 @@ var __vue_render__ = function __vue_render__() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-875a1cc4>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-3100d769>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -7553,8 +7557,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-875a1cc4_0", {
-    source: "tr td[data-v-875a1cc4]:first-child,tr td[data-v-875a1cc4]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-875a1cc4]{display:flex;justify-content:center}.crud-header[data-v-875a1cc4]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-875a1cc4]{margin:0}.crud-header .crud-search[data-v-875a1cc4]{max-width:15rem}.crud-header .crud-search .btn[data-v-875a1cc4]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-875a1cc4]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-875a1cc4]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-875a1cc4]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-875a1cc4]{table-layout:auto}.table tbody td[data-v-875a1cc4]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-875a1cc4]::-webkit-scrollbar{display:none}}",
+  inject("data-v-3100d769_0", {
+    source: "tr td[data-v-3100d769]:first-child,tr td[data-v-3100d769]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-3100d769]{display:flex;justify-content:center}.crud-header[data-v-3100d769]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-3100d769]{margin:0}.crud-header .crud-search[data-v-3100d769]{max-width:15rem}.crud-header .crud-search .btn[data-v-3100d769]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-3100d769]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-3100d769]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-3100d769]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-3100d769]{table-layout:auto}.table tbody td[data-v-3100d769]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-3100d769]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7562,10 +7566,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-875a1cc4";
+var __vue_scope_id__ = "data-v-3100d769";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-875a1cc4";
+var __vue_module_identifier__ = "data-v-3100d769";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
