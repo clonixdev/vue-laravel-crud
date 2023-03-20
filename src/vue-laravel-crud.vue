@@ -452,6 +452,7 @@ export default /*#__PURE__*/ {
     },
 
     refresh() {
+      this.$emit("refresh", {});
       this.fetchItems();
     },
     isColumnHasFilter(column) {
@@ -512,6 +513,7 @@ export default /*#__PURE__*/ {
           }
 
           this.loading = false;
+            this.$emit("afterFetch", {});
         })
         .catch((error) => {
           //console.debug(error);
