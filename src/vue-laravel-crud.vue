@@ -467,7 +467,7 @@ export default /*#__PURE__*/ {
       }, 1);
     },
     fetchItems(page = 1) {
-
+      this.$emit("beforeFetch", {});
       this.loading = true;
       axios
         .get(this.apiUrl + "/" + this.modelName, {
