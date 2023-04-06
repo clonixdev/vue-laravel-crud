@@ -6208,6 +6208,23 @@ function commonjsRequire (target) {
         this.selectedItems.push(this.item);
       }
     },
+    externalUpdate: function externalUpdate(itemsUpdate) {
+      var _this6 = this;
+
+      var addIfNotExist = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'id';
+      itemsUpdate.forEach(function (itemUpdate) {
+        var itemInList = _this6.items.find(function (item) {
+          return item[key] === itemUpdate[key];
+        });
+
+        if (itemInList) Object.assign(itemInList, itemUpdate);else {
+          if (addIfNotExist) {
+            _this6.items.push(itemUpdate);
+          }
+        }
+      });
+    },
     getSelectedItems: function getSelectedItems() {
       return this.selectedItems;
     },
@@ -6263,7 +6280,7 @@ function commonjsRequire (target) {
       return column && !column.hideFilter && column.type != "actions";
     },
     setFilter: function setFilter(column, value) {
-      var _this6 = this;
+      var _this7 = this;
 
       var filter = this.filter.find(function (f) {
         return f.column == column;
@@ -6271,11 +6288,11 @@ function commonjsRequire (target) {
       filter.value = value;
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this6.refresh();
+        _this7.refresh();
       }, 1);
     },
     fetchItems: function fetchItems() {
-      var _this7 = this;
+      var _this8 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
@@ -6292,16 +6309,16 @@ function commonjsRequire (target) {
           filters: JSON.stringify(this.finalFilters)
         }
       }).then(function (response) {
-        _this7.makePagination(response.data);
+        _this8.makePagination(response.data);
 
         var items = response.data.data;
 
-        if (_this7.grouped) {
+        if (_this8.grouped) {
           var itemswithgroup = [];
           var lastcomparevalue = null;
-          var compareattr = _this7.groupedAttribute;
-          var groupLabelPre = _this7.groupedLabelPre;
-          var groupLabelAfter = _this7.groupedLabelAfter;
+          var compareattr = _this8.groupedAttribute;
+          var groupLabelPre = _this8.groupedLabelPre;
+          var groupLabelAfter = _this8.groupedLabelAfter;
           items.forEach(function (item, key) {
             if (Array.isArray(item)) {
               itemswithgroup.push({
@@ -6323,23 +6340,23 @@ function commonjsRequire (target) {
               itemswithgroup.push(item);
             }
           });
-          _this7.items = itemswithgroup;
+          _this8.items = itemswithgroup;
         } else {
-          _this7.items = items;
+          _this8.items = items;
         }
 
-        _this7.loading = false;
+        _this8.loading = false;
 
-        _this7.$emit("afterFetch", {});
+        _this8.$emit("afterFetch", {});
       }).catch(function (error) {
         //console.debug(error);
-        _this7.toastError(error);
+        _this8.toastError(error);
 
-        _this7.loading = false;
+        _this8.loading = false;
       });
     },
     removeItem: function removeItem(id, index) {
-      var _this8 = this;
+      var _this9 = this;
 
       this.$bvModal.msgBoxConfirm(this.messageRemoveConfirm, {
         size: "sm",
@@ -6350,27 +6367,27 @@ function commonjsRequire (target) {
         centered: true
       }).then(function (value) {
         if (value) {
-          _this8.loading = true;
-          axios__default['default'].delete(_this8.apiUrl + "/" + _this8.modelName + "/" + id).then(function (response) {
-            _this8.items.splice(index, 1);
+          _this9.loading = true;
+          axios__default['default'].delete(_this9.apiUrl + "/" + _this9.modelName + "/" + id).then(function (response) {
+            _this9.items.splice(index, 1);
 
-            _this8.toastSuccess("Elemento eliminado.");
+            _this9.toastSuccess("Elemento eliminado.");
 
-            _this8.loading = false;
+            _this9.loading = false;
           }).catch(function (error) {
-            _this8.toastError(error);
+            _this9.toastError(error);
 
-            _this8.loading = false;
+            _this9.loading = false;
           });
         }
       }).catch(function (error) {
-        _this8.toastError(error);
+        _this9.toastError(error);
 
-        _this8.loading = false;
+        _this9.loading = false;
       });
     },
     saveSort: function saveSort() {
-      var _this9 = this;
+      var _this10 = this;
 
       if (this.orderable) {
         this.loading = true;
@@ -6378,7 +6395,7 @@ function commonjsRequire (target) {
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: v[_this9.orderProp]
+            order: v[_this10.orderProp]
           });
         });
         axios__default['default'].post(this.apiUrl + "/" + this.modelName + "/sort", {
@@ -6386,15 +6403,15 @@ function commonjsRequire (target) {
         }).then(function (response) {
           response.data;
 
-          _this9.toastSuccess("Orden Actualizado");
+          _this10.toastSuccess("Orden Actualizado");
 
-          if (_this9.refreshAfterSave) _this9.refresh();
-          _this9.loading = false;
+          if (_this10.refreshAfterSave) _this10.refresh();
+          _this10.loading = false;
         }).catch(function (error) {
           //console.debug(error);
-          _this9.toastError(error);
+          _this10.toastError(error);
 
-          _this9.loading = false;
+          _this10.loading = false;
         });
       }
     },
@@ -6433,7 +6450,7 @@ function commonjsRequire (target) {
     },
     saveItem: function saveItem() {
       var _arguments = arguments,
-          _this10 = this;
+          _this11 = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var event, validation_result, validation_error_message, formData;
@@ -6442,22 +6459,22 @@ function commonjsRequire (target) {
             switch (_context.prev = _context.next) {
               case 0:
                 event = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : null;
-                _this10.loading = true;
+                _this11.loading = true;
 
-                if (!_this10.validate) {
+                if (!_this11.validate) {
                   _context.next = 10;
                   break;
                 }
 
                 validation_result = true;
-                validation_error_message = _this10.messageDefaultValidationError;
+                validation_error_message = _this11.messageDefaultValidationError;
 
                 if (validation_result) {
                   _context.next = 8;
                   break;
                 }
 
-                _this10.toastError(validation_error_message);
+                _this11.toastError(validation_error_message);
 
                 return _context.abrupt("return");
 
@@ -6469,51 +6486,51 @@ function commonjsRequire (target) {
                 if (event) event.preventDefault();
 
               case 11:
-                if (_this10.item.id) {
-                  axios__default['default'].put(_this10.apiUrl + "/" + _this10.modelName + "/" + _this10.item.id, _this10.item).then(function (response) {
-                    if (_this10.hideModalAfterSave) {
-                      _this10.$bvModal.hide("modal-form-item-" + _this10.modelName);
+                if (_this11.item.id) {
+                  axios__default['default'].put(_this11.apiUrl + "/" + _this11.modelName + "/" + _this11.item.id, _this11.item).then(function (response) {
+                    if (_this11.hideModalAfterSave) {
+                      _this11.$bvModal.hide("modal-form-item-" + _this11.modelName);
                     }
 
                     var itemSv = response.data;
 
-                    var itemIndex = _this10.items.findIndex(function (item) {
-                      return item.id == _this10.item.id;
+                    var itemIndex = _this11.items.findIndex(function (item) {
+                      return item.id == _this11.item.id;
                     });
 
-                    _this10.items[itemIndex] = itemSv;
-                    _this10.item = itemSv;
-                    _this10.loading = false;
-                    if (_this10.refreshAfterSave) _this10.refresh();
+                    _this11.items[itemIndex] = itemSv;
+                    _this11.item = itemSv;
+                    _this11.loading = false;
+                    if (_this11.refreshAfterSave) _this11.refresh();
 
-                    _this10.toastSuccess("Elemento Modificado");
+                    _this11.toastSuccess("Elemento Modificado");
                   }).catch(function (error) {
-                    _this10.toastError(error);
+                    _this11.toastError(error);
 
-                    _this10.loading = false;
+                    _this11.loading = false;
                   });
                 } else {
-                  if (_this10.createMultipart) {
+                  if (_this11.createMultipart) {
                     formData = new FormData();
-                    Object.keys(_this10.item).forEach(function (key) {
-                      if (_this10.item[key][0] && _this10.item[key][0].name) {
-                        var files = _this10.item[key];
+                    Object.keys(_this11.item).forEach(function (key) {
+                      if (_this11.item[key][0] && _this11.item[key][0].name) {
+                        var files = _this11.item[key];
 
                         for (var x = 0; x < files.length; x++) {
-                          formData.append(key + "[]", _this10.item[key][x], _this10.item[key][x].name);
+                          formData.append(key + "[]", _this11.item[key][x], _this11.item[key][x].name);
                         }
-                      } else formData.append(key, _this10.item[key]);
+                      } else formData.append(key, _this11.item[key]);
                     });
-                    axios__default['default'].post(_this10.apiUrl + "/" + _this10.modelName, formData).then(function (response) {
-                      _this10.loading = false;
+                    axios__default['default'].post(_this11.apiUrl + "/" + _this11.modelName, formData).then(function (response) {
+                      _this11.loading = false;
 
-                      if (_this10.hideModalAfterSave) {
-                        _this10.$bvModal.hide("modal-form-item-" + _this10.modelName);
+                      if (_this11.hideModalAfterSave) {
+                        _this11.$bvModal.hide("modal-form-item-" + _this11.modelName);
                       }
 
                       if (response.data.success) {
                         if (response.data.message) {
-                          _this10.toastSuccess(response.data.message);
+                          _this11.toastSuccess(response.data.message);
                         }
 
                         return;
@@ -6521,28 +6538,28 @@ function commonjsRequire (target) {
 
                       var itemSv = response.data;
 
-                      _this10.items.push(itemSv);
+                      _this11.items.push(itemSv);
 
-                      _this10.item = itemSv;
-                      if (_this10.refreshAfterSave) _this10.refresh();
+                      _this11.item = itemSv;
+                      if (_this11.refreshAfterSave) _this11.refresh();
 
-                      _this10.toastSuccess("Elemento Creado");
+                      _this11.toastSuccess("Elemento Creado");
                     }).catch(function (error) {
-                      _this10.toastError(error);
+                      _this11.toastError(error);
 
-                      _this10.loading = false;
+                      _this11.loading = false;
                     });
                   } else {
-                    axios__default['default'].post(_this10.apiUrl + "/" + _this10.modelName, _this10.item).then(function (response) {
-                      _this10.loading = false;
+                    axios__default['default'].post(_this11.apiUrl + "/" + _this11.modelName, _this11.item).then(function (response) {
+                      _this11.loading = false;
 
-                      if (_this10.hideModalAfterSave) {
-                        _this10.$bvModal.hide("modal-form-item-" + _this10.modelName);
+                      if (_this11.hideModalAfterSave) {
+                        _this11.$bvModal.hide("modal-form-item-" + _this11.modelName);
                       }
 
                       if (response.data.success) {
                         if (response.data.message) {
-                          _this10.toastSuccess(response.data.message);
+                          _this11.toastSuccess(response.data.message);
                         }
 
                         return;
@@ -6550,16 +6567,16 @@ function commonjsRequire (target) {
 
                       var itemSv = response.data;
 
-                      _this10.items.push(itemSv);
+                      _this11.items.push(itemSv);
 
-                      _this10.item = itemSv;
-                      if (_this10.refreshAfterSave) _this10.refresh();
+                      _this11.item = itemSv;
+                      if (_this11.refreshAfterSave) _this11.refresh();
 
-                      _this10.toastSuccess("Elemento Creado");
+                      _this11.toastSuccess("Elemento Creado");
                     }).catch(function (error) {
-                      _this10.toastError(error);
+                      _this11.toastError(error);
 
-                      _this10.loading = false;
+                      _this11.loading = false;
                     });
                   }
                 }
@@ -6618,11 +6635,11 @@ function commonjsRequire (target) {
       });
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this11 = this;
+      var _this12 = this;
 
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this11.refresh();
+        _this12.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -6766,7 +6783,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-489f44cf>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-489f44cf>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-e01c8902>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-e01c8902>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -6980,7 +6997,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-489f44cf>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-e01c8902>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -7479,7 +7496,7 @@ var __vue_render__ = function __vue_render__() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-489f44cf>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-e01c8902>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -7600,8 +7617,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-489f44cf_0", {
-    source: "tr td[data-v-489f44cf]:first-child,tr td[data-v-489f44cf]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-489f44cf]{display:flex;justify-content:center}.crud-header[data-v-489f44cf]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-489f44cf]{margin:0}.crud-header .crud-search[data-v-489f44cf]{max-width:15rem}.crud-header .crud-search .btn[data-v-489f44cf]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-489f44cf]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-489f44cf]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-489f44cf]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-489f44cf]{table-layout:auto}.table tbody td[data-v-489f44cf]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-489f44cf]::-webkit-scrollbar{display:none}}",
+  inject("data-v-e01c8902_0", {
+    source: "tr td[data-v-e01c8902]:first-child,tr td[data-v-e01c8902]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-e01c8902]{display:flex;justify-content:center}.crud-header[data-v-e01c8902]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-e01c8902]{margin:0}.crud-header .crud-search[data-v-e01c8902]{max-width:15rem}.crud-header .crud-search .btn[data-v-e01c8902]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-e01c8902]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-e01c8902]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-e01c8902]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-e01c8902]{table-layout:auto}.table tbody td[data-v-e01c8902]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-e01c8902]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7609,10 +7626,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-489f44cf";
+var __vue_scope_id__ = "data-v-e01c8902";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-489f44cf";
+var __vue_module_identifier__ = "data-v-e01c8902";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
