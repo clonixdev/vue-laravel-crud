@@ -5827,6 +5827,16 @@ function commonjsRequire (target) {
     modelName: String,
     model: Object,
     title: String,
+    models: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    ajax: {
+      type: Boolean,
+      default: true
+    },
     columns: {
       type: Array,
       default: function _default() {
@@ -6017,7 +6027,13 @@ function commonjsRequire (target) {
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
     this.internalFilters = [];
     this.setupFilters();
-    this.fetchItems();
+
+    if (this.ajax) {
+      this.fetchItems();
+    } else {
+      this.items = this.models;
+      this.pagination.total = this.items.length;
+    }
   },
   computed: {
     itemValue: function itemValue() {
@@ -6028,6 +6044,19 @@ function commonjsRequire (target) {
           return item[column.prop];
         }
       };
+    },
+    itemsList: function itemsList() {
+      if (this.ajax) {
+        return this.items;
+      } else {
+        return this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
+      }
+    },
+    paginationIndexStart: function paginationIndexStart() {
+      return (this.pagination.current_page - 1) * this.pagination.per_page;
+    },
+    paginationIndexEnd: function paginationIndexEnd() {
+      return this.paginationIndexStart + this.pagination.per_page;
     },
 
     /* filteredItems() {
@@ -6223,7 +6252,12 @@ function commonjsRequire (target) {
     },
     refresh: function refresh() {
       this.$emit("refresh", {});
-      this.fetchItems();
+
+      if (!this.ajax) {
+        return;
+      }
+
+      this.fetchItems(this.pagination.current_page);
     },
     isColumnHasFilter: function isColumnHasFilter(column) {
       return column && !column.hideFilter && column.type != "actions";
@@ -6244,6 +6278,11 @@ function commonjsRequire (target) {
       var _this7 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      if (!this.ajax) {
+        return;
+      }
+
       this.$emit("beforeFetch", {});
       this.loading = true;
       axios__default['default'].get(this.apiUrl + "/" + this.modelName, {
@@ -6727,7 +6766,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "crud"
-  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-38759c56>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-38759c56>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
+  }, [_vm.showHeader ? _vm._ssrNode("<div class=\"crud-header\" data-v-489f44cf>", "</div>", [_vm._ssrNode((_vm.showTitle ? "<h4 class=\"crud-title\" data-v-489f44cf>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</h4>" : "<!---->") + " "), _c('b-sidebar', {
     attrs: {
       "title": "Filtrar",
       "right": "",
@@ -6941,7 +6980,7 @@ var __vue_render__ = function __vue_render__() {
     "loading": _vm.loading,
     "isColumnHasFilter": _vm.isColumnHasFilter,
     "setFilter": _vm.setFilter
-  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-38759c56>", "</div>", [_c('b-button-group', {
+  })], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"table-options\" data-v-489f44cf>", "</div>", [_c('b-button-group', {
     staticClass: "mr-1"
   }, [_vm._t("tableActions", [_vm._t("tableActionsPrepend", null, {
     "loading": _vm.loading
@@ -7440,7 +7479,7 @@ var __vue_render__ = function __vue_render__() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-38759c56>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
+  })], 2)]) : _vm._e()]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"crud-paginator\" data-v-489f44cf>", "</div>", [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
       "total-rows": _vm.pagination.total,
       "per-page": _vm.pagination.per_page
@@ -7561,8 +7600,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-38759c56_0", {
-    source: "tr td[data-v-38759c56]:first-child,tr td[data-v-38759c56]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-38759c56]{display:flex;justify-content:center}.crud-header[data-v-38759c56]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-38759c56]{margin:0}.crud-header .crud-search[data-v-38759c56]{max-width:15rem}.crud-header .crud-search .btn[data-v-38759c56]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-38759c56]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-38759c56]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-38759c56]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-38759c56]{table-layout:auto}.table tbody td[data-v-38759c56]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-38759c56]::-webkit-scrollbar{display:none}}",
+  inject("data-v-489f44cf_0", {
+    source: "tr td[data-v-489f44cf]:first-child,tr td[data-v-489f44cf]:last-child{width:1%;white-space:nowrap}.crud-pagination[data-v-489f44cf]{display:flex;justify-content:center}.crud-header[data-v-489f44cf]{display:flex;justify-content:space-between;max-height:3rem}.crud-header .crud-title[data-v-489f44cf]{margin:0}.crud-header .crud-search[data-v-489f44cf]{max-width:15rem}.crud-header .crud-search .btn[data-v-489f44cf]{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.crud-header .crud-search .btn.open[data-v-489f44cf]{border-top-right-radius:0;border-bottom-right-radius:0}.crud-header .table-options[data-v-489f44cf]{margin-bottom:1rem;display:flex;align-items:center;justify-content:flex-end}.custom-control[data-v-489f44cf]{position:relative;top:-15px}@media (min-width:992px){.table[data-v-489f44cf]{table-layout:auto}.table tbody td[data-v-489f44cf]{overflow:scroll;-ms-overflow-style:none;scrollbar-width:none}.table tbody td[data-v-489f44cf]::-webkit-scrollbar{display:none}}",
     map: undefined,
     media: undefined
   });
@@ -7570,10 +7609,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-38759c56";
+var __vue_scope_id__ = "data-v-489f44cf";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-38759c56";
+var __vue_module_identifier__ = "data-v-489f44cf";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

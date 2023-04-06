@@ -55,6 +55,17 @@ export default /*#__PURE__*/ {
     modelName: String,
     model: Object,
     title: String,
+
+    models: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+    ajax: {
+      type: Boolean,
+      default: true,
+    },
     columns: {
       type: Array,
 
@@ -251,7 +262,14 @@ export default /*#__PURE__*/ {
     this.itemDefault = JSON.parse(JSON.stringify(this.item));
     this.internalFilters = [];
     this.setupFilters();
-    this.fetchItems();
+
+    if(this.ajax){
+      this.fetchItems();
+    }else{
+      this.items = this.models;
+      this.pagination.total = this.items.length;
+    }
+
   },
   computed: {
     itemValue() {
@@ -270,6 +288,22 @@ export default /*#__PURE__*/ {
         }
       };
     },
+
+    itemsList() {
+      if(this.ajax) {
+        return this.items;
+      }else{
+        return this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
+      }
+    },
+
+    paginationIndexStart() {
+      return (this.pagination.current_page - 1) * this.pagination.per_page;
+    },
+    paginationIndexEnd() {
+      return this.paginationIndexStart + this.pagination.per_page;
+    },
+
 
     /* filteredItems() {
       return this.items;
@@ -453,7 +487,10 @@ export default /*#__PURE__*/ {
 
     refresh() {
       this.$emit("refresh", {});
-      this.fetchItems();
+      if(!this.ajax){
+        return;
+      }
+      this.fetchItems(this.pagination.current_page);
     },
     isColumnHasFilter(column) {
       return column && !column.hideFilter && column.type != "actions";
@@ -467,6 +504,9 @@ export default /*#__PURE__*/ {
       }, 1);
     },
     fetchItems(page = 1) {
+      if(!this.ajax){
+        return;
+      }
       this.$emit("beforeFetch", {});
       this.loading = true;
       axios
