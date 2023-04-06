@@ -450,7 +450,17 @@ export default /*#__PURE__*/ {
         this.selectedItems.push(this.item);
       }
     },
-
+    externalUpdate(itemsUpdate,addIfNotExist = true,key= 'id'){
+      itemsUpdate.forEach(itemUpdate => {
+        let itemInList = this.items.find(item => item[key] === itemUpdate[key]);
+        if (itemInList) Object.assign(itemInList, itemUpdate);
+        else {
+          if(addIfNotExist){
+            this.items.push(itemUpdate);
+          }
+        }
+      });
+    },
     getSelectedItems() {
       return this.selectedItems;
     },
