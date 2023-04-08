@@ -38,7 +38,6 @@ export default /*#__PURE__*/ {
         MODE_CARDS: 2,
         MODE_CUSTOM: 3,
       },
-      useVuexORM: false,
 
     };
   },
@@ -73,6 +72,10 @@ export default /*#__PURE__*/ {
     ajax: {
       type: Boolean,
       default: true,
+    },
+    useVuexORM: {
+      type: Boolean,
+      default: false,
     },
     columns: {
       type: Array,
@@ -267,8 +270,8 @@ export default /*#__PURE__*/ {
 
   mounted() {
 
-    if (this.model.prototype instanceof Model) {
-      this.useVuexORM = true;
+    if (this.useVuexORM) {
+      //this.useVuexORM = true;
     } else {
       this.item = this.model;
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
