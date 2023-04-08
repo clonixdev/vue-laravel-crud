@@ -7,6 +7,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import babel from '@rollup/plugin-babel';
+import json from "@rollup/plugin-json";
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
 
@@ -100,6 +101,7 @@ if (!argv.format || argv.format === 'es') {
         ],
       }),
       commonjs(),
+      json(),
     ],
   };
   buildFormats.push(esConfig);
@@ -130,6 +132,7 @@ if (!argv.format || argv.format === 'cjs') {
       ...baseConfig.plugins.postVue,
       babel(baseConfig.plugins.babel),
       commonjs(),
+      json(),
     ],
   };
   buildFormats.push(umdConfig);
@@ -154,6 +157,7 @@ if (!argv.format || argv.format === 'iife') {
       ...baseConfig.plugins.postVue,
       babel(baseConfig.plugins.babel),
       commonjs(),
+      json(),
       terser({
         output: {
           ecma: 5,
