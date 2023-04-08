@@ -2,7 +2,7 @@
 import draggable from "vuedraggable";
 import axios from "axios";
 import moment from "moment";
-//import { Model, Collection } from 'vue-mc';
+import { Model } from '@vuex-orm/core';
 
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
@@ -38,8 +38,8 @@ export default /*#__PURE__*/ {
         MODE_CARDS: 2,
         MODE_CUSTOM: 3,
       },
-      useMc: false,
-      collection
+      useVuexORM: false,
+      
     };
   },
   watch: {
@@ -262,13 +262,12 @@ export default /*#__PURE__*/ {
 
   mounted() {
 
-    /*if (this.model instanceof Model) {
-      this.useMc = true;
-      this.collection = new Collection();
-    } else {*/
+    if (this.model instanceof Model) {
+      this.useVuexORM = true;
+    } else {
       this.item = this.model;
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
-    //}
+    }
 
     this.internalFilters = [];
     this.setupFilters();
@@ -320,7 +319,12 @@ export default /*#__PURE__*/ {
     },*/
 
     finalFilters() {
-      return this.filters.concat(this.filter).concat(this.internalFilter);
+
+      return [
+      ...this.filters,
+      ...this.filter,
+      ...this.internalFilter
+      ];
     },
 
     internalFilter() {
@@ -541,7 +545,7 @@ export default /*#__PURE__*/ {
         return;
       }
       this.$emit("beforeFetch", {});
-      if (this.useMc) {
+      if (this.useVuexORM) {
        // return this.fetchItemsMc(page);
       }
       this.loading = true;
