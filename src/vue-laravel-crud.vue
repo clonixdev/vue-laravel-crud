@@ -2,7 +2,7 @@
 import draggable from "vuedraggable";
 import axios from "axios";
 import moment from "moment";
-//import { Model, Collection } from 'vue-mc';
+import { Model, Collection } from 'vue-mc';
 
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
@@ -262,13 +262,13 @@ export default /*#__PURE__*/ {
 
   mounted() {
 
-   /* if (this.model instanceof Model) {
+    if (this.model instanceof Model) {
       this.useMc = true;
       this.collection = new Collection();
-    } else {*/
+    } else {
       this.item = this.model;
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
-    //}
+    }
 
     this.internalFilters = [];
     this.setupFilters();
@@ -524,7 +524,7 @@ export default /*#__PURE__*/ {
       }, 1);
     },
 
-    /*fetchItemsMc(page = 1) {
+    fetchItemsMc(page = 1) {
       this.loading = true;
       this.$emit("beforeFetch", {});
       this.collection.page(page).fetch().then((response) => {
@@ -535,14 +535,14 @@ export default /*#__PURE__*/ {
         this.toastError(error);
         this.loading = false;
       });
-    },*/
+    },
     fetchItems(page = 1) {
       if (!this.ajax) {
         return;
       }
       this.$emit("beforeFetch", {});
       if (this.useMc) {
-        //return this.fetchItemsMc(page);
+        return this.fetchItemsMc(page);
       }
       this.loading = true;
       axios
