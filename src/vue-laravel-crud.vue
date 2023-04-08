@@ -524,7 +524,7 @@ export default /*#__PURE__*/ {
       }, 1);
     },
 
-    fetchItemsMc(page = 1) {
+    /*fetchItemsMc(page = 1) {
       this.loading = true;
       this.$emit("beforeFetch", {});
       this.collection.page(page).fetch().then((response) => {
@@ -535,14 +535,14 @@ export default /*#__PURE__*/ {
         this.toastError(error);
         this.loading = false;
       });
-    },
+    },*/
     fetchItems(page = 1) {
       if (!this.ajax) {
         return;
       }
       this.$emit("beforeFetch", {});
       if (this.useMc) {
-        return this.fetchItemsMc(page);
+        //return this.fetchItemsMc(page);
       }
       this.loading = true;
       axios
