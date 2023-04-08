@@ -267,7 +267,7 @@ export default /*#__PURE__*/ {
 
   mounted() {
 
-    if (this.model instanceof Model) {
+    if (this.model.prototype instanceof Model) {
       this.useVuexORM = true;
     } else {
       this.item = this.model;
