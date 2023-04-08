@@ -10,6 +10,7 @@ import babel from '@rollup/plugin-babel';
 import json from "@rollup/plugin-json";
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs.readFileSync('./.browserslistrc')
@@ -36,6 +37,7 @@ const baseConfig = {
     ],
     replace: {
       'process.env.NODE_ENV': JSON.stringify('production'),
+      preventAssignment: true,
     },
     vue: {
       css: true,
@@ -47,6 +49,7 @@ const baseConfig = {
       resolve({
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
       }),
+      nodePolyfills(),
     ],
     babel: {
       exclude: 'node_modules/**',
