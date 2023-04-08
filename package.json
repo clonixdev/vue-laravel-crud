@@ -1,6 +1,6 @@
 {
     "name": "vue-laravel-crud",
-    "version": "1.4.2",
+    "version": "1.4.0",
     "description": "",
     "homepage": "https://github.com/clonixdev/vue-laravel-crud",
     "main": "dist/vue-laravel-crud.ssr.js",
@@ -23,8 +23,7 @@
         "bootstrap-vue": "^2.21.2",
         "moment": "^2.29.1",
         "vue-mc": "^0.6.0",
-        "vuedraggable": "^2.24.3",
-        "axios": "^0.21.4"
+        "vuedraggable": "^2.24.3"
     },
     "devDependencies": {
         "@babel/core": "^7.12.10",
@@ -32,7 +31,6 @@
         "@rollup/plugin-alias": "^3.1.1",
         "@rollup/plugin-babel": "^5.2.2",
         "@rollup/plugin-commonjs": "^17.0.0",
-        "@rollup/plugin-json": "^6.0.0",
         "@rollup/plugin-node-resolve": "^11.0.1",
         "@rollup/plugin-replace": "^2.3.4",
         "@vue/cli-plugin-babel": "^4.5.10",
@@ -40,11 +38,11 @@
         "cross-env": "^7.0.3",
         "minimist": "^1.2.5",
         "rollup": "^2.36.1",
-        "rollup-plugin-node-polyfills": "^0.2.1",
         "rollup-plugin-terser": "^7.0.2",
         "rollup-plugin-vue": "^5.1.9",
         "vue": "^2.6.12",
-        "vue-template-compiler": "^2.6.12"
+        "vue-template-compiler": "^2.6.12",
+        "axios": "^0.21.1"
     },
     "peerDependencies": {
         "vue": "^2.6.12"
