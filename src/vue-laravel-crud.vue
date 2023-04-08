@@ -39,7 +39,7 @@ export default /*#__PURE__*/ {
         MODE_CUSTOM: 3,
       },
       useVuexORM: false,
-      
+
     };
   },
   watch: {
@@ -56,9 +56,14 @@ export default /*#__PURE__*/ {
   },
   props: {
     modelName: String,
-    model: Object,
-    title: String,
 
+    title: String,
+    model: {
+      type: Object | Model,
+      default() {
+        return { id: 0 };
+      },
+    },
     models: {
       type: Array,
       default() {
@@ -321,9 +326,9 @@ export default /*#__PURE__*/ {
     finalFilters() {
 
       return [
-      ...this.filters,
-      ...this.filter,
-      ...this.internalFilter
+        ...this.filters,
+        ...this.filter,
+        ...this.internalFilter
       ];
     },
 
@@ -528,25 +533,20 @@ export default /*#__PURE__*/ {
       }, 1);
     },
 
-    /*fetchItemsMc(page = 1) {
+    fetchItemsVuex(page = 1) {
       this.loading = true;
       this.$emit("beforeFetch", {});
-      this.collection.page(page).fetch().then((response) => {
-        console.debug("fetch page ", page, response, this.collection);
-        this.loading = false;
-        this.$emit("afterFetch", {});
-      }).catch((error) => {
-        this.toastError(error);
-        this.loading = false;
-      });
-    },*/
+      console.debug("fetch page vuex ", page, response, this.collection);
+      this.collection = this.model.api().query().offset(page).limit(this.pagination.perPage).get();
+      this.loading = false;
+    },
     fetchItems(page = 1) {
       if (!this.ajax) {
         return;
       }
       this.$emit("beforeFetch", {});
       if (this.useVuexORM) {
-       // return this.fetchItemsMc(page);
+        return this.fetchItemsVuex(page);
       }
       this.loading = true;
       axios
