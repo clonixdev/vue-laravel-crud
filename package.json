@@ -51,7 +51,10 @@
         "@vuex-orm/plugin-axios": "^0.9.4"
     },
     "peerDependencies": {
-        "vue": "^2.7.14"
+        "vue": "^2.7.14",
+        "vuex": "^3.6.2",
+        "@vuex-orm/core": "^0.36.4",
+        "@vuex-orm/plugin-axios": "^0.9.4"
     },
     "engines": {
         "node": ">=14"

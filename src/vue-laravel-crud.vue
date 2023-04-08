@@ -2,7 +2,6 @@
 import draggable from "vuedraggable";
 import axios from "axios";
 import moment from "moment";
-import { Model } from '@vuex-orm/core';
 
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
@@ -58,7 +57,7 @@ export default /*#__PURE__*/ {
 
     title: String,
     model: {
-      type: Object | Model,
+      type: Object | Function,
       default() {
         return { id: 0 };
       },
@@ -539,8 +538,19 @@ export default /*#__PURE__*/ {
     async fetchItemsVuex(page = 1) {
       this.loading = true;
       this.$emit("beforeFetch", {});
-      this.collection = await this.model.api().query().offset(page).limit(this.pagination.perPage).get();
-      console.debug("fetch page vuex ", page,  this.collection);
+
+      const result = await this.model.api().get('', {
+        params: {
+          page: page,
+          limit: this.pagination.perPage,
+          filters: JSON.stringify(this.finalFilters),
+        }
+      });
+
+      this.collection = result.entities[this.model.entity];
+
+
+      console.debug("fetch page vuex ", page, this.collection);
       this.loading = false;
     },
     fetchItems(page = 1) {
