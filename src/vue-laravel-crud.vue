@@ -528,7 +528,7 @@ export default /*#__PURE__*/ {
       this.loading = true;
       this.$emit("beforeFetch", {});
       this.collection.page(page).fetch().then((response) => {
-        console.debug("fetch page ",page,response,this.collection);
+        console.debug("fetch page ", page, response, this.collection);
         this.loading = false;
         this.$emit("afterFetch", {});
       }).catch((error) => {

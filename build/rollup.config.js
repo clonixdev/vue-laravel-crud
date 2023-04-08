@@ -1,7 +1,7 @@
 // rollup.config.js
 import fs from 'fs';
 import path from 'path';
-import vue from 'rollup-plugin-vue';
+import vue from '@vitejs/plugin-vue2'
 import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
@@ -11,6 +11,7 @@ import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
 import json from "@rollup/plugin-json";
 import nodePolyfills from 'rollup-plugin-polyfill-node';
+import styles from 'rollup-plugin-styles';
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs.readFileSync('./.browserslistrc')
@@ -47,9 +48,11 @@ const baseConfig = {
     },
     postVue: [
       json(), 
-      nodePolyfills( /* options */ ),
+      nodePolyfills(),
+      styles({ mode: 'inject' }),
       resolve({
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+        jsnext: true, preferBuiltins: true, browser: true 
       }),
       
     ],
