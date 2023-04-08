@@ -536,10 +536,10 @@ export default /*#__PURE__*/ {
       }, 1);
     },
 
-    fetchItemsVuex(page = 1) {
+    async fetchItemsVuex(page = 1) {
       this.loading = true;
       this.$emit("beforeFetch", {});
-      this.collection = this.model.api().query().offset(page).limit(this.pagination.perPage).get();
+      this.collection = await this.model.api().query().offset(page).limit(this.pagination.perPage).get();
       console.debug("fetch page vuex ", page,  this.collection);
       this.loading = false;
     },

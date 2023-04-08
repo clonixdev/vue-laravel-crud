@@ -20451,7 +20451,7 @@ Model.typeKey = 'type';
 /**
  * Vuex Store state definition.
  */
-Model.state = {};var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-e677b311]:last-child,\ntr td[data-v-e677b311]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-e677b311] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-e677b311] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-e677b311] .crud-title[data-v-e677b311] {\n    margin: 0; }\n  .crud-header[data-v-e677b311] .crud-search[data-v-e677b311] {\n    max-width: 15rem; }\n    .crud-header[data-v-e677b311] .crud-search[data-v-e677b311] .btn[data-v-e677b311] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-e677b311] .crud-search[data-v-e677b311] .btn[data-v-e677b311].open[data-v-e677b311] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-e677b311] .table-options[data-v-e677b311] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-e677b311] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-e677b311] {\n    table-layout: auto; }\n    .table[data-v-e677b311] tbody[data-v-e677b311] td[data-v-e677b311] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-e677b311] tbody[data-v-e677b311] td[data-v-e677b311]::-webkit-scrollbar {\n      display: none; } }\n";
+Model.state = {};var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-fa834ca3]:last-child,\ntr td[data-v-fa834ca3]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-fa834ca3] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-fa834ca3] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-fa834ca3] .crud-title[data-v-fa834ca3] {\n    margin: 0; }\n  .crud-header[data-v-fa834ca3] .crud-search[data-v-fa834ca3] {\n    max-width: 15rem; }\n    .crud-header[data-v-fa834ca3] .crud-search[data-v-fa834ca3] .btn[data-v-fa834ca3] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-fa834ca3] .crud-search[data-v-fa834ca3] .btn[data-v-fa834ca3].open[data-v-fa834ca3] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-fa834ca3] .table-options[data-v-fa834ca3] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-fa834ca3] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-fa834ca3] {\n    table-layout: auto; }\n    .table[data-v-fa834ca3] tbody[data-v-fa834ca3] td[data-v-fa834ca3] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-fa834ca3] tbody[data-v-fa834ca3] td[data-v-fa834ca3]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -21052,15 +21052,31 @@ n(css, {});function normalizeComponent (
       }, 1);
     },
     fetchItemsVuex: function fetchItemsVuex() {
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      this.loading = true;
-      this.$emit("beforeFetch", {});
-      this.collection = this.model.api().query().offset(page).limit(this.pagination.perPage).get();
-      console.debug("fetch page vuex ", page, this.collection);
-      this.loading = false;
+      var _arguments = arguments,
+        _this8 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var page;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
+              _this8.loading = true;
+              _this8.$emit("beforeFetch", {});
+              _context.next = 5;
+              return _this8.model.api().query().offset(page).limit(_this8.pagination.perPage).get();
+            case 5:
+              _this8.collection = _context.sent;
+              console.debug("fetch page vuex ", page, _this8.collection);
+              _this8.loading = false;
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }))();
     },
     fetchItems: function fetchItems() {
-      var _this8 = this;
+      var _this9 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (!this.ajax) {
         return;
@@ -21077,14 +21093,14 @@ n(css, {});function normalizeComponent (
           filters: JSON.stringify(this.finalFilters)
         }
       }).then(function (response) {
-        _this8.makePagination(response.data);
+        _this9.makePagination(response.data);
         var items = response.data.data;
-        if (_this8.grouped) {
+        if (_this9.grouped) {
           var itemswithgroup = [];
           var lastcomparevalue = null;
-          var compareattr = _this8.groupedAttribute;
-          var groupLabelPre = _this8.groupedLabelPre;
-          var groupLabelAfter = _this8.groupedLabelAfter;
+          var compareattr = _this9.groupedAttribute;
+          var groupLabelPre = _this9.groupedLabelPre;
+          var groupLabelAfter = _this9.groupedLabelAfter;
           items.forEach(function (item, key) {
             if (Array.isArray(item)) {
               itemswithgroup.push({
@@ -21105,20 +21121,20 @@ n(css, {});function normalizeComponent (
               itemswithgroup.push(item);
             }
           });
-          _this8.items = itemswithgroup;
+          _this9.items = itemswithgroup;
         } else {
-          _this8.items = items;
+          _this9.items = items;
         }
-        _this8.loading = false;
-        _this8.$emit("afterFetch", {});
+        _this9.loading = false;
+        _this9.$emit("afterFetch", {});
       }).catch(function (error) {
         //console.debug(error);
-        _this8.toastError(error);
-        _this8.loading = false;
+        _this9.toastError(error);
+        _this9.loading = false;
       });
     },
     removeItem: function removeItem(id, index) {
-      var _this9 = this;
+      var _this10 = this;
       this.$bvModal.msgBoxConfirm(this.messageRemoveConfirm, {
         size: "sm",
         buttonSize: "sm",
@@ -21128,43 +21144,43 @@ n(css, {});function normalizeComponent (
         centered: true
       }).then(function (value) {
         if (value) {
-          _this9.loading = true;
-          axios.delete(_this9.apiUrl + "/" + _this9.modelName + "/" + id).then(function (response) {
-            _this9.items.splice(index, 1);
-            _this9.toastSuccess("Elemento eliminado.");
-            _this9.loading = false;
+          _this10.loading = true;
+          axios.delete(_this10.apiUrl + "/" + _this10.modelName + "/" + id).then(function (response) {
+            _this10.items.splice(index, 1);
+            _this10.toastSuccess("Elemento eliminado.");
+            _this10.loading = false;
           }).catch(function (error) {
-            _this9.toastError(error);
-            _this9.loading = false;
+            _this10.toastError(error);
+            _this10.loading = false;
           });
         }
       }).catch(function (error) {
-        _this9.toastError(error);
-        _this9.loading = false;
+        _this10.toastError(error);
+        _this10.loading = false;
       });
     },
     saveSort: function saveSort() {
-      var _this10 = this;
+      var _this11 = this;
       if (this.orderable) {
         this.loading = true;
         var order = [];
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: v[_this10.orderProp]
+            order: v[_this11.orderProp]
           });
         });
         axios.post(this.apiUrl + "/" + this.modelName + "/sort", {
           order: order
         }).then(function (response) {
           response.data;
-          _this10.toastSuccess("Orden Actualizado");
-          if (_this10.refreshAfterSave) _this10.refresh();
-          _this10.loading = false;
+          _this11.toastSuccess("Orden Actualizado");
+          if (_this11.refreshAfterSave) _this11.refresh();
+          _this11.loading = false;
         }).catch(function (error) {
           //console.debug(error);
-          _this10.toastError(error);
-          _this10.loading = false;
+          _this11.toastError(error);
+          _this11.loading = false;
         });
       }
     },
@@ -21200,111 +21216,111 @@ n(css, {});function normalizeComponent (
       return ops.join(", ");
     },
     saveItem: function saveItem() {
-      var _arguments = arguments,
-        _this11 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _arguments2 = arguments,
+        _this12 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var event, validation_result, validation_error_message, formData;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              event = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : null;
-              _this11.loading = true;
-              if (!_this11.validate) {
-                _context.next = 10;
+              event = _arguments2.length > 0 && _arguments2[0] !== undefined ? _arguments2[0] : null;
+              _this12.loading = true;
+              if (!_this12.validate) {
+                _context2.next = 10;
                 break;
               }
               validation_result = true;
-              validation_error_message = _this11.messageDefaultValidationError;
+              validation_error_message = _this12.messageDefaultValidationError;
               if (validation_result) {
-                _context.next = 8;
+                _context2.next = 8;
                 break;
               }
-              _this11.toastError(validation_error_message);
-              return _context.abrupt("return");
+              _this12.toastError(validation_error_message);
+              return _context2.abrupt("return");
             case 8:
-              _context.next = 11;
+              _context2.next = 11;
               break;
             case 10:
               if (event) event.preventDefault();
             case 11:
-              if (_this11.item.id) {
-                axios.put(_this11.apiUrl + "/" + _this11.modelName + "/" + _this11.item.id, _this11.item).then(function (response) {
-                  if (_this11.hideModalAfterSave) {
-                    _this11.$bvModal.hide("modal-form-item-" + _this11.modelName);
+              if (_this12.item.id) {
+                axios.put(_this12.apiUrl + "/" + _this12.modelName + "/" + _this12.item.id, _this12.item).then(function (response) {
+                  if (_this12.hideModalAfterSave) {
+                    _this12.$bvModal.hide("modal-form-item-" + _this12.modelName);
                   }
                   var itemSv = response.data;
-                  var itemIndex = _this11.items.findIndex(function (item) {
-                    return item.id == _this11.item.id;
+                  var itemIndex = _this12.items.findIndex(function (item) {
+                    return item.id == _this12.item.id;
                   });
-                  _this11.items[itemIndex] = itemSv;
-                  _this11.item = itemSv;
-                  _this11.loading = false;
-                  if (_this11.refreshAfterSave) _this11.refresh();
-                  _this11.toastSuccess("Elemento Modificado");
+                  _this12.items[itemIndex] = itemSv;
+                  _this12.item = itemSv;
+                  _this12.loading = false;
+                  if (_this12.refreshAfterSave) _this12.refresh();
+                  _this12.toastSuccess("Elemento Modificado");
                 }).catch(function (error) {
-                  _this11.toastError(error);
-                  _this11.loading = false;
+                  _this12.toastError(error);
+                  _this12.loading = false;
                 });
               } else {
-                if (_this11.createMultipart) {
+                if (_this12.createMultipart) {
                   formData = new FormData();
-                  Object.keys(_this11.item).forEach(function (key) {
-                    if (_this11.item[key][0] && _this11.item[key][0].name) {
-                      var files = _this11.item[key];
+                  Object.keys(_this12.item).forEach(function (key) {
+                    if (_this12.item[key][0] && _this12.item[key][0].name) {
+                      var files = _this12.item[key];
                       for (var x = 0; x < files.length; x++) {
-                        formData.append(key + "[]", _this11.item[key][x], _this11.item[key][x].name);
+                        formData.append(key + "[]", _this12.item[key][x], _this12.item[key][x].name);
                       }
-                    } else formData.append(key, _this11.item[key]);
+                    } else formData.append(key, _this12.item[key]);
                   });
-                  axios.post(_this11.apiUrl + "/" + _this11.modelName, formData).then(function (response) {
-                    _this11.loading = false;
-                    if (_this11.hideModalAfterSave) {
-                      _this11.$bvModal.hide("modal-form-item-" + _this11.modelName);
+                  axios.post(_this12.apiUrl + "/" + _this12.modelName, formData).then(function (response) {
+                    _this12.loading = false;
+                    if (_this12.hideModalAfterSave) {
+                      _this12.$bvModal.hide("modal-form-item-" + _this12.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this11.toastSuccess(response.data.message);
+                        _this12.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this11.items.push(itemSv);
-                    _this11.item = itemSv;
-                    if (_this11.refreshAfterSave) _this11.refresh();
-                    _this11.toastSuccess("Elemento Creado");
+                    _this12.items.push(itemSv);
+                    _this12.item = itemSv;
+                    if (_this12.refreshAfterSave) _this12.refresh();
+                    _this12.toastSuccess("Elemento Creado");
                   }).catch(function (error) {
-                    _this11.toastError(error);
-                    _this11.loading = false;
+                    _this12.toastError(error);
+                    _this12.loading = false;
                   });
                 } else {
-                  axios.post(_this11.apiUrl + "/" + _this11.modelName, _this11.item).then(function (response) {
-                    _this11.loading = false;
-                    if (_this11.hideModalAfterSave) {
-                      _this11.$bvModal.hide("modal-form-item-" + _this11.modelName);
+                  axios.post(_this12.apiUrl + "/" + _this12.modelName, _this12.item).then(function (response) {
+                    _this12.loading = false;
+                    if (_this12.hideModalAfterSave) {
+                      _this12.$bvModal.hide("modal-form-item-" + _this12.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this11.toastSuccess(response.data.message);
+                        _this12.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this11.items.push(itemSv);
-                    _this11.item = itemSv;
-                    if (_this11.refreshAfterSave) _this11.refresh();
-                    _this11.toastSuccess("Elemento Creado");
+                    _this12.items.push(itemSv);
+                    _this12.item = itemSv;
+                    if (_this12.refreshAfterSave) _this12.refresh();
+                    _this12.toastSuccess("Elemento Creado");
                   }).catch(function (error) {
-                    _this11.toastError(error);
-                    _this11.loading = false;
+                    _this12.toastError(error);
+                    _this12.loading = false;
                   });
                 }
               }
               if (event) event.preventDefault();
             case 13:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
-        }, _callee);
+        }, _callee2);
       }))();
     },
     toastError: function toastError(error) {
@@ -21349,10 +21365,10 @@ n(css, {});function normalizeComponent (
       });
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this12 = this;
+      var _this13 = this;
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this12.refresh();
+        _this13.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -22232,7 +22248,7 @@ var _sfc_render = function render() {
   })], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "e677b311", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "fa834ca3", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
