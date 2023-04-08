@@ -2,6 +2,7 @@
 import draggable from "vuedraggable";
 import axios from "axios";
 import moment from "moment";
+import { Model, Collection } from 'vue-mc';
 
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
@@ -37,6 +38,8 @@ export default /*#__PURE__*/ {
         MODE_CARDS: 2,
         MODE_CUSTOM: 3,
       },
+      useMc: false,
+      collection
     };
   },
   watch: {
@@ -258,14 +261,21 @@ export default /*#__PURE__*/ {
   },
 
   mounted() {
-    this.item = this.model;
-    this.itemDefault = JSON.parse(JSON.stringify(this.item));
+
+    if (this.model instanceof Model) {
+      this.useMc = true;
+      this.collection = new Collection();
+    } else {
+      this.item = this.model;
+      this.itemDefault = JSON.parse(JSON.stringify(this.item));
+    }
+
     this.internalFilters = [];
     this.setupFilters();
 
-    if(this.ajax){
+    if (this.ajax) {
       this.fetchItems();
-    }else{
+    } else {
       this.items = this.models;
       this.pagination.total = this.items.length;
     }
@@ -290,9 +300,9 @@ export default /*#__PURE__*/ {
     },
 
     itemsList() {
-      if(this.ajax) {
+      if (this.ajax) {
         return this.items;
-      }else{
+      } else {
         return this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
       }
     },
@@ -450,12 +460,12 @@ export default /*#__PURE__*/ {
         this.selectedItems.push(this.item);
       }
     },
-    externalUpdate(itemsUpdate,addIfNotExist = true,key= 'id'){
+    externalUpdate(itemsUpdate, addIfNotExist = true, key = 'id') {
       itemsUpdate.forEach(itemUpdate => {
         let itemInList = this.items.find(item => item[key] === itemUpdate[key]);
         if (itemInList) Object.assign(itemInList, itemUpdate);
         else {
-          if(addIfNotExist){
+          if (addIfNotExist) {
             this.items.push(itemUpdate);
           }
         }
@@ -497,7 +507,7 @@ export default /*#__PURE__*/ {
 
     refresh() {
       this.$emit("refresh", {});
-      if(!this.ajax){
+      if (!this.ajax) {
         return;
       }
       this.fetchItems(this.pagination.current_page);
@@ -513,11 +523,27 @@ export default /*#__PURE__*/ {
         this.refresh();
       }, 1);
     },
+
+    fetchItemsMc(page = 1) {
+      this.loading = true;
+      this.$emit("beforeFetch", {});
+      this.collection.page(page).fetch().then((response) => {
+        console.debug("fetch page ",page,response,this.collection);
+        this.loading = false;
+        this.$emit("afterFetch", {});
+      }).catch((error) => {
+        this.toastError(error);
+        this.loading = false;
+      });
+    },
     fetchItems(page = 1) {
-      if(!this.ajax){
+      if (!this.ajax) {
         return;
       }
       this.$emit("beforeFetch", {});
+      if (this.useMc) {
+        return this.fetchItemsMc(page);
+      }
       this.loading = true;
       axios
         .get(this.apiUrl + "/" + this.modelName, {
@@ -563,7 +589,7 @@ export default /*#__PURE__*/ {
           }
 
           this.loading = false;
-            this.$emit("afterFetch", {});
+          this.$emit("afterFetch", {});
         })
         .catch((error) => {
           //console.debug(error);
@@ -587,12 +613,12 @@ export default /*#__PURE__*/ {
             this.loading = true;
             axios
               .delete(this.apiUrl + "/" + this.modelName + "/" + id)
-              .then( (response) => {
+              .then((response) => {
                 this.items.splice(index, 1);
                 this.toastSuccess("Elemento eliminado.");
                 this.loading = false;
               })
-              .catch( (error) => {
+              .catch((error) => {
                 this.toastError(error);
                 this.loading = false;
               });
@@ -616,13 +642,13 @@ export default /*#__PURE__*/ {
           .post(this.apiUrl + "/" + this.modelName + "/sort", {
             order: order,
           })
-          .then( (response) => {
+          .then((response) => {
             let data = response.data;
             this.toastSuccess("Orden Actualizado");
             if (this.refreshAfterSave) this.refresh();
             this.loading = false;
           })
-          .catch( (error) => {
+          .catch((error) => {
             //console.debug(error);
             this.toastError(error);
             this.loading = false;
@@ -688,7 +714,7 @@ export default /*#__PURE__*/ {
             this.item
           )
           .then((response) => {
-            if(this.hideModalAfterSave){
+            if (this.hideModalAfterSave) {
               this.$bvModal.hide("modal-form-item-" + this.modelName);
             }
 
@@ -725,9 +751,9 @@ export default /*#__PURE__*/ {
 
           axios
             .post(this.apiUrl + "/" + this.modelName, formData)
-            .then( (response) => {
+            .then((response) => {
               this.loading = false;
-              if(this.hideModalAfterSave){
+              if (this.hideModalAfterSave) {
                 this.$bvModal.hide("modal-form-item-" + this.modelName);
               }
               if (response.data.success) {
@@ -744,16 +770,16 @@ export default /*#__PURE__*/ {
               if (this.refreshAfterSave) this.refresh();
               this.toastSuccess("Elemento Creado");
             })
-            .catch( (error) => {
+            .catch((error) => {
               this.toastError(error);
               this.loading = false;
             });
         } else {
           axios
             .post(this.apiUrl + "/" + this.modelName, this.item)
-            .then( (response) => {
+            .then((response) => {
               this.loading = false;
-              if(this.hideModalAfterSave){
+              if (this.hideModalAfterSave) {
                 this.$bvModal.hide("modal-form-item-" + this.modelName);
               }
               if (response.data.success) {
@@ -770,7 +796,7 @@ export default /*#__PURE__*/ {
               if (this.refreshAfterSave) this.refresh();
               this.toastSuccess("Elemento Creado");
             })
-            .catch( (error) => {
+            .catch((error) => {
               this.toastError(error);
               this.loading = false;
             });
@@ -852,32 +878,18 @@ export default /*#__PURE__*/ {
       <h4 class="crud-title" v-if="showTitle">{{ title }}</h4>
 
       <b-sidebar v-model="filterSidebarOpen" title="Filtrar" right shadow>
-        <slot
-          name="sidebarFilters"
-          v-bind:createItem="createItem"
-          v-bind:toggleDisplayMode="toggleDisplayMode"
-          v-bind:loading="loading"
-          v-bind:isColumnHasFilter="isColumnHasFilter"
-          v-bind:setFilter="setFilter"
-        >
+        <slot name="sidebarFilters" v-bind:createItem="createItem" v-bind:toggleDisplayMode="toggleDisplayMode"
+          v-bind:loading="loading" v-bind:isColumnHasFilter="isColumnHasFilter" v-bind:setFilter="setFilter">
           <div class="px-3 py-2">
             <div v-for="(column, indexc) in columns" :key="indexc">
               <div v-if="isColumnHasFilter(column)">
-                <slot
-                  :name="'sidebar-filter-' + column.prop"
-                  v-bind:column="column"
-                  v-bind:filter="filter"
-                  v-bind:internalFilterByProp="internalFilterByProp"
-                  v-if="internalFilterByProp(column.prop)"
-                >
+                <slot :name="'sidebar-filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
+                  v-bind:internalFilterByProp="internalFilterByProp" v-if="internalFilterByProp(column.prop)">
                   <div class="form-group" v-if="column.type == 'boolean'">
                     <label>{{ column.label }}</label>
 
-                    <select
-                      class="form-control"
-                      v-model="internalFilterByProp(column.prop).value"
-                      @change="onChangeFilter($event)"
-                    >
+                    <select class="form-control" v-model="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)">
                       <option value=""></option>
                       <option value="1">Sí</option>
                       <option value="0">No</option>
@@ -886,26 +898,14 @@ export default /*#__PURE__*/ {
                   <div class="form-group" v-else-if="column.type == 'date'">
                     <div class="row">
                       <div class="col-6">
-                        <b-form-datepicker
-                          v-model="
-                            internalFilterByProp(column.prop + '_from').value
-                          "
-                          today-button
-                          reset-button
-                          close-button
-                          locale="es"
-                        ></b-form-datepicker>
+                        <b-form-datepicker v-model="
+                          internalFilterByProp(column.prop + '_from').value
+                        " today-button reset-button close-button locale="es"></b-form-datepicker>
                       </div>
                       <div class="col-6">
-                        <b-form-datepicker
-                          v-model="
-                            internalFilterByProp(column.prop + '_to').value
-                          "
-                          today-button
-                          reset-button
-                          close-button
-                          locale="es"
-                        ></b-form-datepicker>
+                        <b-form-datepicker v-model="
+                          internalFilterByProp(column.prop + '_to').value
+                        " today-button reset-button close-button locale="es"></b-form-datepicker>
                       </div>
                     </div>
                   </div>
@@ -914,21 +914,14 @@ export default /*#__PURE__*/ {
                     <label>{{ column.label }}</label>
                     <div class="d-none">{{ column.options }}</div>
 
-                    <select
-                      class="form-control"
-                      v-model="internalFilterByProp(column.prop).value"
-                      @change="onChangeFilter($event)"
-                    >
+                    <select class="form-control" v-model="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)">
                       <option value=""></option>
-                      <option
-                        :value="option.id"
-                        v-for="option in column.options"
-                        :key="option.id"
-                      >
+                      <option :value="option.id" v-for="option in column.options" :key="option.id">
                         {{
                           option.text
-                            ? option.text
-                            : option.label
+                          ? option.text
+                          : option.label
                             ? option.label
                             : ""
                         }}
@@ -940,22 +933,15 @@ export default /*#__PURE__*/ {
                     <label>{{ column.label }}</label>
                     <div class="d-none">{{ column.options }}</div>
 
-                    <select
-                      class="form-control"
-                      v-model="internalFilterByProp(column.prop).value"
-                      @change="onChangeFilter($event)"
-                    >
+                    <select class="form-control" v-model="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)">
                       <option value=""></option>
                       <template v-if="column.options">
-                        <option
-                          :value="option.id"
-                          v-for="option in column.options"
-                          :key="option.id"
-                        >
+                        <option :value="option.id" v-for="option in column.options" :key="option.id">
                           {{
                             option.text
-                              ? option.text
-                              : option.label
+                            ? option.text
+                            : option.label
                               ? option.label
                               : ""
                           }}
@@ -967,11 +953,8 @@ export default /*#__PURE__*/ {
                   <div class="form-group" v-else>
                     <label>{{ column.label }}</label>
 
-                    <input
-                      class="form-control"
-                      v-model.lazy="internalFilterByProp(column.prop).value"
-                      @change="onChangeFilter($event)"
-                    />
+                    <input class="form-control" v-model.lazy="internalFilterByProp(column.prop).value"
+                      @change="onChangeFilter($event)" />
                   </div>
                 </slot>
               </div>
@@ -991,63 +974,30 @@ export default /*#__PURE__*/ {
 
       <div class="table-options">
         <b-button-group class="mr-1">
-          <slot
-            name="tableActions"
-            v-bind:createItem="createItem"
-            v-bind:toggleDisplayMode="toggleDisplayMode"
-            v-bind:loading="loading"
-          >
+          <slot name="tableActions" v-bind:createItem="createItem" v-bind:toggleDisplayMode="toggleDisplayMode"
+            v-bind:loading="loading">
             <slot name="tableActionsPrepend" v-bind:loading="loading"> </slot>
-            <b-button
-              variant="success"
-              v-if="showCreateBtn"
-              @click="createItem()"
-              :disabled="loading"
-            >
+            <b-button variant="success" v-if="showCreateBtn" @click="createItem()" :disabled="loading">
               <b-icon-plus></b-icon-plus>{{ messageNew }}
             </b-button>
 
-            <b-button v-if="enableFilters" @click="toggleFilters()"
-              >Filtros</b-button
-            >
+            <b-button v-if="enableFilters" @click="toggleFilters()">Filtros</b-button>
 
-            <b-button @click="refresh()"
-              ><b-icon-arrow-clockwise></b-icon-arrow-clockwise
-            ></b-button>
+            <b-button @click="refresh()"><b-icon-arrow-clockwise></b-icon-arrow-clockwise></b-button>
 
-            <b-button
-              variant="info"
-              @click="toggleDisplayMode()"
-              :disabled="loading"
-              v-if="displayModeToggler"
-            >
-              <b-icon-card-list
-                v-if="displayMode == displayModes.MODE_TABLE"
-              ></b-icon-card-list>
-              <b-icon-table
-                v-if="displayMode == displayModes.MODE_CARDS"
-              ></b-icon-table>
+            <b-button variant="info" @click="toggleDisplayMode()" :disabled="loading" v-if="displayModeToggler">
+              <b-icon-card-list v-if="displayMode == displayModes.MODE_TABLE"></b-icon-card-list>
+              <b-icon-table v-if="displayMode == displayModes.MODE_CARDS"></b-icon-table>
             </b-button>
 
             <div class="crud-search m-0" v-if="showSearch">
               <b-input-group>
                 <b-input-group-prepend>
-                  <b-button
-                    variant="info"
-                    @click="displaySearch = !displaySearch"
-                    :class="{ open: displaySearch }"
-                    ><b-icon-search></b-icon-search
-                  ></b-button>
+                  <b-button variant="info" @click="displaySearch = !displaySearch"
+                    :class="{ open: displaySearch }"><b-icon-search></b-icon-search></b-button>
                 </b-input-group-prepend>
-                <b-form-input
-                  v-if="displaySearch"
-                  v-model="search"
-                  class="pl-2"
-                  type="search"
-                  required
-                  :placeholder="searchPlaceholder"
-                  debounce="500"
-                ></b-form-input>
+                <b-form-input v-if="displaySearch" v-model="search" class="pl-2" type="search" required
+                  :placeholder="searchPlaceholder" debounce="500"></b-form-input>
               </b-input-group>
 
               <slot name="tableActionsAppend" v-bind:loading="loading"> </slot>
@@ -1057,38 +1007,22 @@ export default /*#__PURE__*/ {
       </div>
     </div>
     <b-overlay :show="loading" rounded="sm">
-      <div
-        :class="['table-responsive', tableContainerClass]"
-        v-if="displayMode == displayModes.MODE_TABLE"
-      >
+      <div :class="['table-responsive', tableContainerClass]" v-if="displayMode == displayModes.MODE_TABLE">
         <table :class="['table table-hover table-striped w-100', tableClass]">
           <thead class="thead-light">
             <tr>
               <slot name="rowHead">
-                <th
-                  v-for="(column, indexc) in columns"
-                  :key="indexc"
-                  :style="{ width: column.width ? column.width : 'inherit' }"
-                  scope="col"
-                >
-                  <slot
-                    :name="'filter-' + column.prop"
-                    v-bind:column="column"
-                    v-bind:filter="filter"
-                    v-bind:internalFilterByProp="internalFilterByProp"
-                    v-if="
+                <th v-for="(column, indexc) in columns" :key="indexc"
+                  :style="{ width: column.width ? column.width : 'inherit' }" scope="col">
+                  <slot :name="'filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
+                    v-bind:internalFilterByProp="internalFilterByProp" v-if="
                       enableFilters &&
                       filtersVisible &&
                       isColumnHasFilter(column) &&
                       internalFilterByProp(column.prop)
-                    "
-                  >
-                    <select
-                      v-if="column.type == 'boolean'"
-                      class="form-control"
-                      v-model="internalFilterByProp(column.prop).value"
-                      @change="onChangeFilter($event)"
-                    >
+                    ">
+                    <select v-if="column.type == 'boolean'" class="form-control"
+                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
                       <option value="">{{ column.label }}</option>
                       <option value="1">Sí</option>
                       <option value="0">No</option>
@@ -1096,133 +1030,72 @@ export default /*#__PURE__*/ {
 
                     <div class="row" v-else-if="column.type == 'date'">
                       <div class="col-6">
-                        <b-form-datepicker
-                          v-model="
-                            internalFilterByProp(column.prop + '_from').value
-                          "
-                          today-button
-                          reset-button
-                          close-button
-                          locale="es"
-                        ></b-form-datepicker>
+                        <b-form-datepicker v-model="
+                          internalFilterByProp(column.prop + '_from').value
+                        " today-button reset-button close-button locale="es"></b-form-datepicker>
                       </div>
                       <div class="col-6">
-                        <b-form-datepicker
-                          v-model="
-                            internalFilterByProp(column.prop + '_to').value
-                          "
-                          today-button
-                          reset-button
-                          close-button
-                          locale="es"
-                        ></b-form-datepicker>
+                        <b-form-datepicker v-model="
+                          internalFilterByProp(column.prop + '_to').value
+                        " today-button reset-button close-button locale="es"></b-form-datepicker>
                       </div>
                     </div>
 
-                    <select
-                      v-else-if="column.type == 'state'"
-                      class="form-control"
-                      v-model="internalFilterByProp(column.prop).value"
-                      @change="onChangeFilter($event)"
-                    >
+                    <select v-else-if="column.type == 'state'" class="form-control"
+                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
                       <option value="">{{ column.label }}</option>
-                      <option
-                        :value="option.id"
-                        v-for="(option, indexo) in column.options"
-                        :key="indexo"
-                      >
+                      <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
                         {{
                           option.text
-                            ? option.text
-                            : option.label
+                          ? option.text
+                          : option.label
                             ? option.label
                             : ""
                         }}
                       </option>
                     </select>
 
-                    <select
-                      v-else-if="column.type == 'array'"
-                      class="form-control"
-                      v-model="internalFilterByProp(column.prop).value"
-                      @change="onChangeFilter($event)"
-                    >
+                    <select v-else-if="column.type == 'array'" class="form-control"
+                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
                       <option value="">{{ column.label }}</option>
-                      <option
-                        :value="option.id"
-                        v-for="(option, indexo) in column.options"
-                        :key="indexo"
-                      >
+                      <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
                         {{
                           option.text
-                            ? option.text
-                            : option.label
+                          ? option.text
+                          : option.label
                             ? option.label
                             : ""
                         }}
                       </option>
                     </select>
 
-                    <b-form-checkbox
-                      v-else-if="column.type == 'checkbox'"
-                      name="select-all"
-                      @change="toggleAll()"
-                    >
+                    <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
                     </b-form-checkbox>
-                    <input
-                      v-else
-                      class="form-control"
-                      v-model="internalFilterByProp(column.prop).value"
-                      :placeholder="column.label"
-                      @change="onChangeFilter($event)"
-                    />
+                    <input v-else class="form-control" v-model="internalFilterByProp(column.prop).value"
+                      :placeholder="column.label" @change="onChangeFilter($event)" />
                   </slot>
 
                   <span v-else>{{ column.label }}</span>
 
-                  <span
-                    v-if="
-                      sortable && internalFilterByProp(column.prop + '_sort')
-                    "
-                    class="sort-filter"
-                    @click="toggleSortFilter(column)"
-                    ><b-icon-sort
-                      v-if="!internalFilterByProp(column.prop + '_sort').value"
-                    ></b-icon-sort
-                    ><b-icon-sort-up
-                      v-if="
+                  <span v-if="
+                    sortable && internalFilterByProp(column.prop + '_sort')
+                  " class="sort-filter" @click="toggleSortFilter(column)"><b-icon-sort
+                      v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort><b-icon-sort-up v-if="
                         internalFilterByProp(column.prop + '_sort').value ==
                         'ASC'
-                      "
-                    ></b-icon-sort-up
-                    ><b-icon-sort-down
-                      v-if="
-                        internalFilterByProp(column.prop + '_sort').value ==
-                        'DESC'
-                      "
-                    ></b-icon-sort-down
-                  ></span>
+                      "></b-icon-sort-up><b-icon-sort-down v-if="
+  internalFilterByProp(column.prop + '_sort').value ==
+  'DESC'
+"></b-icon-sort-down></span>
                 </th>
               </slot>
             </tr>
           </thead>
 
-          <draggable
-            v-model="items"
-            group="people"
-            tag="tbody"
-            :draggable="orderable ? '.item' : '.none'"
-            @start="drag = true"
-            @end="drag = false"
-            @sort="onSort()"
-          >
-            <tr
-              v-for="(item, index) in items"
-              v-bind:key="index"
-              @mouseover="onRowHover(item, index)"
-              @click="onRowClick(item, index)"
-              class="item"
-            >
+          <draggable v-model="items" group="people" tag="tbody" :draggable="orderable ? '.item' : '.none'"
+            @start="drag = true" @end="drag = false" @sort="onSort()">
+            <tr v-for="(item, index) in items" v-bind:key="index" @mouseover="onRowHover(item, index)"
+              @click="onRowClick(item, index)" class="item">
               <template v-if="item.group">
                 <th :colspan="columns.length">
                   <span>{{ item.label }}</span>
@@ -1230,52 +1103,32 @@ export default /*#__PURE__*/ {
               </template>
               <template v-else>
                 <slot name="row" v-bind:item="item">
-                  <td
-                    v-for="(column, indexc) in columns"
-                    :key="indexc"
-                    :scope="column.prop == 'id' ? 'row' : ''"
-                  >
-                    <slot
-                      :name="'cell-' + column.prop"
-                      v-bind:item="item"
-                      v-bind:index="index"
-                      v-bind:itemindex="index"
-                      v-bind:columnindex="indexc"
-                    >
+                  <td v-for="(column, indexc) in columns" :key="indexc" :scope="column.prop == 'id' ? 'row' : ''">
+                    <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
+                      v-bind:columnindex="indexc">
                       <span v-if="column.type == 'boolean'">
-                        <b-badge
-                          variant="success"
-                          v-if="
-                            itemValue(column, item) == 'true' ||
-                            itemValue(column, item) == 1 ||
-                            itemValue(column, item) == '1'
-                          "
-                          ><b-icon-check-circle></b-icon-check-circle
-                        ></b-badge>
-                        <b-badge
-                          variant="danger"
-                          v-if="
-                            !itemValue(column, item) ||
-                            itemValue(column, item) == '0' ||
-                            itemValue(column, item) == 'false'
-                          "
-                          ><b-icon-x-circle></b-icon-x-circle
-                        ></b-badge>
+                        <b-badge variant="success" v-if="
+                          itemValue(column, item) == 'true' ||
+                          itemValue(column, item) == 1 ||
+                          itemValue(column, item) == '1'
+                        "><b-icon-check-circle></b-icon-check-circle></b-badge>
+                        <b-badge variant="danger" v-if="
+                          !itemValue(column, item) ||
+                          itemValue(column, item) == '0' ||
+                          itemValue(column, item) == 'false'
+                        "><b-icon-x-circle></b-icon-x-circle></b-badge>
                       </span>
                       <span v-else-if="column.type == 'date'">
                         {{
                           itemValue(column, item) && column.format
-                            ? moment(itemValue(column, item)).format(
-                                column.format
-                              )
-                            : itemValue(column, item)
+                          ? moment(itemValue(column, item)).format(
+                            column.format
+                          )
+                          : itemValue(column, item)
                         }}
                       </span>
                       <span v-else-if="column.type == 'checkbox'">
-                        <b-form-checkbox
-                          v-model="item.selected"
-                          @change="onCheckSelect($event, item)"
-                        >
+                        <b-form-checkbox v-model="item.selected" @change="onCheckSelect($event, item)">
                         </b-form-checkbox>
                       </span>
 
@@ -1300,30 +1153,15 @@ export default /*#__PURE__*/ {
                     </slot>
 
                     <b-button-group v-if="column.type == 'actions'">
-                      <slot
-                        name="rowAction"
-                        v-bind:item="item"
-                        v-bind:index="index"
-                        v-bind:showItem="showItem"
-                        v-bind:updateItem="updateItem"
-                        v-bind:removeItem="removeItem"
-                      >
-                        <b-button
-                          variant="primary"
-                          @click="showItem(item.id, index)"
-                        >
+                      <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
+                        v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
+                        <b-button variant="primary" @click="showItem(item.id, index)">
                           <b-icon-eye></b-icon-eye>
                         </b-button>
-                        <b-button
-                          variant="secondary"
-                          @click="updateItem(item.id, index)"
-                        >
+                        <b-button variant="secondary" @click="updateItem(item.id, index)">
                           <b-icon-pencil></b-icon-pencil>
                         </b-button>
-                        <b-button
-                          variant="danger"
-                          @click="removeItem(item.id, index)"
-                        >
+                        <b-button variant="danger" @click="removeItem(item.id, index)">
                           <b-icon-trash></b-icon-trash>
                         </b-button>
                       </slot>
@@ -1344,62 +1182,28 @@ export default /*#__PURE__*/ {
           {{ messageEmptyResults }}
         </p>
 
-        <draggable
-          v-model="items"
-          group="people"
-          class="row"
-          :draggable="orderable ? '.item' : '.none'"
-          @start="drag = true"
-          @end="drag = false"
-          @sort="onSort()"
-        >
-          <b-col
-            v-for="(item, index) in items"
-            v-bind:key="index"
-            :cols="colXs"
-            :sm="colSm"
-            :md="colMd"
-            :lg="colLg"
-            :xl="colXl"
-            class="item"
-          >
-            <b-card
-              :title="item.title"
-              tag="article"
-              class="mb-2 card-crud"
-              :class="cardClass"
-              :hideFooter="cardHideFooter"
-            >
+        <draggable v-model="items" group="people" class="row" :draggable="orderable ? '.item' : '.none'"
+          @start="drag = true" @end="drag = false" @sort="onSort()">
+          <b-col v-for="(item, index) in items" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
+            :xl="colXl" class="item">
+            <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
+              :hideFooter="cardHideFooter">
               <slot name="card" v-bind:item="item">
                 <div v-for="(column, indexc) in columns" :key="indexc">
-                  <b-card-text v-if="column.type != 'actions'"
-                    >{{ column.label }}:
-                    <slot
-                      :name="'cell-' + column.prop"
-                      v-bind:item="item"
-                      v-bind:index="index"
-                      v-bind:itemindex="index"
-                      v-bind:columnindex="indexc"
-                    >
+                  <b-card-text v-if="column.type != 'actions'">{{ column.label }}:
+                    <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
+                      v-bind:columnindex="indexc">
                       <span v-if="column.type == 'boolean'">
-                        <b-badge
-                          variant="success"
-                          v-if="
-                            itemValue(column, item) == 'true' ||
-                            itemValue(column, item) == 1 ||
-                            itemValue(column, item) == '1'
-                          "
-                          ><b-icon-check-circle></b-icon-check-circle
-                        ></b-badge>
-                        <b-badge
-                          variant="danger"
-                          v-if="
-                            !itemValue(column, item) ||
-                            itemValue(column, item) == '0' ||
-                            itemValue(column, item) == 'false'
-                          "
-                          ><b-icon-x-circle></b-icon-x-circle
-                        ></b-badge>
+                        <b-badge variant="success" v-if="
+                          itemValue(column, item) == 'true' ||
+                          itemValue(column, item) == 1 ||
+                          itemValue(column, item) == '1'
+                        "><b-icon-check-circle></b-icon-check-circle></b-badge>
+                        <b-badge variant="danger" v-if="
+                          !itemValue(column, item) ||
+                          itemValue(column, item) == '0' ||
+                          itemValue(column, item) == 'false'
+                        "><b-icon-x-circle></b-icon-x-circle></b-badge>
                       </span>
 
                       <span v-else-if="column.type == 'date'">
@@ -1428,30 +1232,15 @@ export default /*#__PURE__*/ {
 
               <template v-slot:footer>
                 <b-button-group>
-                  <slot
-                    name="rowAction"
-                    v-bind:item="item"
-                    v-bind:index="index"
-                    v-bind:showItem="showItem"
-                    v-bind:updateItem="updateItem"
-                    v-bind:removeItem="removeItem"
-                  >
-                    <b-button
-                      variant="primary"
-                      @click="showItem(item.id, index)"
-                    >
+                  <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
+                    v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
+                    <b-button variant="primary" @click="showItem(item.id, index)">
                       <b-icon-eye></b-icon-eye>
                     </b-button>
-                    <b-button
-                      variant="secondary"
-                      @click="updateItem(item.id, index)"
-                    >
+                    <b-button variant="secondary" @click="updateItem(item.id, index)">
                       <b-icon-pencil></b-icon-pencil>
                     </b-button>
-                    <b-button
-                      variant="danger"
-                      @click="removeItem(item.id, index)"
-                    >
+                    <b-button variant="danger" @click="removeItem(item.id, index)">
                       <b-icon-trash></b-icon-trash>
                     </b-button>
                   </slot>
@@ -1468,43 +1257,23 @@ export default /*#__PURE__*/ {
             {{ messageEmptyResults }}
           </p>
 
-          <div
-            :class="listItemClass"
-            v-for="(item, index) in items"
-            v-bind:key="index"
-          >
+          <div :class="listItemClass" v-for="(item, index) in items" v-bind:key="index">
             <slot name="card" v-bind:item="item"> </slot>
           </div>
         </div>
       </div>
     </b-overlay>
     <div class="crud-paginator">
-      <b-pagination
-        v-if="showPaginator"
-        v-model="pagination.current_page"
-        :total-rows="pagination.total"
-        :per-page="pagination.per_page"
-        @change="onPaginationChange($event)"
-      ></b-pagination>
+      <b-pagination v-if="showPaginator" v-model="pagination.current_page" :total-rows="pagination.total"
+        :per-page="pagination.per_page" @change="onPaginationChange($event)"></b-pagination>
     </div>
-    <b-modal
-      :id="'modal-form-item-' + modelName"
-      hide-footer
-      size="xl"
-      :title="title"
-      no-close-on-backdrop
-    >
+    <b-modal :id="'modal-form-item-' + modelName" hide-footer size="xl" :title="title" no-close-on-backdrop>
       <b-overlay :show="loading" rounded="sm">
         <template v-if="validate">
           <form @submit="saveItem">
             <slot name="form" v-bind:item="item">
               <b-form-group label="Nombre:" description="Nombre ">
-                <b-form-input
-                  v-model="item.title"
-                  type="text"
-                  required
-                  placeholder="Nombre"
-                ></b-form-input>
+                <b-form-input v-model="item.title" type="text" required placeholder="Nombre"></b-form-input>
               </b-form-group>
             </slot>
             <b-button block type="submit" variant="success" :disabled="loading">
@@ -1515,33 +1284,16 @@ export default /*#__PURE__*/ {
         <template v-if="!validate">
           <slot name="form" v-bind:item="item">
             <b-form-group label="Nombre:" description="Nombre ">
-              <b-form-input
-                v-model="item.title"
-                type="text"
-                required
-                placeholder="Nombre"
-              ></b-form-input>
+              <b-form-input v-model="item.title" type="text" required placeholder="Nombre"></b-form-input>
             </b-form-group>
           </slot>
-          <b-button
-            block
-            type="submit"
-            variant="success"
-            :disabled="loading"
-            @click="saveItem()"
-          >
+          <b-button block type="submit" variant="success" :disabled="loading" @click="saveItem()">
             <b-spinner small v-if="loading"></b-spinner>{{ messageSave }}
           </b-button>
         </template>
       </b-overlay>
     </b-modal>
-    <b-modal
-      :id="'modal-show-item-' + modelName"
-      hide-footer
-      size="xl"
-      :title="title"
-      no-close-on-backdrop
-    >
+    <b-modal :id="'modal-show-item-' + modelName" hide-footer size="xl" :title="title" no-close-on-backdrop>
       <slot name="show" v-bind:item="item">
         <p class="my-4">Show</p>
       </slot>
@@ -1555,10 +1307,12 @@ tr td:first-child {
   width: 1%;
   white-space: nowrap;
 }
+
 .crud-pagination {
   display: flex;
   justify-content: center;
 }
+
 .crud-header {
   display: flex;
   justify-content: space-between;
@@ -1583,6 +1337,7 @@ tr td:first-child {
       }
     }
   }
+
   .table-options {
     margin-bottom: 1rem;
     display: flex;
@@ -1590,6 +1345,7 @@ tr td:first-child {
     justify-content: flex-end;
   }
 }
+
 .custom-control {
   position: relative;
   top: -15px;
@@ -1602,9 +1358,12 @@ tr td:first-child {
     tbody {
       td {
         overflow: scroll;
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
       }
+
       td::-webkit-scrollbar {
         display: none;
       }
