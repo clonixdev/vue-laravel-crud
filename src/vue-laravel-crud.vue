@@ -539,8 +539,8 @@ export default /*#__PURE__*/ {
     fetchItemsVuex(page = 1) {
       this.loading = true;
       this.$emit("beforeFetch", {});
-      console.debug("fetch page vuex ", page, response, this.collection);
       this.collection = this.model.api().query().offset(page).limit(this.pagination.perPage).get();
+      console.debug("fetch page vuex ", page,  this.collection);
       this.loading = false;
     },
     fetchItems(page = 1) {
