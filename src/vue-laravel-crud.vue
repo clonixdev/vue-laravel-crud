@@ -271,6 +271,8 @@ export default /*#__PURE__*/ {
 
     if (this.useVuexORM) {
       //this.useVuexORM = true;
+      this.item = new this.model();
+
     } else {
       this.item = this.model;
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
@@ -305,44 +307,31 @@ export default /*#__PURE__*/ {
       };
     },
     itemsList() {
-
       if (this.ajax) {
         return this.items;
       } else {
         return this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
       }
     },
-
-
-
     paginationIndexStart() {
       return (this.pagination.current_page - 1) * this.pagination.per_page;
     },
     paginationIndexEnd() {
       return this.paginationIndexStart + this.pagination.per_page;
     },
-
-
-    /* filteredItems() {
-      return this.items;
-    },*/
-
     finalFilters() {
-
       return [
         ...this.filters,
         ...this.filter,
         ...this.internalFilter
       ];
     },
-
     internalFilter() {
       let filter = [];
       this.forceRecomputeCounter;
       this.internalFilters.forEach((f) => {
         if (f.value) filter.push([f.column, f.op, f.value]);
       });
-
       return filter;
     },
     internalFilterByProp() {
@@ -375,7 +364,6 @@ export default /*#__PURE__*/ {
             });
           }
         }
-
         if (this.sortable) {
           this.internalFilters.push({
             column: column.prop + "_sort",
@@ -388,7 +376,6 @@ export default /*#__PURE__*/ {
 
     toggleSortFilter(column) {
       let value = this.internalFilterByProp(column.prop + "_sort").value;
-
       if (!value) {
         this.internalFilterByProp(column.prop + "_sort").value = "ASC";
       } else if (value == "ASC") {
@@ -540,7 +527,6 @@ export default /*#__PURE__*/ {
     async fetchItemsVuex(page = 1) {
       this.loading = true;
       this.$emit("beforeFetch", {});
-
       const result = await this.model.api().get('', {
         params: {
           page: page,
@@ -548,10 +534,7 @@ export default /*#__PURE__*/ {
           filters: JSON.stringify(this.finalFilters),
         }
       });
-
       this.items = result.entities[this.model.entity];
-
-
       console.debug("fetch page vuex ", page, this.items);
       this.loading = false;
     },
@@ -617,7 +600,7 @@ export default /*#__PURE__*/ {
         });
     },
 
-    removeItem: function (id, index) {
+    removeItem(id, index) {
       this.$bvModal
         .msgBoxConfirm(this.messageRemoveConfirm, {
           size: "sm",
@@ -629,18 +612,7 @@ export default /*#__PURE__*/ {
         })
         .then((value) => {
           if (value) {
-            this.loading = true;
-            axios
-              .delete(this.apiUrl + "/" + this.modelName + "/" + id)
-              .then((response) => {
-                this.items.splice(index, 1);
-                this.toastSuccess("Elemento eliminado.");
-                this.loading = false;
-              })
-              .catch((error) => {
-                this.toastError(error);
-                this.loading = false;
-              });
+            this.deleteItem(id, index);
           }
         })
         .catch((error) => {
@@ -649,6 +621,40 @@ export default /*#__PURE__*/ {
         });
     },
 
+    deleteItem(id, index) {
+
+      if (this.useVuexORM) {
+        return this.deleteItemVuex(id, index);
+      }
+      this.loading = true;
+      axios
+        .delete(this.apiUrl + "/" + this.modelName + "/" + id)
+        .then((response) => {
+          this.items.splice(index, 1);
+          this.toastSuccess("Elemento eliminado.");
+          this.loading = false;
+        })
+        .catch((error) => {
+          this.toastError(error);
+          this.loading = false;
+        });
+    },
+    async deleteItemVuex(id, index) {
+
+      let result = await this.model.api().delete('/' + id, {
+        delete: 1
+      });
+
+      console.debug("delete item vuex",result);
+      let responseStatus = result.response.status;
+
+      if (result.response.data.error) {
+        this.toastError(result.response.data.error);
+        return;
+      }
+
+      this.toastSuccess("Elemento eliminado.");
+    },
     saveSort() {
       if (this.orderable) {
         this.loading = true;
@@ -656,7 +662,6 @@ export default /*#__PURE__*/ {
         this.items.forEach((v, k) => {
           order.push({ id: v.id, order: v[this.orderProp] });
         });
-
         axios
           .post(this.apiUrl + "/" + this.modelName + "/sort", {
             order: order,
@@ -696,7 +701,6 @@ export default /*#__PURE__*/ {
         );
         return value;
       }
-
       let ops = options.filter((option) => {
         if (Array.isArray(value)) {
           return value.includes(option.id);
@@ -704,26 +708,53 @@ export default /*#__PURE__*/ {
           return option.id == value;
         }
       });
-
       ops = ops.map((option) => {
         return option.text ? option.text : option.label ? option.label : "";
       });
-
       return ops.join(", ");
     },
+    async saveItemVuex(event = null) {
+      let jsondata = this.item.$toJson();
+
+
+      console.debug("save item ", this.item, jsondata);
+      let result;
+
+      if (this.item.id) {
+        result = await this.model.api().put('/' + this.item.id, jsondata);
+      } else {
+        result = await this.model.api().post('', jsondata);
+      }
+
+      let responseStatus = result.response.status;
+      if (result.response.data.error) {
+        this.toastError(result.response.data.error);
+        return;
+        //throw new Error('Something is wrong.')
+      }
+
+      result.save();
+
+      if (this.refreshAfterSave) this.refresh();
+      this.toastSuccess("Elemento Modificado");
+    },
+
+
     async saveItem(event = null) {
       this.loading = true;
-
       if (this.validate) {
         let validation_result = true;
         let validation_error_message = this.messageDefaultValidationError;
-
         if (!validation_result) {
           this.toastError(validation_error_message);
           return;
         }
       } else {
         if (event) event.preventDefault();
+      }
+
+      if (this.useVuexORM) {
+        return this.saveItemVuex();
       }
 
       if (this.item.id) {
@@ -736,7 +767,6 @@ export default /*#__PURE__*/ {
             if (this.hideModalAfterSave) {
               this.$bvModal.hide("modal-form-item-" + this.modelName);
             }
-
             let itemSv = response.data;
             let itemIndex = this.items.findIndex(
               (item) => item.id == this.item.id
@@ -754,7 +784,6 @@ export default /*#__PURE__*/ {
       } else {
         if (this.createMultipart) {
           const formData = new FormData();
-
           Object.keys(this.item).forEach((key) => {
             if (this.item[key][0] && this.item[key][0].name) {
               let files = this.item[key];
@@ -781,9 +810,7 @@ export default /*#__PURE__*/ {
                 }
                 return;
               }
-
               let itemSv = response.data;
-
               this.items.push(itemSv);
               this.item = itemSv;
               if (this.refreshAfterSave) this.refresh();
@@ -809,7 +836,6 @@ export default /*#__PURE__*/ {
               }
 
               let itemSv = response.data;
-
               this.items.push(itemSv);
               this.item = itemSv;
               if (this.refreshAfterSave) this.refresh();
@@ -1096,16 +1122,13 @@ export default /*#__PURE__*/ {
 
                   <span v-else>{{ column.label }}</span>
 
-                  <span v-if="
-                    sortable && internalFilterByProp(column.prop + '_sort')
-                  " class="sort-filter" @click="toggleSortFilter(column)"><b-icon-sort
+                  <span v-if="sortable && internalFilterByProp(column.prop + '_sort')" class="sort-filter"
+                    @click="toggleSortFilter(column)"><b-icon-sort
                       v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort><b-icon-sort-up v-if="
-                        internalFilterByProp(column.prop + '_sort').value ==
-                        'ASC'
-                      "></b-icon-sort-up><b-icon-sort-down v-if="
-  internalFilterByProp(column.prop + '_sort').value ==
-  'DESC'
-"></b-icon-sort-down></span>
+                        internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
+                    <b-icon-sort-down
+                      v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
+                  </span>
                 </th>
               </slot>
             </tr>
@@ -1150,13 +1173,11 @@ export default /*#__PURE__*/ {
                         <b-form-checkbox v-model="item.selected" @change="onCheckSelect($event, item)">
                         </b-form-checkbox>
                       </span>
-
                       <span v-else-if="column.type == 'state'">
                         {{
                           getStateValue(itemValue(column, item), column.options)
                         }}
                       </span>
-
                       <span v-else-if="column.type == 'array'">
                         {{
                           getArrayValue(
@@ -1165,7 +1186,6 @@ export default /*#__PURE__*/ {
                           )
                         }}
                       </span>
-
                       <span v-else>
                         {{ itemValue(column, item) }}
                       </span>
@@ -1224,7 +1244,6 @@ export default /*#__PURE__*/ {
                           itemValue(column, item) == 'false'
                         "><b-icon-x-circle></b-icon-x-circle></b-badge>
                       </span>
-
                       <span v-else-if="column.type == 'date'">
                         {{ itemValue(column, item) }}
                       </span>
@@ -1275,7 +1294,6 @@ export default /*#__PURE__*/ {
           <p v-if="itemsList.length == 0" class="p-3">
             {{ messageEmptyResults }}
           </p>
-
           <div :class="listItemClass" v-for="(item, index) in itemsList" v-bind:key="index">
             <slot name="card" v-bind:item="item"> </slot>
           </div>

@@ -17017,7 +17017,7 @@ var moment = momentExports;
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-21892586]:last-child,\ntr td[data-v-21892586]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-21892586] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-21892586] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-21892586] .crud-title[data-v-21892586] {\n    margin: 0; }\n  .crud-header[data-v-21892586] .crud-search[data-v-21892586] {\n    max-width: 15rem; }\n    .crud-header[data-v-21892586] .crud-search[data-v-21892586] .btn[data-v-21892586] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-21892586] .crud-search[data-v-21892586] .btn[data-v-21892586].open[data-v-21892586] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-21892586] .table-options[data-v-21892586] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-21892586] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-21892586] {\n    table-layout: auto; }\n    .table[data-v-21892586] tbody[data-v-21892586] td[data-v-21892586] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-21892586] tbody[data-v-21892586] td[data-v-21892586]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-1f4fa85d]:last-child,\ntr td[data-v-1f4fa85d]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-1f4fa85d] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-1f4fa85d] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-1f4fa85d] .crud-title[data-v-1f4fa85d] {\n    margin: 0; }\n  .crud-header[data-v-1f4fa85d] .crud-search[data-v-1f4fa85d] {\n    max-width: 15rem; }\n    .crud-header[data-v-1f4fa85d] .crud-search[data-v-1f4fa85d] .btn[data-v-1f4fa85d] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-1f4fa85d] .crud-search[data-v-1f4fa85d] .btn[data-v-1f4fa85d].open[data-v-1f4fa85d] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-1f4fa85d] .table-options[data-v-1f4fa85d] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-1f4fa85d] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-1f4fa85d] {\n    table-layout: auto; }\n    .table[data-v-1f4fa85d] tbody[data-v-1f4fa85d] td[data-v-1f4fa85d] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-1f4fa85d] tbody[data-v-1f4fa85d] td[data-v-1f4fa85d]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -17372,7 +17372,10 @@ const _sfc_main = {
     }
   },
   mounted() {
-    if (this.useVuexORM) ; else {
+    if (this.useVuexORM) {
+      //this.useVuexORM = true;
+      this.item = new this.model();
+    } else {
       this.item = this.model;
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
     }
@@ -17408,10 +17411,6 @@ const _sfc_main = {
     paginationIndexEnd() {
       return this.paginationIndexStart + this.pagination.per_page;
     },
-    /* filteredItems() {
-      return this.items;
-    },*/
-
     finalFilters() {
       return [...this.filters, ...this.filter, ...this.internalFilter];
     },
@@ -17673,7 +17672,7 @@ const _sfc_main = {
         this.loading = false;
       });
     },
-    removeItem: function (id, index) {
+    removeItem(id, index) {
       this.$bvModal.msgBoxConfirm(this.messageRemoveConfirm, {
         size: "sm",
         buttonSize: "sm",
@@ -17683,20 +17682,38 @@ const _sfc_main = {
         centered: true
       }).then(value => {
         if (value) {
-          this.loading = true;
-          axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(response => {
-            this.items.splice(index, 1);
-            this.toastSuccess("Elemento eliminado.");
-            this.loading = false;
-          }).catch(error => {
-            this.toastError(error);
-            this.loading = false;
-          });
+          this.deleteItem(id, index);
         }
       }).catch(error => {
         this.toastError(error);
         this.loading = false;
       });
+    },
+    deleteItem(id, index) {
+      if (this.useVuexORM) {
+        return this.deleteItemVuex(id, index);
+      }
+      this.loading = true;
+      axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(response => {
+        this.items.splice(index, 1);
+        this.toastSuccess("Elemento eliminado.");
+        this.loading = false;
+      }).catch(error => {
+        this.toastError(error);
+        this.loading = false;
+      });
+    },
+    async deleteItemVuex(id, index) {
+      let result = await this.model.api().delete('/' + id, {
+        delete: 1
+      });
+      console.debug("delete item vuex", result);
+      result.response.status;
+      if (result.response.data.error) {
+        this.toastError(result.response.data.error);
+        return;
+      }
+      this.toastSuccess("Elemento eliminado.");
     },
     saveSort() {
       if (this.orderable) {
@@ -17751,6 +17768,26 @@ const _sfc_main = {
       });
       return ops.join(", ");
     },
+    async saveItemVuex() {
+      let jsondata = this.item.$toJson();
+      console.debug("save item ", this.item, jsondata);
+      let result;
+      if (this.item.id) {
+        result = await this.model.api().put('/' + this.item.id, jsondata);
+      } else {
+        result = await this.model.api().post('', jsondata);
+      }
+      result.response.status;
+      if (result.response.data.error) {
+        this.toastError(result.response.data.error);
+        return;
+        //throw new Error('Something is wrong.')
+      }
+
+      result.save();
+      if (this.refreshAfterSave) this.refresh();
+      this.toastSuccess("Elemento Modificado");
+    },
     async saveItem() {
       let event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.loading = true;
@@ -17758,6 +17795,9 @@ const _sfc_main = {
         this.messageDefaultValidationError;
       } else {
         if (event) event.preventDefault();
+      }
+      if (this.useVuexORM) {
+        return this.saveItemVuex();
       }
       if (this.item.id) {
         axios.put(this.apiUrl + "/" + this.modelName + "/" + this.item.id, this.item).then(response => {
@@ -17976,7 +18016,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_from').value\n                        "
+            expression: "\n                        internalFilterByProp(column.prop + '_from').value\n                      "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -17992,7 +18032,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_to').value\n                        "
+            expression: "\n                        internalFilterByProp(column.prop + '_to').value\n                      "
           }
         })], 1)])]) : column.type == 'state' ? _c('div', {
           staticClass: "form-group"
@@ -18264,7 +18304,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_from').value\n                        "
+            expression: "\n                        internalFilterByProp(column.prop + '_from').value\n                      "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -18280,7 +18320,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_to').value\n                        "
+            expression: "\n                        internalFilterByProp(column.prop + '_to').value\n                      "
           }
         })], 1)]) : column.type == 'state' ? _c('select', {
           directives: [{
@@ -18755,7 +18795,7 @@ var _sfc_render = function render() {
   })], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "21892586", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "1f4fa85d", null, null);
 var component = __component__.exports;
 
 // Import vue component

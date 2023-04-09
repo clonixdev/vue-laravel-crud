@@ -17305,7 +17305,7 @@ var moment$1 = {
 	})));
 } (moment$1));
 
-var moment = momentExports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-21892586]:last-child,\ntr td[data-v-21892586]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-21892586] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-21892586] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-21892586] .crud-title[data-v-21892586] {\n    margin: 0; }\n  .crud-header[data-v-21892586] .crud-search[data-v-21892586] {\n    max-width: 15rem; }\n    .crud-header[data-v-21892586] .crud-search[data-v-21892586] .btn[data-v-21892586] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-21892586] .crud-search[data-v-21892586] .btn[data-v-21892586].open[data-v-21892586] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-21892586] .table-options[data-v-21892586] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-21892586] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-21892586] {\n    table-layout: auto; }\n    .table[data-v-21892586] tbody[data-v-21892586] td[data-v-21892586] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-21892586] tbody[data-v-21892586] td[data-v-21892586]::-webkit-scrollbar {\n      display: none; } }\n";
+var moment = momentExports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-1f4fa85d]:last-child,\ntr td[data-v-1f4fa85d]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-1f4fa85d] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-1f4fa85d] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-1f4fa85d] .crud-title[data-v-1f4fa85d] {\n    margin: 0; }\n  .crud-header[data-v-1f4fa85d] .crud-search[data-v-1f4fa85d] {\n    max-width: 15rem; }\n    .crud-header[data-v-1f4fa85d] .crud-search[data-v-1f4fa85d] .btn[data-v-1f4fa85d] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-1f4fa85d] .crud-search[data-v-1f4fa85d] .btn[data-v-1f4fa85d].open[data-v-1f4fa85d] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-1f4fa85d] .table-options[data-v-1f4fa85d] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-1f4fa85d] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-1f4fa85d] {\n    table-layout: auto; }\n    .table[data-v-1f4fa85d] tbody[data-v-1f4fa85d] td[data-v-1f4fa85d] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-1f4fa85d] tbody[data-v-1f4fa85d] td[data-v-1f4fa85d]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -17656,7 +17656,10 @@ n(css, {});function normalizeComponent (
     }
   },
   mounted: function mounted() {
-    if (this.useVuexORM) ; else {
+    if (this.useVuexORM) {
+      //this.useVuexORM = true;
+      this.item = new this.model();
+    } else {
       this.item = this.model;
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
     }
@@ -17692,9 +17695,6 @@ n(css, {});function normalizeComponent (
     paginationIndexEnd: function paginationIndexEnd() {
       return this.paginationIndexStart + this.pagination.per_page;
     },
-    /* filteredItems() {
-      return this.items;
-    },*/
     finalFilters: function finalFilters() {
       return [].concat(_toConsumableArray$1(this.filters), _toConsumableArray$1(this.filter), _toConsumableArray$1(this.internalFilter));
     },
@@ -18005,43 +18005,80 @@ n(css, {});function normalizeComponent (
         centered: true
       }).then(function (value) {
         if (value) {
-          _this10.loading = true;
-          axios.delete(_this10.apiUrl + "/" + _this10.modelName + "/" + id).then(function (response) {
-            _this10.items.splice(index, 1);
-            _this10.toastSuccess("Elemento eliminado.");
-            _this10.loading = false;
-          }).catch(function (error) {
-            _this10.toastError(error);
-            _this10.loading = false;
-          });
+          _this10.deleteItem(id, index);
         }
       }).catch(function (error) {
         _this10.toastError(error);
         _this10.loading = false;
       });
     },
-    saveSort: function saveSort() {
+    deleteItem: function deleteItem(id, index) {
       var _this11 = this;
+      if (this.useVuexORM) {
+        return this.deleteItemVuex(id, index);
+      }
+      this.loading = true;
+      axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(function (response) {
+        _this11.items.splice(index, 1);
+        _this11.toastSuccess("Elemento eliminado.");
+        _this11.loading = false;
+      }).catch(function (error) {
+        _this11.toastError(error);
+        _this11.loading = false;
+      });
+    },
+    deleteItemVuex: function deleteItemVuex(id, index) {
+      var _this12 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var result;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _this12.model.api().delete('/' + id, {
+                delete: 1
+              });
+            case 2:
+              result = _context2.sent;
+              console.debug("delete item vuex", result);
+              result.response.status;
+              if (!result.response.data.error) {
+                _context2.next = 8;
+                break;
+              }
+              _this12.toastError(result.response.data.error);
+              return _context2.abrupt("return");
+            case 8:
+              _this12.toastSuccess("Elemento eliminado.");
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2);
+      }))();
+    },
+    saveSort: function saveSort() {
+      var _this13 = this;
       if (this.orderable) {
         this.loading = true;
         var order = [];
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: v[_this11.orderProp]
+            order: v[_this13.orderProp]
           });
         });
         axios.post(this.apiUrl + "/" + this.modelName + "/sort", {
           order: order
         }).then(function (response) {
           response.data;
-          _this11.toastSuccess("Orden Actualizado");
-          if (_this11.refreshAfterSave) _this11.refresh();
-          _this11.loading = false;
+          _this13.toastSuccess("Orden Actualizado");
+          if (_this13.refreshAfterSave) _this13.refresh();
+          _this13.loading = false;
         }).catch(function (error) {
           //console.debug(error);
-          _this11.toastError(error);
-          _this11.loading = false;
+          _this13.toastError(error);
+          _this13.loading = false;
         });
       }
     },
@@ -18076,112 +18113,161 @@ n(css, {});function normalizeComponent (
       });
       return ops.join(", ");
     },
-    saveItem: function saveItem() {
-      var _arguments2 = arguments,
-        _this12 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var event, validation_result, validation_error_message, formData;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
+    saveItemVuex: function saveItemVuex() {
+      var _this14 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var jsondata, result;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
             case 0:
-              event = _arguments2.length > 0 && _arguments2[0] !== undefined ? _arguments2[0] : null;
-              _this12.loading = true;
-              if (!_this12.validate) {
-                _context2.next = 10;
+              jsondata = _this14.item.$toJson();
+              console.debug("save item ", _this14.item, jsondata);
+              if (!_this14.item.id) {
+                _context3.next = 9;
+                break;
+              }
+              _context3.next = 6;
+              return _this14.model.api().put('/' + _this14.item.id, jsondata);
+            case 6:
+              result = _context3.sent;
+              _context3.next = 12;
+              break;
+            case 9:
+              _context3.next = 11;
+              return _this14.model.api().post('', jsondata);
+            case 11:
+              result = _context3.sent;
+            case 12:
+              result.response.status;
+              if (!result.response.data.error) {
+                _context3.next = 16;
+                break;
+              }
+              _this14.toastError(result.response.data.error);
+              return _context3.abrupt("return");
+            case 16:
+              result.save();
+              if (_this14.refreshAfterSave) _this14.refresh();
+              _this14.toastSuccess("Elemento Modificado");
+            case 19:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3);
+      }))();
+    },
+    saveItem: function saveItem() {
+      var _arguments3 = arguments,
+        _this15 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        var event, validation_result, validation_error_message, formData;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              event = _arguments3.length > 0 && _arguments3[0] !== undefined ? _arguments3[0] : null;
+              _this15.loading = true;
+              if (!_this15.validate) {
+                _context4.next = 10;
                 break;
               }
               validation_result = true;
-              validation_error_message = _this12.messageDefaultValidationError;
+              validation_error_message = _this15.messageDefaultValidationError;
               if (validation_result) {
-                _context2.next = 8;
+                _context4.next = 8;
                 break;
               }
-              _this12.toastError(validation_error_message);
-              return _context2.abrupt("return");
+              _this15.toastError(validation_error_message);
+              return _context4.abrupt("return");
             case 8:
-              _context2.next = 11;
+              _context4.next = 11;
               break;
             case 10:
               if (event) event.preventDefault();
             case 11:
-              if (_this12.item.id) {
-                axios.put(_this12.apiUrl + "/" + _this12.modelName + "/" + _this12.item.id, _this12.item).then(function (response) {
-                  if (_this12.hideModalAfterSave) {
-                    _this12.$bvModal.hide("modal-form-item-" + _this12.modelName);
+              if (!_this15.useVuexORM) {
+                _context4.next = 13;
+                break;
+              }
+              return _context4.abrupt("return", _this15.saveItemVuex());
+            case 13:
+              if (_this15.item.id) {
+                axios.put(_this15.apiUrl + "/" + _this15.modelName + "/" + _this15.item.id, _this15.item).then(function (response) {
+                  if (_this15.hideModalAfterSave) {
+                    _this15.$bvModal.hide("modal-form-item-" + _this15.modelName);
                   }
                   var itemSv = response.data;
-                  var itemIndex = _this12.items.findIndex(function (item) {
-                    return item.id == _this12.item.id;
+                  var itemIndex = _this15.items.findIndex(function (item) {
+                    return item.id == _this15.item.id;
                   });
-                  _this12.items[itemIndex] = itemSv;
-                  _this12.item = itemSv;
-                  _this12.loading = false;
-                  if (_this12.refreshAfterSave) _this12.refresh();
-                  _this12.toastSuccess("Elemento Modificado");
+                  _this15.items[itemIndex] = itemSv;
+                  _this15.item = itemSv;
+                  _this15.loading = false;
+                  if (_this15.refreshAfterSave) _this15.refresh();
+                  _this15.toastSuccess("Elemento Modificado");
                 }).catch(function (error) {
-                  _this12.toastError(error);
-                  _this12.loading = false;
+                  _this15.toastError(error);
+                  _this15.loading = false;
                 });
               } else {
-                if (_this12.createMultipart) {
+                if (_this15.createMultipart) {
                   formData = new FormData();
-                  Object.keys(_this12.item).forEach(function (key) {
-                    if (_this12.item[key][0] && _this12.item[key][0].name) {
-                      var files = _this12.item[key];
+                  Object.keys(_this15.item).forEach(function (key) {
+                    if (_this15.item[key][0] && _this15.item[key][0].name) {
+                      var files = _this15.item[key];
                       for (var x = 0; x < files.length; x++) {
-                        formData.append(key + "[]", _this12.item[key][x], _this12.item[key][x].name);
+                        formData.append(key + "[]", _this15.item[key][x], _this15.item[key][x].name);
                       }
-                    } else formData.append(key, _this12.item[key]);
+                    } else formData.append(key, _this15.item[key]);
                   });
-                  axios.post(_this12.apiUrl + "/" + _this12.modelName, formData).then(function (response) {
-                    _this12.loading = false;
-                    if (_this12.hideModalAfterSave) {
-                      _this12.$bvModal.hide("modal-form-item-" + _this12.modelName);
+                  axios.post(_this15.apiUrl + "/" + _this15.modelName, formData).then(function (response) {
+                    _this15.loading = false;
+                    if (_this15.hideModalAfterSave) {
+                      _this15.$bvModal.hide("modal-form-item-" + _this15.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this12.toastSuccess(response.data.message);
+                        _this15.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this12.items.push(itemSv);
-                    _this12.item = itemSv;
-                    if (_this12.refreshAfterSave) _this12.refresh();
-                    _this12.toastSuccess("Elemento Creado");
+                    _this15.items.push(itemSv);
+                    _this15.item = itemSv;
+                    if (_this15.refreshAfterSave) _this15.refresh();
+                    _this15.toastSuccess("Elemento Creado");
                   }).catch(function (error) {
-                    _this12.toastError(error);
-                    _this12.loading = false;
+                    _this15.toastError(error);
+                    _this15.loading = false;
                   });
                 } else {
-                  axios.post(_this12.apiUrl + "/" + _this12.modelName, _this12.item).then(function (response) {
-                    _this12.loading = false;
-                    if (_this12.hideModalAfterSave) {
-                      _this12.$bvModal.hide("modal-form-item-" + _this12.modelName);
+                  axios.post(_this15.apiUrl + "/" + _this15.modelName, _this15.item).then(function (response) {
+                    _this15.loading = false;
+                    if (_this15.hideModalAfterSave) {
+                      _this15.$bvModal.hide("modal-form-item-" + _this15.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this12.toastSuccess(response.data.message);
+                        _this15.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this12.items.push(itemSv);
-                    _this12.item = itemSv;
-                    if (_this12.refreshAfterSave) _this12.refresh();
-                    _this12.toastSuccess("Elemento Creado");
+                    _this15.items.push(itemSv);
+                    _this15.item = itemSv;
+                    if (_this15.refreshAfterSave) _this15.refresh();
+                    _this15.toastSuccess("Elemento Creado");
                   }).catch(function (error) {
-                    _this12.toastError(error);
-                    _this12.loading = false;
+                    _this15.toastError(error);
+                    _this15.loading = false;
                   });
                 }
               }
               if (event) event.preventDefault();
-            case 13:
+            case 15:
             case "end":
-              return _context2.stop();
+              return _context4.stop();
           }
-        }, _callee2);
+        }, _callee4);
       }))();
     },
     toastError: function toastError(error) {
@@ -18226,10 +18312,10 @@ n(css, {});function normalizeComponent (
       });
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this13 = this;
+      var _this16 = this;
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this13.refresh();
+        _this16.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -18330,7 +18416,7 @@ var _sfc_render = function render() {
             callback: function callback($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_from').value\n                        "
+            expression: "\n                        internalFilterByProp(column.prop + '_from').value\n                      "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -18346,7 +18432,7 @@ var _sfc_render = function render() {
             callback: function callback($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_to').value\n                        "
+            expression: "\n                        internalFilterByProp(column.prop + '_to').value\n                      "
           }
         })], 1)])]) : column.type == 'state' ? _c('div', {
           staticClass: "form-group"
@@ -18618,7 +18704,7 @@ var _sfc_render = function render() {
             callback: function callback($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_from').value\n                        "
+            expression: "\n                        internalFilterByProp(column.prop + '_from').value\n                      "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -18634,7 +18720,7 @@ var _sfc_render = function render() {
             callback: function callback($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_to').value\n                        "
+            expression: "\n                        internalFilterByProp(column.prop + '_to').value\n                      "
           }
         })], 1)]) : column.type == 'state' ? _c('select', {
           directives: [{
@@ -19109,7 +19195,7 @@ var _sfc_render = function render() {
   })], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "21892586", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "1f4fa85d", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
