@@ -304,7 +304,6 @@ export default /*#__PURE__*/ {
         }
       };
     },
-
     itemsList() {
       if (this.ajax) {
         return this.items;
@@ -312,6 +311,8 @@ export default /*#__PURE__*/ {
         return this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
       }
     },
+
+
 
     paginationIndexStart() {
       return (this.pagination.current_page - 1) * this.pagination.per_page;
@@ -547,10 +548,10 @@ export default /*#__PURE__*/ {
         }
       });
 
-      this.collection = result.entities[this.model.entity];
+      this.items = result.entities[this.model.entity];
 
 
-      console.debug("fetch page vuex ", page, this.collection);
+      console.debug("fetch page vuex ", page, this.items);
       this.loading = false;
     },
     fetchItems(page = 1) {
@@ -1109,9 +1110,9 @@ export default /*#__PURE__*/ {
             </tr>
           </thead>
 
-          <draggable v-model="items" group="people" tag="tbody" :draggable="orderable ? '.item' : '.none'"
+          <draggable v-model="itemsList" group="people" tag="tbody" :draggable="orderable ? '.item' : '.none'"
             @start="drag = true" @end="drag = false" @sort="onSort()">
-            <tr v-for="(item, index) in items" v-bind:key="index" @mouseover="onRowHover(item, index)"
+            <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)" class="item">
               <template v-if="item.group">
                 <th :colspan="columns.length">
@@ -1189,19 +1190,19 @@ export default /*#__PURE__*/ {
             </tr>
           </draggable>
         </table>
-        <p v-if="items.length == 0" class="p-3">
+        <p v-if="itemsList.length == 0" class="p-3">
           {{ messageEmptyResults }}
         </p>
       </div>
 
       <div v-if="displayMode == displayModes.MODE_CARDS">
-        <p v-if="items.length == 0" class="p-3">
+        <p v-if="itemsList.length == 0" class="p-3">
           {{ messageEmptyResults }}
         </p>
 
-        <draggable v-model="items" group="people" class="row" :draggable="orderable ? '.item' : '.none'"
+        <draggable v-model="itemsList" group="people" class="row" :draggable="orderable ? '.item' : '.none'"
           @start="drag = true" @end="drag = false" @sort="onSort()">
-          <b-col v-for="(item, index) in items" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
+          <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
             :xl="colXl" class="item">
             <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
               :hideFooter="cardHideFooter">
@@ -1270,11 +1271,11 @@ export default /*#__PURE__*/ {
 
       <div v-if="displayMode == displayModes.MODE_CUSTOM">
         <div :class="listContainerClass">
-          <p v-if="items.length == 0" class="p-3">
+          <p v-if="itemsList.length == 0" class="p-3">
             {{ messageEmptyResults }}
           </p>
 
-          <div :class="listItemClass" v-for="(item, index) in items" v-bind:key="index">
+          <div :class="listItemClass" v-for="(item, index) in itemsList" v-bind:key="index">
             <slot name="card" v-bind:item="item"> </slot>
           </div>
         </div>

@@ -17305,7 +17305,7 @@ var moment$1 = {
 	})));
 } (moment$1));
 
-var moment = momentExports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-cc7b4474]:last-child,\ntr td[data-v-cc7b4474]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-cc7b4474] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-cc7b4474] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-cc7b4474] .crud-title[data-v-cc7b4474] {\n    margin: 0; }\n  .crud-header[data-v-cc7b4474] .crud-search[data-v-cc7b4474] {\n    max-width: 15rem; }\n    .crud-header[data-v-cc7b4474] .crud-search[data-v-cc7b4474] .btn[data-v-cc7b4474] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-cc7b4474] .crud-search[data-v-cc7b4474] .btn[data-v-cc7b4474].open[data-v-cc7b4474] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-cc7b4474] .table-options[data-v-cc7b4474] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-cc7b4474] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-cc7b4474] {\n    table-layout: auto; }\n    .table[data-v-cc7b4474] tbody[data-v-cc7b4474] td[data-v-cc7b4474] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-cc7b4474] tbody[data-v-cc7b4474] td[data-v-cc7b4474]::-webkit-scrollbar {\n      display: none; } }\n";
+var moment = momentExports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-21892586]:last-child,\ntr td[data-v-21892586]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-21892586] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-21892586] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-21892586] .crud-title[data-v-21892586] {\n    margin: 0; }\n  .crud-header[data-v-21892586] .crud-search[data-v-21892586] {\n    max-width: 15rem; }\n    .crud-header[data-v-21892586] .crud-search[data-v-21892586] .btn[data-v-21892586] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-21892586] .crud-search[data-v-21892586] .btn[data-v-21892586].open[data-v-21892586] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-21892586] .table-options[data-v-21892586] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-21892586] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-21892586] {\n    table-layout: auto; }\n    .table[data-v-21892586] tbody[data-v-21892586] td[data-v-21892586] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-21892586] tbody[data-v-21892586] td[data-v-21892586]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -17926,8 +17926,8 @@ n(css, {});function normalizeComponent (
               });
             case 5:
               result = _context.sent;
-              _this8.collection = result.entities[_this8.model.entity];
-              console.debug("fetch page vuex ", page, _this8.collection);
+              _this8.items = result.entities[_this8.model.entity];
+              console.debug("fetch page vuex ", page, _this8.items);
               _this8.loading = false;
             case 9:
             case "end":
@@ -18764,13 +18764,13 @@ var _sfc_render = function render() {
       }
     },
     model: {
-      value: _vm.items,
+      value: _vm.itemsList,
       callback: function callback($$v) {
-        _vm.items = $$v;
+        _vm.itemsList = $$v;
       },
-      expression: "items"
+      expression: "itemsList"
     }
-  }, _vm._l(_vm.items, function (item, index) {
+  }, _vm._l(_vm.itemsList, function (item, index) {
     return _c('tr', {
       key: index,
       staticClass: "item",
@@ -18861,9 +18861,9 @@ var _sfc_render = function render() {
     }, {
       "item": item
     })]], 2);
-  }), 0)], 1), _vm.items.length == 0 ? _c('p', {
+  }), 0)], 1), _vm.itemsList.length == 0 ? _c('p', {
     staticClass: "p-3"
-  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.items.length == 0 ? _c('p', {
+  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.itemsList.length == 0 ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e(), _c('draggable', {
     staticClass: "row",
@@ -18883,13 +18883,13 @@ var _sfc_render = function render() {
       }
     },
     model: {
-      value: _vm.items,
+      value: _vm.itemsList,
       callback: function callback($$v) {
-        _vm.items = $$v;
+        _vm.itemsList = $$v;
       },
-      expression: "items"
+      expression: "itemsList"
     }
-  }, _vm._l(_vm.items, function (item, index) {
+  }, _vm._l(_vm.itemsList, function (item, index) {
     return _c('b-col', {
       key: index,
       staticClass: "item",
@@ -18976,9 +18976,9 @@ var _sfc_render = function render() {
     })], 2)], 1);
   }), 1)], 1) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CUSTOM ? _c('div', [_c('div', {
     class: _vm.listContainerClass
-  }, [_vm.items.length == 0 ? _c('p', {
+  }, [_vm.itemsList.length == 0 ? _c('p', {
     staticClass: "p-3"
-  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e(), _vm._l(_vm.items, function (item, index) {
+  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e(), _vm._l(_vm.itemsList, function (item, index) {
     return _c('div', {
       key: index,
       class: _vm.listItemClass
@@ -19109,7 +19109,7 @@ var _sfc_render = function render() {
   })], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "cc7b4474", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "21892586", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
