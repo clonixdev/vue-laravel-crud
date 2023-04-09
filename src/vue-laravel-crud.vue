@@ -10,14 +10,13 @@ export default /*#__PURE__*/ {
   },
   data() {
     return {
-      filterSidebarOpen: false,
-      forceRecomputeCounter: 0,
-      filtersVisible: false,
+      moment: moment,
       loading: false,
+      item: {
+        id: null,
+      },
       items: [],
       selectedItems: [],
-      moment: moment,
-      displaySearch: false,
       pagination: {
         current_page: 1,
         last_page: 1,
@@ -26,12 +25,13 @@ export default /*#__PURE__*/ {
         per_page: 20,
         total: 0,
       },
+      displaySearch: false,
       itemDefault: null,
       filters: [],
+      filtersVisible: false,
+      filterSidebarOpen: false,
       internalFilters: [],
-      item: {
-        id: null,
-      },
+      forceRecomputeCounter: 0,
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -489,7 +489,11 @@ export default /*#__PURE__*/ {
       this.$bvModal.show("modal-show-item-" + this.modelName);
     },
     createItem() {
-      this.item = JSON.parse(JSON.stringify(this.itemDefault));
+      if (this.useVuexORM) {
+        this.item = new this.model();
+      } else {
+        this.item = JSON.parse(JSON.stringify(this.itemDefault));
+      }
       this.onSelect();
       this.$bvModal.show("modal-form-item-" + this.modelName);
     },
@@ -645,7 +649,7 @@ export default /*#__PURE__*/ {
         delete: 1
       });
 
-      console.debug("delete item vuex",result);
+      console.debug("delete item vuex", result);
       let responseStatus = result.response.status;
 
       if (result.response.data.error) {
@@ -714,10 +718,13 @@ export default /*#__PURE__*/ {
       return ops.join(", ");
     },
     async saveItemVuex(event = null) {
+
+      console.debug("save item 1", this.item);
+
       let jsondata = this.item.$toJson();
 
 
-      console.debug("save item ", this.item, jsondata);
+      console.debug("save item 2", this.item, jsondata);
       let result;
 
       if (this.item.id) {

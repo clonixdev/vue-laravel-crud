@@ -17017,7 +17017,7 @@ var moment = momentExports;
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-1f4fa85d]:last-child,\ntr td[data-v-1f4fa85d]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-1f4fa85d] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-1f4fa85d] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-1f4fa85d] .crud-title[data-v-1f4fa85d] {\n    margin: 0; }\n  .crud-header[data-v-1f4fa85d] .crud-search[data-v-1f4fa85d] {\n    max-width: 15rem; }\n    .crud-header[data-v-1f4fa85d] .crud-search[data-v-1f4fa85d] .btn[data-v-1f4fa85d] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-1f4fa85d] .crud-search[data-v-1f4fa85d] .btn[data-v-1f4fa85d].open[data-v-1f4fa85d] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-1f4fa85d] .table-options[data-v-1f4fa85d] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-1f4fa85d] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-1f4fa85d] {\n    table-layout: auto; }\n    .table[data-v-1f4fa85d] tbody[data-v-1f4fa85d] td[data-v-1f4fa85d] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-1f4fa85d] tbody[data-v-1f4fa85d] td[data-v-1f4fa85d]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-09914f57]:last-child,\ntr td[data-v-09914f57]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-09914f57] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-09914f57] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-09914f57] .crud-title[data-v-09914f57] {\n    margin: 0; }\n  .crud-header[data-v-09914f57] .crud-search[data-v-09914f57] {\n    max-width: 15rem; }\n    .crud-header[data-v-09914f57] .crud-search[data-v-09914f57] .btn[data-v-09914f57] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-09914f57] .crud-search[data-v-09914f57] .btn[data-v-09914f57].open[data-v-09914f57] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-09914f57] .table-options[data-v-09914f57] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-09914f57] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-09914f57] {\n    table-layout: auto; }\n    .table[data-v-09914f57] tbody[data-v-09914f57] td[data-v-09914f57] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-09914f57] tbody[data-v-09914f57] td[data-v-09914f57]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -17120,14 +17120,13 @@ const _sfc_main = {
   },
   data() {
     return {
-      filterSidebarOpen: false,
-      forceRecomputeCounter: 0,
-      filtersVisible: false,
+      moment: moment,
       loading: false,
+      item: {
+        id: null
+      },
       items: [],
       selectedItems: [],
-      moment: moment,
-      displaySearch: false,
       pagination: {
         current_page: 1,
         last_page: 1,
@@ -17136,12 +17135,13 @@ const _sfc_main = {
         per_page: 20,
         total: 0
       },
+      displaySearch: false,
       itemDefault: null,
       filters: [],
+      filtersVisible: false,
+      filterSidebarOpen: false,
       internalFilters: [],
-      item: {
-        id: null
-      },
+      forceRecomputeCounter: 0,
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -17566,7 +17566,11 @@ const _sfc_main = {
       this.$bvModal.show("modal-show-item-" + this.modelName);
     },
     createItem() {
-      this.item = JSON.parse(JSON.stringify(this.itemDefault));
+      if (this.useVuexORM) {
+        this.item = new this.model();
+      } else {
+        this.item = JSON.parse(JSON.stringify(this.itemDefault));
+      }
       this.onSelect();
       this.$bvModal.show("modal-form-item-" + this.modelName);
     },
@@ -17769,8 +17773,9 @@ const _sfc_main = {
       return ops.join(", ");
     },
     async saveItemVuex() {
+      console.debug("save item 1", this.item);
       let jsondata = this.item.$toJson();
-      console.debug("save item ", this.item, jsondata);
+      console.debug("save item 2", this.item, jsondata);
       let result;
       if (this.item.id) {
         result = await this.model.api().put('/' + this.item.id, jsondata);
@@ -18795,7 +18800,7 @@ var _sfc_render = function render() {
   })], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "1f4fa85d", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "09914f57", null, null);
 var component = __component__.exports;
 
 // Import vue component
