@@ -305,6 +305,7 @@ export default /*#__PURE__*/ {
       };
     },
     itemsList() {
+
       if (this.ajax) {
         return this.items;
       } else {
