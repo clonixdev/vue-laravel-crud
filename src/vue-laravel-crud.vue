@@ -32,6 +32,7 @@ export default /*#__PURE__*/ {
       filterSidebarOpen: false,
       internalFilters: [],
       forceRecomputeCounter: 0,
+
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -1315,7 +1316,7 @@ export default /*#__PURE__*/ {
       <b-overlay :show="loading" rounded="sm">
         <template v-if="validate">
           <form @submit="saveItem">
-            <slot name="form" v-bind:item="item">
+            <slot name="form" v-bind:item="item" v-if="item">
               <b-form-group label="Nombre:" description="Nombre ">
                 <b-form-input v-model="item.title" type="text" required placeholder="Nombre"></b-form-input>
               </b-form-group>
@@ -1326,9 +1327,9 @@ export default /*#__PURE__*/ {
           </form>
         </template>
         <template v-if="!validate">
-          <slot name="form" v-bind:item="item">
-            <b-form-group label="Nombre:" description="Nombre ">
-              <b-form-input v-model="item.title" type="text" required placeholder="Nombre"></b-form-input>
+          <slot name="form" v-bind:item="item" v-if="item">
+            <b-form-group :label="key"  v-for="(value, key) in  item" :key="key">
+              <b-form-input v-model="item[key]" type="text" required ></b-form-input>
             </b-form-group>
           </slot>
           <b-button block type="submit" variant="success" :disabled="loading" @click="saveItem()">
@@ -1338,8 +1339,15 @@ export default /*#__PURE__*/ {
       </b-overlay>
     </b-modal>
     <b-modal :id="'modal-show-item-' + modelName" hide-footer size="xl" :title="title" no-close-on-backdrop>
-      <slot name="show" v-bind:item="item">
-        <p class="my-4">Show</p>
+      <slot name="show" v-bind:item="item" v-if="item">
+        <b-list-group>
+          <b-list-group-item v-for="(value, key) in  item" :key="key">
+            <b-row>
+              <b-col cols="4" class="font-weight-bold">{{ key }}</b-col>
+              <b-col cols="8">{{ JSON.stringify(value) }}</b-col>
+            </b-row>
+          </b-list-group-item>
+        </b-list-group>
       </slot>
     </b-modal>
   </div>
