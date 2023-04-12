@@ -637,6 +637,7 @@ export default /*#__PURE__*/ {
         .then((response) => {
           this.items.splice(index, 1);
           this.toastSuccess("Elemento eliminado.");
+          this.$emit("itemDeleted", {});
           this.loading = false;
         })
         .catch((error) => {
@@ -784,6 +785,8 @@ export default /*#__PURE__*/ {
             this.loading = false;
             if (this.refreshAfterSave) this.refresh();
             this.toastSuccess("Elemento Modificado");
+            this.$emit("itemSaved", {item: this.item});
+            this.$emit("itemUpdated", {item: this.item});
           })
           .catch((error) => {
             this.toastError(error);
@@ -823,6 +826,8 @@ export default /*#__PURE__*/ {
               this.item = itemSv;
               if (this.refreshAfterSave) this.refresh();
               this.toastSuccess("Elemento Creado");
+              this.$emit("itemSaved", {item: this.item});
+              this.$emit("itemCreated", {item: this.item});
             })
             .catch((error) => {
               this.toastError(error);
@@ -848,6 +853,8 @@ export default /*#__PURE__*/ {
               this.item = itemSv;
               if (this.refreshAfterSave) this.refresh();
               this.toastSuccess("Elemento Creado");
+              this.$emit("itemSaved", {item: this.item});
+              this.$emit("itemCreated", {item: this.item});
             })
             .catch((error) => {
               this.toastError(error);
@@ -1074,58 +1081,62 @@ export default /*#__PURE__*/ {
                       isColumnHasFilter(column) &&
                       internalFilterByProp(column.prop)
                     ">
-                    <select v-if="column.type == 'boolean'" class="form-control"
-                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
-                      <option value="">{{ column.label }}</option>
-                      <option value="1">Sí</option>
-                      <option value="0">No</option>
-                    </select>
 
-                    <div class="row" v-else-if="column.type == 'date'">
-                      <div class="col-6">
-                        <b-form-datepicker v-model="
-                          internalFilterByProp(column.prop + '_from').value
-                        " today-button reset-button close-button locale="es"></b-form-datepicker>
+                    <div class="form-group">
+                      <select v-if="column.type == 'boolean'" class="form-control"
+                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
+                        <option value="">{{ column.label }}</option>
+                        <option value="1">Sí</option>
+                        <option value="0">No</option>
+                      </select>
+
+                      <div class="row" v-else-if="column.type == 'date'">
+                        <div class="col-6">
+                          <b-form-datepicker v-model="
+                            internalFilterByProp(column.prop + '_from').value
+                          " today-button reset-button close-button locale="es"></b-form-datepicker>
+                        </div>
+                        <div class="col-6">
+                          <b-form-datepicker v-model="
+                            internalFilterByProp(column.prop + '_to').value
+                          " today-button reset-button close-button locale="es"></b-form-datepicker>
+                        </div>
                       </div>
-                      <div class="col-6">
-                        <b-form-datepicker v-model="
-                          internalFilterByProp(column.prop + '_to').value
-                        " today-button reset-button close-button locale="es"></b-form-datepicker>
-                      </div>
+
+                      <select v-else-if="column.type == 'state'" class="form-control"
+                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
+                        <option value="">{{ column.label }}</option>
+                        <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
+                          {{
+                            option.text
+                            ? option.text
+                            : option.label
+                              ? option.label
+                              : ""
+                          }}
+                        </option>
+                      </select>
+
+                      <select v-else-if="column.type == 'array'" class="form-control"
+                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
+                        <option value="">{{ column.label }}</option>
+                        <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
+                          {{
+                            option.text
+                            ? option.text
+                            : option.label
+                              ? option.label
+                              : ""
+                          }}
+                        </option>
+                      </select>
+
+                      <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
+                      </b-form-checkbox>
+                      <input v-else class="form-control" v-model="internalFilterByProp(column.prop).value"
+                        :placeholder="column.label" @change="onChangeFilter($event)" />
+
                     </div>
-
-                    <select v-else-if="column.type == 'state'" class="form-control"
-                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
-                      <option value="">{{ column.label }}</option>
-                      <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
-                        {{
-                          option.text
-                          ? option.text
-                          : option.label
-                            ? option.label
-                            : ""
-                        }}
-                      </option>
-                    </select>
-
-                    <select v-else-if="column.type == 'array'" class="form-control"
-                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
-                      <option value="">{{ column.label }}</option>
-                      <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
-                        {{
-                          option.text
-                          ? option.text
-                          : option.label
-                            ? option.label
-                            : ""
-                        }}
-                      </option>
-                    </select>
-
-                    <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
-                    </b-form-checkbox>
-                    <input v-else class="form-control" v-model="internalFilterByProp(column.prop).value"
-                      :placeholder="column.label" @change="onChangeFilter($event)" />
                   </slot>
 
                   <span v-else>{{ column.label }}</span>
@@ -1328,8 +1339,8 @@ export default /*#__PURE__*/ {
         </template>
         <template v-if="!validate">
           <slot name="form" v-bind:item="item" v-if="item">
-            <b-form-group :label="key"  v-for="(value, key) in  item" :key="key">
-              <b-form-input v-model="item[key]" type="text" required ></b-form-input>
+            <b-form-group :label="key" v-for="(value, key) in  item" :key="key">
+              <b-form-input v-model="item[key]" type="text" required></b-form-input>
             </b-form-group>
           </slot>
           <b-button block type="submit" variant="success" :disabled="loading" @click="saveItem()">

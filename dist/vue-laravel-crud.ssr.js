@@ -17305,7 +17305,7 @@ var moment$1 = {
 	})));
 } (moment$1));
 
-var moment = momentExports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-818372ed]:last-child,\ntr td[data-v-818372ed]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-818372ed] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-818372ed] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-818372ed] .crud-title[data-v-818372ed] {\n    margin: 0; }\n  .crud-header[data-v-818372ed] .crud-search[data-v-818372ed] {\n    max-width: 15rem; }\n    .crud-header[data-v-818372ed] .crud-search[data-v-818372ed] .btn[data-v-818372ed] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-818372ed] .crud-search[data-v-818372ed] .btn[data-v-818372ed].open[data-v-818372ed] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-818372ed] .table-options[data-v-818372ed] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-818372ed] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-818372ed] {\n    table-layout: auto; }\n    .table[data-v-818372ed] tbody[data-v-818372ed] td[data-v-818372ed] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-818372ed] tbody[data-v-818372ed] td[data-v-818372ed]::-webkit-scrollbar {\n      display: none; } }\n";
+var moment = momentExports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-98011f56]:last-child,\ntr td[data-v-98011f56]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-98011f56] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-98011f56] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-98011f56] .crud-title[data-v-98011f56] {\n    margin: 0; }\n  .crud-header[data-v-98011f56] .crud-search[data-v-98011f56] {\n    max-width: 15rem; }\n    .crud-header[data-v-98011f56] .crud-search[data-v-98011f56] .btn[data-v-98011f56] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-98011f56] .crud-search[data-v-98011f56] .btn[data-v-98011f56].open[data-v-98011f56] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-98011f56] .table-options[data-v-98011f56] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-98011f56] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-98011f56] {\n    table-layout: auto; }\n    .table[data-v-98011f56] tbody[data-v-98011f56] td[data-v-98011f56] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-98011f56] tbody[data-v-98011f56] td[data-v-98011f56]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -18025,6 +18025,7 @@ n(css, {});function normalizeComponent (
       axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(function (response) {
         _this11.items.splice(index, 1);
         _this11.toastSuccess("Elemento eliminado.");
+        _this11.$emit("itemDeleted", {});
         _this11.loading = false;
       }).catch(function (error) {
         _this11.toastError(error);
@@ -18209,6 +18210,12 @@ n(css, {});function normalizeComponent (
                   _this15.loading = false;
                   if (_this15.refreshAfterSave) _this15.refresh();
                   _this15.toastSuccess("Elemento Modificado");
+                  _this15.$emit("itemSaved", {
+                    item: _this15.item
+                  });
+                  _this15.$emit("itemUpdated", {
+                    item: _this15.item
+                  });
                 }).catch(function (error) {
                   _this15.toastError(error);
                   _this15.loading = false;
@@ -18240,6 +18247,12 @@ n(css, {});function normalizeComponent (
                     _this15.item = itemSv;
                     if (_this15.refreshAfterSave) _this15.refresh();
                     _this15.toastSuccess("Elemento Creado");
+                    _this15.$emit("itemSaved", {
+                      item: _this15.item
+                    });
+                    _this15.$emit("itemCreated", {
+                      item: _this15.item
+                    });
                   }).catch(function (error) {
                     _this15.toastError(error);
                     _this15.loading = false;
@@ -18261,6 +18274,12 @@ n(css, {});function normalizeComponent (
                     _this15.item = itemSv;
                     if (_this15.refreshAfterSave) _this15.refresh();
                     _this15.toastSuccess("Elemento Creado");
+                    _this15.$emit("itemSaved", {
+                      item: _this15.item
+                    });
+                    _this15.$emit("itemCreated", {
+                      item: _this15.item
+                    });
                   }).catch(function (error) {
                     _this15.toastError(error);
                     _this15.loading = false;
@@ -18660,7 +18679,9 @@ var _sfc_render = function render() {
           "scope": "col"
         }
       }, [_vm.enableFilters && _vm.filtersVisible && _vm.isColumnHasFilter(column) && _vm.internalFilterByProp(column.prop) ? _vm._t('filter-' + column.prop, function () {
-        return [column.type == 'boolean' ? _c('select', {
+        return [_c('div', {
+          staticClass: "form-group"
+        }, [column.type == 'boolean' ? _c('select', {
           directives: [{
             name: "model",
             rawName: "v-model",
@@ -18709,7 +18730,7 @@ var _sfc_render = function render() {
             callback: function callback($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "\n                        internalFilterByProp(column.prop + '_from').value\n                      "
+            expression: "\n                          internalFilterByProp(column.prop + '_from').value\n                        "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -18725,7 +18746,7 @@ var _sfc_render = function render() {
             callback: function callback($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "\n                        internalFilterByProp(column.prop + '_to').value\n                      "
+            expression: "\n                          internalFilterByProp(column.prop + '_to').value\n                        "
           }
         })], 1)]) : column.type == 'state' ? _c('select', {
           directives: [{
@@ -18823,7 +18844,7 @@ var _sfc_render = function render() {
               _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.value);
             }
           }
-        })];
+        })], 1)];
       }, {
         "column": column,
         "filter": _vm.filter,
@@ -19212,7 +19233,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "818372ed", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "98011f56", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
