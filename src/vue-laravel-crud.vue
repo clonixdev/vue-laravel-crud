@@ -308,11 +308,7 @@ export default /*#__PURE__*/ {
       };
     },
     itemsList() {
-      if (this.ajax) {
-        return this.items;
-      } else {
-        return this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
-      }
+      return this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
     },
     paginationIndexStart() {
       return (this.pagination.current_page - 1) * this.pagination.per_page;
@@ -1083,7 +1079,7 @@ export default /*#__PURE__*/ {
                     ">
 
                     <div class="form-group">
-                      <select v-if="column.type == 'boolean'" class="form-control"
+                      <select v-if="column.type == 'boolean'" class="form-control form-control-sm"
                         v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
                         <option value="">{{ column.label }}</option>
                         <option value="1">Sí</option>
@@ -1094,16 +1090,16 @@ export default /*#__PURE__*/ {
                         <div class="col-6">
                           <b-form-datepicker v-model="
                             internalFilterByProp(column.prop + '_from').value
-                          " today-button reset-button close-button locale="es"></b-form-datepicker>
+                          " today-button reset-button close-button locale="es" class="form-control-sm"></b-form-datepicker>
                         </div>
                         <div class="col-6">
                           <b-form-datepicker v-model="
                             internalFilterByProp(column.prop + '_to').value
-                          " today-button reset-button close-button locale="es"></b-form-datepicker>
+                          " today-button reset-button close-button locale="es" class="form-control-sm"></b-form-datepicker>
                         </div>
                       </div>
 
-                      <select v-else-if="column.type == 'state'" class="form-control"
+                      <select v-else-if="column.type == 'state'" class="form-control form-control-sm"
                         v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
                         <option value="">{{ column.label }}</option>
                         <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
@@ -1117,7 +1113,7 @@ export default /*#__PURE__*/ {
                         </option>
                       </select>
 
-                      <select v-else-if="column.type == 'array'" class="form-control"
+                      <select v-else-if="column.type == 'array'" class="form-control form-control-sm"
                         v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
                         <option value="">{{ column.label }}</option>
                         <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
@@ -1133,7 +1129,7 @@ export default /*#__PURE__*/ {
 
                       <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
                       </b-form-checkbox>
-                      <input v-else class="form-control" v-model="internalFilterByProp(column.prop).value"
+                      <input v-else class="form-control form-control-sm" v-model="internalFilterByProp(column.prop).value"
                         :placeholder="column.label" @change="onChangeFilter($event)" />
 
                     </div>
@@ -1153,7 +1149,7 @@ export default /*#__PURE__*/ {
             </tr>
           </thead>
 
-          <draggable v-model="itemsList" group="people" tag="tbody" :draggable="orderable ? '.item' : '.none'"
+          <draggable v-model="items" group="people" tag="tbody" :draggable="orderable ? '.item' : '.none'"
             @start="drag = true" @end="drag = false" @sort="onSort()">
             <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)" class="item">
@@ -1230,17 +1226,17 @@ export default /*#__PURE__*/ {
             </tr>
           </draggable>
         </table>
-        <p v-if="itemsList.length == 0" class="p-3">
+        <p v-if="items.length == 0" class="p-3">
           {{ messageEmptyResults }}
         </p>
       </div>
 
       <div v-if="displayMode == displayModes.MODE_CARDS">
-        <p v-if="itemsList.length == 0" class="p-3">
+        <p v-if="items.length == 0" class="p-3">
           {{ messageEmptyResults }}
         </p>
 
-        <draggable v-model="itemsList" group="people" class="row" :draggable="orderable ? '.item' : '.none'"
+        <draggable v-model="items" group="people" class="row" :draggable="orderable ? '.item' : '.none'"
           @start="drag = true" @end="drag = false" @sort="onSort()">
           <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
             :xl="colXl" class="item">
@@ -1310,7 +1306,7 @@ export default /*#__PURE__*/ {
 
       <div v-if="displayMode == displayModes.MODE_CUSTOM">
         <div :class="listContainerClass">
-          <p v-if="itemsList.length == 0" class="p-3">
+          <p v-if="items.length == 0" class="p-3">
             {{ messageEmptyResults }}
           </p>
           <div :class="listItemClass" v-for="(item, index) in itemsList" v-bind:key="index">
