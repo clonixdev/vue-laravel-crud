@@ -1160,13 +1160,13 @@ export default /*#__PURE__*/ {
             @start="drag = true" @end="drag = false" @sort="onSort()">
             <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)" class="item">
-              <template v-if="item.group">
-                <th :colspan="columns.length">
+    
+                <th :colspan="columns.length" v-if="item.group">
                   <span>{{ item.label }}</span>
                 </th>
-              </template>
-              <template v-else>
-                <slot name="row" v-bind:item="item">
+          
+        
+                <slot name="row" v-bind:item="item" v-else>
                   <td v-for="(column, indexc) in columns" :key="indexc" :scope="column.prop == 'id' ? 'row' : ''">
                     <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
                       v-bind:columnindex="indexc">
@@ -1229,7 +1229,7 @@ export default /*#__PURE__*/ {
                     </b-button-group>
                   </td>
                 </slot>
-              </template>
+          
             </tr>
           </draggable>
         </table>
