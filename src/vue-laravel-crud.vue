@@ -271,14 +271,13 @@ export default /*#__PURE__*/ {
   mounted() {
 
     if (this.useVuexORM) {
-      //this.useVuexORM = true;
       this.item = new this.model();
-
     } else {
       this.item = this.model;
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
     }
 
+    console.debug("crud mounted columns" ,this.columns);
     this.internalFilters = [];
     this.setupFilters();
 
@@ -716,12 +715,8 @@ export default /*#__PURE__*/ {
       return ops.join(", ");
     },
     async saveItemVuex(event = null) {
-
       console.debug("save item 1", this.item);
-
       let jsondata = this.item.$toJson();
-
-
       console.debug("save item 2", this.item, jsondata);
       let result;
 
@@ -737,9 +732,7 @@ export default /*#__PURE__*/ {
         return;
         //throw new Error('Something is wrong.')
       }
-
       result.save();
-
       if (this.refreshAfterSave) this.refresh();
       this.toastSuccess("Elemento Modificado");
     },
@@ -781,8 +774,8 @@ export default /*#__PURE__*/ {
             this.loading = false;
             if (this.refreshAfterSave) this.refresh();
             this.toastSuccess("Elemento Modificado");
-            this.$emit("itemSaved", {item: this.item});
-            this.$emit("itemUpdated", {item: this.item});
+            this.$emit("itemSaved", { item: this.item });
+            this.$emit("itemUpdated", { item: this.item });
           })
           .catch((error) => {
             this.toastError(error);
@@ -822,8 +815,8 @@ export default /*#__PURE__*/ {
               this.item = itemSv;
               if (this.refreshAfterSave) this.refresh();
               this.toastSuccess("Elemento Creado");
-              this.$emit("itemSaved", {item: this.item});
-              this.$emit("itemCreated", {item: this.item});
+              this.$emit("itemSaved", { item: this.item });
+              this.$emit("itemCreated", { item: this.item });
             })
             .catch((error) => {
               this.toastError(error);
@@ -849,8 +842,8 @@ export default /*#__PURE__*/ {
               this.item = itemSv;
               if (this.refreshAfterSave) this.refresh();
               this.toastSuccess("Elemento Creado");
-              this.$emit("itemSaved", {item: this.item});
-              this.$emit("itemCreated", {item: this.item});
+              this.$emit("itemSaved", { item: this.item });
+              this.$emit("itemCreated", { item: this.item });
             })
             .catch((error) => {
               this.toastError(error);
@@ -862,31 +855,43 @@ export default /*#__PURE__*/ {
     },
 
     toastError(error) {
-      console.warn(error);
-      let errormsg = "";
-      if (error.response) {
-        if (error.response.data && error.response.data.message) {
-          errormsg = error.response.data.message;
-        } else if (error.response.data && error.response.data.error) {
-          errormsg = error.response.data.error;
-        } else if (error.response.data && error.response.data.errors) {
-          errormsg = error.response.data.errors;
-        } else if (error.response.data) {
-          errormsg = error.response.data;
+      let error_message = "Ha ocurrido un error";
+
+      if (typeof error === "string") {
+        error_message = error;
+      } else if (error.response) {
+        // handle API errors
+        if (error.response.status === 401) {
+          error_message = "No estás autorizado para realizar esta acción";
+        } else if (error.response.status === 404) {
+          error_message = "El recurso solicitado no se encontró";
+        } else if (error.response.status >= 400 && error.response.status < 500) {
+          error_message = "Hubo un problema con la solicitud realizada";
+        } else if (error.response.status >= 500) {
+          error_message = "El servidor no pudo procesar la solicitud";
         }
+
+        if (error.response.data) {
+          if (typeof error.response.data === "object") {
+            if (error.response.data.message) {
+              error_message = error.response.data.message;
+            } else if (error.response.data.errors) {
+              let errors = error.response.data.errors;
+              error_message = Object.values(errors)[0][0];
+            }
+          } else if (typeof error.response.data === "string") {
+            error_message = error.response.data;
+          }
+        }
+      } else if (error.request) {
+        // handle network errors
+        error_message = "No se pudo conectar con el servidor. Verifique su conexión a Internet.";
       } else if (error.message) {
-        errormsg = error.message;
-      } else if (error) {
-        if (typeof error === "string" || myVar instanceof String) {
-          errormsg = error;
-        } else {
-          errormsg = "Error: Hubo un problema procesando la solicitud.";
-        }
-      } else {
-        errormsg = "Error: Hubo un problema procesando la solicitud.";
+        // handle other errors
+        error_message = error.message;
       }
 
-      this.$bvToast.toast(errormsg, {
+      this.$bvToast.toast(error_message, {
         title: `Error`,
         toaster: "b-toaster-bottom-right",
         variant: "danger",
@@ -1090,12 +1095,14 @@ export default /*#__PURE__*/ {
                         <div class="col-6">
                           <b-form-datepicker v-model="
                             internalFilterByProp(column.prop + '_from').value
-                          " today-button reset-button close-button locale="es" class="form-control-sm"></b-form-datepicker>
+                          " today-button reset-button close-button locale="es"
+                            class="form-control-sm"></b-form-datepicker>
                         </div>
                         <div class="col-6">
                           <b-form-datepicker v-model="
                             internalFilterByProp(column.prop + '_to').value
-                          " today-button reset-button close-button locale="es" class="form-control-sm"></b-form-datepicker>
+                          " today-button reset-button close-button locale="es"
+                            class="form-control-sm"></b-form-datepicker>
                         </div>
                       </div>
 
