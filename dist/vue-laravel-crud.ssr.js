@@ -17305,7 +17305,7 @@ var moment$1 = {
 	})));
 } (moment$1));
 
-var moment = momentExports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-8671ae2d]:last-child,\ntr td[data-v-8671ae2d]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-8671ae2d] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-8671ae2d] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-8671ae2d] .crud-title[data-v-8671ae2d] {\n    margin: 0; }\n  .crud-header[data-v-8671ae2d] .crud-search[data-v-8671ae2d] {\n    max-width: 15rem; }\n    .crud-header[data-v-8671ae2d] .crud-search[data-v-8671ae2d] .btn[data-v-8671ae2d] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-8671ae2d] .crud-search[data-v-8671ae2d] .btn[data-v-8671ae2d].open[data-v-8671ae2d] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-8671ae2d] .table-options[data-v-8671ae2d] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-8671ae2d] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-8671ae2d] {\n    table-layout: auto; }\n    .table[data-v-8671ae2d] tbody[data-v-8671ae2d] td[data-v-8671ae2d] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-8671ae2d] tbody[data-v-8671ae2d] td[data-v-8671ae2d]::-webkit-scrollbar {\n      display: none; } }\n";
+var moment = momentExports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-c72d8320]:last-child,\ntr td[data-v-c72d8320]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-c72d8320] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-c72d8320] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-c72d8320] .crud-title[data-v-c72d8320] {\n    margin: 0; }\n  .crud-header[data-v-c72d8320] .crud-search[data-v-c72d8320] {\n    max-width: 15rem; }\n    .crud-header[data-v-c72d8320] .crud-search[data-v-c72d8320] .btn[data-v-c72d8320] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-c72d8320] .crud-search[data-v-c72d8320] .btn[data-v-c72d8320].open[data-v-c72d8320] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-c72d8320] .table-options[data-v-c72d8320] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-c72d8320] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-c72d8320] {\n    table-layout: auto; }\n    .table[data-v-c72d8320] tbody[data-v-c72d8320] td[data-v-c72d8320] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-c72d8320] tbody[data-v-c72d8320] td[data-v-c72d8320]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -18902,11 +18902,11 @@ var _sfc_render = function render() {
           return _vm.onRowClick(item, index);
         }
       }
-    }, [item.group ? [_c('th', {
+    }, [item.group ? _c('th', {
       attrs: {
         "colspan": _vm.columns.length
       }
-    }, [_c('span', [_vm._v(_vm._s(item.label))])])] : [_vm._t("row", function () {
+    }, [_c('span', [_vm._v(_vm._s(item.label))])]) : _vm._t("row", function () {
       return _vm._l(_vm.columns, function (column, indexc) {
         return _c('td', {
           key: indexc,
@@ -18980,7 +18980,7 @@ var _sfc_render = function render() {
       });
     }, {
       "item": item
-    })]], 2);
+    })], 2);
   }), 0)], 1), _vm.items.length == 0 ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.items.length == 0 ? _c('p', {
@@ -19241,7 +19241,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "8671ae2d", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "c72d8320", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
