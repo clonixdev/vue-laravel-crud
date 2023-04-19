@@ -858,38 +858,41 @@ export default /*#__PURE__*/ {
       let error_message = "Ha ocurrido un error";
 
       if (typeof error === "string") {
-        error_message = error;
+          error_message = error;
       } else if (error.response) {
-        // handle API errors
-        if (error.response.status === 401) {
-          error_message = "No estás autorizado para realizar esta acción";
-        } else if (error.response.status === 404) {
-          error_message = "El recurso solicitado no se encontró";
-        } else if (error.response.status >= 400 && error.response.status < 500) {
-          error_message = "Hubo un problema con la solicitud realizada";
-        } else if (error.response.status >= 500) {
-          error_message = "El servidor no pudo procesar la solicitud";
-        }
-
-        if (error.response.data) {
-          if (typeof error.response.data === "object") {
-            if (error.response.data.message) {
-              error_message = error.response.data.message;
-            } else if (error.response.data.errors) {
-              let errors = error.response.data.errors;
-              error_message = Object.values(errors)[0][0];
-            }
-          } else if (typeof error.response.data === "string") {
-            error_message = error.response.data;
+          // handle API errors
+          if (error.response.status === 401) {
+              error_message = "No estás autorizado para realizar esta acción";
+          } else if (error.response.status === 404) {
+              error_message = "El recurso solicitado no se encontró";
+          } else if (error.response.status >= 400 && error.response.status < 500) {
+              error_message = "Hubo un problema con la solicitud realizada";
+          } else if (error.response.status >= 500) {
+              error_message = "El servidor no pudo procesar la solicitud";
           }
-        }
+
+          if (error.response.data) {
+              if (typeof error.response.data === "object") {
+                  if (error.response.data.errors) {
+                      let errors = error.response.data.errors;
+                      this.responseErrors = errors;
+                      error_message = Object.values(errors)[0][0];
+                  } else if (error.response.data.message) {
+                      error_message = error.response.data.message;
+                  }
+              } else if (typeof error.response.data === "string") {
+                  error_message = error.response.data;
+              }
+          }
       } else if (error.request) {
-        // handle network errors
-        error_message = "No se pudo conectar con el servidor. Verifique su conexión a Internet.";
+          // handle network errors
+          error_message = "No se pudo conectar con el servidor. Verifique su conexión a Internet.";
       } else if (error.message) {
-        // handle other errors
-        error_message = error.message;
+          // handle other errors
+          error_message = error.message;
       }
+
+
 
       this.$bvToast.toast(error_message, {
         title: `Error`,
