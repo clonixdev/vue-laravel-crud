@@ -982,7 +982,7 @@ export default /*#__PURE__*/ {
                     <select class="form-control" v-model="internalFilterByProp(column.prop).value"
                       @change="onChangeFilter($event)">
                       <option value=""></option>
-                      <option :value="option.id" v-for="option in column.options" :key="option.id">
+                      <option :value="option.id ? option.id : option.value ? option.value : ''" v-for="option in column.options" :key="option.id ? option.id : option.value ? option.value : ''">
                         {{
                           option.text
                           ? option.text
@@ -1002,7 +1002,7 @@ export default /*#__PURE__*/ {
                       @change="onChangeFilter($event)">
                       <option value=""></option>
                       <template v-if="column.options">
-                        <option :value="option.id" v-for="option in column.options" :key="option.id">
+                        <option :value="option.id ? option.id : option.value ? option.value : '' " v-for="option in column.options" :key="option.id ? option.id : option.value ? option.value : ''">
                           {{
                             option.text
                             ? option.text
