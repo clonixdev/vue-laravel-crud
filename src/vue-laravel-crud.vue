@@ -1088,7 +1088,7 @@ export default /*#__PURE__*/ {
                     ">
 
                     <div class="form-group">
-                      <select v-if="column.type == 'boolean'" class="form-control form-control-sm"
+                      <select v-if="column.type == 'boolean'" class="form-control form-control-md p-2"
                         v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
                         <option value="">{{ column.label }}</option>
                         <option value="1">Sí</option>
@@ -1100,17 +1100,17 @@ export default /*#__PURE__*/ {
                           <b-form-datepicker v-model="
                             internalFilterByProp(column.prop + '_from').value
                           " today-button reset-button close-button locale="es"
-                            class="form-control-sm"></b-form-datepicker>
+                            class="form-control-md p-2"></b-form-datepicker>
                         </div>
                         <div class="col-6">
                           <b-form-datepicker v-model="
                             internalFilterByProp(column.prop + '_to').value
                           " today-button reset-button close-button locale="es"
-                            class="form-control-sm"></b-form-datepicker>
+                            class="form-control-md p-2"></b-form-datepicker>
                         </div>
                       </div>
 
-                      <select v-else-if="column.type == 'state'" class="form-control form-control-sm"
+                      <select v-else-if="column.type == 'state'" class="form-control form-control-md p-2"
                         v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
                         <option value="">{{ column.label }}</option>
                         <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
@@ -1124,7 +1124,7 @@ export default /*#__PURE__*/ {
                         </option>
                       </select>
 
-                      <select v-else-if="column.type == 'array'" class="form-control form-control-sm"
+                      <select v-else-if="column.type == 'array'" class="form-control form-control-md p-2"
                         v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
                         <option value="">{{ column.label }}</option>
                         <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
@@ -1140,7 +1140,7 @@ export default /*#__PURE__*/ {
 
                       <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
                       </b-form-checkbox>
-                      <input v-else class="form-control form-control-sm" v-model="internalFilterByProp(column.prop).value"
+                      <input v-else class="form-control form-control-md p-2" v-model="internalFilterByProp(column.prop).value"
                         :placeholder="column.label" @change="onChangeFilter($event)" />
 
                     </div>
