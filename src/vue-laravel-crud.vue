@@ -914,6 +914,7 @@ export default /*#__PURE__*/ {
 
     onChangeFilter(event) {
       this.forceRecomputeCounter++;
+      console.debug("Filters debug ",this.finalFilters,this.internalFilter,this.internalFilters,this.filter,this.filters);
       setTimeout(() => {
         this.refresh();
       }, 1);
