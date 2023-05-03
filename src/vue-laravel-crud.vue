@@ -1188,9 +1188,9 @@ export default /*#__PURE__*/ {
                       </span>
                       <span v-else-if="column.type == 'date'">
                         {{
-                          itemValue(column, item) && column.format
+                          itemValue(column, item)
                           ? moment(itemValue(column, item)).format(
-                            column.format
+                            column.format ?   column.format  : 'L LT'
                           )
                           : itemValue(column, item)
                         }}
