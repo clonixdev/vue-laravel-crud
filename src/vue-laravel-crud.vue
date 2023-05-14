@@ -266,6 +266,18 @@ export default /*#__PURE__*/ {
       type: String,
       default: "",
     },
+
+    draggableGroup: {
+      type: String,
+      default: "people",
+    },
+
+    draggableOptions: {
+      type: Object,
+      default: {
+        clone: false
+      }
+    },
   },
 
   mounted() {
@@ -277,7 +289,7 @@ export default /*#__PURE__*/ {
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
     }
 
-    console.debug("crud mounted columns" ,this.columns);
+    console.debug("crud mounted columns", this.columns);
     this.internalFilters = [];
     this.setupFilters();
 
@@ -287,6 +299,7 @@ export default /*#__PURE__*/ {
       this.items = this.models;
       this.pagination.total = this.items.length;
     }
+
 
   },
   computed: {
@@ -337,6 +350,11 @@ export default /*#__PURE__*/ {
     },
   },
   methods: {
+
+    onDraggableAdded(event) {
+      console.log('Se agregó un nuevo elemento a la lista', event);
+      this.$emit("draggableAdded", event);
+    },
     setupFilters() {
       this.columns.forEach((column) => {
         if (this.isColumnHasFilter(column)) {
@@ -858,38 +876,38 @@ export default /*#__PURE__*/ {
       let error_message = "Ha ocurrido un error";
 
       if (typeof error === "string") {
-          error_message = error;
+        error_message = error;
       } else if (error.response) {
-          // handle API errors
-          if (error.response.status === 401) {
-              error_message = "No estás autorizado para realizar esta acción";
-          } else if (error.response.status === 404) {
-              error_message = "El recurso solicitado no se encontró";
-          } else if (error.response.status >= 400 && error.response.status < 500) {
-              error_message = "Hubo un problema con la solicitud realizada";
-          } else if (error.response.status >= 500) {
-              error_message = "El servidor no pudo procesar la solicitud";
-          }
+        // handle API errors
+        if (error.response.status === 401) {
+          error_message = "No estás autorizado para realizar esta acción";
+        } else if (error.response.status === 404) {
+          error_message = "El recurso solicitado no se encontró";
+        } else if (error.response.status >= 400 && error.response.status < 500) {
+          error_message = "Hubo un problema con la solicitud realizada";
+        } else if (error.response.status >= 500) {
+          error_message = "El servidor no pudo procesar la solicitud";
+        }
 
-          if (error.response.data) {
-              if (typeof error.response.data === "object") {
-                  if (error.response.data.errors) {
-                      let errors = error.response.data.errors;
-                      this.responseErrors = errors;
-                      error_message = Object.values(errors)[0][0];
-                  } else if (error.response.data.message) {
-                      error_message = error.response.data.message;
-                  }
-              } else if (typeof error.response.data === "string") {
-                  error_message = error.response.data;
-              }
+        if (error.response.data) {
+          if (typeof error.response.data === "object") {
+            if (error.response.data.errors) {
+              let errors = error.response.data.errors;
+              this.responseErrors = errors;
+              error_message = Object.values(errors)[0][0];
+            } else if (error.response.data.message) {
+              error_message = error.response.data.message;
+            }
+          } else if (typeof error.response.data === "string") {
+            error_message = error.response.data;
           }
+        }
       } else if (error.request) {
-          // handle network errors
-          error_message = "No se pudo conectar con el servidor. Verifique su conexión a Internet.";
+        // handle network errors
+        error_message = "No se pudo conectar con el servidor. Verifique su conexión a Internet.";
       } else if (error.message) {
-          // handle other errors
-          error_message = error.message;
+        // handle other errors
+        error_message = error.message;
       }
 
 
@@ -914,7 +932,7 @@ export default /*#__PURE__*/ {
 
     onChangeFilter(event) {
       this.forceRecomputeCounter++;
-      console.debug("Filters debug ",this.finalFilters,this.internalFilter,this.internalFilters,this.filter,this.filters);
+      console.debug("Filters debug ", this.finalFilters, this.internalFilter, this.internalFilters, this.filter, this.filters);
       setTimeout(() => {
         this.refresh();
       }, 1);
@@ -963,14 +981,12 @@ export default /*#__PURE__*/ {
                   <div class="form-group" v-else-if="column.type == 'date'">
                     <div class="row">
                       <div class="col-6">
-                        <b-form-datepicker v-model="
-                          internalFilterByProp(column.prop + '_from').value
-                        " today-button reset-button close-button locale="es"></b-form-datepicker>
+                        <b-form-datepicker v-model="internalFilterByProp(column.prop + '_from').value
+                          " today-button reset-button close-button locale="es"></b-form-datepicker>
                       </div>
                       <div class="col-6">
-                        <b-form-datepicker v-model="
-                          internalFilterByProp(column.prop + '_to').value
-                        " today-button reset-button close-button locale="es"></b-form-datepicker>
+                        <b-form-datepicker v-model="internalFilterByProp(column.prop + '_to').value
+                          " today-button reset-button close-button locale="es"></b-form-datepicker>
                       </div>
                     </div>
                   </div>
@@ -982,7 +998,8 @@ export default /*#__PURE__*/ {
                     <select class="form-control" v-model="internalFilterByProp(column.prop).value"
                       @change="onChangeFilter($event)">
                       <option value=""></option>
-                      <option :value="option.id ? option.id : option.value " v-for="option in column.options" :key="option.id ? option.id : option.value ">
+                      <option :value="option.id ? option.id : option.value" v-for="option in column.options"
+                        :key="option.id ? option.id : option.value">
                         {{
                           option.text
                           ? option.text
@@ -1002,7 +1019,8 @@ export default /*#__PURE__*/ {
                       @change="onChangeFilter($event)">
                       <option value=""></option>
                       <template v-if="column.options">
-                        <option :value="option.id ? option.id : option.value  " v-for="option in column.options" :key="option.id ? option.id : option.value ">
+                        <option :value="option.id ? option.id : option.value" v-for="option in column.options"
+                          :key="option.id ? option.id : option.value">
                           {{
                             option.text
                             ? option.text
@@ -1080,12 +1098,11 @@ export default /*#__PURE__*/ {
                 <th v-for="(column, indexc) in columns" :key="indexc"
                   :style="{ width: column.width ? column.width : 'inherit' }" scope="col">
                   <slot :name="'filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
-                    v-bind:internalFilterByProp="internalFilterByProp" v-if="
-                      enableFilters &&
+                    v-bind:internalFilterByProp="internalFilterByProp" v-if="enableFilters &&
                       filtersVisible &&
                       isColumnHasFilter(column) &&
                       internalFilterByProp(column.prop)
-                    ">
+                      ">
 
                     <div class="form-group">
                       <select v-if="column.type == 'boolean'" class="form-control form-control-md p-2"
@@ -1097,15 +1114,13 @@ export default /*#__PURE__*/ {
 
                       <div class="row" v-else-if="column.type == 'date'">
                         <div class="col-6">
-                          <b-form-datepicker v-model="
-                            internalFilterByProp(column.prop + '_from').value
-                          " today-button reset-button close-button locale="es"
+                          <b-form-datepicker v-model="internalFilterByProp(column.prop + '_from').value
+                            " today-button reset-button close-button locale="es"
                             class="form-control-md p-2"></b-form-datepicker>
                         </div>
                         <div class="col-6">
-                          <b-form-datepicker v-model="
-                            internalFilterByProp(column.prop + '_to').value
-                          " today-button reset-button close-button locale="es"
+                          <b-form-datepicker v-model="internalFilterByProp(column.prop + '_to').value
+                            " today-button reset-button close-button locale="es"
                             class="form-control-md p-2"></b-form-datepicker>
                         </div>
                       </div>
@@ -1140,8 +1155,9 @@ export default /*#__PURE__*/ {
 
                       <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
                       </b-form-checkbox>
-                      <input v-else class="form-control form-control-md p-2" v-model="internalFilterByProp(column.prop).value"
-                        :placeholder="column.label" @change="onChangeFilter($event)" />
+                      <input v-else class="form-control form-control-md p-2"
+                        v-model="internalFilterByProp(column.prop).value" :placeholder="column.label"
+                        @change="onChangeFilter($event)" />
 
                     </div>
                   </slot>
@@ -1150,8 +1166,8 @@ export default /*#__PURE__*/ {
 
                   <span v-if="sortable && internalFilterByProp(column.prop + '_sort')" class="sort-filter"
                     @click="toggleSortFilter(column)"><b-icon-sort
-                      v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort><b-icon-sort-up v-if="
-                        internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
+                      v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort><b-icon-sort-up
+                      v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
                     <b-icon-sort-down
                       v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
                   </span>
@@ -1160,80 +1176,79 @@ export default /*#__PURE__*/ {
             </tr>
           </thead>
 
-          <draggable v-model="items" group="people" tag="tbody" :draggable="orderable ? '.item' : '.none'"
-            @start="drag = true" @end="drag = false" @sort="onSort()">
+          <draggable v-model="items" :group="draggableGroup" tag="tbody" :draggable="orderable ? '.item' : '.none'"
+            @start="drag = true" @end="drag = false" @sort="onSort()" @added="onDraggableAdded($event)"
+            :options="draggableOptions">
             <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)" class="item">
-    
-                <th :colspan="columns.length" v-if="item.group">
-                  <span>{{ item.label }}</span>
-                </th>
-          
-        
-                <slot name="row" v-bind:item="item" v-else>
-                  <td v-for="(column, indexc) in columns" :key="indexc" :scope="column.prop == 'id' ? 'row' : ''">
-                    <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
-                      v-bind:columnindex="indexc">
-                      <span v-if="column.type == 'boolean'">
-                        <b-badge variant="success" v-if="
-                          itemValue(column, item) == 'true' ||
-                          itemValue(column, item) == 1 ||
-                          itemValue(column, item) == '1'
-                        "><b-icon-check-circle></b-icon-check-circle></b-badge>
-                        <b-badge variant="danger" v-if="
-                          !itemValue(column, item) ||
-                          itemValue(column, item) == '0' ||
-                          itemValue(column, item) == 'false'
-                        "><b-icon-x-circle></b-icon-x-circle></b-badge>
-                      </span>
-                      <span v-else-if="column.type == 'date'">
-                        {{
-                          itemValue(column, item)
-                          ? moment(itemValue(column, item)).format(
-                            column.format ?   column.format  : 'L LT'
-                          )
-                          : itemValue(column, item)
-                        }}
-                      </span>
-                      <span v-else-if="column.type == 'checkbox'">
-                        <b-form-checkbox v-model="item.selected" @change="onCheckSelect($event, item)">
-                        </b-form-checkbox>
-                      </span>
-                      <span v-else-if="column.type == 'state'">
-                        {{
-                          getStateValue(itemValue(column, item), column.options)
-                        }}
-                      </span>
-                      <span v-else-if="column.type == 'array'">
-                        {{
-                          getArrayValue(
-                            itemValue(column, item),
-                            column.displayProp
-                          )
-                        }}
-                      </span>
-                      <span v-else>
-                        {{ itemValue(column, item) }}
-                      </span>
-                    </slot>
 
-                    <b-button-group v-if="column.type == 'actions'">
-                      <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
-                        v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
-                        <b-button variant="primary" @click="showItem(item.id, index)">
-                          <b-icon-eye></b-icon-eye>
-                        </b-button>
-                        <b-button variant="secondary" @click="updateItem(item.id, index)">
-                          <b-icon-pencil></b-icon-pencil>
-                        </b-button>
-                        <b-button variant="danger" @click="removeItem(item.id, index)">
-                          <b-icon-trash></b-icon-trash>
-                        </b-button>
-                      </slot>
-                    </b-button-group>
-                  </td>
-                </slot>
-          
+              <th :colspan="columns.length" v-if="item.group">
+                <span>{{ item.label }}</span>
+              </th>
+
+
+              <slot name="row" v-bind:item="item" v-else>
+                <td v-for="(column, indexc) in columns" :key="indexc" :scope="column.prop == 'id' ? 'row' : ''">
+                  <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
+                    v-bind:columnindex="indexc">
+                    <span v-if="column.type == 'boolean'">
+                      <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
+                        itemValue(column, item) == 1 ||
+                        itemValue(column, item) == '1'
+                        "><b-icon-check-circle></b-icon-check-circle></b-badge>
+                      <b-badge variant="danger" v-if="!itemValue(column, item) ||
+                        itemValue(column, item) == '0' ||
+                        itemValue(column, item) == 'false'
+                        "><b-icon-x-circle></b-icon-x-circle></b-badge>
+                    </span>
+                    <span v-else-if="column.type == 'date'">
+                      {{
+                        itemValue(column, item)
+                        ? moment(itemValue(column, item)).format(
+                          column.format ? column.format : 'L LT'
+                        )
+                        : itemValue(column, item)
+                      }}
+                    </span>
+                    <span v-else-if="column.type == 'select'">
+                      <b-form-checkbox v-model="item.selected" @change="onCheckSelect($event, item)">
+                      </b-form-checkbox>
+                    </span>
+                    <span v-else-if="column.type == 'state'">
+                      {{
+                        getStateValue(itemValue(column, item), column.options)
+                      }}
+                    </span>
+                    <span v-else-if="column.type == 'array'">
+                      {{
+                        getArrayValue(
+                          itemValue(column, item),
+                          column.displayProp
+                        )
+                      }}
+                    </span>
+                    <span v-else>
+                      {{ itemValue(column, item) }}
+                    </span>
+                  </slot>
+
+                  <b-button-group v-if="column.type == 'actions'">
+                    <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
+                      v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
+                      <b-button variant="primary" @click="showItem(item.id, index)">
+                        <b-icon-eye></b-icon-eye>
+                      </b-button>
+                      <b-button variant="secondary" @click="updateItem(item.id, index)">
+                        <b-icon-pencil></b-icon-pencil>
+                      </b-button>
+                      <b-button variant="danger" @click="removeItem(item.id, index)">
+                        <b-icon-trash></b-icon-trash>
+                      </b-button>
+                    </slot>
+                  </b-button-group>
+                </td>
+              </slot>
+
             </tr>
           </draggable>
         </table>
@@ -1247,8 +1262,9 @@ export default /*#__PURE__*/ {
           {{ messageEmptyResults }}
         </p>
 
-        <draggable v-model="items" group="people" class="row" :draggable="orderable ? '.item' : '.none'"
-          @start="drag = true" @end="drag = false" @sort="onSort()">
+        <draggable v-model="items" :group="draggableGroup" class="row" :draggable="orderable ? '.item' : '.none'"
+          @start="drag = true" @end="drag = false" @sort="onSort()" @added="onDraggableAdded($event)"
+          :options="draggableOptions">
           <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
             :xl="colXl" class="item">
             <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
@@ -1259,16 +1275,14 @@ export default /*#__PURE__*/ {
                     <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
                       v-bind:columnindex="indexc">
                       <span v-if="column.type == 'boolean'">
-                        <b-badge variant="success" v-if="
-                          itemValue(column, item) == 'true' ||
+                        <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
                           itemValue(column, item) == 1 ||
                           itemValue(column, item) == '1'
-                        "><b-icon-check-circle></b-icon-check-circle></b-badge>
-                        <b-badge variant="danger" v-if="
-                          !itemValue(column, item) ||
+                          "><b-icon-check-circle></b-icon-check-circle></b-badge>
+                        <b-badge variant="danger" v-if="!itemValue(column, item) ||
                           itemValue(column, item) == '0' ||
                           itemValue(column, item) == 'false'
-                        "><b-icon-x-circle></b-icon-x-circle></b-badge>
+                          "><b-icon-x-circle></b-icon-x-circle></b-badge>
                       </span>
                       <span v-else-if="column.type == 'date'">
                         {{ itemValue(column, item) }}

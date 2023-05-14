@@ -17017,7 +17017,7 @@ var moment = momentExports;
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-3bce964f]:last-child,\ntr td[data-v-3bce964f]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-3bce964f] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-3bce964f] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-3bce964f] .crud-title[data-v-3bce964f] {\n    margin: 0; }\n  .crud-header[data-v-3bce964f] .crud-search[data-v-3bce964f] {\n    max-width: 15rem; }\n    .crud-header[data-v-3bce964f] .crud-search[data-v-3bce964f] .btn[data-v-3bce964f] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-3bce964f] .crud-search[data-v-3bce964f] .btn[data-v-3bce964f].open[data-v-3bce964f] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-3bce964f] .table-options[data-v-3bce964f] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-3bce964f] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-3bce964f] {\n    table-layout: auto; }\n    .table[data-v-3bce964f] tbody[data-v-3bce964f] td[data-v-3bce964f] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-3bce964f] tbody[data-v-3bce964f] td[data-v-3bce964f]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-93788972]:last-child,\ntr td[data-v-93788972]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-93788972] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-93788972] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-93788972] .crud-title[data-v-93788972] {\n    margin: 0; }\n  .crud-header[data-v-93788972] .crud-search[data-v-93788972] {\n    max-width: 15rem; }\n    .crud-header[data-v-93788972] .crud-search[data-v-93788972] .btn[data-v-93788972] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-93788972] .crud-search[data-v-93788972] .btn[data-v-93788972].open[data-v-93788972] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-93788972] .table-options[data-v-93788972] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-93788972] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-93788972] {\n    table-layout: auto; }\n    .table[data-v-93788972] tbody[data-v-93788972] td[data-v-93788972] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-93788972] tbody[data-v-93788972] td[data-v-93788972]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -17369,6 +17369,16 @@ const _sfc_main = {
     groupedLabelAfter: {
       type: String,
       default: ""
+    },
+    draggableGroup: {
+      type: String,
+      default: "people"
+    },
+    draggableOptions: {
+      type: Object,
+      default: {
+        clone: false
+      }
     }
   },
   mounted() {
@@ -17425,6 +17435,10 @@ const _sfc_main = {
     }
   },
   methods: {
+    onDraggableAdded(event) {
+      console.log('Se agregó un nuevo elemento a la lista', event);
+      this.$emit("draggableAdded", event);
+    },
     setupFilters() {
       this.columns.forEach(column => {
         if (this.isColumnHasFilter(column)) {
@@ -18048,7 +18062,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "\n                        internalFilterByProp(column.prop + '_from').value\n                      "
+            expression: "internalFilterByProp(column.prop + '_from').value\n                        "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -18064,7 +18078,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "\n                        internalFilterByProp(column.prop + '_to').value\n                      "
+            expression: "internalFilterByProp(column.prop + '_to').value\n                        "
           }
         })], 1)])]) : column.type == 'state' ? _c('div', {
           staticClass: "form-group"
@@ -18339,7 +18353,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_from').value\n                        "
+            expression: "internalFilterByProp(column.prop + '_from').value\n                          "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -18356,7 +18370,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "\n                          internalFilterByProp(column.prop + '_to').value\n                        "
+            expression: "internalFilterByProp(column.prop + '_to').value\n                          "
           }
         })], 1)]) : column.type == 'state' ? _c('select', {
           directives: [{
@@ -18470,9 +18484,10 @@ var _sfc_render = function render() {
     });
   })], 2)]), _c('draggable', {
     attrs: {
-      "group": "people",
+      "group": _vm.draggableGroup,
       "tag": "tbody",
-      "draggable": _vm.orderable ? '.item' : '.none'
+      "draggable": _vm.orderable ? '.item' : '.none',
+      "options": _vm.draggableOptions
     },
     on: {
       "start": function ($event) {
@@ -18483,6 +18498,9 @@ var _sfc_render = function render() {
       },
       "sort": function ($event) {
         return _vm.onSort();
+      },
+      "added": function ($event) {
+        return _vm.onDraggableAdded($event);
       }
     },
     model: {
@@ -18524,7 +18542,7 @@ var _sfc_render = function render() {
             attrs: {
               "variant": "danger"
             }
-          }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item) ? _vm.moment(_vm.itemValue(column, item)).format(column.format ? column.format : 'L LT') : _vm.itemValue(column, item)) + " ")]) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
+          }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item) ? _vm.moment(_vm.itemValue(column, item)).format(column.format ? column.format : 'L LT') : _vm.itemValue(column, item)) + " ")]) : column.type == 'select' ? _c('span', [_c('b-form-checkbox', {
             on: {
               "change": function ($event) {
                 return _vm.onCheckSelect($event, item);
@@ -18590,8 +18608,9 @@ var _sfc_render = function render() {
   }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e(), _c('draggable', {
     staticClass: "row",
     attrs: {
-      "group": "people",
-      "draggable": _vm.orderable ? '.item' : '.none'
+      "group": _vm.draggableGroup,
+      "draggable": _vm.orderable ? '.item' : '.none',
+      "options": _vm.draggableOptions
     },
     on: {
       "start": function ($event) {
@@ -18602,6 +18621,9 @@ var _sfc_render = function render() {
       },
       "sort": function ($event) {
         return _vm.onSort();
+      },
+      "added": function ($event) {
+        return _vm.onDraggableAdded($event);
       }
     },
     model: {
@@ -18843,7 +18865,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "3bce964f", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "93788972", null, null);
 var component = __component__.exports;
 
 // Import vue component
