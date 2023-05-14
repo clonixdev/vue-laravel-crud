@@ -274,9 +274,10 @@ export default /*#__PURE__*/ {
 
     draggableOptions: {
       type: Object,
-      default: {
-        clone: false
-      }
+      default: function() {
+      return {        clone: false };
+    }
+  
     },
   },
 
@@ -1165,8 +1166,8 @@ export default /*#__PURE__*/ {
                   <span v-else>{{ column.label }}</span>
 
                   <span v-if="sortable && internalFilterByProp(column.prop + '_sort')" class="sort-filter"
-                    @click="toggleSortFilter(column)"><b-icon-sort
-                      v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort><b-icon-sort-up
+                    @click="toggleSortFilter(column)"><b-icon-sort-down
+                      v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
                       v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
                     <b-icon-sort-down
                       v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
