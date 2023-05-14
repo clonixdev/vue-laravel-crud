@@ -356,6 +356,10 @@ export default /*#__PURE__*/ {
       console.log('Se agregó un nuevo elemento a la lista', event);
       this.$emit("draggableAdded", event);
     },
+    onDraggableChange(event){
+      console.log('Lista change', event);
+      this.$emit("draggableChange", event);
+    },
     setupFilters() {
       this.columns.forEach((column) => {
         if (this.isColumnHasFilter(column)) {
@@ -1178,7 +1182,7 @@ export default /*#__PURE__*/ {
           </thead>
 
           <draggable v-model="items" :group="draggableGroup" tag="tbody" :draggable="orderable ? '.item' : '.none'"
-            @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
+            @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)" @change="onDraggableChange($event)"
             :options="draggableOptions">
             <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)" class="item">
@@ -1264,7 +1268,7 @@ export default /*#__PURE__*/ {
         </p>
 
         <draggable v-model="items" :group="draggableGroup" class="row" :draggable="orderable ? '.item' : '.none'"
-          @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
+          @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)" @change="onDraggableChange($event)"
           :options="draggableOptions">
           <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
             :xl="colXl" class="item">
