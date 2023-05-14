@@ -276,7 +276,7 @@ export default /*#__PURE__*/ {
       type: Object,
       default: function() {
       return {        clone: false };
-    }
+     }
   
     },
   },
@@ -1178,7 +1178,7 @@ export default /*#__PURE__*/ {
           </thead>
 
           <draggable v-model="items" :group="draggableGroup" tag="tbody" :draggable="orderable ? '.item' : '.none'"
-            @start="drag = true" @end="drag = false" @sort="onSort()" @added="onDraggableAdded($event)"
+            @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
             :options="draggableOptions">
             <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)" class="item">
@@ -1264,7 +1264,7 @@ export default /*#__PURE__*/ {
         </p>
 
         <draggable v-model="items" :group="draggableGroup" class="row" :draggable="orderable ? '.item' : '.none'"
-          @start="drag = true" @end="drag = false" @sort="onSort()" @added="onDraggableAdded($event)"
+          @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
           :options="draggableOptions">
           <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
             :xl="colXl" class="item">
