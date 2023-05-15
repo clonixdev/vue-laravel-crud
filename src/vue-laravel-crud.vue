@@ -2,11 +2,13 @@
 import draggable from "vuedraggable";
 import axios from "axios";
 import moment from "moment";
+import InfiniteLoading from 'vue-infinite-loading';
 
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
   components: {
     draggable,
+    InfiniteLoading
   },
   data() {
     return {
@@ -91,6 +93,11 @@ export default /*#__PURE__*/ {
       },
     },
     enableFilters: {
+      type: Boolean,
+      default: false,
+    },
+
+    infiniteScroll: {
       type: Boolean,
       default: false,
     },
@@ -274,10 +281,10 @@ export default /*#__PURE__*/ {
 
     draggableOptions: {
       type: Object,
-      default: function() {
-      return {        clone: false };
-     }
-  
+      default: function () {
+        return { clone: false };
+      }
+
     },
   },
 
@@ -351,12 +358,18 @@ export default /*#__PURE__*/ {
     },
   },
   methods: {
-
+    loadMore() {
+      const hasNextPage = (this.pagination.current_page * this.pagination.per_page) < this.pagination.total;
+      if (hasNextPage) {
+        const page = this.pagination.current_page + 1;
+        this.fetchItems(page,true);
+      }
+    },
     onDraggableAdded(event) {
       console.log('Se agregó un nuevo elemento a la lista', event);
       this.$emit("draggableAdded", event);
     },
-    onDraggableChange(event){
+    onDraggableChange(event) {
       console.log('Lista change', event);
       this.$emit("draggableChange", event);
     },
@@ -547,7 +560,7 @@ export default /*#__PURE__*/ {
       }, 1);
     },
 
-    async fetchItemsVuex(page = 1) {
+    async fetchItemsVuex(page = 1, concat = false) {
       this.loading = true;
       this.$emit("beforeFetch", {});
       const result = await this.model.api().get('', {
@@ -561,13 +574,13 @@ export default /*#__PURE__*/ {
       console.debug("fetch page vuex ", page, this.items);
       this.loading = false;
     },
-    fetchItems(page = 1) {
+    fetchItems(page = 1, concat = false) {
       if (!this.ajax) {
         return;
       }
       this.$emit("beforeFetch", {});
       if (this.useVuexORM) {
-        return this.fetchItemsVuex(page);
+        return this.fetchItemsVuex(page, concat);
       }
       this.loading = true;
       axios
@@ -608,9 +621,17 @@ export default /*#__PURE__*/ {
                 itemswithgroup.push(item);
               }
             });
-            this.items = itemswithgroup;
+            if (concat) {
+              this.items = this.items.concat(itemswithgroup);
+            } else {
+              this.items = itemswithgroup;
+            }
           } else {
-            this.items = items;
+            if (concat) {
+              this.items = this.items.concat(items);
+            } else {
+              this.items = items;
+            }
           }
 
           this.loading = false;
@@ -1182,8 +1203,8 @@ export default /*#__PURE__*/ {
           </thead>
 
           <draggable v-model="items" :group="draggableGroup" tag="tbody" :draggable="orderable ? '.item' : '.none'"
-            @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)" @change="onDraggableChange($event)"
-            :options="draggableOptions">
+            @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
+            @change="onDraggableChange($event)" :options="draggableOptions">
             <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)" class="item">
 
@@ -1255,6 +1276,7 @@ export default /*#__PURE__*/ {
               </slot>
 
             </tr>
+            <infinite-loading v-infinite-scroll="loadMore" v-if="infiniteScroll" />
           </draggable>
         </table>
         <p v-if="items.length == 0" class="p-3">
@@ -1268,8 +1290,8 @@ export default /*#__PURE__*/ {
         </p>
 
         <draggable v-model="items" :group="draggableGroup" class="row" :draggable="orderable ? '.item' : '.none'"
-          @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)" @change="onDraggableChange($event)"
-          :options="draggableOptions">
+          @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
+          @change="onDraggableChange($event)" :options="draggableOptions">
           <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
             :xl="colXl" class="item">
             <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
@@ -1331,6 +1353,7 @@ export default /*#__PURE__*/ {
               </template>
             </b-card>
           </b-col>
+          <infinite-loading v-infinite-scroll="loadMore" v-if="infiniteScroll" />
         </draggable>
       </div>
 
@@ -1345,7 +1368,7 @@ export default /*#__PURE__*/ {
         </div>
       </div>
     </b-overlay>
-    <div class="crud-paginator">
+    <div class="crud-paginator" v-if="!infiniteScroll">
       <b-pagination v-if="showPaginator" v-model="pagination.current_page" :total-rows="pagination.total"
         :per-page="pagination.per_page" @change="onPaginationChange($event)"></b-pagination>
     </div>
