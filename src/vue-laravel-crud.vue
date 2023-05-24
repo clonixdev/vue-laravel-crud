@@ -362,9 +362,9 @@ export default /*#__PURE__*/ {
       const hasNextPage = (this.pagination.current_page * this.pagination.per_page) < this.pagination.total;
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
-        this.fetchItems(page,true).then(() => {
+         this.fetchItems(page,true).then(() => {
           $state.loaded();
-        });
+         });
       }else{
         $state.complete();
       }
@@ -587,7 +587,7 @@ export default /*#__PURE__*/ {
         return this.fetchItemsVuex(page, concat);
       }
       this.loading = true;
-      axios
+      return axios
         .get(this.apiUrl + "/" + this.modelName, {
           params: {
             page: page,
