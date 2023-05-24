@@ -358,11 +358,15 @@ export default /*#__PURE__*/ {
     },
   },
   methods: {
-    loadMore() {
+    infiniteHandler($state) {
       const hasNextPage = (this.pagination.current_page * this.pagination.per_page) < this.pagination.total;
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
-        this.fetchItems(page,true);
+        this.fetchItems(page,true).then(() => {
+          $state.loaded();
+        });
+      }else{
+        $state.complete();
       }
     },
     onDraggableAdded(event) {
@@ -1276,7 +1280,7 @@ export default /*#__PURE__*/ {
               </slot>
 
             </tr>
-            <infinite-loading v-infinite-scroll="loadMore" v-if="infiniteScroll" />
+            <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" />
           </draggable>
         </table>
         <p v-if="items.length == 0" class="p-3">
@@ -1353,7 +1357,7 @@ export default /*#__PURE__*/ {
               </template>
             </b-card>
           </b-col>
-          <infinite-loading v-infinite-scroll="loadMore" v-if="infiniteScroll" />
+          <infinite-loading @infinite="infiniteHandler" v-if="infiniteScroll" />
         </draggable>
       </div>
 
