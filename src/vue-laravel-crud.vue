@@ -24,7 +24,7 @@ export default /*#__PURE__*/ {
         last_page: 1,
         next_page_url: "",
         prev_page_url: "",
-        per_page: 20,
+        per_page: 21,
         total: 0,
       },
       displaySearch: false,
