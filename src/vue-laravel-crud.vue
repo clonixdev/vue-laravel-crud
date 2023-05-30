@@ -1119,7 +1119,7 @@ export default /*#__PURE__*/ {
         </b-button-group>
       </div>
     </div>
-    <b-overlay :show="loading" rounded="sm">
+   
       <div :class="['table-responsive', tableContainerClass]" v-if="displayMode == displayModes.MODE_TABLE">
         <table :class="['table table-hover table-striped w-100', tableClass]">
           <thead class="thead-light">
@@ -1280,7 +1280,11 @@ export default /*#__PURE__*/ {
               </slot>
 
             </tr>
-            <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" />
+            <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
+                <div slot="spinner">Cargando mas elementos...</div>
+                <div slot="no-more">No hay mas elementos para mostrar</div>
+                <div slot="no-results">No se han encontrado resultados</div>
+            </infinite-loading>
           </draggable>
         </table>
         <p v-if="items.length == 0" class="p-3">
@@ -1371,7 +1375,7 @@ export default /*#__PURE__*/ {
           </div>
         </div>
       </div>
-    </b-overlay>
+       <b-overlay :show="loading" rounded="sm"></b-overlay>
     <div class="crud-paginator" v-if="!infiniteScroll">
       <b-pagination v-if="showPaginator" v-model="pagination.current_page" :total-rows="pagination.total"
         :per-page="pagination.per_page" @change="onPaginationChange($event)"></b-pagination>
