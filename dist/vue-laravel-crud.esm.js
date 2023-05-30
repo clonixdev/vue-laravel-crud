@@ -17035,7 +17035,7 @@ var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExp
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-80e5e66e]:last-child,\ntr td[data-v-80e5e66e]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-80e5e66e] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-80e5e66e] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-80e5e66e] .crud-title[data-v-80e5e66e] {\n    margin: 0; }\n  .crud-header[data-v-80e5e66e] .crud-search[data-v-80e5e66e] {\n    max-width: 15rem; }\n    .crud-header[data-v-80e5e66e] .crud-search[data-v-80e5e66e] .btn[data-v-80e5e66e] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-80e5e66e] .crud-search[data-v-80e5e66e] .btn[data-v-80e5e66e].open[data-v-80e5e66e] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-80e5e66e] .table-options[data-v-80e5e66e] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-80e5e66e] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-80e5e66e] {\n    table-layout: auto; }\n    .table[data-v-80e5e66e] tbody[data-v-80e5e66e] td[data-v-80e5e66e] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-80e5e66e] tbody[data-v-80e5e66e] td[data-v-80e5e66e]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-ca397074]:last-child,\ntr td[data-v-ca397074]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-ca397074] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-ca397074] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-ca397074] .crud-title[data-v-ca397074] {\n    margin: 0; }\n  .crud-header[data-v-ca397074] .crud-search[data-v-ca397074] {\n    max-width: 15rem; }\n    .crud-header[data-v-ca397074] .crud-search[data-v-ca397074] .btn[data-v-ca397074] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-ca397074] .crud-search[data-v-ca397074] .btn[data-v-ca397074].open[data-v-ca397074] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-ca397074] .table-options[data-v-ca397074] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-ca397074] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-ca397074] {\n    table-layout: auto; }\n    .table[data-v-ca397074] tbody[data-v-ca397074] td[data-v-ca397074] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-ca397074] tbody[data-v-ca397074] td[data-v-ca397074]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -18328,12 +18328,7 @@ var _sfc_render = function render() {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading
-  })], 2)], 1)], 1) : _vm._e(), _c('b-overlay', {
-    attrs: {
-      "show": _vm.loading,
-      "rounded": "sm"
-    }
-  }, [_vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('div', {
+  })], 2)], 1)], 1) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('div', {
     class: ['table-responsive', _vm.tableContainerClass]
   }, [_c('table', {
     class: ['table table-hover table-striped w-100', _vm.tableClass]
@@ -18657,7 +18652,28 @@ var _sfc_render = function render() {
     on: {
       "infinite": _vm.infiniteHandler
     }
-  }) : _vm._e()], 2)], 1), _vm.items.length == 0 ? _c('p', {
+  }, [_c('div', {
+    attrs: {
+      "slot": "spinner"
+    },
+    slot: "spinner"
+  }, [_c('div', {
+    staticClass: "text-center"
+  }, [_vm._v("Cargando mas elementos...")])]), _c('div', {
+    attrs: {
+      "slot": "no-more"
+    },
+    slot: "no-more"
+  }, [_c('div', {
+    staticClass: "text-center"
+  }, [_vm._v("No hay mas elementos para mostrar")])]), _c('div', {
+    attrs: {
+      "slot": "no-results"
+    },
+    slot: "no-results"
+  }, [_c('div', {
+    staticClass: "text-center"
+  }, [_vm._v("No se han encontrado resultados")])])]) : _vm._e()], 2)], 1), _vm.items.length == 0 ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.items.length == 0 ? _c('p', {
     staticClass: "p-3"
@@ -18792,7 +18808,12 @@ var _sfc_render = function render() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]) : _vm._e()]), !_vm.infiniteScroll ? _c('div', {
+  })], 2)]) : _vm._e(), _c('b-overlay', {
+    attrs: {
+      "show": _vm.loading,
+      "rounded": "sm"
+    }
+  }), !_vm.infiniteScroll ? _c('div', {
     staticClass: "crud-paginator"
   }, [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
@@ -18928,7 +18949,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "80e5e66e", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "ca397074", null, null);
 var component = __component__.exports;
 
 // Import vue component

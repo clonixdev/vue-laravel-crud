@@ -1281,9 +1281,9 @@ export default /*#__PURE__*/ {
 
             </tr>
             <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
-                <div slot="spinner">Cargando mas elementos...</div>
-                <div slot="no-more">No hay mas elementos para mostrar</div>
-                <div slot="no-results">No se han encontrado resultados</div>
+                <div slot="spinner"><div class="text-center">Cargando mas elementos...</div></div>
+                <div slot="no-more"><div class="text-center">No hay mas elementos para mostrar</div></div>
+                <div slot="no-results"><div class="text-center">No se han encontrado resultados</div></div>
             </infinite-loading>
           </draggable>
         </table>
