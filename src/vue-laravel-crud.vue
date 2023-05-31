@@ -238,7 +238,7 @@ export default /*#__PURE__*/ {
     },
     messageNoMore: {
       type: String,
-      default: "No hay mas elementos para mostrar.",
+      default: "No hay más elementos para mostrar.",
     },
     messageLoading: {
       type: String,
@@ -909,6 +909,9 @@ export default /*#__PURE__*/ {
       }
       if (event) event.preventDefault();
     },
+    clearItems(){
+      this.items = [];
+    },
 
     toastError(error) {
       let error_message = "Ha ocurrido un error";
@@ -1291,7 +1294,7 @@ export default /*#__PURE__*/ {
             <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
                 <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
                 <div slot="no-more"><div class="text-center">{{ messageNoMore }}</div></div>
-                <div slot="no-results"><div class="text-center">{{ messageEmptyResults }}</div></div>
+                <div slot="no-results"><div class="text-center">{{ messageNoMore }}</div></div>
             </infinite-loading>
           </draggable>
    
@@ -1370,10 +1373,10 @@ export default /*#__PURE__*/ {
               </template>
             </b-card>
           </b-col>
-          <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
-                <div slot="spinner"><div class="text-center col-12">{{ messageLoading }}</div></div>
-                <div slot="no-more"><div class="text-center col-12">{{ messageNoMore }}</div></div>
-                <div slot="no-results"><div class="text-center col-12">{{ messageEmptyResults }}</div></div>
+          <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" class="col-12 my-2" >
+                <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
+                <div slot="no-more"><div class="text-center">{{ messageNoMore }}</div></div>
+                <div slot="no-results"><div class="text-center">{{ messageEmptyResults }}</div></div>
             </infinite-loading>
         </draggable>
 

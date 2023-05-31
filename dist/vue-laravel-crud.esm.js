@@ -17035,7 +17035,7 @@ var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExp
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-7bd60172]:last-child,\ntr td[data-v-7bd60172]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-7bd60172] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-7bd60172] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-7bd60172] .crud-title[data-v-7bd60172] {\n    margin: 0; }\n  .crud-header[data-v-7bd60172] .crud-search[data-v-7bd60172] {\n    max-width: 15rem; }\n    .crud-header[data-v-7bd60172] .crud-search[data-v-7bd60172] .btn[data-v-7bd60172] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-7bd60172] .crud-search[data-v-7bd60172] .btn[data-v-7bd60172].open[data-v-7bd60172] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-7bd60172] .table-options[data-v-7bd60172] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-7bd60172] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-7bd60172] {\n    table-layout: auto; }\n    .table[data-v-7bd60172] tbody[data-v-7bd60172] td[data-v-7bd60172] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-7bd60172] tbody[data-v-7bd60172] td[data-v-7bd60172]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-e795f7d3]:last-child,\ntr td[data-v-e795f7d3]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-e795f7d3] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-e795f7d3] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-e795f7d3] .crud-title[data-v-e795f7d3] {\n    margin: 0; }\n  .crud-header[data-v-e795f7d3] .crud-search[data-v-e795f7d3] {\n    max-width: 15rem; }\n    .crud-header[data-v-e795f7d3] .crud-search[data-v-e795f7d3] .btn[data-v-e795f7d3] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-e795f7d3] .crud-search[data-v-e795f7d3] .btn[data-v-e795f7d3].open[data-v-e795f7d3] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-e795f7d3] .table-options[data-v-e795f7d3] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-e795f7d3] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-e795f7d3] {\n    table-layout: auto; }\n    .table[data-v-e795f7d3] tbody[data-v-e795f7d3] td[data-v-e795f7d3] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-e795f7d3] tbody[data-v-e795f7d3] td[data-v-e795f7d3]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -17359,7 +17359,7 @@ const _sfc_main = {
     },
     messageNoMore: {
       type: String,
-      default: "No hay mas elementos para mostrar."
+      default: "No hay más elementos para mostrar."
     },
     messageLoading: {
       type: String,
@@ -17961,6 +17961,9 @@ const _sfc_main = {
         }
       }
       if (event) event.preventDefault();
+    },
+    clearItems() {
+      this.items = [];
     },
     toastError(error) {
       let error_message = "Ha ocurrido un error";
@@ -18681,7 +18684,7 @@ var _sfc_render = function render() {
     slot: "no-results"
   }, [_c('div', {
     staticClass: "text-center"
-  }, [_vm._v(_vm._s(_vm.messageEmptyResults))])])]) : _vm._e()], 2)], 1), !_vm.loading && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
+  }, [_vm._v(_vm._s(_vm.messageNoMore))])])]) : _vm._e()], 2)], 1), !_vm.loading && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [!_vm.loading && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
@@ -18802,6 +18805,7 @@ var _sfc_render = function render() {
       "item": item
     })], 2)], 1);
   }), _vm.infiniteScroll ? _c('infinite-loading', {
+    staticClass: "col-12 my-2",
     on: {
       "infinite": _vm.infiniteHandler
     }
@@ -18811,21 +18815,21 @@ var _sfc_render = function render() {
     },
     slot: "spinner"
   }, [_c('div', {
-    staticClass: "text-center col-12"
+    staticClass: "text-center"
   }, [_vm._v(_vm._s(_vm.messageLoading))])]), _c('div', {
     attrs: {
       "slot": "no-more"
     },
     slot: "no-more"
   }, [_c('div', {
-    staticClass: "text-center col-12"
+    staticClass: "text-center"
   }, [_vm._v(_vm._s(_vm.messageNoMore))])]), _c('div', {
     attrs: {
       "slot": "no-results"
     },
     slot: "no-results"
   }, [_c('div', {
-    staticClass: "text-center col-12"
+    staticClass: "text-center"
   }, [_vm._v(_vm._s(_vm.messageEmptyResults))])])]) : _vm._e()], 2)], 1) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CUSTOM ? _c('div', [_c('div', {
     class: _vm.listContainerClass
   }, [_vm.items.length == 0 ? _c('p', {
@@ -18978,7 +18982,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "7bd60172", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "e795f7d3", null, null);
 var component = __component__.exports;
 
 // Import vue component
