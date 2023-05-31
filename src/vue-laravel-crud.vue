@@ -1288,13 +1288,13 @@ export default /*#__PURE__*/ {
               </slot>
 
             </tr>
-
-          </draggable>
-          <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
+            <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
                 <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
                 <div slot="no-more"><div class="text-center">{{ messageNoMore }}</div></div>
                 <div slot="no-results"><div class="text-center">{{ messageEmptyResults }}</div></div>
             </infinite-loading>
+          </draggable>
+   
         </table>
         <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
@@ -1370,13 +1370,13 @@ export default /*#__PURE__*/ {
               </template>
             </b-card>
           </b-col>
-    
-        </draggable>
-        <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
-                <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
-                <div slot="no-more"><div class="text-center">{{ messageNoMore }}</div></div>
-                <div slot="no-results"><div class="text-center">{{ messageEmptyResults }}</div></div>
+          <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
+                <div slot="spinner"><div class="text-center col-12">{{ messageLoading }}</div></div>
+                <div slot="no-more"><div class="text-center col-12">{{ messageNoMore }}</div></div>
+                <div slot="no-results"><div class="text-center col-12">{{ messageEmptyResults }}</div></div>
             </infinite-loading>
+        </draggable>
+
       </div>
 
       <div v-if="displayMode == displayModes.MODE_CUSTOM">
