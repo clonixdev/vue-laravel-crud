@@ -1293,8 +1293,8 @@ export default /*#__PURE__*/ {
             </tr>
             <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
                 <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
-                <div slot="no-more"><div class="text-center">{{ messageNoMore }}</div></div>
-                <div slot="no-results"><div class="text-center">{{ messageNoMore }}</div></div>
+                <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
+                <div slot="no-results"><div class="text-center"  v-if="!loading">{{ pagination.current_page == 1 ? messageEmptyResults : messageNoMore }}</div></div>
             </infinite-loading>
           </draggable>
    
@@ -1375,8 +1375,8 @@ export default /*#__PURE__*/ {
           </b-col>
           <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" class="col-12 my-2" >
                 <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
-                <div slot="no-more"><div class="text-center">{{ messageNoMore }}</div></div>
-                <div slot="no-results"><div class="text-center">{{ messageEmptyResults }}</div></div>
+                <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
+                <div slot="no-results"><div class="text-center" v-if="!loading">{{ pagination.current_page == 1 ? messageEmptyResults : messageNoMore }}</div></div>
             </infinite-loading>
         </draggable>
 
