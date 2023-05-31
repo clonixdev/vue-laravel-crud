@@ -236,6 +236,14 @@ export default /*#__PURE__*/ {
       type: String,
       default: "No se han encontrado resultados",
     },
+    messageNoMore: {
+      type: String,
+      default: "No hay mas elementos para mostrar.",
+    },
+    messageLoading: {
+      type: String,
+      default: "Cargando...",
+    },
     messageSave: {
       type: String,
       default: "Guardar",
@@ -1280,20 +1288,21 @@ export default /*#__PURE__*/ {
               </slot>
 
             </tr>
-            <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
-                <div slot="spinner"><div class="text-center">Cargando mas elementos...</div></div>
-                <div slot="no-more"><div class="text-center">No hay mas elementos para mostrar</div></div>
-                <div slot="no-results"><div class="text-center">No se han encontrado resultados</div></div>
-            </infinite-loading>
+
           </draggable>
+          <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
+                <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
+                <div slot="no-more"><div class="text-center">{{ messageNoMore }}</div></div>
+                <div slot="no-results"><div class="text-center">{{ messageEmptyResults }}</div></div>
+            </infinite-loading>
         </table>
-        <p v-if="items.length == 0" class="p-3">
+        <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
         </p>
       </div>
 
       <div v-if="displayMode == displayModes.MODE_CARDS">
-        <p v-if="items.length == 0" class="p-3">
+        <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
         </p>
 
@@ -1361,8 +1370,13 @@ export default /*#__PURE__*/ {
               </template>
             </b-card>
           </b-col>
-          <infinite-loading @infinite="infiniteHandler" v-if="infiniteScroll" />
+    
         </draggable>
+        <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
+                <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
+                <div slot="no-more"><div class="text-center">{{ messageNoMore }}</div></div>
+                <div slot="no-results"><div class="text-center">{{ messageEmptyResults }}</div></div>
+            </infinite-loading>
       </div>
 
       <div v-if="displayMode == displayModes.MODE_CUSTOM">
