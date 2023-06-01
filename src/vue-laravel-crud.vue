@@ -1293,12 +1293,13 @@ export default /*#__PURE__*/ {
             </tr>
 
           </draggable>
-          <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" >
+
+        </table>
+        <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll"  :forceUseInfiniteWrapper="'html'" >
                 <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
                 <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
                 <div slot="no-results"><div class="text-center"  v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div></div>
             </infinite-loading>
-        </table>
         <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
         </p>
@@ -1375,11 +1376,11 @@ export default /*#__PURE__*/ {
           </b-col>
     
         </draggable>
-        <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" class="my-2" >
+        <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" class="my-2" :forceUseInfiniteWrapper="'html'">
                 <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
                 <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
                 <div slot="no-results"><div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div></div>
-            </infinite-loading>
+        </infinite-loading>
       </div>
 
       <div v-if="displayMode == displayModes.MODE_CUSTOM">

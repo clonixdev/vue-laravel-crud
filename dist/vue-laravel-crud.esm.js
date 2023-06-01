@@ -17035,7 +17035,7 @@ var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExp
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-eef0b381]:last-child,\ntr td[data-v-eef0b381]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-eef0b381] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-eef0b381] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-eef0b381] .crud-title[data-v-eef0b381] {\n    margin: 0; }\n  .crud-header[data-v-eef0b381] .crud-search[data-v-eef0b381] {\n    max-width: 15rem; }\n    .crud-header[data-v-eef0b381] .crud-search[data-v-eef0b381] .btn[data-v-eef0b381] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-eef0b381] .crud-search[data-v-eef0b381] .btn[data-v-eef0b381].open[data-v-eef0b381] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-eef0b381] .table-options[data-v-eef0b381] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-eef0b381] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-eef0b381] {\n    table-layout: auto; }\n    .table[data-v-eef0b381] tbody[data-v-eef0b381] td[data-v-eef0b381] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-eef0b381] tbody[data-v-eef0b381] td[data-v-eef0b381]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-9feb749c]:last-child,\ntr td[data-v-9feb749c]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-9feb749c] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-9feb749c] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-9feb749c] .crud-title[data-v-9feb749c] {\n    margin: 0; }\n  .crud-header[data-v-9feb749c] .crud-search[data-v-9feb749c] {\n    max-width: 15rem; }\n    .crud-header[data-v-9feb749c] .crud-search[data-v-9feb749c] .btn[data-v-9feb749c] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-9feb749c] .crud-search[data-v-9feb749c] .btn[data-v-9feb749c].open[data-v-9feb749c] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-9feb749c] .table-options[data-v-9feb749c] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-9feb749c] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-9feb749c] {\n    table-layout: auto; }\n    .table[data-v-9feb749c] tbody[data-v-9feb749c] td[data-v-9feb749c] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-9feb749c] tbody[data-v-9feb749c] td[data-v-9feb749c]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -18659,7 +18659,10 @@ var _sfc_render = function render() {
     }, {
       "item": item
     })], 2);
-  }), 0), _vm.infiniteScroll ? _c('infinite-loading', {
+  }), 0)], 1), _vm.infiniteScroll ? _c('infinite-loading', {
+    attrs: {
+      "forceUseInfiniteWrapper": 'html'
+    },
     on: {
       "infinite": _vm.infiniteHandler
     }
@@ -18684,9 +18687,9 @@ var _sfc_render = function render() {
     slot: "no-results"
   }, [!_vm.loading ? _c('div', {
     staticClass: "text-center"
-  }, [_vm._v(_vm._s(_vm.items.length == 0 ? _vm.messageEmptyResults : _vm.messageNoMore))]) : _vm._e()])]) : _vm._e()], 1), !_vm.loading && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
+  }, [_vm._v(_vm._s(_vm.items.length == 0 ? _vm.messageEmptyResults : _vm.messageNoMore))]) : _vm._e()])]) : _vm._e(), !_vm.loading && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
-  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [!_vm.loading && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
+  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()], 1) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [!_vm.loading && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e(), _c('draggable', {
     staticClass: "row",
@@ -18806,6 +18809,9 @@ var _sfc_render = function render() {
     })], 2)], 1);
   }), 1), _vm.infiniteScroll ? _c('infinite-loading', {
     staticClass: "my-2",
+    attrs: {
+      "forceUseInfiniteWrapper": 'html'
+    },
     on: {
       "infinite": _vm.infiniteHandler
     }
@@ -18982,7 +18988,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "eef0b381", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "9feb749c", null, null);
 var component = __component__.exports;
 
 // Import vue component
