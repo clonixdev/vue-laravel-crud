@@ -367,7 +367,7 @@ export default /*#__PURE__*/ {
   },
   methods: {
     infiniteHandler($state) {
-      const hasNextPage = (this.pagination.current_page * this.pagination.per_page) < this.pagination.total;
+      const hasNextPage = (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total;
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
          this.fetchItems(page,true).then(() => {
@@ -1302,21 +1302,12 @@ export default /*#__PURE__*/ {
           </draggable>
 
         </table>
-        <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll"  :forceUseInfiniteWrapper="true" >
-                <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
-                <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
-                <div slot="no-results"><div class="text-center"  v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div></div>
-            </infinite-loading>
         <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
         </p>
       </div>
 
       <div v-if="displayMode == displayModes.MODE_CARDS">
-        <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
-          {{ messageEmptyResults }}
-        </p>
-
         <draggable v-model="items" :group="draggableGroup" class="row" :draggable="orderable ? '.item' : '.none'"
           @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
           @change="onDraggableChange($event)" :options="draggableOptions">
@@ -1383,16 +1374,16 @@ export default /*#__PURE__*/ {
           </b-col>
     
         </draggable>
-        <infinite-loading  ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll" class="my-2" :forceUseInfiniteWrapper="true">
-                <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
-                <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
-                <div slot="no-results"><div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div></div>
-        </infinite-loading>
+
+        <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
+          {{ messageEmptyResults }}
+        </p>
+        
       </div>
 
       <div v-if="displayMode == displayModes.MODE_CUSTOM">
         <div :class="listContainerClass">
-          <p v-if="items.length == 0" class="p-3">
+          <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
             {{ messageEmptyResults }}
           </p>
           <div :class="listItemClass" v-for="(item, index) in itemsList" v-bind:key="index">
@@ -1401,6 +1392,12 @@ export default /*#__PURE__*/ {
         </div>
       </div>
        <b-overlay :show="loading" rounded="sm"></b-overlay>
+       <infinite-loading  ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll"  :forceUseInfiniteWrapper="true">
+                <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
+                <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
+                <div slot="no-results"><div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div></div>
+        </infinite-loading>
+        
     <div class="crud-paginator" v-if="!infiniteScroll">
       <b-pagination v-if="showPaginator" v-model="pagination.current_page" :total-rows="pagination.total"
         :per-page="pagination.per_page" @change="onPaginationChange($event)"></b-pagination>
