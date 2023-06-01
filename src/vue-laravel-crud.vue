@@ -367,14 +367,20 @@ export default /*#__PURE__*/ {
   },
   methods: {
     infiniteHandler($state) {
+      console.debug("infinite handler");
       const hasNextPage = (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total;
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
          this.fetchItems(page,true).then(() => {
           $state.loaded();
+          console.debug("infinite handler loaded");
+         }).catch(error =>{
+          console.debug("infinite handler error",error);
+          $state.error();
          });
       }else{
         $state.complete();
+        console.debug("infinite handler complete",this.pagination,(this.pagination.current_page * this.pagination.per_page),this.pagination.total);
       }
 
       const iref = this.$refs.infiniteLoading;
