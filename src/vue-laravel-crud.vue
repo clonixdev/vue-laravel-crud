@@ -376,6 +376,13 @@ export default /*#__PURE__*/ {
       }else{
         $state.complete();
       }
+
+      const iref = this.$refs.infiniteLoading;
+
+      console.debug("iref",iref);
+      if(iref){
+        console.debug(iref.getCurrentDistance(),iref.getScrollParent(),iref.status,iref.$el);
+      }
     },
     onDraggableAdded(event) {
       console.log('Se agregó un nuevo elemento a la lista', event);
@@ -1295,7 +1302,7 @@ export default /*#__PURE__*/ {
           </draggable>
 
         </table>
-        <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll"  :forceUseInfiniteWrapper="'html'" >
+        <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll"  :forceUseInfiniteWrapper="true" >
                 <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
                 <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
                 <div slot="no-results"><div class="text-center"  v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div></div>
@@ -1376,7 +1383,7 @@ export default /*#__PURE__*/ {
           </b-col>
     
         </draggable>
-        <infinite-loading  @infinite="infiniteHandler" v-if="infiniteScroll" class="my-2" :forceUseInfiniteWrapper="'html'">
+        <infinite-loading  ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll" class="my-2" :forceUseInfiniteWrapper="true">
                 <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
                 <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
                 <div slot="no-results"><div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div></div>
