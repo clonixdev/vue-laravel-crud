@@ -14,6 +14,7 @@ export default /*#__PURE__*/ {
     return {
       moment: moment,
       loading: false,
+      firstLoad: false,
       item: {
         id: null,
       },
@@ -367,35 +368,23 @@ export default /*#__PURE__*/ {
   },
   methods: {
     infiniteHandler($state) {
-      console.debug("infinite handler");
-      const hasNextPage = (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total;
+      const hasNextPage = !this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total;
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
          this.fetchItems(page,true).then(() => {
           $state.loaded();
-          console.debug("infinite handler loaded");
          }).catch(error =>{
           console.debug("infinite handler error",error);
           $state.error();
          });
       }else{
         $state.complete();
-        console.debug("infinite handler complete",this.pagination,(this.pagination.current_page * this.pagination.per_page),this.pagination.total);
-      }
-
-      const iref = this.$refs.infiniteLoading;
-
-      console.debug("iref",iref);
-      if(iref){
-        console.debug(iref.getCurrentDistance(),iref.getScrollParent(),iref.status,iref.$el);
       }
     },
     onDraggableAdded(event) {
-      console.log('Se agregó un nuevo elemento a la lista', event);
       this.$emit("draggableAdded", event);
     },
     onDraggableChange(event) {
-      console.log('Lista change', event);
       this.$emit("draggableChange", event);
     },
     setupFilters() {
@@ -443,7 +432,6 @@ export default /*#__PURE__*/ {
     },
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
-
       if (this.displayMode == this.displayModes.MODE_CARDS) {
         this.filterSidebarOpen = this.filtersVisible;
       } else {
@@ -506,7 +494,6 @@ export default /*#__PURE__*/ {
     },
     selectItem() {
       let sitem = this.selectedItems.find((e) => e.id == this.item.id);
-
       if (sitem) {
         this.item.selected = false;
         this.selectedItems = this.selectedItems.filter(
@@ -541,7 +528,6 @@ export default /*#__PURE__*/ {
       } else {
         this.item = this.items[itemIndex];
       }
-
       this.onSelect();
       this.$bvModal.show("modal-show-item-" + this.modelName);
     },
@@ -584,7 +570,6 @@ export default /*#__PURE__*/ {
         this.refresh();
       }, 1);
     },
-
     async fetchItemsVuex(page = 1, concat = false) {
       this.loading = true;
       this.$emit("beforeFetch", {});
@@ -598,6 +583,7 @@ export default /*#__PURE__*/ {
       this.items = result.entities[this.model.entity];
       console.debug("fetch page vuex ", page, this.items);
       this.loading = false;
+      this.firstLoad = true;
     },
     fetchItems(page = 1, concat = false) {
       if (!this.ajax) {
@@ -660,6 +646,7 @@ export default /*#__PURE__*/ {
           }
 
           this.loading = false;
+          this.firstLoad = true;
           this.$emit("afterFetch", {});
         })
         .catch((error) => {
@@ -668,7 +655,6 @@ export default /*#__PURE__*/ {
           this.loading = false;
         });
     },
-
     removeItem(id, index) {
       this.$bvModal
         .msgBoxConfirm(this.messageRemoveConfirm, {
@@ -689,7 +675,6 @@ export default /*#__PURE__*/ {
           this.loading = false;
         });
     },
-
     deleteItem(id, index) {
 
       if (this.useVuexORM) {
@@ -805,8 +790,6 @@ export default /*#__PURE__*/ {
       if (this.refreshAfterSave) this.refresh();
       this.toastSuccess("Elemento Modificado");
     },
-
-
     async saveItem(event = null) {
       this.loading = true;
       if (this.validate) {
