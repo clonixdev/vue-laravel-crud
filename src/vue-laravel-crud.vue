@@ -557,6 +557,7 @@ export default /*#__PURE__*/ {
       if (!this.ajax) {
         return;
       }
+      if(this.infiniteScroll) this.pagination.current_page = 1;
       this.fetchItems(this.pagination.current_page);
     },
     isColumnHasFilter(column) {
