@@ -626,8 +626,8 @@ export default /*#__PURE__*/ {
                 if (lastcomparevalue != item[compareattr]) {
                   lastcomparevalue = item[compareattr];
                   itemswithgroup.push({
-                    label: groupLabelPre + lastcomparevalue + groupLabelAfter,
-                    group: true,
+                    crudgrouplabel: groupLabelPre + lastcomparevalue + groupLabelAfter,
+                    crudgroup: true,
                   });
                 }
                 itemswithgroup.push(item);
@@ -1220,8 +1220,8 @@ export default /*#__PURE__*/ {
             <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
               @click="onRowClick(item, index)" class="item">
 
-              <th :colspan="columns.length" v-if="item.group">
-                <span>{{ item.label }}</span>
+              <th :colspan="columns.length" v-if="grouped && item.crudgroup">
+                <span>{{ item.crudgrouplabel }}</span>
               </th>
 
 
