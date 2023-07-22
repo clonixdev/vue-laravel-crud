@@ -55,6 +55,12 @@ export default /*#__PURE__*/ {
         this.fetchItems();
       }
     },
+
+    models(val){
+      if(!this.ajax){
+        this.items = val;
+      }
+    },
   },
   props: {
     modelName: String,
@@ -1164,7 +1170,7 @@ export default /*#__PURE__*/ {
                       </div>
 
                       <select v-else-if="column.type == 'state'" class="form-control form-control-md p-2"
-                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
+                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"  :placeholder="column.label">
                         <option value="">{{ column.label }}</option>
                         <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
                           {{
@@ -1178,7 +1184,7 @@ export default /*#__PURE__*/ {
                       </select>
 
                       <select v-else-if="column.type == 'array'" class="form-control form-control-md p-2"
-                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
+                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"  :placeholder="column.label">
                         <option value="">{{ column.label }}</option>
                         <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
                           {{
