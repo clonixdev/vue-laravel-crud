@@ -74,9 +74,7 @@ export default /*#__PURE__*/ {
     },
     models: {
       type: Array,
-      default() {
-        return [];
-      },
+      default: () => [],
     },
     ajax: {
       type: Boolean,
@@ -95,9 +93,7 @@ export default /*#__PURE__*/ {
     },
     filter: {
       type: Array,
-      default() {
-        return [];
-      },
+      default: () => [],
     },
     enableFilters: {
       type: Boolean,
@@ -1298,7 +1294,7 @@ export default /*#__PURE__*/ {
           </draggable>
 
         </table>
-        <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
+        <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
         </p>
       </div>
@@ -1371,7 +1367,7 @@ export default /*#__PURE__*/ {
     
         </draggable>
 
-        <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
+        <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
         </p>
         
@@ -1379,7 +1375,7 @@ export default /*#__PURE__*/ {
 
       <div v-if="displayMode == displayModes.MODE_CUSTOM">
         <div :class="listContainerClass">
-          <p v-if="!loading && items.length == 0 && !infiniteScroll" class="p-3">
+          <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
             {{ messageEmptyResults }}
           </p>
           <div :class="listItemClass" v-for="(item, index) in itemsList" v-bind:key="index">
