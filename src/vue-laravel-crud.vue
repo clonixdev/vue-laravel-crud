@@ -25,7 +25,7 @@ export default /*#__PURE__*/ {
         last_page: 1,
         next_page_url: "",
         prev_page_url: "",
-        per_page: 21,
+        per_page: 20,
         total: 0,
       },
       displaySearch: false,
@@ -371,6 +371,7 @@ export default /*#__PURE__*/ {
   methods: {
     infiniteHandler($state) {
       const hasNextPage = !this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total;
+      console.debug("Has next page",hasNextPage,this.pagination);
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
          this.fetchItems(page,true).then(() => {
