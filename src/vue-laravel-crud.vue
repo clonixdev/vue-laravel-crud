@@ -41,6 +41,7 @@ export default /*#__PURE__*/ {
         MODE_CARDS: 2,
         MODE_CUSTOM: 3,
       },
+      infiniteScrollKey: 1,
 
     };
   },
@@ -560,7 +561,10 @@ export default /*#__PURE__*/ {
       if (!this.ajax) {
         return;
       }
-      if(this.infiniteScroll) this.pagination.current_page = 1;
+      if(this.infiniteScroll){
+        this.pagination.current_page = 1;
+        this.infiniteScrollKey++;
+      } 
       this.fetchItems(this.pagination.current_page);
     },
     isColumnHasFilter(column) {
@@ -1385,7 +1389,7 @@ export default /*#__PURE__*/ {
         </div>
       </div>
        <b-overlay :show="loading" rounded="sm"></b-overlay>
-       <infinite-loading  ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll"  :forceUseInfiniteWrapper="true">
+       <infinite-loading  ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll"  :forceUseInfiniteWrapper="true" :key="infiniteScrollKey">
                 <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
                 <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
                 <div slot="no-results"><div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div></div>
