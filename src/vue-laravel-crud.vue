@@ -564,19 +564,20 @@ export default /*#__PURE__*/ {
       if(this.infiniteScroll){
         this.pagination.current_page = 1;
         this.infiniteScrollKey++;
-
-        const infiniteLoadingRef = this.$refs.infiniteLoading;
-
-        if(infiniteLoadingRef){
-          console.debug(infiniteLoadingRef);
-          infiniteLoadingRef.stateChanger.reset();
-        }else{
-          console.debug("infiniteLoadingRef not set");
-        }
-      
-   
       } 
-      this.fetchItems(this.pagination.current_page);
+      
+      const fetchPromise = this.fetchItems(this.pagination.current_page);
+
+      if(this.infiniteScroll && fetchPromise){
+        fetchPromise.then(() => {
+          const infiniteLoadingRef = this.$refs.infiniteLoading;
+            if(infiniteLoadingRef){
+              infiniteLoadingRef.stateChanger.reset();
+            }else{
+              console.debug("infiniteLoadingRef not set");
+            }
+        });
+      }
     },
     isColumnHasFilter(column) {
       return column && !column.hideFilter && column.type != "actions";
