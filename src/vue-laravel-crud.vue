@@ -564,6 +564,17 @@ export default /*#__PURE__*/ {
       if(this.infiniteScroll){
         this.pagination.current_page = 1;
         this.infiniteScrollKey++;
+
+        const infiniteLoadingRef = this.$refs.infiniteLoading;
+
+        if(infiniteLoadingRef){
+          console.debug(infiniteLoadingRef);
+          infiniteLoadingRef.reset();
+        }else{
+          console.debug("infiniteLoadingRef not set");
+        }
+      
+   
       } 
       this.fetchItems(this.pagination.current_page);
     },
