@@ -569,7 +569,7 @@ export default /*#__PURE__*/ {
 
         if(infiniteLoadingRef){
           console.debug(infiniteLoadingRef);
-          infiniteLoadingRef.reset();
+          infiniteLoadingRef.stateChanger.reset();
         }else{
           console.debug("infiniteLoadingRef not set");
         }
