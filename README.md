@@ -167,7 +167,6 @@ Selected: {{ selected ? selected.name : 'none' }}
 | listContainerClass      | Clase de contenedor de lista  | `String`  | opcional, predeterminado: `""`             |
 | listItemClass           | Clase de elemento de lista    | `String`  | opcional, predeterminado: `""`             |
 | cardHideFooter          | Ocultar pie de tarjeta        | `Boolean` | opcional, predeterminado: `false`          |
-
 | searchPlaceholder       | Marcador de posición de búsqueda | `String` | opcional, predeterminado: "Buscar..."    |
 | tableContainerClass     | Clase de contenedor de tabla  | `String`  | opcional, predeterminado: `""`             |
 | tableClass             | Clase de tabla               | `String`  | opcional, predeterminado: `""`             |
