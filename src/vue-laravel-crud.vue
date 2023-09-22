@@ -810,6 +810,17 @@ export default /*#__PURE__*/ {
       if (this.refreshAfterSave) this.refresh();
       this.toastSuccess("Elemento Modificado");
     },
+
+    async saveItemLocal(event = null){
+      if (this.item.id) {
+        let itemIndex = this.items.findIndex(
+              (item) => item.id == this.item.id
+            );
+        this.items[itemIndex] = this.item;
+      }else{
+        this.items.push(this.item);
+      }
+    },
     async saveItem(event = null) {
       this.loading = true;
       if (this.validate) {
@@ -824,9 +835,12 @@ export default /*#__PURE__*/ {
       }
 
       if (this.useVuexORM) {
-        return this.saveItemVuex();
+        return this.saveItemVuex(event);
       }
 
+      if (!this.ajax) {
+        return this.saveItemLocal(event);
+      }
       if (this.item.id) {
         axios
           .put(

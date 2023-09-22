@@ -17035,7 +17035,7 @@ var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExp
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-34878233]:last-child,\ntr td[data-v-34878233]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-34878233] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-34878233] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-34878233] .crud-title[data-v-34878233] {\n    margin: 0; }\n  .crud-header[data-v-34878233] .crud-search[data-v-34878233] {\n    max-width: 15rem; }\n    .crud-header[data-v-34878233] .crud-search[data-v-34878233] .btn[data-v-34878233] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-34878233] .crud-search[data-v-34878233] .btn[data-v-34878233].open[data-v-34878233] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-34878233] .table-options[data-v-34878233] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-34878233] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-34878233] {\n    table-layout: auto; }\n    .table[data-v-34878233] tbody[data-v-34878233] td[data-v-34878233] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-34878233] tbody[data-v-34878233] td[data-v-34878233]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-a5170120]:last-child,\ntr td[data-v-a5170120]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-a5170120] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-a5170120] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-a5170120] .crud-title[data-v-a5170120] {\n    margin: 0; }\n  .crud-header[data-v-a5170120] .crud-search[data-v-a5170120] {\n    max-width: 15rem; }\n    .crud-header[data-v-a5170120] .crud-search[data-v-a5170120] .btn[data-v-a5170120] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-a5170120] .crud-search[data-v-a5170120] .btn[data-v-a5170120].open[data-v-a5170120] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-a5170120] .table-options[data-v-a5170120] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-a5170120] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-a5170120] {\n    table-layout: auto; }\n    .table[data-v-a5170120] tbody[data-v-a5170120] td[data-v-a5170120] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-a5170120] tbody[data-v-a5170120] td[data-v-a5170120]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -17882,6 +17882,14 @@ const _sfc_main = {
       if (this.refreshAfterSave) this.refresh();
       this.toastSuccess("Elemento Modificado");
     },
+    async saveItemLocal() {
+      if (this.item.id) {
+        let itemIndex = this.items.findIndex(item => item.id == this.item.id);
+        this.items[itemIndex] = this.item;
+      } else {
+        this.items.push(this.item);
+      }
+    },
     async saveItem() {
       let event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.loading = true;
@@ -17891,7 +17899,10 @@ const _sfc_main = {
         if (event) event.preventDefault();
       }
       if (this.useVuexORM) {
-        return this.saveItemVuex();
+        return this.saveItemVuex(event);
+      }
+      if (!this.ajax) {
+        return this.saveItemLocal(event);
       }
       if (this.item.id) {
         axios.put(this.apiUrl + "/" + this.modelName + "/" + this.item.id, this.item).then(response => {
@@ -18988,7 +18999,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "34878233", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "a5170120", null, null);
 var component = __component__.exports;
 
 // Import vue component
