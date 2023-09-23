@@ -808,6 +808,7 @@ export default /*#__PURE__*/ {
       }
       result.save();
       if (this.refreshAfterSave) this.refresh();
+      this.loading = false;
       this.toastSuccess("Elemento Modificado");
     },
 
@@ -820,6 +821,7 @@ export default /*#__PURE__*/ {
       }else{
         this.items.push(this.item);
       }
+      this.loading = false;
     },
     async saveItem(event = null) {
       this.loading = true;
