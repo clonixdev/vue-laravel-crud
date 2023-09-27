@@ -600,8 +600,13 @@ export default /*#__PURE__*/ {
           filters: JSON.stringify(this.finalFilters),
         }
       });
-      this.items = result.entities[this.model.entity];
-      console.debug("fetch page vuex ", page, this.items);
+
+      let itemsResult = result.entities[this.model.entity];
+
+      if(itemsResult){
+        this.items = itemsResult;
+      }
+      console.debug("fetch page vuex ", page, this.items,result);
       this.loading = false;
       this.firstLoad = true;
     },
@@ -1000,7 +1005,7 @@ export default /*#__PURE__*/ {
         variant: "success",
         solid: true,
         appendToast: true,
-      });
+      });pp
     },
 
     onChangeFilter(event) {
