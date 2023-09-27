@@ -601,7 +601,9 @@ export default /*#__PURE__*/ {
         }
       });
 
-      let itemsResult = result.entities[this.model.entity];
+
+      let itemsResult = this.model.query().withAll().get();
+      //let itemsResult = result.entities[this.model.entity];
 
       if(itemsResult){
         this.items = itemsResult;
