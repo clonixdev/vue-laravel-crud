@@ -537,7 +537,7 @@ export default /*#__PURE__*/ {
     },
     createItem() {
       if (this.useVuexORM) {
-        this.item = new this.model();
+        this.item = new this.model( JSON.parse(JSON.stringify(this.itemDefault)));
       } else {
         this.item = JSON.parse(JSON.stringify(this.itemDefault));
       }
@@ -593,6 +593,9 @@ export default /*#__PURE__*/ {
     async fetchItemsVuex(page = 1, concat = false) {
       this.loading = true;
       this.$emit("beforeFetch", {});
+
+      this.model.deleteAll();
+
       const result = await this.model.api().get('', {
         params: {
           page: page,
@@ -601,7 +604,7 @@ export default /*#__PURE__*/ {
         }
       });
 
-
+   
       let itemsResult = this.model.query().withAll().get();
       //let itemsResult = result.entities[this.model.entity];
 
@@ -732,6 +735,7 @@ export default /*#__PURE__*/ {
 
       if (result.response.data.error) {
         this.toastError(result.response.data.error);
+        this.loading = false;
         return;
       }
 
@@ -810,6 +814,7 @@ export default /*#__PURE__*/ {
       let responseStatus = result.response.status;
       if (result.response.data.error) {
         this.toastError(result.response.data.error);
+        this.loading = false;
         return;
         //throw new Error('Something is wrong.')
       }
