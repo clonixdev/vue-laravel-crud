@@ -608,7 +608,7 @@ export default /*#__PURE__*/ {
       if(itemsResult){
         this.items = itemsResult;
       }
-      console.debug("fetch page vuex ", page, this.items,result);
+      console.debug("fetch page vuex ",itemsResult, page, this.items,result);
       this.loading = false;
       this.firstLoad = true;
     },
