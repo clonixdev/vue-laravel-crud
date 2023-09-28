@@ -320,7 +320,7 @@ export default /*#__PURE__*/ {
       for (const fieldName of Object.keys(fields)) {
         const field = fields[fieldName];
 
-        if (field instanceof this.$database.Model.Relation) {
+        if (field.type === 'relation') {
           // Si es una relación, inicializa como un objeto vacío.
 
           if(this.vuexInitRelations == true || (Array.isArray(this.vuexInitRelations) && this.vuexInitRelations.includes(fieldName))){
