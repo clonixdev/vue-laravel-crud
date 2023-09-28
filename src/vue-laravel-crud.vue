@@ -85,6 +85,11 @@ export default /*#__PURE__*/ {
       type: Boolean,
       default: false,
     },
+    vuexInitRelations: {
+      type: Boolean | Array,
+      default: true,
+    },
+
     columns: {
       type: Array,
 
@@ -303,7 +308,50 @@ export default /*#__PURE__*/ {
   mounted() {
 
     if (this.useVuexORM) {
+
       this.item = new this.model();
+
+      let itemVuexOrmDefault = {};
+
+      const fields = this.model.fields();
+
+      // Inicializa el objeto "itemDefault" con los valores por defecto
+      const itemDefault = {};
+      for (const fieldName of Object.keys(fields)) {
+        const field = fields[fieldName];
+
+        if (field instanceof this.$database.Model.Relation) {
+          // Si es una relación, inicializa como un objeto vacío.
+
+          if(this.vuexInitRelations == true || (Array.isArray(this.vuexInitRelations) && this.vuexInitRelations.includes(fieldName))){
+            itemDefault[fieldName] = {};
+          }
+       
+        } else {
+          // Si es un campo, verifica si tiene un valor por defecto definido
+          if (field.default !== undefined) {
+            itemDefault[fieldName] = field.default;
+          } else {
+            // Si no tiene un valor por defecto definido, inicializa según su tipo
+            switch (field.constructor.name) {
+              case 'StringField':
+                itemDefault[fieldName] = '';
+                break;
+              case 'NumberField':
+                itemDefault[fieldName] = 0;
+                break;
+              // Agrega más casos según los tipos de campos que uses en tu modelo
+              default:
+                // Tipo de campo no reconocido, puedes manejarlo de acuerdo a tus necesidades
+                itemDefault[fieldName] = null;
+            }
+          }
+        }
+      }
+
+      this.itemDefault = JSON.parse(JSON.stringify(itemDefault));
+      
+      
     } else {
       this.item = this.model;
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
