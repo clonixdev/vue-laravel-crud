@@ -1060,7 +1060,7 @@ export default /*#__PURE__*/ {
         variant: "success",
         solid: true,
         appendToast: true,
-      });pp
+      });
     },
 
     onChangeFilter(event) {
