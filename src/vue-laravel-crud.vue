@@ -142,6 +142,14 @@ export default /*#__PURE__*/ {
       type: Boolean,
       default: true,
     },
+    hideModalAfterCreate: {
+      type: Boolean,
+      default: false,
+    },
+    hideModalAfterUpdate: {
+      type: Boolean,
+      default: false,
+    },
     refreshAfterSave: {
       type: Boolean,
       default: true,
@@ -853,10 +861,14 @@ export default /*#__PURE__*/ {
       console.debug("save item 2", this.item, jsondata);
       let result;
 
+      let create = false;
+
       if (this.item.id) {
         result = await this.model.api().put('/' + this.item.id, jsondata);
+        create = false;
       } else {
         result = await this.model.api().post('', jsondata);
+        create = true;
       }
 
       let responseStatus = result.response.status;
@@ -867,9 +879,15 @@ export default /*#__PURE__*/ {
         //throw new Error('Something is wrong.')
       }
       result.save();
-      if (this.refreshAfterSave) this.refresh();
+      if (this.refreshAfterSave ) this.refresh();
       this.loading = false;
       this.toastSuccess("Elemento Modificado");
+
+     if (this.hideModalAfterSave || ((create && this.hideModalAfterCreate) || (!create && this.hideModalAfterUpdate)  )) {
+          this.$bvModal.hide("modal-form-item-" + this.modelName);
+      }
+
+
     },
 
     async saveItemLocal(event = null){
@@ -878,10 +896,18 @@ export default /*#__PURE__*/ {
               (item) => item.id == this.item.id
             );
         this.items[itemIndex] = this.item;
+        if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
+          this.$bvModal.hide("modal-form-item-" + this.modelName);
+      }
       }else{
         this.items.push(this.item);
+        if (this.hideModalAfterSave || this.hideModalAfterCreate) {
+          this.$bvModal.hide("modal-form-item-" + this.modelName);
       }
+      }
+      this.toastSuccess("Elemento Modificado");
       this.loading = false;
+
     },
     async saveItem(event = null) {
       this.loading = true;
@@ -910,7 +936,7 @@ export default /*#__PURE__*/ {
             this.item
           )
           .then((response) => {
-            if (this.hideModalAfterSave) {
+            if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
               this.$bvModal.hide("modal-form-item-" + this.modelName);
             }
             let itemSv = response.data;
@@ -920,7 +946,7 @@ export default /*#__PURE__*/ {
             this.items[itemIndex] = itemSv;
             this.item = itemSv;
             this.loading = false;
-            if (this.refreshAfterSave) this.refresh();
+            if (this.refreshAfterSave ) this.refresh();
             this.toastSuccess("Elemento Modificado");
             this.$emit("itemSaved", { item: this.item });
             this.$emit("itemUpdated", { item: this.item });
@@ -949,7 +975,7 @@ export default /*#__PURE__*/ {
             .post(this.apiUrl + "/" + this.modelName, formData)
             .then((response) => {
               this.loading = false;
-              if (this.hideModalAfterSave) {
+              if (this.hideModalAfterSave || this.hideModalAfterCreate) {
                 this.$bvModal.hide("modal-form-item-" + this.modelName);
               }
               if (response.data.success) {
@@ -975,7 +1001,7 @@ export default /*#__PURE__*/ {
             .post(this.apiUrl + "/" + this.modelName, this.item)
             .then((response) => {
               this.loading = false;
-              if (this.hideModalAfterSave) {
+              if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
                 this.$bvModal.hide("modal-form-item-" + this.modelName);
               }
               if (response.data.success) {
