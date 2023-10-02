@@ -891,19 +891,21 @@ export default /*#__PURE__*/ {
     },
 
     async saveItemLocal(event = null){
+
+      const itemSave = JSON.parse(JSON.stringify(this.item));
       if (this.item.id) {
         let itemIndex = this.items.findIndex(
               (item) => item.id == this.item.id
             );
-        this.items[itemIndex] = this.item;
+        this.items[itemIndex] = itemSave;
         if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
           this.$bvModal.hide("modal-form-item-" + this.modelName);
       }
       }else{
-        this.items.push(this.item);
+        this.items.push(itemSave);
         if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
-      }
+            this.$bvModal.hide("modal-form-item-" + this.modelName);
+        }
       }
       this.toastSuccess("Elemento Modificado");
       this.loading = false;
