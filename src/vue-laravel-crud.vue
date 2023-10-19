@@ -1,6 +1,5 @@
 <script>
 import draggable from "vuedraggable";
-import axios from "axios";
 import moment from "moment";
 import InfiniteLoading from 'vue-infinite-loading';
 
