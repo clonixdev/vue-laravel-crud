@@ -427,7 +427,7 @@ export default /*#__PURE__*/ {
   },
   methods: {
     infiniteHandler($state) {
-      const hasNextPage = !this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total;
+      const hasNextPage = this.pagination.total > 0 && (!this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total);
       console.debug("Has next page",hasNextPage,this.pagination);
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
