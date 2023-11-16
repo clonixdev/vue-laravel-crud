@@ -931,7 +931,10 @@ export default /*#__PURE__*/ {
               (item) => item.id == this.item.id
             );
         }else{
-          itemIndex = this.item.index;
+
+          itemIndex = this.items.findIndex(
+              (item) => item.index == this.item.index
+            );
         }
       
         this.items[itemIndex] = itemSave;
@@ -940,7 +943,7 @@ export default /*#__PURE__*/ {
       }
       }else{
 
-        itemSave.index = this.items.length;
+        itemSave.index = this.items.length + 1;
         this.items.push(itemSave);
         if (this.hideModalAfterSave || this.hideModalAfterCreate) {
             this.$bvModal.hide("modal-form-item-" + this.modelName);
