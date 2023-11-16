@@ -765,6 +765,11 @@ export default /*#__PURE__*/ {
       if (this.useVuexORM) {
         return this.deleteItemVuex(id, index);
       }
+
+      if (!this.ajax) {
+        return this.deleteItemLocal(id,index);
+      }
+
       this.loading = true;
       axios
         .delete(this.apiUrl + "/" + this.modelName + "/" + id)
@@ -778,6 +783,31 @@ export default /*#__PURE__*/ {
           this.toastError(error);
           this.loading = false;
         });
+    },
+
+    async deleteItemLocal(id,index) {
+      if (this.item.id || this.item.index) {
+        let itemIndex;
+
+        if (this.item.id) {
+          itemIndex = this.items.findIndex((item) => item.id == this.item.id);
+        } else {
+          itemIndex = this.item.index;
+        }
+    
+        // Assuming this.items is an array
+        this.items.splice(itemIndex, 1);
+        this.item = null;
+        this.toastSuccess("Elemento Eliminado");
+        this.$emit("itemDeleted", {});
+ 
+      } else {
+        // Handle the case where there's no item.id or item.index
+        console.error("Cannot delete item without ID or index");
+        // You might want to show an error message or handle it in a way that fits your application.
+      }
+
+      this.loading = false;
     },
     async deleteItemVuex(id, index) {
 
