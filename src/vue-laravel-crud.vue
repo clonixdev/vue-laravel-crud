@@ -786,13 +786,13 @@ export default /*#__PURE__*/ {
     },
 
     async deleteItemLocal(id,index) {
-      if (this.item.id || this.item.index) {
+      if (id || index) {
         let itemIndex;
 
-        if (this.item.id) {
+        if (id) {
           itemIndex = this.items.findIndex((item) => item.id == this.item.id);
         } else {
-          itemIndex = this.item.index;
+          itemIndex = index;
         }
     
         // Assuming this.items is an array
@@ -939,8 +939,8 @@ export default /*#__PURE__*/ {
       
         this.items[itemIndex] = itemSave;
         if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
-      }
+            this.$bvModal.hide("modal-form-item-" + this.modelName);
+        }
       }else{
 
         itemSave.index = this.items.length + 1;
