@@ -11878,7 +11878,7 @@ var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExp
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-1c8b3f68]:last-child,\ntr td[data-v-1c8b3f68]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-1c8b3f68] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-1c8b3f68] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-1c8b3f68] .crud-title[data-v-1c8b3f68] {\n    margin: 0; }\n  .crud-header[data-v-1c8b3f68] .crud-search[data-v-1c8b3f68] {\n    max-width: 15rem; }\n    .crud-header[data-v-1c8b3f68] .crud-search[data-v-1c8b3f68] .btn[data-v-1c8b3f68] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-1c8b3f68] .crud-search[data-v-1c8b3f68] .btn[data-v-1c8b3f68].open[data-v-1c8b3f68] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-1c8b3f68] .table-options[data-v-1c8b3f68] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-1c8b3f68] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-1c8b3f68] {\n    table-layout: auto; }\n    .table[data-v-1c8b3f68] tbody[data-v-1c8b3f68] td[data-v-1c8b3f68] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-1c8b3f68] tbody[data-v-1c8b3f68] td[data-v-1c8b3f68]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-44f025cd]:last-child,\ntr td[data-v-44f025cd]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-44f025cd] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-44f025cd] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-44f025cd] .crud-title[data-v-44f025cd] {\n    margin: 0; }\n  .crud-header[data-v-44f025cd] .crud-search[data-v-44f025cd] {\n    max-width: 15rem; }\n    .crud-header[data-v-44f025cd] .crud-search[data-v-44f025cd] .btn[data-v-44f025cd] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-44f025cd] .crud-search[data-v-44f025cd] .btn[data-v-44f025cd].open[data-v-44f025cd] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-44f025cd] .table-options[data-v-44f025cd] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-44f025cd] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-44f025cd] {\n    table-layout: auto; }\n    .table[data-v-44f025cd] tbody[data-v-44f025cd] td[data-v-44f025cd] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-44f025cd] tbody[data-v-44f025cd] td[data-v-44f025cd]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -12010,7 +12010,8 @@ const _sfc_main = {
         MODE_CARDS: 2,
         MODE_CUSTOM: 3
       },
-      infiniteScrollKey: 1
+      infiniteScrollKey: 1,
+      optionsLoaded: false
     };
   },
   watch: {
@@ -12322,6 +12323,7 @@ const _sfc_main = {
       this.items = this.models;
       this.pagination.total = this.items.length;
     }
+    this.loadOptions();
   },
   computed: {
     itemValue() {
@@ -12357,6 +12359,9 @@ const _sfc_main = {
       return prop => {
         return this.internalFilters.find(inf => inf.column == prop);
       };
+    },
+    columnOptions() {
+      return column => {};
     }
   },
   methods: {
@@ -12739,6 +12744,9 @@ const _sfc_main = {
             order: v[this.orderProp]
           });
         });
+        if (!this.ajax) {
+          return;
+        }
         axios.post(this.apiUrl + "/" + this.modelName + "/sort", {
           order: order
         }).then(response => {
@@ -12754,16 +12762,23 @@ const _sfc_main = {
       }
     },
     getArrayValue(value, displayProp) {
+      let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
       if (!Array.isArray(value)) return "N/A";
+      let values = [];
+      let valuesFinal = [];
       if (value.length > 0) {
         if (typeof value[0] === "object" && displayProp) {
-          return value.map(vv => vv[displayProp]).join(",");
+          values = value.map(vv => vv[displayProp]);
         } else {
-          return value.join(",");
+          values = value.join(",");
         }
       } else {
         return "";
       }
+      values.forEach(val => {
+        valuesFinal.push(this.getStateValue(val, options));
+      });
+      return values.join(",");
     },
     getStateValue(value, options) {
       if (!options) {
@@ -12833,6 +12848,20 @@ const _sfc_main = {
       }
       this.toastSuccess("Elemento Modificado");
       this.loading = false;
+    },
+    async loadOptions() {
+      for (let i = 0; i < this.columns.length; i++) {
+        const column = this.columns[i];
+        if (typeof column.options === 'function') {
+          // Si las opciones son una función (promesa), esperar y actualizar
+          const options = await column.options();
+          this.$set(this.columns, i, {
+            ...column,
+            options
+          });
+        }
+      }
+      this.optionsLoaded = true;
     },
     async saveItem() {
       let event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -13118,9 +13147,7 @@ var _sfc_render = function render() {
           }
         })], 1)])]) : column.type == 'state' ? _c('div', {
           staticClass: "form-group"
-        }, [_c('label', [_vm._v(_vm._s(column.label))]), _c('div', {
-          staticClass: "d-none"
-        }, [_vm._v(_vm._s(column.options))]), _c('select', {
+        }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm.optionsLoaded ? _c('select', {
           directives: [{
             name: "model",
             rawName: "v-model",
@@ -13152,11 +13179,9 @@ var _sfc_render = function render() {
               "value": option.id ? option.id : option.value
             }
           }, [_vm._v(" " + _vm._s(option.text ? option.text : option.label ? option.label : "") + " ")]);
-        })], 2)]) : column.type == 'array' ? _c('div', {
+        })], 2) : _vm._e()]) : column.type == 'array' ? _c('div', {
           staticClass: "form-group"
-        }, [_c('label', [_vm._v(_vm._s(column.label))]), _c('div', {
-          staticClass: "d-none"
-        }, [_vm._v(_vm._s(column.options))]), _c('select', {
+        }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm.optionsLoaded ? _c('select', {
           directives: [{
             name: "model",
             rawName: "v-model",
@@ -13188,7 +13213,7 @@ var _sfc_render = function render() {
               "value": option.id ? option.id : option.value
             }
           }, [_vm._v(" " + _vm._s(option.text ? option.text : option.label ? option.label : "") + " ")]);
-        }) : _vm._e()], 2)]) : _c('div', {
+        }) : _vm._e()], 2) : _vm._e()]) : _c('div', {
           staticClass: "form-group"
         }, [_c('label', [_vm._v(_vm._s(column.label))]), _c('input', {
           directives: [{
@@ -13384,7 +13409,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "internalFilterByProp(column.prop + '_from').value\n                          "
+            expression: "internalFilterByProp(column.prop + '_from').value\n                        "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -13401,9 +13426,9 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "internalFilterByProp(column.prop + '_to').value\n                          "
+            expression: "internalFilterByProp(column.prop + '_to').value\n                        "
           }
-        })], 1)]) : column.type == 'state' ? _c('select', {
+        })], 1)]) : column.type == 'state' && _vm.optionsLoaded ? _c('select', {
           directives: [{
             name: "model",
             rawName: "v-model",
@@ -13438,7 +13463,7 @@ var _sfc_render = function render() {
               "value": option.id
             }
           }, [_vm._v(" " + _vm._s(option.text ? option.text : option.label ? option.label : "") + " ")]);
-        })], 2) : column.type == 'array' ? _c('select', {
+        })], 2) : column.type == 'array' && _vm.optionsLoaded ? _c('select', {
           directives: [{
             name: "model",
             rawName: "v-model",
@@ -13595,7 +13620,7 @@ var _sfc_render = function render() {
               },
               expression: "item.selected"
             }
-          })], 1) : column.type == 'state' ? _c('span', [_vm._v(" " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + " ")]) : column.type == 'array' ? _c('span', [_vm._v(" " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp)) + " ")]) : _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item)) + " ")])];
+          })], 1) : column.type == 'state' && _vm.optionsLoaded ? _c('span', [_vm._v(" " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + " ")]) : column.type == 'array' && _vm.optionsLoaded ? _c('span', [_vm._v(" " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp, column.options)) + " ")]) : _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item)) + " ")])];
         }, {
           "item": item,
           "index": index,
@@ -13748,7 +13773,7 @@ var _sfc_render = function render() {
             attrs: {
               "variant": "danger"
             }
-          }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item)) + " ")]) : column.type == 'state' ? _c('span', [_vm._v(" " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + " ")]) : column.type == 'array' ? _c('span', [_vm._v(" " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp)) + " ")]) : _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item)) + " ")])];
+          }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item)) + " ")]) : column.type == 'state' ? _c('span', [_vm._v(" " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + " ")]) : column.type == 'array' ? _c('span', [_vm._v(" " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp, column.options)) + " ")]) : _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item)) + " ")])];
         }, {
           "item": item,
           "index": index,
@@ -13943,7 +13968,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "1c8b3f68", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "44f025cd", null, null);
 var component = __component__.exports;
 
 // Import vue component

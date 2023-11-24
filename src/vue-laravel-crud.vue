@@ -41,6 +41,7 @@ export default /*#__PURE__*/ {
         MODE_CUSTOM: 3,
       },
       infiniteScrollKey: 1,
+      optionsLoaded: false,
 
     };
   },
@@ -56,8 +57,8 @@ export default /*#__PURE__*/ {
       }
     },
 
-    models(val){
-      if(!this.ajax){
+    models(val) {
+      if (!this.ajax) {
         this.items = val;
       }
     },
@@ -330,10 +331,10 @@ export default /*#__PURE__*/ {
         if (field.type === 'relation') {
           // Si es una relación, inicializa como un objeto vacío.
 
-          if(this.vuexInitRelations == true || (Array.isArray(this.vuexInitRelations) && this.vuexInitRelations.includes(fieldName))){
+          if (this.vuexInitRelations == true || (Array.isArray(this.vuexInitRelations) && this.vuexInitRelations.includes(fieldName))) {
             itemDefault[fieldName] = {};
           }
-       
+
         } else {
           // Si es un campo, verifica si tiene un valor por defecto definido
           if (field.default !== undefined) {
@@ -357,8 +358,8 @@ export default /*#__PURE__*/ {
       }
 
       this.itemDefault = JSON.parse(JSON.stringify(itemDefault));
-      
-      
+
+
     } else {
       this.item = this.model;
       this.itemDefault = JSON.parse(JSON.stringify(this.item));
@@ -375,7 +376,7 @@ export default /*#__PURE__*/ {
       this.pagination.total = this.items.length;
     }
 
-
+    this.loadOptions();
   },
   computed: {
     itemValue() {
@@ -423,20 +424,25 @@ export default /*#__PURE__*/ {
         return this.internalFilters.find((inf) => inf.column == prop);
       };
     },
+    columnOptions() {
+      return (column) => {
+
+      }
+    }
   },
   methods: {
     infiniteHandler($state) {
       const hasNextPage = this.pagination.total > 0 && (!this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total);
-      console.debug("Has next page",hasNextPage,this.pagination);
+      console.debug("Has next page", hasNextPage, this.pagination);
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
-         this.fetchItems(page,true).then(() => {
+        this.fetchItems(page, true).then(() => {
           $state.loaded();
-         }).catch(error =>{
-          console.debug("infinite handler error",error);
+        }).catch(error => {
+          console.debug("infinite handler error", error);
           $state.error();
-         });
-      }else{
+        });
+      } else {
         $state.complete();
       }
     },
@@ -592,7 +598,7 @@ export default /*#__PURE__*/ {
     },
     createItem() {
       if (this.useVuexORM) {
-        this.item = new this.model( JSON.parse(JSON.stringify(this.itemDefault)));
+        this.item = new this.model(JSON.parse(JSON.stringify(this.itemDefault)));
       } else {
         this.item = JSON.parse(JSON.stringify(this.itemDefault));
       }
@@ -616,21 +622,21 @@ export default /*#__PURE__*/ {
       if (!this.ajax) {
         return;
       }
-      if(this.infiniteScroll){
+      if (this.infiniteScroll) {
         this.pagination.current_page = 1;
         this.infiniteScrollKey++;
-      } 
-      
+      }
+
       const fetchPromise = this.fetchItems(this.pagination.current_page);
 
-      if(this.infiniteScroll && fetchPromise){
+      if (this.infiniteScroll && fetchPromise) {
         fetchPromise.then(() => {
           const infiniteLoadingRef = this.$refs.infiniteLoading;
-            if(infiniteLoadingRef){
-              infiniteLoadingRef.stateChanger.reset();
-            }else{
-              console.debug("infiniteLoadingRef not set");
-            }
+          if (infiniteLoadingRef) {
+            infiniteLoadingRef.stateChanger.reset();
+          } else {
+            console.debug("infiniteLoadingRef not set");
+          }
         });
       }
     },
@@ -659,14 +665,14 @@ export default /*#__PURE__*/ {
         }
       });
 
-   
+
       let itemsResult = this.model.query().withAll().get();
       //let itemsResult = result.entities[this.model.entity];
 
-      if(itemsResult){
+      if (itemsResult) {
         this.items = itemsResult;
       }
-      console.debug("fetch page vuex ",itemsResult, page, this.items,result);
+      console.debug("fetch page vuex ", itemsResult, page, this.items, result);
       this.loading = false;
       this.firstLoad = true;
     },
@@ -767,7 +773,7 @@ export default /*#__PURE__*/ {
       }
 
       if (!this.ajax) {
-        return this.deleteItemLocal(id,index);
+        return this.deleteItemLocal(id, index);
       }
 
       this.loading = true;
@@ -785,7 +791,7 @@ export default /*#__PURE__*/ {
         });
     },
 
-    async deleteItemLocal(id,index) {
+    async deleteItemLocal(id, index) {
       if (id || index) {
         let itemIndex;
 
@@ -794,13 +800,13 @@ export default /*#__PURE__*/ {
         } else {
           itemIndex = index;
         }
-    
+
         // Assuming this.items is an array
         this.items.splice(itemIndex, 1);
         this.item = null;
         this.toastSuccess("Elemento Eliminado");
         this.$emit("itemDeleted", {});
- 
+
       } else {
         // Handle the case where there's no item.id or item.index
         console.error("Cannot delete item without ID or index");
@@ -833,6 +839,10 @@ export default /*#__PURE__*/ {
         this.items.forEach((v, k) => {
           order.push({ id: v.id, order: v[this.orderProp] });
         });
+
+        if (!this.ajax) {
+          return;
+        }
         axios
           .post(this.apiUrl + "/" + this.modelName + "/sort", {
             order: order,
@@ -850,18 +860,26 @@ export default /*#__PURE__*/ {
           });
       }
     },
-    getArrayValue(value, displayProp) {
+    getArrayValue(value, displayProp,options = []) {
       if (!Array.isArray(value)) return "N/A";
-
+      let values = [];
+      let valuesFinal = [];
+      
       if (value.length > 0) {
         if (typeof value[0] === "object" && displayProp) {
-          return value.map((vv) => vv[displayProp]).join(",");
+          values = value.map((vv) => vv[displayProp]);
         } else {
-          return value.join(",");
+          values = value.join(",");
         }
       } else {
         return "";
       }
+
+      values.forEach(val =>{
+        valuesFinal.push(this.getStateValue(val,options));
+      })
+
+      return values.join(",");
     },
     getStateValue(value, options) {
       if (!options) {
@@ -908,50 +926,63 @@ export default /*#__PURE__*/ {
         //throw new Error('Something is wrong.')
       }
       result.save();
-      if (this.refreshAfterSave ) this.refresh();
+      if (this.refreshAfterSave) this.refresh();
       this.loading = false;
       this.toastSuccess("Elemento Modificado");
 
-     if (this.hideModalAfterSave || ((create && this.hideModalAfterCreate) || (!create && this.hideModalAfterUpdate)  )) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
+      if (this.hideModalAfterSave || ((create && this.hideModalAfterCreate) || (!create && this.hideModalAfterUpdate))) {
+        this.$bvModal.hide("modal-form-item-" + this.modelName);
       }
 
 
     },
 
-    async saveItemLocal(event = null){
+    async saveItemLocal(event = null) {
 
       const itemSave = JSON.parse(JSON.stringify(this.item));
       if (this.item.id || this.item.index) {
 
-          let itemIndex ;
+        let itemIndex;
 
-        if(this.item.id){
+        if (this.item.id) {
           itemIndex = this.items.findIndex(
-              (item) => item.id == this.item.id
-            );
-        }else{
+            (item) => item.id == this.item.id
+          );
+        } else {
 
           itemIndex = this.items.findIndex(
-              (item) => item.index == this.item.index
-            );
+            (item) => item.index == this.item.index
+          );
         }
-      
+
         this.items[itemIndex] = itemSave;
         if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-            this.$bvModal.hide("modal-form-item-" + this.modelName);
+          this.$bvModal.hide("modal-form-item-" + this.modelName);
         }
-      }else{
+      } else {
 
         itemSave.index = this.items.length + 1;
         this.items.push(itemSave);
         if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-            this.$bvModal.hide("modal-form-item-" + this.modelName);
+          this.$bvModal.hide("modal-form-item-" + this.modelName);
         }
       }
       this.toastSuccess("Elemento Modificado");
       this.loading = false;
 
+    },
+    async loadOptions() {
+      for (let i = 0; i < this.columns.length; i++) {
+        const column = this.columns[i];
+
+        if (typeof column.options === 'function') {
+          // Si las opciones son una función (promesa), esperar y actualizar
+          const options = await column.options();
+          this.$set(this.columns, i, { ...column, options });
+        } 
+      }
+
+      this.optionsLoaded = true;
     },
     async saveItem(event = null) {
       this.loading = true;
@@ -990,7 +1021,7 @@ export default /*#__PURE__*/ {
             this.items[itemIndex] = itemSv;
             this.item = itemSv;
             this.loading = false;
-            if (this.refreshAfterSave ) this.refresh();
+            if (this.refreshAfterSave) this.refresh();
             this.toastSuccess("Elemento Modificado");
             this.$emit("itemSaved", { item: this.item });
             this.$emit("itemUpdated", { item: this.item });
@@ -1071,7 +1102,7 @@ export default /*#__PURE__*/ {
       }
       if (event) event.preventDefault();
     },
-    clearItems(){
+    clearItems() {
       this.items = [];
     },
 
@@ -1196,10 +1227,9 @@ export default /*#__PURE__*/ {
 
                   <div class="form-group" v-else-if="column.type == 'state'">
                     <label>{{ column.label }}</label>
-                    <div class="d-none">{{ column.options }}</div>
-
+                
                     <select class="form-control" v-model="internalFilterByProp(column.prop).value"
-                      @change="onChangeFilter($event)">
+                      @change="onChangeFilter($event)" v-if="optionsLoaded">
                       <option value=""></option>
                       <option :value="option.id ? option.id : option.value" v-for="option in column.options"
                         :key="option.id ? option.id : option.value">
@@ -1216,10 +1246,9 @@ export default /*#__PURE__*/ {
 
                   <div class="form-group" v-else-if="column.type == 'array'">
                     <label>{{ column.label }}</label>
-                    <div class="d-none">{{ column.options }}</div>
-
+               
                     <select class="form-control" v-model="internalFilterByProp(column.prop).value"
-                      @change="onChangeFilter($event)">
+                      @change="onChangeFilter($event)" v-if="optionsLoaded">
                       <option value=""></option>
                       <template v-if="column.options">
                         <option :value="option.id ? option.id : option.value" v-for="option in column.options"
@@ -1235,6 +1264,7 @@ export default /*#__PURE__*/ {
                       </template>
                     </select>
                   </div>
+
 
                   <div class="form-group" v-else>
                     <label>{{ column.label }}</label>
@@ -1292,225 +1322,152 @@ export default /*#__PURE__*/ {
         </b-button-group>
       </div>
     </div>
-   
-      <div :class="['table-responsive', tableContainerClass]" v-if="displayMode == displayModes.MODE_TABLE">
-        <table :class="['table table-hover table-striped w-100', tableClass]">
-          <thead class="thead-light">
-            <tr>
-              <slot name="rowHead">
-                <th v-for="(column, indexc) in columns" :key="indexc"
-                  :style="{ width: column.width ? column.width : 'inherit' }" scope="col">
-                  <slot :name="'filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
-                    v-bind:internalFilterByProp="internalFilterByProp" v-if="enableFilters &&
-                      filtersVisible &&
-                      isColumnHasFilter(column) &&
-                      internalFilterByProp(column.prop)
-                      ">
 
-                    <div class="form-group">
-                      <select v-if="column.type == 'boolean'" class="form-control form-control-md p-2"
-                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
-                        <option value="">{{ column.label }}</option>
-                        <option value="1">Sí</option>
-                        <option value="0">No</option>
-                      </select>
+    <div :class="['table-responsive', tableContainerClass]" v-if="displayMode == displayModes.MODE_TABLE">
+      <table :class="['table table-hover table-striped w-100', tableClass]">
+        <thead class="thead-light">
+          <tr>
+            <slot name="rowHead">
+              <th v-for="(column, indexc) in columns" :key="indexc"
+                :style="{ width: column.width ? column.width : 'inherit' }" scope="col">
+                <slot :name="'filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
+                  v-bind:internalFilterByProp="internalFilterByProp" v-if="enableFilters &&
+                    filtersVisible &&
+                    isColumnHasFilter(column) &&
+                    internalFilterByProp(column.prop)
+                    ">
 
-                      <div class="row" v-else-if="column.type == 'date'">
-                        <div class="col-6">
-                          <b-form-datepicker v-model="internalFilterByProp(column.prop + '_from').value
-                            " today-button reset-button close-button locale="es"
-                            class="form-control-md p-2"></b-form-datepicker>
-                        </div>
-                        <div class="col-6">
-                          <b-form-datepicker v-model="internalFilterByProp(column.prop + '_to').value
-                            " today-button reset-button close-button locale="es"
-                            class="form-control-md p-2"></b-form-datepicker>
-                        </div>
+                  <div class="form-group">
+                    <select v-if="column.type == 'boolean'" class="form-control form-control-md p-2"
+                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
+                      <option value="">{{ column.label }}</option>
+                      <option value="1">Sí</option>
+                      <option value="0">No</option>
+                    </select>
+
+                    <div class="row" v-else-if="column.type == 'date'">
+                      <div class="col-6">
+                        <b-form-datepicker v-model="internalFilterByProp(column.prop + '_from').value
+                          " today-button reset-button close-button locale="es"
+                          class="form-control-md p-2"></b-form-datepicker>
                       </div>
-
-                      <select v-else-if="column.type == 'state'" class="form-control form-control-md p-2"
-                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"  :placeholder="column.label">
-                        <option value="">{{ column.label }}</option>
-                        <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
-                          {{
-                            option.text
-                            ? option.text
-                            : option.label
-                              ? option.label
-                              : ""
-                          }}
-                        </option>
-                      </select>
-
-                      <select v-else-if="column.type == 'array'" class="form-control form-control-md p-2"
-                        v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"  :placeholder="column.label">
-                        <option value="">{{ column.label }}</option>
-                        <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
-                          {{
-                            option.text
-                            ? option.text
-                            : option.label
-                              ? option.label
-                              : ""
-                          }}
-                        </option>
-                      </select>
-
-                      <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
-                      </b-form-checkbox>
-                      <input v-else class="form-control form-control-md p-2"
-                        v-model="internalFilterByProp(column.prop).value" :placeholder="column.label"
-                        @change="onChangeFilter($event)" />
-
+                      <div class="col-6">
+                        <b-form-datepicker v-model="internalFilterByProp(column.prop + '_to').value
+                          " today-button reset-button close-button locale="es"
+                          class="form-control-md p-2"></b-form-datepicker>
+                      </div>
                     </div>
-                  </slot>
 
-                  <span v-else>{{ column.label }}</span>
+                    <select v-else-if="column.type == 'state' && optionsLoaded" class="form-control form-control-md p-2"
+                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"
+                      :placeholder="column.label">
+                      <option value="">{{ column.label }}</option>
+                      <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
+                        {{
+                          option.text
+                          ? option.text
+                          : option.label
+                            ? option.label
+                            : ""
+                        }}
+                      </option>
+                    </select>
+                  
+                    <select v-else-if="column.type == 'array' && optionsLoaded" class="form-control form-control-md p-2"
+                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"
+                      :placeholder="column.label">
+                      <option value="">{{ column.label }}</option>
+                      <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
+                        {{
+                          option.text
+                          ? option.text
+                          : option.label
+                            ? option.label
+                            : ""
+                        }}
+                      </option>
+                    </select>
 
-                  <span v-if="sortable && internalFilterByProp(column.prop + '_sort')" class="sort-filter"
-                    @click="toggleSortFilter(column)"><b-icon-sort-down
-                      v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
-                      v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
-                    <b-icon-sort-down
-                      v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
-                  </span>
-                </th>
-              </slot>
-            </tr>
-          </thead>
+                    <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
+                    </b-form-checkbox>
+                    <input v-else class="form-control form-control-md p-2"
+                      v-model="internalFilterByProp(column.prop).value" :placeholder="column.label"
+                      @change="onChangeFilter($event)" />
 
-          <draggable v-model="items" :group="draggableGroup" tag="tbody" :draggable="orderable ? '.item' : '.none'"
-            @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
-            @change="onDraggableChange($event)" :options="draggableOptions">
-            <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
-              @click="onRowClick(item, index)" class="item">
+                  </div>
+                </slot>
 
-              <th :colspan="columns.length" v-if="grouped && item.crudgroup">
-                <span>{{ item.crudgrouplabel }}</span>
+                <span v-else>{{ column.label }}</span>
+
+                <span v-if="sortable && internalFilterByProp(column.prop + '_sort')" class="sort-filter"
+                  @click="toggleSortFilter(column)"><b-icon-sort-down
+                    v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
+                    v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
+                  <b-icon-sort-down v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
+                </span>
               </th>
+            </slot>
+          </tr>
+        </thead>
 
-
-              <slot name="row" v-bind:item="item" v-else>
-                <td v-for="(column, indexc) in columns" :key="indexc" :scope="column.prop == 'id' ? 'row' : ''">
-                  <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
-                    v-bind:columnindex="indexc">
-                    <span v-if="column.type == 'boolean'">
-                      <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
-                        itemValue(column, item) == 1 ||
-                        itemValue(column, item) == '1'
-                        "><b-icon-check-circle></b-icon-check-circle></b-badge>
-                      <b-badge variant="danger" v-if="!itemValue(column, item) ||
-                        itemValue(column, item) == '0' ||
-                        itemValue(column, item) == 'false'
-                        "><b-icon-x-circle></b-icon-x-circle></b-badge>
-                    </span>
-                    <span v-else-if="column.type == 'date'">
-                      {{
-                        itemValue(column, item)
-                        ? moment(itemValue(column, item)).format(
-                          column.format ? column.format : 'L LT'
-                        )
-                        : itemValue(column, item)
-                      }}
-                    </span>
-                    <span v-else-if="column.type == 'select'">
-                      <b-form-checkbox v-model="item.selected" @change="onCheckSelect($event, item)">
-                      </b-form-checkbox>
-                    </span>
-                    <span v-else-if="column.type == 'state'">
-                      {{
-                        getStateValue(itemValue(column, item), column.options)
-                      }}
-                    </span>
-                    <span v-else-if="column.type == 'array'">
-                      {{
-                        getArrayValue(
-                          itemValue(column, item),
-                          column.displayProp
-                        )
-                      }}
-                    </span>
-                    <span v-else>
-                      {{ itemValue(column, item) }}
-                    </span>
-                  </slot>
-
-                  <b-button-group v-if="column.type == 'actions'">
-                    <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
-                      v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
-                      <b-button variant="primary" @click="showItem(item.id, index)">
-                        <b-icon-eye></b-icon-eye>
-                      </b-button>
-                      <b-button variant="secondary" @click="updateItem(item.id, index)">
-                        <b-icon-pencil></b-icon-pencil>
-                      </b-button>
-                      <b-button variant="danger" @click="removeItem(item.id, index)">
-                        <b-icon-trash></b-icon-trash>
-                      </b-button>
-                    </slot>
-                  </b-button-group>
-                </td>
-              </slot>
-
-            </tr>
-
-          </draggable>
-
-        </table>
-        <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
-          {{ messageEmptyResults }}
-        </p>
-      </div>
-
-      <div v-if="displayMode == displayModes.MODE_CARDS">
-        <draggable v-model="items" :group="draggableGroup" class="row" :draggable="orderable ? '.item' : '.none'"
+        <draggable v-model="items" :group="draggableGroup" tag="tbody" :draggable="orderable ? '.item' : '.none'"
           @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
           @change="onDraggableChange($event)" :options="draggableOptions">
-          <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
-            :xl="colXl" class="item">
-            <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
-              :hideFooter="cardHideFooter">
-              <slot name="card" v-bind:item="item">
-                <div v-for="(column, indexc) in columns" :key="indexc">
-                  <b-card-text v-if="column.type != 'actions'">{{ column.label }}:
-                    <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
-                      v-bind:columnindex="indexc">
-                      <span v-if="column.type == 'boolean'">
-                        <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
-                          itemValue(column, item) == 1 ||
-                          itemValue(column, item) == '1'
-                          "><b-icon-check-circle></b-icon-check-circle></b-badge>
-                        <b-badge variant="danger" v-if="!itemValue(column, item) ||
-                          itemValue(column, item) == '0' ||
-                          itemValue(column, item) == 'false'
-                          "><b-icon-x-circle></b-icon-x-circle></b-badge>
-                      </span>
-                      <span v-else-if="column.type == 'date'">
-                        {{ itemValue(column, item) }}
-                      </span>
-                      <span v-else-if="column.type == 'state'">
-                        {{
-                          getStateValue(itemValue(column, item), column.options)
-                        }}
-                      </span>
-                      <span v-else-if="column.type == 'array'">
-                        {{
-                          getArrayValue(
-                            itemValue(column, item),
-                            column.displayProp
-                          )
-                        }}
-                      </span>
-                      <span v-else>
-                        {{ itemValue(column, item) }}
-                      </span>
-                    </slot>
-                  </b-card-text>
-                </div>
-              </slot>
+          <tr v-for="(item, index) in itemsList" v-bind:key="index" @mouseover="onRowHover(item, index)"
+            @click="onRowClick(item, index)" class="item">
 
-              <template v-slot:footer>
-                <b-button-group>
+            <th :colspan="columns.length" v-if="grouped && item.crudgroup">
+              <span>{{ item.crudgrouplabel }}</span>
+            </th>
+
+
+            <slot name="row" v-bind:item="item" v-else>
+              <td v-for="(column, indexc) in columns" :key="indexc" :scope="column.prop == 'id' ? 'row' : ''">
+                <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
+                  v-bind:columnindex="indexc">
+                  <span v-if="column.type == 'boolean'">
+                    <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
+                      itemValue(column, item) == 1 ||
+                      itemValue(column, item) == '1'
+                      "><b-icon-check-circle></b-icon-check-circle></b-badge>
+                    <b-badge variant="danger" v-if="!itemValue(column, item) ||
+                      itemValue(column, item) == '0' ||
+                      itemValue(column, item) == 'false'
+                      "><b-icon-x-circle></b-icon-x-circle></b-badge>
+                  </span>
+                  <span v-else-if="column.type == 'date'">
+                    {{
+                      itemValue(column, item)
+                      ? moment(itemValue(column, item)).format(
+                        column.format ? column.format : 'L LT'
+                      )
+                      : itemValue(column, item)
+                    }}
+                  </span>
+                  <span v-else-if="column.type == 'select'">
+                    <b-form-checkbox v-model="item.selected" @change="onCheckSelect($event, item)">
+                    </b-form-checkbox>
+                  </span>
+                  <span v-else-if="column.type == 'state' && optionsLoaded">
+                    {{
+                      getStateValue(itemValue(column, item), column.options)
+                    }}
+                  </span>
+                  <span v-else-if="column.type == 'array' && optionsLoaded">
+                    {{
+                      getArrayValue(
+                        itemValue(column, item),
+                        column.displayProp,
+                         column.options
+                      )
+                    }}
+                  </span>
+                  <span v-else>
+                    {{ itemValue(column, item) }}
+                  </span>
+                </slot>
+
+                <b-button-group v-if="column.type == 'actions'">
                   <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
                     v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
                     <b-button variant="primary" @click="showItem(item.id, index)">
@@ -1524,35 +1481,118 @@ export default /*#__PURE__*/ {
                     </b-button>
                   </slot>
                 </b-button-group>
-              </template>
-            </b-card>
-          </b-col>
-    
+              </td>
+            </slot>
+
+          </tr>
+
         </draggable>
 
+      </table>
+      <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
+        {{ messageEmptyResults }}
+      </p>
+    </div>
+
+    <div v-if="displayMode == displayModes.MODE_CARDS">
+      <draggable v-model="items" :group="draggableGroup" class="row" :draggable="orderable ? '.item' : '.none'"
+        @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
+        @change="onDraggableChange($event)" :options="draggableOptions">
+        <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
+          :xl="colXl" class="item">
+          <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
+            :hideFooter="cardHideFooter">
+            <slot name="card" v-bind:item="item">
+              <div v-for="(column, indexc) in columns" :key="indexc">
+                <b-card-text v-if="column.type != 'actions'">{{ column.label }}:
+                  <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
+                    v-bind:columnindex="indexc">
+                    <span v-if="column.type == 'boolean'">
+                      <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
+                        itemValue(column, item) == 1 ||
+                        itemValue(column, item) == '1'
+                        "><b-icon-check-circle></b-icon-check-circle></b-badge>
+                      <b-badge variant="danger" v-if="!itemValue(column, item) ||
+                        itemValue(column, item) == '0' ||
+                        itemValue(column, item) == 'false'
+                        "><b-icon-x-circle></b-icon-x-circle></b-badge>
+                    </span>
+                    <span v-else-if="column.type == 'date'">
+                      {{ itemValue(column, item) }}
+                    </span>
+                    <span v-else-if="column.type == 'state'">
+                      {{
+                        getStateValue(itemValue(column, item), column.options)
+                      }}
+                    </span>
+                    <span v-else-if="column.type == 'array'">
+                      {{
+                        getArrayValue(
+                          itemValue(column, item),
+                          column.displayProp,
+                          column.options
+                        )
+                      }}
+                    </span>
+                    <span v-else>
+                      {{ itemValue(column, item) }}
+                    </span>
+                  </slot>
+                </b-card-text>
+              </div>
+            </slot>
+
+            <template v-slot:footer>
+              <b-button-group>
+                <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
+                  v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
+                  <b-button variant="primary" @click="showItem(item.id, index)">
+                    <b-icon-eye></b-icon-eye>
+                  </b-button>
+                  <b-button variant="secondary" @click="updateItem(item.id, index)">
+                    <b-icon-pencil></b-icon-pencil>
+                  </b-button>
+                  <b-button variant="danger" @click="removeItem(item.id, index)">
+                    <b-icon-trash></b-icon-trash>
+                  </b-button>
+                </slot>
+              </b-button-group>
+            </template>
+          </b-card>
+        </b-col>
+
+      </draggable>
+
+      <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
+        {{ messageEmptyResults }}
+      </p>
+
+    </div>
+
+    <div v-if="displayMode == displayModes.MODE_CUSTOM">
+      <div :class="listContainerClass">
         <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
         </p>
-        
-      </div>
-
-      <div v-if="displayMode == displayModes.MODE_CUSTOM">
-        <div :class="listContainerClass">
-          <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
-            {{ messageEmptyResults }}
-          </p>
-          <div :class="listItemClass" v-for="(item, index) in itemsList" v-bind:key="index">
-            <slot name="card" v-bind:item="item"> </slot>
-          </div>
+        <div :class="listItemClass" v-for="(item, index) in itemsList" v-bind:key="index">
+          <slot name="card" v-bind:item="item"> </slot>
         </div>
       </div>
-       <b-overlay :show="loading" rounded="sm"></b-overlay>
-       <infinite-loading  ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll"  :forceUseInfiniteWrapper="true" :key="infiniteScrollKey">
-                <div slot="spinner"><div class="text-center">{{ messageLoading }}</div></div>
-                <div slot="no-more"><div class="text-center"  v-if="!loading">{{ messageNoMore }}</div></div>
-                <div slot="no-results"><div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div></div>
-        </infinite-loading>
-        
+    </div>
+    <b-overlay :show="loading" rounded="sm"></b-overlay>
+    <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll"
+      :forceUseInfiniteWrapper="true" :key="infiniteScrollKey">
+      <div slot="spinner">
+        <div class="text-center">{{ messageLoading }}</div>
+      </div>
+      <div slot="no-more">
+        <div class="text-center" v-if="!loading">{{ messageNoMore }}</div>
+      </div>
+      <div slot="no-results">
+        <div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div>
+      </div>
+    </infinite-loading>
+
     <div class="crud-paginator" v-if="!infiniteScroll">
       <b-pagination v-if="showPaginator" v-model="pagination.current_page" :total-rows="pagination.total"
         :per-page="pagination.per_page" @change="onPaginationChange($event)"></b-pagination>
@@ -1666,5 +1706,4 @@ tr td:first-child {
       }
     }
   }
-}
-</style>
+}</style>
