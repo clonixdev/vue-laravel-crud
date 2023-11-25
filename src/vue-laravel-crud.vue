@@ -975,10 +975,12 @@ export default /*#__PURE__*/ {
       for (let i = 0; i < this.columns.length; i++) {
         const column = this.columns[i];
 
-        if (typeof column.options === 'function') {
+        if (column.options instanceof Promise) {
           // Si las opciones son una función (promesa), esperar y actualizar
-          const options = await column.options();
+          const options = await column.options;
           this.$set(this.columns, i, { ...column, options });
+
+          console.debug("Options promise",this.columns);
         } 
       }
 
