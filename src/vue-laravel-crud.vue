@@ -42,6 +42,7 @@ export default /*#__PURE__*/ {
       },
       infiniteScrollKey: 1,
       optionsLoaded: false,
+      isMobile: false,
 
     };
   },
@@ -325,6 +326,11 @@ export default /*#__PURE__*/ {
 
   mounted() {
 
+    this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
+
+    // Agregar un oyente de eventos para actualizar isMobile cuando cambia el tamaño de la pantalla
+    window.addEventListener("resize", this.handleResize);
+
     if (this.useVuexORM) {
 
       this.item = new this.model();
@@ -407,7 +413,7 @@ export default /*#__PURE__*/ {
     },
     itemsList() {
       const items = this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
-      if(this.masonrySort){
+      if(this.masonrySort && !this.isMobile){
         return this.rearrangeArray(items,this.masonryColumns);
       }
       return items;
@@ -445,6 +451,10 @@ export default /*#__PURE__*/ {
     }
   },
   methods: {
+    handleResize() {
+      // Actualizar isMobile cuando cambia el tamaño de la pantalla
+      this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
+    },
     infiniteHandler($state) {
       const hasNextPage = this.pagination.total > 0 && (!this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total);
       console.debug("Has next page", hasNextPage, this.pagination);
@@ -1210,6 +1220,11 @@ export default /*#__PURE__*/ {
       };
       this.pagination = pagination;
     },
+  },
+
+  beforeDestroy() {
+    // Eliminar el oyente de eventos al destruir el componente para evitar pérdidas de memoria
+    window.removeEventListener("resize", this.handleResize);
   },
 };
 </script>
