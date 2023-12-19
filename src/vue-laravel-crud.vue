@@ -311,6 +311,16 @@ export default /*#__PURE__*/ {
       }
 
     },
+
+    masonrySort: {
+      type: Boolean,
+      default: false,
+    },
+    masonryColumns: {
+      type: Number,
+      default: 3,
+    },
+
   },
 
   mounted() {
@@ -396,7 +406,11 @@ export default /*#__PURE__*/ {
       };
     },
     itemsList() {
-      return this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
+      const items = this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
+      if(this.masonrySort){
+        return this.rearrangeArray(items,this.masonryColumns);
+      }
+      return items;
     },
     paginationIndexStart() {
       return (this.pagination.current_page - 1) * this.pagination.per_page;
@@ -445,6 +459,15 @@ export default /*#__PURE__*/ {
       } else {
         $state.complete();
       }
+    },
+    rearrangeArray(originalArray,columns = 3) {
+        const rearrangedArray = [];
+        for (let i = 0; i < columns; i++) {
+            for (let j = i; j < originalArray.length; j += columns) {
+                rearrangedArray.push(originalArray[j]);
+            }
+        }
+        return rearrangedArray;
     },
     onDraggableAdded(event) {
       this.$emit("draggableAdded", event);
