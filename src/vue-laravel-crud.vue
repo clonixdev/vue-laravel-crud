@@ -391,6 +391,7 @@ export default /*#__PURE__*/ {
     } else {
       this.items = this.models;
       this.pagination.total = this.items.length;
+      this.firstLoad = true;
     }
 
     this.loadOptions();
@@ -1627,7 +1628,7 @@ export default /*#__PURE__*/ {
       </div>
     </div>
     <b-overlay :show="loading" rounded="sm"></b-overlay>
-    <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll"
+    <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll && !firstLoad"
       :forceUseInfiniteWrapper="true" :key="infiniteScrollKey">
       <div slot="spinner">
         <div class="text-center">{{ messageLoading }}</div>
