@@ -1,6 +1,6 @@
 {
     "name": "vue-laravel-crud",
-    "version": "1.5.8",
+    "version": "1.5.9",
     "description": "",
     "homepage": "https://github.com/clonixdev/vue-laravel-crud",
     "main": "dist/vue-laravel-crud.ssr.js",
