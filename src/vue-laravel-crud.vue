@@ -43,6 +43,7 @@ export default /*#__PURE__*/ {
       infiniteScrollKey: 1,
       optionsLoaded: false,
       isMobile: false,
+      refreshing: false,
 
     };
   },
@@ -413,8 +414,8 @@ export default /*#__PURE__*/ {
     },
     itemsList() {
       const items = this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
-      if(this.masonrySort && !this.isMobile){
-        return this.rearrangeArray(items,this.masonryColumns);
+      if (this.masonrySort && !this.isMobile) {
+        return this.rearrangeArray(items, this.masonryColumns);
       }
       return items;
     },
@@ -470,14 +471,14 @@ export default /*#__PURE__*/ {
         $state.complete();
       }
     },
-    rearrangeArray(originalArray,columns = 3) {
-        const rearrangedArray = [];
-        for (let i = 0; i < columns; i++) {
-            for (let j = i; j < originalArray.length; j += columns) {
-                rearrangedArray.push(originalArray[j]);
-            }
+    rearrangeArray(originalArray, columns = 3) {
+      const rearrangedArray = [];
+      for (let i = 0; i < columns; i++) {
+        for (let j = i; j < originalArray.length; j += columns) {
+          rearrangedArray.push(originalArray[j]);
         }
-        return rearrangedArray;
+      }
+      return rearrangedArray;
     },
     onDraggableAdded(event) {
       this.$emit("draggableAdded", event);
@@ -536,13 +537,17 @@ export default /*#__PURE__*/ {
         this.filterSidebarOpen = false;
       }
     },
-    resetFilters() {
+    resetFilters(refresh = true) {
       this.internalFilters = [];
       this.setupFilters();
       this.forceRecomputeCounter++;
-      setTimeout(() => {
-        this.refresh();
-      }, 1);
+
+      if (refresh) {
+        setTimeout(() => {
+          this.refresh();
+        }, 1);
+      }
+
     },
     toggleDisplayMode() {
       if (this.displayMode == this.displayModes.MODE_TABLE)
@@ -663,6 +668,7 @@ export default /*#__PURE__*/ {
       const fetchPromise = this.fetchItems(this.pagination.current_page);
 
       if (this.infiniteScroll && fetchPromise) {
+        this.refreshing = true;
         fetchPromise.then(() => {
           const infiniteLoadingRef = this.$refs.infiniteLoading;
           if (infiniteLoadingRef) {
@@ -670,6 +676,7 @@ export default /*#__PURE__*/ {
           } else {
             console.debug("infiniteLoadingRef not set");
           }
+          this.refreshing = false;
         });
       }
     },
@@ -893,11 +900,11 @@ export default /*#__PURE__*/ {
           });
       }
     },
-    getArrayValue(value, displayProp,options = []) {
+    getArrayValue(value, displayProp, options = []) {
       if (!Array.isArray(value)) return "N/A";
       let values = [];
       let valuesFinal = [];
-      
+
       if (value.length > 0) {
         if (typeof value[0] === "object" && displayProp) {
           values = value.map((vv) => vv[displayProp]);
@@ -908,8 +915,8 @@ export default /*#__PURE__*/ {
         return "";
       }
 
-      values.forEach(val =>{
-        valuesFinal.push(this.getStateValue(val,options));
+      values.forEach(val => {
+        valuesFinal.push(this.getStateValue(val, options));
       })
 
       return values.join(",");
@@ -1013,8 +1020,8 @@ export default /*#__PURE__*/ {
           const options = await column.options;
           this.$set(this.columns, i, { ...column, options });
 
-          console.debug("Options promise",this.columns);
-        } 
+          console.debug("Options promise", this.columns);
+        }
       }
 
       this.optionsLoaded = true;
@@ -1267,7 +1274,7 @@ export default /*#__PURE__*/ {
 
                   <div class="form-group" v-else-if="column.type == 'state'">
                     <label>{{ column.label }}</label>
-                
+
                     <select class="form-control" v-model="internalFilterByProp(column.prop).value"
                       @change="onChangeFilter($event)" v-if="optionsLoaded">
                       <option value=""></option>
@@ -1286,7 +1293,7 @@ export default /*#__PURE__*/ {
 
                   <div class="form-group" v-else-if="column.type == 'array'">
                     <label>{{ column.label }}</label>
-               
+
                     <select class="form-control" v-model="internalFilterByProp(column.prop).value"
                       @change="onChangeFilter($event)" v-if="optionsLoaded">
                       <option value=""></option>
@@ -1412,7 +1419,7 @@ export default /*#__PURE__*/ {
                         }}
                       </option>
                     </select>
-                  
+
                     <select v-else-if="column.type == 'array' && optionsLoaded" class="form-control form-control-md p-2"
                       v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"
                       :placeholder="column.label">
@@ -1498,7 +1505,7 @@ export default /*#__PURE__*/ {
                       getArrayValue(
                         itemValue(column, item),
                         column.displayProp,
-                         column.options
+                        column.options
                       )
                     }}
                   </span>
@@ -1746,4 +1753,5 @@ tr td:first-child {
       }
     }
   }
-}</style>
+}
+</style>
