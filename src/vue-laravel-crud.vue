@@ -20,6 +20,7 @@ export default /*#__PURE__*/ {
       items: [],
       selectedItems: [],
       pagination: {
+      
         current_page: 1,
         last_page: 1,
         next_page_url: "",
@@ -458,7 +459,8 @@ export default /*#__PURE__*/ {
       this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
     },
     infiniteHandler($state) {
-      const hasNextPage = this.pagination.total > 0 && (!this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total);
+      
+      const hasNextPage = (this.pagination.total > 0 || !this.firstLoad) && (!this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total);
       console.debug("Has next page", hasNextPage, this.pagination);
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
@@ -1628,7 +1630,7 @@ export default /*#__PURE__*/ {
       </div>
     </div>
     <b-overlay :show="loading" rounded="sm"></b-overlay>
-    <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll && !firstLoad"
+    <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll "
       :forceUseInfiniteWrapper="true" :key="infiniteScrollKey">
       <div slot="spinner">
         <div class="text-center">{{ messageLoading }}</div>
