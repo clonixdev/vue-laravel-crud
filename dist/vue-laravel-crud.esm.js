@@ -11878,7 +11878,7 @@ var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExp
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-ddf2ca4c]:last-child,\ntr td[data-v-ddf2ca4c]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-ddf2ca4c] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-ddf2ca4c] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-ddf2ca4c] .crud-title[data-v-ddf2ca4c] {\n    margin: 0; }\n  .crud-header[data-v-ddf2ca4c] .crud-search[data-v-ddf2ca4c] {\n    max-width: 15rem; }\n    .crud-header[data-v-ddf2ca4c] .crud-search[data-v-ddf2ca4c] .btn[data-v-ddf2ca4c] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-ddf2ca4c] .crud-search[data-v-ddf2ca4c] .btn[data-v-ddf2ca4c].open[data-v-ddf2ca4c] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-ddf2ca4c] .table-options[data-v-ddf2ca4c] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-ddf2ca4c] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-ddf2ca4c] {\n    table-layout: auto; }\n    .table[data-v-ddf2ca4c] tbody[data-v-ddf2ca4c] td[data-v-ddf2ca4c] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-ddf2ca4c] tbody[data-v-ddf2ca4c] td[data-v-ddf2ca4c]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-7bee070b]:last-child,\ntr td[data-v-7bee070b]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-7bee070b] {\n  display: flex;\n  justify-content: center; }\n\n.crud-header[data-v-7bee070b] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-7bee070b] .crud-title[data-v-7bee070b] {\n    margin: 0; }\n  .crud-header[data-v-7bee070b] .crud-search[data-v-7bee070b] {\n    max-width: 15rem; }\n    .crud-header[data-v-7bee070b] .crud-search[data-v-7bee070b] .btn[data-v-7bee070b] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-7bee070b] .crud-search[data-v-7bee070b] .btn[data-v-7bee070b].open[data-v-7bee070b] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-7bee070b] .table-options[data-v-7bee070b] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-7bee070b] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-7bee070b] {\n    table-layout: auto; }\n    .table[data-v-7bee070b] tbody[data-v-7bee070b] td[data-v-7bee070b] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-7bee070b] tbody[data-v-7bee070b] td[data-v-7bee070b]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -13995,7 +13995,9 @@ var _sfc_render = function render() {
     return [_c('b-list-group', _vm._l(_vm.item, function (value, key) {
       return _c('b-list-group-item', {
         key: key
-      }, [_c('b-row', [_c('b-col', {
+      }, [_c('b-row', {
+        staticClass: "w-100"
+      }, [_c('b-col', {
         staticClass: "font-weight-bold",
         attrs: {
           "cols": "4"
@@ -14011,7 +14013,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "ddf2ca4c", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "7bee070b", null, null);
 var component = __component__.exports;
 
 // Import vue component
