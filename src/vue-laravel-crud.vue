@@ -1675,7 +1675,7 @@ export default /*#__PURE__*/ {
       <slot name="show" v-bind:item="item" v-if="item">
         <b-list-group>
           <b-list-group-item v-for="(value, key) in  item" :key="key">
-            <b-row>
+            <b-row class="w-100">
               <b-col cols="4" class="font-weight-bold">{{ key }}</b-col>
               <b-col cols="8">{{ JSON.stringify(value) }}</b-col>
             </b-row>
