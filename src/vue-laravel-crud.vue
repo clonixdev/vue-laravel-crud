@@ -1697,7 +1697,10 @@ tr td:first-child {
 
 .crud-pagination {
   display: flex;
-  justify-content: center;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
 }
 
 .crud-header {
@@ -1737,6 +1740,7 @@ tr td:first-child {
   position: relative;
   top: -15px;
 }
+
 
 @media (min-width: 992px) {
   .table {
