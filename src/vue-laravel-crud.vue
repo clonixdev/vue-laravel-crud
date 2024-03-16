@@ -1563,8 +1563,8 @@ export default /*#__PURE__*/ {
         @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
         @change="onDraggableChange($event)" :options="draggableOptions">
         <masonry
-        :cols="{default: colLg, 1000: colMd, 700: colSm, 400: colXs}"
-  :gutter="{default: '30px', 700: '15px'}"
+        :cols="{default: colLg, 1400: colXl, 1200: colLg, 1000: colMd, 700: colSm, 400: colXs}"
+  :gutter="{default: '15px', 700: '15px'}"
   >
 
         <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
