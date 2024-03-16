@@ -1559,7 +1559,7 @@ export default /*#__PURE__*/ {
     </div>
 
     <div v-if="displayMode == displayModes.MODE_CARDS">
-      <draggable v-model="items" :group="draggableGroup" class="row" :draggable="orderable ? '.item' : '.none'"
+      <draggable v-model="items" :group="draggableGroup" :draggable="orderable ? '.item' : '.none'"
         @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
         @change="onDraggableChange($event)" :options="draggableOptions">
         <masonry
@@ -1567,8 +1567,7 @@ export default /*#__PURE__*/ {
   :gutter="{default: '30px', 700: '15px'}"
   >
 
-        <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
-          :xl="colXl" class="item">
+        <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
           <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
             :hideFooter="cardHideFooter">
             <slot name="card" v-bind:item="item">
@@ -1628,7 +1627,7 @@ export default /*#__PURE__*/ {
               </b-button-group>
             </template>
           </b-card>
-        </b-col>
+        </div>
 </masonry>
       </draggable>
 
