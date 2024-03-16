@@ -2,12 +2,17 @@
 import draggable from "vuedraggable";
 import moment from "moment";
 import InfiniteLoading from 'vue-infinite-loading';
+import Vue from 'vue'
+import VueMasonry from 'vue-masonry-css'
+
+
 
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
   components: {
     draggable,
-    InfiniteLoading
+    InfiniteLoading,
+    VueMasonry
   },
   data() {
     return {

@@ -1,4 +1,4 @@
-'use strict';function _iterableToArrayLimit(r, l) {
+'use strict';require('vue');function _iterableToArrayLimit(r, l) {
   var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
   if (null != t) {
     var e,
@@ -12296,7 +12296,243 @@ vueInfiniteLoading.exports;
 } (vueInfiniteLoading, vueInfiniteLoading.exports));
 
 var vueInfiniteLoadingExports = vueInfiniteLoading.exports;
-var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExports);var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-3e65ccf8]:last-child,\ntr td[data-v-3e65ccf8]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-3e65ccf8] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-3e65ccf8] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-3e65ccf8] .crud-title[data-v-3e65ccf8] {\n    margin: 0; }\n  .crud-header[data-v-3e65ccf8] .crud-search[data-v-3e65ccf8] {\n    max-width: 15rem; }\n    .crud-header[data-v-3e65ccf8] .crud-search[data-v-3e65ccf8] .btn[data-v-3e65ccf8] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-3e65ccf8] .crud-search[data-v-3e65ccf8] .btn[data-v-3e65ccf8].open[data-v-3e65ccf8] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-3e65ccf8] .table-options[data-v-3e65ccf8] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-3e65ccf8] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-3e65ccf8] {\n    table-layout: auto; }\n    .table[data-v-3e65ccf8] tbody[data-v-3e65ccf8] td[data-v-3e65ccf8] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-3e65ccf8] tbody[data-v-3e65ccf8] td[data-v-3e65ccf8]::-webkit-scrollbar {\n      display: none; } }\n";
+var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExports);/*!
+ * vue-masonry-css v1.0.3
+ * https://github.com/paulcollett/vue-masonry-css
+ * Released under the MIT License.
+ */
+
+// the component name `<masonry />`
+// can be overridden with `Vue.use(Masonry, { name: 'the-masonry' });`
+var componentName = 'masonry';
+
+var props = {
+  tag: {
+    type: [String],
+    default: 'div'
+  },
+  cols: {
+    type: [Object, Number, String],
+    default: 2
+  },
+  gutter: {
+    type: [Object, Number, String],
+    default: 0
+  },
+  css: {
+    type: [Boolean],
+    default: true
+  },
+  columnTag: {
+    type: [String],
+    default: 'div'
+  },
+  columnClass: {
+    type: [String, Array, Object],
+    default: function () { return []; }
+  },
+  columnAttr: {
+    type: [Object],
+    default: function () { return ({}); }
+  }
+};
+
+// Get the resulting value from  `:col=` prop
+// based on the window width
+var breakpointValue = function (mixed, windowWidth) {
+  var valueAsNum = parseInt(mixed);
+
+  if(valueAsNum > -1) {
+    return mixed;
+  }else if(typeof mixed !== 'object') {
+    return 0;
+  }
+
+  var matchedBreakpoint = Infinity;
+  var matchedValue = mixed.default || 0;
+
+  for(var k in mixed) {
+    var breakpoint = parseInt(k);
+    var breakpointValRaw = mixed[breakpoint];
+    var breakpointVal = parseInt(breakpointValRaw);
+
+    if(isNaN(breakpoint) || isNaN(breakpointVal)) {
+      continue;
+    }
+
+    var isNewBreakpoint = windowWidth <= breakpoint && breakpoint < matchedBreakpoint;
+
+    if(isNewBreakpoint) {
+      matchedBreakpoint = breakpoint;
+      matchedValue = breakpointValRaw;
+    }
+  }
+
+  return matchedValue;
+};
+
+var component$2 = {
+  props: props,
+
+  data: function data() {
+    return {
+      displayColumns: 2,
+      displayGutter: 0
+    }
+  },
+
+  mounted: function mounted() {
+    var this$1$1 = this;
+
+    this.$nextTick(function () {
+      this$1$1.reCalculate();
+    });
+
+    // Bind resize handler to page
+    if(window) {
+      window.addEventListener('resize', this.reCalculate);
+    }
+  },
+
+  updated: function updated() {
+    var this$1$1 = this;
+
+    this.$nextTick(function () {
+      this$1$1.reCalculate();
+    });
+  },
+
+  beforeDestroy: function beforeDestroy() {
+    if(window) {
+      window.removeEventListener('resize', this.reCalculate);
+    }
+  },
+
+  methods: {
+    // Recalculate how many columns to display based on window width
+    // and the value of the passed `:cols=` prop
+    reCalculate: function reCalculate() {
+      var previousWindowWidth = this.windowWidth;
+
+      this.windowWidth = (window ? window.innerWidth : null) || Infinity;
+
+      // Window resize events get triggered on page height
+      // change which when loading the page can result in multiple
+      // needless calculations. We prevent this here.
+      if(previousWindowWidth === this.windowWidth) {
+        return;
+      }
+
+      this._reCalculateColumnCount(this.windowWidth);
+
+      this._reCalculateGutterSize(this.windowWidth);
+    },
+
+    _reCalculateGutterSize: function _reCalculateGutterSize(windowWidth) {
+      this.displayGutter = breakpointValue(this.gutter, windowWidth);
+    },
+
+    _reCalculateColumnCount: function _reCalculateColumnCount(windowWidth) {
+      var newColumns = breakpointValue(this.cols, windowWidth);
+
+      // Make sure we can return a valid value
+      newColumns = Math.max(1, Number(newColumns) || 0);
+
+      this.displayColumns = newColumns;
+    },
+
+    _getChildItemsInColumnsArray: function _getChildItemsInColumnsArray() {
+      var this$1$1 = this;
+
+      var columns = [];
+      var childItems = this.$slots.default || [];
+
+      // This component does not work with a child <transition-group /> ..yet,
+      // so for now we think it may be helpful to ignore until we can find a way for support
+      if(childItems.length === 1 && childItems[0].componentOptions && childItems[0].componentOptions.tag == 'transition-group') {
+        childItems = childItems[0].componentOptions.children;
+      }
+
+      // Loop through child elements
+      for (var i = 0, visibleItemI = 0; i < childItems.length; i++, visibleItemI++) {
+        // skip Vue elements without tags, which includes
+        // whitespace elements and also plain text
+        if(!childItems[i].tag) {
+          visibleItemI--;
+
+          continue;
+        }
+
+        // Get the column index the child item will end up in
+        var columnIndex = visibleItemI % this$1$1.displayColumns;
+
+        if(!columns[columnIndex]) {
+          columns[columnIndex] = [];
+        }
+
+        columns[columnIndex].push(childItems[i]);
+      }
+
+      return columns;
+    }
+  },
+
+  render: function render(createElement) {
+    var this$1$1 = this;
+
+    var columnsContainingChildren = this._getChildItemsInColumnsArray();
+    var isGutterSizeUnitless = parseInt(this.displayGutter) === this.displayGutter * 1;
+    var gutterSizeWithUnit =  isGutterSizeUnitless ? ((this.displayGutter) + "px") : this.displayGutter;
+
+    var columnStyle = {
+      boxSizing: 'border-box',
+      backgroundClip: 'padding-box',
+      width: ((100 / this.displayColumns) + "%"),
+      border: '0 solid transparent',
+      borderLeftWidth: gutterSizeWithUnit
+    };
+
+    var columns = columnsContainingChildren.map(function (children, index) {
+      /// Create column element and inject the children
+      return createElement(this$1$1.columnTag, {
+        key: index + '-' + columnsContainingChildren.length,
+        style: this$1$1.css ? columnStyle : null,
+        class: this$1$1.columnClass,
+        attrs: this$1$1.columnAttr
+      }, children); // specify child items here
+    });
+
+    var containerStyle = {
+      display: ['-webkit-box', '-ms-flexbox', 'flex'],
+      marginLeft: ("-" + gutterSizeWithUnit)
+    };
+
+    // Return wrapper with columns
+    return createElement(
+      this.tag, // tag name
+      this.css ? { style: containerStyle } : null, // element options
+      columns // column vue elements
+    );
+  }
+};
+
+var Plugin = function () {};
+
+Plugin.install = function (Vue, options) {
+  if (Plugin.installed) {
+    return;
+  }
+
+  if(options && options.name) {
+    Vue.component(options.name, component$2);
+  } else {
+    Vue.component(componentName, component$2);
+  }
+};
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(Plugin);
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-45e6bdb2]:last-child,\ntr td[data-v-45e6bdb2]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-45e6bdb2] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-45e6bdb2] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-45e6bdb2] .crud-title[data-v-45e6bdb2] {\n    margin: 0; }\n  .crud-header[data-v-45e6bdb2] .crud-search[data-v-45e6bdb2] {\n    max-width: 15rem; }\n    .crud-header[data-v-45e6bdb2] .crud-search[data-v-45e6bdb2] .btn[data-v-45e6bdb2] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-45e6bdb2] .crud-search[data-v-45e6bdb2] .btn[data-v-45e6bdb2].open[data-v-45e6bdb2] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-45e6bdb2] .table-options[data-v-45e6bdb2] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-45e6bdb2] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-45e6bdb2] {\n    table-layout: auto; }\n    .table[data-v-45e6bdb2] tbody[data-v-45e6bdb2] td[data-v-45e6bdb2] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-45e6bdb2] tbody[data-v-45e6bdb2] td[data-v-45e6bdb2]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -12392,7 +12628,8 @@ n(css, {});function normalizeComponent (
   name: "VueLaravelCrud",
   components: {
     draggable: draggable,
-    InfiniteLoading: InfiniteLoading
+    InfiniteLoading: InfiniteLoading,
+    VueMasonry: Plugin
   },
   data: function data() {
     return {
@@ -14623,7 +14860,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "3e65ccf8", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "45e6bdb2", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
