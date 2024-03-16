@@ -2,7 +2,6 @@
 import draggable from "vuedraggable";
 import moment from "moment";
 import InfiniteLoading from 'vue-infinite-loading';
-import Vue from 'vue'
 import VueMasonry from 'vue-masonry-css'
 
 
@@ -1257,7 +1256,6 @@ export default /*#__PURE__*/ {
   <div class="crud">
     <div class="crud-header" v-if="showHeader">
       <h4 class="crud-title" v-if="showTitle">{{ title }}</h4>
-
       <b-sidebar v-model="filterSidebarOpen" title="Filtrar" right shadow>
         <slot name="sidebarFilters" v-bind:createItem="createItem" v-bind:toggleDisplayMode="toggleDisplayMode"
           v-bind:loading="loading" v-bind:isColumnHasFilter="isColumnHasFilter" v-bind:setFilter="setFilter">
@@ -1360,11 +1358,8 @@ export default /*#__PURE__*/ {
             <b-button variant="success" v-if="showCreateBtn" @click="createItem()" :disabled="loading">
               <b-icon-plus></b-icon-plus>{{ messageNew }}
             </b-button>
-
             <b-button v-if="enableFilters" @click="toggleFilters()">Filtros</b-button>
-
             <b-button @click="refresh()"><b-icon-arrow-clockwise></b-icon-arrow-clockwise></b-button>
-
             <b-button variant="info" @click="toggleDisplayMode()" :disabled="loading" v-if="displayModeToggler">
               <b-icon-card-list v-if="displayMode == displayModes.MODE_TABLE"></b-icon-card-list>
               <b-icon-table v-if="displayMode == displayModes.MODE_CARDS"></b-icon-table>
@@ -1563,7 +1558,7 @@ export default /*#__PURE__*/ {
         @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
         @change="onDraggableChange($event)" :options="draggableOptions">
         <masonry
-        :cols="{default: colLg, 1400: colXl, 1200: colLg, 1000: colMd, 700: colSm, 400: colXs}"
+        :cols="{default: 12/colLg, 1400: 12/colXl, 1200: 12/colLg, 1000: 12/colMd, 700: 12/colSm, 400: 12/colXs}"
   :gutter="{default: '15px', 700: '15px'}"
   >
 
