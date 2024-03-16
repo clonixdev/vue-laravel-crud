@@ -45,6 +45,7 @@ export default /*#__PURE__*/ {
       optionsLoaded: false,
       isMobile: false,
       refreshing: false,
+      fetchError: false,
 
     };
   },
@@ -314,6 +315,10 @@ export default /*#__PURE__*/ {
       }
 
     },
+    masonryEnabled: {
+      type: Boolean,
+      default: false,
+    },
 
     masonrySort: {
       type: Boolean,
@@ -460,11 +465,13 @@ export default /*#__PURE__*/ {
     },
     infiniteHandler($state) {
       
+      
       const hasNextPage = (this.pagination.total > 0 || !this.firstLoad) && (!this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total);
       console.debug("Has next page", hasNextPage, this.pagination);
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
         this.fetchItems(page, true).then(() => {
+          console.debug("infinite handler then");
           $state.loaded();
         }).catch(error => {
           console.debug("infinite handler error", error);
@@ -787,6 +794,8 @@ export default /*#__PURE__*/ {
           //console.debug(error);
           this.toastError(error);
           this.loading = false;
+          this.firstLoad = true;
+          this.fetchError = true;
         });
     },
     removeItem(id, index) {
@@ -1548,6 +1557,11 @@ export default /*#__PURE__*/ {
       <draggable v-model="items" :group="draggableGroup" class="row" :draggable="orderable ? '.item' : '.none'"
         @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
         @change="onDraggableChange($event)" :options="draggableOptions">
+        <masonry
+        :cols="{default: colLg, 1000: colMd, 700: colSm, 400: colXs}"
+  :gutter="{default: '30px', 700: '15px'}"
+  >
+
         <b-col v-for="(item, index) in itemsList" v-bind:key="index" :cols="colXs" :sm="colSm" :md="colMd" :lg="colLg"
           :xl="colXl" class="item">
           <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
@@ -1610,7 +1624,7 @@ export default /*#__PURE__*/ {
             </template>
           </b-card>
         </b-col>
-
+</masonry>
       </draggable>
 
       <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
