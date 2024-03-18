@@ -174,6 +174,11 @@ export default /*#__PURE__*/ {
       type: Boolean,
       default: true,
     },
+    showPrincipalSortBtn: {
+      type: Boolean,
+      default: false,
+    },
+
     showHeader: {
       type: Boolean,
       default: true,
@@ -212,7 +217,7 @@ export default /*#__PURE__*/ {
       type: Number,
     },
     colXl: {
-      default: 3,
+      default: 4,
       type: Number,
     },
 
@@ -333,6 +338,10 @@ export default /*#__PURE__*/ {
       default: 3,
     },
 
+    principalSortColumn: {
+      type: String,
+      default: "id",
+    },
   },
 
   mounted() {
@@ -440,8 +449,21 @@ export default /*#__PURE__*/ {
       return [
         ...this.filters,
         ...this.filter,
-        ...this.internalFilter
+        ...this.internalFilter,
+        ...this.sortFilter
       ];
+    },
+    sortFilter(){
+      if(this.showPrincipalSortBtn){
+        if(this.principalSort){
+        return [[this.principalSortColumn,'SORTASC','']];
+      }else{
+        return [[this.principalSortColumn,'SORTDESC','']];
+      }
+      }else{
+        return [];
+      }
+
     },
     internalFilter() {
       let filter = [];
@@ -466,6 +488,13 @@ export default /*#__PURE__*/ {
     handleResize() {
       // Actualizar isMobile cuando cambia el tamaño de la pantalla
       this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
+    },
+
+    togglePrincipalSort(){
+      this.principalSort = !this.principalSort;
+      setTimeout(() => {
+          this.refresh();
+        }, 1);
     },
     infiniteHandler($state) {
       
@@ -1355,6 +1384,10 @@ export default /*#__PURE__*/ {
           <slot name="tableActions" v-bind:createItem="createItem" v-bind:toggleDisplayMode="toggleDisplayMode"
             v-bind:loading="loading">
             <slot name="tableActionsPrepend" v-bind:loading="loading"> </slot>
+            <b-button variant="success" v-if="showPrincipalSortBtn" @click="togglePrincipalSort()" :disabled="loading">
+              <b-icon-sort-numeric-down v-if="principalSort"></b-icon-sort-numeric-down>
+              <b-icon-sort-numeric-up v-else></b-icon-sort-numeric-up>
+            </b-button>
             <b-button variant="success" v-if="showCreateBtn" @click="createItem()" :disabled="loading">
               <b-icon-plus></b-icon-plus>{{ messageNew }}
             </b-button>
