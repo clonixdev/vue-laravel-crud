@@ -50,6 +50,7 @@ export default /*#__PURE__*/ {
       isMobile: false,
       refreshing: false,
       fetchError: false,
+      principalSort: false,
 
     };
   },
@@ -456,10 +457,10 @@ export default /*#__PURE__*/ {
     sortFilter(){
       if(this.showPrincipalSortBtn){
         if(this.principalSort){
-        return [[this.principalSortColumn,'SORTASC','']];
-      }else{
-        return [[this.principalSortColumn,'SORTDESC','']];
-      }
+          return [[this.principalSortColumn,'SORTASC','']];
+        }else{
+          return [[this.principalSortColumn,'SORTDESC','']];
+        }
       }else{
         return [];
       }
@@ -1384,15 +1385,16 @@ export default /*#__PURE__*/ {
           <slot name="tableActions" v-bind:createItem="createItem" v-bind:toggleDisplayMode="toggleDisplayMode"
             v-bind:loading="loading">
             <slot name="tableActionsPrepend" v-bind:loading="loading"> </slot>
-            <b-button variant="success" v-if="showPrincipalSortBtn" @click="togglePrincipalSort()" :disabled="loading">
+            <b-button variant="info" v-if="showPrincipalSortBtn" @click="togglePrincipalSort()" :disabled="loading">
               <b-icon-sort-numeric-down v-if="principalSort"></b-icon-sort-numeric-down>
               <b-icon-sort-numeric-up v-else></b-icon-sort-numeric-up>
             </b-button>
+            
             <b-button variant="success" v-if="showCreateBtn" @click="createItem()" :disabled="loading">
               <b-icon-plus></b-icon-plus>{{ messageNew }}
             </b-button>
-            <b-button v-if="enableFilters" @click="toggleFilters()">Filtros</b-button>
-            <b-button @click="refresh()"><b-icon-arrow-clockwise></b-icon-arrow-clockwise></b-button>
+            <b-button variant="info" v-if="enableFilters" @click="toggleFilters()">Filtros</b-button>
+            <b-button variant="info" @click="refresh()"><b-icon-arrow-clockwise></b-icon-arrow-clockwise></b-button>
             <b-button variant="info" @click="toggleDisplayMode()" :disabled="loading" v-if="displayModeToggler">
               <b-icon-card-list v-if="displayMode == displayModes.MODE_TABLE"></b-icon-card-list>
               <b-icon-table v-if="displayMode == displayModes.MODE_CARDS"></b-icon-table>
