@@ -12532,7 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-77a16873]:last-child,\ntr td[data-v-77a16873]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-77a16873] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-77a16873] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-77a16873] .crud-title[data-v-77a16873] {\n    margin: 0; }\n  .crud-header[data-v-77a16873] .crud-search[data-v-77a16873] {\n    max-width: 15rem; }\n    .crud-header[data-v-77a16873] .crud-search[data-v-77a16873] .btn[data-v-77a16873] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-77a16873] .crud-search[data-v-77a16873] .btn[data-v-77a16873].open[data-v-77a16873] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-77a16873] .table-options[data-v-77a16873] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-77a16873] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-77a16873] {\n    table-layout: auto; }\n    .table[data-v-77a16873] tbody[data-v-77a16873] td[data-v-77a16873] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-77a16873] tbody[data-v-77a16873] td[data-v-77a16873]::-webkit-scrollbar {\n      display: none; } }\n";
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-a4bec9a9]:last-child,\ntr td[data-v-a4bec9a9]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-a4bec9a9] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-a4bec9a9] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-a4bec9a9] .crud-title[data-v-a4bec9a9] {\n    margin: 0; }\n  .crud-header[data-v-a4bec9a9] .crud-search[data-v-a4bec9a9] {\n    max-width: 15rem; }\n    .crud-header[data-v-a4bec9a9] .crud-search[data-v-a4bec9a9] .btn[data-v-a4bec9a9] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-a4bec9a9] .crud-search[data-v-a4bec9a9] .btn[data-v-a4bec9a9].open[data-v-a4bec9a9] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-a4bec9a9] .table-options[data-v-a4bec9a9] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-a4bec9a9] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-a4bec9a9] {\n    table-layout: auto; }\n    .table[data-v-a4bec9a9] tbody[data-v-a4bec9a9] td[data-v-a4bec9a9] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-a4bec9a9] tbody[data-v-a4bec9a9] td[data-v-a4bec9a9]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -12794,6 +12794,10 @@ n(css, {});function normalizeComponent (
       type: Boolean,
       default: true
     },
+    showPrincipalSortBtn: {
+      type: Boolean,
+      default: false
+    },
     showHeader: {
       type: Boolean,
       default: true
@@ -12831,7 +12835,7 @@ n(css, {});function normalizeComponent (
       type: Number
     },
     colXl: {
-      default: 3,
+      default: 4,
       type: Number
     },
     selectHover: {
@@ -12941,6 +12945,10 @@ n(css, {});function normalizeComponent (
     masonryColumns: {
       type: Number,
       default: 3
+    },
+    principalSortColumn: {
+      type: String,
+      default: "id"
     }
   },
   mounted: function mounted() {
@@ -13025,7 +13033,18 @@ n(css, {});function normalizeComponent (
       return this.paginationIndexStart + this.pagination.per_page;
     },
     finalFilters: function finalFilters() {
-      return [].concat(_toConsumableArray$1(this.filters), _toConsumableArray$1(this.filter), _toConsumableArray$1(this.internalFilter));
+      return [].concat(_toConsumableArray$1(this.filters), _toConsumableArray$1(this.filter), _toConsumableArray$1(this.internalFilter), _toConsumableArray$1(this.sortFilter));
+    },
+    sortFilter: function sortFilter() {
+      if (this.showPrincipalSortBtn) {
+        if (this.principalSort) {
+          return [[this.principalSortColumn, 'SORTASC', '']];
+        } else {
+          return [[this.principalSortColumn, 'SORTDESC', '']];
+        }
+      } else {
+        return [];
+      }
     },
     internalFilter: function internalFilter() {
       var filter = [];
@@ -13051,6 +13070,13 @@ n(css, {});function normalizeComponent (
     handleResize: function handleResize() {
       // Actualizar isMobile cuando cambia el tamaño de la pantalla
       this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
+    },
+    togglePrincipalSort: function togglePrincipalSort() {
+      var _this2 = this;
+      this.principalSort = !this.principalSort;
+      setTimeout(function () {
+        _this2.refresh();
+      }, 1);
     },
     infiniteHandler: function infiniteHandler($state) {
       var hasNextPage = (this.pagination.total > 0 || !this.firstLoad) && (!this.firstLoad || this.pagination.current_page * this.pagination.per_page <= this.pagination.total);
@@ -13085,30 +13111,30 @@ n(css, {});function normalizeComponent (
       this.$emit("draggableChange", event);
     },
     setupFilters: function setupFilters() {
-      var _this2 = this;
+      var _this3 = this;
       this.columns.forEach(function (column) {
-        if (_this2.isColumnHasFilter(column)) {
+        if (_this3.isColumnHasFilter(column)) {
           if (column.type == "date") {
-            _this2.internalFilters.push({
+            _this3.internalFilters.push({
               column: column.prop + "_from",
               op: column.filterOp ? column.filterOp : "=",
               value: null
             });
-            _this2.internalFilters.push({
+            _this3.internalFilters.push({
               column: column.prop + "_to",
               op: column.filterOp ? column.filterOp : "=",
               value: null
             });
           } else {
-            _this2.internalFilters.push({
+            _this3.internalFilters.push({
               column: column.prop,
               op: column.filterOp ? column.filterOp : "=",
               value: null
             });
           }
         }
-        if (_this2.sortable) {
-          _this2.internalFilters.push({
+        if (_this3.sortable) {
+          _this3.internalFilters.push({
             column: column.prop + "_sort",
             op: column.filterOp ? column.filterOp : "=",
             value: null
@@ -13135,14 +13161,14 @@ n(css, {});function normalizeComponent (
       }
     },
     resetFilters: function resetFilters() {
-      var _this3 = this;
+      var _this4 = this;
       var refresh = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       this.internalFilters = [];
       this.setupFilters();
       this.forceRecomputeCounter++;
       if (refresh) {
         setTimeout(function () {
-          _this3.refresh();
+          _this4.refresh();
         }, 1);
       }
     },
@@ -13164,12 +13190,12 @@ n(css, {});function normalizeComponent (
       }
     },
     onSort: function onSort() {
-      var _this4 = this;
+      var _this5 = this;
       var event = {};
       var i = 1 + (this.pagination.current_page * this.pagination.per_page - this.pagination.per_page);
       this.items.forEach(function (item, index) {
         //console.debug(s, i);
-        item[_this4.orderProp] = i;
+        item[_this5.orderProp] = i;
         i++;
       });
       this.$emit("sort", event);
@@ -13188,14 +13214,14 @@ n(css, {});function normalizeComponent (
       }
     },
     selectItem: function selectItem() {
-      var _this5 = this;
+      var _this6 = this;
       var sitem = this.selectedItems.find(function (e) {
-        return e.id == _this5.item.id;
+        return e.id == _this6.item.id;
       });
       if (sitem) {
         this.item.selected = false;
         this.selectedItems = this.selectedItems.filter(function (e) {
-          return e.id != _this5.item.id;
+          return e.id != _this6.item.id;
         });
       } else {
         this.item.selected = true;
@@ -13203,16 +13229,16 @@ n(css, {});function normalizeComponent (
       }
     },
     externalUpdate: function externalUpdate(itemsUpdate) {
-      var _this6 = this;
+      var _this7 = this;
       var addIfNotExist = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'id';
       itemsUpdate.forEach(function (itemUpdate) {
-        var itemInList = _this6.items.find(function (item) {
+        var itemInList = _this7.items.find(function (item) {
           return item[key] === itemUpdate[key];
         });
         if (itemInList) Object.assign(itemInList, itemUpdate);else {
           if (addIfNotExist) {
-            _this6.items.push(itemUpdate);
+            _this7.items.push(itemUpdate);
           }
         }
       });
@@ -13260,7 +13286,7 @@ n(css, {});function normalizeComponent (
       this.$bvModal.show("modal-form-item-" + this.modelName);
     },
     refresh: function refresh() {
-      var _this7 = this;
+      var _this8 = this;
       this.$emit("refresh", {});
       if (!this.ajax) {
         return;
@@ -13273,13 +13299,13 @@ n(css, {});function normalizeComponent (
       if (this.infiniteScroll && fetchPromise) {
         this.refreshing = true;
         fetchPromise.then(function () {
-          var infiniteLoadingRef = _this7.$refs.infiniteLoading;
+          var infiniteLoadingRef = _this8.$refs.infiniteLoading;
           if (infiniteLoadingRef) {
             infiniteLoadingRef.stateChanger.reset();
           } else {
             console.debug("infiniteLoadingRef not set");
           }
-          _this7.refreshing = false;
+          _this8.refreshing = false;
         });
       }
     },
@@ -13287,45 +13313,45 @@ n(css, {});function normalizeComponent (
       return column && !column.hideFilter && column.type != "actions";
     },
     setFilter: function setFilter(column, value) {
-      var _this8 = this;
+      var _this9 = this;
       var filter = this.filter.find(function (f) {
         return f.column == column;
       });
       filter.value = value;
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this8.refresh();
+        _this9.refresh();
       }, 1);
     },
     fetchItemsVuex: function fetchItemsVuex() {
       var _arguments = arguments,
-        _this9 = this;
+        _this10 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var page, result, itemsResult;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
-              _this9.loading = true;
-              _this9.$emit("beforeFetch", {});
-              _this9.model.deleteAll();
+              _this10.loading = true;
+              _this10.$emit("beforeFetch", {});
+              _this10.model.deleteAll();
               _context.next = 7;
-              return _this9.model.api().get('', {
+              return _this10.model.api().get('', {
                 params: {
                   page: page,
-                  limit: _this9.pagination.perPage,
-                  filters: JSON.stringify(_this9.finalFilters)
+                  limit: _this10.pagination.perPage,
+                  filters: JSON.stringify(_this10.finalFilters)
                 }
               });
             case 7:
               result = _context.sent;
-              itemsResult = _this9.model.query().withAll().get(); //let itemsResult = result.entities[this.model.entity];
+              itemsResult = _this10.model.query().withAll().get(); //let itemsResult = result.entities[this.model.entity];
               if (itemsResult) {
-                _this9.items = itemsResult;
+                _this10.items = itemsResult;
               }
-              console.debug("fetch page vuex ", itemsResult, page, _this9.items, result);
-              _this9.loading = false;
-              _this9.firstLoad = true;
+              console.debug("fetch page vuex ", itemsResult, page, _this10.items, result);
+              _this10.loading = false;
+              _this10.firstLoad = true;
             case 13:
             case "end":
               return _context.stop();
@@ -13334,7 +13360,7 @@ n(css, {});function normalizeComponent (
       }))();
     },
     fetchItems: function fetchItems() {
-      var _this10 = this;
+      var _this11 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var concat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       if (!this.ajax) {
@@ -13352,14 +13378,14 @@ n(css, {});function normalizeComponent (
           filters: JSON.stringify(this.finalFilters)
         }
       }).then(function (response) {
-        _this10.makePagination(response.data);
+        _this11.makePagination(response.data);
         var items = response.data.data;
-        if (_this10.grouped) {
+        if (_this11.grouped) {
           var itemswithgroup = [];
           var lastcomparevalue = null;
-          var compareattr = _this10.groupedAttribute;
-          var groupLabelPre = _this10.groupedLabelPre;
-          var groupLabelAfter = _this10.groupedLabelAfter;
+          var compareattr = _this11.groupedAttribute;
+          var groupLabelPre = _this11.groupedLabelPre;
+          var groupLabelAfter = _this11.groupedLabelAfter;
           items.forEach(function (item, key) {
             if (Array.isArray(item)) {
               itemswithgroup.push({
@@ -13381,30 +13407,30 @@ n(css, {});function normalizeComponent (
             }
           });
           if (concat) {
-            _this10.items = _this10.items.concat(itemswithgroup);
+            _this11.items = _this11.items.concat(itemswithgroup);
           } else {
-            _this10.items = itemswithgroup;
+            _this11.items = itemswithgroup;
           }
         } else {
           if (concat) {
-            _this10.items = _this10.items.concat(items);
+            _this11.items = _this11.items.concat(items);
           } else {
-            _this10.items = items;
+            _this11.items = items;
           }
         }
-        _this10.loading = false;
-        _this10.firstLoad = true;
-        _this10.$emit("afterFetch", {});
+        _this11.loading = false;
+        _this11.firstLoad = true;
+        _this11.$emit("afterFetch", {});
       }).catch(function (error) {
         //console.debug(error);
-        _this10.toastError(error);
-        _this10.loading = false;
-        _this10.firstLoad = true;
-        _this10.fetchError = true;
+        _this11.toastError(error);
+        _this11.loading = false;
+        _this11.firstLoad = true;
+        _this11.fetchError = true;
       });
     },
     removeItem: function removeItem(id, index) {
-      var _this11 = this;
+      var _this12 = this;
       this.$bvModal.msgBoxConfirm(this.messageRemoveConfirm, {
         size: "sm",
         buttonSize: "sm",
@@ -13414,15 +13440,15 @@ n(css, {});function normalizeComponent (
         centered: true
       }).then(function (value) {
         if (value) {
-          _this11.deleteItem(id, index);
+          _this12.deleteItem(id, index);
         }
       }).catch(function (error) {
-        _this11.toastError(error);
-        _this11.loading = false;
+        _this12.toastError(error);
+        _this12.loading = false;
       });
     },
     deleteItem: function deleteItem(id, index) {
-      var _this12 = this;
+      var _this13 = this;
       if (this.useVuexORM) {
         return this.deleteItemVuex(id, index);
       }
@@ -13431,17 +13457,17 @@ n(css, {});function normalizeComponent (
       }
       this.loading = true;
       axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(function (response) {
-        _this12.items.splice(index, 1);
-        _this12.toastSuccess("Elemento eliminado.");
-        _this12.$emit("itemDeleted", {});
-        _this12.loading = false;
+        _this13.items.splice(index, 1);
+        _this13.toastSuccess("Elemento eliminado.");
+        _this13.$emit("itemDeleted", {});
+        _this13.loading = false;
       }).catch(function (error) {
-        _this12.toastError(error);
-        _this12.loading = false;
+        _this13.toastError(error);
+        _this13.loading = false;
       });
     },
     deleteItemLocal: function deleteItemLocal(id, index) {
-      var _this13 = this;
+      var _this14 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var itemIndex;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -13449,24 +13475,24 @@ n(css, {});function normalizeComponent (
             case 0:
               if (id || index) {
                 if (id) {
-                  itemIndex = _this13.items.findIndex(function (item) {
-                    return item.id == _this13.item.id;
+                  itemIndex = _this14.items.findIndex(function (item) {
+                    return item.id == _this14.item.id;
                   });
                 } else {
                   itemIndex = index;
                 }
 
                 // Assuming this.items is an array
-                _this13.items.splice(itemIndex, 1);
-                _this13.item = null;
-                _this13.toastSuccess("Elemento Eliminado");
-                _this13.$emit("itemDeleted", {});
+                _this14.items.splice(itemIndex, 1);
+                _this14.item = null;
+                _this14.toastSuccess("Elemento Eliminado");
+                _this14.$emit("itemDeleted", {});
               } else {
                 // Handle the case where there's no item.id or item.index
                 console.error("Cannot delete item without ID or index");
                 // You might want to show an error message or handle it in a way that fits your application.
               }
-              _this13.loading = false;
+              _this14.loading = false;
             case 2:
             case "end":
               return _context2.stop();
@@ -13475,14 +13501,14 @@ n(css, {});function normalizeComponent (
       }))();
     },
     deleteItemVuex: function deleteItemVuex(id, index) {
-      var _this14 = this;
+      var _this15 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var result;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return _this14.model.api().delete('/' + id, {
+              return _this15.model.api().delete('/' + id, {
                 delete: 1
               });
             case 2:
@@ -13493,11 +13519,11 @@ n(css, {});function normalizeComponent (
                 _context3.next = 9;
                 break;
               }
-              _this14.toastError(result.response.data.error);
-              _this14.loading = false;
+              _this15.toastError(result.response.data.error);
+              _this15.loading = false;
               return _context3.abrupt("return");
             case 9:
-              _this14.toastSuccess("Elemento eliminado.");
+              _this15.toastSuccess("Elemento eliminado.");
             case 10:
             case "end":
               return _context3.stop();
@@ -13506,14 +13532,14 @@ n(css, {});function normalizeComponent (
       }))();
     },
     saveSort: function saveSort() {
-      var _this15 = this;
+      var _this16 = this;
       if (this.orderable) {
         this.loading = true;
         var order = [];
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: v[_this15.orderProp]
+            order: v[_this16.orderProp]
           });
         });
         if (!this.ajax) {
@@ -13523,18 +13549,18 @@ n(css, {});function normalizeComponent (
           order: order
         }).then(function (response) {
           response.data;
-          _this15.toastSuccess("Orden Actualizado");
-          if (_this15.refreshAfterSave) _this15.refresh();
-          _this15.loading = false;
+          _this16.toastSuccess("Orden Actualizado");
+          if (_this16.refreshAfterSave) _this16.refresh();
+          _this16.loading = false;
         }).catch(function (error) {
           //console.debug(error);
-          _this15.toastError(error);
-          _this15.loading = false;
+          _this16.toastError(error);
+          _this16.loading = false;
         });
       }
     },
     getArrayValue: function getArrayValue(value, displayProp) {
-      var _this16 = this;
+      var _this17 = this;
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
       if (!Array.isArray(value)) return "N/A";
       var values = [];
@@ -13551,7 +13577,7 @@ n(css, {});function normalizeComponent (
         return "";
       }
       values.forEach(function (val) {
-        valuesFinal.push(_this16.getStateValue(val, options));
+        valuesFinal.push(_this17.getStateValue(val, options));
       });
       return values.join(",");
     },
@@ -13573,22 +13599,22 @@ n(css, {});function normalizeComponent (
       return ops.join(", ");
     },
     saveItemVuex: function saveItemVuex() {
-      var _this17 = this;
+      var _this18 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var jsondata, result, create;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) switch (_context4.prev = _context4.next) {
             case 0:
-              console.debug("save item 1", _this17.item);
-              jsondata = _this17.item.$toJson();
-              console.debug("save item 2", _this17.item, jsondata);
+              console.debug("save item 1", _this18.item);
+              jsondata = _this18.item.$toJson();
+              console.debug("save item 2", _this18.item, jsondata);
               create = false;
-              if (!_this17.item.id) {
+              if (!_this18.item.id) {
                 _context4.next = 12;
                 break;
               }
               _context4.next = 8;
-              return _this17.model.api().put('/' + _this17.item.id, jsondata);
+              return _this18.model.api().put('/' + _this18.item.id, jsondata);
             case 8:
               result = _context4.sent;
               create = false;
@@ -13596,7 +13622,7 @@ n(css, {});function normalizeComponent (
               break;
             case 12:
               _context4.next = 14;
-              return _this17.model.api().post('', jsondata);
+              return _this18.model.api().post('', jsondata);
             case 14:
               result = _context4.sent;
               create = true;
@@ -13606,16 +13632,16 @@ n(css, {});function normalizeComponent (
                 _context4.next = 21;
                 break;
               }
-              _this17.toastError(result.response.data.error);
-              _this17.loading = false;
+              _this18.toastError(result.response.data.error);
+              _this18.loading = false;
               return _context4.abrupt("return");
             case 21:
               result.save();
-              if (_this17.refreshAfterSave) _this17.refresh();
-              _this17.loading = false;
-              _this17.toastSuccess("Elemento Modificado");
-              if (_this17.hideModalAfterSave || create && _this17.hideModalAfterCreate || !create && _this17.hideModalAfterUpdate) {
-                _this17.$bvModal.hide("modal-form-item-" + _this17.modelName);
+              if (_this18.refreshAfterSave) _this18.refresh();
+              _this18.loading = false;
+              _this18.toastSuccess("Elemento Modificado");
+              if (_this18.hideModalAfterSave || create && _this18.hideModalAfterCreate || !create && _this18.hideModalAfterUpdate) {
+                _this18.$bvModal.hide("modal-form-item-" + _this18.modelName);
               }
             case 26:
             case "end":
@@ -13625,36 +13651,36 @@ n(css, {});function normalizeComponent (
       }))();
     },
     saveItemLocal: function saveItemLocal() {
-      var _this18 = this;
+      var _this19 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         var itemSave, itemIndex;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
-              itemSave = JSON.parse(JSON.stringify(_this18.item));
-              if (_this18.item.id || _this18.item.index) {
-                if (_this18.item.id) {
-                  itemIndex = _this18.items.findIndex(function (item) {
-                    return item.id == _this18.item.id;
+              itemSave = JSON.parse(JSON.stringify(_this19.item));
+              if (_this19.item.id || _this19.item.index) {
+                if (_this19.item.id) {
+                  itemIndex = _this19.items.findIndex(function (item) {
+                    return item.id == _this19.item.id;
                   });
                 } else {
-                  itemIndex = _this18.items.findIndex(function (item) {
-                    return item.index == _this18.item.index;
+                  itemIndex = _this19.items.findIndex(function (item) {
+                    return item.index == _this19.item.index;
                   });
                 }
-                _this18.items[itemIndex] = itemSave;
-                if (_this18.hideModalAfterSave || _this18.hideModalAfterUpdate) {
-                  _this18.$bvModal.hide("modal-form-item-" + _this18.modelName);
+                _this19.items[itemIndex] = itemSave;
+                if (_this19.hideModalAfterSave || _this19.hideModalAfterUpdate) {
+                  _this19.$bvModal.hide("modal-form-item-" + _this19.modelName);
                 }
               } else {
-                itemSave.index = _this18.items.length + 1;
-                _this18.items.push(itemSave);
-                if (_this18.hideModalAfterSave || _this18.hideModalAfterCreate) {
-                  _this18.$bvModal.hide("modal-form-item-" + _this18.modelName);
+                itemSave.index = _this19.items.length + 1;
+                _this19.items.push(itemSave);
+                if (_this19.hideModalAfterSave || _this19.hideModalAfterCreate) {
+                  _this19.$bvModal.hide("modal-form-item-" + _this19.modelName);
                 }
               }
-              _this18.toastSuccess("Elemento Modificado");
-              _this18.loading = false;
+              _this19.toastSuccess("Elemento Modificado");
+              _this19.loading = false;
             case 5:
             case "end":
               return _context5.stop();
@@ -13663,7 +13689,7 @@ n(css, {});function normalizeComponent (
       }))();
     },
     loadOptions: function loadOptions() {
-      var _this19 = this;
+      var _this20 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         var i, column, options;
         return _regeneratorRuntime().wrap(function _callee6$(_context6) {
@@ -13671,11 +13697,11 @@ n(css, {});function normalizeComponent (
             case 0:
               i = 0;
             case 1:
-              if (!(i < _this19.columns.length)) {
+              if (!(i < _this20.columns.length)) {
                 _context6.next = 12;
                 break;
               }
-              column = _this19.columns[i];
+              column = _this20.columns[i];
               if (!(column.options instanceof Promise)) {
                 _context6.next = 9;
                 break;
@@ -13684,16 +13710,16 @@ n(css, {});function normalizeComponent (
               return column.options;
             case 6:
               options = _context6.sent;
-              _this19.$set(_this19.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
+              _this20.$set(_this20.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
                 options: options
               }));
-              console.debug("Options promise", _this19.columns);
+              console.debug("Options promise", _this20.columns);
             case 9:
               i++;
               _context6.next = 1;
               break;
             case 12:
-              _this19.optionsLoaded = true;
+              _this20.optionsLoaded = true;
             case 13:
             case "end":
               return _context6.stop();
@@ -13703,25 +13729,25 @@ n(css, {});function normalizeComponent (
     },
     saveItem: function saveItem() {
       var _arguments4 = arguments,
-        _this20 = this;
+        _this21 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
         var event, validation_result, validation_error_message, formData;
         return _regeneratorRuntime().wrap(function _callee7$(_context7) {
           while (1) switch (_context7.prev = _context7.next) {
             case 0:
               event = _arguments4.length > 0 && _arguments4[0] !== undefined ? _arguments4[0] : null;
-              _this20.loading = true;
-              if (!_this20.validate) {
+              _this21.loading = true;
+              if (!_this21.validate) {
                 _context7.next = 10;
                 break;
               }
               validation_result = true;
-              validation_error_message = _this20.messageDefaultValidationError;
+              validation_error_message = _this21.messageDefaultValidationError;
               if (validation_result) {
                 _context7.next = 8;
                 break;
               }
-              _this20.toastError(validation_error_message);
+              _this21.toastError(validation_error_message);
               return _context7.abrupt("return");
             case 8:
               _context7.next = 11;
@@ -13729,105 +13755,105 @@ n(css, {});function normalizeComponent (
             case 10:
               if (event) event.preventDefault();
             case 11:
-              if (!_this20.useVuexORM) {
+              if (!_this21.useVuexORM) {
                 _context7.next = 13;
                 break;
               }
-              return _context7.abrupt("return", _this20.saveItemVuex(event));
+              return _context7.abrupt("return", _this21.saveItemVuex(event));
             case 13:
-              if (_this20.ajax) {
+              if (_this21.ajax) {
                 _context7.next = 15;
                 break;
               }
-              return _context7.abrupt("return", _this20.saveItemLocal(event));
+              return _context7.abrupt("return", _this21.saveItemLocal(event));
             case 15:
-              if (_this20.item.id) {
-                axios.put(_this20.apiUrl + "/" + _this20.modelName + "/" + _this20.item.id, _this20.item).then(function (response) {
-                  if (_this20.hideModalAfterSave || _this20.hideModalAfterUpdate) {
-                    _this20.$bvModal.hide("modal-form-item-" + _this20.modelName);
+              if (_this21.item.id) {
+                axios.put(_this21.apiUrl + "/" + _this21.modelName + "/" + _this21.item.id, _this21.item).then(function (response) {
+                  if (_this21.hideModalAfterSave || _this21.hideModalAfterUpdate) {
+                    _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
                   }
                   var itemSv = response.data;
-                  var itemIndex = _this20.items.findIndex(function (item) {
-                    return item.id == _this20.item.id;
+                  var itemIndex = _this21.items.findIndex(function (item) {
+                    return item.id == _this21.item.id;
                   });
-                  _this20.items[itemIndex] = itemSv;
-                  _this20.item = itemSv;
-                  _this20.loading = false;
-                  if (_this20.refreshAfterSave) _this20.refresh();
-                  _this20.toastSuccess("Elemento Modificado");
-                  _this20.$emit("itemSaved", {
-                    item: _this20.item
+                  _this21.items[itemIndex] = itemSv;
+                  _this21.item = itemSv;
+                  _this21.loading = false;
+                  if (_this21.refreshAfterSave) _this21.refresh();
+                  _this21.toastSuccess("Elemento Modificado");
+                  _this21.$emit("itemSaved", {
+                    item: _this21.item
                   });
-                  _this20.$emit("itemUpdated", {
-                    item: _this20.item
+                  _this21.$emit("itemUpdated", {
+                    item: _this21.item
                   });
                 }).catch(function (error) {
-                  _this20.toastError(error);
-                  _this20.loading = false;
+                  _this21.toastError(error);
+                  _this21.loading = false;
                 });
               } else {
-                if (_this20.createMultipart) {
+                if (_this21.createMultipart) {
                   formData = new FormData();
-                  Object.keys(_this20.item).forEach(function (key) {
-                    if (_this20.item[key][0] && _this20.item[key][0].name) {
-                      var files = _this20.item[key];
+                  Object.keys(_this21.item).forEach(function (key) {
+                    if (_this21.item[key][0] && _this21.item[key][0].name) {
+                      var files = _this21.item[key];
                       for (var x = 0; x < files.length; x++) {
-                        formData.append(key + "[]", _this20.item[key][x], _this20.item[key][x].name);
+                        formData.append(key + "[]", _this21.item[key][x], _this21.item[key][x].name);
                       }
-                    } else formData.append(key, _this20.item[key]);
+                    } else formData.append(key, _this21.item[key]);
                   });
-                  axios.post(_this20.apiUrl + "/" + _this20.modelName, formData).then(function (response) {
-                    _this20.loading = false;
-                    if (_this20.hideModalAfterSave || _this20.hideModalAfterCreate) {
-                      _this20.$bvModal.hide("modal-form-item-" + _this20.modelName);
+                  axios.post(_this21.apiUrl + "/" + _this21.modelName, formData).then(function (response) {
+                    _this21.loading = false;
+                    if (_this21.hideModalAfterSave || _this21.hideModalAfterCreate) {
+                      _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this20.toastSuccess(response.data.message);
+                        _this21.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this20.items.push(itemSv);
-                    _this20.item = itemSv;
-                    if (_this20.refreshAfterSave) _this20.refresh();
-                    _this20.toastSuccess("Elemento Creado");
-                    _this20.$emit("itemSaved", {
-                      item: _this20.item
+                    _this21.items.push(itemSv);
+                    _this21.item = itemSv;
+                    if (_this21.refreshAfterSave) _this21.refresh();
+                    _this21.toastSuccess("Elemento Creado");
+                    _this21.$emit("itemSaved", {
+                      item: _this21.item
                     });
-                    _this20.$emit("itemCreated", {
-                      item: _this20.item
+                    _this21.$emit("itemCreated", {
+                      item: _this21.item
                     });
                   }).catch(function (error) {
-                    _this20.toastError(error);
-                    _this20.loading = false;
+                    _this21.toastError(error);
+                    _this21.loading = false;
                   });
                 } else {
-                  axios.post(_this20.apiUrl + "/" + _this20.modelName, _this20.item).then(function (response) {
-                    _this20.loading = false;
-                    if (_this20.hideModalAfterSave || _this20.hideModalAfterUpdate) {
-                      _this20.$bvModal.hide("modal-form-item-" + _this20.modelName);
+                  axios.post(_this21.apiUrl + "/" + _this21.modelName, _this21.item).then(function (response) {
+                    _this21.loading = false;
+                    if (_this21.hideModalAfterSave || _this21.hideModalAfterUpdate) {
+                      _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this20.toastSuccess(response.data.message);
+                        _this21.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this20.items.push(itemSv);
-                    _this20.item = itemSv;
-                    if (_this20.refreshAfterSave) _this20.refresh();
-                    _this20.toastSuccess("Elemento Creado");
-                    _this20.$emit("itemSaved", {
-                      item: _this20.item
+                    _this21.items.push(itemSv);
+                    _this21.item = itemSv;
+                    if (_this21.refreshAfterSave) _this21.refresh();
+                    _this21.toastSuccess("Elemento Creado");
+                    _this21.$emit("itemSaved", {
+                      item: _this21.item
                     });
-                    _this20.$emit("itemCreated", {
-                      item: _this20.item
+                    _this21.$emit("itemCreated", {
+                      item: _this21.item
                     });
                   }).catch(function (error) {
-                    _this20.toastError(error);
-                    _this20.loading = false;
+                    _this21.toastError(error);
+                    _this21.loading = false;
                   });
                 }
               }
@@ -13895,11 +13921,11 @@ n(css, {});function normalizeComponent (
       });
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this21 = this;
+      var _this22 = this;
       this.forceRecomputeCounter++;
       console.debug("Filters debug ", this.finalFilters, this.internalFilter, this.internalFilters, this.filter, this.filters);
       setTimeout(function () {
-        _this21.refresh();
+        _this22.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -14149,7 +14175,17 @@ var _sfc_render = function render() {
   }, [_vm._t("tableActions", function () {
     return [_vm._t("tableActionsPrepend", null, {
       "loading": _vm.loading
-    }), _vm.showCreateBtn ? _c('b-button', {
+    }), _vm.showPrincipalSortBtn ? _c('b-button', {
+      attrs: {
+        "variant": "success",
+        "disabled": _vm.loading
+      },
+      on: {
+        "click": function click($event) {
+          return _vm.togglePrincipalSort();
+        }
+      }
+    }, [_vm.principalSort ? _c('b-icon-sort-numeric-down') : _c('b-icon-sort-numeric-up')], 1) : _vm._e(), _vm.showCreateBtn ? _c('b-button', {
       attrs: {
         "variant": "success",
         "disabled": _vm.loading
@@ -14854,7 +14890,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "77a16873", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "a4bec9a9", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
