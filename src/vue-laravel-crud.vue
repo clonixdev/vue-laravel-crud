@@ -343,6 +343,12 @@ export default /*#__PURE__*/ {
       type: String,
       default: "id",
     },
+
+    bulkDelete: {
+      type: Boolean,
+      default: false,
+    },
+
   },
 
   mounted() {
@@ -853,8 +859,26 @@ export default /*#__PURE__*/ {
         });
     },
 
-
-
+    confirmBulkDelete(){
+      this.$bvModal
+        .msgBoxConfirm(this.messageRemoveConfirm, {
+          size: "sm",
+          buttonSize: "sm",
+          okVariant: "danger",
+          okTitle: this.messageRemove,
+          cancelTitle: "NO",
+          centered: true,
+        })
+        .then((value) => {
+          if (value) {
+            this.deleteItemBulk();
+          }
+        })
+        .catch((error) => {
+          this.toastError(error);
+          this.loading = false;
+        });
+    },
     deleteItemBulk(){
       if (this.useVuexORM) {
         return this.deleteItemBulkVuex();
@@ -1439,11 +1463,12 @@ export default /*#__PURE__*/ {
           <slot name="tableActions" v-bind:createItem="createItem" v-bind:toggleDisplayMode="toggleDisplayMode"
             v-bind:loading="loading">
             <slot name="tableActionsPrepend" v-bind:loading="loading"> </slot>
+
             <b-button variant="info" v-if="showPrincipalSortBtn" @click="togglePrincipalSort()" :disabled="loading">
               <b-icon-sort-numeric-down v-if="principalSort"></b-icon-sort-numeric-down>
               <b-icon-sort-numeric-up v-else></b-icon-sort-numeric-up>
             </b-button>
-            
+            <b-button variant="danger" @click="confirmBulkDelete()" v-if="bulkDelete"><b-icon-trash></b-icon-trash></b-button>
             <b-button variant="success" v-if="showCreateBtn" @click="createItem()" :disabled="loading">
               <b-icon-plus></b-icon-plus>{{ messageNew }}
             </b-button>

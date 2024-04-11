@@ -12532,7 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-1a50c07c]:last-child,\ntr td[data-v-1a50c07c]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-1a50c07c] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-1a50c07c] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-1a50c07c] .crud-title[data-v-1a50c07c] {\n    margin: 0; }\n  .crud-header[data-v-1a50c07c] .crud-search[data-v-1a50c07c] {\n    max-width: 15rem; }\n    .crud-header[data-v-1a50c07c] .crud-search[data-v-1a50c07c] .btn[data-v-1a50c07c] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-1a50c07c] .crud-search[data-v-1a50c07c] .btn[data-v-1a50c07c].open[data-v-1a50c07c] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-1a50c07c] .table-options[data-v-1a50c07c] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-1a50c07c] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-1a50c07c] {\n    table-layout: auto; }\n    .table[data-v-1a50c07c] tbody[data-v-1a50c07c] td[data-v-1a50c07c] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-1a50c07c] tbody[data-v-1a50c07c] td[data-v-1a50c07c]::-webkit-scrollbar {\n      display: none; } }\n";
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-d24c9f33]:last-child,\ntr td[data-v-d24c9f33]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-d24c9f33] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-d24c9f33] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-d24c9f33] .crud-title[data-v-d24c9f33] {\n    margin: 0; }\n  .crud-header[data-v-d24c9f33] .crud-search[data-v-d24c9f33] {\n    max-width: 15rem; }\n    .crud-header[data-v-d24c9f33] .crud-search[data-v-d24c9f33] .btn[data-v-d24c9f33] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-d24c9f33] .crud-search[data-v-d24c9f33] .btn[data-v-d24c9f33].open[data-v-d24c9f33] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-d24c9f33] .table-options[data-v-d24c9f33] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-d24c9f33] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-d24c9f33] {\n    table-layout: auto; }\n    .table[data-v-d24c9f33] tbody[data-v-d24c9f33] td[data-v-d24c9f33] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-d24c9f33] tbody[data-v-d24c9f33] td[data-v-d24c9f33]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -12950,6 +12950,10 @@ n(css, {});function normalizeComponent (
     principalSortColumn: {
       type: String,
       default: "id"
+    },
+    bulkDelete: {
+      type: Boolean,
+      default: false
     }
   },
   mounted: function mounted() {
@@ -13448,8 +13452,26 @@ n(css, {});function normalizeComponent (
         _this12.loading = false;
       });
     },
-    deleteItemBulk: function deleteItemBulk() {
+    confirmBulkDelete: function confirmBulkDelete() {
       var _this13 = this;
+      this.$bvModal.msgBoxConfirm(this.messageRemoveConfirm, {
+        size: "sm",
+        buttonSize: "sm",
+        okVariant: "danger",
+        okTitle: this.messageRemove,
+        cancelTitle: "NO",
+        centered: true
+      }).then(function (value) {
+        if (value) {
+          _this13.deleteItemBulk();
+        }
+      }).catch(function (error) {
+        _this13.toastError(error);
+        _this13.loading = false;
+      });
+    },
+    deleteItemBulk: function deleteItemBulk() {
+      var _this14 = this;
       if (this.useVuexORM) {
         return this.deleteItemBulkVuex();
       }
@@ -13463,34 +13485,34 @@ n(css, {});function normalizeComponent (
       axios.delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {
         ids: ids
       }).then(function (response) {
-        _this13.items = _this13.items.filter(function (it) {
+        _this14.items = _this14.items.filter(function (it) {
           return ids.includes(it.id);
         });
-        _this13.toastSuccess("Elemento/s eliminado.");
-        _this13.$emit("itemDeleted", {});
-        _this13.loading = false;
+        _this14.toastSuccess("Elemento/s eliminado.");
+        _this14.$emit("itemDeleted", {});
+        _this14.loading = false;
       }).catch(function (error) {
-        _this13.toastError(error);
-        _this13.loading = false;
+        _this14.toastError(error);
+        _this14.loading = false;
       });
     },
     deleteItemBulkLocal: function deleteItemBulkLocal() {
-      var _this14 = this;
+      var _this15 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var ids;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              ids = _this14.selectedItems.map(function (it) {
+              ids = _this15.selectedItems.map(function (it) {
                 return it.id;
               });
-              _this14.items = _this14.items.filter(function (it) {
+              _this15.items = _this15.items.filter(function (it) {
                 return ids.includes(it.id);
               });
-              _this14.item = null;
-              _this14.toastSuccess("Elemento Eliminado");
-              _this14.$emit("itemDeleted", {});
-              _this14.loading = false;
+              _this15.item = null;
+              _this15.toastSuccess("Elemento Eliminado");
+              _this15.$emit("itemDeleted", {});
+              _this15.loading = false;
             case 6:
             case "end":
               return _context2.stop();
@@ -13524,7 +13546,7 @@ n(css, {});function normalizeComponent (
       
             this.toastSuccess("Elemento eliminado.");*/,
     deleteItem: function deleteItem(id, index) {
-      var _this15 = this;
+      var _this16 = this;
       if (this.useVuexORM) {
         return this.deleteItemVuex(id, index);
       }
@@ -13533,17 +13555,17 @@ n(css, {});function normalizeComponent (
       }
       this.loading = true;
       axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(function (response) {
-        _this15.items.splice(index, 1);
-        _this15.toastSuccess("Elemento eliminado.");
-        _this15.$emit("itemDeleted", {});
-        _this15.loading = false;
+        _this16.items.splice(index, 1);
+        _this16.toastSuccess("Elemento eliminado.");
+        _this16.$emit("itemDeleted", {});
+        _this16.loading = false;
       }).catch(function (error) {
-        _this15.toastError(error);
-        _this15.loading = false;
+        _this16.toastError(error);
+        _this16.loading = false;
       });
     },
     deleteItemLocal: function deleteItemLocal(id, index) {
-      var _this16 = this;
+      var _this17 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var itemIndex;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
@@ -13551,24 +13573,24 @@ n(css, {});function normalizeComponent (
             case 0:
               if (id || index) {
                 if (id) {
-                  itemIndex = _this16.items.findIndex(function (item) {
-                    return item.id == _this16.item.id;
+                  itemIndex = _this17.items.findIndex(function (item) {
+                    return item.id == _this17.item.id;
                   });
                 } else {
                   itemIndex = index;
                 }
 
                 // Assuming this.items is an array
-                _this16.items.splice(itemIndex, 1);
-                _this16.item = null;
-                _this16.toastSuccess("Elemento Eliminado");
-                _this16.$emit("itemDeleted", {});
+                _this17.items.splice(itemIndex, 1);
+                _this17.item = null;
+                _this17.toastSuccess("Elemento Eliminado");
+                _this17.$emit("itemDeleted", {});
               } else {
                 // Handle the case where there's no item.id or item.index
                 console.error("Cannot delete item without ID or index");
                 // You might want to show an error message or handle it in a way that fits your application.
               }
-              _this16.loading = false;
+              _this17.loading = false;
             case 2:
             case "end":
               return _context4.stop();
@@ -13577,14 +13599,14 @@ n(css, {});function normalizeComponent (
       }))();
     },
     deleteItemVuex: function deleteItemVuex(id, index) {
-      var _this17 = this;
+      var _this18 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         var result;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return _this17.model.api().delete('/' + id, {
+              return _this18.model.api().delete('/' + id, {
                 delete: 1
               });
             case 2:
@@ -13595,11 +13617,11 @@ n(css, {});function normalizeComponent (
                 _context5.next = 9;
                 break;
               }
-              _this17.toastError(result.response.data.error);
-              _this17.loading = false;
+              _this18.toastError(result.response.data.error);
+              _this18.loading = false;
               return _context5.abrupt("return");
             case 9:
-              _this17.toastSuccess("Elemento eliminado.");
+              _this18.toastSuccess("Elemento eliminado.");
             case 10:
             case "end":
               return _context5.stop();
@@ -13608,14 +13630,14 @@ n(css, {});function normalizeComponent (
       }))();
     },
     saveSort: function saveSort() {
-      var _this18 = this;
+      var _this19 = this;
       if (this.orderable) {
         this.loading = true;
         var order = [];
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: v[_this18.orderProp]
+            order: v[_this19.orderProp]
           });
         });
         if (!this.ajax) {
@@ -13625,18 +13647,18 @@ n(css, {});function normalizeComponent (
           order: order
         }).then(function (response) {
           response.data;
-          _this18.toastSuccess("Orden Actualizado");
-          if (_this18.refreshAfterSave) _this18.refresh();
-          _this18.loading = false;
+          _this19.toastSuccess("Orden Actualizado");
+          if (_this19.refreshAfterSave) _this19.refresh();
+          _this19.loading = false;
         }).catch(function (error) {
           //console.debug(error);
-          _this18.toastError(error);
-          _this18.loading = false;
+          _this19.toastError(error);
+          _this19.loading = false;
         });
       }
     },
     getArrayValue: function getArrayValue(value, displayProp) {
-      var _this19 = this;
+      var _this20 = this;
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
       if (!Array.isArray(value)) return "N/A";
       var values = [];
@@ -13653,7 +13675,7 @@ n(css, {});function normalizeComponent (
         return "";
       }
       values.forEach(function (val) {
-        valuesFinal.push(_this19.getStateValue(val, options));
+        valuesFinal.push(_this20.getStateValue(val, options));
       });
       return values.join(",");
     },
@@ -13675,22 +13697,22 @@ n(css, {});function normalizeComponent (
       return ops.join(", ");
     },
     saveItemVuex: function saveItemVuex() {
-      var _this20 = this;
+      var _this21 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         var jsondata, result, create;
         return _regeneratorRuntime().wrap(function _callee6$(_context6) {
           while (1) switch (_context6.prev = _context6.next) {
             case 0:
-              console.debug("save item 1", _this20.item);
-              jsondata = _this20.item.$toJson();
-              console.debug("save item 2", _this20.item, jsondata);
+              console.debug("save item 1", _this21.item);
+              jsondata = _this21.item.$toJson();
+              console.debug("save item 2", _this21.item, jsondata);
               create = false;
-              if (!_this20.item.id) {
+              if (!_this21.item.id) {
                 _context6.next = 12;
                 break;
               }
               _context6.next = 8;
-              return _this20.model.api().put('/' + _this20.item.id, jsondata);
+              return _this21.model.api().put('/' + _this21.item.id, jsondata);
             case 8:
               result = _context6.sent;
               create = false;
@@ -13698,7 +13720,7 @@ n(css, {});function normalizeComponent (
               break;
             case 12:
               _context6.next = 14;
-              return _this20.model.api().post('', jsondata);
+              return _this21.model.api().post('', jsondata);
             case 14:
               result = _context6.sent;
               create = true;
@@ -13708,16 +13730,16 @@ n(css, {});function normalizeComponent (
                 _context6.next = 21;
                 break;
               }
-              _this20.toastError(result.response.data.error);
-              _this20.loading = false;
+              _this21.toastError(result.response.data.error);
+              _this21.loading = false;
               return _context6.abrupt("return");
             case 21:
               result.save();
-              if (_this20.refreshAfterSave) _this20.refresh();
-              _this20.loading = false;
-              _this20.toastSuccess("Elemento Modificado");
-              if (_this20.hideModalAfterSave || create && _this20.hideModalAfterCreate || !create && _this20.hideModalAfterUpdate) {
-                _this20.$bvModal.hide("modal-form-item-" + _this20.modelName);
+              if (_this21.refreshAfterSave) _this21.refresh();
+              _this21.loading = false;
+              _this21.toastSuccess("Elemento Modificado");
+              if (_this21.hideModalAfterSave || create && _this21.hideModalAfterCreate || !create && _this21.hideModalAfterUpdate) {
+                _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
               }
             case 26:
             case "end":
@@ -13727,36 +13749,36 @@ n(css, {});function normalizeComponent (
       }))();
     },
     saveItemLocal: function saveItemLocal() {
-      var _this21 = this;
+      var _this22 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
         var itemSave, itemIndex;
         return _regeneratorRuntime().wrap(function _callee7$(_context7) {
           while (1) switch (_context7.prev = _context7.next) {
             case 0:
-              itemSave = JSON.parse(JSON.stringify(_this21.item));
-              if (_this21.item.id || _this21.item.index) {
-                if (_this21.item.id) {
-                  itemIndex = _this21.items.findIndex(function (item) {
-                    return item.id == _this21.item.id;
+              itemSave = JSON.parse(JSON.stringify(_this22.item));
+              if (_this22.item.id || _this22.item.index) {
+                if (_this22.item.id) {
+                  itemIndex = _this22.items.findIndex(function (item) {
+                    return item.id == _this22.item.id;
                   });
                 } else {
-                  itemIndex = _this21.items.findIndex(function (item) {
-                    return item.index == _this21.item.index;
+                  itemIndex = _this22.items.findIndex(function (item) {
+                    return item.index == _this22.item.index;
                   });
                 }
-                _this21.items[itemIndex] = itemSave;
-                if (_this21.hideModalAfterSave || _this21.hideModalAfterUpdate) {
-                  _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
+                _this22.items[itemIndex] = itemSave;
+                if (_this22.hideModalAfterSave || _this22.hideModalAfterUpdate) {
+                  _this22.$bvModal.hide("modal-form-item-" + _this22.modelName);
                 }
               } else {
-                itemSave.index = _this21.items.length + 1;
-                _this21.items.push(itemSave);
-                if (_this21.hideModalAfterSave || _this21.hideModalAfterCreate) {
-                  _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
+                itemSave.index = _this22.items.length + 1;
+                _this22.items.push(itemSave);
+                if (_this22.hideModalAfterSave || _this22.hideModalAfterCreate) {
+                  _this22.$bvModal.hide("modal-form-item-" + _this22.modelName);
                 }
               }
-              _this21.toastSuccess("Elemento Modificado");
-              _this21.loading = false;
+              _this22.toastSuccess("Elemento Modificado");
+              _this22.loading = false;
             case 5:
             case "end":
               return _context7.stop();
@@ -13765,7 +13787,7 @@ n(css, {});function normalizeComponent (
       }))();
     },
     loadOptions: function loadOptions() {
-      var _this22 = this;
+      var _this23 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
         var i, column, options;
         return _regeneratorRuntime().wrap(function _callee8$(_context8) {
@@ -13773,11 +13795,11 @@ n(css, {});function normalizeComponent (
             case 0:
               i = 0;
             case 1:
-              if (!(i < _this22.columns.length)) {
+              if (!(i < _this23.columns.length)) {
                 _context8.next = 12;
                 break;
               }
-              column = _this22.columns[i];
+              column = _this23.columns[i];
               if (!(column.options instanceof Promise)) {
                 _context8.next = 9;
                 break;
@@ -13786,16 +13808,16 @@ n(css, {});function normalizeComponent (
               return column.options;
             case 6:
               options = _context8.sent;
-              _this22.$set(_this22.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
+              _this23.$set(_this23.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
                 options: options
               }));
-              console.debug("Options promise", _this22.columns);
+              console.debug("Options promise", _this23.columns);
             case 9:
               i++;
               _context8.next = 1;
               break;
             case 12:
-              _this22.optionsLoaded = true;
+              _this23.optionsLoaded = true;
             case 13:
             case "end":
               return _context8.stop();
@@ -13805,25 +13827,25 @@ n(css, {});function normalizeComponent (
     },
     saveItem: function saveItem() {
       var _arguments4 = arguments,
-        _this23 = this;
+        _this24 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
         var event, validation_result, validation_error_message, formData;
         return _regeneratorRuntime().wrap(function _callee9$(_context9) {
           while (1) switch (_context9.prev = _context9.next) {
             case 0:
               event = _arguments4.length > 0 && _arguments4[0] !== undefined ? _arguments4[0] : null;
-              _this23.loading = true;
-              if (!_this23.validate) {
+              _this24.loading = true;
+              if (!_this24.validate) {
                 _context9.next = 10;
                 break;
               }
               validation_result = true;
-              validation_error_message = _this23.messageDefaultValidationError;
+              validation_error_message = _this24.messageDefaultValidationError;
               if (validation_result) {
                 _context9.next = 8;
                 break;
               }
-              _this23.toastError(validation_error_message);
+              _this24.toastError(validation_error_message);
               return _context9.abrupt("return");
             case 8:
               _context9.next = 11;
@@ -13831,105 +13853,105 @@ n(css, {});function normalizeComponent (
             case 10:
               if (event) event.preventDefault();
             case 11:
-              if (!_this23.useVuexORM) {
+              if (!_this24.useVuexORM) {
                 _context9.next = 13;
                 break;
               }
-              return _context9.abrupt("return", _this23.saveItemVuex(event));
+              return _context9.abrupt("return", _this24.saveItemVuex(event));
             case 13:
-              if (_this23.ajax) {
+              if (_this24.ajax) {
                 _context9.next = 15;
                 break;
               }
-              return _context9.abrupt("return", _this23.saveItemLocal(event));
+              return _context9.abrupt("return", _this24.saveItemLocal(event));
             case 15:
-              if (_this23.item.id) {
-                axios.put(_this23.apiUrl + "/" + _this23.modelName + "/" + _this23.item.id, _this23.item).then(function (response) {
-                  if (_this23.hideModalAfterSave || _this23.hideModalAfterUpdate) {
-                    _this23.$bvModal.hide("modal-form-item-" + _this23.modelName);
+              if (_this24.item.id) {
+                axios.put(_this24.apiUrl + "/" + _this24.modelName + "/" + _this24.item.id, _this24.item).then(function (response) {
+                  if (_this24.hideModalAfterSave || _this24.hideModalAfterUpdate) {
+                    _this24.$bvModal.hide("modal-form-item-" + _this24.modelName);
                   }
                   var itemSv = response.data;
-                  var itemIndex = _this23.items.findIndex(function (item) {
-                    return item.id == _this23.item.id;
+                  var itemIndex = _this24.items.findIndex(function (item) {
+                    return item.id == _this24.item.id;
                   });
-                  _this23.items[itemIndex] = itemSv;
-                  _this23.item = itemSv;
-                  _this23.loading = false;
-                  if (_this23.refreshAfterSave) _this23.refresh();
-                  _this23.toastSuccess("Elemento Modificado");
-                  _this23.$emit("itemSaved", {
-                    item: _this23.item
+                  _this24.items[itemIndex] = itemSv;
+                  _this24.item = itemSv;
+                  _this24.loading = false;
+                  if (_this24.refreshAfterSave) _this24.refresh();
+                  _this24.toastSuccess("Elemento Modificado");
+                  _this24.$emit("itemSaved", {
+                    item: _this24.item
                   });
-                  _this23.$emit("itemUpdated", {
-                    item: _this23.item
+                  _this24.$emit("itemUpdated", {
+                    item: _this24.item
                   });
                 }).catch(function (error) {
-                  _this23.toastError(error);
-                  _this23.loading = false;
+                  _this24.toastError(error);
+                  _this24.loading = false;
                 });
               } else {
-                if (_this23.createMultipart) {
+                if (_this24.createMultipart) {
                   formData = new FormData();
-                  Object.keys(_this23.item).forEach(function (key) {
-                    if (_this23.item[key][0] && _this23.item[key][0].name) {
-                      var files = _this23.item[key];
+                  Object.keys(_this24.item).forEach(function (key) {
+                    if (_this24.item[key][0] && _this24.item[key][0].name) {
+                      var files = _this24.item[key];
                       for (var x = 0; x < files.length; x++) {
-                        formData.append(key + "[]", _this23.item[key][x], _this23.item[key][x].name);
+                        formData.append(key + "[]", _this24.item[key][x], _this24.item[key][x].name);
                       }
-                    } else formData.append(key, _this23.item[key]);
+                    } else formData.append(key, _this24.item[key]);
                   });
-                  axios.post(_this23.apiUrl + "/" + _this23.modelName, formData).then(function (response) {
-                    _this23.loading = false;
-                    if (_this23.hideModalAfterSave || _this23.hideModalAfterCreate) {
-                      _this23.$bvModal.hide("modal-form-item-" + _this23.modelName);
+                  axios.post(_this24.apiUrl + "/" + _this24.modelName, formData).then(function (response) {
+                    _this24.loading = false;
+                    if (_this24.hideModalAfterSave || _this24.hideModalAfterCreate) {
+                      _this24.$bvModal.hide("modal-form-item-" + _this24.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this23.toastSuccess(response.data.message);
+                        _this24.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this23.items.push(itemSv);
-                    _this23.item = itemSv;
-                    if (_this23.refreshAfterSave) _this23.refresh();
-                    _this23.toastSuccess("Elemento Creado");
-                    _this23.$emit("itemSaved", {
-                      item: _this23.item
+                    _this24.items.push(itemSv);
+                    _this24.item = itemSv;
+                    if (_this24.refreshAfterSave) _this24.refresh();
+                    _this24.toastSuccess("Elemento Creado");
+                    _this24.$emit("itemSaved", {
+                      item: _this24.item
                     });
-                    _this23.$emit("itemCreated", {
-                      item: _this23.item
+                    _this24.$emit("itemCreated", {
+                      item: _this24.item
                     });
                   }).catch(function (error) {
-                    _this23.toastError(error);
-                    _this23.loading = false;
+                    _this24.toastError(error);
+                    _this24.loading = false;
                   });
                 } else {
-                  axios.post(_this23.apiUrl + "/" + _this23.modelName, _this23.item).then(function (response) {
-                    _this23.loading = false;
-                    if (_this23.hideModalAfterSave || _this23.hideModalAfterUpdate) {
-                      _this23.$bvModal.hide("modal-form-item-" + _this23.modelName);
+                  axios.post(_this24.apiUrl + "/" + _this24.modelName, _this24.item).then(function (response) {
+                    _this24.loading = false;
+                    if (_this24.hideModalAfterSave || _this24.hideModalAfterUpdate) {
+                      _this24.$bvModal.hide("modal-form-item-" + _this24.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this23.toastSuccess(response.data.message);
+                        _this24.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this23.items.push(itemSv);
-                    _this23.item = itemSv;
-                    if (_this23.refreshAfterSave) _this23.refresh();
-                    _this23.toastSuccess("Elemento Creado");
-                    _this23.$emit("itemSaved", {
-                      item: _this23.item
+                    _this24.items.push(itemSv);
+                    _this24.item = itemSv;
+                    if (_this24.refreshAfterSave) _this24.refresh();
+                    _this24.toastSuccess("Elemento Creado");
+                    _this24.$emit("itemSaved", {
+                      item: _this24.item
                     });
-                    _this23.$emit("itemCreated", {
-                      item: _this23.item
+                    _this24.$emit("itemCreated", {
+                      item: _this24.item
                     });
                   }).catch(function (error) {
-                    _this23.toastError(error);
-                    _this23.loading = false;
+                    _this24.toastError(error);
+                    _this24.loading = false;
                   });
                 }
               }
@@ -13997,11 +14019,11 @@ n(css, {});function normalizeComponent (
       });
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this24 = this;
+      var _this25 = this;
       this.forceRecomputeCounter++;
       console.debug("Filters debug ", this.finalFilters, this.internalFilter, this.internalFilters, this.filter, this.filters);
       setTimeout(function () {
-        _this24.refresh();
+        _this25.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -14261,7 +14283,16 @@ var _sfc_render = function render() {
           return _vm.togglePrincipalSort();
         }
       }
-    }, [_vm.principalSort ? _c('b-icon-sort-numeric-down') : _c('b-icon-sort-numeric-up')], 1) : _vm._e(), _vm.showCreateBtn ? _c('b-button', {
+    }, [_vm.principalSort ? _c('b-icon-sort-numeric-down') : _c('b-icon-sort-numeric-up')], 1) : _vm._e(), _vm.bulkDelete ? _c('b-button', {
+      attrs: {
+        "variant": "danger"
+      },
+      on: {
+        "click": function click($event) {
+          return _vm.confirmBulkDelete();
+        }
+      }
+    }, [_c('b-icon-trash')], 1) : _vm._e(), _vm.showCreateBtn ? _c('b-button', {
       attrs: {
         "variant": "success",
         "disabled": _vm.loading
@@ -14972,7 +15003,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "1a50c07c", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "d24c9f33", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
