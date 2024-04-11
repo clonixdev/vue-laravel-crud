@@ -852,6 +852,60 @@ export default /*#__PURE__*/ {
           this.loading = false;
         });
     },
+
+
+
+    deleteItemBulk(){
+      if (this.useVuexORM) {
+        return this.deleteItemBulkVuex();
+      }
+
+      if (!this.ajax) {
+        return this.deleteItemBulkLocal();
+      }
+
+
+      let ids = this.selectedItems.map(it => it.id);
+
+      this.loading = true;
+      axios
+        .delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {ids: ids} )
+        .then((response) => {
+          this.items = this.items.filter(it => ids.includes(it.id));
+          this.toastSuccess("Elemento/s eliminado.");
+          this.$emit("itemDeleted", {});
+          this.loading = false;
+        })
+        .catch((error) => {
+          this.toastError(error);
+          this.loading = false;
+        });
+    },
+    async deleteItemBulkLocal() {
+      let ids = this.selectedItems.map(it => it.id);
+      this.items = this.items.filter(it => ids.includes(it.id));
+      this.item = null;
+      this.toastSuccess("Elemento Eliminado");
+      this.$emit("itemDeleted", {});
+      this.loading = false;
+    },
+    async deleteItemBulkVuex() {
+/*
+      let result = await this.model.api().delete('/' + id, {
+        delete: 1
+      });
+
+      console.debug("delete item vuex", result);
+      let responseStatus = result.response.status;
+
+      if (result.response.data.error) {
+        this.toastError(result.response.data.error);
+        this.loading = false;
+        return;
+      }
+
+      this.toastSuccess("Elemento eliminado.");*/
+    },
     deleteItem(id, index) {
 
       if (this.useVuexORM) {

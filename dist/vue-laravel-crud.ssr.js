@@ -12532,7 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-6dad4180]:last-child,\ntr td[data-v-6dad4180]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-6dad4180] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-6dad4180] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-6dad4180] .crud-title[data-v-6dad4180] {\n    margin: 0; }\n  .crud-header[data-v-6dad4180] .crud-search[data-v-6dad4180] {\n    max-width: 15rem; }\n    .crud-header[data-v-6dad4180] .crud-search[data-v-6dad4180] .btn[data-v-6dad4180] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-6dad4180] .crud-search[data-v-6dad4180] .btn[data-v-6dad4180].open[data-v-6dad4180] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-6dad4180] .table-options[data-v-6dad4180] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-6dad4180] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-6dad4180] {\n    table-layout: auto; }\n    .table[data-v-6dad4180] tbody[data-v-6dad4180] td[data-v-6dad4180] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-6dad4180] tbody[data-v-6dad4180] td[data-v-6dad4180]::-webkit-scrollbar {\n      display: none; } }\n";
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-1a50c07c]:last-child,\ntr td[data-v-1a50c07c]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-1a50c07c] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-1a50c07c] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-1a50c07c] .crud-title[data-v-1a50c07c] {\n    margin: 0; }\n  .crud-header[data-v-1a50c07c] .crud-search[data-v-1a50c07c] {\n    max-width: 15rem; }\n    .crud-header[data-v-1a50c07c] .crud-search[data-v-1a50c07c] .btn[data-v-1a50c07c] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-1a50c07c] .crud-search[data-v-1a50c07c] .btn[data-v-1a50c07c].open[data-v-1a50c07c] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-1a50c07c] .table-options[data-v-1a50c07c] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-1a50c07c] {\n  position: relative;\n  top: -15px; }\n\n@media (min-width: 992px) {\n  .table[data-v-1a50c07c] {\n    table-layout: auto; }\n    .table[data-v-1a50c07c] tbody[data-v-1a50c07c] td[data-v-1a50c07c] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-1a50c07c] tbody[data-v-1a50c07c] td[data-v-1a50c07c]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -13448,8 +13448,83 @@ n(css, {});function normalizeComponent (
         _this12.loading = false;
       });
     },
-    deleteItem: function deleteItem(id, index) {
+    deleteItemBulk: function deleteItemBulk() {
       var _this13 = this;
+      if (this.useVuexORM) {
+        return this.deleteItemBulkVuex();
+      }
+      if (!this.ajax) {
+        return this.deleteItemBulkLocal();
+      }
+      var ids = this.selectedItems.map(function (it) {
+        return it.id;
+      });
+      this.loading = true;
+      axios.delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {
+        ids: ids
+      }).then(function (response) {
+        _this13.items = _this13.items.filter(function (it) {
+          return ids.includes(it.id);
+        });
+        _this13.toastSuccess("Elemento/s eliminado.");
+        _this13.$emit("itemDeleted", {});
+        _this13.loading = false;
+      }).catch(function (error) {
+        _this13.toastError(error);
+        _this13.loading = false;
+      });
+    },
+    deleteItemBulkLocal: function deleteItemBulkLocal() {
+      var _this14 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var ids;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              ids = _this14.selectedItems.map(function (it) {
+                return it.id;
+              });
+              _this14.items = _this14.items.filter(function (it) {
+                return ids.includes(it.id);
+              });
+              _this14.item = null;
+              _this14.toastSuccess("Elemento Eliminado");
+              _this14.$emit("itemDeleted", {});
+              _this14.loading = false;
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2);
+      }))();
+    },
+    deleteItemBulkVuex: function deleteItemBulkVuex() {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3);
+      }))();
+    } /*
+            let result = await this.model.api().delete('/' + id, {
+              delete: 1
+            });
+      
+            console.debug("delete item vuex", result);
+            let responseStatus = result.response.status;
+      
+            if (result.response.data.error) {
+              this.toastError(result.response.data.error);
+              this.loading = false;
+              return;
+            }
+      
+            this.toastSuccess("Elemento eliminado.");*/,
+    deleteItem: function deleteItem(id, index) {
+      var _this15 = this;
       if (this.useVuexORM) {
         return this.deleteItemVuex(id, index);
       }
@@ -13458,89 +13533,89 @@ n(css, {});function normalizeComponent (
       }
       this.loading = true;
       axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(function (response) {
-        _this13.items.splice(index, 1);
-        _this13.toastSuccess("Elemento eliminado.");
-        _this13.$emit("itemDeleted", {});
-        _this13.loading = false;
+        _this15.items.splice(index, 1);
+        _this15.toastSuccess("Elemento eliminado.");
+        _this15.$emit("itemDeleted", {});
+        _this15.loading = false;
       }).catch(function (error) {
-        _this13.toastError(error);
-        _this13.loading = false;
+        _this15.toastError(error);
+        _this15.loading = false;
       });
     },
     deleteItemLocal: function deleteItemLocal(id, index) {
-      var _this14 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var _this16 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var itemIndex;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
             case 0:
               if (id || index) {
                 if (id) {
-                  itemIndex = _this14.items.findIndex(function (item) {
-                    return item.id == _this14.item.id;
+                  itemIndex = _this16.items.findIndex(function (item) {
+                    return item.id == _this16.item.id;
                   });
                 } else {
                   itemIndex = index;
                 }
 
                 // Assuming this.items is an array
-                _this14.items.splice(itemIndex, 1);
-                _this14.item = null;
-                _this14.toastSuccess("Elemento Eliminado");
-                _this14.$emit("itemDeleted", {});
+                _this16.items.splice(itemIndex, 1);
+                _this16.item = null;
+                _this16.toastSuccess("Elemento Eliminado");
+                _this16.$emit("itemDeleted", {});
               } else {
                 // Handle the case where there's no item.id or item.index
                 console.error("Cannot delete item without ID or index");
                 // You might want to show an error message or handle it in a way that fits your application.
               }
-              _this14.loading = false;
+              _this16.loading = false;
             case 2:
             case "end":
-              return _context2.stop();
+              return _context4.stop();
           }
-        }, _callee2);
+        }, _callee4);
       }))();
     },
     deleteItemVuex: function deleteItemVuex(id, index) {
-      var _this15 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var _this17 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         var result;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
             case 0:
-              _context3.next = 2;
-              return _this15.model.api().delete('/' + id, {
+              _context5.next = 2;
+              return _this17.model.api().delete('/' + id, {
                 delete: 1
               });
             case 2:
-              result = _context3.sent;
+              result = _context5.sent;
               console.debug("delete item vuex", result);
               result.response.status;
               if (!result.response.data.error) {
-                _context3.next = 9;
+                _context5.next = 9;
                 break;
               }
-              _this15.toastError(result.response.data.error);
-              _this15.loading = false;
-              return _context3.abrupt("return");
+              _this17.toastError(result.response.data.error);
+              _this17.loading = false;
+              return _context5.abrupt("return");
             case 9:
-              _this15.toastSuccess("Elemento eliminado.");
+              _this17.toastSuccess("Elemento eliminado.");
             case 10:
             case "end":
-              return _context3.stop();
+              return _context5.stop();
           }
-        }, _callee3);
+        }, _callee5);
       }))();
     },
     saveSort: function saveSort() {
-      var _this16 = this;
+      var _this18 = this;
       if (this.orderable) {
         this.loading = true;
         var order = [];
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: v[_this16.orderProp]
+            order: v[_this18.orderProp]
           });
         });
         if (!this.ajax) {
@@ -13550,18 +13625,18 @@ n(css, {});function normalizeComponent (
           order: order
         }).then(function (response) {
           response.data;
-          _this16.toastSuccess("Orden Actualizado");
-          if (_this16.refreshAfterSave) _this16.refresh();
-          _this16.loading = false;
+          _this18.toastSuccess("Orden Actualizado");
+          if (_this18.refreshAfterSave) _this18.refresh();
+          _this18.loading = false;
         }).catch(function (error) {
           //console.debug(error);
-          _this16.toastError(error);
-          _this16.loading = false;
+          _this18.toastError(error);
+          _this18.loading = false;
         });
       }
     },
     getArrayValue: function getArrayValue(value, displayProp) {
-      var _this17 = this;
+      var _this19 = this;
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
       if (!Array.isArray(value)) return "N/A";
       var values = [];
@@ -13578,7 +13653,7 @@ n(css, {});function normalizeComponent (
         return "";
       }
       values.forEach(function (val) {
-        valuesFinal.push(_this17.getStateValue(val, options));
+        valuesFinal.push(_this19.getStateValue(val, options));
       });
       return values.join(",");
     },
@@ -13600,270 +13675,270 @@ n(css, {});function normalizeComponent (
       return ops.join(", ");
     },
     saveItemVuex: function saveItemVuex() {
-      var _this18 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var _this20 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         var jsondata, result, create;
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-          while (1) switch (_context4.prev = _context4.next) {
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) switch (_context6.prev = _context6.next) {
             case 0:
-              console.debug("save item 1", _this18.item);
-              jsondata = _this18.item.$toJson();
-              console.debug("save item 2", _this18.item, jsondata);
+              console.debug("save item 1", _this20.item);
+              jsondata = _this20.item.$toJson();
+              console.debug("save item 2", _this20.item, jsondata);
               create = false;
-              if (!_this18.item.id) {
-                _context4.next = 12;
+              if (!_this20.item.id) {
+                _context6.next = 12;
                 break;
               }
-              _context4.next = 8;
-              return _this18.model.api().put('/' + _this18.item.id, jsondata);
+              _context6.next = 8;
+              return _this20.model.api().put('/' + _this20.item.id, jsondata);
             case 8:
-              result = _context4.sent;
+              result = _context6.sent;
               create = false;
-              _context4.next = 16;
+              _context6.next = 16;
               break;
             case 12:
-              _context4.next = 14;
-              return _this18.model.api().post('', jsondata);
+              _context6.next = 14;
+              return _this20.model.api().post('', jsondata);
             case 14:
-              result = _context4.sent;
+              result = _context6.sent;
               create = true;
             case 16:
               result.response.status;
               if (!result.response.data.error) {
-                _context4.next = 21;
+                _context6.next = 21;
                 break;
               }
-              _this18.toastError(result.response.data.error);
-              _this18.loading = false;
-              return _context4.abrupt("return");
+              _this20.toastError(result.response.data.error);
+              _this20.loading = false;
+              return _context6.abrupt("return");
             case 21:
               result.save();
-              if (_this18.refreshAfterSave) _this18.refresh();
-              _this18.loading = false;
-              _this18.toastSuccess("Elemento Modificado");
-              if (_this18.hideModalAfterSave || create && _this18.hideModalAfterCreate || !create && _this18.hideModalAfterUpdate) {
-                _this18.$bvModal.hide("modal-form-item-" + _this18.modelName);
+              if (_this20.refreshAfterSave) _this20.refresh();
+              _this20.loading = false;
+              _this20.toastSuccess("Elemento Modificado");
+              if (_this20.hideModalAfterSave || create && _this20.hideModalAfterCreate || !create && _this20.hideModalAfterUpdate) {
+                _this20.$bvModal.hide("modal-form-item-" + _this20.modelName);
               }
             case 26:
-            case "end":
-              return _context4.stop();
-          }
-        }, _callee4);
-      }))();
-    },
-    saveItemLocal: function saveItemLocal() {
-      var _this19 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-        var itemSave, itemIndex;
-        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-          while (1) switch (_context5.prev = _context5.next) {
-            case 0:
-              itemSave = JSON.parse(JSON.stringify(_this19.item));
-              if (_this19.item.id || _this19.item.index) {
-                if (_this19.item.id) {
-                  itemIndex = _this19.items.findIndex(function (item) {
-                    return item.id == _this19.item.id;
-                  });
-                } else {
-                  itemIndex = _this19.items.findIndex(function (item) {
-                    return item.index == _this19.item.index;
-                  });
-                }
-                _this19.items[itemIndex] = itemSave;
-                if (_this19.hideModalAfterSave || _this19.hideModalAfterUpdate) {
-                  _this19.$bvModal.hide("modal-form-item-" + _this19.modelName);
-                }
-              } else {
-                itemSave.index = _this19.items.length + 1;
-                _this19.items.push(itemSave);
-                if (_this19.hideModalAfterSave || _this19.hideModalAfterCreate) {
-                  _this19.$bvModal.hide("modal-form-item-" + _this19.modelName);
-                }
-              }
-              _this19.toastSuccess("Elemento Modificado");
-              _this19.loading = false;
-            case 5:
-            case "end":
-              return _context5.stop();
-          }
-        }, _callee5);
-      }))();
-    },
-    loadOptions: function loadOptions() {
-      var _this20 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
-        var i, column, options;
-        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-          while (1) switch (_context6.prev = _context6.next) {
-            case 0:
-              i = 0;
-            case 1:
-              if (!(i < _this20.columns.length)) {
-                _context6.next = 12;
-                break;
-              }
-              column = _this20.columns[i];
-              if (!(column.options instanceof Promise)) {
-                _context6.next = 9;
-                break;
-              }
-              _context6.next = 6;
-              return column.options;
-            case 6:
-              options = _context6.sent;
-              _this20.$set(_this20.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
-                options: options
-              }));
-              console.debug("Options promise", _this20.columns);
-            case 9:
-              i++;
-              _context6.next = 1;
-              break;
-            case 12:
-              _this20.optionsLoaded = true;
-            case 13:
             case "end":
               return _context6.stop();
           }
         }, _callee6);
       }))();
     },
-    saveItem: function saveItem() {
-      var _arguments4 = arguments,
-        _this21 = this;
+    saveItemLocal: function saveItemLocal() {
+      var _this21 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-        var event, validation_result, validation_error_message, formData;
+        var itemSave, itemIndex;
         return _regeneratorRuntime().wrap(function _callee7$(_context7) {
           while (1) switch (_context7.prev = _context7.next) {
             case 0:
+              itemSave = JSON.parse(JSON.stringify(_this21.item));
+              if (_this21.item.id || _this21.item.index) {
+                if (_this21.item.id) {
+                  itemIndex = _this21.items.findIndex(function (item) {
+                    return item.id == _this21.item.id;
+                  });
+                } else {
+                  itemIndex = _this21.items.findIndex(function (item) {
+                    return item.index == _this21.item.index;
+                  });
+                }
+                _this21.items[itemIndex] = itemSave;
+                if (_this21.hideModalAfterSave || _this21.hideModalAfterUpdate) {
+                  _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
+                }
+              } else {
+                itemSave.index = _this21.items.length + 1;
+                _this21.items.push(itemSave);
+                if (_this21.hideModalAfterSave || _this21.hideModalAfterCreate) {
+                  _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
+                }
+              }
+              _this21.toastSuccess("Elemento Modificado");
+              _this21.loading = false;
+            case 5:
+            case "end":
+              return _context7.stop();
+          }
+        }, _callee7);
+      }))();
+    },
+    loadOptions: function loadOptions() {
+      var _this22 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+        var i, column, options;
+        return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+          while (1) switch (_context8.prev = _context8.next) {
+            case 0:
+              i = 0;
+            case 1:
+              if (!(i < _this22.columns.length)) {
+                _context8.next = 12;
+                break;
+              }
+              column = _this22.columns[i];
+              if (!(column.options instanceof Promise)) {
+                _context8.next = 9;
+                break;
+              }
+              _context8.next = 6;
+              return column.options;
+            case 6:
+              options = _context8.sent;
+              _this22.$set(_this22.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
+                options: options
+              }));
+              console.debug("Options promise", _this22.columns);
+            case 9:
+              i++;
+              _context8.next = 1;
+              break;
+            case 12:
+              _this22.optionsLoaded = true;
+            case 13:
+            case "end":
+              return _context8.stop();
+          }
+        }, _callee8);
+      }))();
+    },
+    saveItem: function saveItem() {
+      var _arguments4 = arguments,
+        _this23 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+        var event, validation_result, validation_error_message, formData;
+        return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+          while (1) switch (_context9.prev = _context9.next) {
+            case 0:
               event = _arguments4.length > 0 && _arguments4[0] !== undefined ? _arguments4[0] : null;
-              _this21.loading = true;
-              if (!_this21.validate) {
-                _context7.next = 10;
+              _this23.loading = true;
+              if (!_this23.validate) {
+                _context9.next = 10;
                 break;
               }
               validation_result = true;
-              validation_error_message = _this21.messageDefaultValidationError;
+              validation_error_message = _this23.messageDefaultValidationError;
               if (validation_result) {
-                _context7.next = 8;
+                _context9.next = 8;
                 break;
               }
-              _this21.toastError(validation_error_message);
-              return _context7.abrupt("return");
+              _this23.toastError(validation_error_message);
+              return _context9.abrupt("return");
             case 8:
-              _context7.next = 11;
+              _context9.next = 11;
               break;
             case 10:
               if (event) event.preventDefault();
             case 11:
-              if (!_this21.useVuexORM) {
-                _context7.next = 13;
+              if (!_this23.useVuexORM) {
+                _context9.next = 13;
                 break;
               }
-              return _context7.abrupt("return", _this21.saveItemVuex(event));
+              return _context9.abrupt("return", _this23.saveItemVuex(event));
             case 13:
-              if (_this21.ajax) {
-                _context7.next = 15;
+              if (_this23.ajax) {
+                _context9.next = 15;
                 break;
               }
-              return _context7.abrupt("return", _this21.saveItemLocal(event));
+              return _context9.abrupt("return", _this23.saveItemLocal(event));
             case 15:
-              if (_this21.item.id) {
-                axios.put(_this21.apiUrl + "/" + _this21.modelName + "/" + _this21.item.id, _this21.item).then(function (response) {
-                  if (_this21.hideModalAfterSave || _this21.hideModalAfterUpdate) {
-                    _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
+              if (_this23.item.id) {
+                axios.put(_this23.apiUrl + "/" + _this23.modelName + "/" + _this23.item.id, _this23.item).then(function (response) {
+                  if (_this23.hideModalAfterSave || _this23.hideModalAfterUpdate) {
+                    _this23.$bvModal.hide("modal-form-item-" + _this23.modelName);
                   }
                   var itemSv = response.data;
-                  var itemIndex = _this21.items.findIndex(function (item) {
-                    return item.id == _this21.item.id;
+                  var itemIndex = _this23.items.findIndex(function (item) {
+                    return item.id == _this23.item.id;
                   });
-                  _this21.items[itemIndex] = itemSv;
-                  _this21.item = itemSv;
-                  _this21.loading = false;
-                  if (_this21.refreshAfterSave) _this21.refresh();
-                  _this21.toastSuccess("Elemento Modificado");
-                  _this21.$emit("itemSaved", {
-                    item: _this21.item
+                  _this23.items[itemIndex] = itemSv;
+                  _this23.item = itemSv;
+                  _this23.loading = false;
+                  if (_this23.refreshAfterSave) _this23.refresh();
+                  _this23.toastSuccess("Elemento Modificado");
+                  _this23.$emit("itemSaved", {
+                    item: _this23.item
                   });
-                  _this21.$emit("itemUpdated", {
-                    item: _this21.item
+                  _this23.$emit("itemUpdated", {
+                    item: _this23.item
                   });
                 }).catch(function (error) {
-                  _this21.toastError(error);
-                  _this21.loading = false;
+                  _this23.toastError(error);
+                  _this23.loading = false;
                 });
               } else {
-                if (_this21.createMultipart) {
+                if (_this23.createMultipart) {
                   formData = new FormData();
-                  Object.keys(_this21.item).forEach(function (key) {
-                    if (_this21.item[key][0] && _this21.item[key][0].name) {
-                      var files = _this21.item[key];
+                  Object.keys(_this23.item).forEach(function (key) {
+                    if (_this23.item[key][0] && _this23.item[key][0].name) {
+                      var files = _this23.item[key];
                       for (var x = 0; x < files.length; x++) {
-                        formData.append(key + "[]", _this21.item[key][x], _this21.item[key][x].name);
+                        formData.append(key + "[]", _this23.item[key][x], _this23.item[key][x].name);
                       }
-                    } else formData.append(key, _this21.item[key]);
+                    } else formData.append(key, _this23.item[key]);
                   });
-                  axios.post(_this21.apiUrl + "/" + _this21.modelName, formData).then(function (response) {
-                    _this21.loading = false;
-                    if (_this21.hideModalAfterSave || _this21.hideModalAfterCreate) {
-                      _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
+                  axios.post(_this23.apiUrl + "/" + _this23.modelName, formData).then(function (response) {
+                    _this23.loading = false;
+                    if (_this23.hideModalAfterSave || _this23.hideModalAfterCreate) {
+                      _this23.$bvModal.hide("modal-form-item-" + _this23.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this21.toastSuccess(response.data.message);
+                        _this23.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this21.items.push(itemSv);
-                    _this21.item = itemSv;
-                    if (_this21.refreshAfterSave) _this21.refresh();
-                    _this21.toastSuccess("Elemento Creado");
-                    _this21.$emit("itemSaved", {
-                      item: _this21.item
+                    _this23.items.push(itemSv);
+                    _this23.item = itemSv;
+                    if (_this23.refreshAfterSave) _this23.refresh();
+                    _this23.toastSuccess("Elemento Creado");
+                    _this23.$emit("itemSaved", {
+                      item: _this23.item
                     });
-                    _this21.$emit("itemCreated", {
-                      item: _this21.item
+                    _this23.$emit("itemCreated", {
+                      item: _this23.item
                     });
                   }).catch(function (error) {
-                    _this21.toastError(error);
-                    _this21.loading = false;
+                    _this23.toastError(error);
+                    _this23.loading = false;
                   });
                 } else {
-                  axios.post(_this21.apiUrl + "/" + _this21.modelName, _this21.item).then(function (response) {
-                    _this21.loading = false;
-                    if (_this21.hideModalAfterSave || _this21.hideModalAfterUpdate) {
-                      _this21.$bvModal.hide("modal-form-item-" + _this21.modelName);
+                  axios.post(_this23.apiUrl + "/" + _this23.modelName, _this23.item).then(function (response) {
+                    _this23.loading = false;
+                    if (_this23.hideModalAfterSave || _this23.hideModalAfterUpdate) {
+                      _this23.$bvModal.hide("modal-form-item-" + _this23.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this21.toastSuccess(response.data.message);
+                        _this23.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this21.items.push(itemSv);
-                    _this21.item = itemSv;
-                    if (_this21.refreshAfterSave) _this21.refresh();
-                    _this21.toastSuccess("Elemento Creado");
-                    _this21.$emit("itemSaved", {
-                      item: _this21.item
+                    _this23.items.push(itemSv);
+                    _this23.item = itemSv;
+                    if (_this23.refreshAfterSave) _this23.refresh();
+                    _this23.toastSuccess("Elemento Creado");
+                    _this23.$emit("itemSaved", {
+                      item: _this23.item
                     });
-                    _this21.$emit("itemCreated", {
-                      item: _this21.item
+                    _this23.$emit("itemCreated", {
+                      item: _this23.item
                     });
                   }).catch(function (error) {
-                    _this21.toastError(error);
-                    _this21.loading = false;
+                    _this23.toastError(error);
+                    _this23.loading = false;
                   });
                 }
               }
               if (event) event.preventDefault();
             case 17:
             case "end":
-              return _context7.stop();
+              return _context9.stop();
           }
-        }, _callee7);
+        }, _callee9);
       }))();
     },
     clearItems: function clearItems() {
@@ -13922,11 +13997,11 @@ n(css, {});function normalizeComponent (
       });
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this22 = this;
+      var _this24 = this;
       this.forceRecomputeCounter++;
       console.debug("Filters debug ", this.finalFilters, this.internalFilter, this.internalFilters, this.filter, this.filters);
       setTimeout(function () {
-        _this22.refresh();
+        _this24.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -14897,7 +14972,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "6dad4180", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "1a50c07c", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
