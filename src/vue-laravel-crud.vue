@@ -1569,9 +1569,10 @@ export default /*#__PURE__*/ {
 
                   </div>
                 </slot>
-
+                <span v-else-if="column.type == 'select'">
+                    <b-form-checkbox name="select-all" @change="toggleAll()"></b-form-checkbox>
+                </span>
                 <span v-else>{{ column.label }}</span>
-
                 <span v-if="sortable && internalFilterByProp(column.prop + '_sort')" class="sort-filter"
                   @click="toggleSortFilter(column)"><b-icon-sort-down
                     v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
@@ -1865,7 +1866,6 @@ tr td:first-child {
 
 .custom-control {
   position: relative;
-  top: -15px;
 }
 
 
