@@ -12115,7 +12115,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-aefbf0b6]:last-child,\ntr td[data-v-aefbf0b6]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-aefbf0b6] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-aefbf0b6] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-aefbf0b6] .crud-title[data-v-aefbf0b6] {\n    margin: 0; }\n  .crud-header[data-v-aefbf0b6] .crud-search[data-v-aefbf0b6] {\n    max-width: 15rem; }\n    .crud-header[data-v-aefbf0b6] .crud-search[data-v-aefbf0b6] .btn[data-v-aefbf0b6] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-aefbf0b6] .crud-search[data-v-aefbf0b6] .btn[data-v-aefbf0b6].open[data-v-aefbf0b6] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-aefbf0b6] .table-options[data-v-aefbf0b6] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-aefbf0b6] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-aefbf0b6] {\n    table-layout: auto; }\n    .table[data-v-aefbf0b6] tbody[data-v-aefbf0b6] td[data-v-aefbf0b6] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-aefbf0b6] tbody[data-v-aefbf0b6] td[data-v-aefbf0b6]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-ed7ab1fe]:last-child,\ntr td[data-v-ed7ab1fe]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-ed7ab1fe] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-ed7ab1fe] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-ed7ab1fe] .crud-title[data-v-ed7ab1fe] {\n    margin: 0; }\n  .crud-header[data-v-ed7ab1fe] .crud-search[data-v-ed7ab1fe] {\n    max-width: 15rem; }\n    .crud-header[data-v-ed7ab1fe] .crud-search[data-v-ed7ab1fe] .btn[data-v-ed7ab1fe] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-ed7ab1fe] .crud-search[data-v-ed7ab1fe] .btn[data-v-ed7ab1fe].open[data-v-ed7ab1fe] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-ed7ab1fe] .table-options[data-v-ed7ab1fe] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-ed7ab1fe] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-ed7ab1fe] {\n    table-layout: auto; }\n    .table[data-v-ed7ab1fe] tbody[data-v-ed7ab1fe] td[data-v-ed7ab1fe] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-ed7ab1fe] tbody[data-v-ed7ab1fe] td[data-v-ed7ab1fe]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -13015,7 +13015,7 @@ const _sfc_main = {
       axios.delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {
         ids: ids
       }).then(response => {
-        this.items = this.items.filter(it => ids.includes(it.id));
+        this.items = this.items.filter(it => !ids.includes(it.id));
         this.toastSuccess("Elemento/s eliminado.");
         this.$emit("itemDeleted", {});
         this.loading = false;
@@ -13026,7 +13026,7 @@ const _sfc_main = {
     },
     async deleteItemBulkLocal() {
       let ids = this.selectedItems.map(it => it.id);
-      this.items = this.items.filter(it => ids.includes(it.id));
+      this.items = this.items.filter(it => !ids.includes(it.id));
       this.item = null;
       this.toastSuccess("Elemento Eliminado");
       this.$emit("itemDeleted", {});
@@ -14380,7 +14380,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "aefbf0b6", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "ed7ab1fe", null, null);
 var component = __component__.exports;
 
 // Import vue component

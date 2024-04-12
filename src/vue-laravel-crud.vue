@@ -895,7 +895,7 @@ export default /*#__PURE__*/ {
       axios
         .delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {ids: ids} )
         .then((response) => {
-          this.items = this.items.filter(it => ids.includes(it.id));
+          this.items = this.items.filter(it => !ids.includes(it.id));
           this.toastSuccess("Elemento/s eliminado.");
           this.$emit("itemDeleted", {});
           this.loading = false;
@@ -907,7 +907,7 @@ export default /*#__PURE__*/ {
     },
     async deleteItemBulkLocal() {
       let ids = this.selectedItems.map(it => it.id);
-      this.items = this.items.filter(it => ids.includes(it.id));
+      this.items = this.items.filter(it => !ids.includes(it.id));
       this.item = null;
       this.toastSuccess("Elemento Eliminado");
       this.$emit("itemDeleted", {});
