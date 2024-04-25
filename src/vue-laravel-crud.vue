@@ -255,6 +255,10 @@ export default /*#__PURE__*/ {
       type: String,
       default: "¿Esta seguro de borrar este elemento?",
     },
+    messageRemoveBulkConfirm: {
+      type: String,
+      default: "¿Esta seguro de borrar los elementos seleccionados?",
+    },
     messageRemove: {
       type: String,
       default: "BORRAR",
@@ -634,8 +638,12 @@ export default /*#__PURE__*/ {
     },
     onCheckSelect(value, item) {
       console.debug("ON CHECK SELECT", value, item);
-      this.item = item;
-      this.selectItem();
+      if(value){
+        this.item = item;
+        this.selectItem();
+      }else{
+        this.unSelectItem(item);
+      }
       this.onSelect();
       console.debug("Selected Items",this.selectedItems);
     },
@@ -652,6 +660,16 @@ export default /*#__PURE__*/ {
           (item) =>      item.selected = true
         );
       }
+
+      this.onSelect();
+
+      console.debug("toggle all",this.selectedItems);
+    },
+    unSelectItem(item){
+      this.selectedItems = this.selectedItems.filter(
+          (e) => e.id != item.id
+        );
+        item.selected = false;
     },
     selectItem() {
       let sitem = this.selectedItems.find((e) => e.id == this.item.id);
@@ -871,7 +889,7 @@ export default /*#__PURE__*/ {
 
     confirmBulkDelete(){
       this.$bvModal
-        .msgBoxConfirm(this.messageRemoveConfirm, {
+        .msgBoxConfirm(this.messageRemoveBulkConfirm, {
           size: "sm",
           buttonSize: "sm",
           okVariant: "danger",
@@ -1573,6 +1591,10 @@ export default /*#__PURE__*/ {
 
                     <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
                     </b-form-checkbox>
+                    
+                    <b-form-checkbox v-else-if="column.type == 'select'" name="select-all" @change="toggleAll()">
+                    </b-form-checkbox>
+
                     <input v-else class="form-control form-control-md p-2"
                       v-model="internalFilterByProp(column.prop).value" :placeholder="column.label"
                       @change="onChangeFilter($event)" />
@@ -1583,7 +1605,9 @@ export default /*#__PURE__*/ {
                     <b-form-checkbox name="select-all" @change="toggleAll()"></b-form-checkbox>
                 </span>
                 <span v-else>{{ column.label }}</span>
-                <span v-if="sortable && internalFilterByProp(column.prop + '_sort')" class="sort-filter"
+
+
+                <span v-if="sortable && column.type != 'select' && column.type != 'checkbox' && internalFilterByProp(column.prop + '_sort')" class="sort-filter"
                   @click="toggleSortFilter(column)"><b-icon-sort-down
                     v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
                     v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
