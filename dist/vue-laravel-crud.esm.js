@@ -12115,7 +12115,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-98af7782]:last-child,\ntr td[data-v-98af7782]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-98af7782] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-98af7782] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-98af7782] .crud-title[data-v-98af7782] {\n    margin: 0; }\n  .crud-header[data-v-98af7782] .crud-search[data-v-98af7782] {\n    max-width: 15rem; }\n    .crud-header[data-v-98af7782] .crud-search[data-v-98af7782] .btn[data-v-98af7782] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-98af7782] .crud-search[data-v-98af7782] .btn[data-v-98af7782].open[data-v-98af7782] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-98af7782] .table-options[data-v-98af7782] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-98af7782] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-98af7782] {\n    table-layout: auto; }\n    .table[data-v-98af7782] tbody[data-v-98af7782] td[data-v-98af7782] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-98af7782] tbody[data-v-98af7782] td[data-v-98af7782]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-eb6bb62a]:last-child,\ntr td[data-v-eb6bb62a]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-eb6bb62a] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-eb6bb62a] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-eb6bb62a] .crud-title[data-v-eb6bb62a] {\n    margin: 0; }\n  .crud-header[data-v-eb6bb62a] .crud-search[data-v-eb6bb62a] {\n    max-width: 15rem; }\n    .crud-header[data-v-eb6bb62a] .crud-search[data-v-eb6bb62a] .btn[data-v-eb6bb62a] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-eb6bb62a] .crud-search[data-v-eb6bb62a] .btn[data-v-eb6bb62a].open[data-v-eb6bb62a] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-eb6bb62a] .table-options[data-v-eb6bb62a] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-eb6bb62a] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-eb6bb62a] {\n    table-layout: auto; }\n    .table[data-v-eb6bb62a] tbody[data-v-eb6bb62a] td[data-v-eb6bb62a] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-eb6bb62a] tbody[data-v-eb6bb62a] td[data-v-eb6bb62a]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -12645,7 +12645,10 @@ const _sfc_main = {
       let filter = [];
       this.forceRecomputeCounter;
       this.internalFilters.forEach(f => {
-        if (f.value) filter.push([f.column, f.op, f.value]);
+        if (f.value) {
+          let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
+          filter.push([colname, f.op, f.value]);
+        }
       });
       return filter;
     },
@@ -12802,23 +12805,22 @@ const _sfc_main = {
         this.selectedItems = this.items;
         this.selectedItems.forEach(item => item.selected = true);
       } else {
-        this.selectedItems = [];
         this.selectedItems.forEach(item => item.selected = false);
+        this.selectedItems = [];
       }
       this.onSelect();
       console.debug("toggle all", this.selectedItems);
       this.$forceUpdate();
     },
     unSelectItem(item) {
-      this.selectedItems = this.selectedItems.filter(e => e.id != item.id);
       item.selected = false;
+      this.selectedItems = this.selectedItems.filter(e => e.id != item.id);
     },
     selectItem() {
       let sitem = this.selectedItems.find(e => e.id == this.item.id);
       if (sitem) {
         this.item.selected = false;
         this.selectedItems = this.selectedItems.filter(e => e.id != this.item.id);
-        this.item.selected = false;
       } else {
         this.item.selected = true;
         this.selectedItems.push(this.item);
@@ -14418,7 +14420,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "98af7782", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "eb6bb62a", null, null);
 var component = __component__.exports;
 
 // Import vue component

@@ -486,7 +486,15 @@ export default /*#__PURE__*/ {
       let filter = [];
       this.forceRecomputeCounter;
       this.internalFilters.forEach((f) => {
-        if (f.value) filter.push([f.column, f.op, f.value]);
+
+   
+
+        if (f.value){
+
+          let colname = f.column.replace("_sort","").replace("_from","").replace("_to","");
+
+          filter.push([colname, f.op, f.value]);
+        } 
       });
       return filter;
     },
@@ -663,10 +671,11 @@ export default /*#__PURE__*/ {
           (item) =>      item.selected = true
         );
       }else{
-        this.selectedItems = [];
         this.selectedItems.forEach(
           (item) =>      item.selected = false
         );
+        this.selectedItems = [];
+
       }
 
       this.onSelect();
@@ -675,10 +684,13 @@ export default /*#__PURE__*/ {
       this.$forceUpdate();
     },
     unSelectItem(item){
+
+      item.selected = false;
+
       this.selectedItems = this.selectedItems.filter(
           (e) => e.id != item.id
         );
-        item.selected = false;
+
     },
     selectItem() {
       let sitem = this.selectedItems.find((e) => e.id == this.item.id);
@@ -687,7 +699,6 @@ export default /*#__PURE__*/ {
         this.selectedItems = this.selectedItems.filter(
           (e) => e.id != this.item.id
         );
-        this.item.selected = false;
       } else {
         this.item.selected = true;
         this.selectedItems.push(this.item);
