@@ -672,6 +672,7 @@ export default /*#__PURE__*/ {
       this.onSelect();
 
       console.debug("toggle all",this.selectedItems);
+      this.$forceUpdate();
     },
     unSelectItem(item){
       this.selectedItems = this.selectedItems.filter(

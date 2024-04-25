@@ -12532,7 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-e80d091a]:last-child,\ntr td[data-v-e80d091a]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-e80d091a] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-e80d091a] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-e80d091a] .crud-title[data-v-e80d091a] {\n    margin: 0; }\n  .crud-header[data-v-e80d091a] .crud-search[data-v-e80d091a] {\n    max-width: 15rem; }\n    .crud-header[data-v-e80d091a] .crud-search[data-v-e80d091a] .btn[data-v-e80d091a] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-e80d091a] .crud-search[data-v-e80d091a] .btn[data-v-e80d091a].open[data-v-e80d091a] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-e80d091a] .table-options[data-v-e80d091a] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-e80d091a] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-e80d091a] {\n    table-layout: auto; }\n    .table[data-v-e80d091a] tbody[data-v-e80d091a] td[data-v-e80d091a] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-e80d091a] tbody[data-v-e80d091a] td[data-v-e80d091a]::-webkit-scrollbar {\n      display: none; } }\n";
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-98af7782]:last-child,\ntr td[data-v-98af7782]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-98af7782] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-98af7782] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-98af7782] .crud-title[data-v-98af7782] {\n    margin: 0; }\n  .crud-header[data-v-98af7782] .crud-search[data-v-98af7782] {\n    max-width: 15rem; }\n    .crud-header[data-v-98af7782] .crud-search[data-v-98af7782] .btn[data-v-98af7782] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-98af7782] .crud-search[data-v-98af7782] .btn[data-v-98af7782].open[data-v-98af7782] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-98af7782] .table-options[data-v-98af7782] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-98af7782] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-98af7782] {\n    table-layout: auto; }\n    .table[data-v-98af7782] tbody[data-v-98af7782] td[data-v-98af7782] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-98af7782] tbody[data-v-98af7782] td[data-v-98af7782]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -13012,7 +13012,11 @@ n(css, {});function normalizeComponent (
     if (this.ajax) {
       this.fetchItems();
     } else {
-      this.items = this.models;
+      if (this.grouped) {
+        this.groupItems(this.models);
+      } else {
+        this.items = this.models;
+      }
       this.pagination.total = this.items.length;
       this.firstLoad = true;
     }
@@ -13234,6 +13238,7 @@ n(css, {});function normalizeComponent (
       }
       this.onSelect();
       console.debug("toggle all", this.selectedItems);
+      this.$forceUpdate();
     },
     unSelectItem: function unSelectItem(item) {
       this.selectedItems = this.selectedItems.filter(function (e) {
@@ -13411,36 +13416,7 @@ n(css, {});function normalizeComponent (
         _this11.makePagination(response.data);
         var items = response.data.data;
         if (_this11.grouped) {
-          var itemswithgroup = [];
-          var lastcomparevalue = null;
-          var compareattr = _this11.groupedAttribute;
-          var groupLabelPre = _this11.groupedLabelPre;
-          var groupLabelAfter = _this11.groupedLabelAfter;
-          items.forEach(function (item, key) {
-            if (Array.isArray(item)) {
-              itemswithgroup.push({
-                label: groupLabelPre + key + groupLabelAfter,
-                group: true
-              });
-              item.forEach(function (sitem) {
-                itemswithgroup.push(sitem);
-              });
-            } else {
-              if (lastcomparevalue != item[compareattr]) {
-                lastcomparevalue = item[compareattr];
-                itemswithgroup.push({
-                  crudgrouplabel: groupLabelPre + lastcomparevalue + groupLabelAfter,
-                  crudgroup: true
-                });
-              }
-              itemswithgroup.push(item);
-            }
-          });
-          if (concat) {
-            _this11.items = _this11.items.concat(itemswithgroup);
-          } else {
-            _this11.items = itemswithgroup;
-          }
+          _this11.groupItems(items, concat);
         } else {
           if (concat) {
             _this11.items = _this11.items.concat(items);
@@ -13458,6 +13434,39 @@ n(css, {});function normalizeComponent (
         _this11.firstLoad = true;
         _this11.fetchError = true;
       });
+    },
+    groupItems: function groupItems(items) {
+      var concat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var itemswithgroup = [];
+      var lastcomparevalue = null;
+      var compareattr = this.groupedAttribute;
+      var groupLabelPre = this.groupedLabelPre;
+      var groupLabelAfter = this.groupedLabelAfter;
+      items.forEach(function (item, key) {
+        if (Array.isArray(item)) {
+          itemswithgroup.push({
+            label: groupLabelPre + key + groupLabelAfter,
+            group: true
+          });
+          item.forEach(function (sitem) {
+            itemswithgroup.push(sitem);
+          });
+        } else {
+          if (lastcomparevalue != item[compareattr]) {
+            lastcomparevalue = item[compareattr];
+            itemswithgroup.push({
+              crudgrouplabel: groupLabelPre + lastcomparevalue + groupLabelAfter,
+              crudgroup: true
+            });
+          }
+          itemswithgroup.push(item);
+        }
+      });
+      if (concat) {
+        this.items = this.items.concat(itemswithgroup);
+      } else {
+        this.items = itemswithgroup;
+      }
     },
     removeItem: function removeItem(id, index) {
       var _this12 = this;
@@ -15048,7 +15057,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "e80d091a", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "98af7782", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
