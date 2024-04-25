@@ -682,6 +682,7 @@ export default /*#__PURE__*/ {
     },
     onSelect() {
       this.$emit("select", this.item);
+      this.$emit("selectItems", this.selectedItems);
     },
     showItem(id, itemIndex = null) {
       if (itemIndex == null) {
