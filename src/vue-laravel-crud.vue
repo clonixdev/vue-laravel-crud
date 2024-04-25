@@ -903,7 +903,7 @@ export default /*#__PURE__*/ {
 
       this.loading = true;
       axios
-        .delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {ids: ids} )
+        .delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {  params: {ids: ids },} )
         .then((response) => {
           this.items = this.items.filter(it => !ids.includes(it.id));
           this.toastSuccess("Elemento/s eliminado.");
