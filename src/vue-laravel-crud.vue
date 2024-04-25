@@ -637,12 +637,20 @@ export default /*#__PURE__*/ {
       this.item = item;
       this.selectItem();
       this.onSelect();
+      console.debug("Selected Items",this.selectedItems);
     },
     toggleAll() {
       if (this.selectedItems.length > 0) {
         this.selectedItems = [];
+        this.selectedItems.forEach(
+          (item) =>      item.selected = false
+        );
       } else {
         this.selectedItems = this.items;
+
+        this.selectedItems.forEach(
+          (item) =>      item.selected = true
+        );
       }
     },
     selectItem() {

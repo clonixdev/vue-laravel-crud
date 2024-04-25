@@ -12532,7 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-ed7ab1fe]:last-child,\ntr td[data-v-ed7ab1fe]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-ed7ab1fe] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-ed7ab1fe] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-ed7ab1fe] .crud-title[data-v-ed7ab1fe] {\n    margin: 0; }\n  .crud-header[data-v-ed7ab1fe] .crud-search[data-v-ed7ab1fe] {\n    max-width: 15rem; }\n    .crud-header[data-v-ed7ab1fe] .crud-search[data-v-ed7ab1fe] .btn[data-v-ed7ab1fe] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-ed7ab1fe] .crud-search[data-v-ed7ab1fe] .btn[data-v-ed7ab1fe].open[data-v-ed7ab1fe] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-ed7ab1fe] .table-options[data-v-ed7ab1fe] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-ed7ab1fe] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-ed7ab1fe] {\n    table-layout: auto; }\n    .table[data-v-ed7ab1fe] tbody[data-v-ed7ab1fe] td[data-v-ed7ab1fe] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-ed7ab1fe] tbody[data-v-ed7ab1fe] td[data-v-ed7ab1fe]::-webkit-scrollbar {\n      display: none; } }\n";
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-a1009d4b]:last-child,\ntr td[data-v-a1009d4b]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-a1009d4b] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-a1009d4b] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-a1009d4b] .crud-title[data-v-a1009d4b] {\n    margin: 0; }\n  .crud-header[data-v-a1009d4b] .crud-search[data-v-a1009d4b] {\n    max-width: 15rem; }\n    .crud-header[data-v-a1009d4b] .crud-search[data-v-a1009d4b] .btn[data-v-a1009d4b] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-a1009d4b] .crud-search[data-v-a1009d4b] .btn[data-v-a1009d4b].open[data-v-a1009d4b] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-a1009d4b] .table-options[data-v-a1009d4b] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-a1009d4b] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-a1009d4b] {\n    table-layout: auto; }\n    .table[data-v-a1009d4b] tbody[data-v-a1009d4b] td[data-v-a1009d4b] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-a1009d4b] tbody[data-v-a1009d4b] td[data-v-a1009d4b]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -13210,12 +13210,19 @@ n(css, {});function normalizeComponent (
       this.item = item;
       this.selectItem();
       this.onSelect();
+      console.debug("Selected Items", this.selectedItems);
     },
     toggleAll: function toggleAll() {
       if (this.selectedItems.length > 0) {
         this.selectedItems = [];
+        this.selectedItems.forEach(function (item) {
+          return item.selected = false;
+        });
       } else {
         this.selectedItems = this.items;
+        this.selectedItems.forEach(function (item) {
+          return item.selected = true;
+        });
       }
     },
     selectItem: function selectItem() {
@@ -15012,7 +15019,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "ed7ab1fe", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "a1009d4b", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
