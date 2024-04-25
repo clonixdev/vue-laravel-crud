@@ -419,7 +419,13 @@ export default /*#__PURE__*/ {
     if (this.ajax) {
       this.fetchItems();
     } else {
-      this.items = this.models;
+
+      if (this.grouped) {
+            this.groupItems(this.models);
+      } else {
+        this.items = this.models;
+      }
+
       this.pagination.total = this.items.length;
       this.firstLoad = true;
     }
@@ -817,7 +823,30 @@ export default /*#__PURE__*/ {
           this.makePagination(response.data);
           let items = response.data.data;
           if (this.grouped) {
-            let itemswithgroup = [];
+            this.groupItems(items,concat);
+          } else {
+            if (concat) {
+              this.items = this.items.concat(items);
+            } else {
+              this.items = items;
+            }
+          }
+
+          this.loading = false;
+          this.firstLoad = true;
+          this.$emit("afterFetch", {});
+        })
+        .catch((error) => {
+          //console.debug(error);
+          this.toastError(error);
+          this.loading = false;
+          this.firstLoad = true;
+          this.fetchError = true;
+        });
+    },
+
+    groupItems(items,concat = false){
+      let itemswithgroup = [];
             let lastcomparevalue = null;
             let compareattr = this.groupedAttribute;
             let groupLabelPre = this.groupedLabelPre;
@@ -848,25 +877,6 @@ export default /*#__PURE__*/ {
             } else {
               this.items = itemswithgroup;
             }
-          } else {
-            if (concat) {
-              this.items = this.items.concat(items);
-            } else {
-              this.items = items;
-            }
-          }
-
-          this.loading = false;
-          this.firstLoad = true;
-          this.$emit("afterFetch", {});
-        })
-        .catch((error) => {
-          //console.debug(error);
-          this.toastError(error);
-          this.loading = false;
-          this.firstLoad = true;
-          this.fetchError = true;
-        });
     },
     removeItem(id, index) {
       this.$bvModal
