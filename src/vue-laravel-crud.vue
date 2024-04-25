@@ -647,17 +647,19 @@ export default /*#__PURE__*/ {
       this.onSelect();
       console.debug("Selected Items",this.selectedItems);
     },
-    toggleAll() {
-      if (this.selectedItems.length > 0) {
-        this.selectedItems = [];
-        this.selectedItems.forEach(
-          (item) =>      item.selected = false
-        );
-      } else {
+    toggleAll(value) {
+
+
+      if(value){
         this.selectedItems = this.items;
 
         this.selectedItems.forEach(
           (item) =>      item.selected = true
+        );
+      }else{
+        this.selectedItems = [];
+        this.selectedItems.forEach(
+          (item) =>      item.selected = false
         );
       }
 
@@ -1589,10 +1591,10 @@ export default /*#__PURE__*/ {
                       </option>
                     </select>
 
-                    <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll()">
+                    <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll($event)">
                     </b-form-checkbox>
                     
-                    <b-form-checkbox v-else-if="column.type == 'select'" name="select-all" @change="toggleAll()">
+                    <b-form-checkbox v-else-if="column.type == 'select'" name="select-all" @change="toggleAll($event)">
                     </b-form-checkbox>
 
                     <input v-else class="form-control form-control-md p-2"
@@ -1602,7 +1604,7 @@ export default /*#__PURE__*/ {
                   </div>
                 </slot>
                 <span v-else-if="column.type == 'select'">
-                    <b-form-checkbox name="select-all" @change="toggleAll()"></b-form-checkbox>
+                    <b-form-checkbox name="select-all" @change="toggleAll($event)"></b-form-checkbox>
                 </span>
                 <span v-else>{{ column.label }}</span>
 

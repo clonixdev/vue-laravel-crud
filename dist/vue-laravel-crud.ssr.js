@@ -12532,7 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-2a26c95b]:last-child,\ntr td[data-v-2a26c95b]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-2a26c95b] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-2a26c95b] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-2a26c95b] .crud-title[data-v-2a26c95b] {\n    margin: 0; }\n  .crud-header[data-v-2a26c95b] .crud-search[data-v-2a26c95b] {\n    max-width: 15rem; }\n    .crud-header[data-v-2a26c95b] .crud-search[data-v-2a26c95b] .btn[data-v-2a26c95b] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-2a26c95b] .crud-search[data-v-2a26c95b] .btn[data-v-2a26c95b].open[data-v-2a26c95b] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-2a26c95b] .table-options[data-v-2a26c95b] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-2a26c95b] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-2a26c95b] {\n    table-layout: auto; }\n    .table[data-v-2a26c95b] tbody[data-v-2a26c95b] td[data-v-2a26c95b] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-2a26c95b] tbody[data-v-2a26c95b] td[data-v-2a26c95b]::-webkit-scrollbar {\n      display: none; } }\n";
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-e80d091a]:last-child,\ntr td[data-v-e80d091a]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-e80d091a] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-e80d091a] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-e80d091a] .crud-title[data-v-e80d091a] {\n    margin: 0; }\n  .crud-header[data-v-e80d091a] .crud-search[data-v-e80d091a] {\n    max-width: 15rem; }\n    .crud-header[data-v-e80d091a] .crud-search[data-v-e80d091a] .btn[data-v-e80d091a] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-e80d091a] .crud-search[data-v-e80d091a] .btn[data-v-e80d091a].open[data-v-e80d091a] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-e80d091a] .table-options[data-v-e80d091a] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-e80d091a] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-e80d091a] {\n    table-layout: auto; }\n    .table[data-v-e80d091a] tbody[data-v-e80d091a] td[data-v-e80d091a] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-e80d091a] tbody[data-v-e80d091a] td[data-v-e80d091a]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -13220,16 +13220,16 @@ n(css, {});function normalizeComponent (
       this.onSelect();
       console.debug("Selected Items", this.selectedItems);
     },
-    toggleAll: function toggleAll() {
-      if (this.selectedItems.length > 0) {
-        this.selectedItems = [];
-        this.selectedItems.forEach(function (item) {
-          return item.selected = false;
-        });
-      } else {
+    toggleAll: function toggleAll(value) {
+      if (value) {
         this.selectedItems = this.items;
         this.selectedItems.forEach(function (item) {
           return item.selected = true;
+        });
+      } else {
+        this.selectedItems = [];
+        this.selectedItems.forEach(function (item) {
+          return item.selected = false;
         });
       }
       this.onSelect();
@@ -14557,7 +14557,7 @@ var _sfc_render = function render() {
           },
           on: {
             "change": function change($event) {
-              return _vm.toggleAll();
+              return _vm.toggleAll($event);
             }
           }
         }) : column.type == 'select' ? _c('b-form-checkbox', {
@@ -14566,7 +14566,7 @@ var _sfc_render = function render() {
           },
           on: {
             "change": function change($event) {
-              return _vm.toggleAll();
+              return _vm.toggleAll($event);
             }
           }
         }) : _c('input', {
@@ -14603,7 +14603,7 @@ var _sfc_render = function render() {
         },
         on: {
           "change": function change($event) {
-            return _vm.toggleAll();
+            return _vm.toggleAll($event);
           }
         }
       })], 1) : _c('span', [_vm._v(_vm._s(column.label))]), _vm.sortable && column.type != 'select' && column.type != 'checkbox' && _vm.internalFilterByProp(column.prop + '_sort') ? _c('span', {
@@ -15048,7 +15048,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2)], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "2a26c95b", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "e80d091a", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
