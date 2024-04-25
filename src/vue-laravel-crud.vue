@@ -660,6 +660,7 @@ export default /*#__PURE__*/ {
         this.selectedItems = this.selectedItems.filter(
           (e) => e.id != this.item.id
         );
+        this.item.selected = false;
       } else {
         this.item.selected = true;
         this.selectedItems.push(this.item);
