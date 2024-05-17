@@ -674,6 +674,9 @@ export default /*#__PURE__*/ {
         this.selectedItems.forEach(
           (item) =>      item.selected = false
         );
+        this.items.forEach(
+          (item) =>      item.selected = false
+        );
         this.selectedItems = [];
 
       }
