@@ -1831,7 +1831,9 @@ export default /*#__PURE__*/ {
         <div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div>
       </div>
     </infinite-loading>
-
+    <div class="paginator-data"  v-if="!infiniteScroll">
+      Filas: {{ pagination.total }} |xPág: {{ pagination.per_page }} |Pág: {{ pagination.current_page }} |Seleccionados: {{ selectedItems.length }}
+    </div>
     <div class="crud-paginator" v-if="!infiniteScroll">
       <b-pagination v-if="showPaginator" v-model="pagination.current_page" :total-rows="pagination.total"
         :per-page="pagination.per_page" @change="onPaginationChange($event)"></b-pagination>
