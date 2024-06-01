@@ -12115,7 +12115,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-f43a8553]:last-child,\ntr td[data-v-f43a8553]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-f43a8553] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-f43a8553] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-f43a8553] .crud-title[data-v-f43a8553] {\n    margin: 0; }\n  .crud-header[data-v-f43a8553] .crud-search[data-v-f43a8553] {\n    max-width: 15rem; }\n    .crud-header[data-v-f43a8553] .crud-search[data-v-f43a8553] .btn[data-v-f43a8553] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-f43a8553] .crud-search[data-v-f43a8553] .btn[data-v-f43a8553].open[data-v-f43a8553] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-f43a8553] .table-options[data-v-f43a8553] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-f43a8553] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-f43a8553] {\n    table-layout: auto; }\n    .table[data-v-f43a8553] tbody[data-v-f43a8553] td[data-v-f43a8553] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-f43a8553] tbody[data-v-f43a8553] td[data-v-f43a8553]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-c0990da7]:last-child,\ntr td[data-v-c0990da7]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-c0990da7] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-c0990da7] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-c0990da7] .crud-title[data-v-c0990da7] {\n    margin: 0; }\n  .crud-header[data-v-c0990da7] .crud-search[data-v-c0990da7] {\n    max-width: 15rem; }\n    .crud-header[data-v-c0990da7] .crud-search[data-v-c0990da7] .btn[data-v-c0990da7] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-c0990da7] .crud-search[data-v-c0990da7] .btn[data-v-c0990da7].open[data-v-c0990da7] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-c0990da7] .table-options[data-v-c0990da7] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-c0990da7] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-c0990da7] {\n    table-layout: auto; }\n    .table[data-v-c0990da7] tbody[data-v-c0990da7] td[data-v-c0990da7] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-c0990da7] tbody[data-v-c0990da7] td[data-v-c0990da7]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -12462,6 +12462,14 @@ const _sfc_main = {
       type: String,
       default: "Nuevo"
     },
+    messageImport: {
+      type: String,
+      default: "Importar"
+    },
+    messageExport: {
+      type: String,
+      default: "Exportar"
+    },
     messageEmptyResults: {
       type: String,
       default: "No se han encontrado resultados"
@@ -12539,6 +12547,14 @@ const _sfc_main = {
       default: "id"
     },
     bulkDelete: {
+      type: Boolean,
+      default: false
+    },
+    showImport: {
+      type: Boolean,
+      default: false
+    },
+    showExport: {
       type: Boolean,
       default: false
     }
@@ -13160,6 +13176,58 @@ const _sfc_main = {
         });
       }
     },
+    exportItems() {
+      if (this.useVuexORM) {
+        return;
+      }
+      if (!this.ajax) {
+        return;
+      }
+      let exportItems = true;
+      let params;
+      let ids = this.selectedItems.map(it => it.id);
+      if (ids.length) {
+        params = {
+          ids: ids,
+          exportItems: exportItems
+        };
+      } else {
+        params = {
+          filters: JSON.stringify(this.finalFilters),
+          exportItems: exportItems
+        };
+      }
+      this.loading = true;
+      axios.delete(this.apiUrl + "/" + this.modelName + "/export", {
+        params: params
+      }).then(response => {
+        this.downloadBlobResponse(response, extension);
+        this.loading = false;
+      }).catch(error => {
+        this.toastError(error);
+        this.loading = false;
+      });
+    },
+    importItems() {
+      let formData = new FormData();
+      formData.append("file", this.fileImport);
+      axios.post(this.apiUrl + "/" + this.modelName + "/impport", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(response => {
+        if (response && response.data && response.data.success == true) {
+          this.$refs["modal-import"].hide();
+          this.toastSuccess("Datos Importados con Éxito");
+          this.$refs["crud"].refresh();
+        } else {
+          this.toastError("No se pudo importar los datos.");
+        }
+      }).catch(error => {
+        console.error(error);
+        this.toastError(error);
+      });
+    },
     getArrayValue(value, displayProp, options = []) {
       if (!Array.isArray(value)) return "N/A";
       let values = [];
@@ -13528,7 +13596,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "internalFilterByProp(column.prop + '_from').value\n                          "
+            expression: "internalFilterByProp(column.prop + '_from').value\n                        "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -13544,7 +13612,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "internalFilterByProp(column.prop + '_to').value\n                          "
+            expression: "internalFilterByProp(column.prop + '_to').value\n                        "
           }
         })], 1)])]) : column.type == 'state' ? _c('div', {
           staticClass: "form-group"
@@ -13673,7 +13741,27 @@ var _sfc_render = function render() {
   }, [_vm._t("tableActions", function () {
     return [_vm._t("tableActionsPrepend", null, {
       "loading": _vm.loading
-    }), _vm.showPrincipalSortBtn ? _c('b-button', {
+    }), _vm.showImport ? _c('b-button', {
+      directives: [{
+        name: "b-modal",
+        rawName: "v-b-modal.modal-import",
+        modifiers: {
+          "modal-import": true
+        }
+      }],
+      attrs: {
+        "variant": "info"
+      }
+    }, [_c('b-icon-cloud-upload'), _vm._v(_vm._s(_vm.messageImport) + " ")], 1) : _vm._e(), _vm.showExport ? _c('b-button', {
+      attrs: {
+        "variant": "info"
+      },
+      on: {
+        "click": function ($event) {
+          return _vm.exportItems();
+        }
+      }
+    }, [_c('b-icon-cloud-download'), _vm._v(_vm._s(_vm.messageExport) + " ")], 1) : _vm._e(), _vm.showPrincipalSortBtn ? _c('b-button', {
       attrs: {
         "variant": "info",
         "disabled": _vm.loading
@@ -13835,7 +13923,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
             },
-            expression: "internalFilterByProp(column.prop + '_from').value\n                          "
+            expression: "internalFilterByProp(column.prop + '_from').value\n                        "
           }
         })], 1), _c('div', {
           staticClass: "col-6"
@@ -13852,7 +13940,7 @@ var _sfc_render = function render() {
             callback: function ($$v) {
               _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
             },
-            expression: "internalFilterByProp(column.prop + '_to').value\n                          "
+            expression: "internalFilterByProp(column.prop + '_to').value\n                        "
           }
         })], 1)]) : column.type == 'state' && _vm.optionsLoaded ? _c('select', {
           directives: [{
@@ -14420,10 +14508,52 @@ var _sfc_render = function render() {
     }), 1)];
   }, {
     "item": _vm.item
-  }) : _vm._e()], 2)], 1);
+  }) : _vm._e()], 2), _vm.showImport ? _c('b-modal', {
+    ref: "modal-import",
+    attrs: {
+      "id": "modal-import",
+      "title": "Importar",
+      "hide-footer": ""
+    }
+  }, [_vm.item ? _vm._t("import", function () {
+    return [_c('b-overlay', {
+      attrs: {
+        "show": _vm.loading,
+        "rounded": "sm"
+      }
+    }, [_c('b-form-file', {
+      attrs: {
+        "state": Boolean(_vm.fileImport),
+        "browse-text": "Explorar",
+        "placeholder": "Importar...",
+        "drop-placeholder": "Arrastrar Archivo aquí..."
+      },
+      model: {
+        value: _vm.fileImport,
+        callback: function ($$v) {
+          _vm.fileImport = $$v;
+        },
+        expression: "fileImport"
+      }
+    }), _c('div', {
+      staticClass: "text-center mt-3"
+    }, [_c('b-button', {
+      attrs: {
+        "variant": "info",
+        "disabled": _vm.loading
+      },
+      on: {
+        "click": function ($event) {
+          return _vm.importItems();
+        }
+      }
+    }, [_c('b-icon-cloud-upload'), _vm._v(" " + _vm._s(_vm.loading ? "Cargando..." : "Importar") + " ")], 1)], 1)], 1)];
+  }, {
+    "item": _vm.item
+  }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "f43a8553", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "c0990da7", null, null);
 var component = __component__.exports;
 
 // Import vue component

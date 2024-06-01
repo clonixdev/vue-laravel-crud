@@ -24,7 +24,7 @@ export default /*#__PURE__*/ {
       items: [],
       selectedItems: [],
       pagination: {
-      
+
         current_page: 1,
         last_page: 1,
         next_page_url: "",
@@ -267,6 +267,14 @@ export default /*#__PURE__*/ {
       type: String,
       default: "Nuevo",
     },
+    messageImport: {
+      type: String,
+      default: "Importar",
+    },
+    messageExport: {
+      type: String,
+      default: "Exportar",
+    },
     messageEmptyResults: {
       type: String,
       default: "No se han encontrado resultados",
@@ -353,6 +361,16 @@ export default /*#__PURE__*/ {
       default: false,
     },
 
+    showImport: {
+      type: Boolean,
+      default: false,
+    },
+
+    showExport: {
+      type: Boolean,
+      default: false,
+    }
+
   },
 
   mounted() {
@@ -421,7 +439,7 @@ export default /*#__PURE__*/ {
     } else {
 
       if (this.grouped) {
-            this.groupItems(this.models);
+        this.groupItems(this.models);
       } else {
         this.items = this.models;
       }
@@ -470,14 +488,14 @@ export default /*#__PURE__*/ {
         ...this.sortFilter
       ];
     },
-    sortFilter(){
-      if(this.showPrincipalSortBtn){
-        if(this.principalSort){
-          return [[this.principalSortColumn,'SORTASC','']];
-        }else{
-          return [[this.principalSortColumn,'SORTDESC','']];
+    sortFilter() {
+      if (this.showPrincipalSortBtn) {
+        if (this.principalSort) {
+          return [[this.principalSortColumn, 'SORTASC', '']];
+        } else {
+          return [[this.principalSortColumn, 'SORTDESC', '']];
         }
-      }else{
+      } else {
         return [];
       }
 
@@ -487,14 +505,14 @@ export default /*#__PURE__*/ {
       this.forceRecomputeCounter;
       this.internalFilters.forEach((f) => {
 
-   
 
-        if (f.value){
 
-          let colname = f.column.replace("_sort","").replace("_from","").replace("_to","");
+        if (f.value) {
+
+          let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
 
           filter.push([colname, f.op, f.value]);
-        } 
+        }
       });
       return filter;
     },
@@ -515,15 +533,15 @@ export default /*#__PURE__*/ {
       this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
     },
 
-    togglePrincipalSort(){
+    togglePrincipalSort() {
       this.principalSort = !this.principalSort;
       setTimeout(() => {
-          this.refresh();
-        }, 1);
+        this.refresh();
+      }, 1);
     },
     infiniteHandler($state) {
-      
-      
+
+
       const hasNextPage = (this.pagination.total > 0 || !this.firstLoad) && (!this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total);
       console.debug("Has next page", hasNextPage, this.pagination);
       if (hasNextPage) {
@@ -652,30 +670,30 @@ export default /*#__PURE__*/ {
     },
     onCheckSelect(value, item) {
       console.debug("ON CHECK SELECT", value, item);
-      if(value){
+      if (value) {
         this.item = item;
         this.selectItem();
-      }else{
+      } else {
         this.unSelectItem(item);
       }
       this.onSelect();
-      console.debug("Selected Items",this.selectedItems);
+      console.debug("Selected Items", this.selectedItems);
     },
     toggleAll(value) {
 
 
-      if(value){
+      if (value) {
         this.selectedItems = this.items;
 
         this.selectedItems.forEach(
-          (item) =>      item.selected = true
+          (item) => item.selected = true
         );
-      }else{
+      } else {
         this.selectedItems.forEach(
-          (item) =>      item.selected = false
+          (item) => item.selected = false
         );
         this.items.forEach(
-          (item) =>      item.selected = false
+          (item) => item.selected = false
         );
         this.selectedItems = [];
 
@@ -683,16 +701,16 @@ export default /*#__PURE__*/ {
 
       this.onSelect();
 
-      console.debug("toggle all",this.selectedItems);
+      console.debug("toggle all", this.selectedItems);
       this.$forceUpdate();
     },
-    unSelectItem(item){
+    unSelectItem(item) {
 
       item.selected = false;
 
       this.selectedItems = this.selectedItems.filter(
-          (e) => e.id != item.id
-        );
+        (e) => e.id != item.id
+      );
 
     },
     selectItem() {
@@ -838,7 +856,7 @@ export default /*#__PURE__*/ {
           this.makePagination(response.data);
           let items = response.data.data;
           if (this.grouped) {
-            this.groupItems(items,concat);
+            this.groupItems(items, concat);
           } else {
             if (concat) {
               this.items = this.items.concat(items);
@@ -860,38 +878,38 @@ export default /*#__PURE__*/ {
         });
     },
 
-    groupItems(items,concat = false){
+    groupItems(items, concat = false) {
       let itemswithgroup = [];
-            let lastcomparevalue = null;
-            let compareattr = this.groupedAttribute;
-            let groupLabelPre = this.groupedLabelPre;
-            let groupLabelAfter = this.groupedLabelAfter;
-            items.forEach((item, key) => {
-              if (Array.isArray(item)) {
-                itemswithgroup.push({
-                  label: groupLabelPre + key + groupLabelAfter,
-                  group: true,
-                });
+      let lastcomparevalue = null;
+      let compareattr = this.groupedAttribute;
+      let groupLabelPre = this.groupedLabelPre;
+      let groupLabelAfter = this.groupedLabelAfter;
+      items.forEach((item, key) => {
+        if (Array.isArray(item)) {
+          itemswithgroup.push({
+            label: groupLabelPre + key + groupLabelAfter,
+            group: true,
+          });
 
-                item.forEach((sitem) => {
-                  itemswithgroup.push(sitem);
-                });
-              } else {
-                if (lastcomparevalue != item[compareattr]) {
-                  lastcomparevalue = item[compareattr];
-                  itemswithgroup.push({
-                    crudgrouplabel: groupLabelPre + lastcomparevalue + groupLabelAfter,
-                    crudgroup: true,
-                  });
-                }
-                itemswithgroup.push(item);
-              }
+          item.forEach((sitem) => {
+            itemswithgroup.push(sitem);
+          });
+        } else {
+          if (lastcomparevalue != item[compareattr]) {
+            lastcomparevalue = item[compareattr];
+            itemswithgroup.push({
+              crudgrouplabel: groupLabelPre + lastcomparevalue + groupLabelAfter,
+              crudgroup: true,
             });
-            if (concat) {
-              this.items = this.items.concat(itemswithgroup);
-            } else {
-              this.items = itemswithgroup;
-            }
+          }
+          itemswithgroup.push(item);
+        }
+      });
+      if (concat) {
+        this.items = this.items.concat(itemswithgroup);
+      } else {
+        this.items = itemswithgroup;
+      }
     },
     removeItem(id, index) {
       this.$bvModal
@@ -914,7 +932,7 @@ export default /*#__PURE__*/ {
         });
     },
 
-    confirmBulkDelete(){
+    confirmBulkDelete() {
       this.$bvModal
         .msgBoxConfirm(this.messageRemoveBulkConfirm, {
           size: "sm",
@@ -934,7 +952,7 @@ export default /*#__PURE__*/ {
           this.loading = false;
         });
     },
-    deleteItemBulk(){
+    deleteItemBulk() {
       if (this.useVuexORM) {
         return this.deleteItemBulkVuex();
       }
@@ -948,7 +966,7 @@ export default /*#__PURE__*/ {
 
       this.loading = true;
       axios
-        .delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {  params: {ids: ids },} )
+        .delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", { params: { ids: ids }, })
         .then((response) => {
           this.items = this.items.filter(it => !ids.includes(it.id));
           this.toastSuccess("Elemento/s eliminado.");
@@ -969,21 +987,21 @@ export default /*#__PURE__*/ {
       this.loading = false;
     },
     async deleteItemBulkVuex() {
-/*
-      let result = await this.model.api().delete('/' + id, {
-        delete: 1
-      });
-
-      console.debug("delete item vuex", result);
-      let responseStatus = result.response.status;
-
-      if (result.response.data.error) {
-        this.toastError(result.response.data.error);
-        this.loading = false;
-        return;
-      }
-
-      this.toastSuccess("Elemento eliminado.");*/
+      /*
+            let result = await this.model.api().delete('/' + id, {
+              delete: 1
+            });
+      
+            console.debug("delete item vuex", result);
+            let responseStatus = result.response.status;
+      
+            if (result.response.data.error) {
+              this.toastError(result.response.data.error);
+              this.loading = false;
+              return;
+            }
+      
+            this.toastSuccess("Elemento eliminado.");*/
     },
     deleteItem(id, index) {
 
@@ -1009,6 +1027,7 @@ export default /*#__PURE__*/ {
           this.loading = false;
         });
     },
+
 
     async deleteItemLocal(id, index) {
       if (id || index) {
@@ -1079,6 +1098,67 @@ export default /*#__PURE__*/ {
           });
       }
     },
+    exportItems() {
+      if (this.useVuexORM) {
+        return;
+      }
+
+      if (!this.ajax) {
+        return;
+      }
+
+      let exportItems = true;
+      let params;
+
+      let ids = this.selectedItems.map(it => it.id);
+
+      if (ids.length) {
+        params = { ids: ids, exportItems: exportItems, };
+      } else {
+        params = { filters: JSON.stringify(this.finalFilters), exportItems: exportItems, };
+      }
+
+
+
+      this.loading = true;
+      axios
+        .delete(this.apiUrl + "/" + this.modelName + "/export", { params: params, })
+        .then((response) => {
+          this.downloadBlobResponse(response, extension);
+          this.loading = false;
+        })
+        .catch((error) => {
+          this.toastError(error);
+          this.loading = false;
+        });
+    },
+
+    importItems() {
+      let formData = new FormData();
+      formData.append("file", this.fileImport);
+      axios
+        .post(this.apiUrl + "/" + this.modelName + "/impport", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          if (response && response.data && response.data.success == true) {
+            this.$refs["modal-import"].hide();
+            this.toastSuccess("Datos Importados con Éxito");
+            this.$refs["crud"].refresh();
+          } else {
+            this.toastError("No se pudo importar los datos.");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          this.toastError(error);
+
+        });
+    },
+
+
     getArrayValue(value, displayProp, options = []) {
       if (!Array.isArray(value)) return "N/A";
       let values = [];
@@ -1460,10 +1540,10 @@ export default /*#__PURE__*/ {
                         :key="option.id ? option.id : option.value">
                         {{
                           option.text
-                          ? option.text
-                          : option.label
-                            ? option.label
-                            : ""
+                            ? option.text
+                            : option.label
+                              ? option.label
+                              : ""
                         }}
                       </option>
                     </select>
@@ -1480,10 +1560,10 @@ export default /*#__PURE__*/ {
                           :key="option.id ? option.id : option.value">
                           {{
                             option.text
-                            ? option.text
-                            : option.label
-                              ? option.label
-                              : ""
+                              ? option.text
+                              : option.label
+                                ? option.label
+                                : ""
                           }}
                         </option>
                       </template>
@@ -1519,11 +1599,18 @@ export default /*#__PURE__*/ {
             v-bind:loading="loading">
             <slot name="tableActionsPrepend" v-bind:loading="loading"> </slot>
 
+            <b-button variant="info" v-b-modal.modal-import v-if="showImport">
+              <b-icon-cloud-upload></b-icon-cloud-upload>{{ messageImport }}
+            </b-button>
+            <b-button variant="info" @click="exportItems()" v-if="showExport">
+              <b-icon-cloud-download></b-icon-cloud-download>{{ messageExport }}
+            </b-button>
             <b-button variant="info" v-if="showPrincipalSortBtn" @click="togglePrincipalSort()" :disabled="loading">
               <b-icon-sort-numeric-down v-if="principalSort"></b-icon-sort-numeric-down>
               <b-icon-sort-numeric-up v-else></b-icon-sort-numeric-up>
             </b-button>
-            <b-button variant="danger" @click="confirmBulkDelete()" v-if="bulkDelete"><b-icon-trash></b-icon-trash></b-button>
+            <b-button variant="danger" @click="confirmBulkDelete()"
+              v-if="bulkDelete"><b-icon-trash></b-icon-trash></b-button>
             <b-button variant="success" v-if="showCreateBtn" @click="createItem()" :disabled="loading">
               <b-icon-plus></b-icon-plus>{{ messageNew }}
             </b-button>
@@ -1563,7 +1650,7 @@ export default /*#__PURE__*/ {
                     filtersVisible &&
                     isColumnHasFilter(column) &&
                     internalFilterByProp(column.prop)
-                    ">
+                  ">
 
                   <div class="form-group">
                     <select v-if="column.type == 'boolean'" class="form-control form-control-md p-2"
@@ -1593,10 +1680,10 @@ export default /*#__PURE__*/ {
                       <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
                         {{
                           option.text
-                          ? option.text
-                          : option.label
-                            ? option.label
-                            : ""
+                            ? option.text
+                            : option.label
+                              ? option.label
+                              : ""
                         }}
                       </option>
                     </select>
@@ -1608,17 +1695,18 @@ export default /*#__PURE__*/ {
                       <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
                         {{
                           option.text
-                          ? option.text
-                          : option.label
-                            ? option.label
-                            : ""
+                            ? option.text
+                            : option.label
+                              ? option.label
+                              : ""
                         }}
                       </option>
                     </select>
 
-                    <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all" @change="toggleAll($event)">
+                    <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all"
+                      @change="toggleAll($event)">
                     </b-form-checkbox>
-                    
+
                     <b-form-checkbox v-else-if="column.type == 'select'" name="select-all" @change="toggleAll($event)">
                     </b-form-checkbox>
 
@@ -1629,16 +1717,18 @@ export default /*#__PURE__*/ {
                   </div>
                 </slot>
                 <span v-else-if="column.type == 'select'">
-                    <b-form-checkbox name="select-all" @change="toggleAll($event)"></b-form-checkbox>
+                  <b-form-checkbox name="select-all" @change="toggleAll($event)"></b-form-checkbox>
                 </span>
                 <span v-else>{{ column.label }}</span>
 
 
-                <span v-if="sortable && column.type != 'select' && column.type != 'checkbox' && internalFilterByProp(column.prop + '_sort')" class="sort-filter"
-                  @click="toggleSortFilter(column)"><b-icon-sort-down
+                <span
+                  v-if="sortable && column.type != 'select' && column.type != 'checkbox' && internalFilterByProp(column.prop + '_sort')"
+                  class="sort-filter" @click="toggleSortFilter(column)"><b-icon-sort-down
                     v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
                     v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
-                  <b-icon-sort-down v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
+                  <b-icon-sort-down
+                    v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
                 </span>
               </th>
             </slot>
@@ -1664,19 +1754,19 @@ export default /*#__PURE__*/ {
                     <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
                       itemValue(column, item) == 1 ||
                       itemValue(column, item) == '1'
-                      "><b-icon-check-circle></b-icon-check-circle></b-badge>
+                    "><b-icon-check-circle></b-icon-check-circle></b-badge>
                     <b-badge variant="danger" v-if="!itemValue(column, item) ||
                       itemValue(column, item) == '0' ||
                       itemValue(column, item) == 'false'
-                      "><b-icon-x-circle></b-icon-x-circle></b-badge>
+                    "><b-icon-x-circle></b-icon-x-circle></b-badge>
                   </span>
                   <span v-else-if="column.type == 'date'">
                     {{
                       itemValue(column, item)
-                      ? moment(itemValue(column, item)).format(
-                        column.format ? column.format : 'L LT'
-                      )
-                      : itemValue(column, item)
+                        ? moment(itemValue(column, item)).format(
+                          column.format ? column.format : 'L LT'
+                        )
+                        : itemValue(column, item)
                     }}
                   </span>
                   <span v-else-if="column.type == 'select'">
@@ -1730,76 +1820,75 @@ export default /*#__PURE__*/ {
     </div>
 
     <div v-if="displayMode == displayModes.MODE_CARDS">
-      <draggable v-model="items" :group="draggableGroup" :draggable="orderable ? '.item' : '.none'"
-        @start="drag = true" @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)"
-        @change="onDraggableChange($event)" :options="draggableOptions">
+      <draggable v-model="items" :group="draggableGroup" :draggable="orderable ? '.item' : '.none'" @start="drag = true"
+        @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)" @change="onDraggableChange($event)"
+        :options="draggableOptions">
         <masonry
-        :cols="{default: 12/colLg, 1400: 12/colXl, 1200: 12/colLg, 1000: 12/colMd, 700: 12/colSm, 400: 12/colXs}"
-  :gutter="{default: '15px', 700: '15px'}"
-  >
+          :cols="{ default: 12 / colLg, 1400: 12 / colXl, 1200: 12 / colLg, 1000: 12 / colMd, 700: 12 / colSm, 400: 12 / colXs }"
+          :gutter="{ default: '15px', 700: '15px' }">
 
-        <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
-          <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
-            :hideFooter="cardHideFooter">
-            <slot name="card" v-bind:item="item">
-              <div v-for="(column, indexc) in columns" :key="indexc">
-                <b-card-text v-if="column.type != 'actions'">{{ column.label }}:
-                  <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
-                    v-bind:columnindex="indexc">
-                    <span v-if="column.type == 'boolean'">
-                      <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
-                        itemValue(column, item) == 1 ||
-                        itemValue(column, item) == '1'
+          <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
+            <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
+              :hideFooter="cardHideFooter">
+              <slot name="card" v-bind:item="item">
+                <div v-for="(column, indexc) in columns" :key="indexc">
+                  <b-card-text v-if="column.type != 'actions'">{{ column.label }}:
+                    <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
+                      v-bind:columnindex="indexc">
+                      <span v-if="column.type == 'boolean'">
+                        <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
+                          itemValue(column, item) == 1 ||
+                          itemValue(column, item) == '1'
                         "><b-icon-check-circle></b-icon-check-circle></b-badge>
-                      <b-badge variant="danger" v-if="!itemValue(column, item) ||
-                        itemValue(column, item) == '0' ||
-                        itemValue(column, item) == 'false'
+                        <b-badge variant="danger" v-if="!itemValue(column, item) ||
+                          itemValue(column, item) == '0' ||
+                          itemValue(column, item) == 'false'
                         "><b-icon-x-circle></b-icon-x-circle></b-badge>
-                    </span>
-                    <span v-else-if="column.type == 'date'">
-                      {{ itemValue(column, item) }}
-                    </span>
-                    <span v-else-if="column.type == 'state'">
-                      {{
-                        getStateValue(itemValue(column, item), column.options)
-                      }}
-                    </span>
-                    <span v-else-if="column.type == 'array'">
-                      {{
-                        getArrayValue(
-                          itemValue(column, item),
-                          column.displayProp,
-                          column.options
-                        )
-                      }}
-                    </span>
-                    <span v-else>
-                      {{ itemValue(column, item) }}
-                    </span>
-                  </slot>
-                </b-card-text>
-              </div>
-            </slot>
+                      </span>
+                      <span v-else-if="column.type == 'date'">
+                        {{ itemValue(column, item) }}
+                      </span>
+                      <span v-else-if="column.type == 'state'">
+                        {{
+                          getStateValue(itemValue(column, item), column.options)
+                        }}
+                      </span>
+                      <span v-else-if="column.type == 'array'">
+                        {{
+                          getArrayValue(
+                            itemValue(column, item),
+                            column.displayProp,
+                            column.options
+                          )
+                        }}
+                      </span>
+                      <span v-else>
+                        {{ itemValue(column, item) }}
+                      </span>
+                    </slot>
+                  </b-card-text>
+                </div>
+              </slot>
 
-            <template v-slot:footer>
-              <b-button-group>
-                <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
-                  v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
-                  <b-button variant="primary" @click="showItem(item.id, index)">
-                    <b-icon-eye></b-icon-eye>
-                  </b-button>
-                  <b-button variant="secondary" @click="updateItem(item.id, index)">
-                    <b-icon-pencil></b-icon-pencil>
-                  </b-button>
-                  <b-button variant="danger" @click="removeItem(item.id, index)">
-                    <b-icon-trash></b-icon-trash>
-                  </b-button>
-                </slot>
-              </b-button-group>
-            </template>
-          </b-card>
-        </div>
-</masonry>
+              <template v-slot:footer>
+                <b-button-group>
+                  <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
+                    v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
+                    <b-button variant="primary" @click="showItem(item.id, index)">
+                      <b-icon-eye></b-icon-eye>
+                    </b-button>
+                    <b-button variant="secondary" @click="updateItem(item.id, index)">
+                      <b-icon-pencil></b-icon-pencil>
+                    </b-button>
+                    <b-button variant="danger" @click="removeItem(item.id, index)">
+                      <b-icon-trash></b-icon-trash>
+                    </b-button>
+                  </slot>
+                </b-button-group>
+              </template>
+            </b-card>
+          </div>
+        </masonry>
       </draggable>
 
       <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
@@ -1819,7 +1908,7 @@ export default /*#__PURE__*/ {
       </div>
     </div>
     <b-overlay :show="loading" rounded="sm"></b-overlay>
-    <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll "
+    <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler" v-if="infiniteScroll"
       :forceUseInfiniteWrapper="true" :key="infiniteScrollKey">
       <div slot="spinner">
         <div class="text-center">{{ messageLoading }}</div>
@@ -1831,8 +1920,10 @@ export default /*#__PURE__*/ {
         <div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div>
       </div>
     </infinite-loading>
-    <div class="paginator-data"  v-if="!infiniteScroll">
-      Filas: {{ pagination.total }} |xPág: {{ pagination.per_page }} |Pág: {{ pagination.current_page }} |Seleccionados: {{ selectedItems.length }}
+    <div class="paginator-data" v-if="!infiniteScroll">
+      Filas: {{ pagination.total }} |xPág: {{ pagination.per_page }} |Pág: {{ pagination.current_page }} |Seleccionados:
+      {{
+        selectedItems.length }}
     </div>
     <div class="crud-paginator" v-if="!infiniteScroll">
       <b-pagination v-if="showPaginator" v-model="pagination.current_page" :total-rows="pagination.total"
@@ -1854,7 +1945,7 @@ export default /*#__PURE__*/ {
         </template>
         <template v-if="!validate">
           <slot name="form" v-bind:item="item" v-if="item">
-            <b-form-group :label="key" v-for="(value, key) in  item" :key="key">
+            <b-form-group :label="key" v-for="(value, key) in item" :key="key">
               <b-form-input v-model="item[key]" type="text" required></b-form-input>
             </b-form-group>
           </slot>
@@ -1867,7 +1958,7 @@ export default /*#__PURE__*/ {
     <b-modal :id="'modal-show-item-' + modelName" hide-footer size="xl" :title="title" no-close-on-backdrop>
       <slot name="show" v-bind:item="item" v-if="item">
         <b-list-group>
-          <b-list-group-item v-for="(value, key) in  item" :key="key">
+          <b-list-group-item v-for="(value, key) in item" :key="key">
             <b-row class="w-100">
               <b-col cols="4" class="font-weight-bold">{{ key }}</b-col>
               <b-col cols="8">{{ JSON.stringify(value) }}</b-col>
@@ -1876,6 +1967,23 @@ export default /*#__PURE__*/ {
         </b-list-group>
       </slot>
     </b-modal>
+
+
+    <b-modal ref="modal-import" id="modal-import" title="Importar" hide-footer v-if="showImport">
+      <slot name="import" v-bind:item="item" v-if="item">
+        <b-overlay :show="loading" rounded="sm">
+          <b-form-file v-model="fileImport" :state="Boolean(fileImport)" browse-text="Explorar"
+            placeholder="Importar..." drop-placeholder="Arrastrar Archivo aquí..."></b-form-file>
+          <div class="text-center mt-3">
+            <b-button variant="info" v-on:click="importItems()" :disabled="loading">
+              <b-icon-cloud-upload></b-icon-cloud-upload>
+              {{ loading ? "Cargando..." : "Importar" }}
+            </b-button>
+          </div>
+        </b-overlay>
+      </slot>
+    </b-modal>
+
   </div>
 </template>
 
@@ -1888,10 +1996,10 @@ tr td:first-child {
 
 .crud-pagination {
   display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-    margin-top: 1rem;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .crud-header {
