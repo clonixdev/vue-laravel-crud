@@ -1464,7 +1464,30 @@ export default /*#__PURE__*/ {
         appendToast: true,
       });
     },
+    downloadBlobResponse(response,extension = null) {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
 
+      let contentdisposition = response.headers['content-disposition'];
+      let filename = "Export";
+
+
+      if (contentdisposition) {
+          filename = contentdisposition.split('filename=')[1].split('.')[0];
+          filename = filename.replace('_', '');
+          filename = filename.replace('"', '');
+          extension = contentdisposition.split('.')[1].split(';')[0];
+          extension = extension.replace('_', '');
+          extension = extension.replace('"', '');
+      }
+
+
+      console.debug("DOWNLOAD ",filename,extension);
+      link.setAttribute("download", filename + '.' + extension);
+      document.body.appendChild(link);
+      link.click();
+  },
     onChangeFilter(event) {
       this.forceRecomputeCounter++;
       console.debug("Filters debug ", this.finalFilters, this.internalFilter, this.internalFilters, this.filter, this.filters);
