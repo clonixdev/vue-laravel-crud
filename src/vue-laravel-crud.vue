@@ -1944,7 +1944,7 @@ export default /*#__PURE__*/ {
       </div>
     </infinite-loading>
     <div class="paginator-data" v-if="!infiniteScroll">
-      Filas: {{ pagination.total }} |xPág: {{ pagination.per_page }} |Pág: {{ pagination.current_page }} |Seleccionados:
+      Filas: {{ pagination.total }} | xPág: {{ pagination.per_page }} | Pág: {{ pagination.current_page }} | Seleccionados:
       {{
         selectedItems.length }}
     </div>
