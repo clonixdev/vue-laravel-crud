@@ -1122,7 +1122,7 @@ export default /*#__PURE__*/ {
       axios
         .get(this.apiUrl + "/" + this.modelName + "/export", { params: params, })
         .then((response) => {
-          this.downloadBlobResponse(response, extension);
+          this.downloadBlobResponse(response);
           this.loading = false;
         })
         .catch((error) => {
