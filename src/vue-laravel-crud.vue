@@ -1118,9 +1118,11 @@ export default /*#__PURE__*/ {
         params = { filters: JSON.stringify(this.finalFilters), exportItems: exportItems, };
       }
 
+      params.format = 'JSON';
+      
       this.loading = true;
       axios
-        .get(this.apiUrl + "/" + this.modelName + "/export", { params: params, })
+        .get(this.apiUrl + "/" + this.modelName + "/export", { params: params, responseType: "blob", })
         .then((response) => {
           this.downloadBlobResponse(response);
           this.loading = false;
