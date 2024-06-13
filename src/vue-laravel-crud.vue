@@ -1137,7 +1137,7 @@ export default /*#__PURE__*/ {
       let formData = new FormData();
       formData.append("file", this.fileImport);
       axios
-        .post(this.apiUrl + "/" + this.modelName + "/impport", formData, {
+        .post(this.apiUrl + "/" + this.modelName + "/import", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
