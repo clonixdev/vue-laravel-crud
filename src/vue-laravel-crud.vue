@@ -748,6 +748,26 @@ export default /*#__PURE__*/ {
       this.$emit("select", this.item);
       this.$emit("selectItems", this.selectedItems);
     },
+
+    updateData(data, allowCreate = true) {
+        // Convertir this.items a un mapa para acceso rápido por id
+        const itemsMap = new Map(this.items.map(item => [item.id, item]));
+
+        // Recorrer cada elemento de data
+        data.forEach(newItem => {
+            if (itemsMap.has(newItem.id)) {
+                // Actualizar el item existente
+                const existingItem = itemsMap.get(newItem.id);
+                Object.assign(existingItem, newItem);
+            } else if (allowCreate) {
+                // Agregar el nuevo item si allowCreate es true
+                this.items.push(newItem);
+            }
+        });
+
+        // Convertir el mapa de vuelta a un array, si es necesario
+        this.items = Array.from(itemsMap.values());
+    },
     showItem(id, itemIndex = null) {
       if (itemIndex == null) {
         let item = this.items.find((it) => it.id == id);
@@ -1007,21 +1027,30 @@ export default /*#__PURE__*/ {
       this.loading = false;
     },
     async deleteItemBulkVuex() {
-      /*
-            let result = await this.model.api().delete('/' + id, {
-              delete: 1
-            });
+
+      let ids = this.selectedItems.map(it => it.id);
+
+
+      if (this.vuexLocalforage) {
+        await this.model.$delete(ids);
+
+      } else {
+        let result = await this.model.api().delete('/bulk-destroy' , {
+          params: { ids: ids},
+          delete: ids
+        });
+
+        console.debug("delete item vuex", result);
+        let responseStatus = result.response.status;
+
+        if (result.response.data.error) {
+          this.toastError(result.response.data.error);
+          this.loading = false;
+          return;
+        }
+      }
       
-            console.debug("delete item vuex", result);
-            let responseStatus = result.response.status;
-      
-            if (result.response.data.error) {
-              this.toastError(result.response.data.error);
-              this.loading = false;
-              return;
-            }
-      
-            this.toastSuccess("Elemento eliminado.");*/
+      this.toastSuccess("Elemento eliminados.");
     },
     deleteItem(id, index) {
 
@@ -1231,24 +1260,24 @@ export default /*#__PURE__*/ {
     },
     async saveItemVuex(event = null) {
       console.debug("save item 1", this.item);
-      let jsondata = this.item.$toJson();
-      console.debug("save item 2", this.item, jsondata);
       let result;
-
       let create = false;
 
 
       if (this.vuexLocalforage) {
 
         if (this.item.id) {
-          result = await this.model.$update(this.item.id, jsondata);
+          result = await this.model.$update(this.item.id, this.item);
           create = false;
         } else {
-          result = await this.model.$create(jsondata);
+          result = await this.model.$create(this.item);
           create = true;
         }
 
       } else {
+
+        let jsondata = this.item.$toJson();
+        console.debug("save item 2", this.item, jsondata);
         if (this.item.id) {
           result = await this.model.api().put('/' + this.item.id, jsondata);
           create = false;

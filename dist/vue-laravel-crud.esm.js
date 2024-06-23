@@ -12115,7 +12115,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-51199a53]:last-child,\ntr td[data-v-51199a53]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-51199a53] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-51199a53] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-51199a53] .crud-title[data-v-51199a53] {\n    margin: 0; }\n  .crud-header[data-v-51199a53] .crud-search[data-v-51199a53] {\n    max-width: 15rem; }\n    .crud-header[data-v-51199a53] .crud-search[data-v-51199a53] .btn[data-v-51199a53] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-51199a53] .crud-search[data-v-51199a53] .btn[data-v-51199a53].open[data-v-51199a53] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-51199a53] .table-options[data-v-51199a53] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-51199a53] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-51199a53] {\n    table-layout: auto; }\n    .table[data-v-51199a53] tbody[data-v-51199a53] td[data-v-51199a53] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-51199a53] tbody[data-v-51199a53] td[data-v-51199a53]::-webkit-scrollbar {\n      display: none; } }\n";
+var css = "tr td[data-v-4e32274c]:last-child,\ntr td[data-v-4e32274c]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-4e32274c] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-4e32274c] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-4e32274c] .crud-title[data-v-4e32274c] {\n    margin: 0; }\n  .crud-header[data-v-4e32274c] .crud-search[data-v-4e32274c] {\n    max-width: 15rem; }\n    .crud-header[data-v-4e32274c] .crud-search[data-v-4e32274c] .btn[data-v-4e32274c] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-4e32274c] .crud-search[data-v-4e32274c] .btn[data-v-4e32274c].open[data-v-4e32274c] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-4e32274c] .table-options[data-v-4e32274c] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-4e32274c] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-4e32274c] {\n    table-layout: auto; }\n    .table[data-v-4e32274c] tbody[data-v-4e32274c] td[data-v-4e32274c] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-4e32274c] tbody[data-v-4e32274c] td[data-v-4e32274c]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});
 
 function normalizeComponent (
@@ -12867,6 +12867,25 @@ const _sfc_main = {
       this.$emit("select", this.item);
       this.$emit("selectItems", this.selectedItems);
     },
+    updateData(data, allowCreate = true) {
+      // Convertir this.items a un mapa para acceso rápido por id
+      const itemsMap = new Map(this.items.map(item => [item.id, item]));
+
+      // Recorrer cada elemento de data
+      data.forEach(newItem => {
+        if (itemsMap.has(newItem.id)) {
+          // Actualizar el item existente
+          const existingItem = itemsMap.get(newItem.id);
+          Object.assign(existingItem, newItem);
+        } else if (allowCreate) {
+          // Agregar el nuevo item si allowCreate es true
+          this.items.push(newItem);
+        }
+      });
+
+      // Convertir el mapa de vuelta a un array, si es necesario
+      this.items = Array.from(itemsMap.values());
+    },
     showItem(id, itemIndex = null) {
       if (itemIndex == null) {
         let item = this.items.find(it => it.id == id);
@@ -13097,21 +13116,25 @@ const _sfc_main = {
       this.loading = false;
     },
     async deleteItemBulkVuex() {
-      /*
-            let result = await this.model.api().delete('/' + id, {
-              delete: 1
-            });
-      
-            console.debug("delete item vuex", result);
-            let responseStatus = result.response.status;
-      
-            if (result.response.data.error) {
-              this.toastError(result.response.data.error);
-              this.loading = false;
-              return;
-            }
-      
-            this.toastSuccess("Elemento eliminado.");*/
+      let ids = this.selectedItems.map(it => it.id);
+      if (this.vuexLocalforage) {
+        await this.model.$delete(ids);
+      } else {
+        let result = await this.model.api().delete('/bulk-destroy', {
+          params: {
+            ids: ids
+          },
+          delete: ids
+        });
+        console.debug("delete item vuex", result);
+        result.response.status;
+        if (result.response.data.error) {
+          this.toastError(result.response.data.error);
+          this.loading = false;
+          return;
+        }
+      }
+      this.toastSuccess("Elemento eliminados.");
     },
     deleteItem(id, index) {
       if (this.useVuexORM) {
@@ -13287,19 +13310,19 @@ const _sfc_main = {
     },
     async saveItemVuex(event = null) {
       console.debug("save item 1", this.item);
-      let jsondata = this.item.$toJson();
-      console.debug("save item 2", this.item, jsondata);
       let result;
       let create = false;
       if (this.vuexLocalforage) {
         if (this.item.id) {
-          result = await this.model.$update(this.item.id, jsondata);
+          result = await this.model.$update(this.item.id, this.item);
           create = false;
         } else {
-          result = await this.model.$create(jsondata);
+          result = await this.model.$create(this.item);
           create = true;
         }
       } else {
+        let jsondata = this.item.$toJson();
+        console.debug("save item 2", this.item, jsondata);
         if (this.item.id) {
           result = await this.model.api().put('/' + this.item.id, jsondata);
           create = false;
@@ -14604,7 +14627,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "51199a53", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "4e32274c", null, null);
 var component = __component__.exports;
 
 // Import vue component

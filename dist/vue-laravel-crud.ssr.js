@@ -12532,7 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-51199a53]:last-child,\ntr td[data-v-51199a53]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-51199a53] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-51199a53] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-51199a53] .crud-title[data-v-51199a53] {\n    margin: 0; }\n  .crud-header[data-v-51199a53] .crud-search[data-v-51199a53] {\n    max-width: 15rem; }\n    .crud-header[data-v-51199a53] .crud-search[data-v-51199a53] .btn[data-v-51199a53] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-51199a53] .crud-search[data-v-51199a53] .btn[data-v-51199a53].open[data-v-51199a53] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-51199a53] .table-options[data-v-51199a53] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-51199a53] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-51199a53] {\n    table-layout: auto; }\n    .table[data-v-51199a53] tbody[data-v-51199a53] td[data-v-51199a53] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-51199a53] tbody[data-v-51199a53] td[data-v-51199a53]::-webkit-scrollbar {\n      display: none; } }\n";
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-4e32274c]:last-child,\ntr td[data-v-4e32274c]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-4e32274c] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-4e32274c] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-4e32274c] .crud-title[data-v-4e32274c] {\n    margin: 0; }\n  .crud-header[data-v-4e32274c] .crud-search[data-v-4e32274c] {\n    max-width: 15rem; }\n    .crud-header[data-v-4e32274c] .crud-search[data-v-4e32274c] .btn[data-v-4e32274c] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-4e32274c] .crud-search[data-v-4e32274c] .btn[data-v-4e32274c].open[data-v-4e32274c] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-4e32274c] .table-options[data-v-4e32274c] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-4e32274c] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-4e32274c] {\n    table-layout: auto; }\n    .table[data-v-4e32274c] tbody[data-v-4e32274c] td[data-v-4e32274c] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-4e32274c] tbody[data-v-4e32274c] td[data-v-4e32274c]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -13312,6 +13312,29 @@ n(css, {});function normalizeComponent (
       this.$emit("select", this.item);
       this.$emit("selectItems", this.selectedItems);
     },
+    updateData: function updateData(data) {
+      var _this8 = this;
+      var allowCreate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      // Convertir this.items a un mapa para acceso rápido por id
+      var itemsMap = new Map(this.items.map(function (item) {
+        return [item.id, item];
+      }));
+
+      // Recorrer cada elemento de data
+      data.forEach(function (newItem) {
+        if (itemsMap.has(newItem.id)) {
+          // Actualizar el item existente
+          var existingItem = itemsMap.get(newItem.id);
+          Object.assign(existingItem, newItem);
+        } else if (allowCreate) {
+          // Agregar el nuevo item si allowCreate es true
+          _this8.items.push(newItem);
+        }
+      });
+
+      // Convertir el mapa de vuelta a un array, si es necesario
+      this.items = Array.from(itemsMap.values());
+    },
     showItem: function showItem(id) {
       var itemIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       if (itemIndex == null) {
@@ -13353,7 +13376,7 @@ n(css, {});function normalizeComponent (
       this.$bvModal.show("modal-form-item-" + this.modelName);
     },
     refresh: function refresh() {
-      var _this8 = this;
+      var _this9 = this;
       this.$emit("refresh", {});
       if (!this.ajax) {
         return;
@@ -13366,13 +13389,13 @@ n(css, {});function normalizeComponent (
       if (this.infiniteScroll && fetchPromise) {
         this.refreshing = true;
         fetchPromise.then(function () {
-          var infiniteLoadingRef = _this8.$refs.infiniteLoading;
+          var infiniteLoadingRef = _this9.$refs.infiniteLoading;
           if (infiniteLoadingRef) {
             infiniteLoadingRef.stateChanger.reset();
           } else {
             console.debug("infiniteLoadingRef not set");
           }
-          _this8.refreshing = false;
+          _this9.refreshing = false;
         });
       }
     },
@@ -13380,56 +13403,56 @@ n(css, {});function normalizeComponent (
       return column && !column.hideFilter && column.type != "actions";
     },
     setFilter: function setFilter(column, value) {
-      var _this9 = this;
+      var _this10 = this;
       var filter = this.filter.find(function (f) {
         return f.column == column;
       });
       filter.value = value;
       this.forceRecomputeCounter++;
       setTimeout(function () {
-        _this9.refresh();
+        _this10.refresh();
       }, 1);
     },
     fetchItemsVuex: function fetchItemsVuex() {
       var _arguments = arguments,
-        _this10 = this;
+        _this11 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var page, result, itemsResult;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
-              _this10.loading = true;
-              _this10.$emit("beforeFetch", {});
-              if (!_this10.vuexLocalforage) {
+              _this11.loading = true;
+              _this11.$emit("beforeFetch", {});
+              if (!_this11.vuexLocalforage) {
                 _context.next = 9;
                 break;
               }
               _context.next = 7;
-              return _this10.model.$fetch();
+              return _this11.model.$fetch();
             case 7:
               _context.next = 13;
               break;
             case 9:
-              _this10.model.deleteAll();
+              _this11.model.deleteAll();
               _context.next = 12;
-              return _this10.model.api().get('', {
+              return _this11.model.api().get('', {
                 params: {
                   page: page,
-                  limit: _this10.pagination.perPage,
-                  filters: JSON.stringify(_this10.finalFilters)
+                  limit: _this11.pagination.perPage,
+                  filters: JSON.stringify(_this11.finalFilters)
                 }
               });
             case 12:
               result = _context.sent;
             case 13:
-              itemsResult = _this10.model.query().withAll().get(); //let itemsResult = result.entities[this.model.entity];
+              itemsResult = _this11.model.query().withAll().get(); //let itemsResult = result.entities[this.model.entity];
               if (itemsResult) {
-                _this10.items = itemsResult;
+                _this11.items = itemsResult;
               }
-              console.debug("fetch page vuex ", itemsResult, page, _this10.items, result);
-              _this10.loading = false;
-              _this10.firstLoad = true;
+              console.debug("fetch page vuex ", itemsResult, page, _this11.items, result);
+              _this11.loading = false;
+              _this11.firstLoad = true;
             case 18:
             case "end":
               return _context.stop();
@@ -13438,7 +13461,7 @@ n(css, {});function normalizeComponent (
       }))();
     },
     fetchItems: function fetchItems() {
-      var _this11 = this;
+      var _this12 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var concat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       if (!this.ajax) {
@@ -13456,26 +13479,26 @@ n(css, {});function normalizeComponent (
           filters: JSON.stringify(this.finalFilters)
         }
       }).then(function (response) {
-        _this11.makePagination(response.data);
+        _this12.makePagination(response.data);
         var items = response.data.data;
-        if (_this11.grouped) {
-          _this11.groupItems(items, concat);
+        if (_this12.grouped) {
+          _this12.groupItems(items, concat);
         } else {
           if (concat) {
-            _this11.items = _this11.items.concat(items);
+            _this12.items = _this12.items.concat(items);
           } else {
-            _this11.items = items;
+            _this12.items = items;
           }
         }
-        _this11.loading = false;
-        _this11.firstLoad = true;
-        _this11.$emit("afterFetch", {});
+        _this12.loading = false;
+        _this12.firstLoad = true;
+        _this12.$emit("afterFetch", {});
       }).catch(function (error) {
         //console.debug(error);
-        _this11.toastError(error);
-        _this11.loading = false;
-        _this11.firstLoad = true;
-        _this11.fetchError = true;
+        _this12.toastError(error);
+        _this12.loading = false;
+        _this12.firstLoad = true;
+        _this12.fetchError = true;
       });
     },
     groupItems: function groupItems(items) {
@@ -13512,7 +13535,7 @@ n(css, {});function normalizeComponent (
       }
     },
     removeItem: function removeItem(id, index) {
-      var _this12 = this;
+      var _this13 = this;
       this.$bvModal.msgBoxConfirm(this.messageRemoveConfirm, {
         size: "sm",
         buttonSize: "sm",
@@ -13522,15 +13545,15 @@ n(css, {});function normalizeComponent (
         centered: true
       }).then(function (value) {
         if (value) {
-          _this12.deleteItem(id, index);
+          _this13.deleteItem(id, index);
         }
       }).catch(function (error) {
-        _this12.toastError(error);
-        _this12.loading = false;
+        _this13.toastError(error);
+        _this13.loading = false;
       });
     },
     confirmBulkDelete: function confirmBulkDelete() {
-      var _this13 = this;
+      var _this14 = this;
       this.$bvModal.msgBoxConfirm(this.messageRemoveBulkConfirm, {
         size: "sm",
         buttonSize: "sm",
@@ -13540,15 +13563,15 @@ n(css, {});function normalizeComponent (
         centered: true
       }).then(function (value) {
         if (value) {
-          _this13.deleteItemBulk();
+          _this14.deleteItemBulk();
         }
       }).catch(function (error) {
-        _this13.toastError(error);
-        _this13.loading = false;
+        _this14.toastError(error);
+        _this14.loading = false;
       });
     },
     deleteItemBulk: function deleteItemBulk() {
-      var _this14 = this;
+      var _this15 = this;
       if (this.useVuexORM) {
         return this.deleteItemBulkVuex();
       }
@@ -13564,34 +13587,34 @@ n(css, {});function normalizeComponent (
           ids: ids
         }
       }).then(function (response) {
-        _this14.items = _this14.items.filter(function (it) {
+        _this15.items = _this15.items.filter(function (it) {
           return !ids.includes(it.id);
         });
-        _this14.toastSuccess("Elemento/s eliminado.");
-        _this14.$emit("itemDeleted", {});
-        _this14.loading = false;
+        _this15.toastSuccess("Elemento/s eliminado.");
+        _this15.$emit("itemDeleted", {});
+        _this15.loading = false;
       }).catch(function (error) {
-        _this14.toastError(error);
-        _this14.loading = false;
+        _this15.toastError(error);
+        _this15.loading = false;
       });
     },
     deleteItemBulkLocal: function deleteItemBulkLocal() {
-      var _this15 = this;
+      var _this16 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var ids;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              ids = _this15.selectedItems.map(function (it) {
+              ids = _this16.selectedItems.map(function (it) {
                 return it.id;
               });
-              _this15.items = _this15.items.filter(function (it) {
+              _this16.items = _this16.items.filter(function (it) {
                 return !ids.includes(it.id);
               });
-              _this15.item = null;
-              _this15.toastSuccess("Elemento Eliminado");
-              _this15.$emit("itemDeleted", {});
-              _this15.loading = false;
+              _this16.item = null;
+              _this16.toastSuccess("Elemento Eliminado");
+              _this16.$emit("itemDeleted", {});
+              _this16.loading = false;
             case 6:
             case "end":
               return _context2.stop();
@@ -13600,32 +13623,54 @@ n(css, {});function normalizeComponent (
       }))();
     },
     deleteItemBulkVuex: function deleteItemBulkVuex() {
+      var _this17 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var ids, result;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
+              ids = _this17.selectedItems.map(function (it) {
+                return it.id;
+              });
+              if (!_this17.vuexLocalforage) {
+                _context3.next = 6;
+                break;
+              }
+              _context3.next = 4;
+              return _this17.model.$delete(ids);
+            case 4:
+              _context3.next = 15;
+              break;
+            case 6:
+              _context3.next = 8;
+              return _this17.model.api().delete('/bulk-destroy', {
+                params: {
+                  ids: ids
+                },
+                delete: ids
+              });
+            case 8:
+              result = _context3.sent;
+              console.debug("delete item vuex", result);
+              result.response.status;
+              if (!result.response.data.error) {
+                _context3.next = 15;
+                break;
+              }
+              _this17.toastError(result.response.data.error);
+              _this17.loading = false;
+              return _context3.abrupt("return");
+            case 15:
+              _this17.toastSuccess("Elemento eliminados.");
+            case 16:
             case "end":
               return _context3.stop();
           }
         }, _callee3);
       }))();
-    } /*
-            let result = await this.model.api().delete('/' + id, {
-              delete: 1
-            });
-      
-            console.debug("delete item vuex", result);
-            let responseStatus = result.response.status;
-      
-            if (result.response.data.error) {
-              this.toastError(result.response.data.error);
-              this.loading = false;
-              return;
-            }
-      
-            this.toastSuccess("Elemento eliminado.");*/,
+    },
     deleteItem: function deleteItem(id, index) {
-      var _this16 = this;
+      var _this18 = this;
       if (this.useVuexORM) {
         return this.deleteItemVuex(id, index);
       }
@@ -13634,17 +13679,17 @@ n(css, {});function normalizeComponent (
       }
       this.loading = true;
       axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(function (response) {
-        _this16.items.splice(index, 1);
-        _this16.toastSuccess("Elemento eliminado.");
-        _this16.$emit("itemDeleted", {});
-        _this16.loading = false;
+        _this18.items.splice(index, 1);
+        _this18.toastSuccess("Elemento eliminado.");
+        _this18.$emit("itemDeleted", {});
+        _this18.loading = false;
       }).catch(function (error) {
-        _this16.toastError(error);
-        _this16.loading = false;
+        _this18.toastError(error);
+        _this18.loading = false;
       });
     },
     deleteItemLocal: function deleteItemLocal(id, index) {
-      var _this17 = this;
+      var _this19 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var itemIndex;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
@@ -13652,24 +13697,24 @@ n(css, {});function normalizeComponent (
             case 0:
               if (id || index) {
                 if (id) {
-                  itemIndex = _this17.items.findIndex(function (item) {
-                    return item.id == _this17.item.id;
+                  itemIndex = _this19.items.findIndex(function (item) {
+                    return item.id == _this19.item.id;
                   });
                 } else {
                   itemIndex = index;
                 }
 
                 // Assuming this.items is an array
-                _this17.items.splice(itemIndex, 1);
-                _this17.item = null;
-                _this17.toastSuccess("Elemento Eliminado");
-                _this17.$emit("itemDeleted", {});
+                _this19.items.splice(itemIndex, 1);
+                _this19.item = null;
+                _this19.toastSuccess("Elemento Eliminado");
+                _this19.$emit("itemDeleted", {});
               } else {
                 // Handle the case where there's no item.id or item.index
                 console.error("Cannot delete item without ID or index");
                 // You might want to show an error message or handle it in a way that fits your application.
               }
-              _this17.loading = false;
+              _this19.loading = false;
             case 2:
             case "end":
               return _context4.stop();
@@ -13678,24 +13723,24 @@ n(css, {});function normalizeComponent (
       }))();
     },
     deleteItemVuex: function deleteItemVuex(id, index) {
-      var _this18 = this;
+      var _this20 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         var result;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
-              if (!_this18.vuexLocalforage) {
+              if (!_this20.vuexLocalforage) {
                 _context5.next = 5;
                 break;
               }
               _context5.next = 3;
-              return _this18.model.$delete(id);
+              return _this20.model.$delete(id);
             case 3:
               _context5.next = 14;
               break;
             case 5:
               _context5.next = 7;
-              return _this18.model.api().delete('/' + id, {
+              return _this20.model.api().delete('/' + id, {
                 delete: 1
               });
             case 7:
@@ -13706,11 +13751,11 @@ n(css, {});function normalizeComponent (
                 _context5.next = 14;
                 break;
               }
-              _this18.toastError(result.response.data.error);
-              _this18.loading = false;
+              _this20.toastError(result.response.data.error);
+              _this20.loading = false;
               return _context5.abrupt("return");
             case 14:
-              _this18.toastSuccess("Elemento eliminado.");
+              _this20.toastSuccess("Elemento eliminado.");
             case 15:
             case "end":
               return _context5.stop();
@@ -13719,14 +13764,14 @@ n(css, {});function normalizeComponent (
       }))();
     },
     saveSort: function saveSort() {
-      var _this19 = this;
+      var _this21 = this;
       if (this.orderable) {
         this.loading = true;
         var order = [];
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: v[_this19.orderProp]
+            order: v[_this21.orderProp]
           });
         });
         if (!this.ajax) {
@@ -13736,18 +13781,18 @@ n(css, {});function normalizeComponent (
           order: order
         }).then(function (response) {
           response.data;
-          _this19.toastSuccess("Orden Actualizado");
-          if (_this19.refreshAfterSave) _this19.refresh();
-          _this19.loading = false;
+          _this21.toastSuccess("Orden Actualizado");
+          if (_this21.refreshAfterSave) _this21.refresh();
+          _this21.loading = false;
         }).catch(function (error) {
           //console.debug(error);
-          _this19.toastError(error);
-          _this19.loading = false;
+          _this21.toastError(error);
+          _this21.loading = false;
         });
       }
     },
     exportItems: function exportItems() {
-      var _this20 = this;
+      var _this22 = this;
       if (this.useVuexORM) {
         return;
       }
@@ -13776,15 +13821,15 @@ n(css, {});function normalizeComponent (
         params: params,
         responseType: "blob"
       }).then(function (response) {
-        _this20.downloadBlobResponse(response);
-        _this20.loading = false;
+        _this22.downloadBlobResponse(response);
+        _this22.loading = false;
       }).catch(function (error) {
-        _this20.toastError(error);
-        _this20.loading = false;
+        _this22.toastError(error);
+        _this22.loading = false;
       });
     },
     importItems: function importItems() {
-      var _this21 = this;
+      var _this23 = this;
       var formData = new FormData();
       formData.append("file", this.fileImport);
       axios.post(this.apiUrl + "/" + this.modelName + "/import", formData, {
@@ -13793,19 +13838,19 @@ n(css, {});function normalizeComponent (
         }
       }).then(function (response) {
         if (response && response.data && response.data.success == true) {
-          _this21.$refs["modal-import"].hide();
-          _this21.toastSuccess("Datos Importados con Éxito");
-          _this21.$refs["crud"].refresh();
+          _this23.$refs["modal-import"].hide();
+          _this23.toastSuccess("Datos Importados con Éxito");
+          _this23.$refs["crud"].refresh();
         } else {
-          _this21.toastError("No se pudo importar los datos.");
+          _this23.toastError("No se pudo importar los datos.");
         }
       }).catch(function (error) {
         console.error(error);
-        _this21.toastError(error);
+        _this23.toastError(error);
       });
     },
     getArrayValue: function getArrayValue(value, displayProp) {
-      var _this22 = this;
+      var _this24 = this;
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
       if (!Array.isArray(value)) return "N/A";
       var values = [];
@@ -13822,7 +13867,7 @@ n(css, {});function normalizeComponent (
         return "";
       }
       values.forEach(function (val) {
-        valuesFinal.push(_this22.getStateValue(val, options));
+        valuesFinal.push(_this24.getStateValue(val, options));
       });
       return values.join(",");
     },
@@ -13844,47 +13889,47 @@ n(css, {});function normalizeComponent (
       return ops.join(", ");
     },
     saveItemVuex: function saveItemVuex() {
-      var _this23 = this;
+      var _this25 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
-        var jsondata, result, create;
+        var result, create, jsondata;
         return _regeneratorRuntime().wrap(function _callee6$(_context6) {
           while (1) switch (_context6.prev = _context6.next) {
             case 0:
-              console.debug("save item 1", _this23.item);
-              jsondata = _this23.item.$toJson();
-              console.debug("save item 2", _this23.item, jsondata);
+              console.debug("save item 1", _this25.item);
               create = false;
-              if (!_this23.vuexLocalforage) {
-                _context6.next = 19;
+              if (!_this25.vuexLocalforage) {
+                _context6.next = 17;
                 break;
               }
-              if (!_this23.item.id) {
-                _context6.next = 13;
+              if (!_this25.item.id) {
+                _context6.next = 11;
                 break;
               }
-              _context6.next = 9;
-              return _this23.model.$update(_this23.item.id, jsondata);
-            case 9:
+              _context6.next = 7;
+              return _this25.model.$update(_this25.item.id, _this25.item);
+            case 7:
               result = _context6.sent;
               create = false;
-              _context6.next = 17;
-              break;
-            case 13:
               _context6.next = 15;
-              return _this23.model.$create(jsondata);
-            case 15:
+              break;
+            case 11:
+              _context6.next = 13;
+              return _this25.model.$create(_this25.item);
+            case 13:
               result = _context6.sent;
               create = true;
-            case 17:
+            case 15:
               _context6.next = 36;
               break;
-            case 19:
-              if (!_this23.item.id) {
+            case 17:
+              jsondata = _this25.item.$toJson();
+              console.debug("save item 2", _this25.item, jsondata);
+              if (!_this25.item.id) {
                 _context6.next = 26;
                 break;
               }
               _context6.next = 22;
-              return _this23.model.api().put('/' + _this23.item.id, jsondata);
+              return _this25.model.api().put('/' + _this25.item.id, jsondata);
             case 22:
               result = _context6.sent;
               create = false;
@@ -13892,7 +13937,7 @@ n(css, {});function normalizeComponent (
               break;
             case 26:
               _context6.next = 28;
-              return _this23.model.api().post('', jsondata);
+              return _this25.model.api().post('', jsondata);
             case 28:
               result = _context6.sent;
               create = true;
@@ -13902,17 +13947,17 @@ n(css, {});function normalizeComponent (
                 _context6.next = 35;
                 break;
               }
-              _this23.toastError(result.response.data.error);
-              _this23.loading = false;
+              _this25.toastError(result.response.data.error);
+              _this25.loading = false;
               return _context6.abrupt("return");
             case 35:
               result.save();
             case 36:
-              if (_this23.refreshAfterSave) _this23.refresh();
-              _this23.loading = false;
-              _this23.toastSuccess("Elemento Modificado");
-              if (_this23.hideModalAfterSave || create && _this23.hideModalAfterCreate || !create && _this23.hideModalAfterUpdate) {
-                _this23.$bvModal.hide("modal-form-item-" + _this23.modelName);
+              if (_this25.refreshAfterSave) _this25.refresh();
+              _this25.loading = false;
+              _this25.toastSuccess("Elemento Modificado");
+              if (_this25.hideModalAfterSave || create && _this25.hideModalAfterCreate || !create && _this25.hideModalAfterUpdate) {
+                _this25.$bvModal.hide("modal-form-item-" + _this25.modelName);
               }
             case 40:
             case "end":
@@ -13922,36 +13967,36 @@ n(css, {});function normalizeComponent (
       }))();
     },
     saveItemLocal: function saveItemLocal() {
-      var _this24 = this;
+      var _this26 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
         var itemSave, itemIndex;
         return _regeneratorRuntime().wrap(function _callee7$(_context7) {
           while (1) switch (_context7.prev = _context7.next) {
             case 0:
-              itemSave = JSON.parse(JSON.stringify(_this24.item));
-              if (_this24.item.id || _this24.item.index) {
-                if (_this24.item.id) {
-                  itemIndex = _this24.items.findIndex(function (item) {
-                    return item.id == _this24.item.id;
+              itemSave = JSON.parse(JSON.stringify(_this26.item));
+              if (_this26.item.id || _this26.item.index) {
+                if (_this26.item.id) {
+                  itemIndex = _this26.items.findIndex(function (item) {
+                    return item.id == _this26.item.id;
                   });
                 } else {
-                  itemIndex = _this24.items.findIndex(function (item) {
-                    return item.index == _this24.item.index;
+                  itemIndex = _this26.items.findIndex(function (item) {
+                    return item.index == _this26.item.index;
                   });
                 }
-                _this24.items[itemIndex] = itemSave;
-                if (_this24.hideModalAfterSave || _this24.hideModalAfterUpdate) {
-                  _this24.$bvModal.hide("modal-form-item-" + _this24.modelName);
+                _this26.items[itemIndex] = itemSave;
+                if (_this26.hideModalAfterSave || _this26.hideModalAfterUpdate) {
+                  _this26.$bvModal.hide("modal-form-item-" + _this26.modelName);
                 }
               } else {
-                itemSave.index = _this24.items.length + 1;
-                _this24.items.push(itemSave);
-                if (_this24.hideModalAfterSave || _this24.hideModalAfterCreate) {
-                  _this24.$bvModal.hide("modal-form-item-" + _this24.modelName);
+                itemSave.index = _this26.items.length + 1;
+                _this26.items.push(itemSave);
+                if (_this26.hideModalAfterSave || _this26.hideModalAfterCreate) {
+                  _this26.$bvModal.hide("modal-form-item-" + _this26.modelName);
                 }
               }
-              _this24.toastSuccess("Elemento Modificado");
-              _this24.loading = false;
+              _this26.toastSuccess("Elemento Modificado");
+              _this26.loading = false;
             case 5:
             case "end":
               return _context7.stop();
@@ -13960,7 +14005,7 @@ n(css, {});function normalizeComponent (
       }))();
     },
     loadOptions: function loadOptions() {
-      var _this25 = this;
+      var _this27 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
         var i, column, options;
         return _regeneratorRuntime().wrap(function _callee8$(_context8) {
@@ -13968,11 +14013,11 @@ n(css, {});function normalizeComponent (
             case 0:
               i = 0;
             case 1:
-              if (!(i < _this25.columns.length)) {
+              if (!(i < _this27.columns.length)) {
                 _context8.next = 12;
                 break;
               }
-              column = _this25.columns[i];
+              column = _this27.columns[i];
               if (!(column.options instanceof Promise)) {
                 _context8.next = 9;
                 break;
@@ -13981,16 +14026,16 @@ n(css, {});function normalizeComponent (
               return column.options;
             case 6:
               options = _context8.sent;
-              _this25.$set(_this25.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
+              _this27.$set(_this27.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
                 options: options
               }));
-              console.debug("Options promise", _this25.columns);
+              console.debug("Options promise", _this27.columns);
             case 9:
               i++;
               _context8.next = 1;
               break;
             case 12:
-              _this25.optionsLoaded = true;
+              _this27.optionsLoaded = true;
             case 13:
             case "end":
               return _context8.stop();
@@ -14000,25 +14045,25 @@ n(css, {});function normalizeComponent (
     },
     saveItem: function saveItem() {
       var _arguments4 = arguments,
-        _this26 = this;
+        _this28 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
         var event, validation_result, validation_error_message, formData;
         return _regeneratorRuntime().wrap(function _callee9$(_context9) {
           while (1) switch (_context9.prev = _context9.next) {
             case 0:
               event = _arguments4.length > 0 && _arguments4[0] !== undefined ? _arguments4[0] : null;
-              _this26.loading = true;
-              if (!_this26.validate) {
+              _this28.loading = true;
+              if (!_this28.validate) {
                 _context9.next = 10;
                 break;
               }
               validation_result = true;
-              validation_error_message = _this26.messageDefaultValidationError;
+              validation_error_message = _this28.messageDefaultValidationError;
               if (validation_result) {
                 _context9.next = 8;
                 break;
               }
-              _this26.toastError(validation_error_message);
+              _this28.toastError(validation_error_message);
               return _context9.abrupt("return");
             case 8:
               _context9.next = 11;
@@ -14026,105 +14071,105 @@ n(css, {});function normalizeComponent (
             case 10:
               if (event) event.preventDefault();
             case 11:
-              if (!_this26.useVuexORM) {
+              if (!_this28.useVuexORM) {
                 _context9.next = 13;
                 break;
               }
-              return _context9.abrupt("return", _this26.saveItemVuex(event));
+              return _context9.abrupt("return", _this28.saveItemVuex(event));
             case 13:
-              if (_this26.ajax) {
+              if (_this28.ajax) {
                 _context9.next = 15;
                 break;
               }
-              return _context9.abrupt("return", _this26.saveItemLocal(event));
+              return _context9.abrupt("return", _this28.saveItemLocal(event));
             case 15:
-              if (_this26.item.id) {
-                axios.put(_this26.apiUrl + "/" + _this26.modelName + "/" + _this26.item.id, _this26.item).then(function (response) {
-                  if (_this26.hideModalAfterSave || _this26.hideModalAfterUpdate) {
-                    _this26.$bvModal.hide("modal-form-item-" + _this26.modelName);
+              if (_this28.item.id) {
+                axios.put(_this28.apiUrl + "/" + _this28.modelName + "/" + _this28.item.id, _this28.item).then(function (response) {
+                  if (_this28.hideModalAfterSave || _this28.hideModalAfterUpdate) {
+                    _this28.$bvModal.hide("modal-form-item-" + _this28.modelName);
                   }
                   var itemSv = response.data;
-                  var itemIndex = _this26.items.findIndex(function (item) {
-                    return item.id == _this26.item.id;
+                  var itemIndex = _this28.items.findIndex(function (item) {
+                    return item.id == _this28.item.id;
                   });
-                  _this26.items[itemIndex] = itemSv;
-                  _this26.item = itemSv;
-                  _this26.loading = false;
-                  if (_this26.refreshAfterSave) _this26.refresh();
-                  _this26.toastSuccess("Elemento Modificado");
-                  _this26.$emit("itemSaved", {
-                    item: _this26.item
+                  _this28.items[itemIndex] = itemSv;
+                  _this28.item = itemSv;
+                  _this28.loading = false;
+                  if (_this28.refreshAfterSave) _this28.refresh();
+                  _this28.toastSuccess("Elemento Modificado");
+                  _this28.$emit("itemSaved", {
+                    item: _this28.item
                   });
-                  _this26.$emit("itemUpdated", {
-                    item: _this26.item
+                  _this28.$emit("itemUpdated", {
+                    item: _this28.item
                   });
                 }).catch(function (error) {
-                  _this26.toastError(error);
-                  _this26.loading = false;
+                  _this28.toastError(error);
+                  _this28.loading = false;
                 });
               } else {
-                if (_this26.createMultipart) {
+                if (_this28.createMultipart) {
                   formData = new FormData();
-                  Object.keys(_this26.item).forEach(function (key) {
-                    if (_this26.item[key][0] && _this26.item[key][0].name) {
-                      var files = _this26.item[key];
+                  Object.keys(_this28.item).forEach(function (key) {
+                    if (_this28.item[key][0] && _this28.item[key][0].name) {
+                      var files = _this28.item[key];
                       for (var x = 0; x < files.length; x++) {
-                        formData.append(key + "[]", _this26.item[key][x], _this26.item[key][x].name);
+                        formData.append(key + "[]", _this28.item[key][x], _this28.item[key][x].name);
                       }
-                    } else formData.append(key, _this26.item[key]);
+                    } else formData.append(key, _this28.item[key]);
                   });
-                  axios.post(_this26.apiUrl + "/" + _this26.modelName, formData).then(function (response) {
-                    _this26.loading = false;
-                    if (_this26.hideModalAfterSave || _this26.hideModalAfterCreate) {
-                      _this26.$bvModal.hide("modal-form-item-" + _this26.modelName);
+                  axios.post(_this28.apiUrl + "/" + _this28.modelName, formData).then(function (response) {
+                    _this28.loading = false;
+                    if (_this28.hideModalAfterSave || _this28.hideModalAfterCreate) {
+                      _this28.$bvModal.hide("modal-form-item-" + _this28.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this26.toastSuccess(response.data.message);
+                        _this28.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this26.items.push(itemSv);
-                    _this26.item = itemSv;
-                    if (_this26.refreshAfterSave) _this26.refresh();
-                    _this26.toastSuccess("Elemento Creado");
-                    _this26.$emit("itemSaved", {
-                      item: _this26.item
+                    _this28.items.push(itemSv);
+                    _this28.item = itemSv;
+                    if (_this28.refreshAfterSave) _this28.refresh();
+                    _this28.toastSuccess("Elemento Creado");
+                    _this28.$emit("itemSaved", {
+                      item: _this28.item
                     });
-                    _this26.$emit("itemCreated", {
-                      item: _this26.item
+                    _this28.$emit("itemCreated", {
+                      item: _this28.item
                     });
                   }).catch(function (error) {
-                    _this26.toastError(error);
-                    _this26.loading = false;
+                    _this28.toastError(error);
+                    _this28.loading = false;
                   });
                 } else {
-                  axios.post(_this26.apiUrl + "/" + _this26.modelName, _this26.item).then(function (response) {
-                    _this26.loading = false;
-                    if (_this26.hideModalAfterSave || _this26.hideModalAfterUpdate) {
-                      _this26.$bvModal.hide("modal-form-item-" + _this26.modelName);
+                  axios.post(_this28.apiUrl + "/" + _this28.modelName, _this28.item).then(function (response) {
+                    _this28.loading = false;
+                    if (_this28.hideModalAfterSave || _this28.hideModalAfterUpdate) {
+                      _this28.$bvModal.hide("modal-form-item-" + _this28.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this26.toastSuccess(response.data.message);
+                        _this28.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this26.items.push(itemSv);
-                    _this26.item = itemSv;
-                    if (_this26.refreshAfterSave) _this26.refresh();
-                    _this26.toastSuccess("Elemento Creado");
-                    _this26.$emit("itemSaved", {
-                      item: _this26.item
+                    _this28.items.push(itemSv);
+                    _this28.item = itemSv;
+                    if (_this28.refreshAfterSave) _this28.refresh();
+                    _this28.toastSuccess("Elemento Creado");
+                    _this28.$emit("itemSaved", {
+                      item: _this28.item
                     });
-                    _this26.$emit("itemCreated", {
-                      item: _this26.item
+                    _this28.$emit("itemCreated", {
+                      item: _this28.item
                     });
                   }).catch(function (error) {
-                    _this26.toastError(error);
-                    _this26.loading = false;
+                    _this28.toastError(error);
+                    _this28.loading = false;
                   });
                 }
               }
@@ -14212,11 +14257,11 @@ n(css, {});function normalizeComponent (
       link.click();
     },
     onChangeFilter: function onChangeFilter(event) {
-      var _this27 = this;
+      var _this29 = this;
       this.forceRecomputeCounter++;
       console.debug("Filters debug ", this.finalFilters, this.internalFilter, this.internalFilters, this.filter, this.filters);
       setTimeout(function () {
-        _this27.refresh();
+        _this29.refresh();
       }, 1);
     },
     onPaginationChange: function onPaginationChange(page) {
@@ -15278,7 +15323,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "51199a53", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "4e32274c", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
