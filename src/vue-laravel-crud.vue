@@ -438,21 +438,7 @@ export default /*#__PURE__*/ {
     console.debug("crud mounted columns", this.columns);
     this.internalFilters = [];
     this.setupFilters();
-
-    if (this.ajax) {
-      this.fetchItems();
-    } else {
-
-      if (this.grouped) {
-        this.groupItems(this.models);
-      } else {
-        this.items = this.models;
-      }
-
-      this.pagination.total = this.items.length;
-      this.firstLoad = true;
-    }
-
+    this.fetchItems();
     this.loadOptions();
   },
   computed: {
@@ -807,9 +793,7 @@ export default /*#__PURE__*/ {
 
     refresh() {
       this.$emit("refresh", {});
-      if (!this.ajax) {
-        return;
-      }
+     
       if (this.infiniteScroll) {
         this.pagination.current_page = 1;
         this.infiniteScrollKey++;
@@ -875,14 +859,30 @@ export default /*#__PURE__*/ {
       this.loading = false;
       this.firstLoad = true;
     },
-    fetchItems(page = 1, concat = false) {
-      if (!this.ajax) {
-        return;
+    fetchItemsLocal(){
+      if (this.grouped) {
+        this.groupItems(this.models);
+      } else {
+        this.items = this.models;
       }
+
+      this.pagination.total = this.items.length;
+      this.firstLoad = true;
+
+    },
+    fetchItems(page = 1, concat = false) {
+   
+      
       this.$emit("beforeFetch", {});
       if (this.useVuexORM) {
         return this.fetchItemsVuex(page, concat);
       }
+
+
+      if (!this.ajax) {
+        return this.fetchItemsLocal(page,concat);
+      }
+
       this.loading = true;
       return axios
         .get(this.apiUrl + "/" + this.modelName, {
