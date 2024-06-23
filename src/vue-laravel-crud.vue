@@ -1077,14 +1077,14 @@ export default /*#__PURE__*/ {
         delete: 1
       });
 
-      console.debug("delete item vuex", result);
-      let responseStatus = result.response.status;
+        console.debug("delete item vuex", result);
+        let responseStatus = result.response.status;
 
-      if (result.response.data.error) {
-        this.toastError(result.response.data.error);
-        this.loading = false;
-        return;
-      }
+        if (result.response.data.error) {
+          this.toastError(result.response.data.error);
+          this.loading = false;
+          return;
+        }
       }
 
   
@@ -1238,7 +1238,7 @@ export default /*#__PURE__*/ {
           result = await this.model.$update(this.item.id, jsondata);
           create = false;
         } else {
-          result = await this.model.$create(this.item.id, jsondata);
+          result = await this.model.$create(jsondata);
           create = true;
         }
       
