@@ -386,12 +386,13 @@ export default /*#__PURE__*/ {
 
     if (this.useVuexORM) {
 
-      this.item = new this.model();
-
+      if (this.vuexLocalforage) {
+        this.item = {};
+      } else {
+        this.item = new this.model();
+      }
       let itemVuexOrmDefault = {};
-
       const fields = this.model.fields();
-
       // Inicializa el objeto "itemDefault" con los valores por defecto
       const itemDefault = {};
       for (const fieldName of Object.keys(fields)) {
@@ -759,7 +760,13 @@ export default /*#__PURE__*/ {
     },
     createItem() {
       if (this.useVuexORM) {
-        this.item = new this.model(JSON.parse(JSON.stringify(this.itemDefault)));
+
+        if (this.vuexLocalforage) {
+          this.item = JSON.parse(JSON.stringify(this.itemDefault));
+        } else {
+          this.item = new this.model(JSON.parse(JSON.stringify(this.itemDefault)));
+        }
+
       } else {
         this.item = JSON.parse(JSON.stringify(this.itemDefault));
       }
@@ -820,10 +827,10 @@ export default /*#__PURE__*/ {
 
       let result;
 
-      if(this.vuexLocalforage){
+      if (this.vuexLocalforage) {
         await this.model.$fetch();
 
-      }else{
+      } else {
         this.model.deleteAll();
 
         result = await this.model.api().get('', {
@@ -836,7 +843,7 @@ export default /*#__PURE__*/ {
 
 
       }
-    
+
 
       let itemsResult = this.model.query().withAll().get();
       //let itemsResult = result.entities[this.model.entity];
@@ -1069,13 +1076,13 @@ export default /*#__PURE__*/ {
     async deleteItemVuex(id, index) {
 
 
-      if(this.vuexLocalforage){
+      if (this.vuexLocalforage) {
         await this.model.$delete(id);
 
-      }else{
+      } else {
         let result = await this.model.api().delete('/' + id, {
-        delete: 1
-      });
+          delete: 1
+        });
 
         console.debug("delete item vuex", result);
         let responseStatus = result.response.status;
@@ -1087,7 +1094,7 @@ export default /*#__PURE__*/ {
         }
       }
 
-  
+
 
       this.toastSuccess("Elemento eliminado.");
     },
@@ -1140,7 +1147,7 @@ export default /*#__PURE__*/ {
       }
 
       params.format = 'JSON';
-      
+
       this.loading = true;
       axios
         .get(this.apiUrl + "/" + this.modelName + "/export", { params: params, responseType: "blob", })
@@ -1231,7 +1238,7 @@ export default /*#__PURE__*/ {
       let create = false;
 
 
-      if(this.vuexLocalforage){
+      if (this.vuexLocalforage) {
 
         if (this.item.id) {
           result = await this.model.$update(this.item.id, jsondata);
@@ -1240,8 +1247,8 @@ export default /*#__PURE__*/ {
           result = await this.model.$create(jsondata);
           create = true;
         }
-      
-      }else{
+
+      } else {
         if (this.item.id) {
           result = await this.model.api().put('/' + this.item.id, jsondata);
           create = false;
@@ -1250,7 +1257,7 @@ export default /*#__PURE__*/ {
           create = true;
         }
 
-          
+
         let responseStatus = result.response.status;
         if (result.response.data.error) {
           this.toastError(result.response.data.error);
@@ -1258,11 +1265,11 @@ export default /*#__PURE__*/ {
           return;
           //throw new Error('Something is wrong.')
         }
-          
+
         result.save();
       }
 
-  
+
       if (this.refreshAfterSave) this.refresh();
       this.loading = false;
       this.toastSuccess("Elemento Modificado");
@@ -1501,7 +1508,7 @@ export default /*#__PURE__*/ {
         appendToast: true,
       });
     },
-    downloadBlobResponse(response,extension = null) {
+    downloadBlobResponse(response, extension = null) {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
@@ -1511,20 +1518,20 @@ export default /*#__PURE__*/ {
 
 
       if (contentdisposition) {
-          filename = contentdisposition.split('filename=')[1].split('.')[0];
-          filename = filename.replace('_', '');
-          filename = filename.replace('"', '');
-          extension = contentdisposition.split('.')[1].split(';')[0];
-          extension = extension.replace('_', '');
-          extension = extension.replace('"', '');
+        filename = contentdisposition.split('filename=')[1].split('.')[0];
+        filename = filename.replace('_', '');
+        filename = filename.replace('"', '');
+        extension = contentdisposition.split('.')[1].split(';')[0];
+        extension = extension.replace('_', '');
+        extension = extension.replace('"', '');
       }
 
 
-      console.debug("DOWNLOAD ",filename,extension);
+      console.debug("DOWNLOAD ", filename, extension);
       link.setAttribute("download", filename + '.' + extension);
       document.body.appendChild(link);
       link.click();
-  },
+    },
     onChangeFilter(event) {
       this.forceRecomputeCounter++;
       console.debug("Filters debug ", this.finalFilters, this.internalFilter, this.internalFilters, this.filter, this.filters);
@@ -1981,7 +1988,8 @@ export default /*#__PURE__*/ {
       </div>
     </infinite-loading>
     <div class="paginator-data" v-if="!infiniteScroll">
-      Filas: {{ pagination.total }} | xPág: {{ pagination.per_page }} | Pág: {{ pagination.current_page }} | Seleccionados:
+      Filas: {{ pagination.total }} | xPág: {{ pagination.per_page }} | Pág: {{ pagination.current_page }} |
+      Seleccionados:
       {{
         selectedItems.length }}
     </div>
