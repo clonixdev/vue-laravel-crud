@@ -1232,7 +1232,6 @@ export default /*#__PURE__*/ {
 
 
       if(this.vuexLocalforage){
-        await this.model.$create(id);
 
         if (this.item.id) {
           result = await this.model.$update(this.item.id, jsondata);
