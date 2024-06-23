@@ -98,6 +98,10 @@ export default /*#__PURE__*/ {
       type: Boolean | Array,
       default: true,
     },
+    vuexLocalforage: {
+      type: Boolean,
+      default: false,
+    },
 
     columns: {
       type: Array,
@@ -814,16 +818,25 @@ export default /*#__PURE__*/ {
       this.loading = true;
       this.$emit("beforeFetch", {});
 
-      this.model.deleteAll();
+      let result;
 
-      const result = await this.model.api().get('', {
-        params: {
-          page: page,
-          limit: this.pagination.perPage,
-          filters: JSON.stringify(this.finalFilters),
-        }
-      });
+      if(this.vuexLocalforage){
+        await this.model.$fetch();
 
+      }else{
+        this.model.deleteAll();
+
+        result = await this.model.api().get('', {
+          params: {
+            page: page,
+            limit: this.pagination.perPage,
+            filters: JSON.stringify(this.finalFilters),
+          }
+        });
+
+
+      }
+    
 
       let itemsResult = this.model.query().withAll().get();
       //let itemsResult = result.entities[this.model.entity];
@@ -1055,7 +1068,12 @@ export default /*#__PURE__*/ {
     },
     async deleteItemVuex(id, index) {
 
-      let result = await this.model.api().delete('/' + id, {
+
+      if(this.vuexLocalforage){
+        await this.model.$delete(id);
+
+      }else{
+        let result = await this.model.api().delete('/' + id, {
         delete: 1
       });
 
@@ -1067,6 +1085,9 @@ export default /*#__PURE__*/ {
         this.loading = false;
         return;
       }
+      }
+
+  
 
       this.toastSuccess("Elemento eliminado.");
     },
@@ -1209,22 +1230,40 @@ export default /*#__PURE__*/ {
 
       let create = false;
 
-      if (this.item.id) {
-        result = await this.model.api().put('/' + this.item.id, jsondata);
-        create = false;
-      } else {
-        result = await this.model.api().post('', jsondata);
-        create = true;
+
+      if(this.vuexLocalforage){
+        await this.model.$create(id);
+
+        if (this.item.id) {
+          result = await this.model.$update(this.item.id, jsondata);
+          create = false;
+        } else {
+          result = await this.model.$create(this.item.id, jsondata);
+          create = true;
+        }
+      
+      }else{
+        if (this.item.id) {
+          result = await this.model.api().put('/' + this.item.id, jsondata);
+          create = false;
+        } else {
+          result = await this.model.api().post('', jsondata);
+          create = true;
+        }
+
+          
+        let responseStatus = result.response.status;
+        if (result.response.data.error) {
+          this.toastError(result.response.data.error);
+          this.loading = false;
+          return;
+          //throw new Error('Something is wrong.')
+        }
+          
+        result.save();
       }
 
-      let responseStatus = result.response.status;
-      if (result.response.data.error) {
-        this.toastError(result.response.data.error);
-        this.loading = false;
-        return;
-        //throw new Error('Something is wrong.')
-      }
-      result.save();
+  
       if (this.refreshAfterSave) this.refresh();
       this.loading = false;
       this.toastSuccess("Elemento Modificado");
@@ -1232,7 +1271,6 @@ export default /*#__PURE__*/ {
       if (this.hideModalAfterSave || ((create && this.hideModalAfterCreate) || (!create && this.hideModalAfterUpdate))) {
         this.$bvModal.hide("modal-form-item-" + this.modelName);
       }
-
 
     },
 
