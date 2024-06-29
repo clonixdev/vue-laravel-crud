@@ -381,7 +381,7 @@ export default /*#__PURE__*/ {
 
   mounted() {
     const now = Math.floor(Date.now() / 1000);
-    this.crudUuid = ''.now;
+    this.crudUuid = ''+now;
     this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
 
     // Agregar un oyente de eventos para actualizar isMobile cuando cambia el tamaño de la pantalla
@@ -498,13 +498,8 @@ export default /*#__PURE__*/ {
       let filter = [];
       this.forceRecomputeCounter;
       this.internalFilters.forEach((f) => {
-
-
-
         if (f.value) {
-
           let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
-
           filter.push([colname, f.op, f.value]);
         }
       });
