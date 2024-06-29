@@ -12532,7 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-e031b2ee]:last-child,\ntr td[data-v-e031b2ee]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-e031b2ee] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-e031b2ee] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-e031b2ee] .crud-title[data-v-e031b2ee] {\n    margin: 0; }\n  .crud-header[data-v-e031b2ee] .crud-search[data-v-e031b2ee] {\n    max-width: 15rem; }\n    .crud-header[data-v-e031b2ee] .crud-search[data-v-e031b2ee] .btn[data-v-e031b2ee] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-e031b2ee] .crud-search[data-v-e031b2ee] .btn[data-v-e031b2ee].open[data-v-e031b2ee] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-e031b2ee] .table-options[data-v-e031b2ee] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-e031b2ee] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-e031b2ee] {\n    table-layout: auto; }\n    .table[data-v-e031b2ee] tbody[data-v-e031b2ee] td[data-v-e031b2ee] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-e031b2ee] tbody[data-v-e031b2ee] td[data-v-e031b2ee]::-webkit-scrollbar {\n      display: none; } }\n";
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-6fd1b6ca]:last-child,\ntr td[data-v-6fd1b6ca]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-6fd1b6ca] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-6fd1b6ca] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-6fd1b6ca] .crud-title[data-v-6fd1b6ca] {\n    margin: 0; }\n  .crud-header[data-v-6fd1b6ca] .crud-search[data-v-6fd1b6ca] {\n    max-width: 15rem; }\n    .crud-header[data-v-6fd1b6ca] .crud-search[data-v-6fd1b6ca] .btn[data-v-6fd1b6ca] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-6fd1b6ca] .crud-search[data-v-6fd1b6ca] .btn[data-v-6fd1b6ca].open[data-v-6fd1b6ca] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-6fd1b6ca] .table-options[data-v-6fd1b6ca] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-6fd1b6ca] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-6fd1b6ca] {\n    table-layout: auto; }\n    .table[data-v-6fd1b6ca] tbody[data-v-6fd1b6ca] td[data-v-6fd1b6ca] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-6fd1b6ca] tbody[data-v-6fd1b6ca] td[data-v-6fd1b6ca]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -12633,6 +12633,7 @@ n(css, {});function normalizeComponent (
   },
   data: function data() {
     return {
+      crudUuid: string,
       moment: moment,
       loading: false,
       firstLoad: false,
@@ -12666,7 +12667,8 @@ n(css, {});function normalizeComponent (
       isMobile: false,
       refreshing: false,
       fetchError: false,
-      principalSort: false
+      principalSort: false,
+      exportFormat: 'JSON'
     };
   },
   watch: {
@@ -12981,6 +12983,7 @@ n(css, {});function normalizeComponent (
     }
   },
   mounted: function mounted() {
+    this.crudUuid = ''.now;
     this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
 
     // Agregar un oyente de eventos para actualizar isMobile cuando cambia el tamaño de la pantalla
@@ -13787,6 +13790,9 @@ n(css, {});function normalizeComponent (
         });
       }
     },
+    showExportModal: function showExportModal() {
+      this.$refs["modal-export"].show();
+    },
     exportItems: function exportItems() {
       var _this22 = this;
       if (this.useVuexORM) {
@@ -13811,7 +13817,7 @@ n(css, {});function normalizeComponent (
           exportItems: exportItems
         };
       }
-      params.format = 'JSON';
+      params.format = this.exportFormat;
       this.loading = true;
       axios.get(this.apiUrl + "/" + this.modelName + "/export", {
         params: params,
@@ -13823,6 +13829,9 @@ n(css, {});function normalizeComponent (
         _this22.toastError(error);
         _this22.loading = false;
       });
+    },
+    showImportModal: function showImportModal() {
+      this.$refs["modal-import"].show();
     },
     importItems: function importItems() {
       var _this23 = this;
@@ -14512,15 +14521,13 @@ var _sfc_render = function render() {
     return [_vm._t("tableActionsPrepend", null, {
       "loading": _vm.loading
     }), _vm.showImport ? _c('b-button', {
-      directives: [{
-        name: "b-modal",
-        rawName: "v-b-modal.modal-import",
-        modifiers: {
-          "modal-import": true
-        }
-      }],
       attrs: {
         "variant": "info"
+      },
+      on: {
+        "click": function click($event) {
+          return _vm.showImportModal();
+        }
       }
     }, [_c('b-icon-cloud-upload'), _vm._v(_vm._s(_vm.messageImport) + " ")], 1) : _vm._e(), _vm.showExport ? _c('b-button', {
       attrs: {
@@ -14528,7 +14535,7 @@ var _sfc_render = function render() {
       },
       on: {
         "click": function click($event) {
-          return _vm.exportItems();
+          return _vm.showExportModal();
         }
       }
     }, [_c('b-icon-cloud-download'), _vm._v(_vm._s(_vm.messageExport) + " ")], 1) : _vm._e(), _vm.showPrincipalSortBtn ? _c('b-button', {
@@ -15281,7 +15288,6 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2), _vm.showImport ? _c('b-modal', {
     ref: "modal-import",
     attrs: {
-      "id": "modal-import",
       "title": "Importar",
       "hide-footer": ""
     }
@@ -15320,10 +15326,64 @@ var _sfc_render = function render() {
     }, [_c('b-icon-cloud-upload'), _vm._v(" " + _vm._s(_vm.loading ? "Cargando..." : "Importar") + " ")], 1)], 1)], 1)];
   }, {
     "item": _vm.item
+  }) : _vm._e()], 2) : _vm._e(), _vm.showExport ? _c('b-modal', {
+    ref: "modal-export",
+    attrs: {
+      "title": "Exportar",
+      "hide-footer": ""
+    }
+  }, [_vm.item ? _vm._t("export", function () {
+    return [_c('b-overlay', {
+      attrs: {
+        "show": _vm.loading,
+        "rounded": "sm"
+      }
+    }, [_vm.selectedItems.length ? _c('p', [_vm._v("Se exportará " + _vm._s(_vm.selectedItems.length) + " elementos.")]) : _c('p', [_vm._v("Se exportará la consulta actual.")]), _c('select', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.exportFormat,
+        expression: "exportFormat"
+      }],
+      staticClass: "form-control",
+      on: {
+        "change": function change($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+          _vm.exportFormat = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+        }
+      }
+    }, [_c('option', {
+      attrs: {
+        "value": "JSON"
+      }
+    }, [_vm._v("JSON")]), _c('option', {
+      attrs: {
+        "value": "XLSX"
+      }
+    }, [_vm._v("XLSX")])]), _c('div', {
+      staticClass: "text-center mt-3"
+    }, [_c('b-button', {
+      attrs: {
+        "variant": "info",
+        "disabled": _vm.loading
+      },
+      on: {
+        "click": function click($event) {
+          return _vm.exportItems();
+        }
+      }
+    }, [_c('b-icon-cloud-upload'), _vm._v(" " + _vm._s(_vm.loading ? "Cargando..." : "Exportar") + " ")], 1)], 1)])];
+  }, {
+    "item": _vm.item
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "e031b2ee", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "6fd1b6ca", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
