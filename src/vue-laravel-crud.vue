@@ -16,7 +16,7 @@ export default /*#__PURE__*/ {
   data() {
     return {
 
-      crudUuid: string,
+      crudUuid,
       moment: moment,
       loading: false,
       firstLoad: false,
