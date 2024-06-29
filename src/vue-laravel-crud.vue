@@ -15,6 +15,8 @@ export default /*#__PURE__*/ {
   },
   data() {
     return {
+
+      crudUuid: string,
       moment: moment,
       loading: false,
       firstLoad: false,
@@ -51,7 +53,7 @@ export default /*#__PURE__*/ {
       refreshing: false,
       fetchError: false,
       principalSort: false,
-
+      exportFormat: 'JSON',
     };
   },
   watch: {
@@ -378,7 +380,8 @@ export default /*#__PURE__*/ {
   },
 
   mounted() {
-
+    const now = Math.floor(Date.now() / 1000);
+    this.crudUuid = ''.now;
     this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
 
     // Agregar un oyente de eventos para actualizar isMobile cuando cambia el tamaño de la pantalla
@@ -1155,6 +1158,12 @@ export default /*#__PURE__*/ {
           });
       }
     },
+
+    showExportModal(){
+      this.$refs["modal-export"].show();
+    },
+
+
     exportItems() {
       if (this.useVuexORM) {
         return;
@@ -1166,17 +1175,13 @@ export default /*#__PURE__*/ {
 
       let exportItems = true;
       let params;
-
       let ids = this.selectedItems.map(it => it.id);
-
       if (ids.length) {
         params = { ids: ids, exportItems: exportItems, };
       } else {
         params = { filters: JSON.stringify(this.finalFilters), exportItems: exportItems, };
       }
-
-      params.format = 'JSON';
-
+      params.format = this.exportFormat;
       this.loading = true;
       axios
         .get(this.apiUrl + "/" + this.modelName + "/export", { params: params, responseType: "blob", })
@@ -1190,6 +1195,10 @@ export default /*#__PURE__*/ {
         });
     },
 
+
+    showImportModal(){
+      this.$refs["modal-import"].show();
+    },
     importItems() {
       let formData = new FormData();
       formData.append("file", this.fileImport);
@@ -1695,10 +1704,10 @@ export default /*#__PURE__*/ {
             v-bind:loading="loading">
             <slot name="tableActionsPrepend" v-bind:loading="loading"> </slot>
 
-            <b-button variant="info" v-b-modal.modal-import v-if="showImport">
+            <b-button variant="info" @click="showImportModal()" v-if="showImport">
               <b-icon-cloud-upload></b-icon-cloud-upload>{{ messageImport }}
             </b-button>
-            <b-button variant="info" @click="exportItems()" v-if="showExport">
+            <b-button variant="info" @click="showExportModal()" v-if="showExport">
               <b-icon-cloud-download></b-icon-cloud-download>{{ messageExport }}
             </b-button>
             <b-button variant="info" v-if="showPrincipalSortBtn" @click="togglePrincipalSort()" :disabled="loading">
@@ -2066,7 +2075,7 @@ export default /*#__PURE__*/ {
     </b-modal>
 
 
-    <b-modal ref="modal-import" id="modal-import" title="Importar" hide-footer v-if="showImport">
+    <b-modal ref="modal-import" title="Importar" hide-footer v-if="showImport">
       <slot name="import" v-bind:item="item" v-if="item">
         <b-overlay :show="loading" rounded="sm">
           <b-form-file v-model="fileImport" :state="Boolean(fileImport)" browse-text="Explorar"
@@ -2081,6 +2090,27 @@ export default /*#__PURE__*/ {
       </slot>
     </b-modal>
 
+    <b-modal ref="modal-export" title="Exportar" hide-footer v-if="showExport">
+      <slot name="export" v-bind:item="item" v-if="item">
+        <b-overlay :show="loading" rounded="sm">
+
+          <p v-if="selectedItems.length">Se exportará {{ selectedItems.length }} elementos.</p>
+          <p v-else>Se exportará la consulta actual.</p>
+
+          <select class="form-control" v-model="exportFormat">
+            <option value="JSON">JSON</option>
+            <option value="XLSX">XLSX</option>
+          </select>
+
+          <div class="text-center mt-3">
+            <b-button variant="info" v-on:click="exportItems()" :disabled="loading">
+              <b-icon-cloud-upload></b-icon-cloud-upload>
+              {{ loading ? "Cargando..." : "Exportar" }}
+            </b-button>
+          </div>
+        </b-overlay>
+      </slot>
+    </b-modal>
   </div>
 </template>
 
