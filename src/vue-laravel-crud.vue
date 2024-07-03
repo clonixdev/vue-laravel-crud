@@ -1207,7 +1207,7 @@ export default /*#__PURE__*/ {
           if (response && response.data && response.data.success == true) {
             this.$refs["modal-import"].hide();
             this.toastSuccess("Datos Importados con Éxito");
-            this.$refs["crud"].refresh();
+            this.refresh();
           } else {
             this.toastError("No se pudo importar los datos.");
           }
