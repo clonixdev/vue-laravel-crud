@@ -12532,7 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-df7e934e]:last-child,\ntr td[data-v-df7e934e]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-df7e934e] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-df7e934e] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-df7e934e] .crud-title[data-v-df7e934e] {\n    margin: 0; }\n  .crud-header[data-v-df7e934e] .crud-search[data-v-df7e934e] {\n    max-width: 15rem; }\n    .crud-header[data-v-df7e934e] .crud-search[data-v-df7e934e] .btn[data-v-df7e934e] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-df7e934e] .crud-search[data-v-df7e934e] .btn[data-v-df7e934e].open[data-v-df7e934e] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-df7e934e] .table-options[data-v-df7e934e] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-df7e934e] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-df7e934e] {\n    table-layout: auto; }\n    .table[data-v-df7e934e] tbody[data-v-df7e934e] td[data-v-df7e934e] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-df7e934e] tbody[data-v-df7e934e] td[data-v-df7e934e]::-webkit-scrollbar {\n      display: none; } }\n";
+}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-f79a84bb]:last-child,\ntr td[data-v-f79a84bb]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-f79a84bb] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-f79a84bb] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-f79a84bb] .crud-title[data-v-f79a84bb] {\n    margin: 0; }\n  .crud-header[data-v-f79a84bb] .crud-search[data-v-f79a84bb] {\n    max-width: 15rem; }\n    .crud-header[data-v-f79a84bb] .crud-search[data-v-f79a84bb] .btn[data-v-f79a84bb] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-f79a84bb] .crud-search[data-v-f79a84bb] .btn[data-v-f79a84bb].open[data-v-f79a84bb] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-f79a84bb] .table-options[data-v-f79a84bb] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-f79a84bb] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-f79a84bb] {\n    table-layout: auto; }\n    .table[data-v-f79a84bb] tbody[data-v-f79a84bb] td[data-v-f79a84bb] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-f79a84bb] tbody[data-v-f79a84bb] td[data-v-f79a84bb]::-webkit-scrollbar {\n      display: none; } }\n";
 n(css, {});function normalizeComponent (
     scriptExports,
     render,
@@ -12980,6 +12980,10 @@ n(css, {});function normalizeComponent (
     showExport: {
       type: Boolean,
       default: false
+    },
+    markDirty: {
+      type: Boolean,
+      default: true
     }
   },
   mounted: function mounted() {
@@ -13904,72 +13908,75 @@ n(css, {});function normalizeComponent (
               console.debug("save item 1", _this25.item);
               create = false;
               if (!_this25.vuexLocalforage) {
-                _context6.next = 17;
+                _context6.next = 18;
                 break;
+              }
+              if (_this25.markDirty) {
+                _this25.item.dirty = true;
               }
               if (!_this25.item.id) {
-                _context6.next = 11;
+                _context6.next = 12;
                 break;
               }
-              _context6.next = 7;
+              _context6.next = 8;
               return _this25.model.$create({
                 data: _this25.item
               });
-            case 7:
+            case 8:
               result = _context6.sent;
               create = false;
-              _context6.next = 15;
+              _context6.next = 16;
               break;
-            case 11:
-              _context6.next = 13;
+            case 12:
+              _context6.next = 14;
               return _this25.model.$create({
                 data: _this25.item
               });
-            case 13:
+            case 14:
               result = _context6.sent;
               create = true;
-            case 15:
-              _context6.next = 36;
+            case 16:
+              _context6.next = 37;
               break;
-            case 17:
+            case 18:
               jsondata = _this25.item.$toJson();
               console.debug("save item 2", _this25.item, jsondata);
               if (!_this25.item.id) {
-                _context6.next = 26;
+                _context6.next = 27;
                 break;
               }
-              _context6.next = 22;
+              _context6.next = 23;
               return _this25.model.api().put('/' + _this25.item.id, jsondata);
-            case 22:
+            case 23:
               result = _context6.sent;
               create = false;
-              _context6.next = 30;
+              _context6.next = 31;
               break;
-            case 26:
-              _context6.next = 28;
+            case 27:
+              _context6.next = 29;
               return _this25.model.api().post('', jsondata);
-            case 28:
+            case 29:
               result = _context6.sent;
               create = true;
-            case 30:
+            case 31:
               result.response.status;
               if (!result.response.data.error) {
-                _context6.next = 35;
+                _context6.next = 36;
                 break;
               }
               _this25.toastError(result.response.data.error);
               _this25.loading = false;
               return _context6.abrupt("return");
-            case 35:
-              result.save();
             case 36:
+              result.save();
+            case 37:
               if (_this25.refreshAfterSave) _this25.refresh();
               _this25.loading = false;
               _this25.toastSuccess("Elemento Modificado");
               if (_this25.hideModalAfterSave || create && _this25.hideModalAfterCreate || !create && _this25.hideModalAfterUpdate) {
                 _this25.$bvModal.hide("modal-form-item-" + _this25.modelName);
               }
-            case 40:
+            case 41:
             case "end":
               return _context6.stop();
           }
@@ -15384,7 +15391,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "df7e934e", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "f79a84bb", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.

@@ -375,8 +375,11 @@ export default /*#__PURE__*/ {
     showExport: {
       type: Boolean,
       default: false,
+    },
+    markDirty: {
+      type: Boolean,
+      default: true,
     }
-
   },
 
   mounted() {
@@ -1269,6 +1272,10 @@ export default /*#__PURE__*/ {
 
 
       if (this.vuexLocalforage) {
+
+        if(this.markDirty){
+          this.item.dirty = true;
+        }
 
         if (this.item.id) {
           result = await this.model.$create({ data:this.item});
