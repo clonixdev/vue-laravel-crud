@@ -1271,7 +1271,7 @@ export default /*#__PURE__*/ {
       if (this.vuexLocalforage) {
 
         if (this.item.id) {
-          result = await this.model.$update(this.item.id,{ data:this.item});
+          result = await this.model.$create({ data:this.item});
           create = false;
         } else {
           result = await this.model.$create({ data:this.item});
