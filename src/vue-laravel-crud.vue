@@ -1278,10 +1278,14 @@ export default /*#__PURE__*/ {
         }
 
         if (this.item.id) {
+         
           result = await this.model.$create({ data:this.item});
+          console.debug("save item 4", this.item,result);
           create = false;
         } else {
+
           result = await this.model.$create({ data:this.item});
+          console.debug("save item 5", this.item,result);
           create = true;
         }
 
