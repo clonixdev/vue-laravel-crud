@@ -443,7 +443,7 @@ export default /*#__PURE__*/ {
 
 
             if (typeof field.value === 'function') {
-              itemDefault[fieldName] = field.default();
+              itemDefault[fieldName] = field.value();
             }else if(field.value){
               itemDefault[fieldName] = field.value;
             }else{
