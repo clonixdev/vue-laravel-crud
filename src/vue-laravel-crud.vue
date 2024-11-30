@@ -409,6 +409,8 @@ export default /*#__PURE__*/ {
           continue; // Salta este campo
         }
         
+        console.debug("debug field",field);
+
         if (field.type === 'relation') {
           // Si es una relación, inicializa como un objeto vacío.
 
@@ -431,6 +433,7 @@ export default /*#__PURE__*/ {
                 break;
               // Agrega más casos según los tipos de campos que uses en tu modelo
               default:
+                console.debug("Undefined constructor ",fieldName,field.constructor);
                 // Tipo de campo no reconocido, puedes manejarlo de acuerdo a tus necesidades
                 itemDefault[fieldName] = null;
             }
