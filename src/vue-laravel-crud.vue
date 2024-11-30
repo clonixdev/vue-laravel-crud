@@ -401,9 +401,14 @@ export default /*#__PURE__*/ {
       const fields = this.model.fields();
       // Inicializa el objeto "itemDefault" con los valores por defecto
       const itemDefault = {};
+      const primaryKey = this.model.primaryKey;
+
       for (const fieldName of Object.keys(fields)) {
         const field = fields[fieldName];
-
+        if (fieldName === primaryKey) {
+          continue; // Salta este campo
+        }
+        
         if (field.type === 'relation') {
           // Si es una relación, inicializa como un objeto vacío.
 
