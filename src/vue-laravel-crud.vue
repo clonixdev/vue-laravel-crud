@@ -421,8 +421,14 @@ export default /*#__PURE__*/ {
         } else {
           // Si es un campo, verifica si tiene un valor por defecto definido
           if (field.default !== undefined) {
-            itemDefault[fieldName] = field.default;
+            //itemDefault[fieldName] = field.default;
+            console.debug("Field default",field.default);
+            itemDefault[fieldName] = typeof field.default === 'function' ? field.default() : field.default;
+
           } else {
+
+            console.debug("Field",field);
+
             // Si no tiene un valor por defecto definido, inicializa según su tipo
             switch (field.constructor.name) {
               case 'StringField':
@@ -433,7 +439,8 @@ export default /*#__PURE__*/ {
                 break;
               // Agrega más casos según los tipos de campos que uses en tu modelo
               default:
-                console.debug("Undefined constructor ",fieldName,field.constructor);
+
+                console.debug("Undefined constructor ",fieldName,field.constructor.name);
                 // Tipo de campo no reconocido, puedes manejarlo de acuerdo a tus necesidades
                 itemDefault[fieldName] = null;
             }
@@ -854,9 +861,7 @@ export default /*#__PURE__*/ {
           }
         });
 
-
       }
-
 
       let itemsResult = this.model.query().withAll().get();
       //let itemsResult = result.entities[this.model.entity];
