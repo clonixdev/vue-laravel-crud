@@ -413,24 +413,20 @@ export default /*#__PURE__*/ {
 
         if (field.type === 'relation') {
           // Si es una relación, inicializa como un objeto vacío.
+          console.debug("Relation",field);
 
           if (this.vuexInitRelations == true || (Array.isArray(this.vuexInitRelations) && this.vuexInitRelations.includes(fieldName))) {
             itemDefault[fieldName] = {};
           }
 
         } else {
-          // Si es un campo, verifica si tiene un valor por defecto definido
-          if (field.default !== undefined) {
-            //itemDefault[fieldName] = field.default;
-            console.debug("Field default",field.default);
-            itemDefault[fieldName] = typeof field.default === 'function' ? field.default() : field.default;
 
-          } else {
 
             console.debug("Field",field);
 
+
             // Si no tiene un valor por defecto definido, inicializa según su tipo
-            switch (field.constructor.name) {
+            /*switch (field.constructor.name) {
               case 'StringField':
                 itemDefault[fieldName] = '';
                 break;
@@ -443,8 +439,18 @@ export default /*#__PURE__*/ {
                 console.debug("Undefined constructor ",fieldName,field.constructor.name);
                 // Tipo de campo no reconocido, puedes manejarlo de acuerdo a tus necesidades
                 itemDefault[fieldName] = null;
+            }*/
+
+
+            if (typeof field.value === 'function') {
+              itemDefault[fieldName] = field.default();
+            }else if(field.value){
+              itemDefault[fieldName] = field.value;
+            }else{
+              itemDefault[fieldName] = null;
             }
-          }
+
+        
         }
       }
 
