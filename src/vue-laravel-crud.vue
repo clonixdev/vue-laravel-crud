@@ -859,7 +859,7 @@ export default /*#__PURE__*/ {
       } else {
         this.model.deleteAll();
 
-        result = await this.model.api().get('', {
+        result = await this.model.api().get(this.apiUrl + "/" + this.modelName, {
           params: {
             page: page,
             limit: this.pagination.perPage,
@@ -1055,7 +1055,7 @@ export default /*#__PURE__*/ {
         await this.model.$delete(ids);
 
       } else {
-        let result = await this.model.api().delete('/bulk-destroy' , {
+        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName+'/bulk-destroy' , {
           params: { ids: ids},
           delete: ids
         });
@@ -1129,7 +1129,7 @@ export default /*#__PURE__*/ {
         await this.model.$delete(id);
 
       } else {
-        let result = await this.model.api().delete('/' + id, {
+        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName+'/' + id, {
           delete: 1
         });
 
@@ -1313,10 +1313,10 @@ export default /*#__PURE__*/ {
         let jsondata = this.item.$toJson();
         console.debug("save item 2", this.item, jsondata);
         if (this.item.id) {
-          result = await this.model.api().put('/' + this.item.id, jsondata);
+          result = await this.model.api().put(this.apiUrl + "/" + this.modelName+'/' + this.item.id, jsondata);
           create = false;
         } else {
-          result = await this.model.api().post('', jsondata);
+          result = await this.model.api().post(this.apiUrl + "/" + this.modelName, jsondata);
           create = true;
         }
 
