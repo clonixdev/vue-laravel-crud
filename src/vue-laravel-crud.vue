@@ -929,8 +929,8 @@ export default /*#__PURE__*/ {
           this.makePagination(response.data);
           let items = response.data.data;
           if (this.grouped) {
-            this.items = items;
-           // this.groupItems(items, concat);
+            //this.items = items;
+            this.groupItems(items, concat);
           } else {
             if (concat) {
               this.items = this.items.concat(items);
