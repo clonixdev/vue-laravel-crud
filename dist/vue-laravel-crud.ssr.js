@@ -12724,7 +12724,7 @@ var _sfc_render$1 = function render() {
 };
 var _sfc_staticRenderFns$1 = [];
 var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, null, null, null);
-var ItemCard = __component__$1.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-ce8ebda1]:last-child,\ntr td[data-v-ce8ebda1]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-ce8ebda1] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-ce8ebda1] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-ce8ebda1] .crud-title[data-v-ce8ebda1] {\n    margin: 0; }\n  .crud-header[data-v-ce8ebda1] .crud-search[data-v-ce8ebda1] {\n    max-width: 15rem; }\n    .crud-header[data-v-ce8ebda1] .crud-search[data-v-ce8ebda1] .btn[data-v-ce8ebda1] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-ce8ebda1] .crud-search[data-v-ce8ebda1] .btn[data-v-ce8ebda1].open[data-v-ce8ebda1] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-ce8ebda1] .table-options[data-v-ce8ebda1] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-ce8ebda1] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-ce8ebda1] {\n    table-layout: auto; }\n    .table[data-v-ce8ebda1] tbody[data-v-ce8ebda1] td[data-v-ce8ebda1] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-ce8ebda1] tbody[data-v-ce8ebda1] td[data-v-ce8ebda1]::-webkit-scrollbar {\n      display: none; } }\n";
+var ItemCard = __component__$1.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-5b1677f8]:last-child,\ntr td[data-v-5b1677f8]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-5b1677f8] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-5b1677f8] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-5b1677f8] .crud-title[data-v-5b1677f8] {\n    margin: 0; }\n  .crud-header[data-v-5b1677f8] .crud-search[data-v-5b1677f8] {\n    max-width: 15rem; }\n    .crud-header[data-v-5b1677f8] .crud-search[data-v-5b1677f8] .btn[data-v-5b1677f8] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-5b1677f8] .crud-search[data-v-5b1677f8] .btn[data-v-5b1677f8].open[data-v-5b1677f8] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-5b1677f8] .table-options[data-v-5b1677f8] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-5b1677f8] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-5b1677f8] {\n    table-layout: auto; }\n    .table[data-v-5b1677f8] tbody[data-v-5b1677f8] td[data-v-5b1677f8] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-5b1677f8] tbody[data-v-5b1677f8] td[data-v-5b1677f8]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-5b1677f8] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-5b1677f8] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-5b1677f8] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-5b1677f8] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-5b1677f8] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
 n(css, {});var _sfc_main = {
   name: "VueLaravelCrud",
   components: {
@@ -13181,7 +13181,7 @@ n(css, {});var _sfc_main = {
       return this.paginationIndexStart + this.pagination.per_page;
     },
     finalFilters: function finalFilters() {
-      return [].concat(_toConsumableArray$1(this.filters), _toConsumableArray$1(this.filter), _toConsumableArray$1(this.internalFilter), _toConsumableArray$1(this.sortFilter));
+      return [].concat(_toConsumableArray$1(this.filters), _toConsumableArray$1(this.filter), _toConsumableArray$1(this.internalFilter), _toConsumableArray$1(this.sortFilter), _toConsumableArray$1(this.groupFilter));
     },
     sortFilter: function sortFilter() {
       if (this.showPrincipalSortBtn) {
@@ -13190,6 +13190,13 @@ n(css, {});var _sfc_main = {
         } else {
           return [[this.principalSortColumn, 'SORTDESC', '']];
         }
+      } else {
+        return [];
+      }
+    },
+    groupFilter: function groupFilter() {
+      if (this.grouped && this.groupedAttribute) {
+        return [['', 'GROUPBY', this.groupedAttribute]];
       } else {
         return [];
       }
@@ -13600,7 +13607,8 @@ n(css, {});var _sfc_main = {
         _this12.makePagination(response.data);
         var items = response.data.data;
         if (_this12.grouped) {
-          _this12.groupItems(items, concat);
+          _this12.items = items;
+          // this.groupItems(items, concat);
         } else {
           if (concat) {
             _this12.items = _this12.items.concat(items);
@@ -14719,7 +14727,7 @@ var _sfc_render = function render() {
           return _vm.toggleDisplayMode();
         }
       }
-    }, [_vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('b-icon-card-list') : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('b-icon-table') : _vm._e()], 1) : _vm._e(), _vm.showSearch ? _c('div', {
+    }, [_vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('b-icon-card-list') : _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('b-icon-table') : _vm._e()], 1) : _vm._e(), _vm.showSearch ? _c('div', {
       staticClass: "crud-search m-0"
     }, [_c('b-input-group', [_c('b-input-group-prepend', [_c('b-button', {
       class: {
@@ -15101,7 +15109,7 @@ var _sfc_render = function render() {
     })], 2);
   }), 0)], 1), !_vm.loading && _vm.items && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
-  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_c('draggable', {
+  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_c('draggable', {
     attrs: {
       "group": _vm.draggableGroup,
       "draggable": _vm.orderable ? '.item' : '.none',
@@ -15174,33 +15182,55 @@ var _sfc_render = function render() {
     })], 2);
   }), 0)], 1), !_vm.loading && _vm.items && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
-  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()], 1) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_KANBAN ? _c('div', _vm._l(_vm.itemsList, function (item, index) {
+  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()], 1) : _vm.displayMode == _vm.displayModes.MODE_KANBAN ? _c('div', [_vm._v(" " + _vm._s(JSON.stringify(_vm.items)) + " "), _vm._l(_vm.items, function (column, colIndex) {
     return _c('div', {
-      key: index,
-      staticClass: "item"
-    }, [_vm._t("card", function () {
-      return _vm._l(_vm.itemsList, function (item, index) {
-        return _c('ItemCard', {
-          key: index,
-          attrs: {
-            "item": item,
-            "columns": _vm.columns,
-            "index": index,
-            "cardClass": _vm.cardClass,
-            "cardHideFooter": _vm.cardHideFooter,
-            "itemValue": _vm.itemValue,
-            "getStateValue": _vm.getStateValue,
-            "getArrayValue": _vm.getArrayValue,
-            "showItem": _vm.showItem,
-            "updateItem": _vm.updateItem,
-            "removeItem": _vm.removeItem
-          }
+      key: colIndex,
+      staticClass: "kanban-column"
+    }, [_c('div', {
+      staticClass: "kanban-column-header"
+    }, [_vm._v(" " + _vm._s(colIndex) + " ")]), _vm._v(" " + _vm._s(JSON.stringify(column)) + " "), _c('draggable', {
+      staticClass: "kanban-column-body",
+      attrs: {
+        "group": "kanban"
+      },
+      on: {
+        "end": _vm.onDragEnd
+      },
+      model: {
+        value: column.items,
+        callback: function callback($$v) {
+          _vm.$set(column, "items", $$v);
+        },
+        expression: "column.items"
+      }
+    }, _vm._l(_vm.itemsList, function (item, index) {
+      return _c('div', {
+        key: index,
+        staticClass: "item"
+      }, [_vm._t("card", function () {
+        return _vm._l(_vm.itemsList, function (item, index) {
+          return _c('ItemCard', {
+            key: index,
+            attrs: {
+              "item": item,
+              "columns": _vm.columns,
+              "index": index,
+              "cardClass": _vm.cardClass,
+              "cardHideFooter": _vm.cardHideFooter,
+              "itemValue": _vm.itemValue,
+              "getStateValue": _vm.getStateValue,
+              "getArrayValue": _vm.getArrayValue,
+              "showItem": _vm.showItem,
+              "updateItem": _vm.updateItem,
+              "removeItem": _vm.removeItem
+            }
+          });
         });
-      });
-    }, {
-      "item": item
-    })], 2);
-  }), 0) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CUSTOM ? _c('div', [_c('div', {
+      }, {
+        "item": item
+      })], 2);
+    }), 0)], 1);
+  })], 2) : _vm.displayMode == _vm.displayModes.MODE_CUSTOM ? _c('div', [_c('div', {
     class: _vm.listContainerClass
   }, [!_vm.loading && _vm.items && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
@@ -15481,7 +15511,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "ce8ebda1", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "5b1677f8", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.

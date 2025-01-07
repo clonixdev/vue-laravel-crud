@@ -506,7 +506,8 @@ export default /*#__PURE__*/ {
         ...this.filters,
         ...this.filter,
         ...this.internalFilter,
-        ...this.sortFilter
+        ...this.sortFilter,
+        ...this.groupFilter
       ];
     },
     sortFilter() {
@@ -521,6 +522,15 @@ export default /*#__PURE__*/ {
       }
 
     },
+
+    groupFilter() {
+      if (this.grouped && this.groupedAttribute) {
+        return [['', 'GROUPBY', this.groupedAttribute]];
+      } else {
+        return [];
+      }
+    },
+
     internalFilter() {
       let filter = [];
       this.forceRecomputeCounter;
@@ -919,7 +929,8 @@ export default /*#__PURE__*/ {
           this.makePagination(response.data);
           let items = response.data.data;
           if (this.grouped) {
-            this.groupItems(items, concat);
+            this.items = items;
+           // this.groupItems(items, concat);
           } else {
             if (concat) {
               this.items = this.items.concat(items);
@@ -1751,7 +1762,7 @@ export default /*#__PURE__*/ {
             <b-button variant="info" @click="refresh()"><b-icon-arrow-clockwise></b-icon-arrow-clockwise></b-button>
             <b-button variant="info" @click="toggleDisplayMode()" :disabled="loading" v-if="displayModeToggler">
               <b-icon-card-list v-if="displayMode == displayModes.MODE_TABLE"></b-icon-card-list>
-              <b-icon-table v-if="displayMode == displayModes.MODE_CARDS"></b-icon-table>
+              <b-icon-table v-else-if="displayMode == displayModes.MODE_CARDS"></b-icon-table>
             </b-button>
 
             <div class="crud-search m-0" v-if="showSearch">
@@ -1976,13 +1987,13 @@ export default /*#__PURE__*/ {
     </div>
 
     <div v-else-if="displayMode == displayModes.MODE_KANBAN">
+      {{ JSON.stringify(items) }}
 
- 
       <div v-for="(column, colIndex) in items" :key="colIndex" class="kanban-column">
         <div class="kanban-column-header">
           {{ colIndex }}
         </div>
-        
+
         {{ JSON.stringify(column) }}
 
 
