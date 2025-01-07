@@ -12532,8 +12532,7 @@ Plugin.install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
-}var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-4d8afc06]:last-child,\ntr td[data-v-4d8afc06]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-4d8afc06] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-4d8afc06] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-4d8afc06] .crud-title[data-v-4d8afc06] {\n    margin: 0; }\n  .crud-header[data-v-4d8afc06] .crud-search[data-v-4d8afc06] {\n    max-width: 15rem; }\n    .crud-header[data-v-4d8afc06] .crud-search[data-v-4d8afc06] .btn[data-v-4d8afc06] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-4d8afc06] .crud-search[data-v-4d8afc06] .btn[data-v-4d8afc06].open[data-v-4d8afc06] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-4d8afc06] .table-options[data-v-4d8afc06] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-4d8afc06] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-4d8afc06] {\n    table-layout: auto; }\n    .table[data-v-4d8afc06] tbody[data-v-4d8afc06] td[data-v-4d8afc06] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-4d8afc06] tbody[data-v-4d8afc06] td[data-v-4d8afc06]::-webkit-scrollbar {\n      display: none; } }\n";
-n(css, {});function normalizeComponent (
+}function normalizeComponent (
     scriptExports,
     render,
     staticRenderFns,
@@ -12624,12 +12623,115 @@ n(css, {});function normalizeComponent (
     exports: scriptExports,
     options: options
   }
-}var _sfc_main = {
+}var _sfc_main$1 = {
+  props: {
+    item: Object,
+    columns: Array,
+    index: Number,
+    itemClass: {
+      type: String,
+      default: 'item'
+    },
+    cardClass: String,
+    cardHideFooter: Boolean,
+    itemValue: Function,
+    getStateValue: Function,
+    getArrayValue: Function,
+    showItem: Function,
+    updateItem: Function,
+    removeItem: Function
+  }
+};
+var _sfc_render$1 = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    class: _vm.itemClass
+  }, [_c('b-card', {
+    staticClass: "mb-2 card-crud",
+    class: _vm.cardClass,
+    attrs: {
+      "title": _vm.item.title,
+      "tag": "article",
+      "hide-footer": _vm.cardHideFooter
+    },
+    scopedSlots: _vm._u([{
+      key: "footer",
+      fn: function fn() {
+        return [_c('b-button-group', [_vm._t("rowAction", function () {
+          return [_c('b-button', {
+            attrs: {
+              "variant": "primary"
+            },
+            on: {
+              "click": function click($event) {
+                return _vm.showItem(_vm.item.id, _vm.index);
+              }
+            }
+          }, [_c('b-icon-eye')], 1), _c('b-button', {
+            attrs: {
+              "variant": "secondary"
+            },
+            on: {
+              "click": function click($event) {
+                return _vm.updateItem(_vm.item.id, _vm.index);
+              }
+            }
+          }, [_c('b-icon-pencil')], 1), _c('b-button', {
+            attrs: {
+              "variant": "danger"
+            },
+            on: {
+              "click": function click($event) {
+                return _vm.removeItem(_vm.item.id, _vm.index);
+              }
+            }
+          }, [_c('b-icon-trash')], 1)];
+        }, {
+          "item": _vm.item,
+          "index": _vm.index,
+          "showItem": _vm.showItem,
+          "updateItem": _vm.updateItem,
+          "removeItem": _vm.removeItem
+        })], 2)];
+      },
+      proxy: true
+    }], null, true)
+  }, [_vm._t("card", function () {
+    return _vm._l(_vm.columns, function (column, indexc) {
+      return _c('div', {
+        key: indexc
+      }, [column.type !== 'actions' ? _c('b-card-text', [_vm._v(" " + _vm._s(column.label) + ": "), _vm._t('cell-' + column.prop, function () {
+        return [column.type === 'boolean' ? _c('span', [_vm.itemValue(column, _vm.item) ? _c('b-badge', {
+          attrs: {
+            "variant": "success"
+          }
+        }, [_c('b-icon-check-circle')], 1) : _c('b-badge', {
+          attrs: {
+            "variant": "danger"
+          }
+        }, [_c('b-icon-x-circle')], 1)], 1) : column.type === 'date' ? _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, _vm.item)) + " ")]) : column.type === 'state' ? _c('span', [_vm._v(" " + _vm._s(_vm.getStateValue(_vm.itemValue(column, _vm.item), column.options)) + " ")]) : column.type === 'array' ? _c('span', [_vm._v(" " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, _vm.item), column.displayProp, column.options)) + " ")]) : _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, _vm.item)) + " ")])];
+      }, {
+        "item": _vm.item,
+        "index": _vm.index,
+        "itemindex": _vm.index,
+        "columnindex": indexc
+      })], 2) : _vm._e()], 1);
+    });
+  }, {
+    "item": _vm.item
+  })], 2)], 1);
+};
+var _sfc_staticRenderFns$1 = [];
+var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, null, null, null);
+var ItemCard = __component__$1.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-ce8ebda1]:last-child,\ntr td[data-v-ce8ebda1]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-ce8ebda1] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-ce8ebda1] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-ce8ebda1] .crud-title[data-v-ce8ebda1] {\n    margin: 0; }\n  .crud-header[data-v-ce8ebda1] .crud-search[data-v-ce8ebda1] {\n    max-width: 15rem; }\n    .crud-header[data-v-ce8ebda1] .crud-search[data-v-ce8ebda1] .btn[data-v-ce8ebda1] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-ce8ebda1] .crud-search[data-v-ce8ebda1] .btn[data-v-ce8ebda1].open[data-v-ce8ebda1] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-ce8ebda1] .table-options[data-v-ce8ebda1] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-ce8ebda1] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-ce8ebda1] {\n    table-layout: auto; }\n    .table[data-v-ce8ebda1] tbody[data-v-ce8ebda1] td[data-v-ce8ebda1] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-ce8ebda1] tbody[data-v-ce8ebda1] td[data-v-ce8ebda1]::-webkit-scrollbar {\n      display: none; } }\n";
+n(css, {});var _sfc_main = {
   name: "VueLaravelCrud",
   components: {
     draggable: draggable,
     InfiniteLoading: InfiniteLoading,
-    VueMasonry: Plugin
+    VueMasonry: Plugin,
+    ItemCard: ItemCard
   },
   data: function data() {
     return {
@@ -12660,7 +12762,8 @@ n(css, {});function normalizeComponent (
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
-        MODE_CUSTOM: 3
+        MODE_CUSTOM: 3,
+        MODE_KANBAN: 4
       },
       infiniteScrollKey: 1,
       optionsLoaded: false,
@@ -15047,83 +15150,57 @@ var _sfc_render = function render() {
     return _c('div', {
       key: index,
       staticClass: "item"
-    }, [_c('b-card', {
-      staticClass: "mb-2 card-crud",
-      class: _vm.cardClass,
-      attrs: {
-        "title": item.title,
-        "tag": "article",
-        "hideFooter": _vm.cardHideFooter
-      },
-      scopedSlots: _vm._u([{
-        key: "footer",
-        fn: function fn() {
-          return [_c('b-button-group', [_vm._t("rowAction", function () {
-            return [_c('b-button', {
-              attrs: {
-                "variant": "primary"
-              },
-              on: {
-                "click": function click($event) {
-                  return _vm.showItem(item.id, index);
-                }
-              }
-            }, [_c('b-icon-eye')], 1), _c('b-button', {
-              attrs: {
-                "variant": "secondary"
-              },
-              on: {
-                "click": function click($event) {
-                  return _vm.updateItem(item.id, index);
-                }
-              }
-            }, [_c('b-icon-pencil')], 1), _c('b-button', {
-              attrs: {
-                "variant": "danger"
-              },
-              on: {
-                "click": function click($event) {
-                  return _vm.removeItem(item.id, index);
-                }
-              }
-            }, [_c('b-icon-trash')], 1)];
-          }, {
+    }, [_vm._t("card", function () {
+      return _vm._l(_vm.itemsList, function (item, index) {
+        return _c('ItemCard', {
+          key: index,
+          attrs: {
             "item": item,
+            "columns": _vm.columns,
             "index": index,
+            "cardClass": _vm.cardClass,
+            "cardHideFooter": _vm.cardHideFooter,
+            "itemValue": _vm.itemValue,
+            "getStateValue": _vm.getStateValue,
+            "getArrayValue": _vm.getArrayValue,
             "showItem": _vm.showItem,
             "updateItem": _vm.updateItem,
             "removeItem": _vm.removeItem
-          })], 2)];
-        },
-        proxy: true
-      }], null, true)
-    }, [_vm._t("card", function () {
-      return _vm._l(_vm.columns, function (column, indexc) {
-        return _c('div', {
-          key: indexc
-        }, [column.type != 'actions' ? _c('b-card-text', [_vm._v(_vm._s(column.label) + ": "), _vm._t('cell-' + column.prop, function () {
-          return [column.type == 'boolean' ? _c('span', [_vm.itemValue(column, item) == 'true' || _vm.itemValue(column, item) == 1 || _vm.itemValue(column, item) == '1' ? _c('b-badge', {
-            attrs: {
-              "variant": "success"
-            }
-          }, [_c('b-icon-check-circle')], 1) : _vm._e(), !_vm.itemValue(column, item) || _vm.itemValue(column, item) == '0' || _vm.itemValue(column, item) == 'false' ? _c('b-badge', {
-            attrs: {
-              "variant": "danger"
-            }
-          }, [_c('b-icon-x-circle')], 1) : _vm._e()], 1) : column.type == 'date' ? _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item)) + " ")]) : column.type == 'state' ? _c('span', [_vm._v(" " + _vm._s(_vm.getStateValue(_vm.itemValue(column, item), column.options)) + " ")]) : column.type == 'array' ? _c('span', [_vm._v(" " + _vm._s(_vm.getArrayValue(_vm.itemValue(column, item), column.displayProp, column.options)) + " ")]) : _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(column, item)) + " ")])];
-        }, {
-          "item": item,
-          "index": index,
-          "itemindex": index,
-          "columnindex": indexc
-        })], 2) : _vm._e()], 1);
+          }
+        });
       });
     }, {
       "item": item
-    })], 2)], 1);
+    })], 2);
   }), 0)], 1), !_vm.loading && _vm.items && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
-  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()], 1) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CUSTOM ? _c('div', [_c('div', {
+  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()], 1) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_KANBAN ? _c('div', _vm._l(_vm.itemsList, function (item, index) {
+    return _c('div', {
+      key: index,
+      staticClass: "item"
+    }, [_vm._t("card", function () {
+      return _vm._l(_vm.itemsList, function (item, index) {
+        return _c('ItemCard', {
+          key: index,
+          attrs: {
+            "item": item,
+            "columns": _vm.columns,
+            "index": index,
+            "cardClass": _vm.cardClass,
+            "cardHideFooter": _vm.cardHideFooter,
+            "itemValue": _vm.itemValue,
+            "getStateValue": _vm.getStateValue,
+            "getArrayValue": _vm.getArrayValue,
+            "showItem": _vm.showItem,
+            "updateItem": _vm.updateItem,
+            "removeItem": _vm.removeItem
+          }
+        });
+      });
+    }, {
+      "item": item
+    })], 2);
+  }), 0) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_CUSTOM ? _c('div', [_c('div', {
     class: _vm.listContainerClass
   }, [!_vm.loading && _vm.items && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
@@ -15404,7 +15481,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "4d8afc06", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "ce8ebda1", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.

@@ -3,6 +3,7 @@ import draggable from "vuedraggable";
 import moment from "moment";
 import InfiniteLoading from 'vue-infinite-loading';
 import VueMasonry from 'vue-masonry-css'
+import ItemCard from "./ItemCard.vue";
 
 
 
@@ -11,7 +12,8 @@ export default /*#__PURE__*/ {
   components: {
     draggable,
     InfiniteLoading,
-    VueMasonry
+    VueMasonry,
+    ItemCard
   },
   data() {
     return {
@@ -46,6 +48,7 @@ export default /*#__PURE__*/ {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
         MODE_CUSTOM: 3,
+        MODE_KANBAN: 4
       },
       infiniteScrollKey: 1,
       optionsLoaded: false,
@@ -1956,67 +1959,24 @@ export default /*#__PURE__*/ {
         <masonry
           :cols="{ default: 12 / colLg, 1400: 12 / colXl, 1200: 12 / colLg, 1000: 12 / colMd, 700: 12 / colSm, 400: 12 / colXs }"
           :gutter="{ default: '15px', 700: '15px' }">
-
           <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
-            <b-card :title="item.title" tag="article" class="mb-2 card-crud" :class="cardClass"
-              :hideFooter="cardHideFooter">
-              <slot name="card" v-bind:item="item">
-                <div v-for="(column, indexc) in columns" :key="indexc">
-                  <b-card-text v-if="column.type != 'actions'">{{ column.label }}:
-                    <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
-                      v-bind:columnindex="indexc">
-                      <span v-if="column.type == 'boolean'">
-                        <b-badge variant="success" v-if="itemValue(column, item) == 'true' ||
-                          itemValue(column, item) == 1 ||
-                          itemValue(column, item) == '1'
-                        "><b-icon-check-circle></b-icon-check-circle></b-badge>
-                        <b-badge variant="danger" v-if="!itemValue(column, item) ||
-                          itemValue(column, item) == '0' ||
-                          itemValue(column, item) == 'false'
-                        "><b-icon-x-circle></b-icon-x-circle></b-badge>
-                      </span>
-                      <span v-else-if="column.type == 'date'">
-                        {{ itemValue(column, item) }}
-                      </span>
-                      <span v-else-if="column.type == 'state'">
-                        {{
-                          getStateValue(itemValue(column, item), column.options)
-                        }}
-                      </span>
-                      <span v-else-if="column.type == 'array'">
-                        {{
-                          getArrayValue(
-                            itemValue(column, item),
-                            column.displayProp,
-                            column.options
-                          )
-                        }}
-                      </span>
-                      <span v-else>
-                        {{ itemValue(column, item) }}
-                      </span>
-                    </slot>
-                  </b-card-text>
-                </div>
+                <slot name="card" v-bind:item="item">
+                  <ItemCard
+                    v-for="(item, index) in itemsList"
+                    :key="index"
+                    :item="item"
+                    :columns="columns"
+                    :index="index"
+                    :cardClass="cardClass"
+                    :cardHideFooter="cardHideFooter"
+                    :itemValue="itemValue"
+                    :getStateValue="getStateValue"
+                    :getArrayValue="getArrayValue"
+                    :showItem="showItem"
+                    :updateItem="updateItem"
+                    :removeItem="removeItem"
+                  />
               </slot>
-
-              <template v-slot:footer>
-                <b-button-group>
-                  <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
-                    v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
-                    <b-button variant="primary" @click="showItem(item.id, index)">
-                      <b-icon-eye></b-icon-eye>
-                    </b-button>
-                    <b-button variant="secondary" @click="updateItem(item.id, index)">
-                      <b-icon-pencil></b-icon-pencil>
-                    </b-button>
-                    <b-button variant="danger" @click="removeItem(item.id, index)">
-                      <b-icon-trash></b-icon-trash>
-                    </b-button>
-                  </slot>
-                </b-button-group>
-              </template>
-            </b-card>
           </div>
         </masonry>
       </draggable>
@@ -2025,6 +1985,28 @@ export default /*#__PURE__*/ {
         {{ messageEmptyResults }}
       </p>
 
+    </div>
+
+    <div v-if="displayMode == displayModes.MODE_KANBAN">
+      <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
+          <slot name="card" v-bind:item="item">
+              <ItemCard
+                v-for="(item, index) in itemsList"
+                :key="index"
+                :item="item"
+                :columns="columns"
+                :index="index"
+                :cardClass="cardClass"
+                :cardHideFooter="cardHideFooter"
+                :itemValue="itemValue"
+                :getStateValue="getStateValue"
+                :getArrayValue="getArrayValue"
+                :showItem="showItem"
+                :updateItem="updateItem"
+                :removeItem="removeItem"
+              />
+          </slot>
+      </div>
     </div>
 
     <div v-if="displayMode == displayModes.MODE_CUSTOM">
