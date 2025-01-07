@@ -18,7 +18,7 @@ export default /*#__PURE__*/ {
   data() {
     return {
 
-      crudUuid:"",
+      crudUuid: "",
       moment: moment,
       loading: false,
       firstLoad: false,
@@ -387,7 +387,7 @@ export default /*#__PURE__*/ {
 
   mounted() {
     const now = Math.floor(Date.now() / 1000);
-    this.crudUuid = ''+now;
+    this.crudUuid = '' + now;
     this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
 
     // Agregar un oyente de eventos para actualizar isMobile cuando cambia el tamaño de la pantalla
@@ -411,12 +411,12 @@ export default /*#__PURE__*/ {
         if (fieldName === primaryKey) {
           continue; // Salta este campo
         }
-        
-        console.debug("debug field",field);
+
+        console.debug("debug field", field);
 
         if (field.type === 'relation') {
           // Si es una relación, inicializa como un objeto vacío.
-          console.debug("Relation",field);
+          console.debug("Relation", field);
 
           if (this.vuexInitRelations == true || (Array.isArray(this.vuexInitRelations) && this.vuexInitRelations.includes(fieldName))) {
             itemDefault[fieldName] = {};
@@ -425,35 +425,35 @@ export default /*#__PURE__*/ {
         } else {
 
 
-            console.debug("Field",field);
+          console.debug("Field", field);
 
 
-            // Si no tiene un valor por defecto definido, inicializa según su tipo
-            /*switch (field.constructor.name) {
-              case 'StringField':
-                itemDefault[fieldName] = '';
-                break;
-              case 'NumberField':
-                itemDefault[fieldName] = 0;
-                break;
-              // Agrega más casos según los tipos de campos que uses en tu modelo
-              default:
+          // Si no tiene un valor por defecto definido, inicializa según su tipo
+          /*switch (field.constructor.name) {
+            case 'StringField':
+              itemDefault[fieldName] = '';
+              break;
+            case 'NumberField':
+              itemDefault[fieldName] = 0;
+              break;
+            // Agrega más casos según los tipos de campos que uses en tu modelo
+            default:
 
-                console.debug("Undefined constructor ",fieldName,field.constructor.name);
-                // Tipo de campo no reconocido, puedes manejarlo de acuerdo a tus necesidades
-                itemDefault[fieldName] = null;
-            }*/
-
-
-            if (typeof field.value === 'function') {
-              itemDefault[fieldName] = field.value();
-            }else if(field.value){
-              itemDefault[fieldName] = field.value;
-            }else{
+              console.debug("Undefined constructor ",fieldName,field.constructor.name);
+              // Tipo de campo no reconocido, puedes manejarlo de acuerdo a tus necesidades
               itemDefault[fieldName] = null;
-            }
+          }*/
 
-        
+
+          if (typeof field.value === 'function') {
+            itemDefault[fieldName] = field.value();
+          } else if (field.value) {
+            itemDefault[fieldName] = field.value;
+          } else {
+            itemDefault[fieldName] = null;
+          }
+
+
         }
       }
 
@@ -761,23 +761,23 @@ export default /*#__PURE__*/ {
     },
 
     updateData(data, allowCreate = true) {
-        // Convertir this.items a un mapa para acceso rápido por id
-        const itemsMap = new Map(this.items.map(item => [item.id, item]));
+      // Convertir this.items a un mapa para acceso rápido por id
+      const itemsMap = new Map(this.items.map(item => [item.id, item]));
 
-        // Recorrer cada elemento de data
-        data.forEach(newItem => {
-            if (itemsMap.has(newItem.id)) {
-                // Actualizar el item existente
-                const existingItem = itemsMap.get(newItem.id);
-                Object.assign(existingItem, newItem);
-            } else if (allowCreate) {
-                // Agregar el nuevo item si allowCreate es true
-                this.items.push(newItem);
-            }
-        });
+      // Recorrer cada elemento de data
+      data.forEach(newItem => {
+        if (itemsMap.has(newItem.id)) {
+          // Actualizar el item existente
+          const existingItem = itemsMap.get(newItem.id);
+          Object.assign(existingItem, newItem);
+        } else if (allowCreate) {
+          // Agregar el nuevo item si allowCreate es true
+          this.items.push(newItem);
+        }
+      });
 
-        // Convertir el mapa de vuelta a un array, si es necesario
-        this.items = Array.from(itemsMap.values());
+      // Convertir el mapa de vuelta a un array, si es necesario
+      this.items = Array.from(itemsMap.values());
     },
     showItem(id, itemIndex = null) {
       if (itemIndex == null) {
@@ -818,7 +818,7 @@ export default /*#__PURE__*/ {
 
     refresh() {
       this.$emit("refresh", {});
-     
+
       if (this.infiniteScroll) {
         this.pagination.current_page = 1;
         this.infiniteScrollKey++;
@@ -882,7 +882,7 @@ export default /*#__PURE__*/ {
       this.loading = false;
       this.firstLoad = true;
     },
-    fetchItemsLocal(){
+    fetchItemsLocal() {
       if (this.grouped) {
         this.groupItems(this.models);
       } else {
@@ -894,8 +894,8 @@ export default /*#__PURE__*/ {
 
     },
     fetchItems(page = 1, concat = false) {
-   
-      
+
+
       this.$emit("beforeFetch", {});
       if (this.useVuexORM) {
         return this.fetchItemsVuex(page, concat);
@@ -903,7 +903,7 @@ export default /*#__PURE__*/ {
 
 
       if (!this.ajax) {
-        return this.fetchItemsLocal(page,concat);
+        return this.fetchItemsLocal(page, concat);
       }
 
       this.loading = true;
@@ -1058,8 +1058,8 @@ export default /*#__PURE__*/ {
         await this.model.$delete(ids);
 
       } else {
-        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName+'/bulk-destroy' , {
-          params: { ids: ids},
+        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName + '/bulk-destroy', {
+          params: { ids: ids },
           delete: ids
         });
 
@@ -1072,7 +1072,7 @@ export default /*#__PURE__*/ {
           return;
         }
       }
-      
+
       this.toastSuccess("Elemento eliminados.");
     },
     deleteItem(id, index) {
@@ -1132,7 +1132,7 @@ export default /*#__PURE__*/ {
         await this.model.$delete(id);
 
       } else {
-        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName+'/' + id, {
+        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName + '/' + id, {
           delete: 1
         });
 
@@ -1179,7 +1179,7 @@ export default /*#__PURE__*/ {
       }
     },
 
-    showExportModal(){
+    showExportModal() {
       this.$refs["modal-export"].show();
     },
 
@@ -1216,7 +1216,7 @@ export default /*#__PURE__*/ {
     },
 
 
-    showImportModal(){
+    showImportModal() {
       this.$refs["modal-import"].show();
     },
     importItems() {
@@ -1295,19 +1295,19 @@ export default /*#__PURE__*/ {
 
       if (this.vuexLocalforage) {
 
-        if(this.markDirty){
+        if (this.markDirty) {
           this.item.dirty = true;
         }
 
         if (this.item.id) {
-         
-          result = await this.model.$create({ data:this.item});
-          console.debug("save item 4", this.item,result);
+
+          result = await this.model.$create({ data: this.item });
+          console.debug("save item 4", this.item, result);
           create = false;
         } else {
 
-          result = await this.model.$create({ data:this.item});
-          console.debug("save item 5", this.item,result);
+          result = await this.model.$create({ data: this.item });
+          console.debug("save item 5", this.item, result);
           create = true;
         }
 
@@ -1316,7 +1316,7 @@ export default /*#__PURE__*/ {
         let jsondata = this.item.$toJson();
         console.debug("save item 2", this.item, jsondata);
         if (this.item.id) {
-          result = await this.model.api().put(this.apiUrl + "/" + this.modelName+'/' + this.item.id, jsondata);
+          result = await this.model.api().put(this.apiUrl + "/" + this.modelName + '/' + this.item.id, jsondata);
           create = false;
         } else {
           result = await this.model.api().post(this.apiUrl + "/" + this.modelName, jsondata);
@@ -1878,7 +1878,6 @@ export default /*#__PURE__*/ {
               <span>{{ item.crudgrouplabel }}</span>
             </th>
 
-
             <slot name="row" v-bind:item="item" v-else>
               <td v-for="(column, indexc) in columns" :key="indexc" :scope="column.prop == 'id' ? 'row' : ''">
                 <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
@@ -1952,7 +1951,7 @@ export default /*#__PURE__*/ {
       </p>
     </div>
 
-    <div v-if="displayMode == displayModes.MODE_CARDS">
+    <div v-else-if="displayMode == displayModes.MODE_CARDS">
       <draggable v-model="items" :group="draggableGroup" :draggable="orderable ? '.item' : '.none'" @start="drag = true"
         @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)" @change="onDraggableChange($event)"
         :options="draggableOptions">
@@ -1960,23 +1959,12 @@ export default /*#__PURE__*/ {
           :cols="{ default: 12 / colLg, 1400: 12 / colXl, 1200: 12 / colLg, 1000: 12 / colMd, 700: 12 / colSm, 400: 12 / colXs }"
           :gutter="{ default: '15px', 700: '15px' }">
           <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
-                <slot name="card" v-bind:item="item">
-                  <ItemCard
-                    v-for="(item, index) in itemsList"
-                    :key="index"
-                    :item="item"
-                    :columns="columns"
-                    :index="index"
-                    :cardClass="cardClass"
-                    :cardHideFooter="cardHideFooter"
-                    :itemValue="itemValue"
-                    :getStateValue="getStateValue"
-                    :getArrayValue="getArrayValue"
-                    :showItem="showItem"
-                    :updateItem="updateItem"
-                    :removeItem="removeItem"
-                  />
-              </slot>
+            <slot name="card" v-bind:item="item">
+              <ItemCard v-for="(item, index) in itemsList" :key="index" :item="item" :columns="columns" :index="index"
+                :cardClass="cardClass" :cardHideFooter="cardHideFooter" :itemValue="itemValue"
+                :getStateValue="getStateValue" :getArrayValue="getArrayValue" :showItem="showItem"
+                :updateItem="updateItem" :removeItem="removeItem" />
+            </slot>
           </div>
         </masonry>
       </draggable>
@@ -1987,29 +1975,35 @@ export default /*#__PURE__*/ {
 
     </div>
 
-    <div v-if="displayMode == displayModes.MODE_KANBAN">
-      <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
-          <slot name="card" v-bind:item="item">
-              <ItemCard
-                v-for="(item, index) in itemsList"
-                :key="index"
-                :item="item"
-                :columns="columns"
-                :index="index"
-                :cardClass="cardClass"
-                :cardHideFooter="cardHideFooter"
-                :itemValue="itemValue"
-                :getStateValue="getStateValue"
-                :getArrayValue="getArrayValue"
-                :showItem="showItem"
-                :updateItem="updateItem"
-                :removeItem="removeItem"
-              />
-          </slot>
+    <div v-else-if="displayMode == displayModes.MODE_KANBAN">
+
+ 
+      <div v-for="(column, colIndex) in items" :key="colIndex" class="kanban-column">
+        <div class="kanban-column-header">
+          {{ colIndex }}
+        </div>
+        
+        {{ JSON.stringify(column) }}
+
+
+        <draggable v-model="column.items" group="kanban" class="kanban-column-body" @end="onDragEnd">
+
+          <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
+            <slot name="card" v-bind:item="item">
+              <ItemCard v-for="(item, index) in itemsList" :key="index" :item="item" :columns="columns" :index="index"
+                :cardClass="cardClass" :cardHideFooter="cardHideFooter" :itemValue="itemValue"
+                :getStateValue="getStateValue" :getArrayValue="getArrayValue" :showItem="showItem"
+                :updateItem="updateItem" :removeItem="removeItem" />
+            </slot>
+          </div>
+
+        </draggable>
+
       </div>
+
     </div>
 
-    <div v-if="displayMode == displayModes.MODE_CUSTOM">
+    <div v-else-if="displayMode == displayModes.MODE_CUSTOM">
       <div :class="listContainerClass">
         <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
@@ -2192,5 +2186,48 @@ tr td:first-child {
       }
     }
   }
+}
+
+
+.kanban-board {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.kanban-column {
+  background: #f4f5f7;
+  border-radius: 8px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.kanban-column-header {
+  font-weight: bold;
+  padding: 0.5rem;
+  background: #dfe1e6;
+  border-radius: 8px 8px 0 0;
+  text-align: center;
+}
+
+.kanban-column-body {
+  padding: 0.5rem;
+  min-height: 100px;
+  background: #ffffff;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kanban-card {
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  cursor: grab;
 }
 </style>
