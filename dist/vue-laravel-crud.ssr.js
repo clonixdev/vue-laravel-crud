@@ -12724,7 +12724,7 @@ var _sfc_render$1 = function render() {
 };
 var _sfc_staticRenderFns$1 = [];
 var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, null, null, null);
-var ItemCard = __component__$1.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-6e210e48]:last-child,\ntr td[data-v-6e210e48]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-6e210e48] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-6e210e48] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-6e210e48] .crud-title[data-v-6e210e48] {\n    margin: 0; }\n  .crud-header[data-v-6e210e48] .crud-search[data-v-6e210e48] {\n    max-width: 15rem; }\n    .crud-header[data-v-6e210e48] .crud-search[data-v-6e210e48] .btn[data-v-6e210e48] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-6e210e48] .crud-search[data-v-6e210e48] .btn[data-v-6e210e48].open[data-v-6e210e48] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-6e210e48] .table-options[data-v-6e210e48] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-6e210e48] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-6e210e48] {\n    table-layout: auto; }\n    .table[data-v-6e210e48] tbody[data-v-6e210e48] td[data-v-6e210e48] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-6e210e48] tbody[data-v-6e210e48] td[data-v-6e210e48]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-6e210e48] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-6e210e48] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-6e210e48] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-6e210e48] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-6e210e48] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+var ItemCard = __component__$1.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css = "tr td[data-v-9859c699]:last-child,\ntr td[data-v-9859c699]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-9859c699] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-9859c699] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-9859c699] .crud-title[data-v-9859c699] {\n    margin: 0; }\n  .crud-header[data-v-9859c699] .crud-search[data-v-9859c699] {\n    max-width: 15rem; }\n    .crud-header[data-v-9859c699] .crud-search[data-v-9859c699] .btn[data-v-9859c699] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-9859c699] .crud-search[data-v-9859c699] .btn[data-v-9859c699].open[data-v-9859c699] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-9859c699] .table-options[data-v-9859c699] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-9859c699] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-9859c699] {\n    table-layout: auto; }\n    .table[data-v-9859c699] tbody[data-v-9859c699] td[data-v-9859c699] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-9859c699] tbody[data-v-9859c699] td[data-v-9859c699]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-9859c699] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-9859c699] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-9859c699] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-9859c699] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-9859c699] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
 n(css, {});var _sfc_main = {
   name: "VueLaravelCrud",
   components: {
@@ -13044,6 +13044,10 @@ n(css, {});var _sfc_main = {
       type: String,
       default: ""
     },
+    groupedSplit: {
+      type: Boolean,
+      default: false
+    },
     draggableGroup: {
       type: String,
       default: "people"
@@ -13166,6 +13170,12 @@ n(css, {});var _sfc_main = {
           return item[column.prop];
         }
       };
+    },
+    isSplitGroups: function isSplitGroups() {
+      if (this.groupedSplit) {
+        return true;
+      }
+      return this.displayMode == this.displayModes.MODE_KANBAN;
     },
     itemsList: function itemsList() {
       var items = this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
@@ -13608,7 +13618,7 @@ n(css, {});var _sfc_main = {
         var items = response.data.data;
         if (_this12.grouped) {
           //this.items = items;
-          _this12.groupItems(items, concat);
+          _this12.groupItems(items, concat, _this12.isSplitGroups);
         } else {
           if (concat) {
             _this12.items = _this12.items.concat(items);
@@ -13629,35 +13639,52 @@ n(css, {});var _sfc_main = {
     },
     groupItems: function groupItems(items) {
       var concat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var itemswithgroup = [];
-      var lastcomparevalue = null;
-      var compareattr = this.groupedAttribute;
-      var groupLabelPre = this.groupedLabelPre;
-      var groupLabelAfter = this.groupedLabelAfter;
-      items.forEach(function (item, key) {
-        if (Array.isArray(item)) {
-          itemswithgroup.push({
-            label: groupLabelPre + key + groupLabelAfter,
-            group: true
-          });
-          item.forEach(function (sitem) {
-            itemswithgroup.push(sitem);
-          });
-        } else {
-          if (lastcomparevalue != item[compareattr]) {
-            lastcomparevalue = item[compareattr];
-            itemswithgroup.push({
-              crudgrouplabel: groupLabelPre + lastcomparevalue + groupLabelAfter,
-              crudgroup: true
-            });
-          }
-          itemswithgroup.push(item);
+      var splitGroups = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var groupedAttribute = this.groupedAttribute;
+      var groupLabelPre = this.groupedLabelPre || '';
+      var groupLabelAfter = this.groupedLabelAfter || '';
+      var itemsWithGroup = [];
+
+      // Usamos un objeto para agrupar los elementos por groupedAttribute
+      var groupedMap = items.reduce(function (acc, item) {
+        var groupKey = item[groupedAttribute] || 'undefined';
+        if (!acc[groupKey]) {
+          acc[groupKey] = [];
         }
-      });
-      if (concat) {
-        this.items = this.items.concat(itemswithgroup);
+        acc[groupKey].push(item);
+        return acc;
+      }, {});
+      if (splitGroups) {
+        // Dividimos los grupos en arrays separados
+        this.items = Object.entries(groupedMap).map(function (_ref) {
+          var _ref2 = _slicedToArray(_ref, 2),
+            groupKey = _ref2[0],
+            groupItems = _ref2[1];
+          return {
+            groupKey: groupKey,
+            groupLabel: groupLabelPre + groupKey + groupLabelAfter,
+            items: groupItems
+          };
+        });
       } else {
-        this.items = itemswithgroup;
+        // Creamos la estructura agrupada en un solo array
+        for (var _i2 = 0, _Object$entries = Object.entries(groupedMap); _i2 < _Object$entries.length; _i2++) {
+          var _Object$entries$_i = _slicedToArray(_Object$entries[_i2], 2),
+            groupKey = _Object$entries$_i[0],
+            groupItems = _Object$entries$_i[1];
+          itemsWithGroup.push({
+            crudgrouplabel: groupLabelPre + groupKey + groupLabelAfter,
+            crudgroup: true
+          });
+          itemsWithGroup.push.apply(itemsWithGroup, _toConsumableArray$1(groupItems));
+        }
+
+        // Decidimos si concatenar o reemplazar los items existentes
+        if (concat) {
+          this.items = this.items.concat(itemsWithGroup);
+        } else {
+          this.items = itemsWithGroup;
+        }
       }
     },
     removeItem: function removeItem(id, index) {
@@ -15154,29 +15181,26 @@ var _sfc_render = function render() {
         700: '15px'
       }
     }
-  }, _vm._l(_vm.itemsList, function (item, index) {
+  }, _vm._l(_vm.itemsList, function (item, itemIndex) {
     return _c('div', {
-      key: index,
+      key: itemIndex,
       staticClass: "item"
     }, [_vm._t("card", function () {
-      return _vm._l(_vm.itemsList, function (item, index) {
-        return _c('ItemCard', {
-          key: index,
-          attrs: {
-            "item": item,
-            "columns": _vm.columns,
-            "index": index,
-            "cardClass": _vm.cardClass,
-            "cardHideFooter": _vm.cardHideFooter,
-            "itemValue": _vm.itemValue,
-            "getStateValue": _vm.getStateValue,
-            "getArrayValue": _vm.getArrayValue,
-            "showItem": _vm.showItem,
-            "updateItem": _vm.updateItem,
-            "removeItem": _vm.removeItem
-          }
-        });
-      });
+      return [_c('ItemCard', {
+        attrs: {
+          "item": item,
+          "columns": _vm.columns,
+          "index": itemIndex,
+          "cardClass": _vm.cardClass,
+          "cardHideFooter": _vm.cardHideFooter,
+          "itemValue": _vm.itemValue,
+          "getStateValue": _vm.getStateValue,
+          "getArrayValue": _vm.getArrayValue,
+          "showItem": _vm.showItem,
+          "updateItem": _vm.updateItem,
+          "removeItem": _vm.removeItem
+        }
+      })];
     }, {
       "item": item
     })], 2);
@@ -15188,7 +15212,7 @@ var _sfc_render = function render() {
       staticClass: "kanban-column"
     }, [_c('div', {
       staticClass: "kanban-column-header"
-    }, [_vm._v(" " + _vm._s(colIndex) + " ")]), _vm._v(" " + _vm._s(JSON.stringify(column)) + " "), _c('draggable', {
+    }, [_vm._v(" " + _vm._s(column.groupLabel) + " ")]), _vm._v(" " + _vm._s(JSON.stringify(column)) + " "), _c('draggable', {
       staticClass: "kanban-column-body",
       attrs: {
         "group": "kanban"
@@ -15203,29 +15227,27 @@ var _sfc_render = function render() {
         },
         expression: "column.items"
       }
-    }, _vm._l(_vm.itemsList, function (item, index) {
+    }, _vm._l(column.items, function (item, itemIndex) {
       return _c('div', {
-        key: index,
+        key: itemIndex,
         staticClass: "item"
       }, [_vm._t("card", function () {
-        return _vm._l(_vm.itemsList, function (item, index) {
-          return _c('ItemCard', {
-            key: index,
-            attrs: {
-              "item": item,
-              "columns": _vm.columns,
-              "index": index,
-              "cardClass": _vm.cardClass,
-              "cardHideFooter": _vm.cardHideFooter,
-              "itemValue": _vm.itemValue,
-              "getStateValue": _vm.getStateValue,
-              "getArrayValue": _vm.getArrayValue,
-              "showItem": _vm.showItem,
-              "updateItem": _vm.updateItem,
-              "removeItem": _vm.removeItem
-            }
-          });
-        });
+        return [_c('ItemCard', {
+          key: itemIndex,
+          attrs: {
+            "item": item,
+            "columns": _vm.columns,
+            "index": _vm.index,
+            "cardClass": _vm.cardClass,
+            "cardHideFooter": _vm.cardHideFooter,
+            "itemValue": _vm.itemValue,
+            "getStateValue": _vm.getStateValue,
+            "getArrayValue": _vm.getArrayValue,
+            "showItem": _vm.showItem,
+            "updateItem": _vm.updateItem,
+            "removeItem": _vm.removeItem
+          }
+        })];
       }, {
         "item": item
       })], 2);
@@ -15511,7 +15533,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "6e210e48", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "9859c699", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.

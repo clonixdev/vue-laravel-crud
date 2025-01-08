@@ -333,7 +333,10 @@ export default /*#__PURE__*/ {
       type: String,
       default: "",
     },
-
+    groupedSplit: {
+      type: Boolean,
+      default: false,
+    },
     draggableGroup: {
       type: String,
       default: "people",
@@ -487,6 +490,15 @@ export default /*#__PURE__*/ {
           return item[column.prop];
         }
       };
+    },
+
+    isSplitGroups(){
+
+      if(this.groupedSplit){
+        return true;
+      }
+      return this.displayMode == this.displayModes.MODE_KANBAN;
+
     },
     itemsList() {
       const items = this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
@@ -930,7 +942,7 @@ export default /*#__PURE__*/ {
           let items = response.data.data;
           if (this.grouped) {
             //this.items = items;
-            this.groupItems(items, concat);
+            this.groupItems(items, concat,this.isSplitGroups);
           } else {
             if (concat) {
               this.items = this.items.concat(items);
@@ -951,38 +963,45 @@ export default /*#__PURE__*/ {
           this.fetchError = true;
         });
     },
+    groupItems(items, concat = false, splitGroups = false) {
+      const groupedAttribute = this.groupedAttribute;
+      const groupLabelPre = this.groupedLabelPre || '';
+      const groupLabelAfter = this.groupedLabelAfter || '';
+      const itemsWithGroup = [];
 
-    groupItems(items, concat = false) {
-      let itemswithgroup = [];
-      let lastcomparevalue = null;
-      let compareattr = this.groupedAttribute;
-      let groupLabelPre = this.groupedLabelPre;
-      let groupLabelAfter = this.groupedLabelAfter;
-      items.forEach((item, key) => {
-        if (Array.isArray(item)) {
-          itemswithgroup.push({
-            label: groupLabelPre + key + groupLabelAfter,
-            group: true,
-          });
-
-          item.forEach((sitem) => {
-            itemswithgroup.push(sitem);
-          });
-        } else {
-          if (lastcomparevalue != item[compareattr]) {
-            lastcomparevalue = item[compareattr];
-            itemswithgroup.push({
-              crudgrouplabel: groupLabelPre + lastcomparevalue + groupLabelAfter,
-              crudgroup: true,
-            });
-          }
-          itemswithgroup.push(item);
+      // Usamos un objeto para agrupar los elementos por groupedAttribute
+      const groupedMap = items.reduce((acc, item) => {
+        const groupKey = item[groupedAttribute] || 'undefined';
+        if (!acc[groupKey]) {
+          acc[groupKey] = [];
         }
-      });
-      if (concat) {
-        this.items = this.items.concat(itemswithgroup);
+        acc[groupKey].push(item);
+        return acc;
+      }, {});
+
+      if (splitGroups) {
+        // Dividimos los grupos en arrays separados
+        this.items = Object.entries(groupedMap).map(([groupKey, groupItems]) => ({
+          groupKey,
+          groupLabel: groupLabelPre + groupKey + groupLabelAfter,
+          items: groupItems,
+        }));
       } else {
-        this.items = itemswithgroup;
+        // Creamos la estructura agrupada en un solo array
+        for (const [groupKey, groupItems] of Object.entries(groupedMap)) {
+          itemsWithGroup.push({
+            crudgrouplabel: groupLabelPre + groupKey + groupLabelAfter,
+            crudgroup: true,
+          });
+          itemsWithGroup.push(...groupItems);
+        }
+
+        // Decidimos si concatenar o reemplazar los items existentes
+        if (concat) {
+          this.items = this.items.concat(itemsWithGroup);
+        } else {
+          this.items = itemsWithGroup;
+        }
       }
     },
     removeItem(id, index) {
@@ -1969,9 +1988,9 @@ export default /*#__PURE__*/ {
         <masonry
           :cols="{ default: 12 / colLg, 1400: 12 / colXl, 1200: 12 / colLg, 1000: 12 / colMd, 700: 12 / colSm, 400: 12 / colXs }"
           :gutter="{ default: '15px', 700: '15px' }">
-          <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
+          <div v-for="(item, itemIndex) in itemsList" v-bind:key="itemIndex" class="item">
             <slot name="card" v-bind:item="item">
-              <ItemCard v-for="(item, index) in itemsList" :key="index" :item="item" :columns="columns" :index="index"
+              <ItemCard :item="item" :columns="columns" :index="itemIndex"
                 :cardClass="cardClass" :cardHideFooter="cardHideFooter" :itemValue="itemValue"
                 :getStateValue="getStateValue" :getArrayValue="getArrayValue" :showItem="showItem"
                 :updateItem="updateItem" :removeItem="removeItem" />
@@ -1991,7 +2010,7 @@ export default /*#__PURE__*/ {
 
       <div v-for="(column, colIndex) in items" :key="colIndex" class="kanban-column">
         <div class="kanban-column-header">
-          {{ colIndex }}
+         {{ column.groupLabel }}
         </div>
 
         {{ JSON.stringify(column) }}
@@ -1999,9 +2018,9 @@ export default /*#__PURE__*/ {
 
         <draggable v-model="column.items" group="kanban" class="kanban-column-body" @end="onDragEnd">
 
-          <div v-for="(item, index) in itemsList" v-bind:key="index" class="item">
+          <div v-for="(item, itemIndex) in column.items" v-bind:key="itemIndex" class="item">
             <slot name="card" v-bind:item="item">
-              <ItemCard v-for="(item, index) in itemsList" :key="index" :item="item" :columns="columns" :index="index"
+              <ItemCard  :key="itemIndex" :item="item" :columns="columns" :index="index"
                 :cardClass="cardClass" :cardHideFooter="cardHideFooter" :itemValue="itemValue"
                 :getStateValue="getStateValue" :getArrayValue="getArrayValue" :showItem="showItem"
                 :updateItem="updateItem" :removeItem="removeItem" />
