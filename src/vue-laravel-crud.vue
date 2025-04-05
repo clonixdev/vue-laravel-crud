@@ -885,6 +885,7 @@ export default /*#__PURE__*/ {
         this.model.deleteAll();
 
         result = await this.model.api().get(this.apiUrl + "/" + this.modelName, {
+          dataKey: 'data',
           params: {
             page: page,
             limit: this.pagination.perPage,
