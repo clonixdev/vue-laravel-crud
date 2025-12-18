@@ -257,7 +257,7 @@ export default {
           </b-list-group-item>
           <b-list-group-item class="d-flex justify-content-between align-items-center">
             Precio
-            <b-badge variant="success" pill>${{ slotProps.item.price }}</b-badge>
+            <b-badge variant="success" pill>$\\{\\{ slotProps.item.price \\}\\}</b-badge>
           </b-list-group-item>
         </b-list-group>
       </template>

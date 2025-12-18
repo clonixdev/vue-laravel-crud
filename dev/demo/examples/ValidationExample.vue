@@ -25,6 +25,7 @@
       :title="title"
       :modelName="modelName"
       :model="model"
+      :models="localData"
       :columns="columns"
       :ajax="ajax"
       :apiUrl="apiUrl"
@@ -146,6 +147,8 @@
 
 <script>
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
+import { isStaticMode } from '../utils/staticMode.js';
+import { generateMockData } from '../data/mockData.js';
 
 export default {
   name: 'ValidationExample',
@@ -153,11 +156,14 @@ export default {
     VueLaravelCrud
   },
   data() {
+    const staticMode = isStaticMode();
+    
     return {
       title: "Validación de Formularios",
       modelName: "users",
-      ajax: true,
-      apiUrl: "http://localhost:3001/api",
+      ajax: !staticMode,
+      apiUrl: staticMode ? "" : "http://localhost:3001/api",
+      localData: staticMode ? generateMockData('users', 20) : [],
       selectedItem: null,
       model: {
         name: "",

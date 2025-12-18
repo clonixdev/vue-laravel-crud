@@ -234,7 +234,7 @@ export default {
       <!-- Slot para personalizar celda de precio -->
       <template v-slot:cell-price="slotProps">
         <span class="font-weight-bold text-success">
-          ${{ slotProps.item.price }}
+          $\\{\\{ slotProps.item.price \\}\\}
         </span>
       </template>
       

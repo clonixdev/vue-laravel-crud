@@ -26,6 +26,7 @@
       :title="title"
       :modelName="modelName"
       :model="model"
+      :models="localData"
       :columns="columns"
       :ajax="ajax"
       :apiUrl="apiUrl"
@@ -129,6 +130,8 @@
 
 <script>
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
+import { isStaticMode } from '../utils/staticMode.js';
+import { generateMockData } from '../data/mockData.js';
 
 export default {
   name: 'KanbanView',
@@ -136,11 +139,14 @@ export default {
     VueLaravelCrud
   },
   data() {
+    const staticMode = isStaticMode();
+    
     return {
       title: "Tablero Kanban de Tareas",
       modelName: "tasks",
-      ajax: true,
-      apiUrl: "http://localhost:3001/api",
+      ajax: !staticMode,
+      apiUrl: staticMode ? "" : "http://localhost:3001/api",
+      localData: staticMode ? generateMockData('tasks', 15) : [],
       selectedItem: null,
       model: {
         title: "",

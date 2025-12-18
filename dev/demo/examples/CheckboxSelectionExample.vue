@@ -32,6 +32,7 @@
       :title="title"
       :modelName="modelName"
       :model="model"
+      :models="localData"
       :columns="columns"
       :ajax="ajax"
       :apiUrl="apiUrl"
@@ -138,6 +139,8 @@
 <script>
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 import CodeSnippet from '../components/CodeSnippet.vue';
+import { isStaticMode } from '../utils/staticMode.js';
+import { generateMockData } from '../data/mockData.js';
 
 export default {
   name: 'CheckboxSelectionExample',
@@ -146,6 +149,8 @@ export default {
     CodeSnippet
   },
   data() {
+    const staticMode = isStaticMode();
+    
     return {
       // CONFIGURACIÓN: Título del componente
       title: "Gestión de Usuarios con Selección",
@@ -154,10 +159,13 @@ export default {
       modelName: "users",
       
       // CONFIGURACIÓN: Habilitar peticiones AJAX
-      ajax: true,
+      ajax: !staticMode,
       
       // CONFIGURACIÓN: URL base de la API
-      apiUrl: "http://localhost:3001/api",
+      apiUrl: staticMode ? "" : "http://localhost:3001/api",
+      
+      // CONFIGURACIÓN: Datos locales para modo estático
+      localData: staticMode ? generateMockData('users', 20) : [],
       
       selectedItem: null,
       selectedItems: [],
