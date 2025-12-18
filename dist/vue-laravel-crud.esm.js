@@ -298,8 +298,8 @@ var CrudFilters = __component__$f.exports;
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css$6 = "\n.crud-header[data-v-ed8e5777] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  max-height: 3rem;\n}\n.crud-title[data-v-ed8e5777] {\r\n  margin: 0;\n}\n.crud-search[data-v-ed8e5777] {\r\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-ed8e5777] {\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\r\n  border-top-right-radius: 0.375rem;\r\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-ed8e5777] {\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-ed8e5777] {\r\n  margin-bottom: 1rem;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-end;\n}\r\n";
-n(css$6, {});
+var css$8 = "\n.crud-header[data-v-ed8e5777] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  max-height: 3rem;\n}\n.crud-title[data-v-ed8e5777] {\r\n  margin: 0;\n}\n.crud-search[data-v-ed8e5777] {\r\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-ed8e5777] {\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\r\n  border-top-right-radius: 0.375rem;\r\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-ed8e5777] {\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-ed8e5777] {\r\n  margin-bottom: 1rem;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-end;\n}\r\n";
+n(css$8, {});
 
 const _sfc_main$e = {
   name: 'CrudHeader',
@@ -721,7 +721,7 @@ function toggleClass(el, name, state) {
   }
 }
 
-function css$5(el, prop, val) {
+function css$7(el, prop, val) {
   var style = el && el.style;
 
   if (style) {
@@ -750,7 +750,7 @@ function matrix(el, selfOnly) {
     appliedTransforms = el;
   } else {
     do {
-      var transform = css$5(el, 'transform');
+      var transform = css$7(el, 'transform');
 
       if (transform && transform !== 'none') {
         appliedTransforms = transform + ' ' + appliedTransforms;
@@ -832,11 +832,11 @@ function getRect(el, relativeToContainingBlock, relativeToNonStaticParent, undoS
 
     if (!IE11OrLess) {
       do {
-        if (container && container.getBoundingClientRect && (css$5(container, 'transform') !== 'none' || relativeToNonStaticParent && css$5(container, 'position') !== 'static')) {
+        if (container && container.getBoundingClientRect && (css$7(container, 'transform') !== 'none' || relativeToNonStaticParent && css$7(container, 'position') !== 'static')) {
           var containerRect = container.getBoundingClientRect(); // Set relative to edges of padding box of container
 
-          top -= containerRect.top + parseInt(css$5(container, 'border-top-width'));
-          left -= containerRect.left + parseInt(css$5(container, 'border-left-width'));
+          top -= containerRect.top + parseInt(css$7(container, 'border-top-width'));
+          left -= containerRect.left + parseInt(css$7(container, 'border-left-width'));
           bottom = top + elRect.height;
           right = left + elRect.width;
           break;
@@ -943,7 +943,7 @@ function getChild(el, childNum, options) {
 function lastChild(el, selector) {
   var last = el.lastElementChild;
 
-  while (last && (last === Sortable.ghost || css$5(last, 'display') === 'none' || selector && !matches(last, selector))) {
+  while (last && (last === Sortable.ghost || css$7(last, 'display') === 'none' || selector && !matches(last, selector))) {
     last = last.previousElementSibling;
   }
 
@@ -1029,7 +1029,7 @@ function getParentAutoScrollElement(el, includeSelf) {
   do {
     // we don't need to get elem css if it isn't even overflowing in the first place (performance)
     if (elem.clientWidth < elem.scrollWidth || elem.clientHeight < elem.scrollHeight) {
-      var elemCSS = css$5(elem);
+      var elemCSS = css$7(elem);
 
       if (elem.clientWidth < elem.scrollWidth && (elemCSS.overflowX == 'auto' || elemCSS.overflowX == 'scroll') || elem.clientHeight < elem.scrollHeight && (elemCSS.overflowY == 'auto' || elemCSS.overflowY == 'scroll')) {
         if (!elem.getBoundingClientRect || elem === document.body) return getWindowScrollingElement();
@@ -1105,19 +1105,19 @@ function clone(el) {
 }
 
 function setRect(el, rect) {
-  css$5(el, 'position', 'absolute');
-  css$5(el, 'top', rect.top);
-  css$5(el, 'left', rect.left);
-  css$5(el, 'width', rect.width);
-  css$5(el, 'height', rect.height);
+  css$7(el, 'position', 'absolute');
+  css$7(el, 'top', rect.top);
+  css$7(el, 'left', rect.left);
+  css$7(el, 'width', rect.width);
+  css$7(el, 'height', rect.height);
 }
 
 function unsetRect(el) {
-  css$5(el, 'position', '');
-  css$5(el, 'top', '');
-  css$5(el, 'left', '');
-  css$5(el, 'width', '');
-  css$5(el, 'height', '');
+  css$7(el, 'position', '');
+  css$7(el, 'top', '');
+  css$7(el, 'left', '');
+  css$7(el, 'width', '');
+  css$7(el, 'height', '');
 }
 
 var expando = 'Sortable' + new Date().getTime();
@@ -1131,7 +1131,7 @@ function AnimationStateManager() {
       if (!this.options.animation) return;
       var children = [].slice.call(this.el.children);
       children.forEach(function (child) {
-        if (css$5(child, 'display') === 'none' || child === Sortable.ghost) return;
+        if (css$7(child, 'display') === 'none' || child === Sortable.ghost) return;
         animationStates.push({
           target: child,
           rect: getRect(child)
@@ -1238,8 +1238,8 @@ function AnimationStateManager() {
     },
     animate: function animate(target, currentRect, toRect, duration) {
       if (duration) {
-        css$5(target, 'transition', '');
-        css$5(target, 'transform', '');
+        css$7(target, 'transition', '');
+        css$7(target, 'transform', '');
         var elMatrix = matrix(this.el),
             scaleX = elMatrix && elMatrix.a,
             scaleY = elMatrix && elMatrix.d,
@@ -1247,15 +1247,15 @@ function AnimationStateManager() {
             translateY = (currentRect.top - toRect.top) / (scaleY || 1);
         target.animatingX = !!translateX;
         target.animatingY = !!translateY;
-        css$5(target, 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)');
+        css$7(target, 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)');
         repaint(target); // repaint
 
-        css$5(target, 'transition', 'transform ' + duration + 'ms' + (this.options.easing ? ' ' + this.options.easing : ''));
-        css$5(target, 'transform', 'translate3d(0,0,0)');
+        css$7(target, 'transition', 'transform ' + duration + 'ms' + (this.options.easing ? ' ' + this.options.easing : ''));
+        css$7(target, 'transform', 'translate3d(0,0,0)');
         typeof target.animated === 'number' && clearTimeout(target.animated);
         target.animated = setTimeout(function () {
-          css$5(target, 'transition', '');
-          css$5(target, 'transform', '');
+          css$7(target, 'transition', '');
+          css$7(target, 'transform', '');
           target.animated = false;
           target.animatingX = false;
           target.animatingY = false;
@@ -1524,12 +1524,12 @@ supportDraggable = documentExists && !ChromeForAndroid && !IOS && 'draggable' in
   return el.style.pointerEvents === 'auto';
 }(),
     _detectDirection = function _detectDirection(el, options) {
-  var elCSS = css$5(el),
+  var elCSS = css$7(el),
       elWidth = parseInt(elCSS.width) - parseInt(elCSS.paddingLeft) - parseInt(elCSS.paddingRight) - parseInt(elCSS.borderLeftWidth) - parseInt(elCSS.borderRightWidth),
       child1 = getChild(el, 0, options),
       child2 = getChild(el, 1, options),
-      firstChildCSS = child1 && css$5(child1),
-      secondChildCSS = child2 && css$5(child2),
+      firstChildCSS = child1 && css$7(child1),
+      secondChildCSS = child2 && css$7(child2),
       firstChildWidth = firstChildCSS && parseInt(firstChildCSS.marginLeft) + parseInt(firstChildCSS.marginRight) + getRect(child1).width,
       secondChildWidth = secondChildCSS && parseInt(secondChildCSS.marginLeft) + parseInt(secondChildCSS.marginRight) + getRect(child2).width;
 
@@ -1618,12 +1618,12 @@ _detectNearestEmptySortable = function _detectNearestEmptySortable(x, y) {
 },
     _hideGhostForTarget = function _hideGhostForTarget() {
   if (!supportCssPointerEvents && ghostEl) {
-    css$5(ghostEl, 'display', 'none');
+    css$7(ghostEl, 'display', 'none');
   }
 },
     _unhideGhostForTarget = function _unhideGhostForTarget() {
   if (!supportCssPointerEvents && ghostEl) {
-    css$5(ghostEl, 'display', '');
+    css$7(ghostEl, 'display', '');
   }
 }; // #1184 fix - Prevent click event on fallback if dragged but item not changed position
 
@@ -2158,10 +2158,10 @@ Sortable.prototype =
         }
 
         var cssMatrix = "matrix(".concat(ghostMatrix.a, ",").concat(ghostMatrix.b, ",").concat(ghostMatrix.c, ",").concat(ghostMatrix.d, ",").concat(ghostMatrix.e, ",").concat(ghostMatrix.f, ")");
-        css$5(ghostEl, 'webkitTransform', cssMatrix);
-        css$5(ghostEl, 'mozTransform', cssMatrix);
-        css$5(ghostEl, 'msTransform', cssMatrix);
-        css$5(ghostEl, 'transform', cssMatrix);
+        css$7(ghostEl, 'webkitTransform', cssMatrix);
+        css$7(ghostEl, 'mozTransform', cssMatrix);
+        css$7(ghostEl, 'msTransform', cssMatrix);
+        css$7(ghostEl, 'transform', cssMatrix);
         lastDx = dx;
         lastDy = dy;
         touchEvt = touch;
@@ -2182,7 +2182,7 @@ Sortable.prototype =
         // Get relatively positioned parent
         ghostRelativeParent = container;
 
-        while (css$5(ghostRelativeParent, 'position') === 'static' && css$5(ghostRelativeParent, 'transform') === 'none' && ghostRelativeParent !== document) {
+        while (css$7(ghostRelativeParent, 'position') === 'static' && css$7(ghostRelativeParent, 'transform') === 'none' && ghostRelativeParent !== document) {
           ghostRelativeParent = ghostRelativeParent.parentNode;
         }
 
@@ -2201,22 +2201,22 @@ Sortable.prototype =
       toggleClass(ghostEl, options.ghostClass, false);
       toggleClass(ghostEl, options.fallbackClass, true);
       toggleClass(ghostEl, options.dragClass, true);
-      css$5(ghostEl, 'transition', '');
-      css$5(ghostEl, 'transform', '');
-      css$5(ghostEl, 'box-sizing', 'border-box');
-      css$5(ghostEl, 'margin', 0);
-      css$5(ghostEl, 'top', rect.top);
-      css$5(ghostEl, 'left', rect.left);
-      css$5(ghostEl, 'width', rect.width);
-      css$5(ghostEl, 'height', rect.height);
-      css$5(ghostEl, 'opacity', '0.8');
-      css$5(ghostEl, 'position', PositionGhostAbsolutely ? 'absolute' : 'fixed');
-      css$5(ghostEl, 'zIndex', '100000');
-      css$5(ghostEl, 'pointerEvents', 'none');
+      css$7(ghostEl, 'transition', '');
+      css$7(ghostEl, 'transform', '');
+      css$7(ghostEl, 'box-sizing', 'border-box');
+      css$7(ghostEl, 'margin', 0);
+      css$7(ghostEl, 'top', rect.top);
+      css$7(ghostEl, 'left', rect.left);
+      css$7(ghostEl, 'width', rect.width);
+      css$7(ghostEl, 'height', rect.height);
+      css$7(ghostEl, 'opacity', '0.8');
+      css$7(ghostEl, 'position', PositionGhostAbsolutely ? 'absolute' : 'fixed');
+      css$7(ghostEl, 'zIndex', '100000');
+      css$7(ghostEl, 'pointerEvents', 'none');
       Sortable.ghost = ghostEl;
       container.appendChild(ghostEl); // Set transform-origin
 
-      css$5(ghostEl, 'transform-origin', tapDistanceLeft / parseInt(ghostEl.style.width) * 100 + '% ' + tapDistanceTop / parseInt(ghostEl.style.height) * 100 + '%');
+      css$7(ghostEl, 'transform-origin', tapDistanceLeft / parseInt(ghostEl.style.width) * 100 + '% ' + tapDistanceTop / parseInt(ghostEl.style.height) * 100 + '%');
     }
   },
   _onDragStart: function _onDragStart(
@@ -2285,7 +2285,7 @@ Sortable.prototype =
 
       on(document, 'drop', _this); // #1276 fix:
 
-      css$5(dragEl, 'transform', 'translateZ(0)');
+      css$7(dragEl, 'transform', 'translateZ(0)');
     }
 
     awaitingDragStarted = true;
@@ -2294,7 +2294,7 @@ Sortable.prototype =
     moved = true;
 
     if (Safari) {
-      css$5(document.body, 'user-select', 'none');
+      css$7(document.body, 'user-select', 'none');
     }
   },
   // Returns true - if no further action is needed (either inserted or another condition)
@@ -2514,7 +2514,7 @@ Sortable.prototype =
           do {
             dragIndex -= direction;
             sibling = parentEl.children[dragIndex];
-          } while (sibling && (css$5(sibling, 'display') === 'none' || sibling === ghostEl));
+          } while (sibling && (css$7(sibling, 'display') === 'none' || sibling === ghostEl));
         } // If dragEl is already beside target: Do not insert
 
 
@@ -2629,10 +2629,10 @@ Sortable.prototype =
     this._offUpEvents();
 
     if (Safari) {
-      css$5(document.body, 'user-select', '');
+      css$7(document.body, 'user-select', '');
     }
 
-    css$5(dragEl, 'transform', '');
+    css$7(dragEl, 'transform', '');
 
     if (evt) {
       if (moved) {
@@ -2907,7 +2907,7 @@ Sortable.prototype =
     if (!cloneHidden) {
       pluginEvent('hideClone', this);
       if (Sortable.eventCanceled) return;
-      css$5(cloneEl, 'display', 'none');
+      css$7(cloneEl, 'display', 'none');
 
       if (this.options.removeCloneOnHide && cloneEl.parentNode) {
         cloneEl.parentNode.removeChild(cloneEl);
@@ -2939,7 +2939,7 @@ Sortable.prototype =
         this.animate(dragEl, cloneEl);
       }
 
-      css$5(cloneEl, 'display', '');
+      css$7(cloneEl, 'display', '');
       cloneHidden = false;
     }
   }
@@ -3114,7 +3114,7 @@ if (documentExists) {
 Sortable.utils = {
   on: on,
   off: off,
-  css: css$5,
+  css: css$7,
   find: find,
   is: function is(el, selector) {
     return !!closest(el, selector, el, false);
@@ -3341,7 +3341,7 @@ var autoScroll = throttle(function (evt, options, rootEl, isFallback) {
         canScrollY = void 0,
         scrollWidth = el.scrollWidth,
         scrollHeight = el.scrollHeight,
-        elCSS = css$5(el),
+        elCSS = css$7(el),
         scrollPosX = el.scrollLeft,
         scrollPosY = el.scrollTop;
 
@@ -3677,7 +3677,7 @@ function MultiDragPlugin() {
       if (!this.isMultiDrag) return;
       insertMultiDragClones(false, rootEl);
       multiDragClones.forEach(function (clone) {
-        css$5(clone, 'display', '');
+        css$7(clone, 'display', '');
       });
       cloneNowShown();
       clonesHidden = false;
@@ -3691,7 +3691,7 @@ function MultiDragPlugin() {
           cancel = _ref5.cancel;
       if (!this.isMultiDrag) return;
       multiDragClones.forEach(function (clone) {
-        css$5(clone, 'display', 'none');
+        css$7(clone, 'display', 'none');
 
         if (_this.options.removeCloneOnHide && clone.parentNode) {
           clone.parentNode.removeChild(clone);
@@ -3735,7 +3735,7 @@ function MultiDragPlugin() {
         if (this.options.animation) {
           multiDragElements.forEach(function (multiDragElement) {
             if (multiDragElement === dragEl$1) return;
-            css$5(multiDragElement, 'position', 'absolute');
+            css$7(multiDragElement, 'position', 'absolute');
           });
           var dragRect = getRect(dragEl$1, false, true, true);
           multiDragElements.forEach(function (multiDragElement) {
@@ -6630,9 +6630,12 @@ vuedraggable_umd.exports;
 var vuedraggable_umdExports = vuedraggable_umd.exports;
 var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);
 
+var css$6 = "\r\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-37559362] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\r\n";
+n(css$6, {});
+
 const _sfc_main$d = {
   name: 'TableHeader',
-  inject: ['columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded'],
+  inject: ['columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded', 'isAllSelected'],
   data() {
     return {
       hoveredColumn: null
@@ -6669,8 +6672,11 @@ var _sfc_render$d = function render() {
     return _vm._l(_vm.columns, function (column, indexc) {
       return _c('th', {
         key: indexc,
+        class: {
+          'actions-header': column.type == 'actions'
+        },
         style: {
-          width: column.width ? column.width : 'inherit'
+          width: column.width ? column.width : column.type == 'actions' ? '1%' : 'inherit'
         },
         attrs: {
           "scope": "col"
@@ -6827,21 +6833,19 @@ var _sfc_render$d = function render() {
           }, [_vm._v(" " + _vm._s(option.text ? option.text : option.label ? option.label : "") + " ")]);
         })], 2) : column.type == 'checkbox' ? _c('b-form-checkbox', {
           attrs: {
-            "name": "select-all"
+            "name": "select-all",
+            "checked": _vm.isAllSelected
           },
           on: {
-            "change": function ($event) {
-              return _vm.toggleAll($event);
-            }
+            "change": _vm.toggleAll
           }
         }) : column.type == 'select' ? _c('b-form-checkbox', {
           attrs: {
-            "name": "select-all"
+            "name": "select-all",
+            "checked": _vm.isAllSelected
           },
           on: {
-            "change": function ($event) {
-              return _vm.toggleAll($event);
-            }
+            "change": _vm.toggleAll
           }
         }) : _c('input', {
           directives: [{
@@ -6873,12 +6877,19 @@ var _sfc_render$d = function render() {
         "internalFilterByProp": _vm.internalFilterByProp
       }) : column.type == 'select' ? _c('span', [_c('b-form-checkbox', {
         attrs: {
-          "name": "select-all"
+          "name": "select-all",
+          "checked": _vm.isAllSelected
         },
         on: {
-          "change": function ($event) {
-            return _vm.toggleAll($event);
-          }
+          "change": _vm.toggleAll
+        }
+      })], 1) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
+        attrs: {
+          "name": "select-all",
+          "checked": _vm.isAllSelected
+        },
+        on: {
+          "change": _vm.toggleAll
         }
       })], 1) : _c('span', [_vm._v(_vm._s(column.label))]), _vm.isSortableColumn(column) && _vm.shouldShowSortIcon(column) ? _c('span', {
         staticClass: "sort-filter",
@@ -6892,7 +6903,7 @@ var _sfc_render$d = function render() {
   })], 2)]);
 };
 var _sfc_staticRenderFns$d = [];
-var __component__$d = /*#__PURE__*/normalizeComponent(_sfc_main$d, _sfc_render$d, _sfc_staticRenderFns$d, false, null, null, null, null);
+var __component__$d = /*#__PURE__*/normalizeComponent(_sfc_main$d, _sfc_render$d, _sfc_staticRenderFns$d, false, null, "37559362", null, null);
 var TableHeader = __component__$d.exports;
 
 function commonjsRequire(path) {
@@ -12588,6 +12599,9 @@ moment$1.exports;
 var momentExports = moment$1.exports;
 var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);
 
+var css$5 = "\r\n/* Fijar ancho de la columna de acciones */\n.actions-cell[data-v-3309b7c7] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.actions-button-group[data-v-3309b7c7] {\r\n  display: inline-flex;\r\n  flex-wrap: nowrap;\n}\n.actions-dropdown[data-v-3309b7c7] {\r\n  display: inline-block;\n}\r\n\r\n/* Asegurar que los botones no se expandan */\n.actions-button-group .btn[data-v-3309b7c7] {\r\n  flex-shrink: 0;\n}\r\n";
+n(css$5, {});
+
 const _sfc_main$c = {
   name: 'TableCell',
   props: {
@@ -12607,6 +12621,9 @@ var _sfc_render$c = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('td', {
+    class: {
+      'actions-cell': _vm.column.type == 'actions'
+    },
     attrs: {
       "scope": _vm.column.prop == 'id' ? 'row' : ''
     }
@@ -12632,13 +12649,68 @@ var _sfc_render$c = function render() {
         },
         expression: "item.selected"
       }
+    })], 1) : _vm.column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
+      on: {
+        "change": function ($event) {
+          return _vm.onCheckSelect($event, _vm.item);
+        }
+      },
+      model: {
+        value: _vm.item.selected,
+        callback: function ($$v) {
+          _vm.$set(_vm.item, "selected", $$v);
+        },
+        expression: "item.selected"
+      }
     })], 1) : _vm.column.type == 'state' && _vm.optionsLoaded ? _c('span', [_vm._v(" " + _vm._s(_vm.getStateValue(_vm.itemValue(_vm.column, _vm.item), _vm.column.options)) + " ")]) : _vm.column.type == 'array' && _vm.optionsLoaded ? _c('span', [_vm._v(" " + _vm._s(_vm.getArrayValue(_vm.itemValue(_vm.column, _vm.item), _vm.column.displayProp, _vm.column.options)) + " ")]) : _c('span', [_vm._v(" " + _vm._s(_vm.itemValue(_vm.column, _vm.item)) + " ")])];
   }, {
     "item": _vm.item,
     "index": _vm.index,
     "itemindex": _vm.index,
     "columnindex": _vm.columnIndex
-  }), _vm.column.type == 'actions' ? _c('b-button-group', [_vm._t("rowAction", function () {
+  }), _vm.column.type == 'actions' && _vm.column.useDropdown ? _c('b-dropdown', {
+    staticClass: "actions-dropdown",
+    attrs: {
+      "variant": "secondary",
+      "size": "sm"
+    },
+    scopedSlots: _vm._u([{
+      key: "button-content",
+      fn: function () {
+        return [_c('b-icon-list')];
+      },
+      proxy: true
+    }], null, false, 4241371057)
+  }, [_vm._t("rowAction", function () {
+    return [_c('b-dropdown-item', {
+      on: {
+        "click": function ($event) {
+          return _vm.showItem(_vm.item.id, _vm.index);
+        }
+      }
+    }, [_c('b-icon-eye'), _vm._v(" Ver ")], 1), _c('b-dropdown-item', {
+      on: {
+        "click": function ($event) {
+          return _vm.updateItem(_vm.item.id, _vm.index);
+        }
+      }
+    }, [_c('b-icon-pencil'), _vm._v(" Editar ")], 1), _c('b-dropdown-item', {
+      staticClass: "text-danger",
+      on: {
+        "click": function ($event) {
+          return _vm.removeItem(_vm.item.id, _vm.index);
+        }
+      }
+    }, [_c('b-icon-trash'), _vm._v(" Eliminar ")], 1)];
+  }, {
+    "item": _vm.item,
+    "index": _vm.index,
+    "showItem": _vm.showItem,
+    "updateItem": _vm.updateItem,
+    "removeItem": _vm.removeItem
+  })], 2) : _vm.column.type == 'actions' ? _c('b-button-group', {
+    staticClass: "actions-button-group"
+  }, [_vm._t("rowAction", function () {
     return [_c('b-button', {
       attrs: {
         "variant": "primary"
@@ -12676,7 +12748,7 @@ var _sfc_render$c = function render() {
   })], 2) : _vm._e()], 2);
 };
 var _sfc_staticRenderFns$c = [];
-var __component__$c = /*#__PURE__*/normalizeComponent(_sfc_main$c, _sfc_render$c, _sfc_staticRenderFns$c, false, null, null, null, null);
+var __component__$c = /*#__PURE__*/normalizeComponent(_sfc_main$c, _sfc_render$c, _sfc_staticRenderFns$c, false, null, "3309b7c7", null, null);
 var TableCell = __component__$c.exports;
 
 const _sfc_main$b = {
@@ -13762,7 +13834,7 @@ vueInfiniteLoading.exports;
 var vueInfiniteLoadingExports = vueInfiniteLoading.exports;
 var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExports);
 
-var css$1 = "\n.paginator-container[data-v-2c61ceb1] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  width: 100%;\r\n  margin-top: 1rem;\r\n  gap: 0.75rem;\n}\n.paginator-data[data-v-2c61ceb1] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-size: 0.875rem;\n}\n.paginator-badge[data-v-2c61ceb1] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\r\n  padding: 0.375rem 0.625rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  border-radius: 0.375rem;\r\n  color: #495057;\r\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-2c61ceb1]:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.paginator-label[data-v-2c61ceb1] {\r\n  font-weight: 500;\r\n  color: #6c757d;\n}\n.paginator-value[data-v-2c61ceb1] {\r\n  font-weight: 600;\r\n  color: #212529;\n}\n.crud-paginator[data-v-2c61ceb1] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  width: 100%;\n}\r\n";
+var css$1 = "\n.paginator-container[data-v-11671e09] {\r\n  display: grid;\r\n  grid-template-columns: 1fr auto 1fr;\r\n  align-items: center;\r\n  width: 100%;\r\n  margin-top: 1rem;\r\n  gap: 1rem;\n}\n.paginator-data[data-v-11671e09] {\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-size: 0.875rem;\r\n  grid-column: 1;\n}\n.paginator-badge[data-v-11671e09] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\r\n  padding: 0.375rem 0.625rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  border-radius: 0.375rem;\r\n  color: #495057;\r\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-11671e09]:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.paginator-label[data-v-11671e09] {\r\n  font-weight: 500;\r\n  color: #6c757d;\n}\n.paginator-value[data-v-11671e09] {\r\n  font-weight: 600;\r\n  color: #212529;\n}\n.paginator-dropdown[data-v-11671e09] {\r\n  font-size: 0.875rem;\n}\n.paginator-dropdown[data-v-11671e09] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\n}\n.paginator-dropdown[data-v-11671e09] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.crud-paginator[data-v-11671e09] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  grid-column: 2;\n}\n.paginator-badge-dropdown[data-v-11671e09] {\r\n  z-index: 1;\r\n  position: relative;\n}\n.paginator-badge-dropdown[data-v-11671e09] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\n}\n.paginator-badge-dropdown[data-v-11671e09] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\r\n";
 n(css$1, {});
 
 const _sfc_main$1 = {
@@ -13770,7 +13842,18 @@ const _sfc_main$1 = {
   components: {
     InfiniteLoading
   },
-  inject: ['infiniteScroll', 'infiniteScrollKey', 'messageLoading', 'messageNoMore', 'messageEmptyResults', 'loading', 'items', 'pagination', 'selectedItems', 'showPaginator', 'infiniteHandler', 'onPaginationChange']
+  inject: ['infiniteScroll', 'infiniteScrollKey', 'messageLoading', 'messageNoMore', 'messageEmptyResults', 'loading', 'items', 'pagination', 'selectedItems', 'showPaginator', 'infiniteHandler', 'onPaginationChange', 'onPerPageChange', 'clearSelection'],
+  data() {
+    return {
+      perPageOptions: [10, 20, 50, 100]
+    };
+  },
+  computed: {
+    selectedItemsCount() {
+      // Computed para forzar reactividad del contador
+      return this.selectedItems ? this.selectedItems.length : 0;
+    }
+  }
 };
 var _sfc_render$1 = function render() {
   var _vm = this,
@@ -13815,25 +13898,39 @@ var _sfc_render$1 = function render() {
     staticClass: "paginator-label"
   }, [_vm._v("Filas:")]), _c('span', {
     staticClass: "paginator-value"
-  }, [_vm._v(_vm._s(_vm.pagination.total))])]), _c('span', {
-    staticClass: "paginator-badge"
-  }, [_c('span', {
-    staticClass: "paginator-label"
-  }, [_vm._v("xPág:")]), _c('span', {
-    staticClass: "paginator-value"
-  }, [_vm._v(_vm._s(_vm.pagination.per_page))])]), _c('span', {
-    staticClass: "paginator-badge"
-  }, [_c('span', {
-    staticClass: "paginator-label"
-  }, [_vm._v("Pág:")]), _c('span', {
-    staticClass: "paginator-value"
-  }, [_vm._v(_vm._s(_vm.pagination.current_page))])]), _vm.selectedItems.length > 0 ? _c('span', {
-    staticClass: "paginator-badge"
-  }, [_c('span', {
-    staticClass: "paginator-label"
-  }, [_vm._v("Seleccionados:")]), _c('span', {
-    staticClass: "paginator-value"
-  }, [_vm._v(_vm._s(_vm.selectedItems.length))])]) : _vm._e()]), _c('div', {
+  }, [_vm._v(_vm._s(_vm.pagination.total))])]), _c('b-dropdown', {
+    staticClass: "paginator-dropdown",
+    attrs: {
+      "variant": "outline-secondary",
+      "size": "sm",
+      "text": `xPág: ${_vm.pagination.per_page}`
+    }
+  }, _vm._l(_vm.perPageOptions, function (option) {
+    return _c('b-dropdown-item', {
+      key: option,
+      attrs: {
+        "active": _vm.pagination.per_page === option
+      },
+      on: {
+        "click": function ($event) {
+          return _vm.onPerPageChange(option);
+        }
+      }
+    }, [_vm._v(" " + _vm._s(option) + " ")]);
+  }), 1), _vm.selectedItemsCount > 0 ? _c('b-dropdown', {
+    staticClass: "paginator-dropdown paginator-badge-dropdown",
+    attrs: {
+      "variant": "outline-secondary",
+      "size": "sm",
+      "text": `Seleccionados: ${_vm.selectedItemsCount}`
+    }
+  }, [_c('b-dropdown-item', {
+    on: {
+      "click": _vm.clearSelection
+    }
+  }, [_c('b-icon-x-circle', {
+    staticClass: "mr-1"
+  }), _vm._v(" Limpiar selección ")], 1)], 1) : _vm._e()], 1), _c('div', {
     staticClass: "crud-paginator"
   }, [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
@@ -13855,7 +13952,7 @@ var _sfc_render$1 = function render() {
   }) : _vm._e()], 1)]) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$1 = [];
-var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "2c61ceb1", null, null);
+var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "11671e09", null, null);
 var CrudPagination = __component__$1.exports;
 
 var crudData = {
@@ -13988,6 +14085,73 @@ var crudData = {
       if (!this.ajax) {
         this.items = val;
       }
+    },
+    limit(val) {
+      if (val && val > 0) {
+        this.pagination.per_page = val;
+        // Resetear a la primera página y recargar datos
+        this.pagination.current_page = 1;
+        this.fetchItems();
+      }
+    },
+    displayMode() {
+      // Forzar re-renderizado cuando cambia el modo de visualización
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+    showPaginator() {
+      // Forzar re-renderizado cuando cambia la visibilidad del paginador
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+    showSearch() {
+      // Forzar re-renderizado cuando cambia la visibilidad de la búsqueda
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+    showCreateBtn() {
+      // Forzar re-renderizado cuando cambia la visibilidad del botón crear
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+    showHeader() {
+      // Forzar re-renderizado cuando cambia la visibilidad del header
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+    tableClass() {
+      // Forzar re-renderizado cuando cambian las clases de la tabla
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+    cardClass() {
+      // Forzar re-renderizado cuando cambian las clases de las tarjetas
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+    tableContainerClass() {
+      // Forzar re-renderizado cuando cambian las clases del contenedor
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+    columns: {
+      handler() {
+        // Recargar opciones cuando cambian las columnas
+        this.loadOptions();
+        // Forzar re-renderizado
+        this.$nextTick(() => {
+          this.forceRecomputeCounter++;
+        });
+      },
+      deep: true
     }
   },
   mounted() {
@@ -14092,15 +14256,13 @@ var crudData = {
       });
     },
     makePagination: function (data) {
-      let pagination = {
-        current_page: data.current_page,
-        last_page: data.last_page,
-        next_page_url: data.next_page_url,
-        prev_page_url: data.prev_page_url,
-        total: data.total,
-        per_page: data.per_page
-      };
-      this.pagination = pagination;
+      // Mutar propiedades existentes para mantener reactividad con provide/inject
+      this.pagination.current_page = data.current_page ?? 1;
+      this.pagination.last_page = data.last_page ?? 1;
+      this.pagination.next_page_url = data.next_page_url ?? "";
+      this.pagination.prev_page_url = data.prev_page_url ?? "";
+      this.pagination.total = data.total ?? 0;
+      this.pagination.per_page = data.per_page ?? 20;
     }
   }
 };
@@ -19834,6 +19996,11 @@ var crudApi = {
     onPaginationChange(page) {
       this.fetchItems(page);
     },
+    onPerPageChange(perPage) {
+      this.pagination.per_page = perPage;
+      this.pagination.current_page = 1;
+      this.fetchItems(1);
+    },
     infiniteHandler($state) {
       const hasNextPage = (this.pagination.total > 0 || !this.firstLoad) && (!this.firstLoad || this.pagination.current_page * this.pagination.per_page <= this.pagination.total);
       console.debug("Has next page", hasNextPage, this.pagination);
@@ -19997,6 +20164,25 @@ var crudValidation = {
 };
 
 var crudHelpers = {
+  computed: {
+    isAllSelected() {
+      // Forzar dependencia en selectedItems.length para que se recalcule cuando cambie
+      const selectedCount = this.selectedItems ? this.selectedItems.length : 0;
+      if (!this.itemsList || this.itemsList.length === 0) {
+        return false;
+      }
+
+      // Si no hay items seleccionados, retornar false
+      if (selectedCount === 0) {
+        return false;
+      }
+
+      // Verificar que todos los items de la lista actual estén seleccionados
+      // Usar Boolean() para manejar valores undefined/null
+      const allSelected = this.itemsList.every(item => Boolean(item.selected) === true);
+      return allSelected;
+    }
+  },
   methods: {
     onRowHover(item, itemIndex) {
       if (this.selectHover) {
@@ -20033,34 +20219,75 @@ var crudHelpers = {
       console.debug("Selected Items", this.selectedItems);
     },
     toggleAll(value) {
-      if (value) {
-        this.selectedItems = this.items;
-        this.selectedItems.forEach(item => item.selected = true);
+      // b-form-checkbox emite el valor booleano directamente en el evento change
+      // El valor puede venir directamente como booleano o como evento del DOM
+      const checked = typeof value === 'boolean' ? value : value && value.target ? value.target.checked : value;
+      if (checked) {
+        // Seleccionar todos los items de la lista actual (itemsList)
+        this.itemsList.forEach(item => {
+          this.$set(item, 'selected', true);
+          // Agregar a selectedItems si no está ya
+          if (!this.selectedItems.find(si => si.id === item.id)) {
+            this.selectedItems.push(item);
+          }
+        });
       } else {
-        this.selectedItems.forEach(item => item.selected = false);
-        this.items.forEach(item => item.selected = false);
-        this.selectedItems = [];
+        // Deseleccionar todos
+        this.selectedItems.forEach(item => this.$set(item, 'selected', false));
+        this.items.forEach(item => this.$set(item, 'selected', false));
+        this.itemsList.forEach(item => this.$set(item, 'selected', false));
+        // Usar splice para mantener la referencia del array y reactividad con provide/inject
+        this.selectedItems.splice(0, this.selectedItems.length);
       }
       this.onSelect();
       console.debug("toggle all", this.selectedItems);
+      // Forzar actualización inmediata y en el siguiente tick
       this.$forceUpdate();
+      this.$nextTick(() => {
+        this.$forceUpdate();
+      });
     },
     unSelectItem(item) {
-      item.selected = false;
-      this.selectedItems = this.selectedItems.filter(e => e.id != item.id);
+      this.$set(item, 'selected', false);
+
+      // Filtrar el array y reasignarlo para asegurar reactividad
+      const filtered = this.selectedItems.filter(e => e.id != item.id);
+      // Vaciar el array y luego agregar los elementos filtrados para mantener la referencia
+      this.selectedItems.splice(0, this.selectedItems.length, ...filtered);
+
+      // Forzar actualización para que el computed isAllSelected se recalcule
+      this.$forceUpdate();
     },
     selectItem() {
       let sitem = this.selectedItems.find(e => e.id == this.item.id);
       if (sitem) {
-        this.item.selected = false;
-        this.selectedItems = this.selectedItems.filter(e => e.id != this.item.id);
+        this.$set(this.item, 'selected', false);
+        const filtered = this.selectedItems.filter(e => e.id != this.item.id);
+        // Usar splice para mantener la referencia del array
+        this.selectedItems.splice(0, this.selectedItems.length, ...filtered);
       } else {
-        this.item.selected = true;
+        this.$set(this.item, 'selected', true);
         this.selectedItems.push(this.item);
       }
+      // Forzar actualización para que el computed isAllSelected se recalcule
+      this.$forceUpdate();
     },
     getSelectedItems() {
       return this.selectedItems;
+    },
+    clearSelection() {
+      // Limpiar todas las selecciones
+      this.selectedItems.forEach(item => this.$set(item, 'selected', false));
+      this.items.forEach(item => this.$set(item, 'selected', false));
+      this.itemsList.forEach(item => this.$set(item, 'selected', false));
+      // Vaciar el array manteniendo la referencia para reactividad con provide/inject
+      this.selectedItems.splice(0, this.selectedItems.length);
+      this.onSelect();
+      // Forzar actualización inmediata y en el siguiente tick para asegurar que todo se actualice
+      this.$forceUpdate();
+      this.$nextTick(() => {
+        this.$forceUpdate();
+      });
     },
     onSelect() {
       this.$emit("select", this.item);
@@ -20239,7 +20466,7 @@ var crudHelpers = {
   }
 };
 
-var css = "tr td[data-v-51b1f76a]:last-child,\ntr td[data-v-51b1f76a]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-51b1f76a] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-51b1f76a] td[data-v-51b1f76a] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-51b1f76a][data-v-51b1f76a]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-51b1f76a][data-v-51b1f76a]:hover td[data-v-51b1f76a] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-51b1f76a]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-51b1f76a]:nth-of-type(odd) td[data-v-51b1f76a] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-51b1f76a]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-51b1f76a]:nth-of-type(even) td[data-v-51b1f76a] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-51b1f76a] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-51b1f76a] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-51b1f76a] .crud-title[data-v-51b1f76a] {\n    margin: 0; }\n  .crud-header[data-v-51b1f76a] .crud-search[data-v-51b1f76a] {\n    max-width: 15rem; }\n    .crud-header[data-v-51b1f76a] .crud-search[data-v-51b1f76a] .btn[data-v-51b1f76a] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-51b1f76a] .crud-search[data-v-51b1f76a] .btn[data-v-51b1f76a].open[data-v-51b1f76a] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-51b1f76a] .table-options[data-v-51b1f76a] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-51b1f76a] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-51b1f76a] {\n    table-layout: auto; }\n    .table[data-v-51b1f76a] tbody[data-v-51b1f76a] td[data-v-51b1f76a] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-51b1f76a] tbody[data-v-51b1f76a] td[data-v-51b1f76a]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-51b1f76a] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-51b1f76a] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-51b1f76a] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-51b1f76a] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-51b1f76a] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+var css = "tr td[data-v-482920a4]:last-child,\ntr td[data-v-482920a4]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-482920a4] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-482920a4] td[data-v-482920a4] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-482920a4][data-v-482920a4]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-482920a4][data-v-482920a4]:hover td[data-v-482920a4] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-482920a4]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-482920a4]:nth-of-type(odd) td[data-v-482920a4] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-482920a4]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-482920a4]:nth-of-type(even) td[data-v-482920a4] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-482920a4] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-482920a4] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-482920a4] .crud-title[data-v-482920a4] {\n    margin: 0; }\n  .crud-header[data-v-482920a4] .crud-search[data-v-482920a4] {\n    max-width: 15rem; }\n    .crud-header[data-v-482920a4] .crud-search[data-v-482920a4] .btn[data-v-482920a4] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-482920a4] .crud-search[data-v-482920a4] .btn[data-v-482920a4].open[data-v-482920a4] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-482920a4] .table-options[data-v-482920a4] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-482920a4] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-482920a4] {\n    table-layout: auto; }\n    .table[data-v-482920a4] tbody[data-v-482920a4] td[data-v-482920a4] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-482920a4] tbody[data-v-482920a4] td[data-v-482920a4]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-482920a4] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-482920a4] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-482920a4] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-482920a4] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-482920a4] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
 n(css, {});
 
 const _sfc_main = {
@@ -20366,6 +20593,7 @@ const _sfc_main = {
       internalFilter: this.internalFilter,
       internalFilterByProp: this.internalFilterByProp,
       columnOptions: this.columnOptions,
+      isAllSelected: this.isAllSelected,
       // Methods from mixins
       handleResize: this.handleResize,
       rearrangeArray: this.rearrangeArray,
@@ -20391,6 +20619,7 @@ const _sfc_main = {
       importItems: this.importItems,
       refresh: this.refresh,
       onPaginationChange: this.onPaginationChange,
+      onPerPageChange: this.onPerPageChange,
       infiniteHandler: this.infiniteHandler,
       setupFilters: this.setupFilters,
       toggleSortFilter: this.toggleSortFilter,
@@ -20411,6 +20640,7 @@ const _sfc_main = {
       unSelectItem: this.unSelectItem,
       selectItem: this.selectItem,
       getSelectedItems: this.getSelectedItems,
+      clearSelection: this.clearSelection,
       onSelect: this.onSelect,
       showItem: this.showItem,
       createItem: this.createItem,
@@ -20737,10 +20967,19 @@ var _sfc_render = function render() {
       "show": _vm.loading,
       "rounded": "sm"
     }
-  }), _c('CrudPagination'), _c('CrudModals')], 1);
+  }), _c('CrudPagination'), _c('CrudModals', {
+    scopedSlots: _vm._u([_vm._l(_vm.$scopedSlots, function (slot, name) {
+      return {
+        key: name,
+        fn: function (slotProps) {
+          return [_vm._t(name, null, null, slotProps)];
+        }
+      };
+    })], null, true)
+  })], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "51b1f76a", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "482920a4", null, null);
 var component = __component__.exports;
 
 // Import vue component
