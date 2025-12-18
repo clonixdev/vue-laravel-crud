@@ -194,6 +194,7 @@ export default /*#__PURE__*/ {
       unSelectItem: this.unSelectItem,
       selectItem: this.selectItem,
       getSelectedItems: this.getSelectedItems,
+      clearSelection: this.clearSelection,
       onSelect: this.onSelect,
       showItem: this.showItem,
       createItem: this.createItem,
@@ -537,7 +538,11 @@ export default /*#__PURE__*/ {
     <b-overlay :show="loading" rounded="sm"></b-overlay>
     
     <CrudPagination />
-    <CrudModals />
+    <CrudModals>
+      <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+        <slot :name="name" v-bind="slotProps" />
+      </template>
+    </CrudModals>
   </div>
 </template>
 

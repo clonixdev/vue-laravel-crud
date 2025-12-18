@@ -16,18 +16,6 @@
   <div>
     <h6 class="mb-3">Selección de filas con checkboxes</h6>
     
-    <b-alert v-if="selectedItemsCount > 0" variant="info" class="mb-3" show>
-      <strong>{{ selectedItemsCount }}</strong> item(s) seleccionado(s)
-      <b-button 
-        variant="outline-danger" 
-        size="sm" 
-        class="ml-2"
-        @click="clearSelection"
-      >
-        Limpiar selección
-      </b-button>
-    </b-alert>
-    
     <VueLaravelCrud
       :title="title"
       :modelName="modelName"
@@ -307,10 +295,6 @@ export default {
     onItemDeleted() {
       console.log('Item eliminado');
       this.selectedItem = null;
-    },
-    clearSelection() {
-      // Limpiar selección manualmente
-      this.selectedItems = [];
     },
     getStatusVariant(status) {
       switch (status) {

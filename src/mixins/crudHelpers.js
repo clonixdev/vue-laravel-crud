@@ -1,10 +1,23 @@
 export default {
   computed: {
     isAllSelected() {
+      // Forzar dependencia en selectedItems.length para que se recalcule cuando cambie
+      const selectedCount = this.selectedItems ? this.selectedItems.length : 0;
+      
       if (!this.itemsList || this.itemsList.length === 0) {
         return false;
       }
-      return this.itemsList.every(item => item.selected === true);
+      
+      // Si no hay items seleccionados, retornar false
+      if (selectedCount === 0) {
+        return false;
+      }
+      
+      // Verificar que todos los items de la lista actual estén seleccionados
+      // Usar Boolean() para manejar valores undefined/null
+      const allSelected = this.itemsList.every(item => Boolean(item.selected) === true);
+      
+      return allSelected;
     }
   },
   methods: {
@@ -74,38 +87,74 @@ export default {
         this.itemsList.forEach(
           (item) => this.$set(item, 'selected', false)
         );
-        this.selectedItems = [];
+        // Usar splice para mantener la referencia del array y reactividad con provide/inject
+        this.selectedItems.splice(0, this.selectedItems.length);
       }
 
       this.onSelect();
 
       console.debug("toggle all", this.selectedItems);
+      // Forzar actualización inmediata y en el siguiente tick
       this.$forceUpdate();
+      this.$nextTick(() => {
+        this.$forceUpdate();
+      });
     },
 
     unSelectItem(item) {
-      item.selected = false;
+      this.$set(item, 'selected', false);
 
-      this.selectedItems = this.selectedItems.filter(
+      // Filtrar el array y reasignarlo para asegurar reactividad
+      const filtered = this.selectedItems.filter(
         (e) => e.id != item.id
       );
+      // Vaciar el array y luego agregar los elementos filtrados para mantener la referencia
+      this.selectedItems.splice(0, this.selectedItems.length, ...filtered);
+      
+      // Forzar actualización para que el computed isAllSelected se recalcule
+      this.$forceUpdate();
     },
 
     selectItem() {
       let sitem = this.selectedItems.find((e) => e.id == this.item.id);
       if (sitem) {
-        this.item.selected = false;
-        this.selectedItems = this.selectedItems.filter(
+        this.$set(this.item, 'selected', false);
+        const filtered = this.selectedItems.filter(
           (e) => e.id != this.item.id
         );
+        // Usar splice para mantener la referencia del array
+        this.selectedItems.splice(0, this.selectedItems.length, ...filtered);
       } else {
-        this.item.selected = true;
+        this.$set(this.item, 'selected', true);
         this.selectedItems.push(this.item);
       }
+      // Forzar actualización para que el computed isAllSelected se recalcule
+      this.$forceUpdate();
     },
 
     getSelectedItems() {
       return this.selectedItems;
+    },
+
+    clearSelection() {
+      // Limpiar todas las selecciones
+      this.selectedItems.forEach(
+        (item) => this.$set(item, 'selected', false)
+      );
+      this.items.forEach(
+        (item) => this.$set(item, 'selected', false)
+      );
+      this.itemsList.forEach(
+        (item) => this.$set(item, 'selected', false)
+      );
+      // Vaciar el array manteniendo la referencia para reactividad con provide/inject
+      this.selectedItems.splice(0, this.selectedItems.length);
+      this.onSelect();
+      // Forzar actualización inmediata y en el siguiente tick para asegurar que todo se actualice
+      this.$forceUpdate();
+      this.$nextTick(() => {
+        this.$forceUpdate();
+      });
     },
 
     onSelect() {

@@ -41,10 +41,18 @@
             {{ option }}
           </b-dropdown-item>
         </b-dropdown>
-        <span class="paginator-badge" v-if="selectedItems.length > 0">
-          <span class="paginator-label">Seleccionados:</span>
-          <span class="paginator-value">{{ selectedItems.length }}</span>
-        </span>
+        <b-dropdown 
+          v-if="selectedItemsCount > 0"
+          variant="outline-secondary" 
+          size="sm" 
+          class="paginator-dropdown paginator-badge-dropdown"
+          :text="`Seleccionados: ${selectedItemsCount}`"
+        >
+          <b-dropdown-item @click="clearSelection">
+            <b-icon-x-circle class="mr-1"></b-icon-x-circle>
+            Limpiar selección
+          </b-dropdown-item>
+        </b-dropdown>
       </div>
       
       <div class="crud-paginator">
@@ -81,21 +89,27 @@ export default {
     'showPaginator',
     'infiniteHandler',
     'onPaginationChange',
-    'onPerPageChange'
+    'onPerPageChange',
+    'clearSelection'
   ],
   data() {
     return {
       perPageOptions: [10, 20, 50, 100]
     };
+  },
+  computed: {
+    selectedItemsCount() {
+      // Computed para forzar reactividad del contador
+      return this.selectedItems ? this.selectedItems.length : 0;
+    }
   }
 };
 </script>
 
 <style scoped>
 .paginator-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   width: 100%;
   margin-top: 1rem;
@@ -109,7 +123,7 @@ export default {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
-  flex: 0 0 auto;
+  grid-column: 1;
 }
 
 .paginator-badge {
@@ -160,6 +174,27 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1 1 auto;
+  grid-column: 2;
+}
+
+.paginator-badge-dropdown {
+  z-index: 1;
+  position: relative;
+}
+
+.paginator-badge-dropdown >>> .btn {
+  padding: 0.375rem 0.625rem;
+  font-size: 0.875rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #495057;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.paginator-badge-dropdown >>> .btn:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
 }
 </style>

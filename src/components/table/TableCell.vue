@@ -1,5 +1,6 @@
 <template>
-  <td :scope="column.prop == 'id' ? 'row' : ''">
+  <td :scope="column.prop == 'id' ? 'row' : ''" 
+      :class="{ 'actions-cell': column.type == 'actions' }">
     <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
       v-bind:columnindex="columnIndex">
       <span v-if="column.type == 'boolean'">
@@ -48,7 +49,30 @@
       </span>
     </slot>
 
-    <b-button-group v-if="column.type == 'actions'">
+    <!-- Modo dropdown cuando useDropdown está activo -->
+    <b-dropdown v-if="column.type == 'actions' && column.useDropdown" 
+                variant="secondary" 
+                size="sm" 
+                class="actions-dropdown">
+      <template #button-content>
+        <b-icon-list></b-icon-list>
+      </template>
+      <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
+        v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
+        <b-dropdown-item @click="showItem(item.id, index)">
+          <b-icon-eye></b-icon-eye> Ver
+        </b-dropdown-item>
+        <b-dropdown-item @click="updateItem(item.id, index)">
+          <b-icon-pencil></b-icon-pencil> Editar
+        </b-dropdown-item>
+        <b-dropdown-item @click="removeItem(item.id, index)" class="text-danger">
+          <b-icon-trash></b-icon-trash> Eliminar
+        </b-dropdown-item>
+      </slot>
+    </b-dropdown>
+    
+    <!-- Modo botones normal (comportamiento original) -->
+    <b-button-group v-else-if="column.type == 'actions'" class="actions-button-group">
       <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
         v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
         <b-button variant="primary" @click="showItem(item.id, index)">
@@ -93,3 +117,25 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+/* Fijar ancho de la columna de acciones */
+.actions-cell {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.actions-button-group {
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+
+.actions-dropdown {
+  display: inline-block;
+}
+
+/* Asegurar que los botones no se expandan */
+.actions-button-group .btn {
+  flex-shrink: 0;
+}
+</style>

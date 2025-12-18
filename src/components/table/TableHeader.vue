@@ -3,7 +3,9 @@
     <tr>
       <slot name="rowHead">
         <th v-for="(column, indexc) in columns" :key="indexc"
-          :style="{ width: column.width ? column.width : 'inherit' }" scope="col"
+          :style="{ width: column.width ? column.width : (column.type == 'actions' ? '1%' : 'inherit') }" 
+          :class="{ 'actions-header': column.type == 'actions' }"
+          scope="col"
           @mouseenter="hoveredColumn = column.prop"
           @mouseleave="hoveredColumn = null">
           <slot :name="'filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
@@ -154,3 +156,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+/* Fijar ancho de la columna de acciones en el header */
+.actions-header {
+  width: 1%;
+  white-space: nowrap;
+}
+</style>
