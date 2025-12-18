@@ -18,9 +18,11 @@
     <h6 class="mb-3">Ejemplo con todas las configuraciones avanzadas</h6>
     
     <VueLaravelCrud
+      :key="crudKey"
       :title="title"
       :modelName="modelName"
       :model="model"
+      :models="localData"
       :columns="columns"
       :ajax="ajax"
       :apiUrl="apiUrl"
@@ -189,23 +191,32 @@
         </b-row>
       </b-card-body>
     </b-card>
+    
+    <CodeSnippet :code="exampleCode" />
   </div>
 </template>
 
 <script>
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
+import CodeSnippet from '../components/CodeSnippet.vue';
+import { isStaticMode } from '../utils/staticMode.js';
+import { generateMockData } from '../data/mockData.js';
 
 export default {
   name: 'AdvancedConfigurations',
   components: {
-    VueLaravelCrud
+    VueLaravelCrud,
+    CodeSnippet
   },
   data() {
+    const staticMode = isStaticMode();
+    
     return {
       title: "Configuraciones Avanzadas",
       modelName: "users",
-      ajax: true,
-      apiUrl: "http://localhost:3001/api",
+      ajax: !staticMode,
+      apiUrl: staticMode ? "" : "http://localhost:3001/api",
+      localData: staticMode ? generateMockData('users', 20) : [],
       selectedItem: null,
       model: {
         name: "",
@@ -265,6 +276,172 @@ export default {
       messageLoading: "Cargando...",
       searchPlaceholder: "Buscar..."
     };
+  },
+  computed: {
+    crudKey() {
+      // Generar una key única basada en las opciones que afectan el renderizado
+      // Esto fuerza el re-renderizado completo del componente cuando cambian
+      return [
+        this.limit,
+        this.showPaginator,
+        this.showCreateBtn,
+        this.showSearch,
+        this.showHeader,
+        this.showTitle,
+        this.displayModeToggler,
+        this.selectHover,
+        this.selectClick,
+        this.cardClass,
+        this.tableClass,
+        this.tableContainerClass,
+        this.hideModalAfterSave,
+        this.hideModalAfterCreate,
+        this.hideModalAfterUpdate,
+        this.refreshAfterSave
+      ].join('-');
+    },
+    exampleCode() {
+      return `<template>
+  <div>
+    <VueLaravelCrud
+      title="Configuraciones Avanzadas"
+      modelName="users"
+      :model="model"
+      :columns="columns"
+      :ajax="true"
+      apiUrl="http://localhost:3001/api"
+      :hideModalAfterSave="hideModalAfterSave"
+      :hideModalAfterCreate="hideModalAfterCreate"
+      :hideModalAfterUpdate="hideModalAfterUpdate"
+      :refreshAfterSave="refreshAfterSave"
+      :limit="limit"
+      :showPaginator="showPaginator"
+      :showCreateBtn="showCreateBtn"
+      :showSearch="showSearch"
+      :showHeader="showHeader"
+      :showTitle="showTitle"
+      :displayModeToggler="displayModeToggler"
+      :selectHover="selectHover"
+      :selectClick="selectClick"
+      :cardClass="cardClass"
+      :tableClass="tableClass"
+      :tableContainerClass="tableContainerClass"
+      :messageNew="messageNew"
+      :messageSave="messageSave"
+      :messageRemoveConfirm="messageRemoveConfirm"
+      :messageEmptyResults="messageEmptyResults"
+      :messageLoading="messageLoading"
+      :searchPlaceholder="searchPlaceholder"
+      @select="onSelect"
+      @itemSaved="onItemSaved"
+      @itemDeleted="onItemDeleted"
+    >
+      <template v-slot:form="slotProps">
+        <b-form-group label="Nombre:" description="Nombre completo del usuario">
+          <b-form-input
+            v-model="slotProps.item.name"
+            type="text"
+            required
+            placeholder="Ingrese el nombre"
+          ></b-form-input>
+        </b-form-group>
+        
+        <b-form-group label="Email:" description="Correo electrónico">
+          <b-form-input
+            v-model="slotProps.item.email"
+            type="email"
+            required
+            placeholder="usuario@ejemplo.com"
+          ></b-form-input>
+        </b-form-group>
+      </template>
+      
+      <template v-slot:show="slotProps">
+        <b-list-group>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            ID
+            <b-badge variant="primary" pill>{{ slotProps.item.id }}</b-badge>
+          </b-list-group-item>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            Nombre
+            <b-badge variant="info" pill>{{ slotProps.item.name }}</b-badge>
+          </b-list-group-item>
+        </b-list-group>
+      </template>
+    </VueLaravelCrud>
+  </div>
+</template>
+
+<script>
+import VueLaravelCrud from "vue-laravel-crud";
+
+export default {
+  components: {
+    VueLaravelCrud
+  },
+  data() {
+    return {
+      hideModalAfterSave: true,
+      hideModalAfterCreate: false,
+      hideModalAfterUpdate: false,
+      refreshAfterSave: true,
+      limit: 20,
+      showPaginator: true,
+      showCreateBtn: true,
+      showSearch: true,
+      showHeader: true,
+      showTitle: true,
+      displayModeToggler: false,
+      selectHover: false,
+      selectClick: false,
+      cardClass: "",
+      tableClass: "",
+      tableContainerClass: "",
+      messageNew: "Nuevo",
+      messageSave: "Guardar",
+      messageRemoveConfirm: "¿Esta seguro de borrar este elemento?",
+      messageEmptyResults: "No se han encontrado resultados",
+      messageLoading: "Cargando...",
+      searchPlaceholder: "Buscar...",
+      model: {
+        name: "",
+        email: "",
+        age: null,
+        status: "active"
+      },
+      columns: [
+        { label: "ID", prop: "id", type: "number", width: "80px" },
+        { label: "Nombre", prop: "name", type: "text" },
+        { label: "Email", prop: "email", type: "text" },
+        { label: "Edad", prop: "age", type: "number" },
+        { 
+          label: "Estado", 
+          prop: "status", 
+          type: "state",
+          options: [
+            { id: "active", text: "Activo" },
+            { id: "inactive", text: "Inactivo" },
+            { id: "pending", text: "Pendiente" }
+          ]
+        },
+        { label: "Acciones", prop: "actions", type: "actions" }
+      ]
+    };
+  },
+  methods: {
+    onSelect(item) {
+      console.log('Item seleccionado:', item);
+    },
+    onItemSaved(data) {
+      console.log('Item guardado:', data);
+    },
+    onItemDeleted() {
+      console.log('Item eliminado');
+    }
+  }
+};
+<\/script>`;
+    }
   },
   methods: {
     onSelect(item) {

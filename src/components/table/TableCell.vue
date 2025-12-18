@@ -25,6 +25,10 @@
         <b-form-checkbox v-model="item.selected" @change="onCheckSelect($event, item)">
         </b-form-checkbox>
       </span>
+      <span v-else-if="column.type == 'checkbox'">
+        <b-form-checkbox v-model="item.selected" @change="onCheckSelect($event, item)">
+        </b-form-checkbox>
+      </span>
       <span v-else-if="column.type == 'state' && optionsLoaded">
         {{
           getStateValue(itemValue(column, item), column.options)

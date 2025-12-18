@@ -27,6 +27,7 @@
       :title="title"
       :modelName="modelName"
       :model="model"
+      :models="localData"
       :columns="columns"
       :ajax="ajax"
       :apiUrl="apiUrl"
@@ -129,23 +130,32 @@
         <strong>Producto seleccionado:</strong> {{ selectedItem.name }} - ${{ selectedItem.price }}
       </b-alert>
     </div>
+    
+    <CodeSnippet :code="exampleCode" />
   </div>
 </template>
 
 <script>
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
+import CodeSnippet from '../components/CodeSnippet.vue';
+import { isStaticMode } from '../utils/staticMode.js';
+import { generateMockData } from '../data/mockData.js';
 
 export default {
   name: 'CardsView',
   components: {
-    VueLaravelCrud
+    VueLaravelCrud,
+    CodeSnippet
   },
   data() {
+    const staticMode = isStaticMode();
+    
     return {
       title: "Catálogo de Productos",
       modelName: "products",
-      ajax: true,
-      apiUrl: "http://localhost:3001/api",
+      ajax: !staticMode,
+      apiUrl: staticMode ? "" : "http://localhost:3001/api",
+      localData: staticMode ? generateMockData('products', 15) : [],
       selectedItem: null,
       model: {
         name: "",
@@ -169,6 +179,133 @@ export default {
       // :colMd="4"   - 3 columnas en tablets
       // :colLg="3"   - 4 columnas en pantallas grandes
     };
+  },
+  computed: {
+    exampleCode() {
+      return `<template>
+  <div>
+    <VueLaravelCrud
+      title="Catálogo de Productos"
+      modelName="products"
+      :model="model"
+      :columns="columns"
+      :ajax="true"
+      apiUrl="http://localhost:3001/api"
+      :displayMode="2"
+      :colLg="3"
+      :colMd="4"
+      :colSm="6"
+      :colXs="12"
+      @select="onSelect"
+      @itemSaved="onItemSaved"
+      @itemDeleted="onItemDeleted"
+    >
+      <template v-slot:form="slotProps">
+        <b-form-group label="Nombre:" description="Nombre del producto">
+          <b-form-input
+            v-model="slotProps.item.name"
+            type="text"
+            required
+            placeholder="Ingrese el nombre del producto"
+          ></b-form-input>
+        </b-form-group>
+        
+        <b-form-group label="Precio:" description="Precio en USD">
+          <b-form-input
+            v-model="slotProps.item.price"
+            type="number"
+            step="0.01"
+            min="0"
+            placeholder="0.00"
+          ></b-form-input>
+        </b-form-group>
+        
+        <b-form-group label="Categoría:" description="Categoría del producto">
+          <b-form-select v-model="slotProps.item.category">
+            <option value="Electronics">Electrónicos</option>
+            <option value="Accessories">Accesorios</option>
+            <option value="Clothing">Ropa</option>
+            <option value="Books">Libros</option>
+          </b-form-select>
+        </b-form-group>
+        
+        <b-form-group label="Stock:" description="Cantidad en inventario">
+          <b-form-input
+            v-model="slotProps.item.stock"
+            type="number"
+            min="0"
+            placeholder="0"
+          ></b-form-input>
+        </b-form-group>
+        
+        <b-form-group>
+          <b-form-checkbox v-model="slotProps.item.active">
+            Producto activo
+          </b-form-checkbox>
+        </b-form-group>
+      </template>
+      
+      <template v-slot:show="slotProps">
+        <b-list-group>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            ID
+            <b-badge variant="primary" pill>{{ slotProps.item.id }}</b-badge>
+          </b-list-group-item>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            Nombre
+            <b-badge variant="info" pill>{{ slotProps.item.name }}</b-badge>
+          </b-list-group-item>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            Precio
+            <b-badge variant="success" pill>${{ slotProps.item.price }}</b-badge>
+          </b-list-group-item>
+        </b-list-group>
+      </template>
+    </VueLaravelCrud>
+  </div>
+</template>
+
+<script>
+import VueLaravelCrud from "vue-laravel-crud";
+
+export default {
+  components: {
+    VueLaravelCrud
+  },
+  data() {
+    return {
+      model: {
+        name: "",
+        price: null,
+        category: "Electronics",
+        stock: 0,
+        active: true
+      },
+      columns: [
+        { label: "ID", prop: "id", type: "number" },
+        { label: "Nombre", prop: "name", type: "text" },
+        { label: "Precio", prop: "price", type: "number" },
+        { label: "Categoría", prop: "category", type: "text" },
+        { label: "Stock", prop: "stock", type: "number" },
+        { label: "Activo", prop: "active", type: "boolean" },
+        { label: "Acciones", prop: "actions", type: "actions" }
+      ]
+    };
+  },
+  methods: {
+    onSelect(item) {
+      console.log('Producto seleccionado:', item);
+    },
+    onItemSaved(data) {
+      console.log('Producto guardado:', data);
+    },
+    onItemDeleted() {
+      console.log('Producto eliminado');
+    }
+  }
+};
+<\/script>`;
+    }
   },
   methods: {
     onSelect(item) {

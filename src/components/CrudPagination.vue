@@ -26,14 +26,21 @@
           <span class="paginator-label">Filas:</span>
           <span class="paginator-value">{{ pagination.total }}</span>
         </span>
-        <span class="paginator-badge">
-          <span class="paginator-label">xPág:</span>
-          <span class="paginator-value">{{ pagination.per_page }}</span>
-        </span>
-        <span class="paginator-badge">
-          <span class="paginator-label">Pág:</span>
-          <span class="paginator-value">{{ pagination.current_page }}</span>
-        </span>
+        <b-dropdown 
+          variant="outline-secondary" 
+          size="sm" 
+          class="paginator-dropdown"
+          :text="`xPág: ${pagination.per_page}`"
+        >
+          <b-dropdown-item 
+            v-for="option in perPageOptions" 
+            :key="option"
+            @click="onPerPageChange(option)"
+            :active="pagination.per_page === option"
+          >
+            {{ option }}
+          </b-dropdown-item>
+        </b-dropdown>
         <span class="paginator-badge" v-if="selectedItems.length > 0">
           <span class="paginator-label">Seleccionados:</span>
           <span class="paginator-value">{{ selectedItems.length }}</span>
@@ -73,28 +80,36 @@ export default {
     'selectedItems',
     'showPaginator',
     'infiniteHandler',
-    'onPaginationChange'
-  ]
+    'onPaginationChange',
+    'onPerPageChange'
+  ],
+  data() {
+    return {
+      perPageOptions: [10, 20, 50, 100]
+    };
+  }
 };
 </script>
 
 <style scoped>
 .paginator-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   margin-top: 1rem;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .paginator-data {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
+  flex: 0 0 auto;
 }
 
 .paginator-badge {
@@ -124,10 +139,27 @@ export default {
   color: #212529;
 }
 
+.paginator-dropdown {
+  font-size: 0.875rem;
+}
+
+.paginator-dropdown >>> .btn {
+  padding: 0.375rem 0.625rem;
+  font-size: 0.875rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #495057;
+}
+
+.paginator-dropdown >>> .btn:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+}
+
 .crud-paginator {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  flex: 1 1 auto;
 }
 </style>

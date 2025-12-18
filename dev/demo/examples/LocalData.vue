@@ -102,16 +102,20 @@
         </b-list-group>
       </template>
     </VueLaravelCrud>
+    
+    <CodeSnippet :code="exampleCode" />
   </div>
 </template>
 
 <script>
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
+import CodeSnippet from '../components/CodeSnippet.vue';
 
 export default {
   name: 'LocalData',
   components: {
-    VueLaravelCrud
+    VueLaravelCrud,
+    CodeSnippet
   },
   data() {
     return {
@@ -193,6 +197,143 @@ export default {
         { label: "Acciones", prop: "actions", type: "actions" }
       ]
     };
+  },
+  computed: {
+    exampleCode() {
+      return `<template>
+  <div>
+    <VueLaravelCrud
+      title="Usuarios Locales"
+      modelName="users"
+      :model="model"
+      :models="localData"
+      :columns="columns"
+      :ajax="false"
+      @select="onSelect"
+      @itemSaved="onItemSaved"
+      @itemDeleted="onItemDeleted"
+    >
+      <template v-slot:form="slotProps">
+        <b-form-group label="Nombre:" description="Nombre completo del usuario">
+          <b-form-input
+            v-model="slotProps.item.name"
+            type="text"
+            required
+            placeholder="Ingrese el nombre"
+          ></b-form-input>
+        </b-form-group>
+        
+        <b-form-group label="Email:" description="Correo electrónico">
+          <b-form-input
+            v-model="slotProps.item.email"
+            type="email"
+            required
+            placeholder="usuario@ejemplo.com"
+          ></b-form-input>
+        </b-form-group>
+        
+        <b-form-group label="Edad:" description="Edad en años">
+          <b-form-input
+            v-model="slotProps.item.age"
+            type="number"
+            min="1"
+            max="120"
+            placeholder="25"
+          ></b-form-input>
+        </b-form-group>
+        
+        <b-form-group label="Estado:" description="Estado del usuario">
+          <b-form-select v-model="slotProps.item.status">
+            <option value="active">Activo</option>
+            <option value="inactive">Inactivo</option>
+            <option value="pending">Pendiente</option>
+          </b-form-select>
+        </b-form-group>
+      </template>
+      
+      <template v-slot:show="slotProps">
+        <b-list-group>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            ID
+            <b-badge variant="primary" pill>{{ slotProps.item.id }}</b-badge>
+          </b-list-group-item>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            Nombre
+            <b-badge variant="info" pill>{{ slotProps.item.name }}</b-badge>
+          </b-list-group-item>
+        </b-list-group>
+      </template>
+    </VueLaravelCrud>
+  </div>
+</template>
+
+<script>
+import VueLaravelCrud from "vue-laravel-crud";
+
+export default {
+  components: {
+    VueLaravelCrud
+  },
+  data() {
+    return {
+      model: {
+        name: "",
+        email: "",
+        age: null,
+        status: "active"
+      },
+      localData: [
+        {
+          id: 1,
+          name: "Juan Pérez",
+          email: "juan@example.com",
+          age: 30,
+          status: "active",
+          created_at: "2023-01-15T10:30:00Z"
+        },
+        {
+          id: 2,
+          name: "María García",
+          email: "maria@example.com",
+          age: 25,
+          status: "inactive",
+          created_at: "2023-01-16T14:20:00Z"
+        }
+      ],
+      columns: [
+        { label: "ID", prop: "id", type: "number", width: "80px" },
+        { label: "Nombre", prop: "name", type: "text" },
+        { label: "Email", prop: "email", type: "text" },
+        { label: "Edad", prop: "age", type: "number" },
+        { 
+          label: "Estado", 
+          prop: "status", 
+          type: "state",
+          options: [
+            { id: "active", text: "Activo" },
+            { id: "inactive", text: "Inactivo" },
+            { id: "pending", text: "Pendiente" }
+          ]
+        },
+        { label: "Creado", prop: "created_at", type: "date", format: "DD/MM/YYYY" },
+        { label: "Acciones", prop: "actions", type: "actions" }
+      ]
+    };
+  },
+  methods: {
+    onSelect(item) {
+      console.log('Item seleccionado:', item);
+    },
+    onItemSaved(data) {
+      console.log('Item guardado localmente:', data);
+    },
+    onItemDeleted() {
+      console.log('Item eliminado localmente');
+    }
+  }
+};
+<\/script>`;
+    }
   },
   methods: {
     onSelect(item) {

@@ -1,192 +1,388 @@
 # vue-laravel-crud
 
-npm i vue-laravel-crud
+Componente Vue.js para crear interfaces CRUD (Create, Read, Update, Delete) completas con integración a APIs Laravel o cualquier API REST estándar.
 
+## Instalación
 
-# How its work?:
-This component implements a table and actions to create, modify, delete by calling a standard api
+```bash
+npm install vue-laravel-crud
+```
 
-* GET apiUrl/modelName - Retrieve paginated listing
-* POST apiUrl/modelName/:id - Create item
-* PUT apiUrl/modelName/:id - Update item
-* DELETE apiUrl/modelName/:id - Delete item
+## Dependencias
 
-# Dependency:
+Este componente requiere las siguientes dependencias:
 
-* bootstrap-vue
-* axios
-* vuedraggable
+* `bootstrap-vue` - Framework de componentes UI
+* `axios` - Cliente HTTP para peticiones AJAX
+* `vuedraggable` - Para funcionalidad de drag & drop
+* `moment` - Para formateo de fechas
+* `vue-infinite-loading` - Para scroll infinito (opcional)
 
-# Full Example:
+## ¿Cómo funciona?
+
+Este componente implementa una tabla completa con acciones para crear, modificar y eliminar elementos mediante llamadas a una API estándar.
+
+### Endpoints API requeridos:
+
+* `GET apiUrl/modelName` - Obtener listado paginado
+* `POST apiUrl/modelName` - Crear nuevo elemento
+* `PUT apiUrl/modelName/:id` - Actualizar elemento existente
+* `DELETE apiUrl/modelName/:id` - Eliminar elemento
+
+## Ejemplo Básico
 
 ### JavaScript
 
 ```js
-
-
 import VueLaravelCrud from "vue-laravel-crud";
 
 export default {
-    
-  components: { VueLaravelCrud },
+  components: { 
+    VueLaravelCrud 
+  },
   data() {
     return {
-        title: "Crud Title",
-        modelName: 'users'
-        model: {
-            name: "",
-            email: "",
-        },
-        columns: [
-            { label: "Name", prop: "name", type: "text" },
-            { label: "Email", prop: "age", type: "number" },
-        ],
-        selected: null,
-        //....
+      title: "Gestión de Usuarios",
+      modelName: 'users',
+      model: {
+        name: "",
+        email: "",
+        age: null,
+      },
+      columns: [
+        { label: "ID", prop: "id", type: "number", width: "80px" },
+        { label: "Nombre", prop: "name", type: "text" },
+        { label: "Email", prop: "email", type: "text" },
+        { label: "Edad", prop: "age", type: "number" },
+        { label: "Acciones", prop: "actions", type: "actions" }
+      ],
+      selected: null,
     };
   },
-  methods:{
-      onSelect(item){
-          this.selected = item;
-      }
-     //....
-
-  },
-
+  methods: {
+    onSelect(item) {
+      this.selected = item;
+    }
+  }
 };
-
 ```
 
-### HTML
+### Template HTML
 
 ```html
-<vue-laravel-crud :title="title" :modelName="modelName" :model="model" :columns="columns">
-    <template v-slot:form="slotProps">
-        <b-form-group label="Name:" description="Your Name">
-            <b-form-input
+<template>
+  <div>
+    <vue-laravel-crud 
+      :title="title" 
+      :modelName="modelName" 
+      :model="model" 
+      :columns="columns"
+      :apiUrl="'http://localhost:8000/api'"
+      @select="onSelect"
+    >
+      <!-- Slot para personalizar el formulario -->
+      <template v-slot:form="slotProps">
+        <b-form-group label="Nombre:" description="Nombre completo del usuario">
+          <b-form-input
             v-model="slotProps.item.name"
             type="text"
             required
-            placeholder="Name"
-            ></b-form-input>
+            placeholder="Ingrese el nombre"
+          ></b-form-input>
         </b-form-group>
-    </template>
-    <template v-slot:show="slotProps">
+        
+        <b-form-group label="Email:" description="Correo electrónico">
+          <b-form-input
+            v-model="slotProps.item.email"
+            type="email"
+            required
+            placeholder="usuario@ejemplo.com"
+          ></b-form-input>
+        </b-form-group>
+        
+        <b-form-group label="Edad:" description="Edad en años">
+          <b-form-input
+            v-model="slotProps.item.age"
+            type="number"
+            min="1"
+            max="120"
+            placeholder="25"
+          ></b-form-input>
+        </b-form-group>
+      </template>
+      
+      <!-- Slot para personalizar la vista de detalle -->
+      <template v-slot:show="slotProps">
         <b-list-group>
-            <b-list-group-item class="d-flex justify-content-between align-items-center">Id<b-badge variant="primary" pill>{{ slotProps.item.id }}</b-badge></b-list-group-item>
-            <b-list-group-item class="d-flex justify-content-between align-items-center">Nombre<b-badge variant="primary" pill>{{ slotProps.item.title }}</b-badge></b-list-group-item>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            ID
+            <b-badge variant="primary" pill>{{ slotProps.item.id }}</b-badge>
+          </b-list-group-item>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            Nombre
+            <b-badge variant="info" pill>{{ slotProps.item.name }}</b-badge>
+          </b-list-group-item>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            Email
+            <b-badge variant="secondary" pill>{{ slotProps.item.email }}</b-badge>
+          </b-list-group-item>
         </b-list-group>
-    </template>
-</vue-laravel-crud>
-
+      </template>
+    </vue-laravel-crud>
+  </div>
+</template>
 ```
 
-### HTML
+## Ejemplo Avanzado con Slots Personalizados
 
 ```html
+<template>
+  <div>
+    <p>Seleccionado: {{ selected ? selected.name : 'ninguno' }}</p>
+    
+    <vue-laravel-crud 
+      :title="title" 
+      :modelName="modelName" 
+      :model="model" 
+      :columns="columns"
+      :apiUrl="'http://localhost:8000/api'"
+      @select="onSelect"
+    >
+      <!-- Personalizar celda específica -->
+      <template slot="cell-name" slot-scope="slotProps">
+        <span class="badge badge-primary">{{ slotProps.item.name }}</span>
+      </template>
 
-Selected: {{ selected ? selected.name : 'none' }}
-<vue-laravel-crud :title="title" :modelName="modelName" :model="model" :columns="columns" @select="onSelect($event)">
+      <!-- Acciones personalizadas en la tabla -->
+      <template v-slot:tableActions="slotProps">
+        <b-button variant="info" size="sm">Acción Personalizada</b-button>
+      </template>
+      
+      <template v-slot:tableActionsRight="slotProps">
+        <b-button variant="success" size="sm">Acción Derecha</b-button>
+      </template>
 
-    <template slot="cell-name" slot-scope="slotProps">
-            <!-- Custom Cell Template cell-(prop) -->
-        <span class="bg-primary">{{ slotProps.item.name }}</span> 
-    </template>
+      <!-- Acciones personalizadas por fila -->
+      <template v-slot:rowAction="slotProps">
+        <b-button 
+          variant="primary" 
+          size="sm"
+          @click="slotProps.showItem(slotProps.item.id, slotProps.index)"
+        >
+          <b-icon-eye></b-icon-eye> Ver
+        </b-button>
+      </template>
 
-
-    <template v-slot:tableActions="slotProps">
-        <span>Slot Actions</span>
-    </template>
-    <template v-slot:tableActionsRight="slotProps">
-        <span>Slot Right Actions</span>
-    </template>
-
-    <template v-slot:rowAction="slotProps">
-        <b-button variant="primary" @click="slotProps.showItem(slotProps.item.id, slotProps.index)"><b-icon-eye></b-icon-eye></b-button>
-    </template>
-
-    <template v-slot:form="slotProps">
-        <b-form-group label="Name:" description="Your Name">
-            <b-form-input
+      <!-- Formulario personalizado -->
+      <template v-slot:form="slotProps">
+        <b-form-group label="Nombre:" description="Nombre completo">
+          <b-form-input
             v-model="slotProps.item.name"
             type="text"
             required
-            placeholder="Name"
-            ></b-form-input>
+            placeholder="Ingrese el nombre"
+          ></b-form-input>
         </b-form-group>
-    </template>
+        
+        <b-form-group label="Email:" description="Correo electrónico">
+          <b-form-input
+            v-model="slotProps.item.email"
+            type="email"
+            required
+            placeholder="usuario@ejemplo.com"
+          ></b-form-input>
+        </b-form-group>
+      </template>
 
-    <template v-slot:show="slotProps">
+      <!-- Vista de detalle personalizada -->
+      <template v-slot:show="slotProps">
         <b-list-group>
-            <b-list-group-item class="d-flex justify-content-between align-items-center">Id<b-badge variant="primary" pill>{{ slotProps.item.id }}</b-badge></b-list-group-item>
-            <b-list-group-item class="d-flex justify-content-between align-items-center">Nombre<b-badge variant="primary" pill>{{ slotProps.item.title }}</b-badge></b-list-group-item>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            ID
+            <b-badge variant="primary" pill>{{ slotProps.item.id }}</b-badge>
+          </b-list-group-item>
+          <b-list-group-item class="d-flex justify-content-between align-items-center">
+            Nombre
+            <b-badge variant="info" pill>{{ slotProps.item.name }}</b-badge>
+          </b-list-group-item>
         </b-list-group>
-    </template>
-</vue-laravel-crud>
-
+      </template>
+    </vue-laravel-crud>
+  </div>
+</template>
 ```
 
-## Configuration
+## Configuración de Props
 
-| Propiedad               | Descripción                   | Tipo      | Valor                                           |
-|:------------------------|:------------------------------|:----------|:------------------------------------------------|
-| modelName               | Nombre del modelo             | `String`  | requerido (ej.: users)                         |
-| model                   | Estructura del modelo         | `Object`  | requerido (ej.: `{ id: 0 }`)                  |
-| models                  | Lista de modelos              | `Array`   | requerido (ej.: `[]`)                         |
-| ajax                    | Habilitar llamadas AJAX       | `Boolean` | opcional, predeterminado: `true`              |
-| useVuexORM              | Usar Vuex ORM                | `Boolean` | opcional, predeterminado: `false`             |
-| columns                 | Array de columnas             | `Array`   | requerido (ej.: `[{ label:"Id", prop: "id", type: "number" }]`) |
-| filter                  | Filtros de búsqueda           | `Array`   | opcional, predeterminado: `[]`                |
-| enableFilters           | Habilitar filtros             | `Boolean` | opcional, predeterminado: `false`             |
-| infiniteScroll          | Desplazamiento infinito       | `Boolean` | opcional, predeterminado: `false`             |
-| sortable                | Habilitar ordenamiento        | `Boolean` | opcional, predeterminado: `false`             |
-| orderable               | Habilitar reordenamiento      | `Boolean` | opcional, predeterminado: `false`             |
-| validate                | Validación de elementos       | `Boolean` | opcional, predeterminado: `false`             |
-| orderProp               | Propiedad de ordenamiento     | `String`  | opcional, predeterminado: `"order"`           |
-| createMultipart         | Crear elementos multipart    | `Boolean` | opcional, predeterminado: `false`             |
-| apiUrl                  | URL base de la API            | `String`  | opcional, predeterminado: `"/api"`            |
-| search                  | Término de búsqueda           | `String`  | opcional, predeterminado: `""`                |
-| hideModalAfterSave      | Ocultar modal después de guardar | `Boolean` | opcional, predeterminado: `true`           |
-| refreshAfterSave        | Actualizar después de guardar  | `Boolean` | opcional, predeterminado: `true`           |
-| showPaginator           | Mostrar paginador             | `Boolean` | opcional, predeterminado: `true`           |
-| showCreateBtn           | Mostrar botón de creación     | `Boolean` | opcional, predeterminado: `true`           |
-| showSearch              | Mostrar campo de búsqueda     | `Boolean` | opcional, predeterminado: `true`           |
-| showHeader              | Mostrar encabezado            | `Boolean` | opcional, predeterminado: `true`           |
-| showTitle               | Mostrar título               | `Boolean` | opcional, predeterminado: `true`           |
-| limit                   | Elementos por página         | `Number`  | opcional, predeterminado: `20`             |
-| displayMode             | Modo de visualización        | `Number`  | opcional, predeterminado: `1`              |
-| displayModeToggler      | Habilitar cambio de modo      | `Boolean` | opcional, predeterminado: `false`          |
-| colXs                   | Columnas en pantallas XS      | `Number`  | opcional, predeterminado: `12`             |
-| colSm                   | Columnas en pantallas SM      | `Number`  | opcional, predeterminado: `12`             |
-| colMd                   | Columnas en pantallas MD      | `Number`  | opcional, predeterminado: `6`              |
-| colLg                   | Columnas en pantallas LG      | `Number`  | opcional, predeterminado: `4`              |
-| colXl                   | Columnas en pantallas XL      | `Number`  | opcional, predeterminado: `3`              |
-| selectHover             | Seleccionar al pasar el mouse  | `Boolean` | opcional, predeterminado: `false`          |
-| selectClick             | Seleccionar al hacer clic     | `Boolean` | opcional, predeterminado: `false`          |
-| cardClass               | Clase de tarjeta              | `String`  | opcional, predeterminado: `""`             |
-| listContainerClass      | Clase de contenedor de lista  | `String`  | opcional, predeterminado: `""`             |
-| listItemClass           | Clase de elemento de lista    | `String`  | opcional, predeterminado: `""`             |
-| cardHideFooter          | Ocultar pie de tarjeta        | `Boolean` | opcional, predeterminado: `false`          |
-| searchPlaceholder       | Marcador de posición de búsqueda | `String` | opcional, predeterminado: "Buscar..."    |
-| tableContainerClass     | Clase de contenedor de tabla  | `String`  | opcional, predeterminado: `""`             |
-| tableClass             | Clase de tabla               | `String`  | opcional, predeterminado: `""`             |
-| grouped                | Agrupar elementos            | `Boolean` | opcional, predeterminado: `false`          |
-| groupedAttribute       | Atributo de agrupación       | `String`  | opcional, predeterminado: "name"          |
-| groupedLabelPre        | Etiqueta de grupo anterior   | `String`  | opcional, predeterminado: `""`             |
-| groupedLabelAfter      | Etiqueta de grupo posterior  | `String`  | opcional, predeterminado: `""`             |
-| draggableGroup         | Grupo arrastrable            | `String`  | opcional, predeterminado: "people"        |
-| draggableOptions       | Opciones de arrastre         | `Object`  | opcional, predeterminado: `{ clone: false }` |
+### Props Requeridas
 
-## Messages
+| Propiedad | Descripción | Tipo | Ejemplo |
+|:----------|:------------|:-----|:--------|
+| `modelName` | Nombre del modelo para las peticiones API | `String` | `"users"` |
+| `model` | Estructura del modelo para formularios | `Object` | `{ name: "", email: "" }` |
+| `columns` | Array de columnas de la tabla | `Array` | Ver ejemplo abajo |
 
+### Props Opcionales - Configuración General
 
-| Propiedad               | Descripción                   | Tipo      | Valor                                           |
-|:------------------------|:------------------------------|:----------|:------------------------------------------------|
-| messageRemoveConfirm    | Mensaje de confirmación de eliminación | `String` | opcional, predeterminado: "¿Está seguro de borrar este elemento?" |
-| messageRemove           | Mensaje de eliminación         | `String`  | opcional, predeterminado: "BORRAR"         |
-| messageNew              | Mensaje de nuevo elemento     | `String`  | opcional, predeterminado: "Nuevo"          |
-| messageEmptyResults     | Mensaje de resultados vacíos   | `String`  | opcional, predeterminado: "No se han encontrado resultados" |
-| messageNoMore           | Mensaje de fin de resultados   | `String`  | opcional, predeterminado: "No hay más elementos para mostrar." |
-| messageLoading          | Mensaje de carga              | `String`  | opcional, predeterminado: "Cargando..."    |
-| messageSave             | Mensaje de guardar            | `String`  | opcional, predeterminado: "Guardar"       |
-| messageDefaultValidationError | Mensaje de error de validación por defecto | `String` | opcional, predeterminado: "Por favor controle el formulario, contiene errores." |
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `title` | Título del componente | `String` | `""` |
+| `ajax` | Habilitar llamadas AJAX | `Boolean` | `true` |
+| `apiUrl` | URL base de la API | `String` | `"/api"` |
+| `useVuexORM` | Usar Vuex ORM | `Boolean` | `false` |
+| `models` | Lista de modelos (cuando `ajax=false`) | `Array` | `[]` |
+
+### Props Opcionales - Visualización
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `displayMode` | Modo de visualización (1=Tabla, 2=Tarjetas, 3=Lista, 4=Kanban) | `Number` | `1` |
+| `displayModeToggler` | Habilitar selector de modo | `Boolean` | `false` |
+| `limit` | Elementos por página | `Number` | `20` |
+| `showPaginator` | Mostrar paginador | `Boolean` | `true` |
+| `showCreateBtn` | Mostrar botón de crear | `Boolean` | `true` |
+| `showSearch` | Mostrar campo de búsqueda | `Boolean` | `true` |
+| `showHeader` | Mostrar encabezado completo | `Boolean` | `true` |
+| `showTitle` | Mostrar título | `Boolean` | `true` |
+| `searchPlaceholder` | Placeholder del buscador | `String` | `"Buscar..."` |
+
+### Props Opcionales - Filtros y Ordenamiento
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `filter` | Filtros de búsqueda predefinidos | `Array` | `[]` |
+| `enableFilters` | Habilitar panel de filtros avanzados | `Boolean` | `false` |
+| `sortable` | Habilitar ordenamiento de columnas | `Boolean` | `false` |
+| `orderable` | Habilitar reordenamiento drag & drop | `Boolean` | `false` |
+| `orderProp` | Propiedad para ordenamiento | `String` | `"order"` |
+| `infiniteScroll` | Habilitar scroll infinito | `Boolean` | `false` |
+
+### Props Opcionales - Comportamiento
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `hideModalAfterSave` | Ocultar modal después de guardar | `Boolean` | `true` |
+| `hideModalAfterCreate` | Ocultar modal después de crear | `Boolean` | `false` |
+| `hideModalAfterUpdate` | Ocultar modal después de actualizar | `Boolean` | `false` |
+| `refreshAfterSave` | Actualizar datos después de guardar | `Boolean` | `true` |
+| `validate` | Habilitar validación de formularios | `Boolean` | `false` |
+| `createMultipart` | Crear elementos con multipart/form-data | `Boolean` | `false` |
+
+### Props Opcionales - Selección
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `selectHover` | Seleccionar al pasar el mouse | `Boolean` | `false` |
+| `selectClick` | Seleccionar al hacer clic | `Boolean` | `false` |
+
+### Props Opcionales - Estilos
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `tableClass` | Clases CSS adicionales para la tabla | `String` | `""` |
+| `tableContainerClass` | Clases CSS para el contenedor de tabla | `String` | `""` |
+| `cardClass` | Clases CSS para las tarjetas | `String` | `""` |
+| `listContainerClass` | Clases CSS para contenedor de lista | `String` | `""` |
+| `listItemClass` | Clases CSS para elementos de lista | `String` | `""` |
+| `cardHideFooter` | Ocultar pie de tarjeta | `Boolean` | `false` |
+
+### Props Opcionales - Agrupación y Drag & Drop
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `grouped` | Agrupar elementos | `Boolean` | `false` |
+| `groupedAttribute` | Atributo para agrupación | `String` | `"name"` |
+| `groupedLabelPre` | Etiqueta antes del grupo | `String` | `""` |
+| `groupedLabelAfter` | Etiqueta después del grupo | `String` | `""` |
+| `groupedSplit` | Dividir grupos | `Boolean` | `false` |
+| `draggableGroup` | Grupo para drag & drop | `String` | `"people"` |
+| `draggableOptions` | Opciones de drag & drop | `Object` | `{ clone: false }` |
+
+### Props Opcionales - Columnas Responsivas (Vista Tarjetas)
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `colXs` | Columnas en pantallas XS | `Number` | `12` |
+| `colSm` | Columnas en pantallas SM | `Number` | `12` |
+| `colMd` | Columnas en pantallas MD | `Number` | `6` |
+| `colLg` | Columnas en pantallas LG | `Number` | `4` |
+| `colXl` | Columnas en pantallas XL | `Number` | `3` |
+
+### Props Opcionales - Importación/Exportación
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `showImport` | Mostrar botón de importar | `Boolean` | `false` |
+| `showExport` | Mostrar botón de exportar | `Boolean` | `false` |
+| `bulkDelete` | Habilitar eliminación masiva | `Boolean` | `false` |
+| `markDirty` | Marcar elementos como modificados | `Boolean` | `true` |
+
+## Mensajes Personalizables
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `messageRemoveConfirm` | Mensaje de confirmación de eliminación | `String` | `"¿Está seguro de borrar este elemento?"` |
+| `messageRemove` | Texto del botón eliminar | `String` | `"BORRAR"` |
+| `messageNew` | Texto del botón nuevo | `String` | `"Nuevo"` |
+| `messageSave` | Texto del botón guardar | `String` | `"Guardar"` |
+| `messageEmptyResults` | Mensaje cuando no hay resultados | `String` | `"No se han encontrado resultados"` |
+| `messageNoMore` | Mensaje de fin de resultados | `String` | `"No hay más elementos para mostrar."` |
+| `messageLoading` | Mensaje de carga | `String` | `"Cargando..."` |
+| `messageDefaultValidationError` | Mensaje de error de validación | `String` | `"Por favor controle el formulario, contiene errores."` |
+| `messageImport` | Texto del botón importar | `String` | `"Importar"` |
+| `messageExport` | Texto del botón exportar | `String` | `"Exportar"` |
+
+## Configuración de Columnas
+
+Las columnas se definen como un array de objetos con las siguientes propiedades:
+
+```js
+columns: [
+  {
+    label: "ID",              // Texto del encabezado
+    prop: "id",               // Propiedad del objeto a mostrar
+    type: "number",           // Tipo: text, number, date, boolean, state, actions
+    width: "80px",            // Ancho de la columna (opcional)
+    format: "DD/MM/YYYY",     // Formato para fechas (opcional)
+    options: [                // Opciones para tipo "state"
+      { id: "active", text: "Activo" },
+      { id: "inactive", text: "Inactivo" }
+    ]
+  }
+]
+```
+
+### Tipos de Columna Disponibles:
+
+- `text` - Texto simple
+- `number` - Número
+- `date` - Fecha (usa moment.js para formateo)
+- `boolean` - Valor booleano
+- `state` - Estado con badges de colores (requiere `options`)
+- `actions` - Columna especial con botones Ver/Editar/Eliminar
+
+## Eventos
+
+El componente emite los siguientes eventos:
+
+- `@select` - Cuando se selecciona un elemento
+- `@itemSaved` - Cuando se guarda un elemento
+- `@itemDeleted` - Cuando se elimina un elemento
+- `@refresh` - Cuando se refrescan los datos
+
+## Slots Disponibles
+
+- `form` - Personalizar el formulario de crear/editar
+- `show` - Personalizar la vista de detalle
+- `cell-{prop}` - Personalizar una celda específica (ej: `cell-name`)
+- `tableActions` - Acciones personalizadas en la tabla (lado izquierdo)
+- `tableActionsRight` - Acciones personalizadas en la tabla (lado derecho)
+- `rowAction` - Acciones personalizadas por fila
+
+## Ejemplos Adicionales
+
+Para ver más ejemplos y demos completos, visita el directorio `dev/demo/examples/` en el repositorio.
+
+## Licencia
+
+MIT

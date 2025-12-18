@@ -156,6 +156,83 @@ export default {
         this.items = val;
       }
     },
+
+    limit(val) {
+      if (val && val > 0) {
+        this.pagination.per_page = val;
+        // Resetear a la primera página y recargar datos
+        this.pagination.current_page = 1;
+        this.fetchItems();
+      }
+    },
+
+    displayMode() {
+      // Forzar re-renderizado cuando cambia el modo de visualización
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+
+    showPaginator() {
+      // Forzar re-renderizado cuando cambia la visibilidad del paginador
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+
+    showSearch() {
+      // Forzar re-renderizado cuando cambia la visibilidad de la búsqueda
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+
+    showCreateBtn() {
+      // Forzar re-renderizado cuando cambia la visibilidad del botón crear
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+
+    showHeader() {
+      // Forzar re-renderizado cuando cambia la visibilidad del header
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+
+    tableClass() {
+      // Forzar re-renderizado cuando cambian las clases de la tabla
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+
+    cardClass() {
+      // Forzar re-renderizado cuando cambian las clases de las tarjetas
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+
+    tableContainerClass() {
+      // Forzar re-renderizado cuando cambian las clases del contenedor
+      this.$nextTick(() => {
+        this.forceRecomputeCounter++;
+      });
+    },
+
+    columns: {
+      handler() {
+        // Recargar opciones cuando cambian las columnas
+        this.loadOptions();
+        // Forzar re-renderizado
+        this.$nextTick(() => {
+          this.forceRecomputeCounter++;
+        });
+      },
+      deep: true
+    },
   },
 
   mounted() {
@@ -277,15 +354,13 @@ export default {
     },
 
     makePagination: function (data) {
-      let pagination = {
-        current_page: data.current_page,
-        last_page: data.last_page,
-        next_page_url: data.next_page_url,
-        prev_page_url: data.prev_page_url,
-        total: data.total,
-        per_page: data.per_page,
-      };
-      this.pagination = pagination;
+      // Mutar propiedades existentes para mantener reactividad con provide/inject
+      this.pagination.current_page = data.current_page ?? 1;
+      this.pagination.last_page = data.last_page ?? 1;
+      this.pagination.next_page_url = data.next_page_url ?? "";
+      this.pagination.prev_page_url = data.prev_page_url ?? "";
+      this.pagination.total = data.total ?? 0;
+      this.pagination.per_page = data.per_page ?? 20;
     },
   }
 };

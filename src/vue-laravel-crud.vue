@@ -146,6 +146,7 @@ export default /*#__PURE__*/ {
       internalFilter: this.internalFilter,
       internalFilterByProp: this.internalFilterByProp,
       columnOptions: this.columnOptions,
+      isAllSelected: this.isAllSelected,
 
       // Methods from mixins
       handleResize: this.handleResize,
@@ -172,6 +173,7 @@ export default /*#__PURE__*/ {
       importItems: this.importItems,
       refresh: this.refresh,
       onPaginationChange: this.onPaginationChange,
+      onPerPageChange: this.onPerPageChange,
       infiniteHandler: this.infiniteHandler,
       setupFilters: this.setupFilters,
       toggleSortFilter: this.toggleSortFilter,

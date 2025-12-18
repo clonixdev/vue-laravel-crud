@@ -1,37 +1,42 @@
 <!--
-  EJEMPLO: Filtros Avanzados y Búsqueda
+  EJEMPLO: Selección con Checkboxes
   
-  Este ejemplo demuestra las funcionalidades de filtrado avanzado y búsqueda global.
-  Los filtros permiten filtrar por columnas específicas y la búsqueda busca en todos los campos.
+  Este ejemplo demuestra cómo usar la columna de tipo 'checkbox' para seleccionar
+  múltiples filas en la tabla. Incluye:
+  - Columna de tipo 'checkbox' para selección de filas
+  - Checkbox en el header para seleccionar/deseleccionar todas las filas
+  - Visualización de los items seleccionados
+  - Evento @selectItems para manejar la selección
   
   CONFIGURACIONES UTILIZADAS:
-  - enableFilters: true = Habilita el panel de filtros avanzados
-  - showSearch: true = Muestra el campo de búsqueda global
-  - sortable: true = Permite ordenar las columnas haciendo click en los encabezados
-  
-  CONFIGURACIONES DISPONIBLES ADICIONALES:
-  - filter: Array de filtros predefinidos - Por defecto: []
-  - search: Texto de búsqueda inicial - Por defecto: ""
-  - searchPlaceholder: Placeholder del campo de búsqueda - Por defecto: "Buscar..."
-  - showPrincipalSortBtn: Mostrar botón de ordenamiento principal - Por defecto: false
-  - principalSortColumn: Columna para ordenamiento principal - Por defecto: "id"
+  - columns: Incluye una columna de tipo 'checkbox' para selección
+  - @selectItems: Evento que se dispara cuando cambian los items seleccionados
 -->
 <template>
   <div>
-    <h6 class="mb-3">Ejemplo con filtros avanzados y búsqueda</h6>
+    <h6 class="mb-3">Selección de filas con checkboxes</h6>
+    
+    <b-alert v-if="selectedItemsCount > 0" variant="info" class="mb-3" show>
+      <strong>{{ selectedItemsCount }}</strong> item(s) seleccionado(s)
+      <b-button 
+        variant="outline-danger" 
+        size="sm" 
+        class="ml-2"
+        @click="clearSelection"
+      >
+        Limpiar selección
+      </b-button>
+    </b-alert>
     
     <VueLaravelCrud
       :title="title"
       :modelName="modelName"
       :model="model"
-      :models="localData"
       :columns="columns"
       :ajax="ajax"
       :apiUrl="apiUrl"
-      :enableFilters="true"
-      :showSearch="true"
-      :sortable="true"
       @select="onSelect"
+      @selectItems="onSelectItems"
       @itemSaved="onItemSaved"
       @itemDeleted="onItemDeleted"
     >
@@ -70,12 +75,6 @@
             <option value="inactive">Inactivo</option>
             <option value="pending">Pendiente</option>
           </b-form-select>
-        </b-form-group>
-        
-        <b-form-group label="Activo:" description="Usuario activo en el sistema">
-          <b-form-checkbox v-model="slotProps.item.is_active" :value="true" :unchecked-value="false">
-            Usuario activo
-          </b-form-checkbox>
         </b-form-group>
       </template>
       
@@ -106,50 +105,80 @@
               {{ getStatusText(slotProps.item.status) }}
             </b-badge>
           </b-list-group-item>
-          <b-list-group-item class="d-flex justify-content-between align-items-center">
-            Activo
-            <b-badge :variant="slotProps.item.is_active ? 'success' : 'secondary'" pill>
-              {{ slotProps.item.is_active ? 'Sí' : 'No' }}
-            </b-badge>
-          </b-list-group-item>
         </b-list-group>
       </template>
     </VueLaravelCrud>
     
     <CodeSnippet :code="exampleCode" />
+    
+    <b-card v-if="selectedItems.length > 0" class="mt-3">
+      <b-card-header>
+        <h6 class="mb-0">Items Seleccionados</h6>
+      </b-card-header>
+      <b-card-body>
+        <b-list-group>
+          <b-list-group-item 
+            v-for="item in selectedItems" 
+            :key="item.id"
+            class="d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <strong>{{ item.name }}</strong> - {{ item.email }}
+            </div>
+            <b-badge :variant="getStatusVariant(item.status)" pill>
+              {{ getStatusText(item.status) }}
+            </b-badge>
+          </b-list-group-item>
+        </b-list-group>
+      </b-card-body>
+    </b-card>
   </div>
 </template>
 
 <script>
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 import CodeSnippet from '../components/CodeSnippet.vue';
-import { isStaticMode } from '../utils/staticMode.js';
-import { generateMockData } from '../data/mockData.js';
 
 export default {
-  name: 'FiltersAndSearch',
+  name: 'CheckboxSelectionExample',
   components: {
     VueLaravelCrud,
     CodeSnippet
   },
   data() {
-    const staticMode = isStaticMode();
-    
     return {
-      title: "Usuarios con Filtros",
+      // CONFIGURACIÓN: Título del componente
+      title: "Gestión de Usuarios con Selección",
+      
+      // CONFIGURACIÓN: Nombre del modelo para las peticiones API
       modelName: "users",
-      ajax: !staticMode,
-      apiUrl: staticMode ? "" : "http://localhost:3001/api",
-      localData: staticMode ? generateMockData('users', 20) : [],
+      
+      // CONFIGURACIÓN: Habilitar peticiones AJAX
+      ajax: true,
+      
+      // CONFIGURACIÓN: URL base de la API
+      apiUrl: "http://localhost:3001/api",
+      
       selectedItem: null,
+      selectedItems: [],
+      
+      // CONFIGURACIÓN: Estructura del modelo para formularios
       model: {
         name: "",
         email: "",
         age: null,
-        status: "active",
-        is_active: true
+        status: "active"
       },
+      
+      // CONFIGURACIÓN: Columnas de la tabla
+      // IMPORTANTE: La primera columna debe ser de tipo 'checkbox' para habilitar la selección
       columns: [
+        { 
+          label: "", 
+          prop: "selected", 
+          type: "checkbox",  // Tipo especial para checkbox de selección
+          width: "50px" 
+        },
         { label: "ID", prop: "id", type: "number", width: "80px" },
         { label: "Nombre", prop: "name", type: "text" },
         { label: "Email", prop: "email", type: "text" },
@@ -164,80 +193,37 @@ export default {
             { id: "pending", text: "Pendiente" }
           ]
         },
-        { label: "Activo", prop: "is_active", type: "boolean" },
-        { label: "Creado", prop: "created_at", type: "date", format: "DD/MM/YYYY" },
-        { label: "Acciones", prop: "actions", type: "actions" }
+        { 
+          label: "Creado", 
+          prop: "created_at", 
+          type: "date", 
+          format: "DD/MM/YYYY"
+        },
+        { 
+          label: "Acciones", 
+          prop: "actions", 
+          type: "actions"
+        }
       ]
     };
   },
   computed: {
+    selectedItemsCount() {
+      return this.selectedItems.length;
+    },
     exampleCode() {
       return `<template>
   <div>
     <VueLaravelCrud
-      title="Usuarios con Filtros"
+      title="Gestión de Usuarios con Selección"
       modelName="users"
       :model="model"
       :columns="columns"
       :ajax="true"
       apiUrl="http://localhost:3001/api"
-      :enableFilters="true"
-      :showSearch="true"
-      :sortable="true"
-      @select="onSelect"
-      @itemSaved="onItemSaved"
-      @itemDeleted="onItemDeleted"
+      @selectItems="onSelectItems"
     >
-      <template v-slot:form="slotProps">
-        <b-form-group label="Nombre:" description="Nombre completo del usuario">
-          <b-form-input
-            v-model="slotProps.item.name"
-            type="text"
-            required
-            placeholder="Ingrese el nombre"
-          ></b-form-input>
-        </b-form-group>
-        
-        <b-form-group label="Email:" description="Correo electrónico">
-          <b-form-input
-            v-model="slotProps.item.email"
-            type="email"
-            required
-            placeholder="usuario@ejemplo.com"
-          ></b-form-input>
-        </b-form-group>
-        
-        <b-form-group label="Edad:" description="Edad en años">
-          <b-form-input
-            v-model="slotProps.item.age"
-            type="number"
-            min="1"
-            max="120"
-            placeholder="25"
-          ></b-form-input>
-        </b-form-group>
-        
-        <b-form-group label="Estado:" description="Estado del usuario">
-          <b-form-select v-model="slotProps.item.status">
-            <option value="active">Activo</option>
-            <option value="inactive">Inactivo</option>
-            <option value="pending">Pendiente</option>
-          </b-form-select>
-        </b-form-group>
-      </template>
-      
-      <template v-slot:show="slotProps">
-        <b-list-group>
-          <b-list-group-item class="d-flex justify-content-between align-items-center">
-            ID
-            <b-badge variant="primary" pill>{{ slotProps.item.id }}</b-badge>
-          </b-list-group-item>
-          <b-list-group-item class="d-flex justify-content-between align-items-center">
-            Nombre
-            <b-badge variant="info" pill>{{ slotProps.item.name }}</b-badge>
-          </b-list-group-item>
-        </b-list-group>
-      </template>
+      <!-- Slots personalizados opcionales -->
     </VueLaravelCrud>
   </div>
 </template>
@@ -255,10 +241,16 @@ export default {
         name: "",
         email: "",
         age: null,
-        status: "active",
-        is_active: true
+        status: "active"
       },
+      // IMPORTANTE: La primera columna debe ser de tipo 'checkbox'
       columns: [
+        { 
+          label: "", 
+          prop: "selected", 
+          type: "checkbox",  // Tipo para checkbox de selección
+          width: "50px" 
+        },
         { label: "ID", prop: "id", type: "number", width: "80px" },
         { label: "Nombre", prop: "name", type: "text" },
         { label: "Email", prop: "email", type: "text" },
@@ -273,21 +265,19 @@ export default {
             { id: "pending", text: "Pendiente" }
           ]
         },
-        { label: "Activo", prop: "is_active", type: "boolean" },
-        { label: "Creado", prop: "created_at", type: "date", format: "DD/MM/YYYY" },
-        { label: "Acciones", prop: "actions", type: "actions" }
+        { 
+          label: "Acciones", 
+          prop: "actions", 
+          type: "actions"
+        }
       ]
     };
   },
   methods: {
-    onSelect(item) {
-      console.log('Item seleccionado:', item);
-    },
-    onItemSaved(data) {
-      console.log('Item guardado:', data);
-    },
-    onItemDeleted() {
-      console.log('Item eliminado');
+    onSelectItems(selectedItems) {
+      // Manejar los items seleccionados
+      console.log('Items seleccionados:', selectedItems);
+      this.selectedItems = selectedItems;
     }
   }
 };
@@ -298,12 +288,21 @@ export default {
     onSelect(item) {
       this.selectedItem = item;
     },
+    onSelectItems(items) {
+      // Este evento se dispara cuando cambian los items seleccionados
+      this.selectedItems = items;
+      console.log('Items seleccionados:', items);
+    },
     onItemSaved(data) {
       console.log('Item guardado:', data);
     },
     onItemDeleted() {
       console.log('Item eliminado');
       this.selectedItem = null;
+    },
+    clearSelection() {
+      // Limpiar selección manualmente
+      this.selectedItems = [];
     },
     getStatusVariant(status) {
       switch (status) {
@@ -324,3 +323,4 @@ export default {
   }
 };
 </script>
+

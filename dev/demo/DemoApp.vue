@@ -81,6 +81,7 @@ import ValidationExample from './examples/ValidationExample.vue';
 import InfiniteScrollExample from './examples/InfiniteScrollExample.vue';
 import CustomMessagesExample from './examples/CustomMessagesExample.vue';
 import DisplayModesExample from './examples/DisplayModesExample.vue';
+import CheckboxSelectionExample from './examples/CheckboxSelectionExample.vue';
 
 export default {
   name: 'DemoApp',
@@ -97,7 +98,8 @@ export default {
     ValidationExample,
     InfiniteScrollExample,
     CustomMessagesExample,
-    DisplayModesExample
+    DisplayModesExample,
+    CheckboxSelectionExample
   },
   data() {
     return {
@@ -109,6 +111,16 @@ export default {
           icon: 'table',
           component: 'BasicTable',
           description: 'Ejemplo básico de tabla con CRUD completo',
+          mode: 'Tabla',
+          modelName: 'users',
+          ajax: true
+        },
+        {
+          id: 'checkbox-selection',
+          name: 'Selección con Checkboxes',
+          icon: 'check-square',
+          component: 'CheckboxSelectionExample',
+          description: 'Ejemplo de selección múltiple de filas con checkboxes',
           mode: 'Tabla',
           modelName: 'users',
           ajax: true

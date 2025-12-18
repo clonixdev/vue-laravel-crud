@@ -585,6 +585,12 @@ export default {
       this.fetchItems(page);
     },
 
+    onPerPageChange(perPage) {
+      this.pagination.per_page = perPage;
+      this.pagination.current_page = 1;
+      this.fetchItems(1);
+    },
+
     infiniteHandler($state) {
       const hasNextPage = (this.pagination.total > 0 || !this.firstLoad) && (!this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total);
       console.debug("Has next page", hasNextPage, this.pagination);

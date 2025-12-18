@@ -1,4 +1,12 @@
 export default {
+  computed: {
+    isAllSelected() {
+      if (!this.itemsList || this.itemsList.length === 0) {
+        return false;
+      }
+      return this.itemsList.every(item => item.selected === true);
+    }
+  },
   methods: {
     onRowHover(item, itemIndex) {
       if (this.selectHover) {
@@ -42,18 +50,29 @@ export default {
     },
 
     toggleAll(value) {
-      if (value) {
-        this.selectedItems = this.items;
-
-        this.selectedItems.forEach(
-          (item) => item.selected = true
-        );
+      // b-form-checkbox emite el valor booleano directamente en el evento change
+      // El valor puede venir directamente como booleano o como evento del DOM
+      const checked = typeof value === 'boolean' ? value : (value && value.target ? value.target.checked : value);
+      
+      if (checked) {
+        // Seleccionar todos los items de la lista actual (itemsList)
+        this.itemsList.forEach((item) => {
+          this.$set(item, 'selected', true);
+          // Agregar a selectedItems si no está ya
+          if (!this.selectedItems.find((si) => si.id === item.id)) {
+            this.selectedItems.push(item);
+          }
+        });
       } else {
+        // Deseleccionar todos
         this.selectedItems.forEach(
-          (item) => item.selected = false
+          (item) => this.$set(item, 'selected', false)
         );
         this.items.forEach(
-          (item) => item.selected = false
+          (item) => this.$set(item, 'selected', false)
+        );
+        this.itemsList.forEach(
+          (item) => this.$set(item, 'selected', false)
         );
         this.selectedItems = [];
       }

@@ -65,10 +65,13 @@
               </select>
 
               <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all"
-                @change="toggleAll($event)">
+                :checked="isAllSelected"
+                @change="toggleAll">
               </b-form-checkbox>
 
-              <b-form-checkbox v-else-if="column.type == 'select'" name="select-all" @change="toggleAll($event)">
+              <b-form-checkbox v-else-if="column.type == 'select'" name="select-all" 
+                :checked="isAllSelected"
+                @change="toggleAll">
               </b-form-checkbox>
 
               <input v-else class="form-control form-control-md p-2"
@@ -78,7 +81,14 @@
             </div>
           </slot>
           <span v-else-if="column.type == 'select'">
-            <b-form-checkbox name="select-all" @change="toggleAll($event)"></b-form-checkbox>
+            <b-form-checkbox name="select-all" 
+              :checked="isAllSelected"
+              @change="toggleAll"></b-form-checkbox>
+          </span>
+          <span v-else-if="column.type == 'checkbox'">
+            <b-form-checkbox name="select-all" 
+              :checked="isAllSelected"
+              @change="toggleAll"></b-form-checkbox>
           </span>
           <span v-else>{{ column.label }}</span>
 
@@ -109,7 +119,8 @@ export default {
     'toggleAll',
     'toggleSortFilter',
     'sortable',
-    'optionsLoaded'
+    'optionsLoaded',
+    'isAllSelected'
   ],
   data() {
     return {
