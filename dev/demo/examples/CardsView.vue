@@ -1,3 +1,24 @@
+<!--
+  EJEMPLO: Vista de Tarjetas (Cards View)
+  
+  Este ejemplo demuestra la visualización en formato de tarjetas con layout responsivo.
+  Las tarjetas se organizan en un grid que se adapta según el tamaño de pantalla.
+  
+  CONFIGURACIONES UTILIZADAS:
+  - displayMode: 2 = Vista de tarjetas (1=Tabla, 2=Tarjetas, 3=Lista, 4=Kanban)
+  - colXs, colSm, colMd, colLg: Columnas de Bootstrap para diferentes breakpoints
+  - title, modelName, model, columns: Configuraciones básicas
+  
+  CONFIGURACIONES DISPONIBLES ADICIONALES:
+  - colXl: Columnas para pantallas extra grandes - Por defecto: 4
+  - masonryEnabled: Habilitar layout masonry (ladrillo) - Por defecto: false
+  - masonrySort: Ordenar en layout masonry - Por defecto: false
+  - masonryColumns: Número de columnas en masonry - Por defecto: 3
+  - cardClass: Clases CSS adicionales para las tarjetas
+  - cardHideFooter: Ocultar footer de las tarjetas - Por defecto: false
+  - listContainerClass: Clases CSS para el contenedor de tarjetas
+  - listItemClass: Clases CSS para cada tarjeta individual
+-->
 <template>
   <div>
     <h6 class="mb-3">Vista de tarjetas con layout masonry</h6>
@@ -112,7 +133,7 @@
 </template>
 
 <script>
-import VueLaravelCrud from '../../src/vue-laravel-crud.vue';
+import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 
 export default {
   name: 'CardsView',
@@ -142,6 +163,11 @@ export default {
         { label: "Activo", prop: "active", type: "boolean" },
         { label: "Acciones", prop: "actions", type: "actions" }
       ]
+      // NOTA: Las configuraciones de columnas (colXs, colSm, etc.) están en el template
+      // :colXs="12"  - 1 columna en móviles extra pequeños
+      // :colSm="6"   - 2 columnas en móviles pequeños
+      // :colMd="4"   - 3 columnas en tablets
+      // :colLg="3"   - 4 columnas en pantallas grandes
     };
   },
   methods: {

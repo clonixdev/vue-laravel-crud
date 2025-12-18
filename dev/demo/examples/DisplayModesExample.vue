@@ -1,24 +1,45 @@
 <!--
-  EJEMPLO: Filtros Avanzados y Búsqueda
+  EJEMPLO: Modos de Visualización
   
-  Este ejemplo demuestra las funcionalidades de filtrado avanzado y búsqueda global.
-  Los filtros permiten filtrar por columnas específicas y la búsqueda busca en todos los campos.
+  Este ejemplo demuestra todos los modos de visualización disponibles
+  en el componente vue-laravel-crud y cómo cambiar entre ellos.
+  
+  MODOS DISPONIBLES:
+  - displayMode: 1 = Tabla (Table)
+  - displayMode: 2 = Tarjetas (Cards)
+  - displayMode: 3 = Lista (List)
+  - displayMode: 4 = Kanban
   
   CONFIGURACIONES UTILIZADAS:
-  - enableFilters: true = Habilita el panel de filtros avanzados
-  - showSearch: true = Muestra el campo de búsqueda global
-  - sortable: true = Permite ordenar las columnas haciendo click en los encabezados
+  - displayMode: Modo de visualización actual
+  - displayModeToggler: true = Muestra botones para cambiar entre modos
+  - colXs, colSm, colMd, colLg, colXl: Columnas para vista de tarjetas
   
-  CONFIGURACIONES DISPONIBLES ADICIONALES:
-  - filter: Array de filtros predefinidos - Por defecto: []
-  - search: Texto de búsqueda inicial - Por defecto: ""
-  - searchPlaceholder: Placeholder del campo de búsqueda - Por defecto: "Buscar..."
-  - showPrincipalSortBtn: Mostrar botón de ordenamiento principal - Por defecto: false
-  - principalSortColumn: Columna para ordenamiento principal - Por defecto: "id"
+  CONFIGURACIONES ADICIONALES PARA TARJETAS:
+  - masonryEnabled: Habilitar layout masonry
+  - masonrySort: Ordenar en layout masonry
+  - masonryColumns: Número de columnas en masonry
 -->
 <template>
   <div>
-    <h6 class="mb-3">Ejemplo con filtros avanzados y búsqueda</h6>
+    <h6 class="mb-3">Ejemplo mostrando todos los modos de visualización</h6>
+    
+    <!-- Selector de modo -->
+    <b-card class="mb-3">
+      <b-card-body>
+        <b-form-group label="Seleccionar modo de visualización:">
+          <b-form-radio-group
+            v-model="displayMode"
+            :options="displayModeOptions"
+            buttons
+            button-variant="outline-primary"
+          ></b-form-radio-group>
+        </b-form-group>
+        <b-alert variant="info" show class="mt-2">
+          <strong>Modo actual:</strong> {{ getDisplayModeName(displayMode) }}
+        </b-alert>
+      </b-card-body>
+    </b-card>
     
     <VueLaravelCrud
       :title="title"
@@ -27,9 +48,16 @@
       :columns="columns"
       :ajax="ajax"
       :apiUrl="apiUrl"
-      :enableFilters="true"
-      :showSearch="true"
-      :sortable="true"
+      :displayMode="displayMode"
+      :displayModeToggler="displayModeToggler"
+      :colXs="colXs"
+      :colSm="colSm"
+      :colMd="colMd"
+      :colLg="colLg"
+      :colXl="colXl"
+      :masonryEnabled="masonryEnabled"
+      :masonrySort="masonrySort"
+      :masonryColumns="masonryColumns"
       @select="onSelect"
       @itemSaved="onItemSaved"
       @itemDeleted="onItemDeleted"
@@ -70,12 +98,6 @@
             <option value="pending">Pendiente</option>
           </b-form-select>
         </b-form-group>
-        
-        <b-form-group label="Activo:" description="Usuario activo en el sistema">
-          <b-form-checkbox v-model="slotProps.item.is_active" :value="true" :unchecked-value="false">
-            Usuario activo
-          </b-form-checkbox>
-        </b-form-group>
       </template>
       
       <template v-slot:show="slotProps">
@@ -105,15 +127,55 @@
               {{ getStatusText(slotProps.item.status) }}
             </b-badge>
           </b-list-group-item>
-          <b-list-group-item class="d-flex justify-content-between align-items-center">
-            Activo
-            <b-badge :variant="slotProps.item.is_active ? 'success' : 'secondary'" pill>
-              {{ slotProps.item.is_active ? 'Sí' : 'No' }}
-            </b-badge>
-          </b-list-group-item>
         </b-list-group>
       </template>
     </VueLaravelCrud>
+    
+    <!-- Panel de configuración para tarjetas -->
+    <b-card class="mt-4" v-if="displayMode === 2">
+      <b-card-header>
+        <h6 class="mb-0">Configuración de Tarjetas</h6>
+      </b-card-header>
+      <b-card-body>
+        <b-row>
+          <b-col md="6">
+            <h6>Columnas Responsivas</h6>
+            <b-form-group label="Extra pequeño (xs):">
+              <b-form-input v-model.number="colXs" type="number" min="1" max="12"></b-form-input>
+            </b-form-group>
+            <b-form-group label="Pequeño (sm):">
+              <b-form-input v-model.number="colSm" type="number" min="1" max="12"></b-form-input>
+            </b-form-group>
+            <b-form-group label="Mediano (md):">
+              <b-form-input v-model.number="colMd" type="number" min="1" max="12"></b-form-input>
+            </b-form-group>
+            <b-form-group label="Grande (lg):">
+              <b-form-input v-model.number="colLg" type="number" min="1" max="12"></b-form-input>
+            </b-form-group>
+            <b-form-group label="Extra grande (xl):">
+              <b-form-input v-model.number="colXl" type="number" min="1" max="12"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col md="6">
+            <h6>Layout Masonry</h6>
+            <b-form-checkbox v-model="masonryEnabled">
+              Habilitar layout masonry
+            </b-form-checkbox>
+            <b-form-checkbox v-model="masonrySort" :disabled="!masonryEnabled">
+              Ordenar en masonry
+            </b-form-checkbox>
+            <b-form-group label="Columnas masonry:" v-if="masonryEnabled">
+              <b-form-input 
+                v-model.number="masonryColumns" 
+                type="number" 
+                min="1" 
+                max="6"
+              ></b-form-input>
+            </b-form-group>
+          </b-col>
+        </b-row>
+      </b-card-body>
+    </b-card>
   </div>
 </template>
 
@@ -121,13 +183,13 @@
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 
 export default {
-  name: 'FiltersAndSearch',
+  name: 'DisplayModesExample',
   components: {
     VueLaravelCrud
   },
   data() {
     return {
-      title: "Usuarios con Filtros",
+      title: "Modos de Visualización",
       modelName: "users",
       ajax: true,
       apiUrl: "http://localhost:3001/api",
@@ -136,8 +198,7 @@ export default {
         name: "",
         email: "",
         age: null,
-        status: "active",
-        is_active: true
+        status: "active"
       },
       columns: [
         { label: "ID", prop: "id", type: "number", width: "80px" },
@@ -154,9 +215,35 @@ export default {
             { id: "pending", text: "Pendiente" }
           ]
         },
-        { label: "Activo", prop: "is_active", type: "boolean" },
         { label: "Creado", prop: "created_at", type: "date", format: "DD/MM/YYYY" },
         { label: "Acciones", prop: "actions", type: "actions" }
+      ],
+      
+      // CONFIGURACIÓN: Modo de visualización
+      // 1 = Tabla, 2 = Tarjetas, 3 = Lista, 4 = Kanban
+      displayMode: 1,
+      
+      // CONFIGURACIÓN: Mostrar botones para cambiar modo
+      displayModeToggler: false,
+      
+      // CONFIGURACIÓN: Columnas para vista de tarjetas
+      colXs: 12,
+      colSm: 6,
+      colMd: 4,
+      colLg: 3,
+      colXl: 3,
+      
+      // CONFIGURACIÓN: Layout masonry
+      masonryEnabled: false,
+      masonrySort: false,
+      masonryColumns: 3,
+      
+      // Opciones para el selector
+      displayModeOptions: [
+        { value: 1, text: '📊 Tabla' },
+        { value: 2, text: '🃏 Tarjetas' },
+        { value: 3, text: '📋 Lista' },
+        { value: 4, text: '📌 Kanban' }
       ]
     };
   },
@@ -170,6 +257,15 @@ export default {
     onItemDeleted() {
       console.log('Item eliminado');
       this.selectedItem = null;
+    },
+    getDisplayModeName(mode) {
+      const modes = {
+        1: 'Tabla',
+        2: 'Tarjetas',
+        3: 'Lista',
+        4: 'Kanban'
+      };
+      return modes[mode] || 'Desconocido';
     },
     getStatusVariant(status) {
       switch (status) {
@@ -190,3 +286,4 @@ export default {
   }
 };
 </script>
+

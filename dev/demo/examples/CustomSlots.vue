@@ -1,3 +1,19 @@
+<!--
+  EJEMPLO: Slots Personalizados
+  
+  Este ejemplo demuestra cómo usar slots personalizados para personalizar completamente
+  el renderizado de formularios y celdas de la tabla.
+  
+  SLOTS DISPONIBLES:
+  - form: Slot para personalizar el formulario de crear/editar
+  - show: Slot para personalizar la vista de detalle (modal)
+  - cell-{prop}: Slot para personalizar el renderizado de una celda específica
+    Ejemplo: v-slot:cell-price para personalizar la columna "price"
+  
+  CONFIGURACIONES RELACIONADAS:
+  - model: Define la estructura del formulario
+  - columns: Define las columnas, pero los slots permiten personalizar su renderizado
+-->
 <template>
   <div>
     <h6 class="mb-3">Ejemplo con slots personalizados para formularios y celdas</h6>
@@ -13,6 +29,7 @@
       @itemSaved="onItemSaved"
       @itemDeleted="onItemDeleted"
     >
+      <!-- SLOT: form - Personaliza el formulario de crear/editar -->
       <template v-slot:form="slotProps">
         <b-form-group label="Nombre del Producto:" description="Nombre del producto">
           <b-form-input
@@ -60,14 +77,14 @@
         </b-form-group>
       </template>
       
-      <!-- Slot personalizado para la celda de precio -->
+      <!-- SLOT: cell-price - Personaliza el renderizado de la columna "price" -->
       <template v-slot:cell-price="slotProps">
         <span class="font-weight-bold text-success">
           ${{ slotProps.item.price }}
         </span>
       </template>
       
-      <!-- Slot personalizado para la celda de stock -->
+      <!-- SLOT: cell-stock - Personaliza el renderizado de la columna "stock" -->
       <template v-slot:cell-stock="slotProps">
         <b-badge 
           :variant="slotProps.item.stock > 10 ? 'success' : slotProps.item.stock > 0 ? 'warning' : 'danger'"
@@ -77,13 +94,14 @@
         </b-badge>
       </template>
       
-      <!-- Slot personalizado para la celda de categoría -->
+      <!-- SLOT: cell-category - Personaliza el renderizado de la columna "category" -->
       <template v-slot:cell-category="slotProps">
         <b-badge variant="info">
           {{ slotProps.item.category }}
         </b-badge>
       </template>
       
+      <!-- SLOT: show - Personaliza la vista de detalle en el modal -->
       <template v-slot:show="slotProps">
         <b-list-group>
           <b-list-group-item class="d-flex justify-content-between align-items-center">
@@ -133,7 +151,7 @@
 </template>
 
 <script>
-import VueLaravelCrud from '../../src/vue-laravel-crud.vue';
+import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 
 export default {
   name: 'CustomSlots',

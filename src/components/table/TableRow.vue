@@ -1,5 +1,9 @@
 <template>
-  <tr @mouseover="onRowHover(item, index)" @click="onRowClick(item, index)" class="item">
+  <tr 
+    @mouseover="onRowHover(item, index)" 
+    @click="onRowClick(item, index)" 
+    :class="['item', { 'selected': item.selected }]"
+  >
     <th :colspan="columns.length" v-if="grouped && item.crudgroup">
       <span>{{ item.crudgrouplabel }}</span>
     </th>

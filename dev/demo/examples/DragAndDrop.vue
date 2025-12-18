@@ -1,3 +1,27 @@
+<!--
+  EJEMPLO: Drag & Drop para Ordenamiento
+  
+  Este ejemplo demuestra cómo habilitar el ordenamiento de filas mediante
+  drag & drop. Los elementos se pueden arrastrar para cambiar su orden.
+  
+  CONFIGURACIONES UTILIZADAS:
+  - orderable: true = Habilita el ordenamiento drag & drop
+  - orderProp: "order" = Nombre de la propiedad que almacena el orden
+  
+  FUNCIONAMIENTO:
+  - Al arrastrar una fila, se actualiza el campo especificado en orderProp
+  - Si ajax=true, se envía una petición POST a /api/{modelName}/sort
+  - Si ajax=false, se actualiza el orden en los datos locales
+  
+  CONFIGURACIONES DISPONIBLES ADICIONALES:
+  - draggableGroup: Nombre del grupo para drag & drop - Por defecto: "people"
+  - draggableOptions: Opciones de configuración para drag & drop - Por defecto: { clone: false }
+  - createMultipart: Usar FormData para peticiones (útil con archivos) - Por defecto: false
+  
+  EVENTOS:
+  - @sort: Se dispara cuando se cambia el orden
+  - @draggableChange: Se dispara durante el arrastre
+-->
 <template>
   <div>
     <h6 class="mb-3">Ejemplo con ordenamiento drag & drop</h6>
@@ -108,7 +132,7 @@
 </template>
 
 <script>
-import VueLaravelCrud from '../../src/vue-laravel-crud.vue';
+import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 
 export default {
   name: 'DragAndDrop',
@@ -128,7 +152,7 @@ export default {
         status: "todo",
         priority: "medium",
         assignee: "",
-        order: null
+        order: null // Campo que almacena el orden (orderProp)
       },
       columns: [
         { label: "ID", prop: "id", type: "number", width: "60px" },

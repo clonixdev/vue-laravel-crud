@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 function normalizeComponent (
     scriptExports,
     render,
@@ -296,7 +298,7 @@ var CrudFilters = __component__$f.exports;
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css$6 = "\n.crud-header[data-v-dec590e4] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  max-height: 3rem;\n}\n.crud-title[data-v-dec590e4] {\r\n  margin: 0;\n}\n.crud-search[data-v-dec590e4] {\r\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-dec590e4] {\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\r\n  border-top-right-radius: 0.375rem;\r\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-dec590e4] {\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-dec590e4] {\r\n  margin-bottom: 1rem;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-end;\n}\r\n";
+var css$6 = "\n.crud-header[data-v-ed8e5777] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  max-height: 3rem;\n}\n.crud-title[data-v-ed8e5777] {\r\n  margin: 0;\n}\n.crud-search[data-v-ed8e5777] {\r\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-ed8e5777] {\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\r\n  border-top-right-radius: 0.375rem;\r\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-ed8e5777] {\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-ed8e5777] {\r\n  margin-bottom: 1rem;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-end;\n}\r\n";
 n(css$6, {});
 
 const _sfc_main$e = {
@@ -304,7 +306,20 @@ const _sfc_main$e = {
   components: {
     CrudFilters
   },
-  inject: ['showHeader', 'showTitle', 'title', 'filterSidebarOpen', 'showImport', 'showExport', 'showPrincipalSortBtn', 'principalSort', 'bulkDelete', 'showCreateBtn', 'enableFilters', 'displayModeToggler', 'displayMode', 'displayModes', 'showSearch', 'displaySearch', 'search', 'searchPlaceholder', 'loading', 'messageImport', 'messageExport', 'messageNew', 'createItem', 'toggleDisplayMode', 'togglePrincipalSort', 'confirmBulkDelete', 'toggleFilters', 'refresh']
+  inject: ['showHeader', 'showTitle', 'title', 'filterSidebarOpen', 'showImport', 'showExport', 'showPrincipalSortBtn', 'principalSort', 'bulkDelete', 'showCreateBtn', 'enableFilters', 'displayModeToggler', 'displayMode', 'displayModes', 'showSearch', 'displaySearch', 'search', 'searchPlaceholder', 'loading', 'messageImport', 'messageExport', 'messageNew', 'createItem', 'toggleDisplayMode', 'togglePrincipalSort', 'confirmBulkDelete', 'toggleFilters', 'refresh'],
+  computed: {
+    sidebarVisible() {
+      // Acceder directamente al componente padre para obtener reactividad
+      return this.$parent ? this.$parent.filterSidebarOpen : this.filterSidebarOpen;
+    }
+  },
+  methods: {
+    closeSidebar() {
+      if (this.filterSidebarOpen) {
+        this.toggleFilters();
+      }
+    }
+  }
 };
 var _sfc_render$e = function render() {
   var _vm = this,
@@ -315,16 +330,13 @@ var _sfc_render$e = function render() {
     staticClass: "crud-title"
   }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _c('b-sidebar', {
     attrs: {
+      "visible": _vm.sidebarVisible,
       "title": "Filtrar",
       "right": "",
       "shadow": ""
     },
-    model: {
-      value: _vm.filterSidebarOpen,
-      callback: function ($$v) {
-        _vm.filterSidebarOpen = $$v;
-      },
-      expression: "filterSidebarOpen"
+    on: {
+      "hidden": _vm.closeSidebar
     }
   }, [_c('CrudFilters')], 1), _c('div', {
     staticClass: "table-options"
@@ -447,7 +459,7 @@ var _sfc_render$e = function render() {
   })], 2)], 1)], 1) : _vm._e();
 };
 var _sfc_staticRenderFns$e = [];
-var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "dec590e4", null, null);
+var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "ed8e5777", null, null);
 var CrudHeader = __component__$e.exports;
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -6620,7 +6632,33 @@ var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);
 
 const _sfc_main$d = {
   name: 'TableHeader',
-  inject: ['columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded']
+  inject: ['columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded'],
+  data() {
+    return {
+      hoveredColumn: null
+    };
+  },
+  methods: {
+    isSortableColumn(column) {
+      return this.sortable && column.type != 'select' && column.type != 'checkbox' && this.internalFilterByProp(column.prop + '_sort');
+    },
+    shouldShowSortIcon(column) {
+      const sortFilter = this.internalFilterByProp(column.prop + '_sort');
+      return this.hoveredColumn === column.prop || sortFilter.value;
+    },
+    getSortIconDirection(column) {
+      const sortFilter = this.internalFilterByProp(column.prop + '_sort');
+      const sortValue = sortFilter.value;
+      if (sortValue === 'DESC') {
+        return 'down';
+      } else if (sortValue === 'ASC') {
+        return 'up';
+      } else if (this.hoveredColumn === column.prop) {
+        return 'up';
+      }
+      return null;
+    }
+  }
 };
 var _sfc_render$d = function render() {
   var _vm = this,
@@ -6636,6 +6674,14 @@ var _sfc_render$d = function render() {
         },
         attrs: {
           "scope": "col"
+        },
+        on: {
+          "mouseenter": function ($event) {
+            _vm.hoveredColumn = column.prop;
+          },
+          "mouseleave": function ($event) {
+            _vm.hoveredColumn = null;
+          }
         }
       }, [_vm.enableFilters && _vm.filtersVisible && _vm.isColumnHasFilter(column) && _vm.internalFilterByProp(column.prop) ? _vm._t('filter-' + column.prop, function () {
         return [_c('div', {
@@ -6834,14 +6880,14 @@ var _sfc_render$d = function render() {
             return _vm.toggleAll($event);
           }
         }
-      })], 1) : _c('span', [_vm._v(_vm._s(column.label))]), _vm.sortable && column.type != 'select' && column.type != 'checkbox' && _vm.internalFilterByProp(column.prop + '_sort') ? _c('span', {
+      })], 1) : _c('span', [_vm._v(_vm._s(column.label))]), _vm.isSortableColumn(column) && _vm.shouldShowSortIcon(column) ? _c('span', {
         staticClass: "sort-filter",
         on: {
           "click": function ($event) {
             return _vm.toggleSortFilter(column);
           }
         }
-      }, [!_vm.internalFilterByProp(column.prop + '_sort').value ? _c('b-icon-sort-down') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'ASC' ? _c('b-icon-sort-up') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'DESC' ? _c('b-icon-sort-down') : _vm._e()], 1) : _vm._e()], 2);
+      }, [_vm.getSortIconDirection(column) === 'up' ? _c('b-icon-sort-up') : _vm._e(), _vm.getSortIconDirection(column) === 'down' ? _c('b-icon-sort-down') : _vm._e()], 1) : _vm._e()], 2);
     });
   })], 2)]);
 };
@@ -12649,7 +12695,9 @@ var _sfc_render$b = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('tr', {
-    staticClass: "item",
+    class: ['item', {
+      'selected': _vm.item.selected
+    }],
     on: {
       "mouseover": function ($event) {
         return _vm.onRowHover(_vm.item, _vm.index);
@@ -12705,6 +12753,7 @@ var _sfc_render$a = function render() {
     class: ['table table-hover table-striped w-100', _vm.tableClass]
   }, [_c('TableHeader'), _c('draggable', {
     attrs: {
+      "list": _vm.items,
       "group": _vm.draggableGroup,
       "tag": "tbody",
       "draggable": _vm.orderable ? '.item' : '.none',
@@ -12726,13 +12775,6 @@ var _sfc_render$a = function render() {
       "change": function ($event) {
         return _vm.onDraggableChange($event);
       }
-    },
-    model: {
-      value: _vm.items,
-      callback: function ($$v) {
-        _vm.items = $$v;
-      },
-      expression: "items"
     }
   }, _vm._l(_vm.itemsList, function (item, index) {
     return _c('TableRow', {
@@ -12743,7 +12785,7 @@ var _sfc_render$a = function render() {
         "grouped": _vm.grouped
       }
     });
-  }), 1)], 1), !_vm.loading && _vm.items && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
+  }), 1)], 1), !_vm.loading && _vm.itemsList && _vm.itemsList.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm._e();
 };
@@ -13092,11 +13134,12 @@ var _sfc_staticRenderFns$9 = [];
 var __component__$9 = /*#__PURE__*/normalizeComponent(_sfc_main$9, _sfc_render$9, _sfc_staticRenderFns$9, false, null, null, null, null);
 var ItemCard = __component__$9.exports;
 
+// Registrar el componente masonry usando el Plugin
+Vue.use(Plugin);
 const _sfc_main$8 = {
   name: 'CrudCards',
   components: {
     draggable,
-    VueMasonry: Plugin,
     ItemCard
   },
   inject: ['displayMode', 'displayModes', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'colLg', 'colXl', 'colMd', 'colSm', 'colXs', 'columns', 'cardClass', 'cardHideFooter', 'itemValue', 'getStateValue', 'getArrayValue', 'showItem', 'updateItem', 'removeItem', 'loading', 'infiniteScroll', 'messageEmptyResults', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
@@ -13109,7 +13152,7 @@ const _sfc_main$8 = {
 var _sfc_render$8 = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_c('draggable', {
+  return _vm.displayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_c('draggable', {
     attrs: {
       "group": _vm.draggableGroup,
       "draggable": _vm.orderable ? '.item' : '.none',
@@ -13177,9 +13220,9 @@ var _sfc_render$8 = function render() {
     }, {
       "item": item
     })], 2);
-  }), 0)], 1), !_vm.loading && _vm.items && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
+  }), 0)], 1), !_vm.loading && _vm.itemsList && _vm.itemsList.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
-  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()], 1);
+  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()], 1) : _vm._e();
 };
 var _sfc_staticRenderFns$8 = [];
 var __component__$8 = /*#__PURE__*/normalizeComponent(_sfc_main$8, _sfc_render$8, _sfc_staticRenderFns$8, false, null, null, null, null);
@@ -13449,7 +13492,7 @@ const _sfc_main$4 = {
 var _sfc_render$4 = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_c('KanbanBoard')], 1);
+  return _vm.displayMode == _vm.displayModes.MODE_KANBAN ? _c('div', [_c('KanbanBoard')], 1) : _vm._e();
 };
 var _sfc_staticRenderFns$4 = [];
 var __component__$4 = /*#__PURE__*/normalizeComponent(_sfc_main$4, _sfc_render$4, _sfc_staticRenderFns$4, false, null, null, null, null);
@@ -13462,9 +13505,9 @@ const _sfc_main$3 = {
 var _sfc_render$3 = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_c('div', {
+  return _vm.displayMode == _vm.displayModes.MODE_CUSTOM ? _c('div', [_c('div', {
     class: _vm.listContainerClass
-  }, [!_vm.loading && _vm.items && _vm.items.length == 0 && !_vm.infiniteScroll ? _c('p', {
+  }, [!_vm.loading && _vm.itemsList && _vm.itemsList.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e(), _vm._l(_vm.itemsList, function (item, index) {
     return _c('div', {
@@ -13473,7 +13516,7 @@ var _sfc_render$3 = function render() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]);
+  })], 2)]) : _vm._e();
 };
 var _sfc_staticRenderFns$3 = [];
 var __component__$3 = /*#__PURE__*/normalizeComponent(_sfc_main$3, _sfc_render$3, _sfc_staticRenderFns$3, false, null, null, null, null);
@@ -13719,7 +13762,7 @@ vueInfiniteLoading.exports;
 var vueInfiniteLoadingExports = vueInfiniteLoading.exports;
 var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExports);
 
-var css$1 = "\n.crud-pagination[data-v-975091ac] {\r\n  display: flex;\r\n  align-items: center;\r\n  width: 100%;\r\n  justify-content: center;\r\n  margin-top: 1rem;\n}\r\n";
+var css$1 = "\n.paginator-container[data-v-2c61ceb1] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  width: 100%;\r\n  margin-top: 1rem;\r\n  gap: 0.75rem;\n}\n.paginator-data[data-v-2c61ceb1] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-size: 0.875rem;\n}\n.paginator-badge[data-v-2c61ceb1] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\r\n  padding: 0.375rem 0.625rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  border-radius: 0.375rem;\r\n  color: #495057;\r\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-2c61ceb1]:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.paginator-label[data-v-2c61ceb1] {\r\n  font-weight: 500;\r\n  color: #6c757d;\n}\n.paginator-value[data-v-2c61ceb1] {\r\n  font-weight: 600;\r\n  color: #212529;\n}\n.crud-paginator[data-v-2c61ceb1] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  width: 100%;\n}\r\n";
 n(css$1, {});
 
 const _sfc_main$1 = {
@@ -13763,8 +13806,34 @@ var _sfc_render$1 = function render() {
   }, [!_vm.loading ? _c('div', {
     staticClass: "text-center"
   }, [_vm._v(_vm._s(_vm.items.length == 0 ? _vm.messageEmptyResults : _vm.messageNoMore))]) : _vm._e()])]) : _vm._e(), !_vm.infiniteScroll ? _c('div', {
+    staticClass: "paginator-container"
+  }, [_c('div', {
     staticClass: "paginator-data"
-  }, [_vm._v(" Filas: " + _vm._s(_vm.pagination.total) + " | xPág: " + _vm._s(_vm.pagination.per_page) + " | Pág: " + _vm._s(_vm.pagination.current_page) + " | Seleccionados: " + _vm._s(_vm.selectedItems.length) + " ")]) : _vm._e(), !_vm.infiniteScroll ? _c('div', {
+  }, [_c('span', {
+    staticClass: "paginator-badge"
+  }, [_c('span', {
+    staticClass: "paginator-label"
+  }, [_vm._v("Filas:")]), _c('span', {
+    staticClass: "paginator-value"
+  }, [_vm._v(_vm._s(_vm.pagination.total))])]), _c('span', {
+    staticClass: "paginator-badge"
+  }, [_c('span', {
+    staticClass: "paginator-label"
+  }, [_vm._v("xPág:")]), _c('span', {
+    staticClass: "paginator-value"
+  }, [_vm._v(_vm._s(_vm.pagination.per_page))])]), _c('span', {
+    staticClass: "paginator-badge"
+  }, [_c('span', {
+    staticClass: "paginator-label"
+  }, [_vm._v("Pág:")]), _c('span', {
+    staticClass: "paginator-value"
+  }, [_vm._v(_vm._s(_vm.pagination.current_page))])]), _vm.selectedItems.length > 0 ? _c('span', {
+    staticClass: "paginator-badge"
+  }, [_c('span', {
+    staticClass: "paginator-label"
+  }, [_vm._v("Seleccionados:")]), _c('span', {
+    staticClass: "paginator-value"
+  }, [_vm._v(_vm._s(_vm.selectedItems.length))])]) : _vm._e()]), _c('div', {
     staticClass: "crud-paginator"
   }, [_vm.showPaginator ? _c('b-pagination', {
     attrs: {
@@ -13783,10 +13852,10 @@ var _sfc_render$1 = function render() {
       },
       expression: "pagination.current_page"
     }
-  }) : _vm._e()], 1) : _vm._e()], 1);
+  }) : _vm._e()], 1)]) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$1 = [];
-var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "975091ac", null, null);
+var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "2c61ceb1", null, null);
 var CrudPagination = __component__$1.exports;
 
 var crudData = {
@@ -13828,7 +13897,8 @@ var crudData = {
       refreshing: false,
       fetchError: false,
       principalSort: false,
-      exportFormat: 'JSON'
+      exportFormat: 'JSON',
+      fileImport: null
     };
   },
   computed: {
@@ -19307,17 +19377,31 @@ var crudApi = {
           filters: JSON.stringify(this.finalFilters)
         }
       }).then(response => {
+        console.debug("fetchItems - Response recibida:", response.data);
         this.makePagination(response.data);
+
+        // Validar que response.data.data existe y es un array
         let items = response.data.data;
+        if (!items) {
+          console.warn("fetchItems - response.data.data es undefined o null, usando array vacío");
+          items = [];
+        } else if (!Array.isArray(items)) {
+          console.warn("fetchItems - response.data.data no es un array, tipo:", typeof items, items);
+          items = [];
+        }
+        console.debug("fetchItems - Items procesados:", items, "Cantidad:", items.length);
         if (this.grouped) {
           this.groupItems(items, concat, this.isSplitGroups);
         } else {
           if (concat) {
-            this.items = this.items.concat(items);
+            // Para concat, agregar items al array existente
+            this.items.push(...items);
           } else {
-            this.items = items;
+            // Mutar el array existente en lugar de reemplazarlo para mantener reactividad con provide/inject
+            this.items.splice(0, this.items.length, ...items);
           }
         }
+        console.debug("fetchItems - this.items después de asignar:", this.items, "Cantidad:", this.items ? this.items.length : 0);
         this.loading = false;
         this.firstLoad = true;
         this.$emit("afterFetch", {});
@@ -19345,11 +19429,13 @@ var crudApi = {
       }, {});
       if (splitGroups) {
         // Dividimos los grupos en arrays separados
-        this.items = Object.entries(groupedMap).map(([groupKey, groupItems]) => ({
+        const groupedItems = Object.entries(groupedMap).map(([groupKey, groupItems]) => ({
           groupKey,
           groupLabel: groupLabelPre + groupKey + groupLabelAfter,
           items: groupItems
         }));
+        // Mutar el array existente para mantener reactividad
+        this.items.splice(0, this.items.length, ...groupedItems);
       } else {
         // Creamos la estructura agrupada en un solo array
         for (const [groupKey, groupItems] of Object.entries(groupedMap)) {
@@ -19362,9 +19448,10 @@ var crudApi = {
 
         // Decidimos si concatenar o reemplazar los items existentes
         if (concat) {
-          this.items = this.items.concat(itemsWithGroup);
+          this.items.push(...itemsWithGroup);
         } else {
-          this.items = itemsWithGroup;
+          // Mutar el array existente para mantener reactividad
+          this.items.splice(0, this.items.length, ...itemsWithGroup);
         }
       }
     },
@@ -19808,14 +19895,14 @@ var crudFilters = {
       } else if (value == "DESC") {
         this.internalFilterByProp(column.prop + "_sort").value = null;
       }
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
     },
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
-      if (this.displayMode == this.displayModes.MODE_CARDS) {
-        this.filterSidebarOpen = this.filtersVisible;
-      } else {
-        this.filterSidebarOpen = false;
-      }
+      this.filterSidebarOpen = this.filtersVisible;
     },
     resetFilters(refresh = true) {
       this.internalFilters = [];
@@ -20152,7 +20239,7 @@ var crudHelpers = {
   }
 };
 
-var css = "tr td[data-v-9374538f]:last-child,\ntr td[data-v-9374538f]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-9374538f] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-9374538f] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-9374538f] .crud-title[data-v-9374538f] {\n    margin: 0; }\n  .crud-header[data-v-9374538f] .crud-search[data-v-9374538f] {\n    max-width: 15rem; }\n    .crud-header[data-v-9374538f] .crud-search[data-v-9374538f] .btn[data-v-9374538f] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-9374538f] .crud-search[data-v-9374538f] .btn[data-v-9374538f].open[data-v-9374538f] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-9374538f] .table-options[data-v-9374538f] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-9374538f] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-9374538f] {\n    table-layout: auto; }\n    .table[data-v-9374538f] tbody[data-v-9374538f] td[data-v-9374538f] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-9374538f] tbody[data-v-9374538f] td[data-v-9374538f]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-9374538f] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-9374538f] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-9374538f] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-9374538f] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-9374538f] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+var css = "tr td[data-v-51b1f76a]:last-child,\ntr td[data-v-51b1f76a]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-51b1f76a] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-51b1f76a] td[data-v-51b1f76a] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-51b1f76a][data-v-51b1f76a]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-51b1f76a][data-v-51b1f76a]:hover td[data-v-51b1f76a] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-51b1f76a]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-51b1f76a]:nth-of-type(odd) td[data-v-51b1f76a] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-51b1f76a]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-51b1f76a]:nth-of-type(even) td[data-v-51b1f76a] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-51b1f76a] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-51b1f76a] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-51b1f76a] .crud-title[data-v-51b1f76a] {\n    margin: 0; }\n  .crud-header[data-v-51b1f76a] .crud-search[data-v-51b1f76a] {\n    max-width: 15rem; }\n    .crud-header[data-v-51b1f76a] .crud-search[data-v-51b1f76a] .btn[data-v-51b1f76a] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-51b1f76a] .crud-search[data-v-51b1f76a] .btn[data-v-51b1f76a].open[data-v-51b1f76a] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-51b1f76a] .table-options[data-v-51b1f76a] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-51b1f76a] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-51b1f76a] {\n    table-layout: auto; }\n    .table[data-v-51b1f76a] tbody[data-v-51b1f76a] td[data-v-51b1f76a] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-51b1f76a] tbody[data-v-51b1f76a] td[data-v-51b1f76a]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-51b1f76a] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-51b1f76a] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-51b1f76a] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-51b1f76a] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-51b1f76a] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
 n(css, {});
 
 const _sfc_main = {
@@ -20241,6 +20328,7 @@ const _sfc_main = {
       bulkDelete: this.bulkDelete,
       showImport: this.showImport,
       showExport: this.showExport,
+      fileImport: this.fileImport,
       markDirty: this.markDirty,
       // Data from mixins
       crudUuid: this.crudUuid,
@@ -20652,7 +20740,7 @@ var _sfc_render = function render() {
   }), _c('CrudPagination'), _c('CrudModals')], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "9374538f", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "51b1f76a", null, null);
 var component = __component__.exports;
 
 // Import vue component

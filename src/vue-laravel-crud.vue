@@ -106,6 +106,7 @@ export default /*#__PURE__*/ {
       bulkDelete: this.bulkDelete,
       showImport: this.showImport,
       showExport: this.showExport,
+      fileImport: this.fileImport,
       markDirty: this.markDirty,
 
       // Data from mixins
@@ -543,6 +544,38 @@ tr td:last-child,
 tr td:first-child {
   width: 1%;
   white-space: nowrap;
+}
+
+tbody tr.selected {
+  background-color: #e3f2fd !important;
+  
+  td {
+    background-color: transparent !important;
+  }
+  
+  &:hover {
+    background-color: #bbdefb !important;
+    
+    td {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.table-striped tbody tr.selected:nth-of-type(odd) {
+  background-color: #e3f2fd !important;
+  
+  td {
+    background-color: transparent !important;
+  }
+}
+
+.table-striped tbody tr.selected:nth-of-type(even) {
+  background-color: #e3f2fd !important;
+  
+  td {
+    background-color: transparent !important;
+  }
 }
 
 .crud-pagination {

@@ -40,6 +40,7 @@ export default {
       fetchError: false,
       principalSort: false,
       exportFormat: 'JSON',
+      fileImport: null,
     };
   },
   computed: {

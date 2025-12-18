@@ -1,3 +1,23 @@
+<!--
+  EJEMPLO: Vista Kanban con Drag & Drop
+  
+  Este ejemplo demuestra la vista Kanban con agrupación por estado y funcionalidad
+  de drag & drop para mover elementos entre columnas.
+  
+  CONFIGURACIONES UTILIZADAS:
+  - displayMode: 4 = Vista Kanban
+  - grouped: true = Habilitar agrupación de elementos
+  - groupedAttribute: Campo por el cual agrupar (ej: "status")
+  - groupedLabelPre: Texto antes del label del grupo (opcional)
+  - groupedLabelAfter: Texto después del label del grupo (opcional)
+  - groupedSplit: true = Separar grupos en columnas diferentes
+  
+  CONFIGURACIONES DISPONIBLES ADICIONALES:
+  - draggableGroup: Nombre del grupo para drag & drop - Por defecto: "people"
+  - draggableOptions: Opciones de configuración para drag & drop - Por defecto: { clone: false }
+  - orderable: Habilitar ordenamiento drag & drop dentro de grupos - Por defecto: false
+  - orderProp: Propiedad que almacena el orden - Por defecto: "order"
+-->
 <template>
   <div>
     <h6 class="mb-3">Vista Kanban con drag & drop entre columnas</h6>
@@ -108,7 +128,7 @@
 </template>
 
 <script>
-import VueLaravelCrud from '../../src/vue-laravel-crud.vue';
+import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 
 export default {
   name: 'KanbanView',
@@ -125,10 +145,15 @@ export default {
       model: {
         title: "",
         description: "",
-        status: "todo",
+        status: "todo", // Este campo se usa para agrupar (groupedAttribute)
         priority: "medium",
         assignee: ""
       },
+      // CONFIGURACIÓN KANBAN:
+      // - grouped: true habilita la agrupación
+      // - groupedAttribute: "status" agrupa por el campo status
+      // - groupedSplit: true crea columnas separadas para cada grupo
+      // - displayMode: 4 activa la vista Kanban
       columns: [
         { label: "ID", prop: "id", type: "number", width: "60px" },
         { label: "Título", prop: "title", type: "text" },

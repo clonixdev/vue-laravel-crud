@@ -1,3 +1,24 @@
+<!--
+  EJEMPLO: Datos Locales (Sin AJAX)
+  
+  Este ejemplo demuestra cómo usar el componente sin peticiones AJAX, trabajando
+  directamente con datos en memoria. Útil para prototipos, demos o cuando los datos
+  ya están disponibles en el componente padre.
+  
+  CONFIGURACIONES UTILIZADAS:
+  - ajax: false = Deshabilita las peticiones AJAX
+  - models: Array de datos locales que se usarán en lugar de cargar desde API
+  
+  DIFERENCIAS CON MODO AJAX:
+  - No requiere apiUrl ni modelName para las peticiones
+  - Los datos se gestionan localmente (crear/editar/eliminar en memoria)
+  - Ideal para prototipos o cuando los datos vienen de otro origen (props, store, etc.)
+  
+  CONFIGURACIONES DISPONIBLES ADICIONALES:
+  - useVuexORM: Usar Vuex ORM para gestión de datos - Por defecto: false
+  - vuexInitRelations: Inicializar relaciones en Vuex ORM - Por defecto: true
+  - vuexLocalforage: Usar localforage con Vuex ORM - Por defecto: false
+-->
 <template>
   <div>
     <h6 class="mb-3">Ejemplo con datos locales (sin AJAX)</h6>
@@ -81,17 +102,11 @@
         </b-list-group>
       </template>
     </VueLaravelCrud>
-    
-    <div v-if="selectedItem" class="mt-3">
-      <b-alert variant="info" show>
-        <strong>Elemento seleccionado:</strong> {{ selectedItem.name }} ({{ selectedItem.email }})
-      </b-alert>
-    </div>
   </div>
 </template>
 
 <script>
-import VueLaravelCrud from '../../src/vue-laravel-crud.vue';
+import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 
 export default {
   name: 'LocalData',
@@ -101,7 +116,7 @@ export default {
   data() {
     return {
       title: "Usuarios Locales",
-      modelName: "users",
+      modelName: "users", // Solo se usa para referencia, no para peticiones API
       selectedItem: null,
       model: {
         name: "",
@@ -109,6 +124,9 @@ export default {
         age: null,
         status: "active"
       },
+      // CONFIGURACIÓN: Array de datos locales
+      // Cuando ajax=false, estos datos se usan directamente
+      // Las operaciones CRUD se realizan en memoria
       localData: [
         {
           id: 1,

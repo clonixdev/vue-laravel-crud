@@ -1,43 +1,30 @@
 <!--
-  EJEMPLO: Tabla Básica con CRUD Completo
+  EJEMPLO: Scroll Infinito (Infinite Scroll)
   
-  Este ejemplo demuestra la configuración básica del componente vue-laravel-crud
-  con operaciones CRUD (Crear, Leer, Actualizar, Eliminar) completas.
+  Este ejemplo demuestra cómo habilitar el scroll infinito para cargar
+  más elementos automáticamente al llegar al final de la lista.
   
   CONFIGURACIONES UTILIZADAS:
-  - title: Título que se muestra en el header del componente
-  - modelName: Nombre del modelo para las peticiones API (ej: "users")
-  - model: Objeto con la estructura de datos del formulario
-  - columns: Array de columnas que se mostrarán en la tabla
-  - ajax: Habilita/deshabilita las peticiones AJAX (true = API, false = datos locales)
-  - apiUrl: URL base para las peticiones API
+  - infiniteScroll: true = Habilita el scroll infinito
+  - limit: Número de elementos a cargar por cada "página"
   
-  CONFIGURACIONES DISPONIBLES NO UTILIZADAS EN ESTE EJEMPLO:
-  - displayMode: Modo de visualización (1=Tabla, 2=Tarjetas, 3=Lista, 4=Kanban) - Por defecto: 1
-  - limit: Número de elementos por página - Por defecto: 20
-  - showPaginator: Mostrar/ocultar paginación - Por defecto: true
-  - showCreateBtn: Mostrar/ocultar botón de crear - Por defecto: true
-  - showSearch: Mostrar/ocultar búsqueda - Por defecto: true
-  - showHeader: Mostrar/ocultar header completo - Por defecto: true
-  - showTitle: Mostrar/ocultar título - Por defecto: true
-  - hideModalAfterSave: Ocultar modal después de guardar - Por defecto: true
-  - refreshAfterSave: Refrescar datos después de guardar - Por defecto: true
-  - enableFilters: Habilitar filtros avanzados - Por defecto: false
-  - sortable: Habilitar ordenamiento de columnas - Por defecto: false
-  - orderable: Habilitar drag & drop para ordenar - Por defecto: false
-  - validate: Habilitar validación de formularios - Por defecto: false
-  - selectHover: Seleccionar al pasar el mouse - Por defecto: false
-  - selectClick: Seleccionar al hacer click - Por defecto: false
-  - searchPlaceholder: Texto placeholder del buscador - Por defecto: "Buscar..."
-  - messageNew: Texto del botón nuevo - Por defecto: "Nuevo"
-  - messageSave: Texto del botón guardar - Por defecto: "Guardar"
-  - messageRemoveConfirm: Mensaje de confirmación para eliminar - Por defecto: "¿Esta seguro de borrar este elemento?"
-  - tableClass: Clases CSS adicionales para la tabla
-  - tableContainerClass: Clases CSS adicionales para el contenedor de la tabla
+  FUNCIONAMIENTO:
+  - Al hacer scroll hasta el final, se cargan automáticamente más elementos
+  - Si ajax=true, se hace una petición GET con parámetros de paginación
+  - Si ajax=false, se cargan más elementos del array local
+  
+  CONFIGURACIONES DISPONIBLES:
+  - infiniteScroll: Habilitar scroll infinito - Por defecto: false
+  - limit: Elementos por carga - Por defecto: 20
+  - messageNoMore: Mensaje cuando no hay más elementos
+    Por defecto: "No hay más elementos para mostrar."
+  - messageLoading: Mensaje mientras carga - Por defecto: "Cargando..."
+  
+  NOTA: Cuando infiniteScroll=true, showPaginator se deshabilita automáticamente
 -->
 <template>
   <div>
-    <h6 class="mb-3">Tabla básica con operaciones CRUD completas</h6>
+    <h6 class="mb-3">Ejemplo con scroll infinito</h6>
     
     <VueLaravelCrud
       :title="title"
@@ -46,6 +33,10 @@
       :columns="columns"
       :ajax="ajax"
       :apiUrl="apiUrl"
+      :infiniteScroll="infiniteScroll"
+      :limit="limit"
+      :messageNoMore="messageNoMore"
+      :messageLoading="messageLoading"
       @select="onSelect"
       @itemSaved="onItemSaved"
       @itemDeleted="onItemDeleted"
@@ -118,6 +109,37 @@
         </b-list-group>
       </template>
     </VueLaravelCrud>
+    
+    <!-- Panel de configuración -->
+    <b-card class="mt-4">
+      <b-card-header>
+        <h6 class="mb-0">Configuración de Scroll Infinito</h6>
+      </b-card-header>
+      <b-card-body>
+        <b-form-group label="Habilitar scroll infinito:">
+          <b-form-checkbox v-model="infiniteScroll">
+            Activar scroll infinito
+          </b-form-checkbox>
+        </b-form-group>
+        <b-form-group label="Elementos por carga:">
+          <b-form-input 
+            v-model.number="limit" 
+            type="number" 
+            min="1" 
+            max="100"
+            :disabled="!infiniteScroll"
+          ></b-form-input>
+          <small class="text-muted">
+            Número de elementos que se cargarán cada vez que llegues al final
+          </small>
+        </b-form-group>
+        <b-alert variant="info" show>
+          <strong>Instrucciones:</strong> Haz scroll hacia abajo en la tabla 
+          para cargar más elementos automáticamente. Cuando no haya más elementos, 
+          se mostrará el mensaje "No hay más elementos para mostrar."
+        </b-alert>
+      </b-card-body>
+    </b-card>
   </div>
 </template>
 
@@ -125,46 +147,23 @@
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 
 export default {
-  name: 'BasicTable',
+  name: 'InfiniteScrollExample',
   components: {
     VueLaravelCrud
   },
   data() {
     return {
-      // CONFIGURACIÓN: Título del componente
-      title: "Gestión de Usuarios",
-      
-      // CONFIGURACIÓN: Nombre del modelo para las peticiones API
-      // Se usará para construir las URLs: GET /api/users, POST /api/users, etc.
+      title: "Scroll Infinito",
       modelName: "users",
-      
-      // CONFIGURACIÓN: Habilitar peticiones AJAX
-      // true = usa API (requiere apiUrl), false = usa datos locales (requiere models)
       ajax: true,
-      
-      // CONFIGURACIÓN: URL base de la API
-      // Las peticiones se harán a: {apiUrl}/{modelName}
       apiUrl: "http://localhost:3001/api",
-      
       selectedItem: null,
-      
-      // CONFIGURACIÓN: Estructura del modelo para formularios
-      // Define los campos que tendrá el formulario de crear/editar
       model: {
         name: "",
         email: "",
         age: null,
         status: "active"
       },
-      
-      // CONFIGURACIÓN: Columnas de la tabla
-      // Cada columna puede tener:
-      // - label: Texto del encabezado
-      // - prop: Propiedad del objeto a mostrar
-      // - type: Tipo de dato (text, number, date, boolean, state, actions)
-      // - width: Ancho de la columna (opcional)
-      // - format: Formato para fechas (opcional, ej: "DD/MM/YYYY")
-      // - options: Opciones para tipo "state" (array de {id, text})
       columns: [
         { label: "ID", prop: "id", type: "number", width: "80px" },
         { label: "Nombre", prop: "name", type: "text" },
@@ -173,25 +172,26 @@ export default {
         { 
           label: "Estado", 
           prop: "status", 
-          type: "state", // Tipo especial que muestra badges con colores
+          type: "state",
           options: [
             { id: "active", text: "Activo" },
             { id: "inactive", text: "Inactivo" },
             { id: "pending", text: "Pendiente" }
           ]
         },
-        { 
-          label: "Creado", 
-          prop: "created_at", 
-          type: "date", 
-          format: "DD/MM/YYYY" // Formato de fecha usando moment.js
-        },
-        { 
-          label: "Acciones", 
-          prop: "actions", 
-          type: "actions" // Columna especial con botones Ver/Editar/Eliminar
-        }
-      ]
+        { label: "Creado", prop: "created_at", type: "date", format: "DD/MM/YYYY" },
+        { label: "Acciones", prop: "actions", type: "actions" }
+      ],
+      
+      // CONFIGURACIÓN: Habilitar scroll infinito
+      infiniteScroll: true,
+      
+      // CONFIGURACIÓN: Elementos por carga
+      limit: 10,
+      
+      // CONFIGURACIÓN: Mensajes personalizados
+      messageNoMore: "No hay más elementos para mostrar.",
+      messageLoading: "Cargando más elementos..."
     };
   },
   methods: {
@@ -224,3 +224,4 @@ export default {
   }
 };
 </script>
+

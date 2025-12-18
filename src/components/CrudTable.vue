@@ -4,7 +4,7 @@
       <TableHeader />
       
       <draggable 
-        v-model="items" 
+        :list="items" 
         :group="draggableGroup" 
         tag="tbody" 
         :draggable="orderable ? '.item' : '.none'"
@@ -25,7 +25,7 @@
       </draggable>
     </table>
     
-    <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
+    <p v-if="!loading && itemsList && itemsList.length == 0 && !infiniteScroll" class="p-3">
       {{ messageEmptyResults }}
     </p>
   </div>

@@ -2,7 +2,7 @@
   <div class="crud-header" v-if="showHeader">
     <h4 class="crud-title" v-if="showTitle">{{ title }}</h4>
     
-    <b-sidebar v-model="filterSidebarOpen" title="Filtrar" right shadow>
+    <b-sidebar :visible="sidebarVisible" @hidden="closeSidebar" title="Filtrar" right shadow>
       <CrudFilters />
     </b-sidebar>
 
@@ -89,7 +89,20 @@ export default {
     'confirmBulkDelete',
     'toggleFilters',
     'refresh'
-  ]
+  ],
+  computed: {
+    sidebarVisible() {
+      // Acceder directamente al componente padre para obtener reactividad
+      return this.$parent ? this.$parent.filterSidebarOpen : this.filterSidebarOpen;
+    }
+  },
+  methods: {
+    closeSidebar() {
+      if (this.filterSidebarOpen) {
+        this.toggleFilters();
+      }
+    }
+  }
 };
 </script>
 

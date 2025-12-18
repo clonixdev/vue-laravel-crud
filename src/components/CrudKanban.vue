@@ -1,5 +1,5 @@
 <template>
-  <div v-else-if="displayMode == displayModes.MODE_KANBAN">
+  <div v-if="displayMode == displayModes.MODE_KANBAN">
     <KanbanBoard />
   </div>
 </template>

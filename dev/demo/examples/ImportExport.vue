@@ -1,3 +1,32 @@
+<!--
+  EJEMPLO: Importación y Exportación
+  
+  Este ejemplo demuestra las funcionalidades de importar y exportar datos,
+  así como la eliminación masiva de elementos.
+  
+  CONFIGURACIONES UTILIZADAS:
+  - showImport: true = Muestra el botón de importar
+  - showExport: true = Muestra el botón de exportar
+  - bulkDelete: true = Habilita la eliminación masiva de elementos seleccionados
+  
+  FUNCIONALIDADES:
+  - Exportar: Permite exportar los datos a JSON o XLSX
+  - Importar: Permite importar datos desde un archivo
+  - Eliminación masiva: Permite eliminar múltiples elementos seleccionados
+  
+  CONFIGURACIONES DISPONIBLES ADICIONALES:
+  - messageImport: Texto del botón importar - Por defecto: "Importar"
+  - messageExport: Texto del botón exportar - Por defecto: "Exportar"
+  - messageRemoveBulkConfirm: Mensaje de confirmación para eliminación masiva
+    Por defecto: "¿Esta seguro de borrar los elementos seleccionados?"
+  - fileImport: Configuración del archivo de importación (opcional)
+  - markDirty: Marcar elementos como modificados - Por defecto: true
+  
+  ENDPOINTS API REQUERIDOS (si ajax=true):
+  - GET /api/{modelName}/export - Para exportar datos
+  - POST /api/{modelName}/import - Para importar datos
+  - DELETE /api/{modelName}/bulk-destroy - Para eliminación masiva
+-->
 <template>
   <div>
     <h6 class="mb-3">Ejemplo con funcionalidades de importación y exportación</h6>
@@ -112,7 +141,7 @@
 </template>
 
 <script>
-import VueLaravelCrud from '../../src/vue-laravel-crud.vue';
+import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 
 export default {
   name: 'ImportExport',

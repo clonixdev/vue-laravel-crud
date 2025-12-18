@@ -42,15 +42,15 @@ export default {
       } else if (value == "DESC") {
         this.internalFilterByProp(column.prop + "_sort").value = null;
       }
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
     },
 
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
-      if (this.displayMode == this.displayModes.MODE_CARDS) {
-        this.filterSidebarOpen = this.filtersVisible;
-      } else {
-        this.filterSidebarOpen = false;
-      }
+      this.filterSidebarOpen = this.filtersVisible;
     },
 
     resetFilters(refresh = true) {

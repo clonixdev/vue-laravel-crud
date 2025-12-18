@@ -64,17 +64,34 @@ export default {
           },
         })
         .then((response) => {
+          console.debug("fetchItems - Response recibida:", response.data);
           this.makePagination(response.data);
+          
+          // Validar que response.data.data existe y es un array
           let items = response.data.data;
+          if (!items) {
+            console.warn("fetchItems - response.data.data es undefined o null, usando array vacío");
+            items = [];
+          } else if (!Array.isArray(items)) {
+            console.warn("fetchItems - response.data.data no es un array, tipo:", typeof items, items);
+            items = [];
+          }
+          
+          console.debug("fetchItems - Items procesados:", items, "Cantidad:", items.length);
+          
           if (this.grouped) {
             this.groupItems(items, concat, this.isSplitGroups);
           } else {
             if (concat) {
-              this.items = this.items.concat(items);
+              // Para concat, agregar items al array existente
+              this.items.push(...items);
             } else {
-              this.items = items;
+              // Mutar el array existente en lugar de reemplazarlo para mantener reactividad con provide/inject
+              this.items.splice(0, this.items.length, ...items);
             }
           }
+          
+          console.debug("fetchItems - this.items después de asignar:", this.items, "Cantidad:", this.items ? this.items.length : 0);
 
           this.loading = false;
           this.firstLoad = true;
@@ -106,11 +123,13 @@ export default {
 
       if (splitGroups) {
         // Dividimos los grupos en arrays separados
-        this.items = Object.entries(groupedMap).map(([groupKey, groupItems]) => ({
+        const groupedItems = Object.entries(groupedMap).map(([groupKey, groupItems]) => ({
           groupKey,
           groupLabel: groupLabelPre + groupKey + groupLabelAfter,
           items: groupItems,
         }));
+        // Mutar el array existente para mantener reactividad
+        this.items.splice(0, this.items.length, ...groupedItems);
       } else {
         // Creamos la estructura agrupada en un solo array
         for (const [groupKey, groupItems] of Object.entries(groupedMap)) {
@@ -123,9 +142,10 @@ export default {
 
         // Decidimos si concatenar o reemplazar los items existentes
         if (concat) {
-          this.items = this.items.concat(itemsWithGroup);
+          this.items.push(...itemsWithGroup);
         } else {
-          this.items = itemsWithGroup;
+          // Mutar el array existente para mantener reactividad
+          this.items.splice(0, this.items.length, ...itemsWithGroup);
         }
       }
     },

@@ -76,6 +76,11 @@ import CustomSlots from './examples/CustomSlots.vue';
 import LocalData from './examples/LocalData.vue';
 import DragAndDrop from './examples/DragAndDrop.vue';
 import ImportExport from './examples/ImportExport.vue';
+import AdvancedConfigurations from './examples/AdvancedConfigurations.vue';
+import ValidationExample from './examples/ValidationExample.vue';
+import InfiniteScrollExample from './examples/InfiniteScrollExample.vue';
+import CustomMessagesExample from './examples/CustomMessagesExample.vue';
+import DisplayModesExample from './examples/DisplayModesExample.vue';
 
 export default {
   name: 'DemoApp',
@@ -87,7 +92,12 @@ export default {
     CustomSlots,
     LocalData,
     DragAndDrop,
-    ImportExport
+    ImportExport,
+    AdvancedConfigurations,
+    ValidationExample,
+    InfiniteScrollExample,
+    CustomMessagesExample,
+    DisplayModesExample
   },
   data() {
     return {
@@ -171,6 +181,56 @@ export default {
           description: 'Ejemplo con funcionalidades de importación y exportación',
           mode: 'Tabla',
           modelName: 'products',
+          ajax: true
+        },
+        {
+          id: 'advanced-configurations',
+          name: 'Configuraciones Avanzadas',
+          icon: 'gear',
+          component: 'AdvancedConfigurations',
+          description: 'Ejemplo mostrando todas las configuraciones avanzadas disponibles',
+          mode: 'Tabla',
+          modelName: 'users',
+          ajax: true
+        },
+        {
+          id: 'validation',
+          name: 'Validación',
+          icon: 'shield-check',
+          component: 'ValidationExample',
+          description: 'Ejemplo con validación de formularios habilitada',
+          mode: 'Tabla',
+          modelName: 'users',
+          ajax: true
+        },
+        {
+          id: 'infinite-scroll',
+          name: 'Scroll Infinito',
+          icon: 'arrow-down-circle',
+          component: 'InfiniteScrollExample',
+          description: 'Ejemplo con scroll infinito para cargar más elementos',
+          mode: 'Tabla',
+          modelName: 'users',
+          ajax: true
+        },
+        {
+          id: 'custom-messages',
+          name: 'Mensajes Personalizados',
+          icon: 'chat-dots',
+          component: 'CustomMessagesExample',
+          description: 'Ejemplo con todos los mensajes personalizados',
+          mode: 'Tabla',
+          modelName: 'users',
+          ajax: true
+        },
+        {
+          id: 'display-modes',
+          name: 'Modos de Visualización',
+          icon: 'layout-split',
+          component: 'DisplayModesExample',
+          description: 'Ejemplo mostrando todos los modos de visualización',
+          mode: 'Todos',
+          modelName: 'users',
           ajax: true
         }
       ]

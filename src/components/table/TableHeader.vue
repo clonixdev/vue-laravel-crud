@@ -3,7 +3,9 @@
     <tr>
       <slot name="rowHead">
         <th v-for="(column, indexc) in columns" :key="indexc"
-          :style="{ width: column.width ? column.width : 'inherit' }" scope="col">
+          :style="{ width: column.width ? column.width : 'inherit' }" scope="col"
+          @mouseenter="hoveredColumn = column.prop"
+          @mouseleave="hoveredColumn = null">
           <slot :name="'filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
             v-bind:internalFilterByProp="internalFilterByProp" v-if="enableFilters &&
               filtersVisible &&
@@ -81,12 +83,12 @@
           <span v-else>{{ column.label }}</span>
 
           <span
-            v-if="sortable && column.type != 'select' && column.type != 'checkbox' && internalFilterByProp(column.prop + '_sort')"
-            class="sort-filter" @click="toggleSortFilter(column)"><b-icon-sort-down
-              v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
-              v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
+            v-if="isSortableColumn(column) && shouldShowSortIcon(column)"
+            class="sort-filter" @click="toggleSortFilter(column)">
+            <b-icon-sort-up
+              v-if="getSortIconDirection(column) === 'up'"></b-icon-sort-up>
             <b-icon-sort-down
-              v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
+              v-if="getSortIconDirection(column) === 'down'"></b-icon-sort-down>
           </span>
         </th>
       </slot>
@@ -108,6 +110,36 @@ export default {
     'toggleSortFilter',
     'sortable',
     'optionsLoaded'
-  ]
+  ],
+  data() {
+    return {
+      hoveredColumn: null
+    };
+  },
+  methods: {
+    isSortableColumn(column) {
+      return this.sortable && 
+             column.type != 'select' && 
+             column.type != 'checkbox' && 
+             this.internalFilterByProp(column.prop + '_sort');
+    },
+    shouldShowSortIcon(column) {
+      const sortFilter = this.internalFilterByProp(column.prop + '_sort');
+      return this.hoveredColumn === column.prop || sortFilter.value;
+    },
+    getSortIconDirection(column) {
+      const sortFilter = this.internalFilterByProp(column.prop + '_sort');
+      const sortValue = sortFilter.value;
+      
+      if (sortValue === 'DESC') {
+        return 'down';
+      } else if (sortValue === 'ASC') {
+        return 'up';
+      } else if (this.hoveredColumn === column.prop) {
+        return 'up';
+      }
+      return null;
+    }
+  }
 };
 </script>
