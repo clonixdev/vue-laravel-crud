@@ -8,6 +8,8 @@
         :columns="columns"
         :itemValue="itemValue"
         :getStateValue="getStateValue"
+        :getStateOptions="getStateOptions"
+        :getStateBadgeVariant="getStateBadgeVariant"
         :getArrayValue="getArrayValue"
         :showItem="showItem"
         :updateItem="updateItem"
@@ -34,6 +36,8 @@ export default {
     'columns',
     'itemValue',
     'getStateValue',
+    'getStateOptions',
+    'getStateBadgeVariant',
     'getArrayValue',
     'showItem',
     'updateItem',

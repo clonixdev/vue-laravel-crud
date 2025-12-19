@@ -120,7 +120,16 @@ export default {
       this.internalFilters.forEach((f) => {
         if (f.value) {
           let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
-          filter.push([colname, f.op, f.value]);
+          let op = f.op;
+          
+          // Aplicar operadores automáticamente para filtros de rango
+          if (f.column.endsWith("_from")) {
+            op = ">=";
+          } else if (f.column.endsWith("_to")) {
+            op = "<=";
+          }
+          
+          filter.push([colname, op, f.value]);
         }
       });
       return filter;

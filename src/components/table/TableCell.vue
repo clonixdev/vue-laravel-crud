@@ -30,10 +30,20 @@
         <b-form-checkbox v-model="item.selected" @change="onCheckSelect($event, item)">
         </b-form-checkbox>
       </span>
-      <span v-else-if="column.type == 'state' && optionsLoaded">
-        {{
-          getStateValue(itemValue(column, item), column.options)
-        }}
+      <span v-else-if="column.type == 'state'">
+        <template v-if="stateOptions.length > 0">
+          <b-badge 
+            v-for="(option, optIndex) in stateOptions" 
+            :key="optIndex" 
+            :variant="getStateBadgeVariant(option)"
+            class="mr-1"
+          >
+            {{ option.text }}
+          </b-badge>
+        </template>
+        <span v-else>
+          {{ itemValue(column, item) }}
+        </span>
       </span>
       <span v-else-if="column.type == 'array' && optionsLoaded">
         {{
@@ -45,6 +55,7 @@
         }}
       </span>
       <span v-else>
+      
         {{ itemValue(column, item) }}
       </span>
     </slot>
@@ -103,6 +114,8 @@ export default {
   inject: [
     'itemValue',
     'getStateValue',
+    'getStateOptions',
+    'getStateBadgeVariant',
     'getArrayValue',
     'onCheckSelect',
     'showItem',
@@ -114,6 +127,18 @@ export default {
     return {
       moment: moment
     };
+  },
+  computed: {
+    stateOptions() {
+      // Permitir usar opciones incluso si optionsLoaded es false, ya que getStateOptions normaliza internamente
+      if (this.column.type === 'state' && this.column.options && Array.isArray(this.column.options)) {
+        const itemVal = this.itemValue(this.column, this.item);
+        const options = this.column.options;
+        const result = this.getStateOptions(itemVal, options);
+        return result;
+      }
+      return [];
+    }
   }
 };
 </script>

@@ -162,7 +162,7 @@ export default {
       modelName: "users",
       ajax: !staticMode,
       apiUrl: staticMode ? "" : "http://localhost:3001/api",
-      localData: staticMode ? generateMockData('users', 50) : [],
+      localData: staticMode ? generateMockData('users', 75) : [],
       selectedItem: null,
       model: {
         name: "",

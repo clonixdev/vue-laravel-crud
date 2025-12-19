@@ -12,7 +12,7 @@
             v-bind:internalFilterByProp="internalFilterByProp" v-if="enableFilters &&
               filtersVisible &&
               isColumnHasFilter(column) &&
-              internalFilterByProp(column.prop)
+              (internalFilterByProp(column.prop) || internalFilterByProp(column.prop + '_from'))
             ">
 
             <div class="form-group">
@@ -36,33 +36,42 @@
                 </div>
               </div>
 
-              <select v-else-if="column.type == 'state' && optionsLoaded" class="form-control form-control-md p-2"
+              <div class="row" v-else-if="column.type == 'number' || column.type == 'money'">
+                <div class="col-6">
+                  <input 
+                    type="number" 
+                    class="form-control form-control-md p-2" 
+                    v-model.number="internalFilterByProp(column.prop + '_from').value"
+                    :step="column.type == 'money' ? '0.01' : '1'"
+                    @change="onChangeFilter($event)"
+                    placeholder="Desde" />
+                </div>
+                <div class="col-6">
+                  <input 
+                    type="number" 
+                    class="form-control form-control-md p-2" 
+                    v-model.number="internalFilterByProp(column.prop + '_to').value"
+                    :step="column.type == 'money' ? '0.01' : '1'"
+                    @change="onChangeFilter($event)"
+                    placeholder="Hasta" />
+                </div>
+              </div>
+
+              <select v-else-if="column.type == 'state' && column.options && Array.isArray(column.options)" class="form-control form-control-md p-2"
                 v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"
                 :placeholder="column.label">
                 <option value="">{{ column.label }}</option>
-                <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
-                  {{
-                    option.text
-                      ? option.text
-                      : option.label
-                        ? option.label
-                        : ""
-                  }}
+                <option :value="option.value" v-for="(option, indexo) in column.options" :key="indexo">
+                  {{ option.text }}
                 </option>
               </select>
 
-              <select v-else-if="column.type == 'array' && optionsLoaded" class="form-control form-control-md p-2"
+              <select v-else-if="column.type == 'array' && column.options && Array.isArray(column.options)" class="form-control form-control-md p-2"
                 v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"
                 :placeholder="column.label">
                 <option value="">{{ column.label }}</option>
-                <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
-                  {{
-                    option.text
-                      ? option.text
-                      : option.label
-                        ? option.label
-                        : ""
-                  }}
+                <option :value="option.value" v-for="(option, indexo) in column.options" :key="indexo">
+                  {{ option.text }}
                 </option>
               </select>
 

@@ -24,7 +24,9 @@
               :cardClass="cardClass" 
               :cardHideFooter="cardHideFooter" 
               :itemValue="itemValue"
-              :getStateValue="getStateValue" 
+              :getStateValue="getStateValue"
+              :getStateOptions="getStateOptions"
+              :getStateBadgeVariant="getStateBadgeVariant"
               :getArrayValue="getArrayValue" 
               :showItem="showItem"
               :updateItem="updateItem" 
@@ -74,6 +76,8 @@ export default {
     'cardHideFooter',
     'itemValue',
     'getStateValue',
+    'getStateOptions',
+    'getStateBadgeVariant',
     'getArrayValue',
     'showItem',
     'updateItem',

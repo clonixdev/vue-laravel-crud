@@ -1,9 +1,10 @@
 import { mockUsers, mockTasks, mockProducts, generateMockData } from './mockData.js';
 
 // Simular base de datos en memoria
-let users = [...mockUsers];
-let tasks = [...mockTasks];
-let products = [...mockProducts];
+// Inicializar con 75 elementos para probar paginación e infinite scroll
+let users = generateMockData('users', 75);
+let tasks = generateMockData('tasks', 75);
+let products = generateMockData('products', 75);
 
 // Función para parsear filtros
 function parseFilters(filterString) {

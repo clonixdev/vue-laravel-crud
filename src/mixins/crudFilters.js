@@ -3,16 +3,16 @@ export default {
     setupFilters() {
       this.columns.forEach((column) => {
         if (this.isColumnHasFilter(column)) {
-          if (column.type == "date") {
+          if (column.type == "date" || column.type == "number" || column.type == "money") {
             this.internalFilters.push({
               column: column.prop + "_from",
-              op: column.filterOp ? column.filterOp : "=",
+              op: ">=",
               value: null,
             });
 
             this.internalFilters.push({
               column: column.prop + "_to",
-              op: column.filterOp ? column.filterOp : "=",
+              op: "<=",
               value: null,
             });
           } else {
@@ -51,6 +51,11 @@ export default {
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
       this.filterSidebarOpen = this.filtersVisible;
+      
+      // Si se está abriendo el sidebar y los filtros no están inicializados, inicializarlos
+      if (this.filtersVisible && this.internalFilters.length === 0) {
+        this.setupFilters();
+      }
     },
 
     resetFilters(refresh = true) {

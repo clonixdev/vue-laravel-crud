@@ -186,6 +186,8 @@ export default /*#__PURE__*/ {
       loadOptions: this.loadOptions,
       getArrayValue: this.getArrayValue,
       getStateValue: this.getStateValue,
+      getStateOptions: this.getStateOptions,
+      getStateBadgeVariant: this.getStateBadgeVariant,
       onRowHover: this.onRowHover,
       onRowClick: this.onRowClick,
       onSort: this.onSort,

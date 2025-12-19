@@ -49,7 +49,7 @@
         </b-col>
 
         <b-col md="9" lg="10">
-          <b-card>
+          <b-card v-if="currentExample !== 'documentation'">
             <b-card-header>
               <h5 class="mb-0">
                 <b-icon :icon="currentExampleData.icon" class="mr-2"></b-icon>
@@ -61,6 +61,7 @@
               <component :is="currentExampleData.component" />
             </b-card-body>
           </b-card>
+          <component v-else :is="currentExampleData.component" />
         </b-col>
       </b-row>
     </b-container>
@@ -82,6 +83,7 @@ import InfiniteScrollExample from './examples/InfiniteScrollExample.vue';
 import CustomMessagesExample from './examples/CustomMessagesExample.vue';
 import DisplayModesExample from './examples/DisplayModesExample.vue';
 import CheckboxSelectionExample from './examples/CheckboxSelectionExample.vue';
+import DocumentationViewer from './components/DocumentationViewer.vue';
 
 export default {
   name: 'DemoApp',
@@ -99,7 +101,8 @@ export default {
     InfiniteScrollExample,
     CustomMessagesExample,
     DisplayModesExample,
-    CheckboxSelectionExample
+    CheckboxSelectionExample,
+    DocumentationViewer
   },
   data() {
     return {
@@ -244,6 +247,16 @@ export default {
           mode: 'Todos',
           modelName: 'users',
           ajax: true
+        },
+        {
+          id: 'documentation',
+          name: 'Documentación',
+          icon: 'book',
+          component: 'DocumentationViewer',
+          description: 'Documentación completa de todas las configuraciones disponibles',
+          mode: 'Documentación',
+          modelName: '',
+          ajax: false
         }
       ]
     };

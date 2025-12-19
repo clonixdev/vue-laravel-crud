@@ -15,7 +15,19 @@
                   {{ itemValue(column, item) }}
                 </span>
                 <span v-else-if="column.type === 'state'">
-                  {{ getStateValue(itemValue(column, item), column.options) }}
+                  <template v-if="getStateOptionsForColumn(column, item).length > 0">
+                    <b-badge 
+                      v-for="(option, optIndex) in getStateOptionsForColumn(column, item)" 
+                      :key="optIndex" 
+                      :variant="getStateBadgeVariant(option)"
+                      class="mr-1"
+                    >
+                      {{ option.text }}
+                    </b-badge>
+                  </template>
+                  <span v-else>
+                    {{ itemValue(column, item) }}
+                  </span>
                 </span>
                 <span v-else-if="column.type === 'array'">
                   {{ getArrayValue(itemValue(column, item), column.displayProp, column.options) }}
@@ -55,11 +67,21 @@
       cardHideFooter: Boolean,
       itemValue: Function,
       getStateValue: Function,
+      getStateOptions: Function,
+      getStateBadgeVariant: Function,
       getArrayValue: Function,
       showItem: Function,
       updateItem: Function,
       removeItem: Function,
     },
+    methods: {
+      getStateOptionsForColumn(column, item) {
+        if (column.type === 'state' && column.options) {
+          return this.getStateOptions(this.itemValue(column, item), column.options);
+        }
+        return [];
+      }
+    }
   };
   </script>
   
