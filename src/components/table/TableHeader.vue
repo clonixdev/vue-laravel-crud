@@ -36,13 +36,13 @@
                 </div>
               </div>
 
-              <div class="row" v-else-if="column.type == 'number' || column.type == 'money'">
+              <div class="row" v-else-if="column.type == 'number' || column.type == 'money' || column.type == 'price'">
                 <div class="col-6">
                   <input 
                     type="number" 
                     class="form-control form-control-md p-2" 
                     v-model.number="internalFilterByProp(column.prop + '_from').value"
-                    :step="column.type == 'money' ? '0.01' : '1'"
+                    :step="column.type == 'money' || column.type == 'price' ? '0.01' : '1'"
                     @change="onChangeFilter($event)"
                     placeholder="Desde" />
                 </div>
@@ -51,7 +51,7 @@
                     type="number" 
                     class="form-control form-control-md p-2" 
                     v-model.number="internalFilterByProp(column.prop + '_to').value"
-                    :step="column.type == 'money' ? '0.01' : '1'"
+                    :step="column.type == 'money' || column.type == 'price' ? '0.01' : '1'"
                     @change="onChangeFilter($event)"
                     placeholder="Hasta" />
                 </div>
@@ -104,12 +104,17 @@
           <span v-else>{{ column.label }}</span>
 
           <span
-            v-if="isSortableColumn(column) && shouldShowSortIcon(column)"
-            class="sort-filter" @click="toggleSortFilter(column)">
+            v-if="isSortableColumn(column)"
+            class="sort-filter ml-1"
+            :class="{ 'sort-filter-visible': shouldShowSortIcon(column) }"
+            @click="toggleSortFilter(column)">
             <b-icon-sort-up
               v-if="getSortIconDirection(column) === 'up'"></b-icon-sort-up>
             <b-icon-sort-down
-              v-if="getSortIconDirection(column) === 'down'"></b-icon-sort-down>
+              v-else-if="getSortIconDirection(column) === 'down'"></b-icon-sort-down>
+            <b-icon-sort-up
+              v-else
+              style="visibility: hidden;"></b-icon-sort-up>
           </span>
         </th>
       </slot>
@@ -171,5 +176,15 @@ export default {
 .actions-header {
   width: 1%;
   white-space: nowrap;
+}
+
+.sort-filter {
+  cursor: pointer;
+  visibility: hidden;
+  display: inline-block;
+}
+
+.sort-filter-visible {
+  visibility: visible;
 }
 </style>

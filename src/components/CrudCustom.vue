@@ -1,5 +1,5 @@
 <template>
-  <div v-if="displayMode == displayModes.MODE_CUSTOM">
+  <div v-if="currentDisplayMode == displayModes.MODE_CUSTOM">
     <div :class="listContainerClass">
       <p v-if="!loading && itemsList && itemsList.length == 0 && !infiniteScroll" class="p-3">
         {{ messageEmptyResults }}
@@ -24,6 +24,18 @@ export default {
     'infiniteScroll',
     'messageEmptyResults',
     'itemsList'
-  ]
+  ],
+  computed: {
+    currentDisplayMode() {
+      if (!this.displayMode) return 1;
+      if (this.displayMode.value !== undefined) {
+        return this.displayMode.value;
+      }
+      if (typeof this.displayMode === 'function') {
+        return this.displayMode();
+      }
+      return this.displayMode;
+    }
+  }
 };
 </script>

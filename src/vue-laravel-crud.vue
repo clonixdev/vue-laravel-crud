@@ -1,4 +1,5 @@
 <script>
+import Vue from 'vue';
 import CrudHeader from "./components/CrudHeader.vue";
 import CrudTable from "./components/CrudTable.vue";
 import CrudCards from "./components/CrudCards.vue";
@@ -45,6 +46,7 @@ export default /*#__PURE__*/ {
       vuexLocalforage: this.vuexLocalforage,
       columns: this.columns,
       filter: this.filter,
+      customFilters: this.customFilters,
       enableFilters: this.enableFilters,
       infiniteScroll: this.infiniteScroll,
       sortable: this.sortable,
@@ -65,7 +67,7 @@ export default /*#__PURE__*/ {
       showHeader: this.showHeader,
       showTitle: this.showTitle,
       limit: this.limit,
-      displayMode: this.displayMode,
+      displayMode: this.displayModeReactive,
       displayModeToggler: this.displayModeToggler,
       colXs: this.colXs,
       colSm: this.colSm,
@@ -114,6 +116,8 @@ export default /*#__PURE__*/ {
       moment: this.moment,
       loading: this.loading,
       firstLoad: this.firstLoad,
+      // Proporcionar item como función getter para reactividad
+      getItem: () => this.item,
       item: this.item,
       items: this.items,
       selectedItems: this.selectedItems,
@@ -180,6 +184,7 @@ export default /*#__PURE__*/ {
       toggleFilters: this.toggleFilters,
       resetFilters: this.resetFilters,
       isColumnHasFilter: this.isColumnHasFilter,
+      isCustomFilterEnabled: this.isCustomFilterEnabled,
       setFilter: this.setFilter,
       onChangeFilter: this.onChangeFilter,
       togglePrincipalSort: this.togglePrincipalSort,
@@ -253,6 +258,10 @@ export default /*#__PURE__*/ {
       },
     },
     filter: {
+      type: Array,
+      default: () => [],
+    },
+    customFilters: {
       type: Array,
       default: () => [],
     },
@@ -532,9 +541,21 @@ export default /*#__PURE__*/ {
   <div class="crud">
     <CrudHeader />
     
-    <CrudTable />
-    <CrudCards />
-    <CrudKanban />
+    <CrudTable>
+      <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+        <slot :name="name" v-bind="slotProps" />
+      </template>
+    </CrudTable>
+    <CrudCards>
+      <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+        <slot :name="name" v-bind="slotProps" />
+      </template>
+    </CrudCards>
+    <CrudKanban>
+      <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+        <slot :name="name" v-bind="slotProps" />
+      </template>
+    </CrudKanban>
     <CrudCustom />
     
     <b-overlay :show="loading" rounded="sm"></b-overlay>

@@ -30,8 +30,8 @@
           <b-button variant="info" v-if="enableFilters" @click="toggleFilters()">Filtros</b-button>
           <b-button variant="info" @click="refresh()"><b-icon-arrow-clockwise></b-icon-arrow-clockwise></b-button>
           <b-button variant="info" @click="toggleDisplayMode()" :disabled="loading" v-if="displayModeToggler">
-            <b-icon-card-list v-if="displayMode == displayModes.MODE_TABLE"></b-icon-card-list>
-            <b-icon-table v-else-if="displayMode == displayModes.MODE_CARDS"></b-icon-table>
+            <b-icon-card-list v-if="currentDisplayMode == displayModes.MODE_TABLE"></b-icon-card-list>
+            <b-icon-table v-else-if="currentDisplayMode == displayModes.MODE_CARDS"></b-icon-table>
           </b-button>
 
           <div class="crud-search m-0" v-if="showSearch">
@@ -94,6 +94,16 @@ export default {
     sidebarVisible() {
       // Acceder directamente al componente padre para obtener reactividad
       return this.$parent ? this.$parent.filterSidebarOpen : this.filterSidebarOpen;
+    },
+    currentDisplayMode() {
+      if (!this.displayMode) return 1;
+      if (this.displayMode.value !== undefined) {
+        return this.displayMode.value;
+      }
+      if (typeof this.displayMode === 'function') {
+        return this.displayMode();
+      }
+      return this.displayMode;
     }
   },
   methods: {

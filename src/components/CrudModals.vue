@@ -5,22 +5,26 @@
       <b-overlay :show="loading" rounded="sm">
         <template v-if="validate">
           <form @submit="saveItem">
-            <slot name="form" v-bind:item="item" v-if="item">
-              <b-form-group label="Nombre:" description="Nombre ">
-                <b-form-input v-model="item.title" type="text" required placeholder="Nombre"></b-form-input>
-              </b-form-group>
-            </slot>
+            <template v-if="reactiveItem">
+              <slot name="form" v-bind:item="reactiveItem">
+                <b-form-group label="Nombre:" description="Nombre ">
+                  <b-form-input v-model="reactiveItem.title" type="text" required placeholder="Nombre"></b-form-input>
+                </b-form-group>
+              </slot>
+            </template>
             <b-button block type="submit" variant="success" :disabled="loading">
               <b-spinner small v-if="loading"></b-spinner>{{ messageSave }}
             </b-button>
           </form>
         </template>
         <template v-if="!validate">
-          <slot name="form" v-bind:item="item" v-if="item">
-            <b-form-group :label="key" v-for="(value, key) in item" :key="key">
-              <b-form-input v-model="item[key]" type="text" required></b-form-input>
-            </b-form-group>
-          </slot>
+          <template v-if="reactiveItem">
+            <slot name="form" v-bind:item="reactiveItem">
+              <b-form-group :label="key" v-for="(value, key) in reactiveItem" :key="key">
+                <b-form-input v-model="reactiveItem[key]" type="text" required></b-form-input>
+              </b-form-group>
+            </slot>
+          </template>
           <b-button block type="submit" variant="success" :disabled="loading" @click="saveItem()">
             <b-spinner small v-if="loading"></b-spinner>{{ messageSave }}
           </b-button>
@@ -30,16 +34,18 @@
 
     <!-- Modal de visualización -->
     <b-modal :id="'modal-show-item-' + modelName" hide-footer size="xl" :title="title" no-close-on-backdrop>
-      <slot name="show" v-bind:item="item" v-if="item">
-        <b-list-group>
-          <b-list-group-item v-for="(value, key) in item" :key="key">
-            <b-row class="w-100">
-              <b-col cols="4" class="font-weight-bold">{{ key }}</b-col>
-              <b-col cols="8">{{ JSON.stringify(value) }}</b-col>
-            </b-row>
-          </b-list-group-item>
-        </b-list-group>
-      </slot>
+      <template v-if="reactiveItem">
+        <slot name="show" v-bind:item="reactiveItem">
+          <b-list-group>
+            <b-list-group-item v-for="(value, key) in reactiveItem" :key="key">
+              <b-row class="w-100">
+                <b-col cols="4" class="font-weight-bold">{{ key }}</b-col>
+                <b-col cols="8">{{ JSON.stringify(value) }}</b-col>
+              </b-row>
+            </b-list-group-item>
+          </b-list-group>
+        </slot>
+      </template>
     </b-modal>
 
     <!-- Modal de importación -->
@@ -92,6 +98,7 @@ export default {
     'loading',
     'validate',
     'item',
+    'getItem',
     'messageSave',
     'showImport',
     'showExport',
@@ -101,6 +108,27 @@ export default {
     'saveItem',
     'importItems',
     'exportItems'
-  ]
+  ],
+  computed: {
+    // Computed property para asegurar reactividad del item inyectado
+    reactiveItem() {
+      // Si hay una función getItem, usarla para obtener el item actual
+      if (this.getItem && typeof this.getItem === 'function') {
+        return this.getItem();
+      }
+      // Si no, usar el item inyectado directamente
+      return this.item;
+    }
+  },
+  watch: {
+    // Watch el item inyectado para forzar actualización
+    item: {
+      handler() {
+        this.$forceUpdate();
+      },
+      deep: true,
+      immediate: true
+    }
+  }
 };
 </script>

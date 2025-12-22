@@ -1,4 +1,5 @@
 import moment from "moment";
+import Vue from "vue";
 
 export default {
   data() {
@@ -27,6 +28,8 @@ export default {
       filterSidebarOpen: false,
       internalFilters: [],
       forceRecomputeCounter: 0,
+      _displayMode: 1, // Propiedad local para displayMode (se inicializará desde la prop en created())
+      displayModeReactive: Vue.observable({ value: 1 }), // Objeto reactivo para provide/inject
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -65,7 +68,7 @@ export default {
       if(this.groupedSplit){
         return true;
       }
-      return this.displayMode == this.displayModes.MODE_KANBAN;
+      return this._displayMode == this.displayModes.MODE_KANBAN;
     },
 
     itemsList() {
@@ -175,7 +178,24 @@ export default {
       }
     },
 
-    displayMode() {
+    // Watcher para la prop displayMode (sincroniza cuando cambia desde el componente padre)
+    displayMode(newVal) {
+      // Usar $props para acceder a la prop y evitar conflictos con data properties
+      const propValue = this.$props && this.$props.displayMode !== undefined ? this.$props.displayMode : newVal;
+      if (propValue !== undefined && this._displayMode !== propValue) {
+        this._displayMode = propValue;
+        if (this.displayModeReactive) {
+          this.displayModeReactive.value = propValue;
+        }
+      }
+    },
+
+    // Watcher para la propiedad local _displayMode (para forzar re-renderizado)
+    _displayMode(newVal) {
+      // Actualizar el objeto reactivo si existe
+      if (this.displayModeReactive) {
+        this.displayModeReactive.value = newVal;
+      }
       // Forzar re-renderizado cuando cambia el modo de visualización
       this.$nextTick(() => {
         this.forceRecomputeCounter++;
@@ -242,6 +262,14 @@ export default {
       },
       deep: true
     },
+  },
+
+  created() {
+    // Inicializar _displayMode desde la prop displayMode en created() para que esté disponible en provide()
+    if (this.$props && this.$props.displayMode !== undefined) {
+      this._displayMode = this.$props.displayMode;
+      this.displayModeReactive.value = this._displayMode;
+    }
   },
 
   mounted() {

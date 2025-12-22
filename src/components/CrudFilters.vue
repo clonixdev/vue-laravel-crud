@@ -87,6 +87,112 @@
       </div>
     </div>
 
+    <!-- Filtros custom -->
+    <div v-for="(customFilter, indexcf) in customFilters" :key="'custom-' + indexcf">
+      <div v-if="isCustomFilterEnabled(customFilter)">
+        <!-- Slot personalizado para filtro custom -->
+        <slot :name="'sidebar-filter-custom-' + customFilter.prop" v-bind:column="customFilter" v-bind:filter="filter"
+          v-bind:internalFilterByProp="internalFilterByProp" v-bind:getFilterForColumn="getFilterForColumn">
+          
+          <!-- Si type es una función callback -->
+          <RenderCustomFilter 
+            v-if="typeof customFilter.type === 'function'"
+            :render-function="customFilter.type"
+            :custom-filter="customFilter"
+            :filter="filter"
+            :internal-filter-by-prop="internalFilterByProp"
+            :get-filter-for-column="getFilterForColumn"
+            :on-change-filter="onChangeFilter"
+          />
+
+          <!-- Si type es string, usar la misma lógica que las columnas -->
+          <template v-else>
+            <div class="form-group" v-if="customFilter.type == 'boolean'">
+              <label>{{ customFilter.label }}</label>
+
+              <select class="form-control" v-model="getFilterForColumn(customFilter).value"
+                @change="onChangeFilter($event)">
+                <option value=""></option>
+                <option value="1">Sí</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+
+            <div class="form-group" v-else-if="customFilter.type == 'date'">
+              <label>{{ customFilter.label }}</label>
+              <div class="row">
+                <div class="col-6">
+                  <b-form-datepicker v-model="getFilterForDateFrom(customFilter).value
+                    " today-button reset-button close-button locale="es"></b-form-datepicker>
+                </div>
+                <div class="col-6">
+                  <b-form-datepicker v-model="getFilterForDateTo(customFilter).value
+                    " today-button reset-button close-button locale="es"></b-form-datepicker>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" v-else-if="customFilter.type == 'number' || customFilter.type == 'money'">
+              <label>{{ customFilter.label }}</label>
+              <div class="row">
+                <div class="col-6">
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    v-model.number="getFilterForDateFrom(customFilter).value"
+                    :step="customFilter.type == 'money' ? '0.01' : '1'"
+                    @change="onChangeFilter($event)"
+                    placeholder="Desde" />
+                </div>
+                <div class="col-6">
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    v-model.number="getFilterForDateTo(customFilter).value"
+                    :step="customFilter.type == 'money' ? '0.01' : '1'"
+                    @change="onChangeFilter($event)"
+                    placeholder="Hasta" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" v-else-if="customFilter.type == 'state'">
+              <label>{{ customFilter.label }}</label>
+
+              <select class="form-control" v-model="getFilterForColumn(customFilter).value"
+                @change="onChangeFilter($event)" v-if="customFilter.options && Array.isArray(customFilter.options)">
+                <option value=""></option>
+                <option :value="option.value" v-for="option in customFilter.options"
+                  :key="option.value || option.id">
+                  {{ option.text }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group" v-else-if="customFilter.type == 'array'">
+              <label>{{ customFilter.label }}</label>
+
+              <select class="form-control" v-model="getFilterForColumn(customFilter).value"
+                @change="onChangeFilter($event)" v-if="customFilter.options && Array.isArray(customFilter.options)">
+                <option value=""></option>
+                <option :value="option.value" v-for="option in customFilter.options"
+                  :key="option.value || option.id">
+                  {{ option.text }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group" v-else>
+              <label>{{ customFilter.label }}</label>
+
+              <input class="form-control" v-model.lazy="getFilterForColumn(customFilter).value"
+                @change="onChangeFilter($event)" />
+            </div>
+          </template>
+        </slot>
+      </div>
+    </div>
+
     <div class="mt-3 d-flex justify-content-center">
       <button class="btn btn-light" @click="resetFilters()">
         Reset
@@ -99,11 +205,57 @@
 </template>
 
 <script>
+// Componente funcional para renderizar filtros custom con callback
+const RenderCustomFilter = {
+  functional: true,
+  props: {
+    renderFunction: {
+      type: Function,
+      required: true
+    },
+    customFilter: {
+      type: Object,
+      required: true
+    },
+    filter: {
+      type: Array,
+      default: () => []
+    },
+    internalFilterByProp: {
+      type: Function,
+      required: true
+    },
+    getFilterForColumn: {
+      type: Function,
+      required: true
+    },
+    onChangeFilter: {
+      type: Function,
+      required: true
+    }
+  },
+  render(h, context) {
+    const { renderFunction, customFilter, filter, internalFilterByProp, getFilterForColumn, onChangeFilter } = context.props;
+    return renderFunction(h, {
+      column: customFilter,
+      filter: filter,
+      internalFilterByProp: internalFilterByProp,
+      getFilterForColumn: getFilterForColumn,
+      onChangeFilter: onChangeFilter
+    });
+  }
+};
+
 export default {
   name: 'CrudFilters',
+  components: {
+    RenderCustomFilter
+  },
   inject: [
     'columns',
+    'customFilters',
     'isColumnHasFilter',
+    'isCustomFilterEnabled',
     'filter',
     'internalFilterByProp',
     'optionsLoaded',

@@ -230,7 +230,7 @@ export default {
       displayMode: 1,
       
       // CONFIGURACIÓN: Mostrar botones para cambiar modo
-      displayModeToggler: false,
+      displayModeToggler: true,
       
       // CONFIGURACIÓN: Columnas para vista de tarjetas
       colXs: 12,

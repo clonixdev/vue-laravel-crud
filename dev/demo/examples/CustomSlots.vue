@@ -9,6 +9,7 @@
   - show: Slot para personalizar la vista de detalle (modal)
   - cell-{prop}: Slot para personalizar el renderizado de una celda específica
     Ejemplo: v-slot:cell-price para personalizar la columna "price"
+  - rowActions: Slot para personalizar las acciones de cada fila (botones de acciones)
   
   CONFIGURACIONES RELACIONADAS:
   - model: Define la estructura del formulario
@@ -141,6 +142,13 @@
           </b-list-group-item>
         </b-list-group>
       </template>
+      
+      <!-- SLOT: rowActions - Personaliza las acciones de cada fila (solo botón de ver) -->
+      <template v-slot:rowActions="slotProps">
+        <b-button variant="primary" @click="slotProps.showItem(slotProps.item.id, slotProps.index)">
+          <b-icon-eye></b-icon-eye>
+        </b-button>
+      </template>
     </VueLaravelCrud>
     
     <div v-if="selectedItem" class="mt-3">
@@ -253,6 +261,13 @@ export default {
         <b-badge variant="info">
           {{ slotProps.item.category }}
         </b-badge>
+      </template>
+      
+      <!-- Slot para personalizar acciones de fila (solo botón de ver) -->
+      <template v-slot:rowActions="slotProps">
+        <b-button variant="primary" @click="slotProps.showItem(slotProps.item.id, slotProps.index)">
+          <b-icon-eye></b-icon-eye>
+        </b-button>
       </template>
       
       <template v-slot:show="slotProps">

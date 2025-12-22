@@ -39,6 +39,12 @@
                 <span v-else-if="column.type === 'array'">
                   {{ getArrayValue(itemValue(column, item), column.displayProp, column.options) }}
                 </span>
+                <span v-else-if="column.type === 'money' || column.type === 'price'">
+                  {{ formatMoney(itemValue(column, item), column) }}
+                </span>
+                <span v-else-if="column.type === 'number' && (column.thousandsSeparator || column.decimalSeparator || column.decimals !== undefined)">
+                  {{ formatNumber(itemValue(column, item), column) }}
+                </span>
                 <span v-else>
                   {{ itemValue(column, item) }}
                 </span>
@@ -50,11 +56,14 @@
       
       <template v-slot:footer>
         <b-button-group size="sm">
-          <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
+          <slot name="rowActions" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
             v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
-            <b-button variant="primary" @click="showItem(item.id, index)"><b-icon-eye></b-icon-eye></b-button>
-            <b-button variant="secondary" @click="updateItem(item.id, index)"><b-icon-pencil></b-icon-pencil></b-button>
-            <b-button variant="danger" @click="removeItem(item.id, index)"><b-icon-trash></b-icon-trash></b-button>
+            <slot name="rowAction" v-bind:item="item" v-bind:index="index" v-bind:showItem="showItem"
+              v-bind:updateItem="updateItem" v-bind:removeItem="removeItem">
+              <b-button variant="primary" @click="showItem(item.id, index)"><b-icon-eye></b-icon-eye></b-button>
+              <b-button variant="secondary" @click="updateItem(item.id, index)"><b-icon-pencil></b-icon-pencil></b-button>
+              <b-button variant="danger" @click="removeItem(item.id, index)"><b-icon-trash></b-icon-trash></b-button>
+            </slot>
           </slot>
         </b-button-group>
       </template>
@@ -86,6 +95,38 @@ export default {
         return this.getStateOptions(this.itemValue(column, item), column.options);
       }
       return [];
+    },
+    formatNumber(value, column) {
+      if (value === null || value === undefined || value === '') {
+        return '';
+      }
+      
+      const numValue = parseFloat(value);
+      if (isNaN(numValue)) {
+        return value;
+      }
+      
+      const thousandsSep = column.thousandsSeparator || '.';
+      const decimalSep = column.decimalSeparator || ',';
+      const decimals = column.decimals !== undefined ? column.decimals : (numValue % 1 === 0 ? 0 : 2);
+      
+      // Formatear número con separadores
+      const parts = numValue.toFixed(decimals).split('.');
+      const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSep);
+      const decimalPart = parts[1] || '';
+      
+      if (decimals > 0 && decimalPart) {
+        return `${integerPart}${decimalSep}${decimalPart}`;
+      }
+      return integerPart;
+    },
+    formatMoney(value, column) {
+      const formatted = this.formatNumber(value, column);
+      if (formatted === '') {
+        return '';
+      }
+      const symbol = column.symbol || '$';
+      return `${symbol}${formatted}`;
     }
   }
 };

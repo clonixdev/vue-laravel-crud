@@ -1,5 +1,5 @@
 <template>
-  <div v-if="displayMode == displayModes.MODE_CARDS">
+  <div v-if="currentDisplayMode == displayModes.MODE_CARDS">
     <draggable 
       v-model="items" 
       :group="draggableGroup" 
@@ -30,8 +30,12 @@
               :getArrayValue="getArrayValue" 
               :showItem="showItem"
               :updateItem="updateItem" 
-              :removeItem="removeItem" 
-            />
+              :removeItem="removeItem"
+            >
+              <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+                <slot :name="name" v-bind="slotProps" />
+              </template>
+            </ItemCard>
           </slot>
         </div>
       </masonry>
@@ -93,6 +97,18 @@ export default {
     return {
       drag: false
     };
+  },
+  computed: {
+    currentDisplayMode() {
+      if (!this.displayMode) return 1;
+      if (this.displayMode.value !== undefined) {
+        return this.displayMode.value;
+      }
+      if (typeof this.displayMode === 'function') {
+        return this.displayMode();
+      }
+      return this.displayMode;
+    }
   }
 };
 </script>

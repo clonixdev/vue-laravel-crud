@@ -163,39 +163,144 @@ export default {
     },
 
     showItem(id, itemIndex = null) {
+      let item;
       if (itemIndex == null) {
-        let item = this.items.find((it) => it.id == id);
-        this.item = item;
+        item = this.items.find((it) => it.id == id);
       } else {
-        this.item = this.items[itemIndex];
+        item = this.items[itemIndex];
       }
+      
+      if (!item) {
+        console.warn('Item not found for showItem');
+        return;
+      }
+      
+      // Hacer copia profunda del objeto para asegurar reactividad
+      const itemCopy = JSON.parse(JSON.stringify(item));
+      
+      if (this.useVuexORM && !this.vuexLocalforage) {
+        const modelInstance = new this.model(itemCopy);
+        // Usar $set para cada propiedad para asegurar reactividad
+        Object.keys(modelInstance).forEach(key => {
+          this.$set(this.item, key, modelInstance[key]);
+        });
+        // Eliminar propiedades que ya no existen
+        Object.keys(this.item).forEach(key => {
+          if (!(key in modelInstance)) {
+            this.$delete(this.item, key);
+          }
+        });
+      } else {
+        // Usar $set para cada propiedad para asegurar reactividad
+        Object.keys(itemCopy).forEach(key => {
+          this.$set(this.item, key, itemCopy[key]);
+        });
+        // Eliminar propiedades que ya no existen
+        Object.keys(this.item).forEach(key => {
+          if (!(key in itemCopy)) {
+            this.$delete(this.item, key);
+          }
+        });
+      }
+      
+      // Forzar actualización para asegurar que los cambios se reflejen
+      this.$forceUpdate();
+      
       this.onSelect();
+      this.$nextTick(() => {
+        this.$forceUpdate();
       this.$bvModal.show("modal-show-item-" + this.modelName);
+      });
     },
 
     createItem() {
-      if (this.useVuexORM) {
-        if (this.vuexLocalforage) {
-          this.item = JSON.parse(JSON.stringify(this.itemDefault));
-        } else {
-          this.item = new this.model(JSON.parse(JSON.stringify(this.itemDefault)));
-        }
+      // Hacer copia profunda del objeto para asegurar reactividad
+      const itemCopy = JSON.parse(JSON.stringify(this.itemDefault));
+      
+      if (this.useVuexORM && !this.vuexLocalforage) {
+        const modelInstance = new this.model(itemCopy);
+        // Usar $set para cada propiedad para asegurar reactividad
+        Object.keys(modelInstance).forEach(key => {
+          this.$set(this.item, key, modelInstance[key]);
+        });
+        // Eliminar propiedades que ya no existen
+        Object.keys(this.item).forEach(key => {
+          if (!(key in modelInstance)) {
+            this.$delete(this.item, key);
+          }
+        });
       } else {
-        this.item = JSON.parse(JSON.stringify(this.itemDefault));
+        // Usar $set para cada propiedad para asegurar reactividad
+        Object.keys(itemCopy).forEach(key => {
+          this.$set(this.item, key, itemCopy[key]);
+        });
+        // Eliminar propiedades que ya no existen
+        Object.keys(this.item).forEach(key => {
+          if (!(key in itemCopy)) {
+            this.$delete(this.item, key);
+          }
+        });
       }
+      
+      // Forzar actualización para asegurar que los cambios se reflejen
+      this.$forceUpdate();
+      
       this.onSelect();
+      this.$nextTick(() => {
+        this.$forceUpdate();
       this.$bvModal.show("modal-form-item-" + this.modelName);
+      });
     },
 
     updateItem(id, itemIndex = null) {
+      let item;
       if (itemIndex == null) {
-        let item = this.items.find((it) => it.id == id);
-        this.item = item;
+        item = this.items.find((it) => it.id == id);
       } else {
-        this.item = this.items[itemIndex];
+        item = this.items[itemIndex];
       }
+      
+      if (!item) {
+        console.warn('Item not found for updateItem');
+        return;
+      }
+      
+      // Hacer copia profunda del objeto para asegurar reactividad
+      const itemCopy = JSON.parse(JSON.stringify(item));
+      
+      if (this.useVuexORM && !this.vuexLocalforage) {
+        const modelInstance = new this.model(itemCopy);
+        // Usar $set para cada propiedad para asegurar reactividad
+        Object.keys(modelInstance).forEach(key => {
+          this.$set(this.item, key, modelInstance[key]);
+        });
+        // Eliminar propiedades que ya no existen
+        Object.keys(this.item).forEach(key => {
+          if (!(key in modelInstance)) {
+            this.$delete(this.item, key);
+          }
+        });
+      } else {
+        // Usar $set para cada propiedad para asegurar reactividad
+        Object.keys(itemCopy).forEach(key => {
+          this.$set(this.item, key, itemCopy[key]);
+        });
+        // Eliminar propiedades que ya no existen
+        Object.keys(this.item).forEach(key => {
+          if (!(key in itemCopy)) {
+            this.$delete(this.item, key);
+          }
+        });
+      }
+      
+      // Forzar actualización para asegurar que los cambios se reflejen
+      this.$forceUpdate();
+      
       this.onSelect();
+      this.$nextTick(() => {
+        this.$forceUpdate();
       this.$bvModal.show("modal-form-item-" + this.modelName);
+      });
     },
 
     removeItem(id, index) {
@@ -241,10 +346,18 @@ export default {
     },
 
     toggleDisplayMode() {
-      if (this.displayMode == this.displayModes.MODE_TABLE)
-        this.displayMode = this.displayModes.MODE_CARDS;
-      else if (this.displayMode == this.displayModes.MODE_CARDS)
-        this.displayMode = this.displayModes.MODE_TABLE;
+      // Mutar la propiedad local _displayMode y el objeto reactivo
+      if (this._displayMode == this.displayModes.MODE_TABLE) {
+        this._displayMode = this.displayModes.MODE_CARDS;
+        if (this.displayModeReactive) {
+          this.displayModeReactive.value = this.displayModes.MODE_CARDS;
+        }
+      } else if (this._displayMode == this.displayModes.MODE_CARDS) {
+        this._displayMode = this.displayModes.MODE_TABLE;
+        if (this.displayModeReactive) {
+          this.displayModeReactive.value = this.displayModes.MODE_TABLE;
+        }
+      }
     },
 
     showExportModal() {

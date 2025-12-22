@@ -30,8 +30,12 @@
             :getArrayValue="getArrayValue" 
             :showItem="showItem"
             :updateItem="updateItem" 
-            :removeItem="removeItem" 
-          />
+            :removeItem="removeItem"
+          >
+            <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+              <slot :name="name" v-bind="slotProps" />
+            </template>
+          </KanbanCard>
         </slot>
       </div>
     </draggable>

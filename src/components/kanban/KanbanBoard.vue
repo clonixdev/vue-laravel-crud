@@ -17,7 +17,11 @@
         :cardClass="cardClass"
         :cardHideFooter="cardHideFooter"
         @draggableChange="onDraggableChange"
-      />
+      >
+        <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+          <slot :name="name" v-bind="slotProps" />
+        </template>
+      </KanbanColumn>
     </div>
   </div>
 </template>

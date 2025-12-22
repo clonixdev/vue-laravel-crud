@@ -1,5 +1,5 @@
 <template>
-  <div :class="['table-responsive', tableContainerClass]" v-if="displayMode == displayModes.MODE_TABLE">
+  <div :class="['table-responsive', tableContainerClass]" v-if="currentDisplayMode == displayModes.MODE_TABLE">
     <table :class="['table table-hover table-striped w-100', tableClass]">
       <TableHeader />
       
@@ -21,7 +21,11 @@
           :item="item"
           :index="index"
           :grouped="grouped"
-        />
+        >
+          <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+            <slot :name="name" v-bind="slotProps" />
+          </template>
+        </TableRow>
       </draggable>
     </table>
     
@@ -65,6 +69,18 @@ export default {
     return {
       drag: false
     };
+  },
+  computed: {
+    currentDisplayMode() {
+      if (!this.displayMode) return 1;
+      if (this.displayMode.value !== undefined) {
+        return this.displayMode.value;
+      }
+      if (typeof this.displayMode === 'function') {
+        return this.displayMode();
+      }
+      return this.displayMode;
+    }
   }
 };
 </script>

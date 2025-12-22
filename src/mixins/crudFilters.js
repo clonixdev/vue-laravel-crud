@@ -31,6 +31,47 @@ export default {
           });
         }
       });
+
+      // Procesar filtros custom
+      if (this.customFilters && Array.isArray(this.customFilters)) {
+        this.customFilters.forEach((customFilter) => {
+          if (this.isCustomFilterEnabled(customFilter)) {
+            // Si el tipo es función (callback), no procesamos automáticamente
+            // El callback se encargará del renderizado y gestión del filtro
+            if (typeof customFilter.type === 'string') {
+              if (customFilter.type == "date" || customFilter.type == "number" || customFilter.type == "money") {
+                this.internalFilters.push({
+                  column: customFilter.prop + "_from",
+                  op: ">=",
+                  value: null,
+                });
+
+                this.internalFilters.push({
+                  column: customFilter.prop + "_to",
+                  op: "<=",
+                  value: null,
+                });
+              } else {
+                this.internalFilters.push({
+                  column: customFilter.prop,
+                  op: customFilter.filterOp ? customFilter.filterOp : "=",
+                  value: null,
+                });
+              }
+            } else if (typeof customFilter.type === 'function') {
+              // Para callbacks, solo creamos el filtro interno si no existe
+              // El callback se encargará del renderizado
+              if (!this.internalFilterByProp(customFilter.prop)) {
+                this.internalFilters.push({
+                  column: customFilter.prop,
+                  op: customFilter.filterOp ? customFilter.filterOp : "=",
+                  value: null,
+                });
+              }
+            }
+          }
+        });
+      }
     },
 
     toggleSortFilter(column) {
@@ -72,6 +113,10 @@ export default {
 
     isColumnHasFilter(column) {
       return column && !column.hideFilter && column.type != "actions";
+    },
+
+    isCustomFilterEnabled(customFilter) {
+      return customFilter && customFilter.prop && !customFilter.hideFilter && customFilter.type != "actions";
     },
 
     setFilter(column, value) {

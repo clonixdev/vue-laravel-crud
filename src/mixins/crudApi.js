@@ -17,7 +17,7 @@ export default {
           dataKey: 'data',
           params: {
             page: page,
-            limit: this.pagination.perPage,
+            limit: this.pagination.per_page,
             filters: JSON.stringify(this.finalFilters),
           }
         });
@@ -59,7 +59,7 @@ export default {
         .get(this.apiUrl + "/" + this.modelName, {
           params: {
             page: page,
-            limit: this.limit,
+            limit: this.pagination.per_page,
             filters: JSON.stringify(this.finalFilters),
           },
         })

@@ -11,10 +11,14 @@
   
   CONFIGURACIONES DISPONIBLES ADICIONALES:
   - filter: Array de filtros predefinidos - Por defecto: []
+  - customFilters: Array de filtros personalizados para columnas no visibles - Por defecto: []
   - search: Texto de búsqueda inicial - Por defecto: ""
   - searchPlaceholder: Placeholder del campo de búsqueda - Por defecto: "Buscar..."
   - showPrincipalSortBtn: Mostrar botón de ordenamiento principal - Por defecto: false
   - principalSortColumn: Columna para ordenamiento principal - Por defecto: "id"
+  
+  NOTA: Los filtros custom pueden usar tipos string (text, number, date, boolean, etc.) 
+  o un callback que recibe (h, props) y retorna un VNode para renderizado personalizado.
 -->
 <template>
   <div>
@@ -26,6 +30,7 @@
       :model="model"
       :models="localData"
       :columns="columns"
+      :customFilters="customFilters"
       :ajax="ajax"
       :apiUrl="apiUrl"
       :enableFilters="true"
@@ -167,6 +172,44 @@ export default {
         { label: "Activo", prop: "is_active", type: "boolean" },
         { label: "Creado", prop: "created_at", type: "date", format: "DD/MM/YYYY" },
         { label: "Acciones", prop: "actions", type: "actions" }
+      ],
+      customFilters: [
+        // Filtro custom con tipo string (similar a las columnas)
+        // Este filtro permite buscar por un campo "department" que no está en la tabla
+        {
+          prop: "department",
+          label: "Departamento",
+          type: "text",
+          filterOp: "LIKE"
+        },
+        // Filtro custom con callback para un filtro más complejo personalizado
+        // Este ejemplo muestra cómo crear un filtro completamente personalizado
+        {
+          prop: "phone",
+          label: "Teléfono",
+          type: (h, props) => {
+            const filterObj = props.getFilterForColumn(props.column);
+            return h('div', { class: 'form-group' }, [
+              h('label', props.column.label),
+              h('input', {
+                class: 'form-control',
+                attrs: {
+                  type: 'tel',
+                  placeholder: 'Buscar por teléfono...'
+                },
+                domProps: {
+                  value: filterObj.value || ''
+                },
+                on: {
+                  input: (e) => {
+                    filterObj.value = e.target.value;
+                  },
+                  change: props.onChangeFilter
+                }
+              })
+            ]);
+          }
+        }
       ]
     };
   },
@@ -179,6 +222,7 @@ export default {
       modelName="users"
       :model="model"
       :columns="columns"
+      :customFilters="customFilters"
       :ajax="true"
       apiUrl="http://localhost:3001/api"
       :enableFilters="true"
@@ -276,6 +320,35 @@ export default {
         { label: "Activo", prop: "is_active", type: "boolean" },
         { label: "Creado", prop: "created_at", type: "date", format: "DD/MM/YYYY" },
         { label: "Acciones", prop: "actions", type: "actions" }
+      ],
+      customFilters: [
+        // Filtro custom con tipo string
+        {
+          prop: "department",
+          label: "Departamento",
+          type: "text",
+          filterOp: "LIKE"
+        },
+        // Filtro custom con callback para renderizado personalizado
+        {
+          prop: "phone",
+          label: "Teléfono",
+          type: (h, props) => {
+            const filterObj = props.getFilterForColumn(props.column);
+            return h('div', { class: 'form-group' }, [
+              h('label', props.column.label),
+              h('input', {
+                class: 'form-control',
+                attrs: { type: 'tel', placeholder: 'Buscar por teléfono...' },
+                domProps: { value: filterObj.value || '' },
+                on: {
+                  input: (e) => { filterObj.value = e.target.value; },
+                  change: props.onChangeFilter
+                }
+              })
+            ]);
+          }
+        }
       ]
     };
   },
