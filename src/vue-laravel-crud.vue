@@ -114,8 +114,8 @@ export default /*#__PURE__*/ {
       // Data from mixins
       crudUuid: this.crudUuid,
       moment: this.moment,
-      loading: this.loading,
-      firstLoad: this.firstLoad,
+      loading: this.loadingReactive,
+      firstLoad: this.firstLoadReactive,
       // Proporcionar item como función getter para reactividad
       getItem: () => this.item,
       item: this.item,
@@ -561,7 +561,7 @@ export default /*#__PURE__*/ {
     <b-overlay :show="loading" rounded="sm"></b-overlay>
     
     <CrudPagination />
-    <CrudModals>
+    <CrudModals ref="crudModals">
       <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
         <slot :name="name" v-bind="slotProps" />
       </template>

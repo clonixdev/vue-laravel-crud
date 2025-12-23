@@ -12,10 +12,10 @@
         <div class="text-center">{{ messageLoading }}</div>
       </div>
       <div slot="no-more">
-        <div class="text-center" v-if="!loading">{{ messageNoMore }}</div>
+        <div class="text-center" v-if="!loadingValue">{{ messageNoMore }}</div>
       </div>
       <div slot="no-results">
-        <div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div>
+        <div class="text-center" v-if="!loadingValue && firstLoadValue">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div>
       </div>
     </infinite-loading>
 
@@ -83,6 +83,7 @@ export default {
     'messageNoMore',
     'messageEmptyResults',
     'loading',
+    'firstLoad',
     'items',
     'pagination',
     'selectedItems',
@@ -101,6 +102,12 @@ export default {
     selectedItemsCount() {
       // Computed para forzar reactividad del contador
       return this.selectedItems ? this.selectedItems.length : 0;
+    },
+    loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    firstLoadValue() {
+      return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
     }
   }
 };

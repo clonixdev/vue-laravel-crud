@@ -430,10 +430,10 @@ export default {
       axios
         .delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", { params: { ids: ids }, })
         .then((response) => {
-          this.items = this.items.filter(it => !ids.includes(it.id));
           this.toastSuccess("Elemento/s eliminado.");
           this.$emit("itemDeleted", {});
-          this.loading = false;
+          this.clearSelection();
+          this.refresh();
         })
         .catch((error) => {
           this.toastError(error);
@@ -445,8 +445,10 @@ export default {
       let ids = this.selectedItems.map(it => it.id);
       this.items = this.items.filter(it => !ids.includes(it.id));
       this.item = null;
+      this.pagination.total = this.items.length;
       this.toastSuccess("Elemento Eliminado");
       this.$emit("itemDeleted", {});
+      this.clearSelection();
       this.loading = false;
     },
 
@@ -471,7 +473,15 @@ export default {
         }
       }
 
+      // Actualizar items desde el store Vuex
+      let itemsResult = this.model.query().withAll().get();
+      if (itemsResult) {
+        this.items = itemsResult;
+      }
+
       this.toastSuccess("Elemento eliminados.");
+      this.clearSelection();
+      this.loading = false;
     },
 
     saveSort() {

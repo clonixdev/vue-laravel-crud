@@ -30,6 +30,8 @@ export default {
       forceRecomputeCounter: 0,
       _displayMode: 1, // Propiedad local para displayMode (se inicializará desde la prop en created())
       displayModeReactive: Vue.observable({ value: 1 }), // Objeto reactivo para provide/inject
+      loadingReactive: Vue.observable({ value: false }), // Objeto reactivo para loading
+      firstLoadReactive: Vue.observable({ value: false }), // Objeto reactivo para firstLoad
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -262,6 +264,18 @@ export default {
       },
       deep: true
     },
+    loading: {
+      handler(newVal) {
+        this.loadingReactive.value = newVal;
+      },
+      immediate: true
+    },
+    firstLoad: {
+      handler(newVal) {
+        this.firstLoadReactive.value = newVal;
+      },
+      immediate: true
+    }
   },
 
   created() {
@@ -270,6 +284,9 @@ export default {
       this._displayMode = this.$props.displayMode;
       this.displayModeReactive.value = this._displayMode;
     }
+    // Inicializar valores reactivos
+    this.loadingReactive.value = this.loading;
+    this.firstLoadReactive.value = this.firstLoad;
   },
 
   mounted() {

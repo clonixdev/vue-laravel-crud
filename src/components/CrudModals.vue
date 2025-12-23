@@ -72,10 +72,26 @@
           <p v-if="selectedItems.length">Se exportará {{ selectedItems.length }} elementos.</p>
           <p v-else>Se exportará la consulta actual.</p>
 
-          <select class="form-control" v-model="exportFormat">
-            <option value="JSON">JSON</option>
-            <option value="XLSX">XLSX</option>
-          </select>
+          <b-form-group label="Seleccione el formato de exportación:" class="mt-3">
+            <div class="export-format-options">
+              <b-form-radio
+                v-model="exportFormat"
+                value="JSON"
+                class="export-format-radio"
+              >
+                <b-icon-file-text class="mr-2"></b-icon-file-text>
+                JSON
+              </b-form-radio>
+              <b-form-radio
+                v-model="exportFormat"
+                value="XLSX"
+                class="export-format-radio"
+              >
+                <b-icon-table class="mr-2"></b-icon-table>
+                XLSX
+              </b-form-radio>
+            </div>
+          </b-form-group>
 
           <div class="text-center mt-3">
             <b-button variant="info" v-on:click="exportItems()" :disabled="loading">
@@ -132,3 +148,66 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.export-format-options {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.export-format-radio {
+  flex: 1;
+  min-width: 150px;
+  padding: 1rem;
+  border: 2px solid #dee2e6;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.export-format-radio:hover {
+  border-color: #007bff;
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+
+.export-format-radio >>> .custom-control-input:checked ~ .custom-control-label {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.export-format-radio >>> .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #007bff;
+  background-color: #007bff;
+}
+
+.export-format-radio >>> .custom-control-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.export-format-radio >>> .custom-control-label::before {
+  margin-right: 0.5rem;
+}
+
+.export-format-radio >>> svg {
+  font-size: 1.5rem;
+  color: #495057;
+}
+
+.export-format-radio >>> .custom-control-input:checked ~ .custom-control-label svg {
+  color: #007bff;
+}
+</style>

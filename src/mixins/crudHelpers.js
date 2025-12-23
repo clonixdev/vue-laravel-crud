@@ -361,11 +361,19 @@ export default {
     },
 
     showExportModal() {
-      this.$refs["modal-export"].show();
+      // Asegurar que loading esté en false al abrir el modal
+      this.loading = false;
+      if (this.$refs.crudModals && this.$refs.crudModals.$refs["modal-export"]) {
+        this.$refs.crudModals.$refs["modal-export"].show();
+      }
     },
 
     showImportModal() {
-      this.$refs["modal-import"].show();
+      // Asegurar que loading esté en false al abrir el modal
+      this.loading = false;
+      if (this.$refs.crudModals && this.$refs.crudModals.$refs["modal-import"]) {
+        this.$refs.crudModals.$refs["modal-import"].show();
+      }
     },
 
     onDraggableAdded(event) {

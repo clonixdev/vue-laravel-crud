@@ -88,7 +88,9 @@ export default {
     'togglePrincipalSort',
     'confirmBulkDelete',
     'toggleFilters',
-    'refresh'
+    'refresh',
+    'showImportModal',
+    'showExportModal'
   ],
   computed: {
     sidebarVisible() {
