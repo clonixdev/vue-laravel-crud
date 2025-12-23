@@ -1169,13 +1169,13 @@ var _sfc_render$f = function render() {
 };
 var _sfc_staticRenderFns$f = [];
 var __component__$f = /*#__PURE__*/normalizeComponent(_sfc_main$f, _sfc_render$f, _sfc_staticRenderFns$f, false, null, null, null, null);
-var CrudFilters = __component__$f.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css$8 = "\n.crud-header[data-v-d09f8396] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  max-height: 3rem;\n}\n.crud-title[data-v-d09f8396] {\r\n  margin: 0;\n}\n.crud-search[data-v-d09f8396] {\r\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-d09f8396] {\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\r\n  border-top-right-radius: 0.375rem;\r\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-d09f8396] {\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-d09f8396] {\r\n  margin-bottom: 1rem;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-end;\n}\r\n";
-n(css$8, {});var _sfc_main$e = {
+var CrudFilters = __component__$f.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css$9 = "\n.crud-header[data-v-4fb65bb3] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-4fb65bb3] {\n  margin: 0;\n}\n.crud-search[data-v-4fb65bb3] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-4fb65bb3] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-4fb65bb3] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-4fb65bb3] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
+n(css$9, {});var _sfc_main$e = {
   name: 'CrudHeader',
   components: {
     CrudFilters: CrudFilters
   },
-  inject: ['showHeader', 'showTitle', 'title', 'filterSidebarOpen', 'showImport', 'showExport', 'showPrincipalSortBtn', 'principalSort', 'bulkDelete', 'showCreateBtn', 'enableFilters', 'displayModeToggler', 'displayMode', 'displayModes', 'showSearch', 'displaySearch', 'search', 'searchPlaceholder', 'loading', 'messageImport', 'messageExport', 'messageNew', 'createItem', 'toggleDisplayMode', 'togglePrincipalSort', 'confirmBulkDelete', 'toggleFilters', 'refresh'],
+  inject: ['showHeader', 'showTitle', 'title', 'filterSidebarOpen', 'showImport', 'showExport', 'showPrincipalSortBtn', 'principalSort', 'bulkDelete', 'showCreateBtn', 'enableFilters', 'displayModeToggler', 'displayMode', 'displayModes', 'showSearch', 'displaySearch', 'search', 'searchPlaceholder', 'loading', 'messageImport', 'messageExport', 'messageNew', 'createItem', 'toggleDisplayMode', 'togglePrincipalSort', 'confirmBulkDelete', 'toggleFilters', 'refresh', 'showImportModal', 'showExportModal'],
   computed: {
     sidebarVisible: function sidebarVisible() {
       // Acceder directamente al componente padre para obtener reactividad
@@ -1338,7 +1338,7 @@ var _sfc_render$e = function render() {
   })], 2)], 1)], 1) : _vm._e();
 };
 var _sfc_staticRenderFns$e = [];
-var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "d09f8396", null, null);
+var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "4fb65bb3", null, null);
 var CrudHeader = __component__$e.exports;var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function getDefaultExportFromCjs (x) {
@@ -1594,7 +1594,7 @@ function toggleClass(el, name, state) {
   }
 }
 
-function css$7(el, prop, val) {
+function css$8(el, prop, val) {
   var style = el && el.style;
 
   if (style) {
@@ -1623,7 +1623,7 @@ function matrix(el, selfOnly) {
     appliedTransforms = el;
   } else {
     do {
-      var transform = css$7(el, 'transform');
+      var transform = css$8(el, 'transform');
 
       if (transform && transform !== 'none') {
         appliedTransforms = transform + ' ' + appliedTransforms;
@@ -1705,11 +1705,11 @@ function getRect(el, relativeToContainingBlock, relativeToNonStaticParent, undoS
 
     if (!IE11OrLess) {
       do {
-        if (container && container.getBoundingClientRect && (css$7(container, 'transform') !== 'none' || relativeToNonStaticParent && css$7(container, 'position') !== 'static')) {
+        if (container && container.getBoundingClientRect && (css$8(container, 'transform') !== 'none' || relativeToNonStaticParent && css$8(container, 'position') !== 'static')) {
           var containerRect = container.getBoundingClientRect(); // Set relative to edges of padding box of container
 
-          top -= containerRect.top + parseInt(css$7(container, 'border-top-width'));
-          left -= containerRect.left + parseInt(css$7(container, 'border-left-width'));
+          top -= containerRect.top + parseInt(css$8(container, 'border-top-width'));
+          left -= containerRect.left + parseInt(css$8(container, 'border-left-width'));
           bottom = top + elRect.height;
           right = left + elRect.width;
           break;
@@ -1816,7 +1816,7 @@ function getChild(el, childNum, options) {
 function lastChild(el, selector) {
   var last = el.lastElementChild;
 
-  while (last && (last === Sortable.ghost || css$7(last, 'display') === 'none' || selector && !matches(last, selector))) {
+  while (last && (last === Sortable.ghost || css$8(last, 'display') === 'none' || selector && !matches(last, selector))) {
     last = last.previousElementSibling;
   }
 
@@ -1902,7 +1902,7 @@ function getParentAutoScrollElement(el, includeSelf) {
   do {
     // we don't need to get elem css if it isn't even overflowing in the first place (performance)
     if (elem.clientWidth < elem.scrollWidth || elem.clientHeight < elem.scrollHeight) {
-      var elemCSS = css$7(elem);
+      var elemCSS = css$8(elem);
 
       if (elem.clientWidth < elem.scrollWidth && (elemCSS.overflowX == 'auto' || elemCSS.overflowX == 'scroll') || elem.clientHeight < elem.scrollHeight && (elemCSS.overflowY == 'auto' || elemCSS.overflowY == 'scroll')) {
         if (!elem.getBoundingClientRect || elem === document.body) return getWindowScrollingElement();
@@ -1978,19 +1978,19 @@ function clone(el) {
 }
 
 function setRect(el, rect) {
-  css$7(el, 'position', 'absolute');
-  css$7(el, 'top', rect.top);
-  css$7(el, 'left', rect.left);
-  css$7(el, 'width', rect.width);
-  css$7(el, 'height', rect.height);
+  css$8(el, 'position', 'absolute');
+  css$8(el, 'top', rect.top);
+  css$8(el, 'left', rect.left);
+  css$8(el, 'width', rect.width);
+  css$8(el, 'height', rect.height);
 }
 
 function unsetRect(el) {
-  css$7(el, 'position', '');
-  css$7(el, 'top', '');
-  css$7(el, 'left', '');
-  css$7(el, 'width', '');
-  css$7(el, 'height', '');
+  css$8(el, 'position', '');
+  css$8(el, 'top', '');
+  css$8(el, 'left', '');
+  css$8(el, 'width', '');
+  css$8(el, 'height', '');
 }
 
 var expando = 'Sortable' + new Date().getTime();
@@ -2004,7 +2004,7 @@ function AnimationStateManager() {
       if (!this.options.animation) return;
       var children = [].slice.call(this.el.children);
       children.forEach(function (child) {
-        if (css$7(child, 'display') === 'none' || child === Sortable.ghost) return;
+        if (css$8(child, 'display') === 'none' || child === Sortable.ghost) return;
         animationStates.push({
           target: child,
           rect: getRect(child)
@@ -2111,8 +2111,8 @@ function AnimationStateManager() {
     },
     animate: function animate(target, currentRect, toRect, duration) {
       if (duration) {
-        css$7(target, 'transition', '');
-        css$7(target, 'transform', '');
+        css$8(target, 'transition', '');
+        css$8(target, 'transform', '');
         var elMatrix = matrix(this.el),
             scaleX = elMatrix && elMatrix.a,
             scaleY = elMatrix && elMatrix.d,
@@ -2120,15 +2120,15 @@ function AnimationStateManager() {
             translateY = (currentRect.top - toRect.top) / (scaleY || 1);
         target.animatingX = !!translateX;
         target.animatingY = !!translateY;
-        css$7(target, 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)');
+        css$8(target, 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)');
         repaint(target); // repaint
 
-        css$7(target, 'transition', 'transform ' + duration + 'ms' + (this.options.easing ? ' ' + this.options.easing : ''));
-        css$7(target, 'transform', 'translate3d(0,0,0)');
+        css$8(target, 'transition', 'transform ' + duration + 'ms' + (this.options.easing ? ' ' + this.options.easing : ''));
+        css$8(target, 'transform', 'translate3d(0,0,0)');
         typeof target.animated === 'number' && clearTimeout(target.animated);
         target.animated = setTimeout(function () {
-          css$7(target, 'transition', '');
-          css$7(target, 'transform', '');
+          css$8(target, 'transition', '');
+          css$8(target, 'transform', '');
           target.animated = false;
           target.animatingX = false;
           target.animatingY = false;
@@ -2397,12 +2397,12 @@ supportDraggable = documentExists && !ChromeForAndroid && !IOS && 'draggable' in
   return el.style.pointerEvents === 'auto';
 }(),
     _detectDirection = function _detectDirection(el, options) {
-  var elCSS = css$7(el),
+  var elCSS = css$8(el),
       elWidth = parseInt(elCSS.width) - parseInt(elCSS.paddingLeft) - parseInt(elCSS.paddingRight) - parseInt(elCSS.borderLeftWidth) - parseInt(elCSS.borderRightWidth),
       child1 = getChild(el, 0, options),
       child2 = getChild(el, 1, options),
-      firstChildCSS = child1 && css$7(child1),
-      secondChildCSS = child2 && css$7(child2),
+      firstChildCSS = child1 && css$8(child1),
+      secondChildCSS = child2 && css$8(child2),
       firstChildWidth = firstChildCSS && parseInt(firstChildCSS.marginLeft) + parseInt(firstChildCSS.marginRight) + getRect(child1).width,
       secondChildWidth = secondChildCSS && parseInt(secondChildCSS.marginLeft) + parseInt(secondChildCSS.marginRight) + getRect(child2).width;
 
@@ -2491,12 +2491,12 @@ _detectNearestEmptySortable = function _detectNearestEmptySortable(x, y) {
 },
     _hideGhostForTarget = function _hideGhostForTarget() {
   if (!supportCssPointerEvents && ghostEl) {
-    css$7(ghostEl, 'display', 'none');
+    css$8(ghostEl, 'display', 'none');
   }
 },
     _unhideGhostForTarget = function _unhideGhostForTarget() {
   if (!supportCssPointerEvents && ghostEl) {
-    css$7(ghostEl, 'display', '');
+    css$8(ghostEl, 'display', '');
   }
 }; // #1184 fix - Prevent click event on fallback if dragged but item not changed position
 
@@ -3031,10 +3031,10 @@ Sortable.prototype =
         }
 
         var cssMatrix = "matrix(".concat(ghostMatrix.a, ",").concat(ghostMatrix.b, ",").concat(ghostMatrix.c, ",").concat(ghostMatrix.d, ",").concat(ghostMatrix.e, ",").concat(ghostMatrix.f, ")");
-        css$7(ghostEl, 'webkitTransform', cssMatrix);
-        css$7(ghostEl, 'mozTransform', cssMatrix);
-        css$7(ghostEl, 'msTransform', cssMatrix);
-        css$7(ghostEl, 'transform', cssMatrix);
+        css$8(ghostEl, 'webkitTransform', cssMatrix);
+        css$8(ghostEl, 'mozTransform', cssMatrix);
+        css$8(ghostEl, 'msTransform', cssMatrix);
+        css$8(ghostEl, 'transform', cssMatrix);
         lastDx = dx;
         lastDy = dy;
         touchEvt = touch;
@@ -3055,7 +3055,7 @@ Sortable.prototype =
         // Get relatively positioned parent
         ghostRelativeParent = container;
 
-        while (css$7(ghostRelativeParent, 'position') === 'static' && css$7(ghostRelativeParent, 'transform') === 'none' && ghostRelativeParent !== document) {
+        while (css$8(ghostRelativeParent, 'position') === 'static' && css$8(ghostRelativeParent, 'transform') === 'none' && ghostRelativeParent !== document) {
           ghostRelativeParent = ghostRelativeParent.parentNode;
         }
 
@@ -3074,22 +3074,22 @@ Sortable.prototype =
       toggleClass(ghostEl, options.ghostClass, false);
       toggleClass(ghostEl, options.fallbackClass, true);
       toggleClass(ghostEl, options.dragClass, true);
-      css$7(ghostEl, 'transition', '');
-      css$7(ghostEl, 'transform', '');
-      css$7(ghostEl, 'box-sizing', 'border-box');
-      css$7(ghostEl, 'margin', 0);
-      css$7(ghostEl, 'top', rect.top);
-      css$7(ghostEl, 'left', rect.left);
-      css$7(ghostEl, 'width', rect.width);
-      css$7(ghostEl, 'height', rect.height);
-      css$7(ghostEl, 'opacity', '0.8');
-      css$7(ghostEl, 'position', PositionGhostAbsolutely ? 'absolute' : 'fixed');
-      css$7(ghostEl, 'zIndex', '100000');
-      css$7(ghostEl, 'pointerEvents', 'none');
+      css$8(ghostEl, 'transition', '');
+      css$8(ghostEl, 'transform', '');
+      css$8(ghostEl, 'box-sizing', 'border-box');
+      css$8(ghostEl, 'margin', 0);
+      css$8(ghostEl, 'top', rect.top);
+      css$8(ghostEl, 'left', rect.left);
+      css$8(ghostEl, 'width', rect.width);
+      css$8(ghostEl, 'height', rect.height);
+      css$8(ghostEl, 'opacity', '0.8');
+      css$8(ghostEl, 'position', PositionGhostAbsolutely ? 'absolute' : 'fixed');
+      css$8(ghostEl, 'zIndex', '100000');
+      css$8(ghostEl, 'pointerEvents', 'none');
       Sortable.ghost = ghostEl;
       container.appendChild(ghostEl); // Set transform-origin
 
-      css$7(ghostEl, 'transform-origin', tapDistanceLeft / parseInt(ghostEl.style.width) * 100 + '% ' + tapDistanceTop / parseInt(ghostEl.style.height) * 100 + '%');
+      css$8(ghostEl, 'transform-origin', tapDistanceLeft / parseInt(ghostEl.style.width) * 100 + '% ' + tapDistanceTop / parseInt(ghostEl.style.height) * 100 + '%');
     }
   },
   _onDragStart: function _onDragStart(
@@ -3158,7 +3158,7 @@ Sortable.prototype =
 
       on(document, 'drop', _this); // #1276 fix:
 
-      css$7(dragEl, 'transform', 'translateZ(0)');
+      css$8(dragEl, 'transform', 'translateZ(0)');
     }
 
     awaitingDragStarted = true;
@@ -3167,7 +3167,7 @@ Sortable.prototype =
     moved = true;
 
     if (Safari) {
-      css$7(document.body, 'user-select', 'none');
+      css$8(document.body, 'user-select', 'none');
     }
   },
   // Returns true - if no further action is needed (either inserted or another condition)
@@ -3387,7 +3387,7 @@ Sortable.prototype =
           do {
             dragIndex -= direction;
             sibling = parentEl.children[dragIndex];
-          } while (sibling && (css$7(sibling, 'display') === 'none' || sibling === ghostEl));
+          } while (sibling && (css$8(sibling, 'display') === 'none' || sibling === ghostEl));
         } // If dragEl is already beside target: Do not insert
 
 
@@ -3502,10 +3502,10 @@ Sortable.prototype =
     this._offUpEvents();
 
     if (Safari) {
-      css$7(document.body, 'user-select', '');
+      css$8(document.body, 'user-select', '');
     }
 
-    css$7(dragEl, 'transform', '');
+    css$8(dragEl, 'transform', '');
 
     if (evt) {
       if (moved) {
@@ -3780,7 +3780,7 @@ Sortable.prototype =
     if (!cloneHidden) {
       pluginEvent('hideClone', this);
       if (Sortable.eventCanceled) return;
-      css$7(cloneEl, 'display', 'none');
+      css$8(cloneEl, 'display', 'none');
 
       if (this.options.removeCloneOnHide && cloneEl.parentNode) {
         cloneEl.parentNode.removeChild(cloneEl);
@@ -3812,7 +3812,7 @@ Sortable.prototype =
         this.animate(dragEl, cloneEl);
       }
 
-      css$7(cloneEl, 'display', '');
+      css$8(cloneEl, 'display', '');
       cloneHidden = false;
     }
   }
@@ -3987,7 +3987,7 @@ if (documentExists) {
 Sortable.utils = {
   on: on,
   off: off,
-  css: css$7,
+  css: css$8,
   find: find,
   is: function is(el, selector) {
     return !!closest(el, selector, el, false);
@@ -4214,7 +4214,7 @@ var autoScroll = throttle(function (evt, options, rootEl, isFallback) {
         canScrollY = void 0,
         scrollWidth = el.scrollWidth,
         scrollHeight = el.scrollHeight,
-        elCSS = css$7(el),
+        elCSS = css$8(el),
         scrollPosX = el.scrollLeft,
         scrollPosY = el.scrollTop;
 
@@ -4550,7 +4550,7 @@ function MultiDragPlugin() {
       if (!this.isMultiDrag) return;
       insertMultiDragClones(false, rootEl);
       multiDragClones.forEach(function (clone) {
-        css$7(clone, 'display', '');
+        css$8(clone, 'display', '');
       });
       cloneNowShown();
       clonesHidden = false;
@@ -4564,7 +4564,7 @@ function MultiDragPlugin() {
           cancel = _ref5.cancel;
       if (!this.isMultiDrag) return;
       multiDragClones.forEach(function (clone) {
-        css$7(clone, 'display', 'none');
+        css$8(clone, 'display', 'none');
 
         if (_this.options.removeCloneOnHide && clone.parentNode) {
           clone.parentNode.removeChild(clone);
@@ -4608,7 +4608,7 @@ function MultiDragPlugin() {
         if (this.options.animation) {
           multiDragElements.forEach(function (multiDragElement) {
             if (multiDragElement === dragEl$1) return;
-            css$7(multiDragElement, 'position', 'absolute');
+            css$8(multiDragElement, 'position', 'absolute');
           });
           var dragRect = getRect(dragEl$1, false, true, true);
           multiDragElements.forEach(function (multiDragElement) {
@@ -7489,8 +7489,8 @@ Sortable.mount(Remove, Revert);var sortable_esm=/*#__PURE__*/Object.freeze({__pr
 } (vuedraggable_umd, vuedraggable_umd.exports));
 
 var vuedraggable_umdExports = vuedraggable_umd.exports;
-var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);var css$6 = "\r\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-3de96e53] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.sort-filter[data-v-3de96e53] {\r\n  cursor: pointer;\r\n  visibility: hidden;\r\n  display: inline-block;\n}\n.sort-filter-visible[data-v-3de96e53] {\r\n  visibility: visible;\n}\r\n";
-n(css$6, {});var _sfc_main$d = {
+var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);var css$7 = "\r\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-3de96e53] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.sort-filter[data-v-3de96e53] {\r\n  cursor: pointer;\r\n  visibility: hidden;\r\n  display: inline-block;\n}\n.sort-filter-visible[data-v-3de96e53] {\r\n  visibility: visible;\n}\r\n";
+n(css$7, {});var _sfc_main$d = {
   name: 'TableHeader',
   inject: ['columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded', 'isAllSelected'],
   data: function data() {
@@ -13523,8 +13523,8 @@ var TableHeader = __component__$d.exports;function commonjsRequire(path) {
 } (moment$1, moment$1.exports));
 
 var momentExports = moment$1.exports;
-var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);var css$5 = "\r\n/* Fijar ancho de la columna de acciones */\n.actions-cell[data-v-e38a3192] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.actions-button-group[data-v-e38a3192] {\r\n  display: inline-flex;\r\n  flex-wrap: nowrap;\n}\n.actions-dropdown[data-v-e38a3192] {\r\n  display: inline-block;\n}\r\n\r\n/* Asegurar que los botones no se expandan */\n.actions-button-group .btn[data-v-e38a3192] {\r\n  flex-shrink: 0;\n}\r\n";
-n(css$5, {});var _sfc_main$c = {
+var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);var css$6 = "\r\n/* Fijar ancho de la columna de acciones */\n.actions-cell[data-v-e38a3192] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.actions-button-group[data-v-e38a3192] {\r\n  display: inline-flex;\r\n  flex-wrap: nowrap;\n}\n.actions-dropdown[data-v-e38a3192] {\r\n  display: inline-block;\n}\r\n\r\n/* Asegurar que los botones no se expandan */\n.actions-button-group .btn[data-v-e38a3192] {\r\n  flex-shrink: 0;\n}\r\n";
+n(css$6, {});var _sfc_main$c = {
   name: 'TableCell',
   props: {
     column: Object,
@@ -13802,7 +13802,7 @@ var TableRow = __component__$b.exports;var _sfc_main$a = {
     TableHeader: TableHeader,
     TableRow: TableRow
   },
-  inject: ['displayMode', 'displayModes', 'tableContainerClass', 'tableClass', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'grouped', 'loading', 'infiniteScroll', 'messageEmptyResults', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
+  inject: ['displayMode', 'displayModes', 'tableContainerClass', 'tableClass', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'grouped', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
   data: function data() {
     return {
       drag: false
@@ -13818,6 +13818,12 @@ var TableRow = __component__$b.exports;var _sfc_main$a = {
         return this.displayMode();
       }
       return this.displayMode;
+    },
+    loadingValue: function loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    firstLoadValue: function firstLoadValue() {
+      return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
     }
   }
 };
@@ -13826,7 +13832,16 @@ var _sfc_render$a = function render() {
     _c = _vm._self._c;
   return _vm.currentDisplayMode == _vm.displayModes.MODE_TABLE ? _c('div', {
     class: ['table-responsive', _vm.tableContainerClass]
-  }, [_c('table', {
+  }, [_vm.loadingValue || !_vm.firstLoadValue ? _c('div', {
+    staticClass: "text-center p-5"
+  }, [_c('b-spinner', {
+    attrs: {
+      "variant": "primary",
+      "label": "Cargando..."
+    }
+  }), _c('p', {
+    staticClass: "mt-2"
+  }, [_vm._v(_vm._s(_vm.messageLoading))])], 1) : [_c('table', {
     class: ['table table-hover table-striped w-100', _vm.tableClass]
   }, [_c('TableHeader'), _c('draggable', {
     attrs: {
@@ -13870,9 +13885,9 @@ var _sfc_render$a = function render() {
         };
       })], null, true)
     });
-  }), 1)], 1), !_vm.loading && _vm.itemsList && _vm.itemsList.length == 0 && !_vm.infiniteScroll ? _c('p', {
+  }), 1)], 1), _vm.firstLoadValue && _vm.itemsList && _vm.itemsList.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
-  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]) : _vm._e();
+  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]], 2) : _vm._e();
 };
 var _sfc_staticRenderFns$a = [];
 var __component__$a = /*#__PURE__*/normalizeComponent(_sfc_main$a, _sfc_render$a, _sfc_staticRenderFns$a, false, null, null, null, null);
@@ -14276,7 +14291,7 @@ var _sfc_main$8 = {
     draggable: draggable,
     ItemCard: ItemCard
   },
-  inject: ['displayMode', 'displayModes', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'colLg', 'colXl', 'colMd', 'colSm', 'colXs', 'columns', 'cardClass', 'cardHideFooter', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'showItem', 'updateItem', 'removeItem', 'loading', 'infiniteScroll', 'messageEmptyResults', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
+  inject: ['displayMode', 'displayModes', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'colLg', 'colXl', 'colMd', 'colSm', 'colXs', 'columns', 'cardClass', 'cardHideFooter', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'showItem', 'updateItem', 'removeItem', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
   data: function data() {
     return {
       drag: false
@@ -14292,13 +14307,28 @@ var _sfc_main$8 = {
         return this.displayMode();
       }
       return this.displayMode;
+    },
+    loadingValue: function loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    firstLoadValue: function firstLoadValue() {
+      return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
     }
   }
 };
 var _sfc_render$8 = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.currentDisplayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_c('draggable', {
+  return _vm.currentDisplayMode == _vm.displayModes.MODE_CARDS ? _c('div', [_vm.loadingValue || !_vm.firstLoadValue ? _c('div', {
+    staticClass: "text-center p-5"
+  }, [_c('b-spinner', {
+    attrs: {
+      "variant": "primary",
+      "label": "Cargando..."
+    }
+  }), _c('p', {
+    staticClass: "mt-2"
+  }, [_vm._v(_vm._s(_vm.messageLoading))])], 1) : [_c('draggable', {
     attrs: {
       "group": _vm.draggableGroup,
       "draggable": _vm.orderable ? '.item' : '.none',
@@ -14376,14 +14406,14 @@ var _sfc_render$8 = function render() {
     }, {
       "item": item
     })], 2);
-  }), 0)], 1), !_vm.loading && _vm.itemsList && _vm.itemsList.length == 0 && !_vm.infiniteScroll ? _c('p', {
+  }), 0)], 1), _vm.firstLoadValue && _vm.itemsList && _vm.itemsList.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
-  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()], 1) : _vm._e();
+  }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e()]], 2) : _vm._e();
 };
 var _sfc_staticRenderFns$8 = [];
 var __component__$8 = /*#__PURE__*/normalizeComponent(_sfc_main$8, _sfc_render$8, _sfc_staticRenderFns$8, false, null, null, null, null);
-var CrudCards = __component__$8.exports;var css$4 = "\n.kanban-card[data-v-ad923ee1] {\r\n  background: #ffffff;\r\n  border-radius: 4px;\r\n  padding: 0.5rem;\r\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\r\n  cursor: grab;\r\n  transition: box-shadow 0.2s ease;\n}\n.kanban-card[data-v-ad923ee1]:hover {\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.kanban-card[data-v-ad923ee1]:active {\r\n  cursor: grabbing;\n}\n.card-crud[data-v-ad923ee1] {\r\n  border: 1px solid #e1e5e9;\n}\n.card-crud .card-title[data-v-ad923ee1] {\r\n  font-size: 0.9rem;\r\n  margin-bottom: 0.5rem;\n}\n.card-crud .card-text[data-v-ad923ee1] {\r\n  font-size: 0.8rem;\r\n  margin-bottom: 0.25rem;\n}\r\n";
-n(css$4, {});var _sfc_main$7 = {
+var CrudCards = __component__$8.exports;var css$5 = "\n.kanban-card[data-v-ad923ee1] {\r\n  background: #ffffff;\r\n  border-radius: 4px;\r\n  padding: 0.5rem;\r\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\r\n  cursor: grab;\r\n  transition: box-shadow 0.2s ease;\n}\n.kanban-card[data-v-ad923ee1]:hover {\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.kanban-card[data-v-ad923ee1]:active {\r\n  cursor: grabbing;\n}\n.card-crud[data-v-ad923ee1] {\r\n  border: 1px solid #e1e5e9;\n}\n.card-crud .card-title[data-v-ad923ee1] {\r\n  font-size: 0.9rem;\r\n  margin-bottom: 0.5rem;\n}\n.card-crud .card-text[data-v-ad923ee1] {\r\n  font-size: 0.8rem;\r\n  margin-bottom: 0.25rem;\n}\r\n";
+n(css$5, {});var _sfc_main$7 = {
   name: 'KanbanCard',
   props: {
     item: Object,
@@ -14544,8 +14574,8 @@ var _sfc_render$7 = function render() {
 };
 var _sfc_staticRenderFns$7 = [];
 var __component__$7 = /*#__PURE__*/normalizeComponent(_sfc_main$7, _sfc_render$7, _sfc_staticRenderFns$7, false, null, "ad923ee1", null, null);
-var KanbanCard = __component__$7.exports;var css$3 = "\n.kanban-column[data-v-a56cf649] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n.kanban-column-header[data-v-a56cf649] {\r\n  font-weight: bold;\r\n  padding: 0.5rem;\r\n  background: #dfe1e6;\r\n  border-radius: 8px 8px 0 0;\r\n  text-align: center;\n}\n.kanban-column-body[data-v-a56cf649] {\r\n  padding: 0.5rem;\r\n  min-height: 100px;\r\n  background: #ffffff;\r\n  border-radius: 0 0 8px 8px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem;\n}\r\n";
-n(css$3, {});var _sfc_main$6 = {
+var KanbanCard = __component__$7.exports;var css$4 = "\n.kanban-column[data-v-a56cf649] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n.kanban-column-header[data-v-a56cf649] {\r\n  font-weight: bold;\r\n  padding: 0.5rem;\r\n  background: #dfe1e6;\r\n  border-radius: 8px 8px 0 0;\r\n  text-align: center;\n}\n.kanban-column-body[data-v-a56cf649] {\r\n  padding: 0.5rem;\r\n  min-height: 100px;\r\n  background: #ffffff;\r\n  border-radius: 0 0 8px 8px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem;\n}\r\n";
+n(css$4, {});var _sfc_main$6 = {
   name: 'KanbanColumn',
   components: {
     draggable: draggable,
@@ -14651,8 +14681,8 @@ var _sfc_render$6 = function render() {
 };
 var _sfc_staticRenderFns$6 = [];
 var __component__$6 = /*#__PURE__*/normalizeComponent(_sfc_main$6, _sfc_render$6, _sfc_staticRenderFns$6, false, null, "a56cf649", null, null);
-var KanbanColumn = __component__$6.exports;var css$2 = "\n.kanban-board[data-v-516ff294] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  overflow-x: auto;\r\n  padding: 1rem;\n}\n.kanban-column[data-v-516ff294] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n  min-width: 300px;\n}\r\n";
-n(css$2, {});var _sfc_main$5 = {
+var KanbanColumn = __component__$6.exports;var css$3 = "\n.kanban-board[data-v-516ff294] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  overflow-x: auto;\r\n  padding: 1rem;\n}\n.kanban-column[data-v-516ff294] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n  min-width: 300px;\n}\r\n";
+n(css$3, {});var _sfc_main$5 = {
   name: 'KanbanBoard',
   components: {
     KanbanColumn: KanbanColumn
@@ -14738,7 +14768,7 @@ var _sfc_staticRenderFns$4 = [];
 var __component__$4 = /*#__PURE__*/normalizeComponent(_sfc_main$4, _sfc_render$4, _sfc_staticRenderFns$4, false, null, null, null, null);
 var CrudKanban = __component__$4.exports;var _sfc_main$3 = {
   name: 'CrudCustom',
-  inject: ['displayMode', 'displayModes', 'listContainerClass', 'listItemClass', 'loading', 'items', 'infiniteScroll', 'messageEmptyResults', 'itemsList'],
+  inject: ['displayMode', 'displayModes', 'listContainerClass', 'listItemClass', 'loading', 'firstLoad', 'items', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'itemsList'],
   computed: {
     currentDisplayMode: function currentDisplayMode() {
       if (!this.displayMode) return 1;
@@ -14749,6 +14779,12 @@ var CrudKanban = __component__$4.exports;var _sfc_main$3 = {
         return this.displayMode();
       }
       return this.displayMode;
+    },
+    loadingValue: function loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    firstLoadValue: function firstLoadValue() {
+      return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
     }
   }
 };
@@ -14757,7 +14793,16 @@ var _sfc_render$3 = function render() {
     _c = _vm._self._c;
   return _vm.currentDisplayMode == _vm.displayModes.MODE_CUSTOM ? _c('div', [_c('div', {
     class: _vm.listContainerClass
-  }, [!_vm.loading && _vm.itemsList && _vm.itemsList.length == 0 && !_vm.infiniteScroll ? _c('p', {
+  }, [_vm.loadingValue || !_vm.firstLoadValue ? _c('div', {
+    staticClass: "text-center p-5"
+  }, [_c('b-spinner', {
+    attrs: {
+      "variant": "primary",
+      "label": "Cargando..."
+    }
+  }), _c('p', {
+    staticClass: "mt-2"
+  }, [_vm._v(_vm._s(_vm.messageLoading))])], 1) : [_vm.firstLoadValue && _vm.itemsList && _vm.itemsList.length == 0 && !_vm.infiniteScroll ? _c('p', {
     staticClass: "p-3"
   }, [_vm._v(" " + _vm._s(_vm.messageEmptyResults) + " ")]) : _vm._e(), _vm._l(_vm.itemsList, function (item, index) {
     return _c('div', {
@@ -14766,11 +14811,12 @@ var _sfc_render$3 = function render() {
     }, [_vm._t("card", null, {
       "item": item
     })], 2);
-  })], 2)]) : _vm._e();
+  })]], 2)]) : _vm._e();
 };
 var _sfc_staticRenderFns$3 = [];
 var __component__$3 = /*#__PURE__*/normalizeComponent(_sfc_main$3, _sfc_render$3, _sfc_staticRenderFns$3, false, null, null, null, null);
-var CrudCustom = __component__$3.exports;var _sfc_main$2 = {
+var CrudCustom = __component__$3.exports;var css$2 = "\n.export-format-options[data-v-051e3fd7] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-051e3fd7] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-051e3fd7]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-051e3fd7] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
+n(css$2, {});var _sfc_main$2 = {
   name: 'CrudModals',
   inject: ['modelName', 'title', 'loading', 'validate', 'item', 'getItem', 'messageSave', 'showImport', 'showExport', 'fileImport', 'selectedItems', 'exportFormat', 'saveItem', 'importItems', 'exportItems'],
   computed: {
@@ -14967,34 +15013,42 @@ var _sfc_render$2 = function render() {
         "show": _vm.loading,
         "rounded": "sm"
       }
-    }, [_vm.selectedItems.length ? _c('p', [_vm._v("Se exportará " + _vm._s(_vm.selectedItems.length) + " elementos.")]) : _c('p', [_vm._v("Se exportará la consulta actual.")]), _c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: _vm.exportFormat,
-        expression: "exportFormat"
-      }],
-      staticClass: "form-control",
-      on: {
-        "change": function change($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-            return o.selected;
-          }).map(function (o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val;
-          });
-          _vm.exportFormat = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
-        }
+    }, [_vm.selectedItems.length ? _c('p', [_vm._v("Se exportará " + _vm._s(_vm.selectedItems.length) + " elementos.")]) : _c('p', [_vm._v("Se exportará la consulta actual.")]), _c('b-form-group', {
+      staticClass: "mt-3",
+      attrs: {
+        "label": "Seleccione el formato de exportación:"
       }
-    }, [_c('option', {
+    }, [_c('div', {
+      staticClass: "export-format-options"
+    }, [_c('b-form-radio', {
+      staticClass: "export-format-radio",
       attrs: {
         "value": "JSON"
+      },
+      model: {
+        value: _vm.exportFormat,
+        callback: function callback($$v) {
+          _vm.exportFormat = $$v;
+        },
+        expression: "exportFormat"
       }
-    }, [_vm._v("JSON")]), _c('option', {
+    }, [_c('b-icon-file-text', {
+      staticClass: "mr-2"
+    }), _vm._v(" JSON ")], 1), _c('b-form-radio', {
+      staticClass: "export-format-radio",
       attrs: {
         "value": "XLSX"
+      },
+      model: {
+        value: _vm.exportFormat,
+        callback: function callback($$v) {
+          _vm.exportFormat = $$v;
+        },
+        expression: "exportFormat"
       }
-    }, [_vm._v("XLSX")])]), _c('div', {
+    }, [_c('b-icon-table', {
+      staticClass: "mr-2"
+    }), _vm._v(" XLSX ")], 1)], 1)]), _c('div', {
       staticClass: "text-center mt-3"
     }, [_c('b-button', {
       attrs: {
@@ -15006,13 +15060,13 @@ var _sfc_render$2 = function render() {
           return _vm.exportItems();
         }
       }
-    }, [_c('b-icon-cloud-upload'), _vm._v(" " + _vm._s(_vm.loading ? "Cargando..." : "Exportar") + " ")], 1)], 1)])];
+    }, [_c('b-icon-cloud-upload'), _vm._v(" " + _vm._s(_vm.loading ? "Cargando..." : "Exportar") + " ")], 1)], 1)], 1)];
   }, {
     "item": _vm.item
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$2 = [];
-var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, null, null, null);
+var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "051e3fd7", null, null);
 var CrudModals = __component__$2.exports;var vueInfiniteLoading = {exports: {}};/*!
  * vue-infinite-loading v2.4.5
  * (c) 2016-2020 PeachScript
@@ -15025,13 +15079,13 @@ vueInfiniteLoading.exports;
 } (vueInfiniteLoading, vueInfiniteLoading.exports));
 
 var vueInfiniteLoadingExports = vueInfiniteLoading.exports;
-var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExports);var css$1 = "\n.paginator-container[data-v-11671e09] {\r\n  display: grid;\r\n  grid-template-columns: 1fr auto 1fr;\r\n  align-items: center;\r\n  width: 100%;\r\n  margin-top: 1rem;\r\n  gap: 1rem;\n}\n.paginator-data[data-v-11671e09] {\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-size: 0.875rem;\r\n  grid-column: 1;\n}\n.paginator-badge[data-v-11671e09] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\r\n  padding: 0.375rem 0.625rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  border-radius: 0.375rem;\r\n  color: #495057;\r\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-11671e09]:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.paginator-label[data-v-11671e09] {\r\n  font-weight: 500;\r\n  color: #6c757d;\n}\n.paginator-value[data-v-11671e09] {\r\n  font-weight: 600;\r\n  color: #212529;\n}\n.paginator-dropdown[data-v-11671e09] {\r\n  font-size: 0.875rem;\n}\n.paginator-dropdown[data-v-11671e09] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\n}\n.paginator-dropdown[data-v-11671e09] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.crud-paginator[data-v-11671e09] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  grid-column: 2;\n}\n.paginator-badge-dropdown[data-v-11671e09] {\r\n  z-index: 1;\r\n  position: relative;\n}\n.paginator-badge-dropdown[data-v-11671e09] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\n}\n.paginator-badge-dropdown[data-v-11671e09] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\r\n";
+var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExports);var css$1 = "\n.paginator-container[data-v-73e31fd7] {\n  display: grid;\n  grid-template-columns: 1fr auto 1fr;\n  align-items: center;\n  width: 100%;\n  margin-top: 1rem;\n  gap: 1rem;\n}\n.paginator-data[data-v-73e31fd7] {\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  gap: 0.5rem;\n  font-size: 0.875rem;\n  grid-column: 1;\n}\n.paginator-badge[data-v-73e31fd7] {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.25rem;\n  padding: 0.375rem 0.625rem;\n  background-color: #f8f9fa;\n  border: 1px solid #dee2e6;\n  border-radius: 0.375rem;\n  color: #495057;\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-73e31fd7]:hover {\n  background-color: #e9ecef;\n  border-color: #ced4da;\n}\n.paginator-label[data-v-73e31fd7] {\n  font-weight: 500;\n  color: #6c757d;\n}\n.paginator-value[data-v-73e31fd7] {\n  font-weight: 600;\n  color: #212529;\n}\n.paginator-dropdown[data-v-73e31fd7] {\n  font-size: 0.875rem;\n}\n.paginator-dropdown[data-v-73e31fd7] .btn {\n  padding: 0.375rem 0.625rem;\n  font-size: 0.875rem;\n  background-color: #f8f9fa;\n  border: 1px solid #dee2e6;\n  color: #495057;\n}\n.paginator-dropdown[data-v-73e31fd7] .btn:hover {\n  background-color: #e9ecef;\n  border-color: #ced4da;\n}\n.crud-paginator[data-v-73e31fd7] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  grid-column: 2;\n}\n.paginator-badge-dropdown[data-v-73e31fd7] {\n  z-index: 1;\n  position: relative;\n}\n.paginator-badge-dropdown[data-v-73e31fd7] .btn {\n  padding: 0.375rem 0.625rem;\n  font-size: 0.875rem;\n  background-color: #f8f9fa;\n  border: 1px solid #dee2e6;\n  color: #495057;\n  display: inline-flex;\n  align-items: center;\n  gap: 0.25rem;\n}\n.paginator-badge-dropdown[data-v-73e31fd7] .btn:hover {\n  background-color: #e9ecef;\n  border-color: #ced4da;\n}\n";
 n(css$1, {});var _sfc_main$1 = {
   name: 'CrudPagination',
   components: {
     InfiniteLoading: InfiniteLoading
   },
-  inject: ['infiniteScroll', 'infiniteScrollKey', 'messageLoading', 'messageNoMore', 'messageEmptyResults', 'loading', 'items', 'pagination', 'selectedItems', 'showPaginator', 'infiniteHandler', 'onPaginationChange', 'onPerPageChange', 'clearSelection'],
+  inject: ['infiniteScroll', 'infiniteScrollKey', 'messageLoading', 'messageNoMore', 'messageEmptyResults', 'loading', 'firstLoad', 'items', 'pagination', 'selectedItems', 'showPaginator', 'infiniteHandler', 'onPaginationChange', 'onPerPageChange', 'clearSelection'],
   data: function data() {
     return {
       perPageOptions: [10, 20, 50, 100]
@@ -15041,6 +15095,12 @@ n(css$1, {});var _sfc_main$1 = {
     selectedItemsCount: function selectedItemsCount() {
       // Computed para forzar reactividad del contador
       return this.selectedItems ? this.selectedItems.length : 0;
+    },
+    loadingValue: function loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    firstLoadValue: function firstLoadValue() {
+      return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
     }
   }
 };
@@ -15068,14 +15128,14 @@ var _sfc_render$1 = function render() {
       "slot": "no-more"
     },
     slot: "no-more"
-  }, [!_vm.loading ? _c('div', {
+  }, [!_vm.loadingValue ? _c('div', {
     staticClass: "text-center"
   }, [_vm._v(_vm._s(_vm.messageNoMore))]) : _vm._e()]), _c('div', {
     attrs: {
       "slot": "no-results"
     },
     slot: "no-results"
-  }, [!_vm.loading ? _c('div', {
+  }, [!_vm.loadingValue && _vm.firstLoadValue ? _c('div', {
     staticClass: "text-center"
   }, [_vm._v(_vm._s(_vm.items.length == 0 ? _vm.messageEmptyResults : _vm.messageNoMore))]) : _vm._e()])]) : _vm._e(), !_vm.infiniteScroll ? _c('div', {
     staticClass: "paginator-container"
@@ -15141,7 +15201,7 @@ var _sfc_render$1 = function render() {
   }) : _vm._e()], 1)]) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$1 = [];
-var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "11671e09", null, null);
+var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "73e31fd7", null, null);
 var CrudPagination = __component__$1.exports;var crudData = {
   data: function data() {
     return {
@@ -15175,6 +15235,14 @@ var CrudPagination = __component__$1.exports;var crudData = {
         value: 1
       }),
       // Objeto reactivo para provide/inject
+      loadingReactive: Vue__default["default"].observable({
+        value: false
+      }),
+      // Objeto reactivo para loading
+      firstLoadReactive: Vue__default["default"].observable({
+        value: false
+      }),
+      // Objeto reactivo para firstLoad
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -15381,6 +15449,18 @@ var CrudPagination = __component__$1.exports;var crudData = {
         });
       },
       deep: true
+    },
+    loading: {
+      handler: function handler(newVal) {
+        this.loadingReactive.value = newVal;
+      },
+      immediate: true
+    },
+    firstLoad: {
+      handler: function handler(newVal) {
+        this.firstLoadReactive.value = newVal;
+      },
+      immediate: true
     }
   },
   created: function created() {
@@ -15389,6 +15469,9 @@ var CrudPagination = __component__$1.exports;var crudData = {
       this._displayMode = this.$props.displayMode;
       this.displayModeReactive.value = this._displayMode;
     }
+    // Inicializar valores reactivos
+    this.loadingReactive.value = this.loading;
+    this.firstLoadReactive.value = this.firstLoad;
   },
   mounted: function mounted() {
     var now = Math.floor(Date.now() / 1000);
@@ -21177,12 +21260,10 @@ axios.default = axios;var crudApi = {
           ids: ids
         }
       }).then(function (response) {
-        _this9.items = _this9.items.filter(function (it) {
-          return !ids.includes(it.id);
-        });
         _this9.toastSuccess("Elemento/s eliminado.");
         _this9.$emit("itemDeleted", {});
-        _this9.loading = false;
+        _this9.clearSelection();
+        _this9.refresh();
       }).catch(function (error) {
         _this9.toastError(error);
         _this9.loading = false;
@@ -21202,10 +21283,12 @@ axios.default = axios;var crudApi = {
                 return !ids.includes(it.id);
               });
               _this10.item = null;
+              _this10.pagination.total = _this10.items.length;
               _this10.toastSuccess("Elemento Eliminado");
               _this10.$emit("itemDeleted", {});
+              _this10.clearSelection();
               _this10.loading = false;
-            case 6:
+            case 8:
             case "end":
               return _context7.stop();
           }
@@ -21215,7 +21298,7 @@ axios.default = axios;var crudApi = {
     deleteItemBulkVuex: function deleteItemBulkVuex() {
       var _this11 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
-        var ids, result;
+        var ids, result, itemsResult;
         return _regeneratorRuntime().wrap(function _callee8$(_context8) {
           while (1) switch (_context8.prev = _context8.next) {
             case 0:
@@ -21251,8 +21334,15 @@ axios.default = axios;var crudApi = {
               _this11.loading = false;
               return _context8.abrupt("return");
             case 15:
+              // Actualizar items desde el store Vuex
+              itemsResult = _this11.model.query().withAll().get();
+              if (itemsResult) {
+                _this11.items = itemsResult;
+              }
               _this11.toastSuccess("Elemento eliminados.");
-            case 16:
+              _this11.clearSelection();
+              _this11.loading = false;
+            case 20:
             case "end":
               return _context8.stop();
           }
@@ -22043,10 +22133,18 @@ axios.default = axios;var crudApi = {
       }
     },
     showExportModal: function showExportModal() {
-      this.$refs["modal-export"].show();
+      // Asegurar que loading esté en false al abrir el modal
+      this.loading = false;
+      if (this.$refs.crudModals && this.$refs.crudModals.$refs["modal-export"]) {
+        this.$refs.crudModals.$refs["modal-export"].show();
+      }
     },
     showImportModal: function showImportModal() {
-      this.$refs["modal-import"].show();
+      // Asegurar que loading esté en false al abrir el modal
+      this.loading = false;
+      if (this.$refs.crudModals && this.$refs.crudModals.$refs["modal-import"]) {
+        this.$refs.crudModals.$refs["modal-import"].show();
+      }
     },
     onDraggableAdded: function onDraggableAdded(event) {
       this.$emit("draggableAdded", event);
@@ -22144,7 +22242,7 @@ axios.default = axios;var crudApi = {
       link.click();
     }
   }
-};var css = "tr td[data-v-9327e2bb]:last-child,\ntr td[data-v-9327e2bb]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-9327e2bb] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-9327e2bb] td[data-v-9327e2bb] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-9327e2bb][data-v-9327e2bb]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-9327e2bb][data-v-9327e2bb]:hover td[data-v-9327e2bb] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-9327e2bb]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-9327e2bb]:nth-of-type(odd) td[data-v-9327e2bb] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-9327e2bb]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-9327e2bb]:nth-of-type(even) td[data-v-9327e2bb] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-9327e2bb] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-9327e2bb] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-9327e2bb] .crud-title[data-v-9327e2bb] {\n    margin: 0; }\n  .crud-header[data-v-9327e2bb] .crud-search[data-v-9327e2bb] {\n    max-width: 15rem; }\n    .crud-header[data-v-9327e2bb] .crud-search[data-v-9327e2bb] .btn[data-v-9327e2bb] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-9327e2bb] .crud-search[data-v-9327e2bb] .btn[data-v-9327e2bb].open[data-v-9327e2bb] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-9327e2bb] .table-options[data-v-9327e2bb] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-9327e2bb] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-9327e2bb] {\n    table-layout: auto; }\n    .table[data-v-9327e2bb] tbody[data-v-9327e2bb] td[data-v-9327e2bb] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-9327e2bb] tbody[data-v-9327e2bb] td[data-v-9327e2bb]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-9327e2bb] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-9327e2bb] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-9327e2bb] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-9327e2bb] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-9327e2bb] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+};var css = "tr td[data-v-3751aeba]:last-child,\ntr td[data-v-3751aeba]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-3751aeba] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-3751aeba] td[data-v-3751aeba] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-3751aeba][data-v-3751aeba]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-3751aeba][data-v-3751aeba]:hover td[data-v-3751aeba] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-3751aeba]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-3751aeba]:nth-of-type(odd) td[data-v-3751aeba] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-3751aeba]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-3751aeba]:nth-of-type(even) td[data-v-3751aeba] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-3751aeba] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-3751aeba] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-3751aeba] .crud-title[data-v-3751aeba] {\n    margin: 0; }\n  .crud-header[data-v-3751aeba] .crud-search[data-v-3751aeba] {\n    max-width: 15rem; }\n    .crud-header[data-v-3751aeba] .crud-search[data-v-3751aeba] .btn[data-v-3751aeba] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-3751aeba] .crud-search[data-v-3751aeba] .btn[data-v-3751aeba].open[data-v-3751aeba] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-3751aeba] .table-options[data-v-3751aeba] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-3751aeba] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-3751aeba] {\n    table-layout: auto; }\n    .table[data-v-3751aeba] tbody[data-v-3751aeba] td[data-v-3751aeba] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-3751aeba] tbody[data-v-3751aeba] td[data-v-3751aeba]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-3751aeba] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-3751aeba] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-3751aeba] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-3751aeba] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-3751aeba] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
 n(css, {});var _sfc_main = {
   name: "VueLaravelCrud",
   components: {
@@ -22238,8 +22336,8 @@ n(css, {});var _sfc_main = {
       // Data from mixins
       crudUuid: this.crudUuid,
       moment: this.moment,
-      loading: this.loading,
-      firstLoad: this.firstLoad,
+      loading: this.loadingReactive,
+      firstLoad: this.firstLoadReactive,
       // Proporcionar item como función getter para reactividad
       getItem: function getItem() {
         return _this.item;
@@ -22690,6 +22788,7 @@ var _sfc_render = function render() {
       "rounded": "sm"
     }
   }), _c('CrudPagination'), _c('CrudModals', {
+    ref: "crudModals",
     scopedSlots: _vm._u([_vm._l(_vm.$scopedSlots, function (slot, name) {
       return {
         key: name,
@@ -22701,7 +22800,7 @@ var _sfc_render = function render() {
   })], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "9327e2bb", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "3751aeba", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.
