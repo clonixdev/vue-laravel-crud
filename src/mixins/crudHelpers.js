@@ -214,6 +214,9 @@ export default {
     },
 
     createItem() {
+      // Asegurar que loading esté en false al abrir el modal
+      this.loading = false;
+      
       // Hacer copia profunda del objeto para asegurar reactividad
       const itemCopy = JSON.parse(JSON.stringify(this.itemDefault));
       
@@ -253,6 +256,9 @@ export default {
     },
 
     updateItem(id, itemIndex = null) {
+      // Asegurar que loading esté en false al abrir el modal
+      this.loading = false;
+      
       let item;
       if (itemIndex == null) {
         item = this.items.find((it) => it.id == id);

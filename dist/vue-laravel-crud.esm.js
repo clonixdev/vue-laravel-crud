@@ -14435,7 +14435,7 @@ var _sfc_staticRenderFns$3 = [];
 var __component__$3 = /*#__PURE__*/normalizeComponent(_sfc_main$3, _sfc_render$3, _sfc_staticRenderFns$3, false, null, null, null, null);
 var CrudCustom = __component__$3.exports;
 
-var css$2 = "\n.export-format-options[data-v-051e3fd7] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-051e3fd7] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-051e3fd7]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-051e3fd7] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-051e3fd7] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
+var css$2 = "\n.export-format-options[data-v-a032ebce] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-a032ebce] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-a032ebce]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-a032ebce] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-a032ebce] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-a032ebce] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-a032ebce] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-a032ebce] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-a032ebce] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
 n(css$2, {});
 
 const _sfc_main$2 = {
@@ -14450,6 +14450,10 @@ const _sfc_main$2 = {
       }
       // Si no, usar el item inyectado directamente
       return this.item;
+    },
+    // Computed property para manejar loading como objeto reactivo o booleano
+    loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
     }
   },
   watch: {
@@ -14476,7 +14480,7 @@ var _sfc_render$2 = function render() {
     }
   }, [_c('b-overlay', {
     attrs: {
-      "show": _vm.loading,
+      "show": _vm.loadingValue,
       "rounded": "sm"
     }
   }, [_vm.validate ? [_c('form', {
@@ -14510,9 +14514,9 @@ var _sfc_render$2 = function render() {
       "block": "",
       "type": "submit",
       "variant": "success",
-      "disabled": _vm.loading
+      "disabled": _vm.loadingValue
     }
-  }, [_vm.loading ? _c('b-spinner', {
+  }, [_vm.loadingValue ? _c('b-spinner', {
     attrs: {
       "small": ""
     }
@@ -14544,14 +14548,14 @@ var _sfc_render$2 = function render() {
       "block": "",
       "type": "submit",
       "variant": "success",
-      "disabled": _vm.loading
+      "disabled": _vm.loadingValue
     },
     on: {
       "click": function ($event) {
         return _vm.saveItem();
       }
     }
-  }, [_vm.loading ? _c('b-spinner', {
+  }, [_vm.loadingValue ? _c('b-spinner', {
     attrs: {
       "small": ""
     }
@@ -14591,7 +14595,7 @@ var _sfc_render$2 = function render() {
   }, [_vm.item ? _vm._t("import", function () {
     return [_c('b-overlay', {
       attrs: {
-        "show": _vm.loading,
+        "show": _vm.loadingValue,
         "rounded": "sm"
       }
     }, [_c('b-form-file', {
@@ -14613,14 +14617,14 @@ var _sfc_render$2 = function render() {
     }, [_c('b-button', {
       attrs: {
         "variant": "info",
-        "disabled": _vm.loading
+        "disabled": _vm.loadingValue
       },
       on: {
         "click": function ($event) {
           return _vm.importItems();
         }
       }
-    }, [_c('b-icon-cloud-upload'), _vm._v(" " + _vm._s(_vm.loading ? "Cargando..." : "Importar") + " ")], 1)], 1)], 1)];
+    }, [_c('b-icon-cloud-upload'), _vm._v(" " + _vm._s(_vm.loadingValue ? "Cargando..." : "Importar") + " ")], 1)], 1)], 1)];
   }, {
     "item": _vm.item
   }) : _vm._e()], 2) : _vm._e(), _vm.showExport ? _c('b-modal', {
@@ -14632,7 +14636,7 @@ var _sfc_render$2 = function render() {
   }, [_vm.item ? _vm._t("export", function () {
     return [_c('b-overlay', {
       attrs: {
-        "show": _vm.loading,
+        "show": _vm.loadingValue,
         "rounded": "sm"
       }
     }, [_vm.selectedItems.length ? _c('p', [_vm._v("Se exportará " + _vm._s(_vm.selectedItems.length) + " elementos.")]) : _c('p', [_vm._v("Se exportará la consulta actual.")]), _c('b-form-group', {
@@ -14675,20 +14679,20 @@ var _sfc_render$2 = function render() {
     }, [_c('b-button', {
       attrs: {
         "variant": "info",
-        "disabled": _vm.loading
+        "disabled": _vm.loadingValue
       },
       on: {
         "click": function ($event) {
           return _vm.exportItems();
         }
       }
-    }, [_c('b-icon-cloud-upload'), _vm._v(" " + _vm._s(_vm.loading ? "Cargando..." : "Exportar") + " ")], 1)], 1)], 1)];
+    }, [_c('b-icon-cloud-upload'), _vm._v(" " + _vm._s(_vm.loadingValue ? "Cargando..." : "Exportar") + " ")], 1)], 1)], 1)];
   }, {
     "item": _vm.item
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$2 = [];
-var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "051e3fd7", null, null);
+var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "a032ebce", null, null);
 var CrudModals = __component__$2.exports;
 
 var vueInfiniteLoading = {exports: {}};
@@ -21422,6 +21426,9 @@ var crudHelpers = {
       });
     },
     createItem() {
+      // Asegurar que loading esté en false al abrir el modal
+      this.loading = false;
+
       // Hacer copia profunda del objeto para asegurar reactividad
       const itemCopy = JSON.parse(JSON.stringify(this.itemDefault));
       if (this.useVuexORM && !this.vuexLocalforage) {
@@ -21458,6 +21465,8 @@ var crudHelpers = {
       });
     },
     updateItem(id, itemIndex = null) {
+      // Asegurar que loading esté en false al abrir el modal
+      this.loading = false;
       let item;
       if (itemIndex == null) {
         item = this.items.find(it => it.id == id);

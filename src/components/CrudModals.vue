@@ -2,7 +2,7 @@
   <div>
     <!-- Modal de formulario -->
     <b-modal :id="'modal-form-item-' + modelName" hide-footer size="xl" :title="title" no-close-on-backdrop>
-      <b-overlay :show="loading" rounded="sm">
+      <b-overlay :show="loadingValue" rounded="sm">
         <template v-if="validate">
           <form @submit="saveItem">
             <template v-if="reactiveItem">
@@ -12,8 +12,8 @@
                 </b-form-group>
               </slot>
             </template>
-            <b-button block type="submit" variant="success" :disabled="loading">
-              <b-spinner small v-if="loading"></b-spinner>{{ messageSave }}
+            <b-button block type="submit" variant="success" :disabled="loadingValue">
+              <b-spinner small v-if="loadingValue"></b-spinner>{{ messageSave }}
             </b-button>
           </form>
         </template>
@@ -25,8 +25,8 @@
               </b-form-group>
             </slot>
           </template>
-          <b-button block type="submit" variant="success" :disabled="loading" @click="saveItem()">
-            <b-spinner small v-if="loading"></b-spinner>{{ messageSave }}
+          <b-button block type="submit" variant="success" :disabled="loadingValue" @click="saveItem()">
+            <b-spinner small v-if="loadingValue"></b-spinner>{{ messageSave }}
           </b-button>
         </template>
       </b-overlay>
@@ -51,13 +51,13 @@
     <!-- Modal de importación -->
     <b-modal ref="modal-import" title="Importar" hide-footer v-if="showImport">
       <slot name="import" v-bind:item="item" v-if="item">
-        <b-overlay :show="loading" rounded="sm">
+        <b-overlay :show="loadingValue" rounded="sm">
           <b-form-file v-model="fileImport" :state="Boolean(fileImport)" browse-text="Explorar"
             placeholder="Importar..." drop-placeholder="Arrastrar Archivo aquí..."></b-form-file>
           <div class="text-center mt-3">
-            <b-button variant="info" v-on:click="importItems()" :disabled="loading">
+            <b-button variant="info" v-on:click="importItems()" :disabled="loadingValue">
               <b-icon-cloud-upload></b-icon-cloud-upload>
-              {{ loading ? "Cargando..." : "Importar" }}
+              {{ loadingValue ? "Cargando..." : "Importar" }}
             </b-button>
           </div>
         </b-overlay>
@@ -67,7 +67,7 @@
     <!-- Modal de exportación -->
     <b-modal ref="modal-export" title="Exportar" hide-footer v-if="showExport">
       <slot name="export" v-bind:item="item" v-if="item">
-        <b-overlay :show="loading" rounded="sm">
+        <b-overlay :show="loadingValue" rounded="sm">
 
           <p v-if="selectedItems.length">Se exportará {{ selectedItems.length }} elementos.</p>
           <p v-else>Se exportará la consulta actual.</p>
@@ -94,9 +94,9 @@
           </b-form-group>
 
           <div class="text-center mt-3">
-            <b-button variant="info" v-on:click="exportItems()" :disabled="loading">
+            <b-button variant="info" v-on:click="exportItems()" :disabled="loadingValue">
               <b-icon-cloud-upload></b-icon-cloud-upload>
-              {{ loading ? "Cargando..." : "Exportar" }}
+              {{ loadingValue ? "Cargando..." : "Exportar" }}
             </b-button>
           </div>
         </b-overlay>
@@ -134,6 +134,10 @@ export default {
       }
       // Si no, usar el item inyectado directamente
       return this.item;
+    },
+    // Computed property para manejar loading como objeto reactivo o booleano
+    loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
     }
   },
   watch: {
