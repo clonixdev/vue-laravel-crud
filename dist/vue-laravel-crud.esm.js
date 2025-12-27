@@ -727,7 +727,7 @@ var CrudFilters = __component__$f.exports;
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css$9 = "\n.crud-header[data-v-4fb65bb3] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-4fb65bb3] {\n  margin: 0;\n}\n.crud-search[data-v-4fb65bb3] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-4fb65bb3] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-4fb65bb3] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-4fb65bb3] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
+var css$9 = "\n.crud-header[data-v-a9762136] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-a9762136] {\n  margin: 0;\n}\n.crud-search[data-v-a9762136] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-a9762136] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-a9762136] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-a9762136] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
 n(css$9, {});
 
 const _sfc_main$e = {
@@ -750,6 +750,10 @@ const _sfc_main$e = {
         return this.displayMode();
       }
       return this.displayMode;
+    },
+    // Computed property para manejar loading como objeto reactivo o booleano
+    loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
     }
   },
   methods: {
@@ -805,7 +809,7 @@ var _sfc_render$e = function render() {
     }, [_c('b-icon-cloud-download'), _vm._v(_vm._s(_vm.messageExport) + " ")], 1) : _vm._e(), _vm.showPrincipalSortBtn ? _c('b-button', {
       attrs: {
         "variant": "info",
-        "disabled": _vm.loading
+        "disabled": _vm.loadingValue
       },
       on: {
         "click": function ($event) {
@@ -824,7 +828,7 @@ var _sfc_render$e = function render() {
     }, [_c('b-icon-trash')], 1) : _vm._e(), _vm.showCreateBtn ? _c('b-button', {
       attrs: {
         "variant": "success",
-        "disabled": _vm.loading
+        "disabled": _vm.loadingValue
       },
       on: {
         "click": function ($event) {
@@ -852,7 +856,7 @@ var _sfc_render$e = function render() {
     }, [_c('b-icon-arrow-clockwise')], 1), _vm.displayModeToggler ? _c('b-button', {
       attrs: {
         "variant": "info",
-        "disabled": _vm.loading
+        "disabled": _vm.loadingValue
       },
       on: {
         "click": function ($event) {
@@ -898,7 +902,7 @@ var _sfc_render$e = function render() {
   })], 2)], 1)], 1) : _vm._e();
 };
 var _sfc_staticRenderFns$e = [];
-var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "4fb65bb3", null, null);
+var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "a9762136", null, null);
 var CrudHeader = __component__$e.exports;
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -14887,6 +14891,7 @@ var crudData = {
       },
       infiniteScrollKey: 1,
       optionsLoaded: false,
+      isLoadingOptions: false,
       isMobile: false,
       refreshing: false,
       fetchError: false,
@@ -15065,6 +15070,10 @@ var crudData = {
     },
     columns: {
       handler() {
+        // Evitar bucle infinito: no ejecutar si loadOptions() está modificando las columnas
+        if (this.isLoadingOptions) {
+          return;
+        }
         // Recargar opciones cuando cambian las columnas
         this.loadOptions();
         // Forzar re-renderizado
@@ -21139,28 +21148,43 @@ var crudValidation = {
       });
     },
     async loadOptions() {
-      for (let i = 0; i < this.columns.length; i++) {
-        const column = this.columns[i];
-        if (column.options instanceof Promise) {
-          // Si las opciones son una función (promesa), esperar y actualizar
-          const options = await column.options;
-          this.$set(this.columns, i, {
-            ...column,
-            options
-          });
-          console.debug("Options promise", this.columns);
-        }
+      // Establecer bandera para evitar que el watcher de columns se dispare
+      this.isLoadingOptions = true;
+      try {
+        for (let i = 0; i < this.columns.length; i++) {
+          const column = this.columns[i];
+          if (column.options instanceof Promise) {
+            // Si las opciones son una función (promesa), esperar y actualizar
+            const options = await column.options;
+            // Solo actualizar si las opciones realmente cambiaron
+            if (JSON.stringify(column.options) !== JSON.stringify(options)) {
+              this.$set(this.columns, i, {
+                ...column,
+                options
+              });
+              console.debug("Options promise", this.columns);
+            }
+          }
 
-        // Normalizar opciones para columnas tipo state y array
-        if ((column.type === 'state' || column.type === 'array') && Array.isArray(column.options)) {
-          const normalizedOptions = this.normalizeOptions(column.options);
-          this.$set(this.columns, i, {
-            ...column,
-            options: normalizedOptions
-          });
+          // Normalizar opciones para columnas tipo state y array
+          if ((column.type === 'state' || column.type === 'array') && Array.isArray(column.options)) {
+            const normalizedOptions = this.normalizeOptions(column.options);
+            // Solo actualizar si las opciones normalizadas son diferentes
+            const currentOptionsStr = JSON.stringify(column.options);
+            const normalizedOptionsStr = JSON.stringify(normalizedOptions);
+            if (currentOptionsStr !== normalizedOptionsStr) {
+              this.$set(this.columns, i, {
+                ...column,
+                options: normalizedOptions
+              });
+            }
+          }
         }
+        this.optionsLoaded = true;
+      } finally {
+        // Restaurar bandera al finalizar, incluso si hay errores
+        this.isLoadingOptions = false;
       }
-      this.optionsLoaded = true;
     },
     getArrayValue(value, displayProp, options = []) {
       if (!Array.isArray(value)) return "N/A";

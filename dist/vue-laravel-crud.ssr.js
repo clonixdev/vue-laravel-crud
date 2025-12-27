@@ -1169,7 +1169,7 @@ var _sfc_render$f = function render() {
 };
 var _sfc_staticRenderFns$f = [];
 var __component__$f = /*#__PURE__*/normalizeComponent(_sfc_main$f, _sfc_render$f, _sfc_staticRenderFns$f, false, null, null, null, null);
-var CrudFilters = __component__$f.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css$9 = "\n.crud-header[data-v-4fb65bb3] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-4fb65bb3] {\n  margin: 0;\n}\n.crud-search[data-v-4fb65bb3] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-4fb65bb3] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-4fb65bb3] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-4fb65bb3] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
+var CrudFilters = __component__$f.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css$9 = "\n.crud-header[data-v-a9762136] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-a9762136] {\n  margin: 0;\n}\n.crud-search[data-v-a9762136] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-a9762136] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-a9762136] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-a9762136] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
 n(css$9, {});var _sfc_main$e = {
   name: 'CrudHeader',
   components: {
@@ -1190,6 +1190,10 @@ n(css$9, {});var _sfc_main$e = {
         return this.displayMode();
       }
       return this.displayMode;
+    },
+    // Computed property para manejar loading como objeto reactivo o booleano
+    loadingValue: function loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
     }
   },
   methods: {
@@ -1245,7 +1249,7 @@ var _sfc_render$e = function render() {
     }, [_c('b-icon-cloud-download'), _vm._v(_vm._s(_vm.messageExport) + " ")], 1) : _vm._e(), _vm.showPrincipalSortBtn ? _c('b-button', {
       attrs: {
         "variant": "info",
-        "disabled": _vm.loading
+        "disabled": _vm.loadingValue
       },
       on: {
         "click": function click($event) {
@@ -1264,7 +1268,7 @@ var _sfc_render$e = function render() {
     }, [_c('b-icon-trash')], 1) : _vm._e(), _vm.showCreateBtn ? _c('b-button', {
       attrs: {
         "variant": "success",
-        "disabled": _vm.loading
+        "disabled": _vm.loadingValue
       },
       on: {
         "click": function click($event) {
@@ -1292,7 +1296,7 @@ var _sfc_render$e = function render() {
     }, [_c('b-icon-arrow-clockwise')], 1), _vm.displayModeToggler ? _c('b-button', {
       attrs: {
         "variant": "info",
-        "disabled": _vm.loading
+        "disabled": _vm.loadingValue
       },
       on: {
         "click": function click($event) {
@@ -1338,7 +1342,7 @@ var _sfc_render$e = function render() {
   })], 2)], 1)], 1) : _vm._e();
 };
 var _sfc_staticRenderFns$e = [];
-var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "4fb65bb3", null, null);
+var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "a9762136", null, null);
 var CrudHeader = __component__$e.exports;var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function getDefaultExportFromCjs (x) {
@@ -15255,6 +15259,7 @@ var CrudPagination = __component__$1.exports;var crudData = {
       },
       infiniteScrollKey: 1,
       optionsLoaded: false,
+      isLoadingOptions: false,
       isMobile: false,
       refreshing: false,
       fetchError: false,
@@ -15445,6 +15450,10 @@ var CrudPagination = __component__$1.exports;var crudData = {
     columns: {
       handler: function handler() {
         var _this10 = this;
+        // Evitar bucle infinito: no ejecutar si loadOptions() está modificando las columnas
+        if (this.isLoadingOptions) {
+          return;
+        }
         // Recargar opciones cuando cambian las columnas
         this.loadOptions();
         // Forzar re-renderizado
@@ -21657,48 +21666,63 @@ axios.default = axios;var crudApi = {
     loadOptions: function loadOptions() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var i, column, options, normalizedOptions;
+        var i, column, options, normalizedOptions, currentOptionsStr, normalizedOptionsStr;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
+              // Establecer bandera para evitar que el watcher de columns se dispare
+              _this.isLoadingOptions = true;
+              _context.prev = 1;
               i = 0;
-            case 1:
+            case 3:
               if (!(i < _this.columns.length)) {
-                _context.next = 13;
+                _context.next = 14;
                 break;
               }
               column = _this.columns[i];
               if (!(column.options instanceof Promise)) {
-                _context.next = 9;
+                _context.next = 10;
                 break;
               }
-              _context.next = 6;
+              _context.next = 8;
               return column.options;
-            case 6:
+            case 8:
               options = _context.sent;
-              _this.$set(_this.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
-                options: options
-              }));
-              console.debug("Options promise", _this.columns);
-            case 9:
-              // Normalizar opciones para columnas tipo state y array
-              if ((column.type === 'state' || column.type === 'array') && Array.isArray(column.options)) {
-                normalizedOptions = _this.normalizeOptions(column.options);
+              // Solo actualizar si las opciones realmente cambiaron
+              if (JSON.stringify(column.options) !== JSON.stringify(options)) {
                 _this.$set(_this.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
-                  options: normalizedOptions
+                  options: options
                 }));
+                console.debug("Options promise", _this.columns);
               }
             case 10:
+              // Normalizar opciones para columnas tipo state y array
+              if ((column.type === 'state' || column.type === 'array') && Array.isArray(column.options)) {
+                normalizedOptions = _this.normalizeOptions(column.options); // Solo actualizar si las opciones normalizadas son diferentes
+                currentOptionsStr = JSON.stringify(column.options);
+                normalizedOptionsStr = JSON.stringify(normalizedOptions);
+                if (currentOptionsStr !== normalizedOptionsStr) {
+                  _this.$set(_this.columns, i, _objectSpread2(_objectSpread2({}, column), {}, {
+                    options: normalizedOptions
+                  }));
+                }
+              }
+            case 11:
               i++;
-              _context.next = 1;
+              _context.next = 3;
               break;
-            case 13:
-              _this.optionsLoaded = true;
             case 14:
+              _this.optionsLoaded = true;
+            case 15:
+              _context.prev = 15;
+              // Restaurar bandera al finalizar, incluso si hay errores
+              _this.isLoadingOptions = false;
+              return _context.finish(15);
+            case 18:
             case "end":
               return _context.stop();
           }
-        }, _callee);
+        }, _callee, null, [[1,, 15, 18]]);
       }))();
     },
     getArrayValue: function getArrayValue(value, displayProp) {
