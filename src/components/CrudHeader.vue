@@ -18,18 +18,18 @@
           <b-button variant="info" @click="showExportModal()" v-if="showExport">
             <b-icon-cloud-download></b-icon-cloud-download>{{ messageExport }}
           </b-button>
-          <b-button variant="info" v-if="showPrincipalSortBtn" @click="togglePrincipalSort()" :disabled="loading">
+          <b-button variant="info" v-if="showPrincipalSortBtn" @click="togglePrincipalSort()" :disabled="loadingValue">
             <b-icon-sort-numeric-down v-if="principalSort"></b-icon-sort-numeric-down>
             <b-icon-sort-numeric-up v-else></b-icon-sort-numeric-up>
           </b-button>
           <b-button variant="danger" @click="confirmBulkDelete()"
             v-if="bulkDelete"><b-icon-trash></b-icon-trash></b-button>
-          <b-button variant="success" v-if="showCreateBtn" @click="createItem()" :disabled="loading">
+          <b-button variant="success" v-if="showCreateBtn" @click="createItem()" :disabled="loadingValue">
             <b-icon-plus></b-icon-plus>{{ messageNew }}
           </b-button>
           <b-button variant="info" v-if="enableFilters" @click="toggleFilters()">Filtros</b-button>
           <b-button variant="info" @click="refresh()"><b-icon-arrow-clockwise></b-icon-arrow-clockwise></b-button>
-          <b-button variant="info" @click="toggleDisplayMode()" :disabled="loading" v-if="displayModeToggler">
+          <b-button variant="info" @click="toggleDisplayMode()" :disabled="loadingValue" v-if="displayModeToggler">
             <b-icon-card-list v-if="currentDisplayMode == displayModes.MODE_TABLE"></b-icon-card-list>
             <b-icon-table v-else-if="currentDisplayMode == displayModes.MODE_CARDS"></b-icon-table>
           </b-button>
@@ -106,6 +106,10 @@ export default {
         return this.displayMode();
       }
       return this.displayMode;
+    },
+    // Computed property para manejar loading como objeto reactivo o booleano
+    loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
     }
   },
   methods: {

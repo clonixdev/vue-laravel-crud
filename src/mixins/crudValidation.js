@@ -29,25 +29,40 @@ export default {
     },
 
     async loadOptions() {
-      for (let i = 0; i < this.columns.length; i++) {
-        const column = this.columns[i];
+      // Establecer bandera para evitar que el watcher de columns se dispare
+      this.isLoadingOptions = true;
 
-        if (column.options instanceof Promise) {
-          // Si las opciones son una función (promesa), esperar y actualizar
-          const options = await column.options;
-          this.$set(this.columns, i, { ...column, options });
+      try {
+        for (let i = 0; i < this.columns.length; i++) {
+          const column = this.columns[i];
 
-          console.debug("Options promise", this.columns);
+          if (column.options instanceof Promise) {
+            // Si las opciones son una función (promesa), esperar y actualizar
+            const options = await column.options;
+            // Solo actualizar si las opciones realmente cambiaron
+            if (JSON.stringify(column.options) !== JSON.stringify(options)) {
+              this.$set(this.columns, i, { ...column, options });
+              console.debug("Options promise", this.columns);
+            }
+          }
+
+          // Normalizar opciones para columnas tipo state y array
+          if ((column.type === 'state' || column.type === 'array') && Array.isArray(column.options)) {
+            const normalizedOptions = this.normalizeOptions(column.options);
+            // Solo actualizar si las opciones normalizadas son diferentes
+            const currentOptionsStr = JSON.stringify(column.options);
+            const normalizedOptionsStr = JSON.stringify(normalizedOptions);
+            if (currentOptionsStr !== normalizedOptionsStr) {
+              this.$set(this.columns, i, { ...column, options: normalizedOptions });
+            }
+          }
         }
 
-        // Normalizar opciones para columnas tipo state y array
-        if ((column.type === 'state' || column.type === 'array') && Array.isArray(column.options)) {
-          const normalizedOptions = this.normalizeOptions(column.options);
-          this.$set(this.columns, i, { ...column, options: normalizedOptions });
-        }
+        this.optionsLoaded = true;
+      } finally {
+        // Restaurar bandera al finalizar, incluso si hay errores
+        this.isLoadingOptions = false;
       }
-
-      this.optionsLoaded = true;
     },
 
     getArrayValue(value, displayProp, options = []) {

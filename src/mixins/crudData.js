@@ -40,6 +40,7 @@ export default {
       },
       infiniteScrollKey: 1,
       optionsLoaded: false,
+      isLoadingOptions: false,
       isMobile: false,
       refreshing: false,
       fetchError: false,
@@ -255,6 +256,10 @@ export default {
 
     columns: {
       handler() {
+        // Evitar bucle infinito: no ejecutar si loadOptions() está modificando las columnas
+        if (this.isLoadingOptions) {
+          return;
+        }
         // Recargar opciones cuando cambian las columnas
         this.loadOptions();
         // Forzar re-renderizado
