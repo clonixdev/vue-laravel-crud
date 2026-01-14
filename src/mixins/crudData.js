@@ -133,6 +133,13 @@ export default {
             op = ">=";
           } else if (f.column.endsWith("_to")) {
             op = "<=";
+          } else if (f.column.endsWith("_sort")) {
+            // Aplicar operadores correctos para filtros de ordenamiento
+            if (f.value === "ASC") {
+              op = "SORTASC";
+            } else if (f.value === "DESC") {
+              op = "SORTDESC";
+            }
           }
           
           filter.push([colname, op, f.value]);
