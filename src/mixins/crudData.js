@@ -45,7 +45,7 @@ export default {
       refreshing: false,
       fetchError: false,
       principalSort: false,
-      exportFormat: 'JSON',
+      exportFormatReactive: Vue.observable({ value: 'JSON' }), // Objeto reactivo para exportFormat
       fileImport: null,
     };
   },
@@ -158,6 +158,11 @@ export default {
       return (column) => {
         // Placeholder for column options logic
       }
+    },
+
+    // Computed property para compatibilidad con exportFormat
+    exportFormat() {
+      return this.exportFormatReactive.value;
     }
   },
 

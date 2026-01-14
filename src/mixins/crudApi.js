@@ -529,7 +529,7 @@ export default {
       } else {
         params = { filters: JSON.stringify(this.finalFilters), exportItems: exportItems, };
       }
-      params.format = this.exportFormat;
+      params.format = this.exportFormatReactive.value;
       this.loading = true;
       axios
         .get(this.apiUrl + "/" + this.modelName + "/export", { params: params, responseType: "blob", })

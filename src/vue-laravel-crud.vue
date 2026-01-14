@@ -136,7 +136,7 @@ export default /*#__PURE__*/ {
       refreshing: this.refreshing,
       fetchError: this.fetchError,
       principalSort: this.principalSort,
-      exportFormat: this.exportFormat,
+      exportFormat: this.exportFormatReactive,
 
       // Computed from mixins
       itemValue: this.itemValue,

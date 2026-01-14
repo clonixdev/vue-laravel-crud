@@ -75,7 +75,7 @@
           <b-form-group label="Seleccione el formato de exportación:" class="mt-3">
             <div class="export-format-options">
               <b-form-radio
-                v-model="exportFormat"
+                v-model="exportFormatValue"
                 value="JSON"
                 class="export-format-radio"
               >
@@ -83,7 +83,7 @@
                 JSON
               </b-form-radio>
               <b-form-radio
-                v-model="exportFormat"
+                v-model="exportFormatValue"
                 value="XLSX"
                 class="export-format-radio"
               >
@@ -138,6 +138,17 @@ export default {
     // Computed property para manejar loading como objeto reactivo o booleano
     loadingValue() {
       return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    // Computed property para manejar exportFormat como objeto reactivo
+    exportFormatValue: {
+      get() {
+        return this.exportFormat && this.exportFormat.value !== undefined ? this.exportFormat.value : this.exportFormat;
+      },
+      set(value) {
+        if (this.exportFormat && this.exportFormat.value !== undefined) {
+          this.exportFormat.value = value;
+        }
+      }
     }
   },
   watch: {
