@@ -14439,7 +14439,7 @@ var _sfc_staticRenderFns$3 = [];
 var __component__$3 = /*#__PURE__*/normalizeComponent(_sfc_main$3, _sfc_render$3, _sfc_staticRenderFns$3, false, null, null, null, null);
 var CrudCustom = __component__$3.exports;
 
-var css$2 = "\n.export-format-options[data-v-a032ebce] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-a032ebce] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-a032ebce]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-a032ebce] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-a032ebce] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-a032ebce] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-a032ebce] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-a032ebce] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-a032ebce] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
+var css$2 = "\n.export-format-options[data-v-cc5f4c75] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-cc5f4c75] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-cc5f4c75]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-cc5f4c75] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
 n(css$2, {});
 
 const _sfc_main$2 = {
@@ -14458,6 +14458,17 @@ const _sfc_main$2 = {
     // Computed property para manejar loading como objeto reactivo o booleano
     loadingValue() {
       return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    // Computed property para manejar exportFormat como objeto reactivo
+    exportFormatValue: {
+      get() {
+        return this.exportFormat && this.exportFormat.value !== undefined ? this.exportFormat.value : this.exportFormat;
+      },
+      set(value) {
+        if (this.exportFormat && this.exportFormat.value !== undefined) {
+          this.exportFormat.value = value;
+        }
+      }
     }
   },
   watch: {
@@ -14656,11 +14667,11 @@ var _sfc_render$2 = function render() {
         "value": "JSON"
       },
       model: {
-        value: _vm.exportFormat,
+        value: _vm.exportFormatValue,
         callback: function ($$v) {
-          _vm.exportFormat = $$v;
+          _vm.exportFormatValue = $$v;
         },
-        expression: "exportFormat"
+        expression: "exportFormatValue"
       }
     }, [_c('b-icon-file-text', {
       staticClass: "mr-2"
@@ -14670,11 +14681,11 @@ var _sfc_render$2 = function render() {
         "value": "XLSX"
       },
       model: {
-        value: _vm.exportFormat,
+        value: _vm.exportFormatValue,
         callback: function ($$v) {
-          _vm.exportFormat = $$v;
+          _vm.exportFormatValue = $$v;
         },
-        expression: "exportFormat"
+        expression: "exportFormatValue"
       }
     }, [_c('b-icon-table', {
       staticClass: "mr-2"
@@ -14696,7 +14707,7 @@ var _sfc_render$2 = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$2 = [];
-var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "a032ebce", null, null);
+var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "cc5f4c75", null, null);
 var CrudModals = __component__$2.exports;
 
 var vueInfiniteLoading = {exports: {}};
@@ -14896,7 +14907,10 @@ var crudData = {
       refreshing: false,
       fetchError: false,
       principalSort: false,
-      exportFormat: 'JSON',
+      exportFormatReactive: Vue.observable({
+        value: 'JSON'
+      }),
+      // Objeto reactivo para exportFormat
       fileImport: null
     };
   },
@@ -14985,6 +14999,10 @@ var crudData = {
       return column => {
         // Placeholder for column options logic
       };
+    },
+    // Computed property para compatibilidad con exportFormat
+    exportFormat() {
+      return this.exportFormatReactive.value;
     }
   },
   watch: {
@@ -20909,7 +20927,7 @@ var crudApi = {
           exportItems: exportItems
         };
       }
-      params.format = this.exportFormat;
+      params.format = this.exportFormatReactive.value;
       this.loading = true;
       axios.get(this.apiUrl + "/" + this.modelName + "/export", {
         params: params,
@@ -21703,7 +21721,7 @@ var crudHelpers = {
   }
 };
 
-var css = "tr td[data-v-3751aeba]:last-child,\ntr td[data-v-3751aeba]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-3751aeba] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-3751aeba] td[data-v-3751aeba] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-3751aeba][data-v-3751aeba]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-3751aeba][data-v-3751aeba]:hover td[data-v-3751aeba] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-3751aeba]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-3751aeba]:nth-of-type(odd) td[data-v-3751aeba] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-3751aeba]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-3751aeba]:nth-of-type(even) td[data-v-3751aeba] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-3751aeba] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-3751aeba] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-3751aeba] .crud-title[data-v-3751aeba] {\n    margin: 0; }\n  .crud-header[data-v-3751aeba] .crud-search[data-v-3751aeba] {\n    max-width: 15rem; }\n    .crud-header[data-v-3751aeba] .crud-search[data-v-3751aeba] .btn[data-v-3751aeba] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-3751aeba] .crud-search[data-v-3751aeba] .btn[data-v-3751aeba].open[data-v-3751aeba] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-3751aeba] .table-options[data-v-3751aeba] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-3751aeba] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-3751aeba] {\n    table-layout: auto; }\n    .table[data-v-3751aeba] tbody[data-v-3751aeba] td[data-v-3751aeba] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-3751aeba] tbody[data-v-3751aeba] td[data-v-3751aeba]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-3751aeba] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-3751aeba] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-3751aeba] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-3751aeba] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-3751aeba] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+var css = "tr td[data-v-aaa8b202]:last-child,\ntr td[data-v-aaa8b202]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-aaa8b202] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-aaa8b202] td[data-v-aaa8b202] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-aaa8b202][data-v-aaa8b202]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-aaa8b202][data-v-aaa8b202]:hover td[data-v-aaa8b202] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(odd) td[data-v-aaa8b202] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(even) td[data-v-aaa8b202] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-aaa8b202] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-aaa8b202] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-aaa8b202] .crud-title[data-v-aaa8b202] {\n    margin: 0; }\n  .crud-header[data-v-aaa8b202] .crud-search[data-v-aaa8b202] {\n    max-width: 15rem; }\n    .crud-header[data-v-aaa8b202] .crud-search[data-v-aaa8b202] .btn[data-v-aaa8b202] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-aaa8b202] .crud-search[data-v-aaa8b202] .btn[data-v-aaa8b202].open[data-v-aaa8b202] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-aaa8b202] .table-options[data-v-aaa8b202] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-aaa8b202] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-aaa8b202] {\n    table-layout: auto; }\n    .table[data-v-aaa8b202] tbody[data-v-aaa8b202] td[data-v-aaa8b202] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-aaa8b202] tbody[data-v-aaa8b202] td[data-v-aaa8b202]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-aaa8b202] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-aaa8b202] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-aaa8b202] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-aaa8b202] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-aaa8b202] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
 n(css, {});
 
 const _sfc_main = {
@@ -21820,7 +21838,7 @@ const _sfc_main = {
       refreshing: this.refreshing,
       fetchError: this.fetchError,
       principalSort: this.principalSort,
-      exportFormat: this.exportFormat,
+      exportFormat: this.exportFormatReactive,
       // Computed from mixins
       itemValue: this.itemValue,
       isSplitGroups: this.isSplitGroups,
@@ -22254,7 +22272,7 @@ var _sfc_render = function render() {
   })], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "3751aeba", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "aaa8b202", null, null);
 var component = __component__.exports;
 
 // Import vue component
