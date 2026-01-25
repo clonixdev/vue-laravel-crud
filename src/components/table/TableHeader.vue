@@ -4,7 +4,7 @@
       <slot name="rowHead">
         <th v-for="(column, indexc) in columns" :key="indexc"
           :style="{ width: column.width ? column.width : (column.type == 'actions' ? '1%' : 'inherit') }" 
-          :class="{ 'actions-header': column.type == 'actions' }"
+          :class="{ 'actions-header': column.type == 'actions', 'checkbox-header': column.type == 'checkbox' || column.type == 'select' }"
           scope="col"
           @mouseenter="hoveredColumn = column.prop"
           @mouseleave="hoveredColumn = null">
@@ -91,12 +91,12 @@
 
             </div>
           </slot>
-          <span v-else-if="column.type == 'select'">
+          <span v-else-if="column.type == 'select'" class="header-checkbox-wrapper">
             <b-form-checkbox name="select-all" 
               :checked="isAllSelected"
               @change="toggleAll"></b-form-checkbox>
           </span>
-          <span v-else-if="column.type == 'checkbox'">
+          <span v-else-if="column.type == 'checkbox'" class="header-checkbox-wrapper">
             <b-form-checkbox name="select-all" 
               :checked="isAllSelected"
               @change="toggleAll"></b-form-checkbox>
@@ -177,6 +177,47 @@ export default {
 .actions-header {
   width: 1%;
   white-space: nowrap;
+}
+
+/* Alinear checkbox en el header */
+.checkbox-header {
+  vertical-align: middle !important;
+  text-align: center;
+}
+
+.header-checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+/* Asegurar que el form-check dentro del header esté alineado */
+.checkbox-header ::v-deep .form-check {
+  margin: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  min-height: auto;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.checkbox-header ::v-deep .form-check-input {
+  margin: 0 !important;
+  margin-top: 0 !important;
+  margin-right: 0.5rem !important;
+  vertical-align: middle;
+  position: relative;
+  float: none;
+  top: 0;
+  align-self: center;
+}
+
+.checkbox-header ::v-deep .form-check-label {
+  margin-left: 0;
+  margin-bottom: 0;
+  vertical-align: middle;
+  display: inline;
+  align-self: center;
 }
 
 .sort-filter {

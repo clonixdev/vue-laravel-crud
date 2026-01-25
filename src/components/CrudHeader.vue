@@ -2,7 +2,7 @@
   <div class="crud-header" v-if="showHeader">
     <h4 class="crud-title" v-if="showTitle">{{ title }}</h4>
     
-    <b-sidebar :visible="sidebarVisible" @hidden="closeSidebar" title="Filtrar" right shadow>
+    <b-sidebar id="crud-filters-sidebar" :visible="sidebarVisible" @hidden="closeSidebar" title="Filtrar" right shadow>
       <CrudFilters />
     </b-sidebar>
 

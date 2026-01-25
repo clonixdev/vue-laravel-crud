@@ -117,15 +117,20 @@ export default /*#__PURE__*/ {
         });
       }
       
-      // Verificar que Bootstrap JavaScript esté disponible
+    }
+  },
+  mounted() {
+    // Verificar que Bootstrap JavaScript esté disponible después de que todo se haya montado
+    this.$nextTick(() => {
       if (typeof window !== 'undefined') {
+        const version = this.normalizedBootstrapVersion;
         if (version === 5 && !window.bootstrap) {
           console.warn('Bootstrap 5 JavaScript no está disponible. Algunos componentes pueden no funcionar correctamente.');
         } else if (version === 4 && !window.$) {
           console.warn('Bootstrap 4 requiere jQuery. Algunos componentes pueden no funcionar correctamente.');
         }
       }
-    }
+    });
   },
   provide() {
     return {

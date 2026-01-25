@@ -123,9 +123,33 @@ export default {
     DocumentationViewer
   },
   data() {
+    // Obtener versión de Bootstrap desde localStorage o URL, por defecto 5
+    const getBootstrapVersion = () => {
+      if (typeof window !== 'undefined') {
+        // Primero verificar URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const versionFromUrl = urlParams.get('bootstrap');
+        if (versionFromUrl === '4' || versionFromUrl === '5') {
+          return parseInt(versionFromUrl);
+        }
+        // Luego verificar localStorage
+        const versionFromStorage = localStorage.getItem('bootstrap-version');
+        if (versionFromStorage === '4' || versionFromStorage === '5') {
+          return parseInt(versionFromStorage);
+        }
+        // Detectar versión actual
+        if (window.bootstrap) {
+          return 5;
+        } else if (window.$) {
+          return 4;
+        }
+      }
+      return 5; // Por defecto Bootstrap 5
+    };
+    
     return {
       currentExample: 'basic-table',
-      bootstrapVersion: 'auto',
+      bootstrapVersion: getBootstrapVersion(),
       detectedVersion: null,
       examples: [
         {

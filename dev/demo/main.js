@@ -7,45 +7,21 @@ import DemoApp from './DemoApp.vue';
 // El componente vue-laravel-crud soporta Bootstrap 4 y 5
 // Los wrappers internos emulan la API de bootstrap-vue (sin necesidad de bootstrap-vue)
 
-// Determinar qué versión de Bootstrap cargar
-const getBootstrapVersion = () => {
-  if (typeof window !== 'undefined') {
-    // Primero verificar URL parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    const versionFromUrl = urlParams.get('bootstrap');
-    if (versionFromUrl === '4' || versionFromUrl === '5') {
-      return parseInt(versionFromUrl);
-    }
-    // Luego verificar localStorage
-    const versionFromStorage = localStorage.getItem('bootstrap-version');
-    if (versionFromStorage === '4' || versionFromStorage === '5') {
-      return parseInt(versionFromStorage);
-    }
-  }
-  return 5; // Por defecto Bootstrap 5
-};
+// ============================================
+// CONFIGURACIÓN DE BOOTSTRAP
+// ============================================
+// Nota: Los imports estáticos se evalúan en tiempo de compilación
+// Para cambiar entre Bootstrap 4 y 5, se recarga la página
+// Los wrappers detectan automáticamente qué versión está disponible
 
-const bootstrapVersion = getBootstrapVersion();
-
-// Cargar Bootstrap según la versión seleccionada
-if (bootstrapVersion === 4) {
-  // Bootstrap 4 requiere jQuery y Popper.js
-  // Nota: jQuery debe estar cargado antes de Bootstrap 4
-  try {
-    require('bootstrap/dist/css/bootstrap.min.css');
-    // Bootstrap 4 JS se carga desde CDN o debe estar disponible globalmente
-    // Si no está disponible, se usará el fallback manual
-  } catch (e) {
-    console.warn('Bootstrap 4 CSS no encontrado, usando fallback');
-  }
-} else {
-  // Bootstrap 5 (por defecto)
-  import('bootstrap/dist/css/bootstrap.min.css');
-  import('bootstrap/dist/js/bootstrap.bundle.min.js');
-}
-
+// Por defecto cargamos Bootstrap 5
+// Si el usuario selecciona Bootstrap 4, se recarga la página
+// y los wrappers funcionarán con la versión que esté disponible
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Importar Bootstrap 5 JS - se expone automáticamente en window.bootstrap
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 // Bootstrap Icons (compatible con Bootstrap 4 y 5)
-import('bootstrap-icons/font/bootstrap-icons.css');
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 // ============================================
 // REGISTRAR COMPONENTES BOOTSTRAP GLOBALMENTE
@@ -64,7 +40,7 @@ console.log('Bootstrap components registered:', Object.keys(Bootstrap || {}).len
 const BIconComponent = Bootstrap?.BIcon || BootstrapPlugin.BIcon || BootstrapPlugin.bIcon;
 
 // Registrar iconos dinámicos adicionales que se usan en la demo
-const commonIcons = ['clipboard', 'check', 'eye', 'pencil', 'trash', 'plus', 'search', 'github', 'grid-3x3-gap', 'table', 'grid', 'kanban', 'funnel', 'puzzle', 'database', 'arrows-move', 'download', 'gear', 'check-square'];
+const commonIcons = ['clipboard', 'check', 'eye', 'pencil', 'trash', 'plus', 'search', 'github', 'grid-3x3-gap', 'table', 'grid', 'kanban', 'funnel', 'puzzle', 'database', 'arrows-move', 'download', 'gear', 'check-square', 'arrow-clockwise', 'cloud-upload', 'cloud-download', 'sort-numeric-down', 'sort-numeric-up', 'card-list'];
 if (BIconComponent) {
   commonIcons.forEach(iconName => {
     const iconComponentName = `BIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1).replace(/-([a-z])/g, (g) => g[1].toUpperCase())}`;
