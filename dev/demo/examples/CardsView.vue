@@ -36,6 +36,7 @@
       :colMd="4"
       :colSm="6"
       :colXs="12"
+      :bootstrapVersion="bootstrapVersion"
       @select="onSelect"
       @itemSaved="onItemSaved"
       @itemDeleted="onItemDeleted"
@@ -146,6 +147,11 @@ export default {
   components: {
     VueLaravelCrud,
     CodeSnippet
+  },
+  inject: {
+    bootstrapVersion: {
+      default: 'auto'
+    }
   },
   data() {
     const staticMode = isStaticMode();

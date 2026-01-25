@@ -1,10 +1,23 @@
 <script>
 import Vue from 'vue';
 import VueLaravelCrud from '@/vue-laravel-crud.vue';
-import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 
-Vue.use(BootstrapVue)
-Vue.use(BootstrapVueIcons)
+// ============================================
+// CONFIGURACIÓN DE BOOTSTRAP
+// ============================================
+// El componente vue-laravel-crud soporta Bootstrap 4 y 5
+// Los wrappers internos emulan la API de bootstrap-vue (sin necesidad de bootstrap-vue)
+
+// OPCIÓN 1: Bootstrap 4
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+// Nota: Bootstrap 4 requiere jQuery
+
+// OPCIÓN 2: Bootstrap 5 (actual)
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+// Bootstrap Icons (compatible con Bootstrap 4 y 5)
+import 'bootstrap-icons/font/bootstrap-icons.css';
 export default Vue.extend({
   name: 'ServeDev',
   components: {
@@ -14,8 +27,15 @@ export default Vue.extend({
 </script>
 <template>
   <div id="app">
-    <vue-laravel-crud ref="crud" title="Posts Categorías" :modelName="'post-categories'" :model="item"
-      :columns="columns" :showCreateBtn="true">
+    <vue-laravel-crud 
+      ref="crud" 
+      title="Posts Categorías" 
+      :modelName="'post-categories'" 
+      :model="item"
+      :columns="columns" 
+      :showCreateBtn="true"
+      :bootstrapVersion="'auto'"
+      >
       <template v-slot:show="slotProps">
       </template>
       <template v-slot:form="slotProps">

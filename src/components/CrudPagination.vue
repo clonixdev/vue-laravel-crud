@@ -77,6 +77,7 @@ export default {
     InfiniteLoading
   },
   inject: [
+    'bootstrapFactory',
     'infiniteScroll',
     'infiniteScrollKey',
     'messageLoading',

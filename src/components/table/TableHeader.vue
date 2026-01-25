@@ -126,6 +126,7 @@
 export default {
   name: 'TableHeader',
   inject: [
+    'bootstrapFactory',
     'columns',
     'enableFilters',
     'filtersVisible',

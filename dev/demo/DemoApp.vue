@@ -46,6 +46,24 @@
               </small>
             </b-card-body>
           </b-card>
+
+          <b-card class="mt-4">
+            <b-card-header>
+              <h6 class="mb-0">Bootstrap Version</h6>
+            </b-card-header>
+            <b-card-body>
+              <b-form-group label="Versión de Bootstrap:">
+                <b-form-select v-model="bootstrapVersion" @change="onBootstrapVersionChange">
+                  <option :value="4">Bootstrap 4</option>
+                  <option :value="5">Bootstrap 5</option>
+                </b-form-select>
+              </b-form-group>
+              <small class="text-muted">
+                <p>Versión actual: <strong>Bootstrap {{ bootstrapVersion }}</strong></p>
+                <p v-if="detectedVersion" class="text-info">Detectada: Bootstrap {{ detectedVersion }}</p>
+              </small>
+            </b-card-body>
+          </b-card>
         </b-col>
 
         <b-col md="9" lg="10">
@@ -107,6 +125,8 @@ export default {
   data() {
     return {
       currentExample: 'basic-table',
+      bootstrapVersion: 'auto',
+      detectedVersion: null,
       examples: [
         {
           id: 'basic-table',
@@ -266,10 +286,40 @@ export default {
       return this.examples.find(example => example.id === this.currentExample) || this.examples[0];
     }
   },
+  mounted() {
+    // Detectar versión de Bootstrap
+    this.detectBootstrapVersion();
+  },
   methods: {
     setCurrentExample(exampleId) {
       this.currentExample = exampleId;
+    },
+    detectBootstrapVersion() {
+      if (typeof window !== 'undefined') {
+        if (window.bootstrap) {
+          this.detectedVersion = 5;
+        } else if (window.$) {
+          this.detectedVersion = 4;
+        }
+      }
+    },
+    onBootstrapVersionChange() {
+      // Guardar versión seleccionada en localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('bootstrap-version', this.bootstrapVersion.toString());
+      }
+      
+      // Recargar la página con la nueva versión
+      // Usar URL parameter para que main.js cargue la versión correcta
+      const url = new URL(window.location.href);
+      url.searchParams.set('bootstrap', this.bootstrapVersion.toString());
+      window.location.href = url.toString();
     }
+  },
+  provide() {
+    return {
+      bootstrapVersion: this.bootstrapVersion
+    };
   }
 };
 </script>

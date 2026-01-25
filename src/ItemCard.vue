@@ -64,6 +64,7 @@
   
   <script>
   export default {
+    inject: ['bootstrapFactory'],
     props: {
       item: Object,
       columns: Array,

@@ -72,6 +72,7 @@ export default {
     ItemCard
   },
   inject: [
+    'bootstrapFactory',
     'displayMode',
     'displayModes',
     'items',

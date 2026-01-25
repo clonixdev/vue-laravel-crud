@@ -252,6 +252,7 @@ export default {
     RenderCustomFilter
   },
   inject: [
+    'bootstrapFactory',
     'columns',
     'customFilters',
     'isColumnHasFilter',

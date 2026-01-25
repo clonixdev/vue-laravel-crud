@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Modal de formulario -->
-    <b-modal :id="'modal-form-item-' + modelName" hide-footer size="xl" :title="title" no-close-on-backdrop>
+    <b-modal :id="'modal-form-item-' + modelName" hide-footer size="xl" :title="title">
       <b-overlay :show="loadingValue" rounded="sm">
         <template v-if="validate">
           <form @submit="saveItem">
@@ -33,7 +33,7 @@
     </b-modal>
 
     <!-- Modal de visualización -->
-    <b-modal :id="'modal-show-item-' + modelName" hide-footer size="xl" :title="title" no-close-on-backdrop>
+    <b-modal :id="'modal-show-item-' + modelName" hide-footer size="xl" :title="title">
       <template v-if="reactiveItem">
         <slot name="show" v-bind:item="reactiveItem">
           <b-list-group>
@@ -109,6 +109,7 @@
 export default {
   name: 'CrudModals',
   inject: [
+    'bootstrapFactory',
     'modelName',
     'title',
     'loading',

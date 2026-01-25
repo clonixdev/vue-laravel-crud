@@ -52,6 +52,7 @@ export default {
     draggable,
     KanbanCard
   },
+  inject: ['bootstrapFactory'],
   props: {
     column: Object,
     colIndex: Number,

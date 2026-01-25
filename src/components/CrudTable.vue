@@ -57,6 +57,7 @@ export default {
     TableRow
   },
   inject: [
+    'bootstrapFactory',
     'displayMode',
     'displayModes',
     'tableContainerClass',

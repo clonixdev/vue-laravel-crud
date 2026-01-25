@@ -124,6 +124,7 @@ export default {
     columnIndex: Number
   },
   inject: [
+    'bootstrapFactory',
     'itemValue',
     'getStateValue',
     'getStateOptions',

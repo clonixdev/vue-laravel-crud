@@ -47,6 +47,7 @@
       :columns="columns"
       :ajax="ajax"
       :apiUrl="apiUrl"
+      :bootstrapVersion="bootstrapVersion"
       @select="onSelect"
       @itemSaved="onItemSaved"
       @itemDeleted="onItemDeleted"
@@ -135,6 +136,11 @@ export default {
   components: {
     VueLaravelCrud,
     CodeSnippet
+  },
+  inject: {
+    bootstrapVersion: {
+      default: 'auto'
+    }
   },
   data() {
     const staticMode = isStaticMode();

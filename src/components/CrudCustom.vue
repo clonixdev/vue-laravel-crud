@@ -24,6 +24,7 @@
 export default {
   name: 'CrudCustom',
   inject: [
+    'bootstrapFactory',
     'displayMode',
     'displayModes',
     'listContainerClass',

@@ -61,6 +61,7 @@ export default {
     CrudFilters
   },
   inject: [
+    'bootstrapFactory',
     'showHeader',
     'showTitle',
     'title',

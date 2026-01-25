@@ -12,11 +12,21 @@ npm install vue-laravel-crud
 
 Este componente requiere las siguientes dependencias:
 
-* `bootstrap-vue` - Framework de componentes UI
+### Dependencias Principales
 * `axios` - Cliente HTTP para peticiones AJAX
 * `vuedraggable` - Para funcionalidad de drag & drop
 * `moment` - Para formateo de fechas
 * `vue-infinite-loading` - Para scroll infinito (opcional)
+
+### Dependencias de Bootstrap
+
+**Bootstrap 4 o 5 (requerido)**
+* `bootstrap@^4.6.2` o `bootstrap@^5.0.0` - Framework CSS Bootstrap
+
+**Bootstrap Icons (recomendado)**
+* `bootstrap-icons@^1.0.0` - Librería de iconos oficial de Bootstrap (compatible con Bootstrap 4 y 5)
+
+> **Nota**: El componente soporta Bootstrap 4 y 5 sin necesidad de `bootstrap-vue`. Los wrappers internos emulan la API de bootstrap-vue pero funcionan directamente con Bootstrap. Bootstrap Icons es compatible con ambas versiones de Bootstrap.
 
 ## ¿Cómo funciona?
 
@@ -222,6 +232,12 @@ export default {
 | `model` | Estructura del modelo para formularios | `Object` | `{ name: "", email: "" }` |
 | `columns` | Array de columnas de la tabla | `Array` | Ver ejemplo abajo |
 
+### Props Opcionales - Bootstrap
+
+| Propiedad | Descripción | Tipo | Valor por defecto |
+|:----------|:------------|:-----|:------------------|
+| `bootstrapVersion` | Versión de Bootstrap a usar (4, 5, o 'auto') | `Number\|String` | `'auto'` |
+
 ### Props Opcionales - Configuración General
 
 | Propiedad | Descripción | Tipo | Valor por defecto |
@@ -382,6 +398,69 @@ El componente emite los siguientes eventos:
 ## Ejemplos Adicionales
 
 Para ver más ejemplos y demos completos, visita el directorio `dev/demo/examples/` en el repositorio.
+
+## Bootstrap 4 y 5
+
+Este componente soporta **Bootstrap 4** y **Bootstrap 5** sin necesidad de `bootstrap-vue`. Los componentes internos usan wrappers que emulan la API de bootstrap-vue pero funcionan directamente con Bootstrap.
+
+### Instalación
+
+**Bootstrap 4:**
+```bash
+npm install bootstrap@^4.6.2
+```
+
+**Bootstrap 5:**
+```bash
+npm install bootstrap@^5.3.0
+```
+
+### Configuración
+
+**Bootstrap 4:**
+```javascript
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+// Nota: Bootstrap 4 requiere jQuery
+```
+
+**Bootstrap 5:**
+```javascript
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+```
+
+### Uso
+
+```vue
+<!-- Bootstrap 4 -->
+<vue-laravel-crud 
+  :bootstrapVersion="4"
+  :modelName="'users'"
+  :model="model"
+  :columns="columns"
+/>
+
+<!-- Bootstrap 5 -->
+<vue-laravel-crud 
+  :bootstrapVersion="5"
+  :modelName="'users'"
+  :model="model"
+  :columns="columns"
+/>
+
+<!-- Detección automática -->
+<vue-laravel-crud 
+  :bootstrapVersion="'auto'"
+  :modelName="'users'"
+  :model="model"
+  :columns="columns"
+/>
+```
+
+> **Nota**: El componente incluye wrappers internos que emulan la API de bootstrap-vue, por lo que **NO necesitas instalar `bootstrap-vue`**. Sin embargo, se recomienda instalar `bootstrap-icons` para tener iconos completos (compatible con Bootstrap 4 y 5).
 
 ## Licencia
 

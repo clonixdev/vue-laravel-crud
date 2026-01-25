@@ -15,6 +15,12 @@ import crudFilters from "./mixins/crudFilters.js";
 import crudValidation from "./mixins/crudValidation.js";
 import crudHelpers from "./mixins/crudHelpers.js";
 
+// Import Bootstrap version utilities
+import { normalizeBootstrapVersion } from "./utils/bootstrap-version.js";
+import { getBootstrapComponent, getBootstrapComponents } from "./utils/bootstrap-factory.js";
+// Import toast plugin
+import ToastPlugin from "./utils/toast.js";
+
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
   components: {
@@ -33,8 +39,100 @@ export default /*#__PURE__*/ {
     crudValidation,
     crudHelpers
   ],
+  computed: {
+    normalizedBootstrapVersion() {
+      return normalizeBootstrapVersion(this.bootstrapVersion);
+    },
+    bootstrapFactory() {
+      return {
+        getComponent: (name) => getBootstrapComponent(name, this.normalizedBootstrapVersion),
+        getComponents: () => getBootstrapComponents(this.normalizedBootstrapVersion),
+        version: this.normalizedBootstrapVersion
+      };
+    }
+  },
+  beforeCreate() {
+    // Instalar plugin de toasts si no está instalado
+    if (!Vue.prototype.$toast) {
+      Vue.use(ToastPlugin);
+    }
+  },
+  created() {
+    // Registrar componentes de Bootstrap globalmente según la versión
+    // Esto permite que todos los componentes hijos usen <b-button>, etc.
+    // Solo registrar si no están ya registrados (para evitar sobrescribir bootstrap-vue si está disponible)
+    if (this.bootstrapFactory) {
+      const components = this.bootstrapFactory.getComponents();
+      const version = this.normalizedBootstrapVersion;
+      
+      // Registrar todos los componentes
+      Object.keys(components).forEach(key => {
+        if (components[key] && typeof components[key] === 'object') {
+          // Registrar con nombre PascalCase (BButton)
+          if (!Vue.options.components[key]) {
+            Vue.component(key, components[key]);
+          }
+          
+          // También registrar con prefijo 'b-' (b-button)
+          const prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
+          if (!Vue.options.components[prefixedName]) {
+            Vue.component(prefixedName, components[key]);
+          }
+          
+          // También registrar con nombre camelCase (bButton) para compatibilidad
+          const camelName = key.charAt(0).toLowerCase() + key.slice(1);
+          if (!Vue.options.components[camelName]) {
+            Vue.component(camelName, components[key]);
+          }
+        }
+      });
+      
+      // Registrar componente BIcon para iconos dinámicos (b-icon-*)
+      if (components.BIcon && !Vue.options.components['BIcon']) {
+        Vue.component('BIcon', components.BIcon);
+        Vue.component('b-icon', components.BIcon);
+        
+        // Crear componentes dinámicos para iconos comunes
+        const commonIcons = ['clipboard', 'check', 'eye', 'pencil', 'trash', 'plus', 'search'];
+        commonIcons.forEach(iconName => {
+          const iconComponentName = `BIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}`;
+          const iconKebabName = `b-icon-${iconName}`;
+          
+          if (!Vue.options.components[iconComponentName] && !Vue.options.components[iconKebabName]) {
+            // Crear componente wrapper para el icono específico
+            const IconWrapper = Vue.extend({
+              name: iconComponentName,
+              extends: components.BIcon,
+              props: {
+                icon: {
+                  type: String,
+                  default: iconName
+                }
+              }
+            });
+            
+            Vue.component(iconComponentName, IconWrapper);
+            Vue.component(iconKebabName, IconWrapper);
+          }
+        });
+      }
+      
+      // Verificar que Bootstrap JavaScript esté disponible
+      if (typeof window !== 'undefined') {
+        if (version === 5 && !window.bootstrap) {
+          console.warn('Bootstrap 5 JavaScript no está disponible. Algunos componentes pueden no funcionar correctamente.');
+        } else if (version === 4 && !window.$) {
+          console.warn('Bootstrap 4 requiere jQuery. Algunos componentes pueden no funcionar correctamente.');
+        }
+      }
+    }
+  },
   provide() {
     return {
+      // Bootstrap version and factory
+      bootstrapVersion: this.normalizedBootstrapVersion,
+      bootstrapFactory: this.bootstrapFactory,
+      
       // Props
       modelName: this.modelName,
       title: this.title,
@@ -221,6 +319,12 @@ export default /*#__PURE__*/ {
   },
   props: {
     modelName: String,
+    
+    bootstrapVersion: {
+      type: [Number, String],
+      default: 'auto',
+      validator: (value) => value === 'auto' || value === 4 || value === 5
+    },
 
     title: String,
     model: {

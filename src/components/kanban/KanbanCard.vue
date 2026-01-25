@@ -74,6 +74,7 @@
 <script>
 export default {
   name: 'KanbanCard',
+  inject: ['bootstrapFactory'],
   props: {
     item: Object,
     columns: Array,

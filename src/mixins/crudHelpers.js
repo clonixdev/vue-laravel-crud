@@ -448,23 +448,51 @@ export default {
         error_message = error.message;
       }
 
-      this.$bvToast.toast(error_message, {
-        title: `Error`,
-        toaster: "b-toaster-bottom-right",
-        variant: "danger",
-        solid: true,
-        appendToast: true,
-      });
+      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
+      if (this.$toast) {
+        this.$toast(error_message, {
+          title: `Error`,
+          toaster: "b-toaster-bottom-right",
+          variant: "danger",
+          solid: true,
+          appendToast: true,
+        });
+      } else if (this.$bvToast && this.$bvToast.toast) {
+        this.$bvToast.toast(error_message, {
+          title: `Error`,
+          toaster: "b-toaster-bottom-right",
+          variant: "danger",
+          solid: true,
+          appendToast: true,
+        });
+      } else {
+        // Fallback: usar console.error
+        console.error('Error:', error_message);
+      }
     },
 
     toastSuccess(message) {
-      this.$bvToast.toast(message, {
-        title: `Listo`,
-        toaster: "b-toaster-bottom-right",
-        variant: "success",
-        solid: true,
-        appendToast: true,
-      });
+      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
+      if (this.$toast) {
+        this.$toast(message, {
+          title: `Listo`,
+          toaster: "b-toaster-bottom-right",
+          variant: "success",
+          solid: true,
+          appendToast: true,
+        });
+      } else if (this.$bvToast && this.$bvToast.toast) {
+        this.$bvToast.toast(message, {
+          title: `Listo`,
+          toaster: "b-toaster-bottom-right",
+          variant: "success",
+          solid: true,
+          appendToast: true,
+        });
+      } else {
+        // Fallback: usar console.log
+        console.log('Success:', message);
+      }
     },
 
     downloadBlobResponse(response, extension = null) {
