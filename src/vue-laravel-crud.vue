@@ -1,5 +1,5 @@
 <script>
-import Vue from 'vue';
+import { defineComponent, h } from 'vue';
 import CrudHeader from "./components/CrudHeader.vue";
 import CrudTable from "./components/CrudTable.vue";
 import CrudCards from "./components/CrudCards.vue";
@@ -53,8 +53,9 @@ export default /*#__PURE__*/ {
   },
   beforeCreate() {
     // Instalar plugin de toasts si no está instalado
-    if (!Vue.prototype.$toast) {
-      Vue.use(ToastPlugin);
+    const instance = getCurrentInstance();
+    if (instance && instance.appContext && !instance.appContext.config.globalProperties.$toast) {
+      instance.appContext.app.use(ToastPlugin);
     }
   },
   created() {
@@ -64,33 +65,37 @@ export default /*#__PURE__*/ {
     if (this.bootstrapFactory) {
       const components = this.bootstrapFactory.getComponents();
       const version = this.normalizedBootstrapVersion;
+      const instance = getCurrentInstance();
+      const app = instance?.appContext?.app;
+      
+      if (!app) return;
       
       // Registrar todos los componentes
       Object.keys(components).forEach(key => {
         if (components[key] && typeof components[key] === 'object') {
           // Registrar con nombre PascalCase (BButton)
-          if (!Vue.options.components[key]) {
-            Vue.component(key, components[key]);
+          if (!app._context.components[key]) {
+            app.component(key, components[key]);
           }
           
           // También registrar con prefijo 'b-' (b-button)
           const prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
-          if (!Vue.options.components[prefixedName]) {
-            Vue.component(prefixedName, components[key]);
+          if (!app._context.components[prefixedName]) {
+            app.component(prefixedName, components[key]);
           }
           
           // También registrar con nombre camelCase (bButton) para compatibilidad
           const camelName = key.charAt(0).toLowerCase() + key.slice(1);
-          if (!Vue.options.components[camelName]) {
-            Vue.component(camelName, components[key]);
+          if (!app._context.components[camelName]) {
+            app.component(camelName, components[key]);
           }
         }
       });
       
       // Registrar componente BIcon para iconos dinámicos (b-icon-*)
-      if (components.BIcon && !Vue.options.components['BIcon']) {
-        Vue.component('BIcon', components.BIcon);
-        Vue.component('b-icon', components.BIcon);
+      if (components.BIcon && !app._context.components['BIcon']) {
+        app.component('BIcon', components.BIcon);
+        app.component('b-icon', components.BIcon);
         
         // Crear componentes dinámicos para iconos comunes
         const commonIcons = ['clipboard', 'check', 'eye', 'pencil', 'trash', 'plus', 'search'];
@@ -98,21 +103,23 @@ export default /*#__PURE__*/ {
           const iconComponentName = `BIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}`;
           const iconKebabName = `b-icon-${iconName}`;
           
-          if (!Vue.options.components[iconComponentName] && !Vue.options.components[iconKebabName]) {
-            // Crear componente wrapper para el icono específico
-            const IconWrapper = Vue.extend({
+          if (!app._context.components[iconComponentName] && !app._context.components[iconKebabName]) {
+            // Crear componente wrapper para el icono específico usando defineComponent
+            const IconWrapper = defineComponent({
               name: iconComponentName,
-              extends: components.BIcon,
               props: {
                 icon: {
                   type: String,
                   default: iconName
                 }
+              },
+              setup(props, { attrs, slots }) {
+                return () => h(components.BIcon, { ...attrs, icon: props.icon || iconName }, slots);
               }
             });
             
-            Vue.component(iconComponentName, IconWrapper);
-            Vue.component(iconKebabName, IconWrapper);
+            app.component(iconComponentName, IconWrapper);
+            app.component(iconKebabName, IconWrapper);
           }
         });
       }
@@ -651,17 +658,17 @@ export default /*#__PURE__*/ {
     <CrudHeader />
     
     <CrudTable>
-      <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+      <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
         <slot :name="name" v-bind="slotProps" />
       </template>
     </CrudTable>
     <CrudCards>
-      <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+      <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
         <slot :name="name" v-bind="slotProps" />
       </template>
     </CrudCards>
     <CrudKanban>
-      <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+      <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
         <slot :name="name" v-bind="slotProps" />
       </template>
     </CrudKanban>
@@ -671,7 +678,7 @@ export default /*#__PURE__*/ {
     
     <CrudPagination />
     <CrudModals ref="crudModals">
-      <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+      <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
         <slot :name="name" v-bind="slotProps" />
       </template>
     </CrudModals>

@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { createApp, defineComponent, h, getCurrentInstance } from 'vue';
 import DemoApp from './DemoApp.vue';
 
 // ============================================
@@ -30,8 +30,11 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 // en toda la aplicación, incluso antes de que se monte vue-laravel-crud
 import BootstrapPlugin, { Bootstrap } from '../../src/bootstrap-wrappers/index.js';
 
+// Crear la aplicación Vue 3
+const app = createApp(DemoApp);
+
 // Instalar el plugin Bootstrap para registrar todos los componentes
-Vue.use(BootstrapPlugin);
+app.use(BootstrapPlugin);
 
 // Debug: Verificar que los componentes se registraron
 console.log('Bootstrap components registered:', Object.keys(Bootstrap || {}).length, 'components');
@@ -46,27 +49,25 @@ if (BIconComponent) {
     const iconComponentName = `BIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1).replace(/-([a-z])/g, (g) => g[1].toUpperCase())}`;
     const iconKebabName = `b-icon-${iconName}`;
     
-    if (!Vue.options.components[iconComponentName] && !Vue.options.components[iconKebabName]) {
-      const IconWrapper = Vue.extend({
+    if (!app._context.components[iconComponentName] && !app._context.components[iconKebabName]) {
+      const IconWrapper = defineComponent({
         name: iconComponentName,
-        extends: BIconComponent,
         props: {
           icon: {
             type: String,
             default: iconName
           }
+        },
+        setup(props, { attrs, slots }) {
+          return () => h(BIconComponent, { ...attrs, icon: props.icon || iconName }, slots);
         }
       });
       
-      Vue.component(iconComponentName, IconWrapper);
-      Vue.component(iconKebabName, IconWrapper);
+      app.component(iconComponentName, IconWrapper);
+      app.component(iconKebabName, IconWrapper);
     }
   });
 }
 
-Vue.config.productionTip = false;
-
-new Vue({
-  render: (h) => h(DemoApp),
-}).$mount('#app');
+app.mount('#app');
 

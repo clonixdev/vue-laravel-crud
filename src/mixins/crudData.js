@@ -1,5 +1,5 @@
 import moment from "moment";
-import Vue from "vue";
+import { reactive } from "vue";
 
 export default {
   data() {
@@ -29,9 +29,9 @@ export default {
       internalFilters: [],
       forceRecomputeCounter: 0,
       _displayMode: 1, // Propiedad local para displayMode (se inicializará desde la prop en created())
-      displayModeReactive: Vue.observable({ value: 1 }), // Objeto reactivo para provide/inject
-      loadingReactive: Vue.observable({ value: false }), // Objeto reactivo para loading
-      firstLoadReactive: Vue.observable({ value: false }), // Objeto reactivo para firstLoad
+      displayModeReactive: reactive({ value: 1 }), // Objeto reactivo para provide/inject
+      loadingReactive: reactive({ value: false }), // Objeto reactivo para loading
+      firstLoadReactive: reactive({ value: false }), // Objeto reactivo para firstLoad
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -45,7 +45,7 @@ export default {
       refreshing: false,
       fetchError: false,
       principalSort: false,
-      exportFormatReactive: Vue.observable({ value: 'JSON' }), // Objeto reactivo para exportFormat
+      exportFormatReactive: reactive({ value: 'JSON' }), // Objeto reactivo para exportFormat
       fileImport: null,
     };
   },
@@ -367,7 +367,7 @@ export default {
     this.loadOptions();
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     // Eliminar el oyente de eventos al destruir el componente para evitar pérdidas de memoria
     window.removeEventListener("resize", this.handleResize);
   },

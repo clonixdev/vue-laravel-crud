@@ -85,13 +85,13 @@ Object.keys(BootstrapComponents).forEach(key => {
 
 // Plugin Vue
 const BootstrapPlugin = {
-  install(Vue) {
+  install(app) {
     // Registrar todos los componentes globalmente
     Object.keys(BootstrapComponents).forEach(key => {
-      Vue.component(key, BootstrapComponents[key]);
+      app.component(key, BootstrapComponents[key]);
       // También registrar con prefijo 'b-'
       const prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
-      Vue.component(prefixedName, BootstrapComponents[key]);
+      app.component(prefixedName, BootstrapComponents[key]);
     });
   },
   ...BootstrapComponents,

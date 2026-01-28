@@ -333,15 +333,15 @@ export const modalHelper = {
  * Plugin Vue para agregar $toast y $bvModal a las instancias
  */
 export default {
-  install(Vue) {
-    Vue.prototype.$toast = showToast;
+  install(app) {
+    app.config.globalProperties.$toast = showToast;
     
     // Compatibilidad con bootstrap-vue API
-    Vue.prototype.$bvToast = {
+    app.config.globalProperties.$bvToast = {
       toast: showToast
     };
     
     // Helper para modales
-    Vue.prototype.$bvModal = modalHelper;
+    app.config.globalProperties.$bvModal = modalHelper;
   }
 };

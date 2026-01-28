@@ -154,7 +154,7 @@ export default {
       }
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.dropdownInstance) {
       this.dropdownInstance.dispose();
     }

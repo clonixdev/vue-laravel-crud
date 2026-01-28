@@ -194,7 +194,7 @@ export default {
       document.addEventListener('keydown', this.escKeyHandler);
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.modalInstance) {
       this.modalInstance.dispose();
     }

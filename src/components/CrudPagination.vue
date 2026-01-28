@@ -5,19 +5,8 @@
       ref="infiniteLoading" 
       @infinite="infiniteHandler" 
       v-if="infiniteScroll"
-      :forceUseInfiniteWrapper="true" 
       :key="infiniteScrollKey"
-    >
-      <div slot="spinner">
-        <div class="text-center">{{ messageLoading }}</div>
-      </div>
-      <div slot="no-more">
-        <div class="text-center" v-if="!loadingValue">{{ messageNoMore }}</div>
-      </div>
-      <div slot="no-results">
-        <div class="text-center" v-if="!loadingValue && firstLoadValue">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div>
-      </div>
-    </infinite-loading>
+    />
 
     <!-- Paginador -->
     <div class="paginator-container" v-if="!infiniteScroll">
@@ -69,7 +58,7 @@
 </template>
 
 <script>
-import InfiniteLoading from 'vue-infinite-loading';
+import InfiniteLoading from 'v3-infinite-loading';
 
 export default {
   name: 'CrudPagination',

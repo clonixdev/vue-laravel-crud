@@ -582,7 +582,12 @@ export default {
         fetchPromise.then(() => {
           const infiniteLoadingRef = this.$refs.infiniteLoading;
           if (infiniteLoadingRef) {
-            infiniteLoadingRef.stateChanger.reset();
+            // v3-infinite-loading usa $state.reset() en lugar de stateChanger.reset()
+            if (infiniteLoadingRef.$state && typeof infiniteLoadingRef.$state.reset === 'function') {
+              infiniteLoadingRef.$state.reset();
+            } else if (infiniteLoadingRef.reset && typeof infiniteLoadingRef.reset === 'function') {
+              infiniteLoadingRef.reset();
+            }
           } else {
             console.debug("infiniteLoadingRef not set");
           }

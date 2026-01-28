@@ -4,14 +4,14 @@ import component from '@/vue-laravel-crud.vue';
 
 // Default export is installable instance of component.
 // IIFE injects install function into component, allowing component
-// to be registered via Vue.use() as well as Vue.component(),
+// to be registered via app.use() as well as app.component(),
 export default /*#__PURE__*/(() => {
   // Get component instance
   const installable = component;
 
-  // Attach install function executed by Vue.use()
-  installable.install = (Vue) => {
-    Vue.component('VueLaravelCrud', installable);
+  // Attach install function executed by app.use()
+  installable.install = (app) => {
+    app.component('VueLaravelCrud', installable);
   };
   return installable;
 })();

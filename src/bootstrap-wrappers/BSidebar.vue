@@ -173,7 +173,7 @@ export default {
       });
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.sidebarInstance) {
       this.sidebarInstance.dispose();
     }

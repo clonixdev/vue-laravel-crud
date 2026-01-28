@@ -17,7 +17,7 @@
         :index="index"
         :columnIndex="indexc"
       >
-        <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+        <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
           <slot :name="name" v-bind="slotProps" />
         </template>
       </TableCell>

@@ -40,7 +40,7 @@
                 :updateItem="updateItem" 
                 :removeItem="removeItem"
               >
-                <template v-for="(slot, name) in $scopedSlots" v-slot:[name]="slotProps">
+                <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
                   <slot :name="name" v-bind="slotProps" />
                 </template>
               </ItemCard>
@@ -57,13 +57,17 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { getCurrentInstance } from 'vue';
 import draggable from "vuedraggable";
 import VueMasonry from 'vue-masonry-css';
 import ItemCard from '../ItemCard.vue';
 
 // Registrar el componente masonry usando el Plugin
-Vue.use(VueMasonry);
+// En Vue 3, los plugins se registran a través de la app
+const instance = getCurrentInstance();
+if (instance && instance.appContext) {
+  instance.appContext.app.use(VueMasonry);
+}
 
 export default {
   name: 'CrudCards',
