@@ -41,7 +41,8 @@ export default {
             const options = await column.options;
             // Solo actualizar si las opciones realmente cambiaron
             if (JSON.stringify(column.options) !== JSON.stringify(options)) {
-              this.$set(this.columns, i, { ...column, options });
+              // En Vue 3, la asignación directa es reactiva
+              this.columns[i] = { ...column, options };
               console.debug("Options promise", this.columns);
             }
           }
@@ -53,7 +54,8 @@ export default {
             const currentOptionsStr = JSON.stringify(column.options);
             const normalizedOptionsStr = JSON.stringify(normalizedOptions);
             if (currentOptionsStr !== normalizedOptionsStr) {
-              this.$set(this.columns, i, { ...column, options: normalizedOptions });
+              // En Vue 3, la asignación directa es reactiva
+              this.columns[i] = { ...column, options: normalizedOptions };
             }
           }
         }

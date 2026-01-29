@@ -1,5 +1,4 @@
 import moment from "moment";
-import { reactive } from "vue";
 
 export default {
   data() {
@@ -29,9 +28,9 @@ export default {
       internalFilters: [],
       forceRecomputeCounter: 0,
       _displayMode: 1, // Propiedad local para displayMode (se inicializará desde la prop en created())
-      displayModeReactive: reactive({ value: 1 }), // Objeto reactivo para provide/inject
-      loadingReactive: reactive({ value: false }), // Objeto reactivo para loading
-      firstLoadReactive: reactive({ value: false }), // Objeto reactivo para firstLoad
+      displayModeReactive: { value: 1 }, // Objeto reactivo para provide/inject
+      loadingReactive: { value: false }, // Objeto reactivo para loading
+      firstLoadReactive: { value: false }, // Objeto reactivo para firstLoad
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -45,7 +44,7 @@ export default {
       refreshing: false,
       fetchError: false,
       principalSort: false,
-      exportFormatReactive: reactive({ value: 'JSON' }), // Objeto reactivo para exportFormat
+      exportFormatReactive: { value: 'JSON' }, // Objeto reactivo para exportFormat
       fileImport: null,
     };
   },

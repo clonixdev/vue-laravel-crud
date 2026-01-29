@@ -205,9 +205,12 @@
 </template>
 
 <script>
-// Componente funcional para renderizar filtros custom con callback
-const RenderCustomFilter = {
-  functional: true,
+import { h, defineComponent } from 'vue';
+
+// Componente para renderizar filtros custom con callback
+// En Vue 3, usamos defineComponent con setup
+const RenderCustomFilter = defineComponent({
+  name: 'RenderCustomFilter',
   props: {
     renderFunction: {
       type: Function,
@@ -234,17 +237,30 @@ const RenderCustomFilter = {
       required: true
     }
   },
-  render(h, context) {
-    const { renderFunction, customFilter, filter, internalFilterByProp, getFilterForColumn, onChangeFilter } = context.props;
-    return renderFunction(h, {
-      column: customFilter,
-      filter: filter,
-      internalFilterByProp: internalFilterByProp,
-      getFilterForColumn: getFilterForColumn,
-      onChangeFilter: onChangeFilter
-    });
+  setup(props) {
+    return () => {
+      const { renderFunction, customFilter, filter, internalFilterByProp, getFilterForColumn, onChangeFilter } = props;
+      
+      if (!renderFunction || typeof renderFunction !== 'function') {
+        console.warn('RenderCustomFilter: renderFunction is not a function', renderFunction);
+        return null;
+      }
+      
+      try {
+        return renderFunction(h, {
+          column: customFilter,
+          filter: filter,
+          internalFilterByProp: internalFilterByProp,
+          getFilterForColumn: getFilterForColumn,
+          onChangeFilter: onChangeFilter
+        });
+      } catch (error) {
+        console.error('Error rendering custom filter:', error);
+        return null;
+      }
+    };
   }
-};
+});
 
 export default {
   name: 'CrudFilters',

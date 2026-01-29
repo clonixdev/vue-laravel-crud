@@ -131,10 +131,15 @@ export default {
     reactiveItem() {
       // Si hay una función getItem, usarla para obtener el item actual
       if (this.getItem && typeof this.getItem === 'function') {
-        return this.getItem();
+        try {
+          return this.getItem();
+        } catch (e) {
+          console.debug('Error getting item from getItem function:', e);
+          return this.item || {};
+        }
       }
-      // Si no, usar el item inyectado directamente
-      return this.item;
+      // Si no, usar el item inyectado directamente, con fallback a objeto vacío
+      return this.item || {};
     },
     // Computed property para manejar loading como objeto reactivo o booleano
     loadingValue() {
@@ -152,16 +157,8 @@ export default {
       }
     }
   },
-  watch: {
-    // Watch el item inyectado para forzar actualización
-    item: {
-      handler() {
-        this.$forceUpdate();
-      },
-      deep: true,
-      immediate: true
-    }
-  }
+  // Eliminamos el watcher problemático - Vue 3 maneja la reactividad automáticamente
+  // El computed reactiveItem se actualizará cuando cambie el item inyectado
 };
 </script>
 

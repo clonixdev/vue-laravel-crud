@@ -22,18 +22,20 @@
           @add="onDraggableAdded($event)"
           @change="onDraggableChange($event)" 
           :options="draggableOptions"
+          item-key="id"
         >
-          <TableRow 
-            v-for="(item, index) in itemsList" 
-            v-bind:key="index"
-            :item="item"
-            :index="index"
-            :grouped="grouped"
-          >
-            <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
-              <slot :name="name" v-bind="slotProps" />
-            </template>
-          </TableRow>
+          <template #item="{ element, index }">
+            <TableRow 
+              :item="element"
+              :index="index"
+              :grouped="grouped"
+              class="item"
+            >
+              <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
+                <slot :name="name" v-bind="slotProps" />
+              </template>
+            </TableRow>
+          </template>
         </draggable>
       </table>
       

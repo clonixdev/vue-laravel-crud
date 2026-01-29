@@ -70,7 +70,8 @@ export default {
       if (checked) {
         // Seleccionar todos los items de la lista actual (itemsList)
         this.itemsList.forEach((item) => {
-          this.$set(item, 'selected', true);
+          // En Vue 3, la asignación directa es reactiva
+          item.selected = true;
           // Agregar a selectedItems si no está ya
           if (!this.selectedItems.find((si) => si.id === item.id)) {
             this.selectedItems.push(item);
@@ -79,13 +80,13 @@ export default {
       } else {
         // Deseleccionar todos
         this.selectedItems.forEach(
-          (item) => this.$set(item, 'selected', false)
+          (item) => { item.selected = false; }
         );
         this.items.forEach(
-          (item) => this.$set(item, 'selected', false)
+          (item) => { item.selected = false; }
         );
         this.itemsList.forEach(
-          (item) => this.$set(item, 'selected', false)
+          (item) => { item.selected = false; }
         );
         // Usar splice para mantener la referencia del array y reactividad con provide/inject
         this.selectedItems.splice(0, this.selectedItems.length);
@@ -94,15 +95,11 @@ export default {
       this.onSelect();
 
       console.debug("toggle all", this.selectedItems);
-      // Forzar actualización inmediata y en el siguiente tick
-      this.$forceUpdate();
-      this.$nextTick(() => {
-        this.$forceUpdate();
-      });
     },
 
     unSelectItem(item) {
-      this.$set(item, 'selected', false);
+      // En Vue 3, la asignación directa es reactiva
+      item.selected = false;
 
       // Filtrar el array y reasignarlo para asegurar reactividad
       const filtered = this.selectedItems.filter(
@@ -110,26 +107,23 @@ export default {
       );
       // Vaciar el array y luego agregar los elementos filtrados para mantener la referencia
       this.selectedItems.splice(0, this.selectedItems.length, ...filtered);
-      
-      // Forzar actualización para que el computed isAllSelected se recalcule
-      this.$forceUpdate();
     },
 
     selectItem() {
       let sitem = this.selectedItems.find((e) => e.id == this.item.id);
       if (sitem) {
-        this.$set(this.item, 'selected', false);
+        // En Vue 3, la asignación directa es reactiva
+        this.item.selected = false;
         const filtered = this.selectedItems.filter(
           (e) => e.id != this.item.id
         );
         // Usar splice para mantener la referencia del array
         this.selectedItems.splice(0, this.selectedItems.length, ...filtered);
       } else {
-        this.$set(this.item, 'selected', true);
+        // En Vue 3, la asignación directa es reactiva
+        this.item.selected = true;
         this.selectedItems.push(this.item);
       }
-      // Forzar actualización para que el computed isAllSelected se recalcule
-      this.$forceUpdate();
     },
 
     getSelectedItems() {
@@ -139,22 +133,17 @@ export default {
     clearSelection() {
       // Limpiar todas las selecciones
       this.selectedItems.forEach(
-        (item) => this.$set(item, 'selected', false)
+        (item) => { item.selected = false; }
       );
       this.items.forEach(
-        (item) => this.$set(item, 'selected', false)
+        (item) => { item.selected = false; }
       );
       this.itemsList.forEach(
-        (item) => this.$set(item, 'selected', false)
+        (item) => { item.selected = false; }
       );
       // Vaciar el array manteniendo la referencia para reactividad con provide/inject
       this.selectedItems.splice(0, this.selectedItems.length);
       this.onSelect();
-      // Forzar actualización inmediata y en el siguiente tick para asegurar que todo se actualice
-      this.$forceUpdate();
-      this.$nextTick(() => {
-        this.$forceUpdate();
-      });
     },
 
     onSelect() {
@@ -180,36 +169,32 @@ export default {
       
       if (this.useVuexORM && !this.vuexLocalforage) {
         const modelInstance = new this.model(itemCopy);
-        // Usar $set para cada propiedad para asegurar reactividad
+        // En Vue 3, la asignación directa es reactiva
         Object.keys(modelInstance).forEach(key => {
-          this.$set(this.item, key, modelInstance[key]);
+          this.item[key] = modelInstance[key];
         });
         // Eliminar propiedades que ya no existen
         Object.keys(this.item).forEach(key => {
           if (!(key in modelInstance)) {
-            this.$delete(this.item, key);
+            delete this.item[key];
           }
         });
       } else {
-        // Usar $set para cada propiedad para asegurar reactividad
+        // En Vue 3, la asignación directa es reactiva
         Object.keys(itemCopy).forEach(key => {
-          this.$set(this.item, key, itemCopy[key]);
+          this.item[key] = itemCopy[key];
         });
         // Eliminar propiedades que ya no existen
         Object.keys(this.item).forEach(key => {
           if (!(key in itemCopy)) {
-            this.$delete(this.item, key);
+            delete this.item[key];
           }
         });
       }
       
-      // Forzar actualización para asegurar que los cambios se reflejen
-      this.$forceUpdate();
-      
       this.onSelect();
       this.$nextTick(() => {
-        this.$forceUpdate();
-      this.$bvModal.show("modal-show-item-" + this.modelName);
+        this.$bvModal.show("modal-show-item-" + this.modelName);
       });
     },
 
@@ -222,36 +207,32 @@ export default {
       
       if (this.useVuexORM && !this.vuexLocalforage) {
         const modelInstance = new this.model(itemCopy);
-        // Usar $set para cada propiedad para asegurar reactividad
+        // En Vue 3, la asignación directa es reactiva
         Object.keys(modelInstance).forEach(key => {
-          this.$set(this.item, key, modelInstance[key]);
+          this.item[key] = modelInstance[key];
         });
         // Eliminar propiedades que ya no existen
         Object.keys(this.item).forEach(key => {
           if (!(key in modelInstance)) {
-            this.$delete(this.item, key);
+            delete this.item[key];
           }
         });
       } else {
-        // Usar $set para cada propiedad para asegurar reactividad
+        // En Vue 3, la asignación directa es reactiva
         Object.keys(itemCopy).forEach(key => {
-          this.$set(this.item, key, itemCopy[key]);
+          this.item[key] = itemCopy[key];
         });
         // Eliminar propiedades que ya no existen
         Object.keys(this.item).forEach(key => {
           if (!(key in itemCopy)) {
-            this.$delete(this.item, key);
+            delete this.item[key];
           }
         });
       }
       
-      // Forzar actualización para asegurar que los cambios se reflejen
-      this.$forceUpdate();
-      
       this.onSelect();
       this.$nextTick(() => {
-        this.$forceUpdate();
-      this.$bvModal.show("modal-form-item-" + this.modelName);
+        this.$bvModal.show("modal-form-item-" + this.modelName);
       });
     },
 
@@ -276,36 +257,32 @@ export default {
       
       if (this.useVuexORM && !this.vuexLocalforage) {
         const modelInstance = new this.model(itemCopy);
-        // Usar $set para cada propiedad para asegurar reactividad
+        // En Vue 3, la asignación directa es reactiva
         Object.keys(modelInstance).forEach(key => {
-          this.$set(this.item, key, modelInstance[key]);
+          this.item[key] = modelInstance[key];
         });
         // Eliminar propiedades que ya no existen
         Object.keys(this.item).forEach(key => {
           if (!(key in modelInstance)) {
-            this.$delete(this.item, key);
+            delete this.item[key];
           }
         });
       } else {
-        // Usar $set para cada propiedad para asegurar reactividad
+        // En Vue 3, la asignación directa es reactiva
         Object.keys(itemCopy).forEach(key => {
-          this.$set(this.item, key, itemCopy[key]);
+          this.item[key] = itemCopy[key];
         });
         // Eliminar propiedades que ya no existen
         Object.keys(this.item).forEach(key => {
           if (!(key in itemCopy)) {
-            this.$delete(this.item, key);
+            delete this.item[key];
           }
         });
       }
       
-      // Forzar actualización para asegurar que los cambios se reflejen
-      this.$forceUpdate();
-      
       this.onSelect();
       this.$nextTick(() => {
-        this.$forceUpdate();
-      this.$bvModal.show("modal-form-item-" + this.modelName);
+        this.$bvModal.show("modal-form-item-" + this.modelName);
       });
     },
 

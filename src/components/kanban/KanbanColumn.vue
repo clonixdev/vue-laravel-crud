@@ -13,31 +13,33 @@
       class="kanban-column-body" 
       @end="onDragEnd"
       :data-column="column.groupKey"
+      item-key="id"
     >
-      <div v-for="(item, itemIndex) in column.items" v-bind:key="itemIndex" class="item">
-        <slot name="card" v-bind:item="item">
-          <KanbanCard 
-            :key="itemIndex" 
-            :item="item" 
-            :columns="columns" 
-            :index="itemIndex"
-            :cardClass="cardClass" 
-            :cardHideFooter="cardHideFooter" 
-            :itemValue="itemValue"
-            :getStateValue="getStateValue"
-            :getStateOptions="getStateOptions"
-            :getStateBadgeVariant="getStateBadgeVariant"
-            :getArrayValue="getArrayValue" 
-            :showItem="showItem"
-            :updateItem="updateItem" 
-            :removeItem="removeItem"
-          >
-            <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
-              <slot :name="name" v-bind="slotProps" />
-            </template>
-          </KanbanCard>
-        </slot>
-      </div>
+      <template #item="{ element, index }">
+        <div class="item">
+          <slot name="card" v-bind:item="element">
+            <KanbanCard 
+              :item="element" 
+              :columns="columns" 
+              :index="index"
+              :cardClass="cardClass" 
+              :cardHideFooter="cardHideFooter" 
+              :itemValue="itemValue"
+              :getStateValue="getStateValue"
+              :getStateOptions="getStateOptions"
+              :getStateBadgeVariant="getStateBadgeVariant"
+              :getArrayValue="getArrayValue" 
+              :showItem="showItem"
+              :updateItem="updateItem" 
+              :removeItem="removeItem"
+            >
+              <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
+                <slot :name="name" v-bind="slotProps" />
+              </template>
+            </KanbanCard>
+          </slot>
+        </div>
+      </template>
     </draggable>
   </div>
 </template>

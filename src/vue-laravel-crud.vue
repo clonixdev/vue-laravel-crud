@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, h } from 'vue';
+import { defineComponent, h, getCurrentInstance } from 'vue';
 import CrudHeader from "./components/CrudHeader.vue";
 import CrudTable from "./components/CrudTable.vue";
 import CrudCards from "./components/CrudCards.vue";
@@ -51,24 +51,33 @@ export default /*#__PURE__*/ {
       };
     }
   },
-  beforeCreate() {
-    // Instalar plugin de toasts si no está instalado
-    const instance = getCurrentInstance();
-    if (instance && instance.appContext && !instance.appContext.config.globalProperties.$toast) {
-      instance.appContext.app.use(ToastPlugin);
-    }
-  },
   created() {
+    // Instalar plugin de toasts si no está instalado
+    try {
+      const instance = getCurrentInstance();
+      if (instance && instance.appContext && !instance.appContext.config.globalProperties.$toast) {
+        instance.appContext.app.use(ToastPlugin);
+      }
+    } catch (e) {
+      console.debug('Could not install ToastPlugin:', e);
+    }
+    
     // Registrar componentes de Bootstrap globalmente según la versión
     // Esto permite que todos los componentes hijos usen <b-button>, etc.
     // Solo registrar si no están ya registrados (para evitar sobrescribir bootstrap-vue si está disponible)
     if (this.bootstrapFactory) {
-      const components = this.bootstrapFactory.getComponents();
-      const version = this.normalizedBootstrapVersion;
-      const instance = getCurrentInstance();
-      const app = instance?.appContext?.app;
-      
-      if (!app) return;
+      try {
+        const instance = getCurrentInstance();
+        if (!instance || !instance.appContext) {
+          console.debug('getCurrentInstance not available, skipping component registration');
+          return;
+        }
+        
+        const components = this.bootstrapFactory.getComponents();
+        const version = this.normalizedBootstrapVersion;
+        const app = instance.appContext.app;
+        
+        if (!app) return;
       
       // Registrar todos los componentes
       Object.keys(components).forEach(key => {
@@ -123,7 +132,9 @@ export default /*#__PURE__*/ {
           }
         });
       }
-      
+      } catch (e) {
+        console.warn('Could not register Bootstrap components:', e);
+      }
     }
   },
   mounted() {
@@ -340,7 +351,7 @@ export default /*#__PURE__*/ {
 
     title: String,
     model: {
-      type: Object | Function,
+      type: [Object, Function],
       default() {
         return { id: 0 };
       },
@@ -358,7 +369,7 @@ export default /*#__PURE__*/ {
       default: false,
     },
     vuexInitRelations: {
-      type: Boolean | Array,
+      type: [Boolean, Array],
       default: true,
     },
     vuexLocalforage: {

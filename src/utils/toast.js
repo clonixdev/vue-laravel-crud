@@ -151,9 +151,9 @@ export const modalHelper = {
       return;
     }
     
-    // Si tiene la propiedad visible, actualizarla
-    if (vueInstance && vueInstance.$set) {
-      vueInstance.$set(vueInstance, 'visible', true);
+    // Si tiene la propiedad visible, actualizarla (Vue 3 no necesita $set)
+    if (vueInstance && 'visible' in vueInstance) {
+      vueInstance.visible = true;
       return;
     }
     

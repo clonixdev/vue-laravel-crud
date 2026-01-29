@@ -8,46 +8,49 @@
 
     <!-- Cards con datos -->
     <template v-else>
-      <draggable 
-        v-model="items" 
-        :group="draggableGroup" 
-        :draggable="orderable ? '.item' : '.none'" 
-        @start="drag = true"
-        @end="drag = false" 
-        @sort="onSort()" 
-        @add="onDraggableAdded($event)" 
-        @change="onDraggableChange($event)"
-        :options="draggableOptions"
+      <masonry
+        :cols="{ default: 12 / colLg, 1400: 12 / colXl, 1200: 12 / colLg, 1000: 12 / colMd, 700: 12 / colSm, 400: 12 / colXs }"
+        :gutter="{ default: '15px', 700: '15px' }"
       >
-        <masonry
-          :cols="{ default: 12 / colLg, 1400: 12 / colXl, 1200: 12 / colLg, 1000: 12 / colMd, 700: 12 / colSm, 400: 12 / colXs }"
-          :gutter="{ default: '15px', 700: '15px' }"
+        <draggable 
+          :list="items" 
+          :group="draggableGroup" 
+          :draggable="orderable ? '.item' : '.none'" 
+          @start="drag = true"
+          @end="drag = false" 
+          @sort="onSort()" 
+          @add="onDraggableAdded($event)" 
+          @change="onDraggableChange($event)"
+          :options="draggableOptions"
+          item-key="id"
         >
-          <div v-for="(item, itemIndex) in itemsList" v-bind:key="itemIndex" class="item">
-            <slot name="card" v-bind:item="item">
-              <ItemCard 
-                :item="item" 
-                :columns="columns" 
-                :index="itemIndex"
-                :cardClass="cardClass" 
-                :cardHideFooter="cardHideFooter" 
-                :itemValue="itemValue"
-                :getStateValue="getStateValue"
-                :getStateOptions="getStateOptions"
-                :getStateBadgeVariant="getStateBadgeVariant"
-                :getArrayValue="getArrayValue" 
-                :showItem="showItem"
-                :updateItem="updateItem" 
-                :removeItem="removeItem"
-              >
-                <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
-                  <slot :name="name" v-bind="slotProps" />
-                </template>
-              </ItemCard>
-            </slot>
-          </div>
-        </masonry>
-      </draggable>
+          <template #item="{ element, index }">
+            <div class="item">
+              <slot name="card" v-bind:item="element">
+                <ItemCard 
+                  :item="element" 
+                  :columns="columns" 
+                  :index="index"
+                  :cardClass="cardClass" 
+                  :cardHideFooter="cardHideFooter" 
+                  :itemValue="itemValue"
+                  :getStateValue="getStateValue"
+                  :getStateOptions="getStateOptions"
+                  :getStateBadgeVariant="getStateBadgeVariant"
+                  :getArrayValue="getArrayValue" 
+                  :showItem="showItem"
+                  :updateItem="updateItem" 
+                  :removeItem="removeItem"
+                >
+                  <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
+                    <slot :name="name" v-bind="slotProps" />
+                  </template>
+                </ItemCard>
+              </slot>
+            </div>
+          </template>
+        </draggable>
+      </masonry>
 
       <p v-if="firstLoadValue && itemsList && itemsList.length == 0 && !infiniteScroll" class="p-3">
         {{ messageEmptyResults }}
@@ -57,23 +60,16 @@
 </template>
 
 <script>
-import { getCurrentInstance } from 'vue';
 import draggable from "vuedraggable";
-import VueMasonry from 'vue-masonry-css';
+import { VueMasonry } from 'vue-masonry-css';
 import ItemCard from '../ItemCard.vue';
-
-// Registrar el componente masonry usando el Plugin
-// En Vue 3, los plugins se registran a través de la app
-const instance = getCurrentInstance();
-if (instance && instance.appContext) {
-  instance.appContext.app.use(VueMasonry);
-}
 
 export default {
   name: 'CrudCards',
   components: {
     draggable,
-    ItemCard
+    ItemCard,
+    masonry: VueMasonry
   },
   inject: [
     'bootstrapFactory',

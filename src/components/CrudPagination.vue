@@ -1,12 +1,21 @@
 <template>
   <div>
     <!-- Infinite Loading -->
-    <infinite-loading 
-      ref="infiniteLoading" 
-      @infinite="infiniteHandler" 
+    <div 
       v-if="infiniteScroll"
+      ref="infiniteLoadingTrigger"
+      class="infinite-loading-trigger"
       :key="infiniteScrollKey"
-    />
+    >
+      <div v-if="loadingValue" class="text-center p-3">
+        <b-spinner variant="primary" label="Cargando..."></b-spinner>
+        <div class="mt-2">{{ messageLoading }}</div>
+      </div>
+      <div v-else-if="!hasMorePages && firstLoadValue" class="text-center p-3">
+        <div v-if="items.length == 0">{{ messageEmptyResults }}</div>
+        <div v-else>{{ messageNoMore }}</div>
+      </div>
+    </div>
 
     <!-- Paginador -->
     <div class="paginator-container" v-if="!infiniteScroll">
@@ -58,13 +67,8 @@
 </template>
 
 <script>
-import InfiniteLoading from 'v3-infinite-loading';
-
 export default {
   name: 'CrudPagination',
-  components: {
-    InfiniteLoading
-  },
   inject: [
     'bootstrapFactory',
     'infiniteScroll',
@@ -85,7 +89,8 @@ export default {
   ],
   data() {
     return {
-      perPageOptions: [10, 20, 50, 100]
+      perPageOptions: [10, 20, 50, 100],
+      observer: null
     };
   },
   computed: {
@@ -98,6 +103,79 @@ export default {
     },
     firstLoadValue() {
       return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
+    },
+    hasMorePages() {
+      if (!this.firstLoadValue) return true;
+      return (this.pagination.current_page * this.pagination.per_page) < this.pagination.total;
+    }
+  },
+  mounted() {
+    if (this.infiniteScroll) {
+      this.setupInfiniteScroll();
+    }
+  },
+  beforeUnmount() {
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
+  },
+  watch: {
+    infiniteScroll(newVal) {
+      if (newVal) {
+        this.$nextTick(() => {
+          this.setupInfiniteScroll();
+        });
+      } else {
+        if (this.observer) {
+          this.observer.disconnect();
+          this.observer = null;
+        }
+      }
+    },
+    infiniteScrollKey() {
+      if (this.infiniteScroll) {
+        this.$nextTick(() => {
+          this.setupInfiniteScroll();
+        });
+      }
+    }
+  },
+  methods: {
+    setupInfiniteScroll() {
+      if (!this.infiniteScroll) return;
+      
+      // Limpiar observer anterior si existe
+      if (this.observer) {
+        this.observer.disconnect();
+        this.observer = null;
+      }
+      
+      this.$nextTick(() => {
+        const trigger = this.$refs.infiniteLoadingTrigger;
+        if (!trigger) return;
+        
+        // Crear IntersectionObserver
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !this.loadingValue && this.hasMorePages) {
+              // Simular el objeto $state para compatibilidad con infiniteHandler
+              const $state = {
+                loaded: () => {},
+                complete: () => {},
+                error: () => {}
+              };
+              this.infiniteHandler($state);
+            }
+          });
+        }, {
+          root: null,
+          rootMargin: '100px',
+          threshold: 0.1
+        });
+        
+        this.observer.observe(trigger);
+      });
     }
   }
 };
@@ -193,5 +271,10 @@ export default {
 .paginator-badge-dropdown >>> .btn:hover {
   background-color: #e9ecef;
   border-color: #ced4da;
+}
+
+.infinite-loading-trigger {
+  min-height: 50px;
+  margin-top: 1rem;
 }
 </style>
