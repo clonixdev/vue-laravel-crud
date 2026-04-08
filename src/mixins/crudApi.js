@@ -75,14 +75,21 @@ export default {
             filters: JSON.stringify(this.finalFilters),
           }
         });
-      }
+}
 
       let itemsResult = this.model.query().withAll().get();
 
       if (itemsResult) {
         this.items = itemsResult;
       }
-      console.debug("fetch page vuex ", itemsResult, page, this.items, result);
+
+      // Actualizar paginación con datos del servidor
+      const paginationData = result?.response?.data ?? result?.data;
+      if (paginationData) {
+        this.makePagination(paginationData);
+      }
+
+      console.debug("fetch page vuex ", itemsResult, page, this.items, result, "pagination:", this.pagination);
       this.loading = false;
       this.firstLoad = true;
     },
