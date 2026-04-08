@@ -591,7 +591,7 @@ var _sfc_main$f = {
   components: {
     RenderCustomFilter: RenderCustomFilter
   },
-  inject: ['columns', 'customFilters', 'isColumnHasFilter', 'isCustomFilterEnabled', 'filter', 'internalFilterByProp', 'optionsLoaded', 'onChangeFilter', 'resetFilters', 'setupFilters', 'internalFilters'],
+  inject: ['bootstrapFactory', 'columns', 'customFilters', 'isColumnHasFilter', 'isCustomFilterEnabled', 'filter', 'internalFilterByProp', 'optionsLoaded', 'onChangeFilter', 'resetFilters', 'setupFilters', 'internalFilters'],
   methods: {
     // Método helper para obtener el filtro de forma segura, creándolo si no existe
     getFilterForColumn: function getFilterForColumn(column) {
@@ -1169,13 +1169,13 @@ var _sfc_render$f = function render() {
 };
 var _sfc_staticRenderFns$f = [];
 var __component__$f = /*#__PURE__*/normalizeComponent(_sfc_main$f, _sfc_render$f, _sfc_staticRenderFns$f, false, null, null, null, null);
-var CrudFilters = __component__$f.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css$9 = "\n.crud-header[data-v-a9762136] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-a9762136] {\n  margin: 0;\n}\n.crud-search[data-v-a9762136] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-a9762136] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-a9762136] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-a9762136] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
+var CrudFilters = __component__$f.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css$9 = "\n.crud-header[data-v-91117739] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-91117739] {\n  margin: 0;\n}\n.crud-search[data-v-91117739] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-91117739] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-91117739] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-91117739] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
 n(css$9, {});var _sfc_main$e = {
   name: 'CrudHeader',
   components: {
     CrudFilters: CrudFilters
   },
-  inject: ['showHeader', 'showTitle', 'title', 'filterSidebarOpen', 'showImport', 'showExport', 'showPrincipalSortBtn', 'principalSort', 'bulkDelete', 'showCreateBtn', 'enableFilters', 'displayModeToggler', 'displayMode', 'displayModes', 'showSearch', 'displaySearch', 'search', 'searchPlaceholder', 'loading', 'messageImport', 'messageExport', 'messageNew', 'createItem', 'toggleDisplayMode', 'togglePrincipalSort', 'confirmBulkDelete', 'toggleFilters', 'refresh', 'showImportModal', 'showExportModal'],
+  inject: ['bootstrapFactory', 'showHeader', 'showTitle', 'title', 'filterSidebarOpen', 'showImport', 'showExport', 'showPrincipalSortBtn', 'principalSort', 'bulkDelete', 'showCreateBtn', 'enableFilters', 'displayModeToggler', 'displayMode', 'displayModes', 'showSearch', 'displaySearch', 'search', 'searchPlaceholder', 'loading', 'messageImport', 'messageExport', 'messageNew', 'createItem', 'toggleDisplayMode', 'togglePrincipalSort', 'confirmBulkDelete', 'toggleFilters', 'refresh', 'showImportModal', 'showExportModal'],
   computed: {
     sidebarVisible: function sidebarVisible() {
       // Acceder directamente al componente padre para obtener reactividad
@@ -1213,6 +1213,7 @@ var _sfc_render$e = function render() {
     staticClass: "crud-title"
   }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _c('b-sidebar', {
     attrs: {
+      "id": "crud-filters-sidebar",
       "visible": _vm.sidebarVisible,
       "title": "Filtrar",
       "right": "",
@@ -1342,7 +1343,7 @@ var _sfc_render$e = function render() {
   })], 2)], 1)], 1) : _vm._e();
 };
 var _sfc_staticRenderFns$e = [];
-var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "a9762136", null, null);
+var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "91117739", null, null);
 var CrudHeader = __component__$e.exports;var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function getDefaultExportFromCjs (x) {
@@ -7493,10 +7494,10 @@ Sortable.mount(Remove, Revert);var sortable_esm=/*#__PURE__*/Object.freeze({__pr
 } (vuedraggable_umd, vuedraggable_umd.exports));
 
 var vuedraggable_umdExports = vuedraggable_umd.exports;
-var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);var css$7 = "\r\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-3de96e53] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.sort-filter[data-v-3de96e53] {\r\n  cursor: pointer;\r\n  visibility: hidden;\r\n  display: inline-block;\n}\n.sort-filter-visible[data-v-3de96e53] {\r\n  visibility: visible;\n}\r\n";
+var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);var css$7 = "\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-b3c8c2ac] {\n  width: 1%;\n  white-space: nowrap;\n}\n\n/* Alinear checkbox en el header */\n.checkbox-header[data-v-b3c8c2ac] {\n  vertical-align: middle !important;\n  text-align: center;\n}\n.header-checkbox-wrapper[data-v-b3c8c2ac] {\n  display: inline-flex;\n  align-items: center;\n  vertical-align: middle;\n}\n\n/* Asegurar que el form-check dentro del header esté alineado */\n.checkbox-header[data-v-b3c8c2ac] .form-check {\n  margin: 0 !important;\n  display: inline-flex;\n  align-items: center;\n  min-height: auto;\n  padding: 0;\n  vertical-align: middle;\n}\n.checkbox-header[data-v-b3c8c2ac] .form-check-input {\n  margin: 0 !important;\n  margin-top: 0 !important;\n  margin-right: 0.5rem !important;\n  vertical-align: middle;\n  position: relative;\n  float: none;\n  top: 0;\n  align-self: center;\n}\n.checkbox-header[data-v-b3c8c2ac] .form-check-label {\n  margin-left: 0;\n  margin-bottom: 0;\n  vertical-align: middle;\n  display: inline;\n  align-self: center;\n}\n.sort-filter[data-v-b3c8c2ac] {\n  cursor: pointer;\n  visibility: hidden;\n  display: inline-block;\n}\n.sort-filter-visible[data-v-b3c8c2ac] {\n  visibility: visible;\n}\n";
 n(css$7, {});var _sfc_main$d = {
   name: 'TableHeader',
-  inject: ['columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded', 'isAllSelected'],
+  inject: ['bootstrapFactory', 'columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded', 'isAllSelected'],
   data: function data() {
     return {
       hoveredColumn: null
@@ -7534,7 +7535,8 @@ var _sfc_render$d = function render() {
       return _c('th', {
         key: indexc,
         class: {
-          'actions-header': column.type == 'actions'
+          'actions-header': column.type == 'actions',
+          'checkbox-header': column.type == 'checkbox' || column.type == 'select'
         },
         style: {
           width: column.width ? column.width : column.type == 'actions' ? '1%' : 'inherit'
@@ -7804,7 +7806,9 @@ var _sfc_render$d = function render() {
         "column": column,
         "filter": _vm.filter,
         "internalFilterByProp": _vm.internalFilterByProp
-      }) : column.type == 'select' ? _c('span', [_c('b-form-checkbox', {
+      }) : column.type == 'select' ? _c('span', {
+        staticClass: "header-checkbox-wrapper"
+      }, [_c('b-form-checkbox', {
         attrs: {
           "name": "select-all",
           "checked": _vm.isAllSelected
@@ -7812,7 +7816,9 @@ var _sfc_render$d = function render() {
         on: {
           "change": _vm.toggleAll
         }
-      })], 1) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
+      })], 1) : column.type == 'checkbox' ? _c('span', {
+        staticClass: "header-checkbox-wrapper"
+      }, [_c('b-form-checkbox', {
         attrs: {
           "name": "select-all",
           "checked": _vm.isAllSelected
@@ -7839,7 +7845,7 @@ var _sfc_render$d = function render() {
   })], 2)]);
 };
 var _sfc_staticRenderFns$d = [];
-var __component__$d = /*#__PURE__*/normalizeComponent(_sfc_main$d, _sfc_render$d, _sfc_staticRenderFns$d, false, null, "3de96e53", null, null);
+var __component__$d = /*#__PURE__*/normalizeComponent(_sfc_main$d, _sfc_render$d, _sfc_staticRenderFns$d, false, null, "b3c8c2ac", null, null);
 var TableHeader = __component__$d.exports;function commonjsRequire(path) {
 	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }var moment$1 = {exports: {}};moment$1.exports;
@@ -13527,7 +13533,7 @@ var TableHeader = __component__$d.exports;function commonjsRequire(path) {
 } (moment$1, moment$1.exports));
 
 var momentExports = moment$1.exports;
-var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);var css$6 = "\r\n/* Fijar ancho de la columna de acciones */\n.actions-cell[data-v-e38a3192] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.actions-button-group[data-v-e38a3192] {\r\n  display: inline-flex;\r\n  flex-wrap: nowrap;\n}\n.actions-dropdown[data-v-e38a3192] {\r\n  display: inline-block;\n}\r\n\r\n/* Asegurar que los botones no se expandan */\n.actions-button-group .btn[data-v-e38a3192] {\r\n  flex-shrink: 0;\n}\r\n";
+var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);var css$6 = "\r\n/* Fijar ancho de la columna de acciones */\n.actions-cell[data-v-74df4ca8] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.actions-button-group[data-v-74df4ca8] {\r\n  display: inline-flex;\r\n  flex-wrap: nowrap;\n}\n.actions-dropdown[data-v-74df4ca8] {\r\n  display: inline-block;\n}\r\n\r\n/* Asegurar que los botones no se expandan */\n.actions-button-group .btn[data-v-74df4ca8] {\r\n  flex-shrink: 0;\n}\r\n";
 n(css$6, {});var _sfc_main$c = {
   name: 'TableCell',
   props: {
@@ -13536,7 +13542,7 @@ n(css$6, {});var _sfc_main$c = {
     index: Number,
     columnIndex: Number
   },
-  inject: ['itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'onCheckSelect', 'showItem', 'updateItem', 'removeItem', 'optionsLoaded'],
+  inject: ['bootstrapFactory', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'onCheckSelect', 'showItem', 'updateItem', 'removeItem', 'optionsLoaded'],
   data: function data() {
     return {
       moment: moment
@@ -13741,7 +13747,7 @@ var _sfc_render$c = function render() {
   })], 2) : _vm._e()], 2);
 };
 var _sfc_staticRenderFns$c = [];
-var __component__$c = /*#__PURE__*/normalizeComponent(_sfc_main$c, _sfc_render$c, _sfc_staticRenderFns$c, false, null, "e38a3192", null, null);
+var __component__$c = /*#__PURE__*/normalizeComponent(_sfc_main$c, _sfc_render$c, _sfc_staticRenderFns$c, false, null, "74df4ca8", null, null);
 var TableCell = __component__$c.exports;var _sfc_main$b = {
   name: 'TableRow',
   components: {
@@ -13806,7 +13812,7 @@ var TableRow = __component__$b.exports;var _sfc_main$a = {
     TableHeader: TableHeader,
     TableRow: TableRow
   },
-  inject: ['displayMode', 'displayModes', 'tableContainerClass', 'tableClass', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'grouped', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
+  inject: ['bootstrapFactory', 'displayMode', 'displayModes', 'tableContainerClass', 'tableClass', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'grouped', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
   data: function data() {
     return {
       drag: false
@@ -14132,6 +14138,7 @@ Plugin.install = function (Vue, options) {
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
 }var _sfc_main$9 = {
+  inject: ['bootstrapFactory'],
   props: {
     item: Object,
     columns: Array,
@@ -14295,7 +14302,7 @@ var _sfc_main$8 = {
     draggable: draggable,
     ItemCard: ItemCard
   },
-  inject: ['displayMode', 'displayModes', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'colLg', 'colXl', 'colMd', 'colSm', 'colXs', 'columns', 'cardClass', 'cardHideFooter', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'showItem', 'updateItem', 'removeItem', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
+  inject: ['bootstrapFactory', 'displayMode', 'displayModes', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'colLg', 'colXl', 'colMd', 'colSm', 'colXs', 'columns', 'cardClass', 'cardHideFooter', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'showItem', 'updateItem', 'removeItem', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
   data: function data() {
     return {
       drag: false
@@ -14416,9 +14423,10 @@ var _sfc_render$8 = function render() {
 };
 var _sfc_staticRenderFns$8 = [];
 var __component__$8 = /*#__PURE__*/normalizeComponent(_sfc_main$8, _sfc_render$8, _sfc_staticRenderFns$8, false, null, null, null, null);
-var CrudCards = __component__$8.exports;var css$5 = "\n.kanban-card[data-v-ad923ee1] {\r\n  background: #ffffff;\r\n  border-radius: 4px;\r\n  padding: 0.5rem;\r\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\r\n  cursor: grab;\r\n  transition: box-shadow 0.2s ease;\n}\n.kanban-card[data-v-ad923ee1]:hover {\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.kanban-card[data-v-ad923ee1]:active {\r\n  cursor: grabbing;\n}\n.card-crud[data-v-ad923ee1] {\r\n  border: 1px solid #e1e5e9;\n}\n.card-crud .card-title[data-v-ad923ee1] {\r\n  font-size: 0.9rem;\r\n  margin-bottom: 0.5rem;\n}\n.card-crud .card-text[data-v-ad923ee1] {\r\n  font-size: 0.8rem;\r\n  margin-bottom: 0.25rem;\n}\r\n";
+var CrudCards = __component__$8.exports;var css$5 = "\n.kanban-card[data-v-1e576787] {\r\n  background: #ffffff;\r\n  border-radius: 4px;\r\n  padding: 0.5rem;\r\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\r\n  cursor: grab;\r\n  transition: box-shadow 0.2s ease;\n}\n.kanban-card[data-v-1e576787]:hover {\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.kanban-card[data-v-1e576787]:active {\r\n  cursor: grabbing;\n}\n.card-crud[data-v-1e576787] {\r\n  border: 1px solid #e1e5e9;\n}\n.card-crud .card-title[data-v-1e576787] {\r\n  font-size: 0.9rem;\r\n  margin-bottom: 0.5rem;\n}\n.card-crud .card-text[data-v-1e576787] {\r\n  font-size: 0.8rem;\r\n  margin-bottom: 0.25rem;\n}\r\n";
 n(css$5, {});var _sfc_main$7 = {
   name: 'KanbanCard',
+  inject: ['bootstrapFactory'],
   props: {
     item: Object,
     columns: Array,
@@ -14577,14 +14585,15 @@ var _sfc_render$7 = function render() {
   })], 2)], 1);
 };
 var _sfc_staticRenderFns$7 = [];
-var __component__$7 = /*#__PURE__*/normalizeComponent(_sfc_main$7, _sfc_render$7, _sfc_staticRenderFns$7, false, null, "ad923ee1", null, null);
-var KanbanCard = __component__$7.exports;var css$4 = "\n.kanban-column[data-v-a56cf649] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n.kanban-column-header[data-v-a56cf649] {\r\n  font-weight: bold;\r\n  padding: 0.5rem;\r\n  background: #dfe1e6;\r\n  border-radius: 8px 8px 0 0;\r\n  text-align: center;\n}\n.kanban-column-body[data-v-a56cf649] {\r\n  padding: 0.5rem;\r\n  min-height: 100px;\r\n  background: #ffffff;\r\n  border-radius: 0 0 8px 8px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem;\n}\r\n";
+var __component__$7 = /*#__PURE__*/normalizeComponent(_sfc_main$7, _sfc_render$7, _sfc_staticRenderFns$7, false, null, "1e576787", null, null);
+var KanbanCard = __component__$7.exports;var css$4 = "\n.kanban-column[data-v-27f87f90] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n.kanban-column-header[data-v-27f87f90] {\r\n  font-weight: bold;\r\n  padding: 0.5rem;\r\n  background: #dfe1e6;\r\n  border-radius: 8px 8px 0 0;\r\n  text-align: center;\n}\n.kanban-column-body[data-v-27f87f90] {\r\n  padding: 0.5rem;\r\n  min-height: 100px;\r\n  background: #ffffff;\r\n  border-radius: 0 0 8px 8px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem;\n}\r\n";
 n(css$4, {});var _sfc_main$6 = {
   name: 'KanbanColumn',
   components: {
     draggable: draggable,
     KanbanCard: KanbanCard
   },
+  inject: ['bootstrapFactory'],
   props: {
     column: Object,
     colIndex: Number,
@@ -14684,7 +14693,7 @@ var _sfc_render$6 = function render() {
   }), 0)], 1);
 };
 var _sfc_staticRenderFns$6 = [];
-var __component__$6 = /*#__PURE__*/normalizeComponent(_sfc_main$6, _sfc_render$6, _sfc_staticRenderFns$6, false, null, "a56cf649", null, null);
+var __component__$6 = /*#__PURE__*/normalizeComponent(_sfc_main$6, _sfc_render$6, _sfc_staticRenderFns$6, false, null, "27f87f90", null, null);
 var KanbanColumn = __component__$6.exports;var css$3 = "\n.kanban-board[data-v-516ff294] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  overflow-x: auto;\r\n  padding: 1rem;\n}\n.kanban-column[data-v-516ff294] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n  min-width: 300px;\n}\r\n";
 n(css$3, {});var _sfc_main$5 = {
   name: 'KanbanBoard',
@@ -14772,7 +14781,7 @@ var _sfc_staticRenderFns$4 = [];
 var __component__$4 = /*#__PURE__*/normalizeComponent(_sfc_main$4, _sfc_render$4, _sfc_staticRenderFns$4, false, null, null, null, null);
 var CrudKanban = __component__$4.exports;var _sfc_main$3 = {
   name: 'CrudCustom',
-  inject: ['displayMode', 'displayModes', 'listContainerClass', 'listItemClass', 'loading', 'firstLoad', 'items', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'itemsList'],
+  inject: ['bootstrapFactory', 'displayMode', 'displayModes', 'listContainerClass', 'listItemClass', 'loading', 'firstLoad', 'items', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'itemsList'],
   computed: {
     currentDisplayMode: function currentDisplayMode() {
       if (!this.displayMode) return 1;
@@ -14819,10 +14828,10 @@ var _sfc_render$3 = function render() {
 };
 var _sfc_staticRenderFns$3 = [];
 var __component__$3 = /*#__PURE__*/normalizeComponent(_sfc_main$3, _sfc_render$3, _sfc_staticRenderFns$3, false, null, null, null, null);
-var CrudCustom = __component__$3.exports;var css$2 = "\n.export-format-options[data-v-cc5f4c75] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-cc5f4c75] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-cc5f4c75]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-cc5f4c75] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
+var CrudCustom = __component__$3.exports;var css$2 = "\n.export-format-options[data-v-eb2621e9] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-eb2621e9] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-eb2621e9]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-eb2621e9] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
 n(css$2, {});var _sfc_main$2 = {
   name: 'CrudModals',
-  inject: ['modelName', 'title', 'loading', 'validate', 'item', 'getItem', 'messageSave', 'showImport', 'showExport', 'fileImport', 'selectedItems', 'exportFormat', 'saveItem', 'importItems', 'exportItems'],
+  inject: ['bootstrapFactory', 'modelName', 'title', 'loading', 'validate', 'item', 'getItem', 'messageSave', 'showImport', 'showExport', 'fileImport', 'selectedItems', 'exportFormat', 'saveItem', 'importItems', 'exportItems'],
   computed: {
     // Computed property para asegurar reactividad del item inyectado
     reactiveItem: function reactiveItem() {
@@ -14868,8 +14877,7 @@ var _sfc_render$2 = function render() {
       "id": 'modal-form-item-' + _vm.modelName,
       "hide-footer": "",
       "size": "xl",
-      "title": _vm.title,
-      "no-close-on-backdrop": ""
+      "title": _vm.title
     }
   }, [_c('b-overlay', {
     attrs: {
@@ -14957,8 +14965,7 @@ var _sfc_render$2 = function render() {
       "id": 'modal-show-item-' + _vm.modelName,
       "hide-footer": "",
       "size": "xl",
-      "title": _vm.title,
-      "no-close-on-backdrop": ""
+      "title": _vm.title
     }
   }, [_vm.reactiveItem ? [_vm._t("show", function () {
     return [_c('b-list-group', _vm._l(_vm.reactiveItem, function (value, key) {
@@ -15085,7 +15092,7 @@ var _sfc_render$2 = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$2 = [];
-var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "cc5f4c75", null, null);
+var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "eb2621e9", null, null);
 var CrudModals = __component__$2.exports;var vueInfiniteLoading = {exports: {}};/*!
  * vue-infinite-loading v2.4.5
  * (c) 2016-2020 PeachScript
@@ -15098,13 +15105,13 @@ vueInfiniteLoading.exports;
 } (vueInfiniteLoading, vueInfiniteLoading.exports));
 
 var vueInfiniteLoadingExports = vueInfiniteLoading.exports;
-var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExports);var css$1 = "\n.paginator-container[data-v-73e31fd7] {\n  display: grid;\n  grid-template-columns: 1fr auto 1fr;\n  align-items: center;\n  width: 100%;\n  margin-top: 1rem;\n  gap: 1rem;\n}\n.paginator-data[data-v-73e31fd7] {\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  gap: 0.5rem;\n  font-size: 0.875rem;\n  grid-column: 1;\n}\n.paginator-badge[data-v-73e31fd7] {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.25rem;\n  padding: 0.375rem 0.625rem;\n  background-color: #f8f9fa;\n  border: 1px solid #dee2e6;\n  border-radius: 0.375rem;\n  color: #495057;\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-73e31fd7]:hover {\n  background-color: #e9ecef;\n  border-color: #ced4da;\n}\n.paginator-label[data-v-73e31fd7] {\n  font-weight: 500;\n  color: #6c757d;\n}\n.paginator-value[data-v-73e31fd7] {\n  font-weight: 600;\n  color: #212529;\n}\n.paginator-dropdown[data-v-73e31fd7] {\n  font-size: 0.875rem;\n}\n.paginator-dropdown[data-v-73e31fd7] .btn {\n  padding: 0.375rem 0.625rem;\n  font-size: 0.875rem;\n  background-color: #f8f9fa;\n  border: 1px solid #dee2e6;\n  color: #495057;\n}\n.paginator-dropdown[data-v-73e31fd7] .btn:hover {\n  background-color: #e9ecef;\n  border-color: #ced4da;\n}\n.crud-paginator[data-v-73e31fd7] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  grid-column: 2;\n}\n.paginator-badge-dropdown[data-v-73e31fd7] {\n  z-index: 1;\n  position: relative;\n}\n.paginator-badge-dropdown[data-v-73e31fd7] .btn {\n  padding: 0.375rem 0.625rem;\n  font-size: 0.875rem;\n  background-color: #f8f9fa;\n  border: 1px solid #dee2e6;\n  color: #495057;\n  display: inline-flex;\n  align-items: center;\n  gap: 0.25rem;\n}\n.paginator-badge-dropdown[data-v-73e31fd7] .btn:hover {\n  background-color: #e9ecef;\n  border-color: #ced4da;\n}\n";
+var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExports);var css$1 = "\n.paginator-container[data-v-b7a8abf9] {\r\n  display: grid;\r\n  grid-template-columns: 1fr auto 1fr;\r\n  align-items: center;\r\n  width: 100%;\r\n  margin-top: 1rem;\r\n  gap: 1rem;\n}\n.paginator-data[data-v-b7a8abf9] {\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-size: 0.875rem;\r\n  grid-column: 1;\n}\n.paginator-badge[data-v-b7a8abf9] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\r\n  padding: 0.375rem 0.625rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  border-radius: 0.375rem;\r\n  color: #495057;\r\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-b7a8abf9]:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.paginator-label[data-v-b7a8abf9] {\r\n  font-weight: 500;\r\n  color: #6c757d;\n}\n.paginator-value[data-v-b7a8abf9] {\r\n  font-weight: 600;\r\n  color: #212529;\n}\n.paginator-dropdown[data-v-b7a8abf9] {\r\n  font-size: 0.875rem;\n}\n.paginator-dropdown[data-v-b7a8abf9] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\n}\n.paginator-dropdown[data-v-b7a8abf9] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.crud-paginator[data-v-b7a8abf9] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  grid-column: 2;\n}\n.paginator-badge-dropdown[data-v-b7a8abf9] {\r\n  z-index: 1;\r\n  position: relative;\n}\n.paginator-badge-dropdown[data-v-b7a8abf9] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\n}\n.paginator-badge-dropdown[data-v-b7a8abf9] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\r\n";
 n(css$1, {});var _sfc_main$1 = {
   name: 'CrudPagination',
   components: {
     InfiniteLoading: InfiniteLoading
   },
-  inject: ['infiniteScroll', 'infiniteScrollKey', 'messageLoading', 'messageNoMore', 'messageEmptyResults', 'loading', 'firstLoad', 'items', 'pagination', 'selectedItems', 'showPaginator', 'infiniteHandler', 'onPaginationChange', 'onPerPageChange', 'clearSelection'],
+  inject: ['bootstrapFactory', 'infiniteScroll', 'infiniteScrollKey', 'messageLoading', 'messageNoMore', 'messageEmptyResults', 'loading', 'firstLoad', 'items', 'pagination', 'selectedItems', 'showPaginator', 'infiniteHandler', 'onPaginationChange', 'onPerPageChange', 'clearSelection'],
   data: function data() {
     return {
       perPageOptions: [10, 20, 50, 100]
@@ -15220,7 +15227,7 @@ var _sfc_render$1 = function render() {
   }) : _vm._e()], 1)]) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$1 = [];
-var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "73e31fd7", null, null);
+var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "b7a8abf9", null, null);
 var CrudPagination = __component__$1.exports;var crudData = {
   data: function data() {
     return {
@@ -20759,47 +20766,94 @@ axios.HttpStatusCode = HttpStatusCode;
 
 axios.default = axios;var crudApi = {
   methods: {
+    normalizeApiSegment: function normalizeApiSegment() {
+      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      return String(value).trim().replace(/^\/+|\/+$/g, '');
+    },
+    resolveApiBaseUrl: function resolveApiBaseUrl() {
+      var rawApiUrl = typeof this.apiUrl === 'string' ? this.apiUrl.trim() : '';
+      var autoApiPrefix = this.autoApiPrefix !== false;
+      var normalizedPrefix = this.normalizeApiSegment(this.apiPrefix || '/api');
+      if (!rawApiUrl) {
+        return autoApiPrefix && normalizedPrefix ? "/".concat(normalizedPrefix) : '';
+      }
+      var isAbsoluteUrl = /^https?:\/\//i.test(rawApiUrl);
+      var originPart = '';
+      var pathPartRaw = rawApiUrl;
+      if (isAbsoluteUrl) {
+        try {
+          var parsedUrl = new URL(rawApiUrl);
+          originPart = parsedUrl.origin;
+          pathPartRaw = parsedUrl.pathname || '';
+        } catch (error) {
+          originPart = rawApiUrl.replace(/\/+$/, '');
+          pathPartRaw = '';
+        }
+      }
+      var pathPart = this.normalizeApiSegment(pathPartRaw);
+      var pathSegments = pathPart ? pathPart.split('/') : [];
+      var hasPrefix = normalizedPrefix ? pathSegments.slice(0, normalizedPrefix.split('/').length).join('/') === normalizedPrefix : false;
+      var finalPath = autoApiPrefix && normalizedPrefix && !hasPrefix ? [normalizedPrefix, pathPart].filter(Boolean).join('/') : pathPart;
+      if (isAbsoluteUrl) {
+        return finalPath ? "".concat(originPart, "/").concat(finalPath) : originPart;
+      }
+      return finalPath ? "/".concat(finalPath) : '';
+    },
+    buildApiEndpoint: function buildApiEndpoint() {
+      var _this = this;
+      var base = this.resolveApiBaseUrl().replace(/\/+$/, '');
+      for (var _len = arguments.length, segments = new Array(_len), _key = 0; _key < _len; _key++) {
+        segments[_key] = arguments[_key];
+      }
+      var normalizedSegments = segments.filter(function (segment) {
+        return segment !== undefined && segment !== null && segment !== '';
+      }).map(function (segment) {
+        return _this.normalizeApiSegment(segment);
+      });
+      var suffix = normalizedSegments.join('/');
+      return suffix ? "".concat(base, "/").concat(suffix) : base;
+    },
     fetchItemsVuex: function fetchItemsVuex() {
       var _arguments = arguments,
-        _this = this;
+        _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var page, result, itemsResult;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
-              _this.loading = true;
-              _this.$emit("beforeFetch", {});
-              if (!_this.vuexLocalforage) {
+              _this2.loading = true;
+              _this2.$emit("beforeFetch", {});
+              if (!_this2.vuexLocalforage) {
                 _context.next = 9;
                 break;
               }
               _context.next = 7;
-              return _this.model.$fetch();
+              return _this2.model.$fetch();
             case 7:
               _context.next = 13;
               break;
             case 9:
-              _this.model.deleteAll();
+              _this2.model.deleteAll();
               _context.next = 12;
-              return _this.model.api().get(_this.apiUrl + "/" + _this.modelName, {
+              return _this2.model.api().get(_this2.buildApiEndpoint(_this2.modelName), {
                 dataKey: 'data',
                 params: {
                   page: page,
-                  limit: _this.pagination.per_page,
-                  filters: JSON.stringify(_this.finalFilters)
+                  limit: _this2.pagination.per_page,
+                  filters: JSON.stringify(_this2.finalFilters)
                 }
               });
             case 12:
               result = _context.sent;
             case 13:
-              itemsResult = _this.model.query().withAll().get();
+              itemsResult = _this2.model.query().withAll().get();
               if (itemsResult) {
-                _this.items = itemsResult;
+                _this2.items = itemsResult;
               }
-              console.debug("fetch page vuex ", itemsResult, page, _this.items, result);
-              _this.loading = false;
-              _this.firstLoad = true;
+              console.debug("fetch page vuex ", itemsResult, page, _this2.items, result);
+              _this2.loading = false;
+              _this2.firstLoad = true;
             case 18:
             case "end":
               return _context.stop();
@@ -20817,7 +20871,7 @@ axios.default = axios;var crudApi = {
       this.firstLoad = true;
     },
     fetchItems: function fetchItems() {
-      var _this2 = this;
+      var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var concat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       this.$emit("beforeFetch", {});
@@ -20828,7 +20882,7 @@ axios.default = axios;var crudApi = {
         return this.fetchItemsLocal(page, concat);
       }
       this.loading = true;
-      return axios.get(this.apiUrl + "/" + this.modelName, {
+      return axios.get(this.buildApiEndpoint(this.modelName), {
         params: {
           page: page,
           limit: this.pagination.per_page,
@@ -20836,7 +20890,7 @@ axios.default = axios;var crudApi = {
         }
       }).then(function (response) {
         console.debug("fetchItems - Response recibida:", response.data);
-        _this2.makePagination(response.data);
+        _this3.makePagination(response.data);
 
         // Validar que response.data.data existe y es un array
         var items = response.data.data;
@@ -20848,28 +20902,28 @@ axios.default = axios;var crudApi = {
           items = [];
         }
         console.debug("fetchItems - Items procesados:", items, "Cantidad:", items.length);
-        if (_this2.grouped) {
-          _this2.groupItems(items, concat, _this2.isSplitGroups);
+        if (_this3.grouped) {
+          _this3.groupItems(items, concat, _this3.isSplitGroups);
         } else {
           if (concat) {
-            var _this2$items;
+            var _this3$items;
             // Para concat, agregar items al array existente
-            (_this2$items = _this2.items).push.apply(_this2$items, _toConsumableArray$1(items));
+            (_this3$items = _this3.items).push.apply(_this3$items, _toConsumableArray$1(items));
           } else {
-            var _this2$items2;
+            var _this3$items2;
             // Mutar el array existente en lugar de reemplazarlo para mantener reactividad con provide/inject
-            (_this2$items2 = _this2.items).splice.apply(_this2$items2, [0, _this2.items.length].concat(_toConsumableArray$1(items)));
+            (_this3$items2 = _this3.items).splice.apply(_this3$items2, [0, _this3.items.length].concat(_toConsumableArray$1(items)));
           }
         }
-        console.debug("fetchItems - this.items después de asignar:", _this2.items, "Cantidad:", _this2.items ? _this2.items.length : 0);
-        _this2.loading = false;
-        _this2.firstLoad = true;
-        _this2.$emit("afterFetch", {});
+        console.debug("fetchItems - this.items después de asignar:", _this3.items, "Cantidad:", _this3.items ? _this3.items.length : 0);
+        _this3.loading = false;
+        _this3.firstLoad = true;
+        _this3.$emit("afterFetch", {});
       }).catch(function (error) {
-        _this2.toastError(error);
-        _this2.loading = false;
-        _this2.firstLoad = true;
-        _this2.fetchError = true;
+        _this3.toastError(error);
+        _this3.loading = false;
+        _this3.firstLoad = true;
+        _this3.fetchError = true;
       });
     },
     groupItems: function groupItems(items) {
@@ -20929,56 +20983,56 @@ axios.default = axios;var crudApi = {
       }
     },
     saveItemVuex: function saveItemVuex() {
-      var _this3 = this;
+      var _this4 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var result, create, jsondata;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              console.debug("save item 1", _this3.item);
+              console.debug("save item 1", _this4.item);
               create = false;
-              if (!_this3.vuexLocalforage) {
+              if (!_this4.vuexLocalforage) {
                 _context2.next = 20;
                 break;
               }
-              if (_this3.markDirty) {
-                _this3.item.dirty = true;
+              if (_this4.markDirty) {
+                _this4.item.dirty = true;
               }
-              if (!_this3.item.id) {
+              if (!_this4.item.id) {
                 _context2.next = 13;
                 break;
               }
               _context2.next = 8;
-              return _this3.model.$create({
-                data: _this3.item
+              return _this4.model.$create({
+                data: _this4.item
               });
             case 8:
               result = _context2.sent;
-              console.debug("save item 4", _this3.item, result);
+              console.debug("save item 4", _this4.item, result);
               create = false;
               _context2.next = 18;
               break;
             case 13:
               _context2.next = 15;
-              return _this3.model.$create({
-                data: _this3.item
+              return _this4.model.$create({
+                data: _this4.item
               });
             case 15:
               result = _context2.sent;
-              console.debug("save item 5", _this3.item, result);
+              console.debug("save item 5", _this4.item, result);
               create = true;
             case 18:
               _context2.next = 39;
               break;
             case 20:
-              jsondata = _this3.item.$toJson();
-              console.debug("save item 2", _this3.item, jsondata);
-              if (!_this3.item.id) {
+              jsondata = _this4.item.$toJson();
+              console.debug("save item 2", _this4.item, jsondata);
+              if (!_this4.item.id) {
                 _context2.next = 29;
                 break;
               }
               _context2.next = 25;
-              return _this3.model.api().put(_this3.apiUrl + "/" + _this3.modelName + '/' + _this3.item.id, jsondata);
+              return _this4.model.api().put(_this4.buildApiEndpoint(_this4.modelName, _this4.item.id), jsondata);
             case 25:
               result = _context2.sent;
               create = false;
@@ -20986,7 +21040,7 @@ axios.default = axios;var crudApi = {
               break;
             case 29:
               _context2.next = 31;
-              return _this3.model.api().post(_this3.apiUrl + "/" + _this3.modelName, jsondata);
+              return _this4.model.api().post(_this4.buildApiEndpoint(_this4.modelName), jsondata);
             case 31:
               result = _context2.sent;
               create = true;
@@ -20996,17 +21050,17 @@ axios.default = axios;var crudApi = {
                 _context2.next = 38;
                 break;
               }
-              _this3.toastError(result.response.data.error);
-              _this3.loading = false;
+              _this4.toastError(result.response.data.error);
+              _this4.loading = false;
               return _context2.abrupt("return");
             case 38:
               result.save();
             case 39:
-              if (_this3.refreshAfterSave) _this3.refresh();
-              _this3.loading = false;
-              _this3.toastSuccess("Elemento Modificado");
-              if (_this3.hideModalAfterSave || create && _this3.hideModalAfterCreate || !create && _this3.hideModalAfterUpdate) {
-                _this3.$bvModal.hide("modal-form-item-" + _this3.modelName);
+              if (_this4.refreshAfterSave) _this4.refresh();
+              _this4.loading = false;
+              _this4.toastSuccess("Elemento Modificado");
+              if (_this4.hideModalAfterSave || create && _this4.hideModalAfterCreate || !create && _this4.hideModalAfterUpdate) {
+                _this4.$bvModal.hide("modal-form-item-" + _this4.modelName);
               }
             case 43:
             case "end":
@@ -21016,36 +21070,36 @@ axios.default = axios;var crudApi = {
       }))();
     },
     saveItemLocal: function saveItemLocal() {
-      var _this4 = this;
+      var _this5 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var itemSave, itemIndex;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
-              itemSave = JSON.parse(JSON.stringify(_this4.item));
-              if (_this4.item.id || _this4.item.index) {
-                if (_this4.item.id) {
-                  itemIndex = _this4.items.findIndex(function (item) {
-                    return item.id == _this4.item.id;
+              itemSave = JSON.parse(JSON.stringify(_this5.item));
+              if (_this5.item.id || _this5.item.index) {
+                if (_this5.item.id) {
+                  itemIndex = _this5.items.findIndex(function (item) {
+                    return item.id == _this5.item.id;
                   });
                 } else {
-                  itemIndex = _this4.items.findIndex(function (item) {
-                    return item.index == _this4.item.index;
+                  itemIndex = _this5.items.findIndex(function (item) {
+                    return item.index == _this5.item.index;
                   });
                 }
-                _this4.items[itemIndex] = itemSave;
-                if (_this4.hideModalAfterSave || _this4.hideModalAfterUpdate) {
-                  _this4.$bvModal.hide("modal-form-item-" + _this4.modelName);
+                _this5.items[itemIndex] = itemSave;
+                if (_this5.hideModalAfterSave || _this5.hideModalAfterUpdate) {
+                  _this5.$bvModal.hide("modal-form-item-" + _this5.modelName);
                 }
               } else {
-                itemSave.index = _this4.items.length + 1;
-                _this4.items.push(itemSave);
-                if (_this4.hideModalAfterSave || _this4.hideModalAfterCreate) {
-                  _this4.$bvModal.hide("modal-form-item-" + _this4.modelName);
+                itemSave.index = _this5.items.length + 1;
+                _this5.items.push(itemSave);
+                if (_this5.hideModalAfterSave || _this5.hideModalAfterCreate) {
+                  _this5.$bvModal.hide("modal-form-item-" + _this5.modelName);
                 }
               }
-              _this4.toastSuccess("Elemento Modificado");
-              _this4.loading = false;
+              _this5.toastSuccess("Elemento Modificado");
+              _this5.loading = false;
             case 5:
             case "end":
               return _context3.stop();
@@ -21055,25 +21109,25 @@ axios.default = axios;var crudApi = {
     },
     saveItem: function saveItem() {
       var _arguments4 = arguments,
-        _this5 = this;
+        _this6 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var event, validation_result, validation_error_message, formData;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) switch (_context4.prev = _context4.next) {
             case 0:
               event = _arguments4.length > 0 && _arguments4[0] !== undefined ? _arguments4[0] : null;
-              _this5.loading = true;
-              if (!_this5.validate) {
+              _this6.loading = true;
+              if (!_this6.validate) {
                 _context4.next = 10;
                 break;
               }
               validation_result = true;
-              validation_error_message = _this5.messageDefaultValidationError;
+              validation_error_message = _this6.messageDefaultValidationError;
               if (validation_result) {
                 _context4.next = 8;
                 break;
               }
-              _this5.toastError(validation_error_message);
+              _this6.toastError(validation_error_message);
               return _context4.abrupt("return");
             case 8:
               _context4.next = 11;
@@ -21081,105 +21135,105 @@ axios.default = axios;var crudApi = {
             case 10:
               if (event) event.preventDefault();
             case 11:
-              if (!_this5.useVuexORM) {
+              if (!_this6.useVuexORM) {
                 _context4.next = 13;
                 break;
               }
-              return _context4.abrupt("return", _this5.saveItemVuex(event));
+              return _context4.abrupt("return", _this6.saveItemVuex(event));
             case 13:
-              if (_this5.ajax) {
+              if (_this6.ajax) {
                 _context4.next = 15;
                 break;
               }
-              return _context4.abrupt("return", _this5.saveItemLocal(event));
+              return _context4.abrupt("return", _this6.saveItemLocal(event));
             case 15:
-              if (_this5.item.id) {
-                axios.put(_this5.apiUrl + "/" + _this5.modelName + "/" + _this5.item.id, _this5.item).then(function (response) {
-                  if (_this5.hideModalAfterSave || _this5.hideModalAfterUpdate) {
-                    _this5.$bvModal.hide("modal-form-item-" + _this5.modelName);
+              if (_this6.item.id) {
+                axios.put(_this6.buildApiEndpoint(_this6.modelName, _this6.item.id), _this6.item).then(function (response) {
+                  if (_this6.hideModalAfterSave || _this6.hideModalAfterUpdate) {
+                    _this6.$bvModal.hide("modal-form-item-" + _this6.modelName);
                   }
                   var itemSv = response.data;
-                  var itemIndex = _this5.items.findIndex(function (item) {
-                    return item.id == _this5.item.id;
+                  var itemIndex = _this6.items.findIndex(function (item) {
+                    return item.id == _this6.item.id;
                   });
-                  _this5.items[itemIndex] = itemSv;
-                  _this5.item = itemSv;
-                  _this5.loading = false;
-                  if (_this5.refreshAfterSave) _this5.refresh();
-                  _this5.toastSuccess("Elemento Modificado");
-                  _this5.$emit("itemSaved", {
-                    item: _this5.item
+                  _this6.items[itemIndex] = itemSv;
+                  _this6.item = itemSv;
+                  _this6.loading = false;
+                  if (_this6.refreshAfterSave) _this6.refresh();
+                  _this6.toastSuccess("Elemento Modificado");
+                  _this6.$emit("itemSaved", {
+                    item: _this6.item
                   });
-                  _this5.$emit("itemUpdated", {
-                    item: _this5.item
+                  _this6.$emit("itemUpdated", {
+                    item: _this6.item
                   });
                 }).catch(function (error) {
-                  _this5.toastError(error);
-                  _this5.loading = false;
+                  _this6.toastError(error);
+                  _this6.loading = false;
                 });
               } else {
-                if (_this5.createMultipart) {
+                if (_this6.createMultipart) {
                   formData = new FormData();
-                  Object.keys(_this5.item).forEach(function (key) {
-                    if (_this5.item[key][0] && _this5.item[key][0].name) {
-                      var files = _this5.item[key];
+                  Object.keys(_this6.item).forEach(function (key) {
+                    if (_this6.item[key][0] && _this6.item[key][0].name) {
+                      var files = _this6.item[key];
                       for (var x = 0; x < files.length; x++) {
-                        formData.append(key + "[]", _this5.item[key][x], _this5.item[key][x].name);
+                        formData.append(key + "[]", _this6.item[key][x], _this6.item[key][x].name);
                       }
-                    } else formData.append(key, _this5.item[key]);
+                    } else formData.append(key, _this6.item[key]);
                   });
-                  axios.post(_this5.apiUrl + "/" + _this5.modelName, formData).then(function (response) {
-                    _this5.loading = false;
-                    if (_this5.hideModalAfterSave || _this5.hideModalAfterCreate) {
-                      _this5.$bvModal.hide("modal-form-item-" + _this5.modelName);
+                  axios.post(_this6.buildApiEndpoint(_this6.modelName), formData).then(function (response) {
+                    _this6.loading = false;
+                    if (_this6.hideModalAfterSave || _this6.hideModalAfterCreate) {
+                      _this6.$bvModal.hide("modal-form-item-" + _this6.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this5.toastSuccess(response.data.message);
+                        _this6.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this5.items.push(itemSv);
-                    _this5.item = itemSv;
-                    if (_this5.refreshAfterSave) _this5.refresh();
-                    _this5.toastSuccess("Elemento Creado");
-                    _this5.$emit("itemSaved", {
-                      item: _this5.item
+                    _this6.items.push(itemSv);
+                    _this6.item = itemSv;
+                    if (_this6.refreshAfterSave) _this6.refresh();
+                    _this6.toastSuccess("Elemento Creado");
+                    _this6.$emit("itemSaved", {
+                      item: _this6.item
                     });
-                    _this5.$emit("itemCreated", {
-                      item: _this5.item
+                    _this6.$emit("itemCreated", {
+                      item: _this6.item
                     });
                   }).catch(function (error) {
-                    _this5.toastError(error);
-                    _this5.loading = false;
+                    _this6.toastError(error);
+                    _this6.loading = false;
                   });
                 } else {
-                  axios.post(_this5.apiUrl + "/" + _this5.modelName, _this5.item).then(function (response) {
-                    _this5.loading = false;
-                    if (_this5.hideModalAfterSave || _this5.hideModalAfterUpdate) {
-                      _this5.$bvModal.hide("modal-form-item-" + _this5.modelName);
+                  axios.post(_this6.buildApiEndpoint(_this6.modelName), _this6.item).then(function (response) {
+                    _this6.loading = false;
+                    if (_this6.hideModalAfterSave || _this6.hideModalAfterUpdate) {
+                      _this6.$bvModal.hide("modal-form-item-" + _this6.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this5.toastSuccess(response.data.message);
+                        _this6.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this5.items.push(itemSv);
-                    _this5.item = itemSv;
-                    if (_this5.refreshAfterSave) _this5.refresh();
-                    _this5.toastSuccess("Elemento Creado");
-                    _this5.$emit("itemSaved", {
-                      item: _this5.item
+                    _this6.items.push(itemSv);
+                    _this6.item = itemSv;
+                    if (_this6.refreshAfterSave) _this6.refresh();
+                    _this6.toastSuccess("Elemento Creado");
+                    _this6.$emit("itemSaved", {
+                      item: _this6.item
                     });
-                    _this5.$emit("itemCreated", {
-                      item: _this5.item
+                    _this6.$emit("itemCreated", {
+                      item: _this6.item
                     });
                   }).catch(function (error) {
-                    _this5.toastError(error);
-                    _this5.loading = false;
+                    _this6.toastError(error);
+                    _this6.loading = false;
                   });
                 }
               }
@@ -21192,7 +21246,7 @@ axios.default = axios;var crudApi = {
       }))();
     },
     deleteItem: function deleteItem(id, index) {
-      var _this6 = this;
+      var _this7 = this;
       if (this.useVuexORM) {
         return this.deleteItemVuex(id, index);
       }
@@ -21200,18 +21254,18 @@ axios.default = axios;var crudApi = {
         return this.deleteItemLocal(id, index);
       }
       this.loading = true;
-      axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(function (response) {
-        _this6.items.splice(index, 1);
-        _this6.toastSuccess("Elemento eliminado.");
-        _this6.$emit("itemDeleted", {});
-        _this6.loading = false;
+      axios.delete(this.buildApiEndpoint(this.modelName, id)).then(function (response) {
+        _this7.items.splice(index, 1);
+        _this7.toastSuccess("Elemento eliminado.");
+        _this7.$emit("itemDeleted", {});
+        _this7.loading = false;
       }).catch(function (error) {
-        _this6.toastError(error);
-        _this6.loading = false;
+        _this7.toastError(error);
+        _this7.loading = false;
       });
     },
     deleteItemLocal: function deleteItemLocal(id, index) {
-      var _this7 = this;
+      var _this8 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         var itemIndex;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
@@ -21219,20 +21273,20 @@ axios.default = axios;var crudApi = {
             case 0:
               if (id || index) {
                 if (id) {
-                  itemIndex = _this7.items.findIndex(function (item) {
-                    return item.id == _this7.item.id;
+                  itemIndex = _this8.items.findIndex(function (item) {
+                    return item.id == _this8.item.id;
                   });
                 } else {
                   itemIndex = index;
                 }
-                _this7.items.splice(itemIndex, 1);
-                _this7.item = null;
-                _this7.toastSuccess("Elemento Eliminado");
-                _this7.$emit("itemDeleted", {});
+                _this8.items.splice(itemIndex, 1);
+                _this8.item = null;
+                _this8.toastSuccess("Elemento Eliminado");
+                _this8.$emit("itemDeleted", {});
               } else {
                 console.error("Cannot delete item without ID or index");
               }
-              _this7.loading = false;
+              _this8.loading = false;
             case 2:
             case "end":
               return _context5.stop();
@@ -21241,24 +21295,24 @@ axios.default = axios;var crudApi = {
       }))();
     },
     deleteItemVuex: function deleteItemVuex(id, index) {
-      var _this8 = this;
+      var _this9 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         var result;
         return _regeneratorRuntime().wrap(function _callee6$(_context6) {
           while (1) switch (_context6.prev = _context6.next) {
             case 0:
-              if (!_this8.vuexLocalforage) {
+              if (!_this9.vuexLocalforage) {
                 _context6.next = 5;
                 break;
               }
               _context6.next = 3;
-              return _this8.model.$delete(id);
+              return _this9.model.$delete(id);
             case 3:
               _context6.next = 14;
               break;
             case 5:
               _context6.next = 7;
-              return _this8.model.api().delete(_this8.apiUrl + "/" + _this8.modelName + '/' + id, {
+              return _this9.model.api().delete(_this9.buildApiEndpoint(_this9.modelName, id), {
                 delete: 1
               });
             case 7:
@@ -21269,11 +21323,11 @@ axios.default = axios;var crudApi = {
                 _context6.next = 14;
                 break;
               }
-              _this8.toastError(result.response.data.error);
-              _this8.loading = false;
+              _this9.toastError(result.response.data.error);
+              _this9.loading = false;
               return _context6.abrupt("return");
             case 14:
-              _this8.toastSuccess("Elemento eliminado.");
+              _this9.toastSuccess("Elemento eliminado.");
             case 15:
             case "end":
               return _context6.stop();
@@ -21282,7 +21336,7 @@ axios.default = axios;var crudApi = {
       }))();
     },
     deleteItemBulk: function deleteItemBulk() {
-      var _this9 = this;
+      var _this10 = this;
       if (this.useVuexORM) {
         return this.deleteItemBulkVuex();
       }
@@ -21293,39 +21347,39 @@ axios.default = axios;var crudApi = {
         return it.id;
       });
       this.loading = true;
-      axios.delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {
+      axios.delete(this.buildApiEndpoint(this.modelName, "bulk-destroy"), {
         params: {
           ids: ids
         }
       }).then(function (response) {
-        _this9.toastSuccess("Elemento/s eliminado.");
-        _this9.$emit("itemDeleted", {});
-        _this9.clearSelection();
-        _this9.refresh();
+        _this10.toastSuccess("Elemento/s eliminado.");
+        _this10.$emit("itemDeleted", {});
+        _this10.clearSelection();
+        _this10.refresh();
       }).catch(function (error) {
-        _this9.toastError(error);
-        _this9.loading = false;
+        _this10.toastError(error);
+        _this10.loading = false;
       });
     },
     deleteItemBulkLocal: function deleteItemBulkLocal() {
-      var _this10 = this;
+      var _this11 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
         var ids;
         return _regeneratorRuntime().wrap(function _callee7$(_context7) {
           while (1) switch (_context7.prev = _context7.next) {
             case 0:
-              ids = _this10.selectedItems.map(function (it) {
+              ids = _this11.selectedItems.map(function (it) {
                 return it.id;
               });
-              _this10.items = _this10.items.filter(function (it) {
+              _this11.items = _this11.items.filter(function (it) {
                 return !ids.includes(it.id);
               });
-              _this10.item = null;
-              _this10.pagination.total = _this10.items.length;
-              _this10.toastSuccess("Elemento Eliminado");
-              _this10.$emit("itemDeleted", {});
-              _this10.clearSelection();
-              _this10.loading = false;
+              _this11.item = null;
+              _this11.pagination.total = _this11.items.length;
+              _this11.toastSuccess("Elemento Eliminado");
+              _this11.$emit("itemDeleted", {});
+              _this11.clearSelection();
+              _this11.loading = false;
             case 8:
             case "end":
               return _context7.stop();
@@ -21334,27 +21388,27 @@ axios.default = axios;var crudApi = {
       }))();
     },
     deleteItemBulkVuex: function deleteItemBulkVuex() {
-      var _this11 = this;
+      var _this12 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
         var ids, result, itemsResult;
         return _regeneratorRuntime().wrap(function _callee8$(_context8) {
           while (1) switch (_context8.prev = _context8.next) {
             case 0:
-              ids = _this11.selectedItems.map(function (it) {
+              ids = _this12.selectedItems.map(function (it) {
                 return it.id;
               });
-              if (!_this11.vuexLocalforage) {
+              if (!_this12.vuexLocalforage) {
                 _context8.next = 6;
                 break;
               }
               _context8.next = 4;
-              return _this11.model.$delete(ids);
+              return _this12.model.$delete(ids);
             case 4:
               _context8.next = 15;
               break;
             case 6:
               _context8.next = 8;
-              return _this11.model.api().delete(_this11.apiUrl + "/" + _this11.modelName + '/bulk-destroy', {
+              return _this12.model.api().delete(_this12.buildApiEndpoint(_this12.modelName, "bulk-destroy"), {
                 params: {
                   ids: ids
                 },
@@ -21368,18 +21422,18 @@ axios.default = axios;var crudApi = {
                 _context8.next = 15;
                 break;
               }
-              _this11.toastError(result.response.data.error);
-              _this11.loading = false;
+              _this12.toastError(result.response.data.error);
+              _this12.loading = false;
               return _context8.abrupt("return");
             case 15:
               // Actualizar items desde el store Vuex
-              itemsResult = _this11.model.query().withAll().get();
+              itemsResult = _this12.model.query().withAll().get();
               if (itemsResult) {
-                _this11.items = itemsResult;
+                _this12.items = itemsResult;
               }
-              _this11.toastSuccess("Elemento eliminados.");
-              _this11.clearSelection();
-              _this11.loading = false;
+              _this12.toastSuccess("Elemento eliminados.");
+              _this12.clearSelection();
+              _this12.loading = false;
             case 20:
             case "end":
               return _context8.stop();
@@ -21388,34 +21442,34 @@ axios.default = axios;var crudApi = {
       }))();
     },
     saveSort: function saveSort() {
-      var _this12 = this;
+      var _this13 = this;
       if (this.orderable) {
         this.loading = true;
         var order = [];
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: v[_this12.orderProp]
+            order: v[_this13.orderProp]
           });
         });
         if (!this.ajax) {
           return;
         }
-        axios.post(this.apiUrl + "/" + this.modelName + "/sort", {
+        axios.post(this.buildApiEndpoint(this.modelName, "sort"), {
           order: order
         }).then(function (response) {
           response.data;
-          _this12.toastSuccess("Orden Actualizado");
-          if (_this12.refreshAfterSave) _this12.refresh();
-          _this12.loading = false;
+          _this13.toastSuccess("Orden Actualizado");
+          if (_this13.refreshAfterSave) _this13.refresh();
+          _this13.loading = false;
         }).catch(function (error) {
-          _this12.toastError(error);
-          _this12.loading = false;
+          _this13.toastError(error);
+          _this13.loading = false;
         });
       }
     },
     exportItems: function exportItems() {
-      var _this13 = this;
+      var _this14 = this;
       if (this.useVuexORM) {
         return;
       }
@@ -21440,40 +21494,40 @@ axios.default = axios;var crudApi = {
       }
       params.format = this.exportFormatReactive.value;
       this.loading = true;
-      axios.get(this.apiUrl + "/" + this.modelName + "/export", {
+      axios.get(this.buildApiEndpoint(this.modelName, "export"), {
         params: params,
         responseType: "blob"
       }).then(function (response) {
-        _this13.downloadBlobResponse(response);
-        _this13.loading = false;
+        _this14.downloadBlobResponse(response);
+        _this14.loading = false;
       }).catch(function (error) {
-        _this13.toastError(error);
-        _this13.loading = false;
+        _this14.toastError(error);
+        _this14.loading = false;
       });
     },
     importItems: function importItems() {
-      var _this14 = this;
+      var _this15 = this;
       var formData = new FormData();
       formData.append("file", this.fileImport);
-      axios.post(this.apiUrl + "/" + this.modelName + "/import", formData, {
+      axios.post(this.buildApiEndpoint(this.modelName, "import"), formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
         if (response && response.data && response.data.success == true) {
-          _this14.$refs["modal-import"].hide();
-          _this14.toastSuccess("Datos Importados con Éxito");
-          _this14.refresh();
+          _this15.$refs["modal-import"].hide();
+          _this15.toastSuccess("Datos Importados con Éxito");
+          _this15.refresh();
         } else {
-          _this14.toastError("No se pudo importar los datos.");
+          _this15.toastError("No se pudo importar los datos.");
         }
       }).catch(function (error) {
         console.error(error);
-        _this14.toastError(error);
+        _this15.toastError(error);
       });
     },
     refresh: function refresh() {
-      var _this15 = this;
+      var _this16 = this;
       this.$emit("refresh", {});
       if (this.infiniteScroll) {
         this.pagination.current_page = 1;
@@ -21483,13 +21537,13 @@ axios.default = axios;var crudApi = {
       if (this.infiniteScroll && fetchPromise) {
         this.refreshing = true;
         fetchPromise.then(function () {
-          var infiniteLoadingRef = _this15.$refs.infiniteLoading;
+          var infiniteLoadingRef = _this16.$refs.infiniteLoading;
           if (infiniteLoadingRef) {
             infiniteLoadingRef.stateChanger.reset();
           } else {
             console.debug("infiniteLoadingRef not set");
           }
-          _this15.refreshing = false;
+          _this16.refreshing = false;
         });
       }
     },
@@ -22262,22 +22316,51 @@ axios.default = axios;var crudApi = {
         // handle other errors
         error_message = error.message;
       }
-      this.$bvToast.toast(error_message, {
-        title: "Error",
-        toaster: "b-toaster-bottom-right",
-        variant: "danger",
-        solid: true,
-        appendToast: true
-      });
+
+      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
+      if (this.$toast) {
+        this.$toast(error_message, {
+          title: "Error",
+          toaster: "b-toaster-bottom-right",
+          variant: "danger",
+          solid: true,
+          appendToast: true
+        });
+      } else if (this.$bvToast && this.$bvToast.toast) {
+        this.$bvToast.toast(error_message, {
+          title: "Error",
+          toaster: "b-toaster-bottom-right",
+          variant: "danger",
+          solid: true,
+          appendToast: true
+        });
+      } else {
+        // Fallback: usar console.error
+        console.error('Error:', error_message);
+      }
     },
     toastSuccess: function toastSuccess(message) {
-      this.$bvToast.toast(message, {
-        title: "Listo",
-        toaster: "b-toaster-bottom-right",
-        variant: "success",
-        solid: true,
-        appendToast: true
-      });
+      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
+      if (this.$toast) {
+        this.$toast(message, {
+          title: "Listo",
+          toaster: "b-toaster-bottom-right",
+          variant: "success",
+          solid: true,
+          appendToast: true
+        });
+      } else if (this.$bvToast && this.$bvToast.toast) {
+        this.$bvToast.toast(message, {
+          title: "Listo",
+          toaster: "b-toaster-bottom-right",
+          variant: "success",
+          solid: true,
+          appendToast: true
+        });
+      } else {
+        // Fallback: usar console.log
+        console.log('Success:', message);
+      }
     },
     downloadBlobResponse: function downloadBlobResponse(response) {
       var extension = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -22300,7 +22383,538 @@ axios.default = axios;var crudApi = {
       link.click();
     }
   }
-};var css = "tr td[data-v-aaa8b202]:last-child,\ntr td[data-v-aaa8b202]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-aaa8b202] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-aaa8b202] td[data-v-aaa8b202] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-aaa8b202][data-v-aaa8b202]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-aaa8b202][data-v-aaa8b202]:hover td[data-v-aaa8b202] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(odd) td[data-v-aaa8b202] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(even) td[data-v-aaa8b202] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-aaa8b202] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-aaa8b202] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-aaa8b202] .crud-title[data-v-aaa8b202] {\n    margin: 0; }\n  .crud-header[data-v-aaa8b202] .crud-search[data-v-aaa8b202] {\n    max-width: 15rem; }\n    .crud-header[data-v-aaa8b202] .crud-search[data-v-aaa8b202] .btn[data-v-aaa8b202] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-aaa8b202] .crud-search[data-v-aaa8b202] .btn[data-v-aaa8b202].open[data-v-aaa8b202] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-aaa8b202] .table-options[data-v-aaa8b202] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-aaa8b202] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-aaa8b202] {\n    table-layout: auto; }\n    .table[data-v-aaa8b202] tbody[data-v-aaa8b202] td[data-v-aaa8b202] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-aaa8b202] tbody[data-v-aaa8b202] td[data-v-aaa8b202]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-aaa8b202] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-aaa8b202] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-aaa8b202] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-aaa8b202] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-aaa8b202] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+};/**
+ * Utilidades para detectar y validar la versión de Bootstrap
+ */
+
+/**
+ * Detecta la versión de Bootstrap instalada
+ * @returns {number|string} 4, 5, o 'unknown'
+ */
+function detectBootstrapVersion() {
+  try {
+    // Intentar detectar Bootstrap 5
+    if (typeof window !== 'undefined' && window.bootstrap) {
+      // Bootstrap 5 expone window.bootstrap
+      return 5;
+    }
+
+    // Intentar detectar bootstrap-vue (Bootstrap 4)
+    if (typeof window !== 'undefined' && window.Vue) {
+      // Verificar si bootstrap-vue está registrado
+      var vue = window.Vue;
+      if (vue.options && vue.options._base) {
+        // Verificar componentes de bootstrap-vue
+        if (vue.options._base.options.components && vue.options._base.options.components['b-button']) {
+          return 4;
+        }
+      }
+    }
+
+    // Verificar por clases CSS en el DOM
+    if (typeof document !== 'undefined') {
+      var testEl = document.createElement('div');
+      testEl.className = 'd-flex';
+      document.body.appendChild(testEl);
+      var styles = window.getComputedStyle(testEl);
+      // Bootstrap 5 usa diferentes valores por defecto
+      // Esta es una heurística simple
+      document.body.removeChild(testEl);
+    }
+    return 'unknown';
+  } catch (e) {
+    console.warn('Error detecting Bootstrap version:', e);
+    return 'unknown';
+  }
+}
+
+/**
+ * Normaliza la versión de Bootstrap
+ * Si es 'auto', intenta detectarla, si no puede, retorna 4 como fallback (compatibilidad)
+ * @param {number|string} version - Versión a normalizar
+ * @returns {number} 4 o 5
+ */
+function normalizeBootstrapVersion(version) {
+  if (version === 'auto' || version === 'unknown') {
+    var detected = detectBootstrapVersion();
+    if (detected === 4 || detected === 5) {
+      return detected;
+    }
+    // Fallback a Bootstrap 4 por compatibilidad
+    return 4;
+  }
+  if (version === 4 || version === 5) {
+    return version;
+  }
+
+  // Fallback a Bootstrap 4
+  return 4;
+}// Import estático de wrappers Bootstrap (se resuelve en build time si están disponibles)
+// Nota: En contextos ESM, esto puede fallar, pero el factory tiene fallbacks
+var BootstrapWrappersStatic = null;
+try {
+  if (typeof require !== 'undefined') {
+    BootstrapWrappersStatic = require('../bootstrap-wrappers');
+  }
+} catch (e) {
+  // Los wrappers no están disponibles en este contexto
+  BootstrapWrappersStatic = null;
+}
+
+// Cache para wrappers Bootstrap (compatibles con BS4 y BS5)
+var bootstrapComponents = null;
+var bootstrapAvailable = null;
+
+/**
+ * Carga wrappers de Bootstrap (compatibles con BS4 y BS5)
+ * @returns {Object|null}
+ */
+function loadBootstrapComponents() {
+  if (bootstrapAvailable !== null) {
+    return bootstrapComponents;
+  }
+
+  // Usar el import estático si está disponible
+  if (BootstrapWrappersStatic) {
+    // El módulo puede exportar como default (plugin) o como objeto
+    var module = BootstrapWrappersStatic.default || BootstrapWrappersStatic;
+
+    // Si es el plugin, extraer los componentes
+    if (module.Bootstrap) {
+      bootstrapComponents = module.Bootstrap;
+    } else if (module.Bootstrap5) {
+      // Compatibilidad con nombre anterior
+      bootstrapComponents = module.Bootstrap5;
+    } else {
+      // Si es un plugin Vue, extraer los componentes del objeto
+      // Los plugins Vue exportan los componentes como propiedades del objeto
+      bootstrapComponents = {};
+      Object.keys(module).forEach(function (key) {
+        // Excluir propiedades especiales del plugin
+        if (key !== 'install' && key !== 'Bootstrap' && key !== 'Bootstrap5') {
+          var component = module[key];
+          // Verificar que sea un componente Vue válido
+          if (component && (_typeof$1(component) === 'object' || typeof component === 'function')) {
+            // Si tiene name, __file, render o template, es un componente Vue
+            if (component.name || component.__file || component.render || component.template || component.options && component.options.name) {
+              bootstrapComponents[key] = component;
+              // También agregar con prefijo 'b-' si es un nombre PascalCase
+              if (key.startsWith('B') && key.length > 1) {
+                var prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
+                bootstrapComponents[prefixedName] = component;
+              }
+              // También agregar con nombre camelCase
+              var camelName = key.charAt(0).toLowerCase() + key.slice(1);
+              bootstrapComponents[camelName] = component;
+            }
+          }
+        }
+      });
+    }
+    bootstrapAvailable = true;
+    return bootstrapComponents;
+  }
+
+  // Intentar require dinámico como fallback
+  try {
+    if (typeof require !== 'undefined') {
+      var BootstrapWrappers = require('../bootstrap-wrappers');
+      var _module = BootstrapWrappers.default || BootstrapWrappers;
+      if (_module.Bootstrap) {
+        bootstrapComponents = _module.Bootstrap;
+      } else if (_module.Bootstrap5) {
+        bootstrapComponents = _module.Bootstrap5;
+      } else {
+        // Extraer componentes del plugin
+        bootstrapComponents = {};
+        Object.keys(_module).forEach(function (key) {
+          if (key !== 'install' && key !== 'Bootstrap' && key !== 'Bootstrap5') {
+            var component = _module[key];
+            if (component && (_typeof$1(component) === 'object' || typeof component === 'function')) {
+              if (component.name || component.__file || component.render || component.template || component.options && component.options.name) {
+                bootstrapComponents[key] = component;
+                if (key.startsWith('B') && key.length > 1) {
+                  var prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
+                  bootstrapComponents[prefixedName] = component;
+                }
+                var camelName = key.charAt(0).toLowerCase() + key.slice(1);
+                bootstrapComponents[camelName] = component;
+              }
+            }
+          }
+        });
+      }
+      bootstrapAvailable = true;
+      return bootstrapComponents;
+    }
+  } catch (e) {
+    // Wrappers Bootstrap no están disponibles
+    console.warn('Error loading Bootstrap components:', e);
+  }
+  bootstrapAvailable = false;
+  return null;
+}
+
+/**
+ * Obtiene un componente de Bootstrap según la versión
+ * @param {string} componentName - Nombre del componente (ej: 'b-button' o 'BButton')
+ * @param {number|string} version - Versión de Bootstrap (4, 5, o 'auto')
+ * @returns {Object|null} Componente Vue o null si no está disponible
+ */
+function getBootstrapComponent(componentName) {
+  var version = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'auto';
+  var normalizedVersion = normalizeBootstrapVersion(version);
+
+  // Normalizar nombre del componente (b-button -> BButton, BButton -> BButton)
+  var normalizedName = componentName.charAt(0).toUpperCase() + componentName.slice(1).replace(/-([a-z])/g, function (g) {
+    return g[1].toUpperCase();
+  });
+  var prefixedName = 'b-' + componentName.replace(/^b-/, '').replace(/([A-Z])/g, '-$1').toLowerCase();
+
+  // Los wrappers son compatibles con Bootstrap 4 y 5
+  var BootstrapWrappers = loadBootstrapComponents();
+  if (BootstrapWrappers) {
+    if (BootstrapWrappers[normalizedName]) return BootstrapWrappers[normalizedName];
+    if (BootstrapWrappers[componentName]) return BootstrapWrappers[componentName];
+    if (BootstrapWrappers[prefixedName]) return BootstrapWrappers[prefixedName];
+  }
+  console.error("Component ".concat(componentName, " not found for Bootstrap ").concat(normalizedVersion));
+  return null;
+}
+
+/**
+ * Obtiene todos los componentes de Bootstrap según la versión
+ * @param {number|string} version - Versión de Bootstrap (4, 5, o 'auto')
+ * @returns {Object} Objeto con todos los componentes disponibles
+ */
+function getBootstrapComponents() {
+  var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'auto';
+  normalizeBootstrapVersion(version);
+
+  // Los wrappers funcionan con Bootstrap 4 y 5
+  var BootstrapWrappers = loadBootstrapComponents();
+  if (BootstrapWrappers) {
+    return BootstrapWrappers;
+  }
+  return {};
+}/**
+ * Sistema de toasts simple compatible con Bootstrap 4 y 5
+ * Reemplaza la funcionalidad de bootstrap-vue $bvToast
+ */
+
+/**
+ * Crea y muestra un toast
+ * @param {string} message - Mensaje a mostrar
+ * @param {Object} options - Opciones del toast
+ * @param {string} options.title - Título del toast
+ * @param {string} options.variant - Variante (success, danger, warning, info)
+ * @param {string} options.toaster - Posición (no usado, mantenido por compatibilidad)
+ * @param {boolean} options.solid - Si es true, usa fondo sólido
+ * @param {boolean} options.appendToast - Si es true, agrega al contenedor existente
+ */
+function showToast(message) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var _options$title = options.title,
+    title = _options$title === void 0 ? '' : _options$title,
+    _options$variant = options.variant,
+    variant = _options$variant === void 0 ? 'info' : _options$variant,
+    _options$toaster = options.toaster,
+    toaster = _options$toaster === void 0 ? 'b-toaster-bottom-right' : _options$toaster,
+    _options$solid = options.solid,
+    solid = _options$solid === void 0 ? false : _options$solid;
+    options.appendToast;
+
+  // Crear contenedor de toasts si no existe
+  var toasterContainer = document.getElementById('vue-laravel-crud-toaster');
+  if (!toasterContainer) {
+    toasterContainer = document.createElement('div');
+    toasterContainer.id = 'vue-laravel-crud-toaster';
+    toasterContainer.className = 'vue-laravel-crud-toaster';
+
+    // Determinar posición basada en toaster
+    if (toaster.includes('bottom-right')) {
+      toasterContainer.style.cssText = 'position: fixed; bottom: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    } else if (toaster.includes('bottom-left')) {
+      toasterContainer.style.cssText = 'position: fixed; bottom: 0; left: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    } else if (toaster.includes('top-right')) {
+      toasterContainer.style.cssText = 'position: fixed; top: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    } else if (toaster.includes('top-left')) {
+      toasterContainer.style.cssText = 'position: fixed; top: 0; left: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    } else {
+      // Default: bottom-right
+      toasterContainer.style.cssText = 'position: fixed; bottom: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    }
+    document.body.appendChild(toasterContainer);
+  }
+
+  // Crear elemento toast
+  var toastId = "toast-".concat(Date.now(), "-").concat(Math.random().toString(36).substr(2, 9));
+  var toast = document.createElement('div');
+  toast.id = toastId;
+  toast.className = 'toast';
+  toast.setAttribute('role', 'alert');
+  toast.setAttribute('aria-live', 'assertive');
+  toast.setAttribute('aria-atomic', 'true');
+
+  // Determinar clases según variant
+  var bgClass = '';
+  var textClass = '';
+  if (variant === 'success') {
+    bgClass = solid ? 'bg-success' : 'border-success';
+    textClass = solid ? 'text-white' : 'text-success';
+  } else if (variant === 'danger') {
+    bgClass = solid ? 'bg-danger' : 'border-danger';
+    textClass = solid ? 'text-white' : 'text-danger';
+  } else if (variant === 'warning') {
+    bgClass = solid ? 'bg-warning' : 'border-warning';
+    textClass = solid ? 'text-white' : 'text-warning';
+  } else if (variant === 'info') {
+    bgClass = solid ? 'bg-info' : 'border-info';
+    textClass = solid ? 'text-white' : 'text-info';
+  } else {
+    bgClass = solid ? 'bg-secondary' : 'border-secondary';
+    textClass = solid ? 'text-white' : 'text-secondary';
+  }
+
+  // Construir HTML del toast
+  toast.innerHTML = "\n    <div class=\"toast-header ".concat(solid ? bgClass + ' ' + textClass : '', "\" style=\"").concat(solid ? '' : 'border-bottom-color: inherit;', "\">\n      ").concat(title ? "<strong class=\"me-auto\">".concat(title, "</strong>") : '', "\n      <button type=\"button\" class=\"btn-close ").concat(solid ? '' : 'btn-close-white', "\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n    </div>\n    <div class=\"toast-body ").concat(solid ? bgClass + ' ' + textClass : textClass, "\">\n      ").concat(message, "\n    </div>\n  ");
+
+  // Agregar clases adicionales
+  if (!solid) {
+    toast.classList.add('border');
+  }
+
+  // Agregar al contenedor
+  toasterContainer.appendChild(toast);
+
+  // Inicializar y mostrar toast
+  // Bootstrap 5
+  if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Toast) {
+    var bsToast = new window.bootstrap.Toast(toast, {
+      autohide: true,
+      delay: 5000
+    });
+    bsToast.show();
+
+    // Remover del DOM cuando se oculte
+    toast.addEventListener('hidden.bs.toast', function () {
+      if (toast.parentNode) {
+        toast.remove();
+      }
+    });
+  } else {
+    // Bootstrap 4 o fallback manual
+    toast.classList.add('show');
+
+    // Auto-ocultar después de 5 segundos
+    setTimeout(function () {
+      toast.classList.remove('show');
+      setTimeout(function () {
+        if (toast.parentNode) {
+          toast.remove();
+        }
+      }, 300);
+    }, 5000);
+  }
+  return toast;
+}
+
+/**
+ * Helper para controlar modales programáticamente
+ * Compatible con bootstrap-vue $bvModal API
+ */
+var modalHelper = {
+  show: function show(modalId) {
+    var modalEl = document.getElementById(modalId);
+    if (!modalEl) {
+      console.warn("Modal with id \"".concat(modalId, "\" not found"));
+      return;
+    }
+
+    // Buscar instancia Vue del componente (puede estar en __vue__ o __vueParentComponent)
+    var vueInstance = modalEl.__vue__;
+    if (!vueInstance && modalEl.__vueParentComponent) {
+      vueInstance = modalEl.__vueParentComponent;
+    }
+
+    // Si encontramos la instancia Vue y tiene el método show, usarlo
+    if (vueInstance && typeof vueInstance.show === 'function') {
+      vueInstance.show();
+      return;
+    }
+
+    // Si tiene la propiedad visible, actualizarla
+    if (vueInstance && vueInstance.$set) {
+      vueInstance.$set(vueInstance, 'visible', true);
+      return;
+    }
+
+    // Fallback: usar Bootstrap JavaScript API directamente
+    if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Modal) {
+      // Bootstrap 5
+      var modal = window.bootstrap.Modal.getInstance(modalEl);
+      if (!modal) {
+        modal = new window.bootstrap.Modal(modalEl);
+      }
+      modal.show();
+    } else if (typeof window !== 'undefined' && window.$ && window.$(modalEl)) {
+      // Bootstrap 4 con jQuery
+      window.$(modalEl).modal('show');
+    } else {
+      // Fallback manual
+      modalEl.classList.add('show', 'd-block');
+      modalEl.style.display = 'block';
+      modalEl.setAttribute('aria-hidden', 'false');
+      modalEl.setAttribute('aria-modal', 'true');
+      document.body.classList.add('modal-open');
+
+      // Crear backdrop si no existe
+      var backdrop = document.getElementById("".concat(modalId, "-backdrop"));
+      if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'modal-backdrop fade show';
+        backdrop.id = "".concat(modalId, "-backdrop");
+        document.body.appendChild(backdrop);
+      }
+    }
+  },
+  hide: function hide(modalId) {
+    var modalEl = document.getElementById(modalId);
+    if (!modalEl) {
+      console.warn("Modal with id \"".concat(modalId, "\" not found"));
+      return;
+    }
+
+    // Buscar instancia Vue del componente - buscar recursivamente en el árbol
+    var vueInstance = modalEl.__vue__;
+    if (!vueInstance) {
+      // Buscar en el padre
+      var parent = modalEl.parentElement;
+      while (parent && !vueInstance) {
+        vueInstance = parent.__vue__;
+        parent = parent.parentElement;
+      }
+    }
+
+    // Si encontramos la instancia Vue y tiene el método hide, usarlo
+    if (vueInstance) {
+      // Buscar el método hide en la instancia o en sus componentes
+      if (typeof vueInstance.hide === 'function') {
+        vueInstance.hide();
+        return;
+      }
+      // Buscar en $refs si hay un ref con el mismo id
+      if (vueInstance.$refs && vueInstance.$refs[modalId]) {
+        var refComponent = vueInstance.$refs[modalId];
+        if (typeof refComponent.hide === 'function') {
+          refComponent.hide();
+          return;
+        }
+      }
+    }
+
+    // Fallback: usar Bootstrap JavaScript API directamente
+    if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Modal) {
+      // Bootstrap 5
+      var modal = window.bootstrap.Modal.getInstance(modalEl);
+      if (modal) {
+        modal.hide();
+      } else {
+        // Si no hay instancia, ocultar manualmente
+        modalEl.classList.remove('show', 'd-block');
+        modalEl.style.display = 'none';
+        modalEl.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+
+        // Remover backdrop
+        var backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+          backdrop.remove();
+        }
+      }
+    } else if (typeof window !== 'undefined' && window.$ && window.$(modalEl)) {
+      // Bootstrap 4 con jQuery
+      window.$(modalEl).modal('hide');
+      // Remover backdrop de jQuery si existe
+      window.$('.modal-backdrop').remove();
+      document.body.classList.remove('modal-open');
+    } else {
+      // Fallback manual
+      modalEl.classList.remove('show', 'd-block');
+      modalEl.style.display = 'none';
+      modalEl.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+
+      // Remover backdrop
+      var _backdrop = document.querySelector('.modal-backdrop');
+      if (_backdrop) {
+        _backdrop.classList.remove('show');
+        setTimeout(function () {
+          if (_backdrop.parentNode) {
+            _backdrop.remove();
+          }
+        }, 150);
+      }
+    }
+  },
+  msgBoxConfirm: function msgBoxConfirm(message) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    // Crear un modal de confirmación simple
+    return new Promise(function (resolve) {
+      var confirmId = 'confirm-modal-' + Date.now();
+      var modal = document.createElement('div');
+      modal.id = confirmId;
+      modal.className = 'modal fade';
+      modal.innerHTML = "\n        <div class=\"modal-dialog modal-sm\">\n          <div class=\"modal-content\">\n            <div class=\"modal-header\">\n              <h5 class=\"modal-title\">".concat(options.title || 'Confirmar', "</h5>\n              <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n            </div>\n            <div class=\"modal-body\">\n              <p>").concat(message, "</p>\n            </div>\n            <div class=\"modal-footer\">\n              <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">").concat(options.cancelTitle || 'Cancelar', "</button>\n              <button type=\"button\" class=\"btn btn-").concat(options.okVariant || 'primary', "\" id=\"").concat(confirmId, "-ok\">").concat(options.okTitle || 'Aceptar', "</button>\n            </div>\n          </div>\n        </div>\n      ");
+      document.body.appendChild(modal);
+      var okButton = document.getElementById("".concat(confirmId, "-ok"));
+      var cancelButton = modal.querySelector('.btn-secondary');
+      var cleanup = function cleanup() {
+        if (modal.parentNode) {
+          modal.remove();
+        }
+      };
+      okButton.addEventListener('click', function () {
+        cleanup();
+        resolve(true);
+      });
+      cancelButton.addEventListener('click', function () {
+        cleanup();
+        resolve(false);
+      });
+
+      // Mostrar modal
+      if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Modal) {
+        var bsModal = new window.bootstrap.Modal(modal);
+        bsModal.show();
+        modal.addEventListener('hidden.bs.modal', cleanup);
+      } else if (typeof window !== 'undefined' && window.$ && window.$(modal)) {
+        window.$(modal).modal('show');
+        window.$(modal).on('hidden.bs.modal', cleanup);
+      } else {
+        modal.classList.add('show', 'd-block');
+        document.body.classList.add('modal-open');
+      }
+    });
+  }
+};
+
+/**
+ * Plugin Vue para agregar $toast y $bvModal a las instancias
+ */
+var ToastPlugin = {
+  install: function install(Vue) {
+    Vue.prototype.$toast = showToast;
+
+    // Compatibilidad con bootstrap-vue API
+    Vue.prototype.$bvToast = {
+      toast: showToast
+    };
+
+    // Helper para modales
+    Vue.prototype.$bvModal = modalHelper;
+  }
+};var css = "tr td[data-v-fad0bb19]:last-child,\ntr td[data-v-fad0bb19]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-fad0bb19] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-fad0bb19] td[data-v-fad0bb19] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-fad0bb19][data-v-fad0bb19]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-fad0bb19][data-v-fad0bb19]:hover td[data-v-fad0bb19] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(odd) td[data-v-fad0bb19] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(even) td[data-v-fad0bb19] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-fad0bb19] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-fad0bb19] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-fad0bb19] .crud-title[data-v-fad0bb19] {\n    margin: 0; }\n  .crud-header[data-v-fad0bb19] .crud-search[data-v-fad0bb19] {\n    max-width: 15rem; }\n    .crud-header[data-v-fad0bb19] .crud-search[data-v-fad0bb19] .btn[data-v-fad0bb19] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-fad0bb19] .crud-search[data-v-fad0bb19] .btn[data-v-fad0bb19].open[data-v-fad0bb19] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-fad0bb19] .table-options[data-v-fad0bb19] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-fad0bb19] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-fad0bb19] {\n    table-layout: auto; }\n    .table[data-v-fad0bb19] tbody[data-v-fad0bb19] td[data-v-fad0bb19] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-fad0bb19] tbody[data-v-fad0bb19] td[data-v-fad0bb19]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-fad0bb19] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-fad0bb19] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-fad0bb19] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-fad0bb19] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-fad0bb19] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
 n(css, {});var _sfc_main = {
   name: "VueLaravelCrud",
   components: {
@@ -22313,9 +22927,108 @@ n(css, {});var _sfc_main = {
     CrudPagination: CrudPagination
   },
   mixins: [crudData, crudApi, crudFilters, crudValidation, crudHelpers],
+  computed: {
+    normalizedBootstrapVersion: function normalizedBootstrapVersion() {
+      return normalizeBootstrapVersion(this.bootstrapVersion);
+    },
+    bootstrapFactory: function bootstrapFactory() {
+      var _this = this;
+      return {
+        getComponent: function getComponent(name) {
+          return getBootstrapComponent(name, _this.normalizedBootstrapVersion);
+        },
+        getComponents: function getComponents() {
+          return getBootstrapComponents(_this.normalizedBootstrapVersion);
+        },
+        version: this.normalizedBootstrapVersion
+      };
+    }
+  },
+  beforeCreate: function beforeCreate() {
+    // Instalar plugin de toasts si no está instalado
+    if (!Vue__default["default"].prototype.$toast) {
+      Vue__default["default"].use(ToastPlugin);
+    }
+  },
+  created: function created() {
+    // Registrar componentes de Bootstrap globalmente según la versión
+    // Esto permite que todos los componentes hijos usen <b-button>, etc.
+    // Solo registrar si no están ya registrados (para evitar sobrescribir bootstrap-vue si está disponible)
+    if (this.bootstrapFactory) {
+      var components = this.bootstrapFactory.getComponents();
+      this.normalizedBootstrapVersion;
+
+      // Registrar todos los componentes
+      Object.keys(components).forEach(function (key) {
+        if (components[key] && _typeof$1(components[key]) === 'object') {
+          // Registrar con nombre PascalCase (BButton)
+          if (!Vue__default["default"].options.components[key]) {
+            Vue__default["default"].component(key, components[key]);
+          }
+
+          // También registrar con prefijo 'b-' (b-button)
+          var prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
+          if (!Vue__default["default"].options.components[prefixedName]) {
+            Vue__default["default"].component(prefixedName, components[key]);
+          }
+
+          // También registrar con nombre camelCase (bButton) para compatibilidad
+          var camelName = key.charAt(0).toLowerCase() + key.slice(1);
+          if (!Vue__default["default"].options.components[camelName]) {
+            Vue__default["default"].component(camelName, components[key]);
+          }
+        }
+      });
+
+      // Registrar componente BIcon para iconos dinámicos (b-icon-*)
+      if (components.BIcon && !Vue__default["default"].options.components['BIcon']) {
+        Vue__default["default"].component('BIcon', components.BIcon);
+        Vue__default["default"].component('b-icon', components.BIcon);
+
+        // Crear componentes dinámicos para iconos comunes
+        var commonIcons = ['clipboard', 'check', 'eye', 'pencil', 'trash', 'plus', 'search'];
+        commonIcons.forEach(function (iconName) {
+          var iconComponentName = "BIcon".concat(iconName.charAt(0).toUpperCase() + iconName.slice(1));
+          var iconKebabName = "b-icon-".concat(iconName);
+          if (!Vue__default["default"].options.components[iconComponentName] && !Vue__default["default"].options.components[iconKebabName]) {
+            // Crear componente wrapper para el icono específico
+            var IconWrapper = Vue__default["default"].extend({
+              name: iconComponentName,
+              extends: components.BIcon,
+              props: {
+                icon: {
+                  type: String,
+                  default: iconName
+                }
+              }
+            });
+            Vue__default["default"].component(iconComponentName, IconWrapper);
+            Vue__default["default"].component(iconKebabName, IconWrapper);
+          }
+        });
+      }
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+    // Verificar que Bootstrap JavaScript esté disponible después de que todo se haya montado
+    this.$nextTick(function () {
+      if (typeof window !== 'undefined') {
+        var version = _this2.normalizedBootstrapVersion;
+        if (version === 5 && !window.bootstrap) {
+          console.warn('Bootstrap 5 JavaScript no está disponible. Algunos componentes pueden no funcionar correctamente.');
+        } else if (version === 4 && !window.$) {
+          console.warn('Bootstrap 4 requiere jQuery. Algunos componentes pueden no funcionar correctamente.');
+        }
+      }
+    });
+  },
   provide: function provide() {
-    var _this = this;
+    var _this3 = this;
     return {
+      // Bootstrap version and factory
+      bootstrapVersion: this.normalizedBootstrapVersion,
+      bootstrapFactory: this.bootstrapFactory,
       // Props
       modelName: this.modelName,
       title: this.title,
@@ -22336,6 +23049,8 @@ n(css, {});var _sfc_main = {
       orderProp: this.orderProp,
       createMultipart: this.createMultipart,
       apiUrl: this.apiUrl,
+      autoApiPrefix: this.autoApiPrefix,
+      apiPrefix: this.apiPrefix,
       search: this.search,
       hideModalAfterSave: this.hideModalAfterSave,
       hideModalAfterCreate: this.hideModalAfterCreate,
@@ -22398,7 +23113,7 @@ n(css, {});var _sfc_main = {
       firstLoad: this.firstLoadReactive,
       // Proporcionar item como función getter para reactividad
       getItem: function getItem() {
-        return _this.item;
+        return _this3.item;
       },
       item: this.item,
       items: this.items,
@@ -22501,6 +23216,13 @@ n(css, {});var _sfc_main = {
   },
   props: {
     modelName: String,
+    bootstrapVersion: {
+      type: [Number, String],
+      default: 'auto',
+      validator: function validator(value) {
+        return value === 'auto' || value === 4 || value === 5;
+      }
+    },
     title: String,
     model: {
       type: Object | Function,
@@ -22583,6 +23305,14 @@ n(css, {});var _sfc_main = {
       default: false
     },
     apiUrl: {
+      type: String,
+      default: "/api"
+    },
+    autoApiPrefix: {
+      type: Boolean,
+      default: true
+    },
+    apiPrefix: {
       type: String,
       default: "/api"
     },
@@ -22858,7 +23588,7 @@ var _sfc_render = function render() {
   })], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "aaa8b202", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "fad0bb19", null, null);
 var component$1 = __component__.exports;// Import vue component
 
 // Default export is installable instance of component.

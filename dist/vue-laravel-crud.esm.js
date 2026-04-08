@@ -145,7 +145,7 @@ const _sfc_main$f = {
   components: {
     RenderCustomFilter
   },
-  inject: ['columns', 'customFilters', 'isColumnHasFilter', 'isCustomFilterEnabled', 'filter', 'internalFilterByProp', 'optionsLoaded', 'onChangeFilter', 'resetFilters', 'setupFilters', 'internalFilters'],
+  inject: ['bootstrapFactory', 'columns', 'customFilters', 'isColumnHasFilter', 'isCustomFilterEnabled', 'filter', 'internalFilterByProp', 'optionsLoaded', 'onChangeFilter', 'resetFilters', 'setupFilters', 'internalFilters'],
   methods: {
     // Método helper para obtener el filtro de forma segura, creándolo si no existe
     getFilterForColumn(column) {
@@ -727,7 +727,7 @@ var CrudFilters = __component__$f.exports;
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css$9 = "\n.crud-header[data-v-a9762136] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-a9762136] {\n  margin: 0;\n}\n.crud-search[data-v-a9762136] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-a9762136] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-a9762136] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-a9762136] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
+var css$9 = "\n.crud-header[data-v-91117739] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-91117739] {\n  margin: 0;\n}\n.crud-search[data-v-91117739] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-91117739] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-91117739] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-91117739] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
 n(css$9, {});
 
 const _sfc_main$e = {
@@ -735,7 +735,7 @@ const _sfc_main$e = {
   components: {
     CrudFilters
   },
-  inject: ['showHeader', 'showTitle', 'title', 'filterSidebarOpen', 'showImport', 'showExport', 'showPrincipalSortBtn', 'principalSort', 'bulkDelete', 'showCreateBtn', 'enableFilters', 'displayModeToggler', 'displayMode', 'displayModes', 'showSearch', 'displaySearch', 'search', 'searchPlaceholder', 'loading', 'messageImport', 'messageExport', 'messageNew', 'createItem', 'toggleDisplayMode', 'togglePrincipalSort', 'confirmBulkDelete', 'toggleFilters', 'refresh', 'showImportModal', 'showExportModal'],
+  inject: ['bootstrapFactory', 'showHeader', 'showTitle', 'title', 'filterSidebarOpen', 'showImport', 'showExport', 'showPrincipalSortBtn', 'principalSort', 'bulkDelete', 'showCreateBtn', 'enableFilters', 'displayModeToggler', 'displayMode', 'displayModes', 'showSearch', 'displaySearch', 'search', 'searchPlaceholder', 'loading', 'messageImport', 'messageExport', 'messageNew', 'createItem', 'toggleDisplayMode', 'togglePrincipalSort', 'confirmBulkDelete', 'toggleFilters', 'refresh', 'showImportModal', 'showExportModal'],
   computed: {
     sidebarVisible() {
       // Acceder directamente al componente padre para obtener reactividad
@@ -773,6 +773,7 @@ var _sfc_render$e = function render() {
     staticClass: "crud-title"
   }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _c('b-sidebar', {
     attrs: {
+      "id": "crud-filters-sidebar",
       "visible": _vm.sidebarVisible,
       "title": "Filtrar",
       "right": "",
@@ -902,7 +903,7 @@ var _sfc_render$e = function render() {
   })], 2)], 1)], 1) : _vm._e();
 };
 var _sfc_staticRenderFns$e = [];
-var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "a9762136", null, null);
+var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "91117739", null, null);
 var CrudHeader = __component__$e.exports;
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -7073,12 +7074,12 @@ vuedraggable_umd.exports;
 var vuedraggable_umdExports = vuedraggable_umd.exports;
 var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);
 
-var css$7 = "\r\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-3de96e53] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.sort-filter[data-v-3de96e53] {\r\n  cursor: pointer;\r\n  visibility: hidden;\r\n  display: inline-block;\n}\n.sort-filter-visible[data-v-3de96e53] {\r\n  visibility: visible;\n}\r\n";
+var css$7 = "\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-b3c8c2ac] {\n  width: 1%;\n  white-space: nowrap;\n}\n\n/* Alinear checkbox en el header */\n.checkbox-header[data-v-b3c8c2ac] {\n  vertical-align: middle !important;\n  text-align: center;\n}\n.header-checkbox-wrapper[data-v-b3c8c2ac] {\n  display: inline-flex;\n  align-items: center;\n  vertical-align: middle;\n}\n\n/* Asegurar que el form-check dentro del header esté alineado */\n.checkbox-header[data-v-b3c8c2ac] .form-check {\n  margin: 0 !important;\n  display: inline-flex;\n  align-items: center;\n  min-height: auto;\n  padding: 0;\n  vertical-align: middle;\n}\n.checkbox-header[data-v-b3c8c2ac] .form-check-input {\n  margin: 0 !important;\n  margin-top: 0 !important;\n  margin-right: 0.5rem !important;\n  vertical-align: middle;\n  position: relative;\n  float: none;\n  top: 0;\n  align-self: center;\n}\n.checkbox-header[data-v-b3c8c2ac] .form-check-label {\n  margin-left: 0;\n  margin-bottom: 0;\n  vertical-align: middle;\n  display: inline;\n  align-self: center;\n}\n.sort-filter[data-v-b3c8c2ac] {\n  cursor: pointer;\n  visibility: hidden;\n  display: inline-block;\n}\n.sort-filter-visible[data-v-b3c8c2ac] {\n  visibility: visible;\n}\n";
 n(css$7, {});
 
 const _sfc_main$d = {
   name: 'TableHeader',
-  inject: ['columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded', 'isAllSelected'],
+  inject: ['bootstrapFactory', 'columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded', 'isAllSelected'],
   data() {
     return {
       hoveredColumn: null
@@ -7116,7 +7117,8 @@ var _sfc_render$d = function render() {
       return _c('th', {
         key: indexc,
         class: {
-          'actions-header': column.type == 'actions'
+          'actions-header': column.type == 'actions',
+          'checkbox-header': column.type == 'checkbox' || column.type == 'select'
         },
         style: {
           width: column.width ? column.width : column.type == 'actions' ? '1%' : 'inherit'
@@ -7386,7 +7388,9 @@ var _sfc_render$d = function render() {
         "column": column,
         "filter": _vm.filter,
         "internalFilterByProp": _vm.internalFilterByProp
-      }) : column.type == 'select' ? _c('span', [_c('b-form-checkbox', {
+      }) : column.type == 'select' ? _c('span', {
+        staticClass: "header-checkbox-wrapper"
+      }, [_c('b-form-checkbox', {
         attrs: {
           "name": "select-all",
           "checked": _vm.isAllSelected
@@ -7394,7 +7398,9 @@ var _sfc_render$d = function render() {
         on: {
           "change": _vm.toggleAll
         }
-      })], 1) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
+      })], 1) : column.type == 'checkbox' ? _c('span', {
+        staticClass: "header-checkbox-wrapper"
+      }, [_c('b-form-checkbox', {
         attrs: {
           "name": "select-all",
           "checked": _vm.isAllSelected
@@ -7421,7 +7427,7 @@ var _sfc_render$d = function render() {
   })], 2)]);
 };
 var _sfc_staticRenderFns$d = [];
-var __component__$d = /*#__PURE__*/normalizeComponent(_sfc_main$d, _sfc_render$d, _sfc_staticRenderFns$d, false, null, "3de96e53", null, null);
+var __component__$d = /*#__PURE__*/normalizeComponent(_sfc_main$d, _sfc_render$d, _sfc_staticRenderFns$d, false, null, "b3c8c2ac", null, null);
 var TableHeader = __component__$d.exports;
 
 function commonjsRequire(path) {
@@ -13117,7 +13123,7 @@ moment$1.exports;
 var momentExports = moment$1.exports;
 var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);
 
-var css$6 = "\r\n/* Fijar ancho de la columna de acciones */\n.actions-cell[data-v-e38a3192] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.actions-button-group[data-v-e38a3192] {\r\n  display: inline-flex;\r\n  flex-wrap: nowrap;\n}\n.actions-dropdown[data-v-e38a3192] {\r\n  display: inline-block;\n}\r\n\r\n/* Asegurar que los botones no se expandan */\n.actions-button-group .btn[data-v-e38a3192] {\r\n  flex-shrink: 0;\n}\r\n";
+var css$6 = "\r\n/* Fijar ancho de la columna de acciones */\n.actions-cell[data-v-74df4ca8] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.actions-button-group[data-v-74df4ca8] {\r\n  display: inline-flex;\r\n  flex-wrap: nowrap;\n}\n.actions-dropdown[data-v-74df4ca8] {\r\n  display: inline-block;\n}\r\n\r\n/* Asegurar que los botones no se expandan */\n.actions-button-group .btn[data-v-74df4ca8] {\r\n  flex-shrink: 0;\n}\r\n";
 n(css$6, {});
 
 const _sfc_main$c = {
@@ -13128,7 +13134,7 @@ const _sfc_main$c = {
     index: Number,
     columnIndex: Number
   },
-  inject: ['itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'onCheckSelect', 'showItem', 'updateItem', 'removeItem', 'optionsLoaded'],
+  inject: ['bootstrapFactory', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'onCheckSelect', 'showItem', 'updateItem', 'removeItem', 'optionsLoaded'],
   data() {
     return {
       moment: moment
@@ -13333,7 +13339,7 @@ var _sfc_render$c = function render() {
   })], 2) : _vm._e()], 2);
 };
 var _sfc_staticRenderFns$c = [];
-var __component__$c = /*#__PURE__*/normalizeComponent(_sfc_main$c, _sfc_render$c, _sfc_staticRenderFns$c, false, null, "e38a3192", null, null);
+var __component__$c = /*#__PURE__*/normalizeComponent(_sfc_main$c, _sfc_render$c, _sfc_staticRenderFns$c, false, null, "74df4ca8", null, null);
 var TableCell = __component__$c.exports;
 
 const _sfc_main$b = {
@@ -13402,7 +13408,7 @@ const _sfc_main$a = {
     TableHeader,
     TableRow
   },
-  inject: ['displayMode', 'displayModes', 'tableContainerClass', 'tableClass', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'grouped', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
+  inject: ['bootstrapFactory', 'displayMode', 'displayModes', 'tableContainerClass', 'tableClass', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'grouped', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
   data() {
     return {
       drag: false
@@ -13732,6 +13738,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 const _sfc_main$9 = {
+  inject: ['bootstrapFactory'],
   props: {
     item: Object,
     columns: Array,
@@ -13897,7 +13904,7 @@ const _sfc_main$8 = {
     draggable,
     ItemCard
   },
-  inject: ['displayMode', 'displayModes', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'colLg', 'colXl', 'colMd', 'colSm', 'colXs', 'columns', 'cardClass', 'cardHideFooter', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'showItem', 'updateItem', 'removeItem', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
+  inject: ['bootstrapFactory', 'displayMode', 'displayModes', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'colLg', 'colXl', 'colMd', 'colSm', 'colXs', 'columns', 'cardClass', 'cardHideFooter', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'showItem', 'updateItem', 'removeItem', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
   data() {
     return {
       drag: false
@@ -14020,11 +14027,12 @@ var _sfc_staticRenderFns$8 = [];
 var __component__$8 = /*#__PURE__*/normalizeComponent(_sfc_main$8, _sfc_render$8, _sfc_staticRenderFns$8, false, null, null, null, null);
 var CrudCards = __component__$8.exports;
 
-var css$5 = "\n.kanban-card[data-v-ad923ee1] {\r\n  background: #ffffff;\r\n  border-radius: 4px;\r\n  padding: 0.5rem;\r\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\r\n  cursor: grab;\r\n  transition: box-shadow 0.2s ease;\n}\n.kanban-card[data-v-ad923ee1]:hover {\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.kanban-card[data-v-ad923ee1]:active {\r\n  cursor: grabbing;\n}\n.card-crud[data-v-ad923ee1] {\r\n  border: 1px solid #e1e5e9;\n}\n.card-crud .card-title[data-v-ad923ee1] {\r\n  font-size: 0.9rem;\r\n  margin-bottom: 0.5rem;\n}\n.card-crud .card-text[data-v-ad923ee1] {\r\n  font-size: 0.8rem;\r\n  margin-bottom: 0.25rem;\n}\r\n";
+var css$5 = "\n.kanban-card[data-v-1e576787] {\r\n  background: #ffffff;\r\n  border-radius: 4px;\r\n  padding: 0.5rem;\r\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\r\n  cursor: grab;\r\n  transition: box-shadow 0.2s ease;\n}\n.kanban-card[data-v-1e576787]:hover {\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.kanban-card[data-v-1e576787]:active {\r\n  cursor: grabbing;\n}\n.card-crud[data-v-1e576787] {\r\n  border: 1px solid #e1e5e9;\n}\n.card-crud .card-title[data-v-1e576787] {\r\n  font-size: 0.9rem;\r\n  margin-bottom: 0.5rem;\n}\n.card-crud .card-text[data-v-1e576787] {\r\n  font-size: 0.8rem;\r\n  margin-bottom: 0.25rem;\n}\r\n";
 n(css$5, {});
 
 const _sfc_main$7 = {
   name: 'KanbanCard',
+  inject: ['bootstrapFactory'],
   props: {
     item: Object,
     columns: Array,
@@ -14183,10 +14191,10 @@ var _sfc_render$7 = function render() {
   })], 2)], 1);
 };
 var _sfc_staticRenderFns$7 = [];
-var __component__$7 = /*#__PURE__*/normalizeComponent(_sfc_main$7, _sfc_render$7, _sfc_staticRenderFns$7, false, null, "ad923ee1", null, null);
+var __component__$7 = /*#__PURE__*/normalizeComponent(_sfc_main$7, _sfc_render$7, _sfc_staticRenderFns$7, false, null, "1e576787", null, null);
 var KanbanCard = __component__$7.exports;
 
-var css$4 = "\n.kanban-column[data-v-a56cf649] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n.kanban-column-header[data-v-a56cf649] {\r\n  font-weight: bold;\r\n  padding: 0.5rem;\r\n  background: #dfe1e6;\r\n  border-radius: 8px 8px 0 0;\r\n  text-align: center;\n}\n.kanban-column-body[data-v-a56cf649] {\r\n  padding: 0.5rem;\r\n  min-height: 100px;\r\n  background: #ffffff;\r\n  border-radius: 0 0 8px 8px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem;\n}\r\n";
+var css$4 = "\n.kanban-column[data-v-27f87f90] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n.kanban-column-header[data-v-27f87f90] {\r\n  font-weight: bold;\r\n  padding: 0.5rem;\r\n  background: #dfe1e6;\r\n  border-radius: 8px 8px 0 0;\r\n  text-align: center;\n}\n.kanban-column-body[data-v-27f87f90] {\r\n  padding: 0.5rem;\r\n  min-height: 100px;\r\n  background: #ffffff;\r\n  border-radius: 0 0 8px 8px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem;\n}\r\n";
 n(css$4, {});
 
 const _sfc_main$6 = {
@@ -14195,6 +14203,7 @@ const _sfc_main$6 = {
     draggable,
     KanbanCard
   },
+  inject: ['bootstrapFactory'],
   props: {
     column: Object,
     colIndex: Number,
@@ -14294,7 +14303,7 @@ var _sfc_render$6 = function render() {
   }), 0)], 1);
 };
 var _sfc_staticRenderFns$6 = [];
-var __component__$6 = /*#__PURE__*/normalizeComponent(_sfc_main$6, _sfc_render$6, _sfc_staticRenderFns$6, false, null, "a56cf649", null, null);
+var __component__$6 = /*#__PURE__*/normalizeComponent(_sfc_main$6, _sfc_render$6, _sfc_staticRenderFns$6, false, null, "27f87f90", null, null);
 var KanbanColumn = __component__$6.exports;
 
 var css$3 = "\n.kanban-board[data-v-516ff294] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  overflow-x: auto;\r\n  padding: 1rem;\n}\n.kanban-column[data-v-516ff294] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n  min-width: 300px;\n}\r\n";
@@ -14390,7 +14399,7 @@ var CrudKanban = __component__$4.exports;
 
 const _sfc_main$3 = {
   name: 'CrudCustom',
-  inject: ['displayMode', 'displayModes', 'listContainerClass', 'listItemClass', 'loading', 'firstLoad', 'items', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'itemsList'],
+  inject: ['bootstrapFactory', 'displayMode', 'displayModes', 'listContainerClass', 'listItemClass', 'loading', 'firstLoad', 'items', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'itemsList'],
   computed: {
     currentDisplayMode() {
       if (!this.displayMode) return 1;
@@ -14439,12 +14448,12 @@ var _sfc_staticRenderFns$3 = [];
 var __component__$3 = /*#__PURE__*/normalizeComponent(_sfc_main$3, _sfc_render$3, _sfc_staticRenderFns$3, false, null, null, null, null);
 var CrudCustom = __component__$3.exports;
 
-var css$2 = "\n.export-format-options[data-v-cc5f4c75] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-cc5f4c75] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-cc5f4c75]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-cc5f4c75] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-cc5f4c75] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
+var css$2 = "\n.export-format-options[data-v-eb2621e9] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-eb2621e9] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-eb2621e9]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-eb2621e9] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
 n(css$2, {});
 
 const _sfc_main$2 = {
   name: 'CrudModals',
-  inject: ['modelName', 'title', 'loading', 'validate', 'item', 'getItem', 'messageSave', 'showImport', 'showExport', 'fileImport', 'selectedItems', 'exportFormat', 'saveItem', 'importItems', 'exportItems'],
+  inject: ['bootstrapFactory', 'modelName', 'title', 'loading', 'validate', 'item', 'getItem', 'messageSave', 'showImport', 'showExport', 'fileImport', 'selectedItems', 'exportFormat', 'saveItem', 'importItems', 'exportItems'],
   computed: {
     // Computed property para asegurar reactividad del item inyectado
     reactiveItem() {
@@ -14490,8 +14499,7 @@ var _sfc_render$2 = function render() {
       "id": 'modal-form-item-' + _vm.modelName,
       "hide-footer": "",
       "size": "xl",
-      "title": _vm.title,
-      "no-close-on-backdrop": ""
+      "title": _vm.title
     }
   }, [_c('b-overlay', {
     attrs: {
@@ -14579,8 +14587,7 @@ var _sfc_render$2 = function render() {
       "id": 'modal-show-item-' + _vm.modelName,
       "hide-footer": "",
       "size": "xl",
-      "title": _vm.title,
-      "no-close-on-backdrop": ""
+      "title": _vm.title
     }
   }, [_vm.reactiveItem ? [_vm._t("show", function () {
     return [_c('b-list-group', _vm._l(_vm.reactiveItem, function (value, key) {
@@ -14707,7 +14714,7 @@ var _sfc_render$2 = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$2 = [];
-var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "cc5f4c75", null, null);
+var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "eb2621e9", null, null);
 var CrudModals = __component__$2.exports;
 
 var vueInfiniteLoading = {exports: {}};
@@ -14726,7 +14733,7 @@ vueInfiniteLoading.exports;
 var vueInfiniteLoadingExports = vueInfiniteLoading.exports;
 var InfiniteLoading = /*@__PURE__*/getDefaultExportFromCjs(vueInfiniteLoadingExports);
 
-var css$1 = "\n.paginator-container[data-v-73e31fd7] {\n  display: grid;\n  grid-template-columns: 1fr auto 1fr;\n  align-items: center;\n  width: 100%;\n  margin-top: 1rem;\n  gap: 1rem;\n}\n.paginator-data[data-v-73e31fd7] {\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: flex-start;\n  align-items: center;\n  gap: 0.5rem;\n  font-size: 0.875rem;\n  grid-column: 1;\n}\n.paginator-badge[data-v-73e31fd7] {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.25rem;\n  padding: 0.375rem 0.625rem;\n  background-color: #f8f9fa;\n  border: 1px solid #dee2e6;\n  border-radius: 0.375rem;\n  color: #495057;\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-73e31fd7]:hover {\n  background-color: #e9ecef;\n  border-color: #ced4da;\n}\n.paginator-label[data-v-73e31fd7] {\n  font-weight: 500;\n  color: #6c757d;\n}\n.paginator-value[data-v-73e31fd7] {\n  font-weight: 600;\n  color: #212529;\n}\n.paginator-dropdown[data-v-73e31fd7] {\n  font-size: 0.875rem;\n}\n.paginator-dropdown[data-v-73e31fd7] .btn {\n  padding: 0.375rem 0.625rem;\n  font-size: 0.875rem;\n  background-color: #f8f9fa;\n  border: 1px solid #dee2e6;\n  color: #495057;\n}\n.paginator-dropdown[data-v-73e31fd7] .btn:hover {\n  background-color: #e9ecef;\n  border-color: #ced4da;\n}\n.crud-paginator[data-v-73e31fd7] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  grid-column: 2;\n}\n.paginator-badge-dropdown[data-v-73e31fd7] {\n  z-index: 1;\n  position: relative;\n}\n.paginator-badge-dropdown[data-v-73e31fd7] .btn {\n  padding: 0.375rem 0.625rem;\n  font-size: 0.875rem;\n  background-color: #f8f9fa;\n  border: 1px solid #dee2e6;\n  color: #495057;\n  display: inline-flex;\n  align-items: center;\n  gap: 0.25rem;\n}\n.paginator-badge-dropdown[data-v-73e31fd7] .btn:hover {\n  background-color: #e9ecef;\n  border-color: #ced4da;\n}\n";
+var css$1 = "\n.paginator-container[data-v-b7a8abf9] {\r\n  display: grid;\r\n  grid-template-columns: 1fr auto 1fr;\r\n  align-items: center;\r\n  width: 100%;\r\n  margin-top: 1rem;\r\n  gap: 1rem;\n}\n.paginator-data[data-v-b7a8abf9] {\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-size: 0.875rem;\r\n  grid-column: 1;\n}\n.paginator-badge[data-v-b7a8abf9] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\r\n  padding: 0.375rem 0.625rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  border-radius: 0.375rem;\r\n  color: #495057;\r\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-b7a8abf9]:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.paginator-label[data-v-b7a8abf9] {\r\n  font-weight: 500;\r\n  color: #6c757d;\n}\n.paginator-value[data-v-b7a8abf9] {\r\n  font-weight: 600;\r\n  color: #212529;\n}\n.paginator-dropdown[data-v-b7a8abf9] {\r\n  font-size: 0.875rem;\n}\n.paginator-dropdown[data-v-b7a8abf9] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\n}\n.paginator-dropdown[data-v-b7a8abf9] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.crud-paginator[data-v-b7a8abf9] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  grid-column: 2;\n}\n.paginator-badge-dropdown[data-v-b7a8abf9] {\r\n  z-index: 1;\r\n  position: relative;\n}\n.paginator-badge-dropdown[data-v-b7a8abf9] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\n}\n.paginator-badge-dropdown[data-v-b7a8abf9] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\r\n";
 n(css$1, {});
 
 const _sfc_main$1 = {
@@ -14734,7 +14741,7 @@ const _sfc_main$1 = {
   components: {
     InfiniteLoading
   },
-  inject: ['infiniteScroll', 'infiniteScrollKey', 'messageLoading', 'messageNoMore', 'messageEmptyResults', 'loading', 'firstLoad', 'items', 'pagination', 'selectedItems', 'showPaginator', 'infiniteHandler', 'onPaginationChange', 'onPerPageChange', 'clearSelection'],
+  inject: ['bootstrapFactory', 'infiniteScroll', 'infiniteScrollKey', 'messageLoading', 'messageNoMore', 'messageEmptyResults', 'loading', 'firstLoad', 'items', 'pagination', 'selectedItems', 'showPaginator', 'infiniteHandler', 'onPaginationChange', 'onPerPageChange', 'clearSelection'],
   data() {
     return {
       perPageOptions: [10, 20, 50, 100]
@@ -14850,7 +14857,7 @@ var _sfc_render$1 = function render() {
   }) : _vm._e()], 1)]) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$1 = [];
-var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "73e31fd7", null, null);
+var __component__$1 = /*#__PURE__*/normalizeComponent(_sfc_main$1, _sfc_render$1, _sfc_staticRenderFns$1, false, null, "b7a8abf9", null, null);
 var CrudPagination = __component__$1.exports;
 
 var crudData = {
@@ -20466,6 +20473,44 @@ axios.default = axios;
 
 var crudApi = {
   methods: {
+    normalizeApiSegment(value = '') {
+      return String(value).trim().replace(/^\/+|\/+$/g, '');
+    },
+    resolveApiBaseUrl() {
+      const rawApiUrl = typeof this.apiUrl === 'string' ? this.apiUrl.trim() : '';
+      const autoApiPrefix = this.autoApiPrefix !== false;
+      const normalizedPrefix = this.normalizeApiSegment(this.apiPrefix || '/api');
+      if (!rawApiUrl) {
+        return autoApiPrefix && normalizedPrefix ? `/${normalizedPrefix}` : '';
+      }
+      const isAbsoluteUrl = /^https?:\/\//i.test(rawApiUrl);
+      let originPart = '';
+      let pathPartRaw = rawApiUrl;
+      if (isAbsoluteUrl) {
+        try {
+          const parsedUrl = new URL(rawApiUrl);
+          originPart = parsedUrl.origin;
+          pathPartRaw = parsedUrl.pathname || '';
+        } catch (error) {
+          originPart = rawApiUrl.replace(/\/+$/, '');
+          pathPartRaw = '';
+        }
+      }
+      const pathPart = this.normalizeApiSegment(pathPartRaw);
+      const pathSegments = pathPart ? pathPart.split('/') : [];
+      const hasPrefix = normalizedPrefix ? pathSegments.slice(0, normalizedPrefix.split('/').length).join('/') === normalizedPrefix : false;
+      const finalPath = autoApiPrefix && normalizedPrefix && !hasPrefix ? [normalizedPrefix, pathPart].filter(Boolean).join('/') : pathPart;
+      if (isAbsoluteUrl) {
+        return finalPath ? `${originPart}/${finalPath}` : originPart;
+      }
+      return finalPath ? `/${finalPath}` : '';
+    },
+    buildApiEndpoint(...segments) {
+      const base = this.resolveApiBaseUrl().replace(/\/+$/, '');
+      const normalizedSegments = segments.filter(segment => segment !== undefined && segment !== null && segment !== '').map(segment => this.normalizeApiSegment(segment));
+      const suffix = normalizedSegments.join('/');
+      return suffix ? `${base}/${suffix}` : base;
+    },
     async fetchItemsVuex(page = 1, concat = false) {
       this.loading = true;
       this.$emit("beforeFetch", {});
@@ -20474,7 +20519,7 @@ var crudApi = {
         await this.model.$fetch();
       } else {
         this.model.deleteAll();
-        result = await this.model.api().get(this.apiUrl + "/" + this.modelName, {
+        result = await this.model.api().get(this.buildApiEndpoint(this.modelName), {
           dataKey: 'data',
           params: {
             page: page,
@@ -20509,7 +20554,7 @@ var crudApi = {
         return this.fetchItemsLocal(page, concat);
       }
       this.loading = true;
-      return axios.get(this.apiUrl + "/" + this.modelName, {
+      return axios.get(this.buildApiEndpoint(this.modelName), {
         params: {
           page: page,
           limit: this.pagination.per_page,
@@ -20619,10 +20664,10 @@ var crudApi = {
         let jsondata = this.item.$toJson();
         console.debug("save item 2", this.item, jsondata);
         if (this.item.id) {
-          result = await this.model.api().put(this.apiUrl + "/" + this.modelName + '/' + this.item.id, jsondata);
+          result = await this.model.api().put(this.buildApiEndpoint(this.modelName, this.item.id), jsondata);
           create = false;
         } else {
-          result = await this.model.api().post(this.apiUrl + "/" + this.modelName, jsondata);
+          result = await this.model.api().post(this.buildApiEndpoint(this.modelName), jsondata);
           create = true;
         }
         result.response.status;
@@ -20677,7 +20722,7 @@ var crudApi = {
         return this.saveItemLocal(event);
       }
       if (this.item.id) {
-        axios.put(this.apiUrl + "/" + this.modelName + "/" + this.item.id, this.item).then(response => {
+        axios.put(this.buildApiEndpoint(this.modelName, this.item.id), this.item).then(response => {
           if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
             this.$bvModal.hide("modal-form-item-" + this.modelName);
           }
@@ -20709,7 +20754,7 @@ var crudApi = {
               }
             } else formData.append(key, this.item[key]);
           });
-          axios.post(this.apiUrl + "/" + this.modelName, formData).then(response => {
+          axios.post(this.buildApiEndpoint(this.modelName), formData).then(response => {
             this.loading = false;
             if (this.hideModalAfterSave || this.hideModalAfterCreate) {
               this.$bvModal.hide("modal-form-item-" + this.modelName);
@@ -20736,7 +20781,7 @@ var crudApi = {
             this.loading = false;
           });
         } else {
-          axios.post(this.apiUrl + "/" + this.modelName, this.item).then(response => {
+          axios.post(this.buildApiEndpoint(this.modelName), this.item).then(response => {
             this.loading = false;
             if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
               this.$bvModal.hide("modal-form-item-" + this.modelName);
@@ -20774,7 +20819,7 @@ var crudApi = {
         return this.deleteItemLocal(id, index);
       }
       this.loading = true;
-      axios.delete(this.apiUrl + "/" + this.modelName + "/" + id).then(response => {
+      axios.delete(this.buildApiEndpoint(this.modelName, id)).then(response => {
         this.items.splice(index, 1);
         this.toastSuccess("Elemento eliminado.");
         this.$emit("itemDeleted", {});
@@ -20805,7 +20850,7 @@ var crudApi = {
       if (this.vuexLocalforage) {
         await this.model.$delete(id);
       } else {
-        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName + '/' + id, {
+        let result = await this.model.api().delete(this.buildApiEndpoint(this.modelName, id), {
           delete: 1
         });
         console.debug("delete item vuex", result);
@@ -20827,7 +20872,7 @@ var crudApi = {
       }
       let ids = this.selectedItems.map(it => it.id);
       this.loading = true;
-      axios.delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", {
+      axios.delete(this.buildApiEndpoint(this.modelName, "bulk-destroy"), {
         params: {
           ids: ids
         }
@@ -20856,7 +20901,7 @@ var crudApi = {
       if (this.vuexLocalforage) {
         await this.model.$delete(ids);
       } else {
-        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName + '/bulk-destroy', {
+        let result = await this.model.api().delete(this.buildApiEndpoint(this.modelName, "bulk-destroy"), {
           params: {
             ids: ids
           },
@@ -20893,7 +20938,7 @@ var crudApi = {
         if (!this.ajax) {
           return;
         }
-        axios.post(this.apiUrl + "/" + this.modelName + "/sort", {
+        axios.post(this.buildApiEndpoint(this.modelName, "sort"), {
           order: order
         }).then(response => {
           response.data;
@@ -20929,7 +20974,7 @@ var crudApi = {
       }
       params.format = this.exportFormatReactive.value;
       this.loading = true;
-      axios.get(this.apiUrl + "/" + this.modelName + "/export", {
+      axios.get(this.buildApiEndpoint(this.modelName, "export"), {
         params: params,
         responseType: "blob"
       }).then(response => {
@@ -20943,7 +20988,7 @@ var crudApi = {
     importItems() {
       let formData = new FormData();
       formData.append("file", this.fileImport);
-      axios.post(this.apiUrl + "/" + this.modelName + "/import", formData, {
+      axios.post(this.buildApiEndpoint(this.modelName, "import"), formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -21682,22 +21727,51 @@ var crudHelpers = {
         // handle other errors
         error_message = error.message;
       }
-      this.$bvToast.toast(error_message, {
-        title: `Error`,
-        toaster: "b-toaster-bottom-right",
-        variant: "danger",
-        solid: true,
-        appendToast: true
-      });
+
+      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
+      if (this.$toast) {
+        this.$toast(error_message, {
+          title: `Error`,
+          toaster: "b-toaster-bottom-right",
+          variant: "danger",
+          solid: true,
+          appendToast: true
+        });
+      } else if (this.$bvToast && this.$bvToast.toast) {
+        this.$bvToast.toast(error_message, {
+          title: `Error`,
+          toaster: "b-toaster-bottom-right",
+          variant: "danger",
+          solid: true,
+          appendToast: true
+        });
+      } else {
+        // Fallback: usar console.error
+        console.error('Error:', error_message);
+      }
     },
     toastSuccess(message) {
-      this.$bvToast.toast(message, {
-        title: `Listo`,
-        toaster: "b-toaster-bottom-right",
-        variant: "success",
-        solid: true,
-        appendToast: true
-      });
+      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
+      if (this.$toast) {
+        this.$toast(message, {
+          title: `Listo`,
+          toaster: "b-toaster-bottom-right",
+          variant: "success",
+          solid: true,
+          appendToast: true
+        });
+      } else if (this.$bvToast && this.$bvToast.toast) {
+        this.$bvToast.toast(message, {
+          title: `Listo`,
+          toaster: "b-toaster-bottom-right",
+          variant: "success",
+          solid: true,
+          appendToast: true
+        });
+      } else {
+        // Fallback: usar console.log
+        console.log('Success:', message);
+      }
     },
     downloadBlobResponse(response, extension = null) {
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -21721,7 +21795,564 @@ var crudHelpers = {
   }
 };
 
-var css = "tr td[data-v-aaa8b202]:last-child,\ntr td[data-v-aaa8b202]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-aaa8b202] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-aaa8b202] td[data-v-aaa8b202] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-aaa8b202][data-v-aaa8b202]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-aaa8b202][data-v-aaa8b202]:hover td[data-v-aaa8b202] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(odd) td[data-v-aaa8b202] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-aaa8b202]:nth-of-type(even) td[data-v-aaa8b202] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-aaa8b202] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-aaa8b202] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-aaa8b202] .crud-title[data-v-aaa8b202] {\n    margin: 0; }\n  .crud-header[data-v-aaa8b202] .crud-search[data-v-aaa8b202] {\n    max-width: 15rem; }\n    .crud-header[data-v-aaa8b202] .crud-search[data-v-aaa8b202] .btn[data-v-aaa8b202] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-aaa8b202] .crud-search[data-v-aaa8b202] .btn[data-v-aaa8b202].open[data-v-aaa8b202] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-aaa8b202] .table-options[data-v-aaa8b202] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-aaa8b202] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-aaa8b202] {\n    table-layout: auto; }\n    .table[data-v-aaa8b202] tbody[data-v-aaa8b202] td[data-v-aaa8b202] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-aaa8b202] tbody[data-v-aaa8b202] td[data-v-aaa8b202]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-aaa8b202] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-aaa8b202] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-aaa8b202] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-aaa8b202] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-aaa8b202] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+/**
+ * Utilidades para detectar y validar la versión de Bootstrap
+ */
+
+/**
+ * Detecta la versión de Bootstrap instalada
+ * @returns {number|string} 4, 5, o 'unknown'
+ */
+function detectBootstrapVersion() {
+  try {
+    // Intentar detectar Bootstrap 5
+    if (typeof window !== 'undefined' && window.bootstrap) {
+      // Bootstrap 5 expone window.bootstrap
+      return 5;
+    }
+
+    // Intentar detectar bootstrap-vue (Bootstrap 4)
+    if (typeof window !== 'undefined' && window.Vue) {
+      // Verificar si bootstrap-vue está registrado
+      const vue = window.Vue;
+      if (vue.options && vue.options._base) {
+        // Verificar componentes de bootstrap-vue
+        if (vue.options._base.options.components && vue.options._base.options.components['b-button']) {
+          return 4;
+        }
+      }
+    }
+
+    // Verificar por clases CSS en el DOM
+    if (typeof document !== 'undefined') {
+      const testEl = document.createElement('div');
+      testEl.className = 'd-flex';
+      document.body.appendChild(testEl);
+      const styles = window.getComputedStyle(testEl);
+      // Bootstrap 5 usa diferentes valores por defecto
+      // Esta es una heurística simple
+      document.body.removeChild(testEl);
+    }
+    return 'unknown';
+  } catch (e) {
+    console.warn('Error detecting Bootstrap version:', e);
+    return 'unknown';
+  }
+}
+
+/**
+ * Normaliza la versión de Bootstrap
+ * Si es 'auto', intenta detectarla, si no puede, retorna 4 como fallback (compatibilidad)
+ * @param {number|string} version - Versión a normalizar
+ * @returns {number} 4 o 5
+ */
+function normalizeBootstrapVersion(version) {
+  if (version === 'auto' || version === 'unknown') {
+    const detected = detectBootstrapVersion();
+    if (detected === 4 || detected === 5) {
+      return detected;
+    }
+    // Fallback a Bootstrap 4 por compatibilidad
+    return 4;
+  }
+  if (version === 4 || version === 5) {
+    return version;
+  }
+
+  // Fallback a Bootstrap 4
+  return 4;
+}
+
+/**
+ * Factory para obtener componentes de Bootstrap según la versión
+ */
+
+// Import estático de wrappers Bootstrap (se resuelve en build time si están disponibles)
+// Nota: En contextos ESM, esto puede fallar, pero el factory tiene fallbacks
+let BootstrapWrappersStatic = null;
+try {
+  if (typeof require !== 'undefined') {
+    BootstrapWrappersStatic = require('../bootstrap-wrappers');
+  }
+} catch (e) {
+  // Los wrappers no están disponibles en este contexto
+  BootstrapWrappersStatic = null;
+}
+
+// Cache para wrappers Bootstrap (compatibles con BS4 y BS5)
+let bootstrapComponents = null;
+let bootstrapAvailable = null;
+
+/**
+ * Carga wrappers de Bootstrap (compatibles con BS4 y BS5)
+ * @returns {Object|null}
+ */
+function loadBootstrapComponents() {
+  if (bootstrapAvailable !== null) {
+    return bootstrapComponents;
+  }
+
+  // Usar el import estático si está disponible
+  if (BootstrapWrappersStatic) {
+    // El módulo puede exportar como default (plugin) o como objeto
+    const module = BootstrapWrappersStatic.default || BootstrapWrappersStatic;
+
+    // Si es el plugin, extraer los componentes
+    if (module.Bootstrap) {
+      bootstrapComponents = module.Bootstrap;
+    } else if (module.Bootstrap5) {
+      // Compatibilidad con nombre anterior
+      bootstrapComponents = module.Bootstrap5;
+    } else {
+      // Si es un plugin Vue, extraer los componentes del objeto
+      // Los plugins Vue exportan los componentes como propiedades del objeto
+      bootstrapComponents = {};
+      Object.keys(module).forEach(key => {
+        // Excluir propiedades especiales del plugin
+        if (key !== 'install' && key !== 'Bootstrap' && key !== 'Bootstrap5') {
+          const component = module[key];
+          // Verificar que sea un componente Vue válido
+          if (component && (typeof component === 'object' || typeof component === 'function')) {
+            // Si tiene name, __file, render o template, es un componente Vue
+            if (component.name || component.__file || component.render || component.template || component.options && component.options.name) {
+              bootstrapComponents[key] = component;
+              // También agregar con prefijo 'b-' si es un nombre PascalCase
+              if (key.startsWith('B') && key.length > 1) {
+                const prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
+                bootstrapComponents[prefixedName] = component;
+              }
+              // También agregar con nombre camelCase
+              const camelName = key.charAt(0).toLowerCase() + key.slice(1);
+              bootstrapComponents[camelName] = component;
+            }
+          }
+        }
+      });
+    }
+    bootstrapAvailable = true;
+    return bootstrapComponents;
+  }
+
+  // Intentar require dinámico como fallback
+  try {
+    if (typeof require !== 'undefined') {
+      const BootstrapWrappers = require('../bootstrap-wrappers');
+      const module = BootstrapWrappers.default || BootstrapWrappers;
+      if (module.Bootstrap) {
+        bootstrapComponents = module.Bootstrap;
+      } else if (module.Bootstrap5) {
+        bootstrapComponents = module.Bootstrap5;
+      } else {
+        // Extraer componentes del plugin
+        bootstrapComponents = {};
+        Object.keys(module).forEach(key => {
+          if (key !== 'install' && key !== 'Bootstrap' && key !== 'Bootstrap5') {
+            const component = module[key];
+            if (component && (typeof component === 'object' || typeof component === 'function')) {
+              if (component.name || component.__file || component.render || component.template || component.options && component.options.name) {
+                bootstrapComponents[key] = component;
+                if (key.startsWith('B') && key.length > 1) {
+                  const prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
+                  bootstrapComponents[prefixedName] = component;
+                }
+                const camelName = key.charAt(0).toLowerCase() + key.slice(1);
+                bootstrapComponents[camelName] = component;
+              }
+            }
+          }
+        });
+      }
+      bootstrapAvailable = true;
+      return bootstrapComponents;
+    }
+  } catch (e) {
+    // Wrappers Bootstrap no están disponibles
+    console.warn('Error loading Bootstrap components:', e);
+  }
+  bootstrapAvailable = false;
+  return null;
+}
+
+/**
+ * Obtiene un componente de Bootstrap según la versión
+ * @param {string} componentName - Nombre del componente (ej: 'b-button' o 'BButton')
+ * @param {number|string} version - Versión de Bootstrap (4, 5, o 'auto')
+ * @returns {Object|null} Componente Vue o null si no está disponible
+ */
+function getBootstrapComponent(componentName, version = 'auto') {
+  const normalizedVersion = normalizeBootstrapVersion(version);
+
+  // Normalizar nombre del componente (b-button -> BButton, BButton -> BButton)
+  const normalizedName = componentName.charAt(0).toUpperCase() + componentName.slice(1).replace(/-([a-z])/g, g => g[1].toUpperCase());
+  const prefixedName = 'b-' + componentName.replace(/^b-/, '').replace(/([A-Z])/g, '-$1').toLowerCase();
+
+  // Los wrappers son compatibles con Bootstrap 4 y 5
+  const BootstrapWrappers = loadBootstrapComponents();
+  if (BootstrapWrappers) {
+    if (BootstrapWrappers[normalizedName]) return BootstrapWrappers[normalizedName];
+    if (BootstrapWrappers[componentName]) return BootstrapWrappers[componentName];
+    if (BootstrapWrappers[prefixedName]) return BootstrapWrappers[prefixedName];
+  }
+  console.error(`Component ${componentName} not found for Bootstrap ${normalizedVersion}`);
+  return null;
+}
+
+/**
+ * Obtiene todos los componentes de Bootstrap según la versión
+ * @param {number|string} version - Versión de Bootstrap (4, 5, o 'auto')
+ * @returns {Object} Objeto con todos los componentes disponibles
+ */
+function getBootstrapComponents(version = 'auto') {
+  normalizeBootstrapVersion(version);
+
+  // Los wrappers funcionan con Bootstrap 4 y 5
+  const BootstrapWrappers = loadBootstrapComponents();
+  if (BootstrapWrappers) {
+    return BootstrapWrappers;
+  }
+  return {};
+}
+
+/**
+ * Sistema de toasts simple compatible con Bootstrap 4 y 5
+ * Reemplaza la funcionalidad de bootstrap-vue $bvToast
+ */
+
+/**
+ * Crea y muestra un toast
+ * @param {string} message - Mensaje a mostrar
+ * @param {Object} options - Opciones del toast
+ * @param {string} options.title - Título del toast
+ * @param {string} options.variant - Variante (success, danger, warning, info)
+ * @param {string} options.toaster - Posición (no usado, mantenido por compatibilidad)
+ * @param {boolean} options.solid - Si es true, usa fondo sólido
+ * @param {boolean} options.appendToast - Si es true, agrega al contenedor existente
+ */
+function showToast(message, options = {}) {
+  const {
+    title = '',
+    variant = 'info',
+    toaster = 'b-toaster-bottom-right',
+    solid = false,
+    appendToast = true
+  } = options;
+
+  // Crear contenedor de toasts si no existe
+  let toasterContainer = document.getElementById('vue-laravel-crud-toaster');
+  if (!toasterContainer) {
+    toasterContainer = document.createElement('div');
+    toasterContainer.id = 'vue-laravel-crud-toaster';
+    toasterContainer.className = 'vue-laravel-crud-toaster';
+
+    // Determinar posición basada en toaster
+    if (toaster.includes('bottom-right')) {
+      toasterContainer.style.cssText = 'position: fixed; bottom: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    } else if (toaster.includes('bottom-left')) {
+      toasterContainer.style.cssText = 'position: fixed; bottom: 0; left: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    } else if (toaster.includes('top-right')) {
+      toasterContainer.style.cssText = 'position: fixed; top: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    } else if (toaster.includes('top-left')) {
+      toasterContainer.style.cssText = 'position: fixed; top: 0; left: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    } else {
+      // Default: bottom-right
+      toasterContainer.style.cssText = 'position: fixed; bottom: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    }
+    document.body.appendChild(toasterContainer);
+  }
+
+  // Crear elemento toast
+  const toastId = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  const toast = document.createElement('div');
+  toast.id = toastId;
+  toast.className = 'toast';
+  toast.setAttribute('role', 'alert');
+  toast.setAttribute('aria-live', 'assertive');
+  toast.setAttribute('aria-atomic', 'true');
+
+  // Determinar clases según variant
+  let bgClass = '';
+  let textClass = '';
+  if (variant === 'success') {
+    bgClass = solid ? 'bg-success' : 'border-success';
+    textClass = solid ? 'text-white' : 'text-success';
+  } else if (variant === 'danger') {
+    bgClass = solid ? 'bg-danger' : 'border-danger';
+    textClass = solid ? 'text-white' : 'text-danger';
+  } else if (variant === 'warning') {
+    bgClass = solid ? 'bg-warning' : 'border-warning';
+    textClass = solid ? 'text-white' : 'text-warning';
+  } else if (variant === 'info') {
+    bgClass = solid ? 'bg-info' : 'border-info';
+    textClass = solid ? 'text-white' : 'text-info';
+  } else {
+    bgClass = solid ? 'bg-secondary' : 'border-secondary';
+    textClass = solid ? 'text-white' : 'text-secondary';
+  }
+
+  // Construir HTML del toast
+  toast.innerHTML = `
+    <div class="toast-header ${solid ? bgClass + ' ' + textClass : ''}" style="${solid ? '' : 'border-bottom-color: inherit;'}">
+      ${title ? `<strong class="me-auto">${title}</strong>` : ''}
+      <button type="button" class="btn-close ${solid ? '' : 'btn-close-white'}" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body ${solid ? bgClass + ' ' + textClass : textClass}">
+      ${message}
+    </div>
+  `;
+
+  // Agregar clases adicionales
+  if (!solid) {
+    toast.classList.add('border');
+  }
+
+  // Agregar al contenedor
+  toasterContainer.appendChild(toast);
+
+  // Inicializar y mostrar toast
+  // Bootstrap 5
+  if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Toast) {
+    const bsToast = new window.bootstrap.Toast(toast, {
+      autohide: true,
+      delay: 5000
+    });
+    bsToast.show();
+
+    // Remover del DOM cuando se oculte
+    toast.addEventListener('hidden.bs.toast', () => {
+      if (toast.parentNode) {
+        toast.remove();
+      }
+    });
+  } else {
+    // Bootstrap 4 o fallback manual
+    toast.classList.add('show');
+
+    // Auto-ocultar después de 5 segundos
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => {
+        if (toast.parentNode) {
+          toast.remove();
+        }
+      }, 300);
+    }, 5000);
+  }
+  return toast;
+}
+
+/**
+ * Helper para controlar modales programáticamente
+ * Compatible con bootstrap-vue $bvModal API
+ */
+const modalHelper = {
+  show(modalId) {
+    const modalEl = document.getElementById(modalId);
+    if (!modalEl) {
+      console.warn(`Modal with id "${modalId}" not found`);
+      return;
+    }
+
+    // Buscar instancia Vue del componente (puede estar en __vue__ o __vueParentComponent)
+    let vueInstance = modalEl.__vue__;
+    if (!vueInstance && modalEl.__vueParentComponent) {
+      vueInstance = modalEl.__vueParentComponent;
+    }
+
+    // Si encontramos la instancia Vue y tiene el método show, usarlo
+    if (vueInstance && typeof vueInstance.show === 'function') {
+      vueInstance.show();
+      return;
+    }
+
+    // Si tiene la propiedad visible, actualizarla
+    if (vueInstance && vueInstance.$set) {
+      vueInstance.$set(vueInstance, 'visible', true);
+      return;
+    }
+
+    // Fallback: usar Bootstrap JavaScript API directamente
+    if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Modal) {
+      // Bootstrap 5
+      let modal = window.bootstrap.Modal.getInstance(modalEl);
+      if (!modal) {
+        modal = new window.bootstrap.Modal(modalEl);
+      }
+      modal.show();
+    } else if (typeof window !== 'undefined' && window.$ && window.$(modalEl)) {
+      // Bootstrap 4 con jQuery
+      window.$(modalEl).modal('show');
+    } else {
+      // Fallback manual
+      modalEl.classList.add('show', 'd-block');
+      modalEl.style.display = 'block';
+      modalEl.setAttribute('aria-hidden', 'false');
+      modalEl.setAttribute('aria-modal', 'true');
+      document.body.classList.add('modal-open');
+
+      // Crear backdrop si no existe
+      let backdrop = document.getElementById(`${modalId}-backdrop`);
+      if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'modal-backdrop fade show';
+        backdrop.id = `${modalId}-backdrop`;
+        document.body.appendChild(backdrop);
+      }
+    }
+  },
+  hide(modalId) {
+    const modalEl = document.getElementById(modalId);
+    if (!modalEl) {
+      console.warn(`Modal with id "${modalId}" not found`);
+      return;
+    }
+
+    // Buscar instancia Vue del componente - buscar recursivamente en el árbol
+    let vueInstance = modalEl.__vue__;
+    if (!vueInstance) {
+      // Buscar en el padre
+      let parent = modalEl.parentElement;
+      while (parent && !vueInstance) {
+        vueInstance = parent.__vue__;
+        parent = parent.parentElement;
+      }
+    }
+
+    // Si encontramos la instancia Vue y tiene el método hide, usarlo
+    if (vueInstance) {
+      // Buscar el método hide en la instancia o en sus componentes
+      if (typeof vueInstance.hide === 'function') {
+        vueInstance.hide();
+        return;
+      }
+      // Buscar en $refs si hay un ref con el mismo id
+      if (vueInstance.$refs && vueInstance.$refs[modalId]) {
+        const refComponent = vueInstance.$refs[modalId];
+        if (typeof refComponent.hide === 'function') {
+          refComponent.hide();
+          return;
+        }
+      }
+    }
+
+    // Fallback: usar Bootstrap JavaScript API directamente
+    if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Modal) {
+      // Bootstrap 5
+      const modal = window.bootstrap.Modal.getInstance(modalEl);
+      if (modal) {
+        modal.hide();
+      } else {
+        // Si no hay instancia, ocultar manualmente
+        modalEl.classList.remove('show', 'd-block');
+        modalEl.style.display = 'none';
+        modalEl.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+
+        // Remover backdrop
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+          backdrop.remove();
+        }
+      }
+    } else if (typeof window !== 'undefined' && window.$ && window.$(modalEl)) {
+      // Bootstrap 4 con jQuery
+      window.$(modalEl).modal('hide');
+      // Remover backdrop de jQuery si existe
+      window.$('.modal-backdrop').remove();
+      document.body.classList.remove('modal-open');
+    } else {
+      // Fallback manual
+      modalEl.classList.remove('show', 'd-block');
+      modalEl.style.display = 'none';
+      modalEl.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+
+      // Remover backdrop
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.classList.remove('show');
+        setTimeout(() => {
+          if (backdrop.parentNode) {
+            backdrop.remove();
+          }
+        }, 150);
+      }
+    }
+  },
+  msgBoxConfirm(message, options = {}) {
+    // Crear un modal de confirmación simple
+    return new Promise(resolve => {
+      const confirmId = 'confirm-modal-' + Date.now();
+      const modal = document.createElement('div');
+      modal.id = confirmId;
+      modal.className = 'modal fade';
+      modal.innerHTML = `
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">${options.title || 'Confirmar'}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>${message}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">${options.cancelTitle || 'Cancelar'}</button>
+              <button type="button" class="btn btn-${options.okVariant || 'primary'}" id="${confirmId}-ok">${options.okTitle || 'Aceptar'}</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      const okButton = document.getElementById(`${confirmId}-ok`);
+      const cancelButton = modal.querySelector('.btn-secondary');
+      const cleanup = () => {
+        if (modal.parentNode) {
+          modal.remove();
+        }
+      };
+      okButton.addEventListener('click', () => {
+        cleanup();
+        resolve(true);
+      });
+      cancelButton.addEventListener('click', () => {
+        cleanup();
+        resolve(false);
+      });
+
+      // Mostrar modal
+      if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Modal) {
+        const bsModal = new window.bootstrap.Modal(modal);
+        bsModal.show();
+        modal.addEventListener('hidden.bs.modal', cleanup);
+      } else if (typeof window !== 'undefined' && window.$ && window.$(modal)) {
+        window.$(modal).modal('show');
+        window.$(modal).on('hidden.bs.modal', cleanup);
+      } else {
+        modal.classList.add('show', 'd-block');
+        document.body.classList.add('modal-open');
+      }
+    });
+  }
+};
+
+/**
+ * Plugin Vue para agregar $toast y $bvModal a las instancias
+ */
+var ToastPlugin = {
+  install(Vue) {
+    Vue.prototype.$toast = showToast;
+
+    // Compatibilidad con bootstrap-vue API
+    Vue.prototype.$bvToast = {
+      toast: showToast
+    };
+
+    // Helper para modales
+    Vue.prototype.$bvModal = modalHelper;
+  }
+};
+
+var css = "tr td[data-v-fad0bb19]:last-child,\ntr td[data-v-fad0bb19]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-fad0bb19] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-fad0bb19] td[data-v-fad0bb19] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-fad0bb19][data-v-fad0bb19]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-fad0bb19][data-v-fad0bb19]:hover td[data-v-fad0bb19] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(odd) td[data-v-fad0bb19] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(even) td[data-v-fad0bb19] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-fad0bb19] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-fad0bb19] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-fad0bb19] .crud-title[data-v-fad0bb19] {\n    margin: 0; }\n  .crud-header[data-v-fad0bb19] .crud-search[data-v-fad0bb19] {\n    max-width: 15rem; }\n    .crud-header[data-v-fad0bb19] .crud-search[data-v-fad0bb19] .btn[data-v-fad0bb19] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-fad0bb19] .crud-search[data-v-fad0bb19] .btn[data-v-fad0bb19].open[data-v-fad0bb19] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-fad0bb19] .table-options[data-v-fad0bb19] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-fad0bb19] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-fad0bb19] {\n    table-layout: auto; }\n    .table[data-v-fad0bb19] tbody[data-v-fad0bb19] td[data-v-fad0bb19] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-fad0bb19] tbody[data-v-fad0bb19] td[data-v-fad0bb19]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-fad0bb19] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-fad0bb19] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-fad0bb19] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-fad0bb19] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-fad0bb19] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
 n(css, {});
 
 const _sfc_main = {
@@ -21736,8 +22367,101 @@ const _sfc_main = {
     CrudPagination
   },
   mixins: [crudData, crudApi, crudFilters, crudValidation, crudHelpers],
+  computed: {
+    normalizedBootstrapVersion() {
+      return normalizeBootstrapVersion(this.bootstrapVersion);
+    },
+    bootstrapFactory() {
+      return {
+        getComponent: name => getBootstrapComponent(name, this.normalizedBootstrapVersion),
+        getComponents: () => getBootstrapComponents(this.normalizedBootstrapVersion),
+        version: this.normalizedBootstrapVersion
+      };
+    }
+  },
+  beforeCreate() {
+    // Instalar plugin de toasts si no está instalado
+    if (!Vue.prototype.$toast) {
+      Vue.use(ToastPlugin);
+    }
+  },
+  created() {
+    // Registrar componentes de Bootstrap globalmente según la versión
+    // Esto permite que todos los componentes hijos usen <b-button>, etc.
+    // Solo registrar si no están ya registrados (para evitar sobrescribir bootstrap-vue si está disponible)
+    if (this.bootstrapFactory) {
+      const components = this.bootstrapFactory.getComponents();
+      this.normalizedBootstrapVersion;
+
+      // Registrar todos los componentes
+      Object.keys(components).forEach(key => {
+        if (components[key] && typeof components[key] === 'object') {
+          // Registrar con nombre PascalCase (BButton)
+          if (!Vue.options.components[key]) {
+            Vue.component(key, components[key]);
+          }
+
+          // También registrar con prefijo 'b-' (b-button)
+          const prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
+          if (!Vue.options.components[prefixedName]) {
+            Vue.component(prefixedName, components[key]);
+          }
+
+          // También registrar con nombre camelCase (bButton) para compatibilidad
+          const camelName = key.charAt(0).toLowerCase() + key.slice(1);
+          if (!Vue.options.components[camelName]) {
+            Vue.component(camelName, components[key]);
+          }
+        }
+      });
+
+      // Registrar componente BIcon para iconos dinámicos (b-icon-*)
+      if (components.BIcon && !Vue.options.components['BIcon']) {
+        Vue.component('BIcon', components.BIcon);
+        Vue.component('b-icon', components.BIcon);
+
+        // Crear componentes dinámicos para iconos comunes
+        const commonIcons = ['clipboard', 'check', 'eye', 'pencil', 'trash', 'plus', 'search'];
+        commonIcons.forEach(iconName => {
+          const iconComponentName = `BIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}`;
+          const iconKebabName = `b-icon-${iconName}`;
+          if (!Vue.options.components[iconComponentName] && !Vue.options.components[iconKebabName]) {
+            // Crear componente wrapper para el icono específico
+            const IconWrapper = Vue.extend({
+              name: iconComponentName,
+              extends: components.BIcon,
+              props: {
+                icon: {
+                  type: String,
+                  default: iconName
+                }
+              }
+            });
+            Vue.component(iconComponentName, IconWrapper);
+            Vue.component(iconKebabName, IconWrapper);
+          }
+        });
+      }
+    }
+  },
+  mounted() {
+    // Verificar que Bootstrap JavaScript esté disponible después de que todo se haya montado
+    this.$nextTick(() => {
+      if (typeof window !== 'undefined') {
+        const version = this.normalizedBootstrapVersion;
+        if (version === 5 && !window.bootstrap) {
+          console.warn('Bootstrap 5 JavaScript no está disponible. Algunos componentes pueden no funcionar correctamente.');
+        } else if (version === 4 && !window.$) {
+          console.warn('Bootstrap 4 requiere jQuery. Algunos componentes pueden no funcionar correctamente.');
+        }
+      }
+    });
+  },
   provide() {
     return {
+      // Bootstrap version and factory
+      bootstrapVersion: this.normalizedBootstrapVersion,
+      bootstrapFactory: this.bootstrapFactory,
       // Props
       modelName: this.modelName,
       title: this.title,
@@ -21758,6 +22482,8 @@ const _sfc_main = {
       orderProp: this.orderProp,
       createMultipart: this.createMultipart,
       apiUrl: this.apiUrl,
+      autoApiPrefix: this.autoApiPrefix,
+      apiPrefix: this.apiPrefix,
       search: this.search,
       hideModalAfterSave: this.hideModalAfterSave,
       hideModalAfterCreate: this.hideModalAfterCreate,
@@ -21921,6 +22647,11 @@ const _sfc_main = {
   },
   props: {
     modelName: String,
+    bootstrapVersion: {
+      type: [Number, String],
+      default: 'auto',
+      validator: value => value === 'auto' || value === 4 || value === 5
+    },
     title: String,
     model: {
       type: Object | Function,
@@ -21997,6 +22728,14 @@ const _sfc_main = {
       default: false
     },
     apiUrl: {
+      type: String,
+      default: "/api"
+    },
+    autoApiPrefix: {
+      type: Boolean,
+      default: true
+    },
+    apiPrefix: {
       type: String,
       default: "/api"
     },
@@ -22272,7 +23011,7 @@ var _sfc_render = function render() {
   })], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "aaa8b202", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "fad0bb19", null, null);
 var component = __component__.exports;
 
 // Import vue component
