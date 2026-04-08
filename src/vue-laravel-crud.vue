@@ -158,6 +158,8 @@ export default /*#__PURE__*/ {
       orderProp: this.orderProp,
       createMultipart: this.createMultipart,
       apiUrl: this.apiUrl,
+      autoApiPrefix: this.autoApiPrefix,
+      apiPrefix: this.apiPrefix,
       search: this.search,
       hideModalAfterSave: this.hideModalAfterSave,
       hideModalAfterCreate: this.hideModalAfterCreate,
@@ -404,6 +406,14 @@ export default /*#__PURE__*/ {
       default: false,
     },
     apiUrl: {
+      type: String,
+      default: "/api",
+    },
+    autoApiPrefix: {
+      type: Boolean,
+      default: true,
+    },
+    apiPrefix: {
       type: String,
       default: "/api",
     },

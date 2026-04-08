@@ -2,6 +2,60 @@ import axios from 'axios';
 
 export default {
   methods: {
+    normalizeApiSegment(value = '') {
+      return String(value).trim().replace(/^\/+|\/+$/g, '');
+    },
+
+    resolveApiBaseUrl() {
+      const rawApiUrl = typeof this.apiUrl === 'string' ? this.apiUrl.trim() : '';
+      const autoApiPrefix = this.autoApiPrefix !== false;
+      const normalizedPrefix = this.normalizeApiSegment(this.apiPrefix || '/api');
+
+      if (!rawApiUrl) {
+        return autoApiPrefix && normalizedPrefix ? `/${normalizedPrefix}` : '';
+      }
+
+      const isAbsoluteUrl = /^https?:\/\//i.test(rawApiUrl);
+      let originPart = '';
+      let pathPartRaw = rawApiUrl;
+
+      if (isAbsoluteUrl) {
+        try {
+          const parsedUrl = new URL(rawApiUrl);
+          originPart = parsedUrl.origin;
+          pathPartRaw = parsedUrl.pathname || '';
+        } catch (error) {
+          originPart = rawApiUrl.replace(/\/+$/, '');
+          pathPartRaw = '';
+        }
+      }
+
+      const pathPart = this.normalizeApiSegment(pathPartRaw);
+      const pathSegments = pathPart ? pathPart.split('/') : [];
+      const hasPrefix = normalizedPrefix
+        ? pathSegments.slice(0, normalizedPrefix.split('/').length).join('/') === normalizedPrefix
+        : false;
+
+      const finalPath = autoApiPrefix && normalizedPrefix && !hasPrefix
+        ? [normalizedPrefix, pathPart].filter(Boolean).join('/')
+        : pathPart;
+
+      if (isAbsoluteUrl) {
+        return finalPath ? `${originPart}/${finalPath}` : originPart;
+      }
+
+      return finalPath ? `/${finalPath}` : '';
+    },
+
+    buildApiEndpoint(...segments) {
+      const base = this.resolveApiBaseUrl().replace(/\/+$/, '');
+      const normalizedSegments = segments
+        .filter((segment) => segment !== undefined && segment !== null && segment !== '')
+        .map((segment) => this.normalizeApiSegment(segment));
+      const suffix = normalizedSegments.join('/');
+      return suffix ? `${base}/${suffix}` : base;
+    },
+
     async fetchItemsVuex(page = 1, concat = false) {
       this.loading = true;
       this.$emit("beforeFetch", {});
@@ -13,7 +67,7 @@ export default {
       } else {
         this.model.deleteAll();
 
-        result = await this.model.api().get(this.apiUrl + "/" + this.modelName, {
+        result = await this.model.api().get(this.buildApiEndpoint(this.modelName), {
           dataKey: 'data',
           params: {
             page: page,
@@ -56,7 +110,7 @@ export default {
 
       this.loading = true;
       return axios
-        .get(this.apiUrl + "/" + this.modelName, {
+        .get(this.buildApiEndpoint(this.modelName), {
           params: {
             page: page,
             limit: this.pagination.per_page,
@@ -173,10 +227,10 @@ export default {
         let jsondata = this.item.$toJson();
         console.debug("save item 2", this.item, jsondata);
         if (this.item.id) {
-          result = await this.model.api().put(this.apiUrl + "/" + this.modelName + '/' + this.item.id, jsondata);
+          result = await this.model.api().put(this.buildApiEndpoint(this.modelName, this.item.id), jsondata);
           create = false;
         } else {
-          result = await this.model.api().post(this.apiUrl + "/" + this.modelName, jsondata);
+          result = await this.model.api().post(this.buildApiEndpoint(this.modelName), jsondata);
           create = true;
         }
 
@@ -253,7 +307,7 @@ export default {
       if (this.item.id) {
         axios
           .put(
-            this.apiUrl + "/" + this.modelName + "/" + this.item.id,
+            this.buildApiEndpoint(this.modelName, this.item.id),
             this.item
           )
           .then((response) => {
@@ -293,7 +347,7 @@ export default {
           });
 
           axios
-            .post(this.apiUrl + "/" + this.modelName, formData)
+            .post(this.buildApiEndpoint(this.modelName), formData)
             .then((response) => {
               this.loading = false;
               if (this.hideModalAfterSave || this.hideModalAfterCreate) {
@@ -319,7 +373,7 @@ export default {
             });
         } else {
           axios
-            .post(this.apiUrl + "/" + this.modelName, this.item)
+            .post(this.buildApiEndpoint(this.modelName), this.item)
             .then((response) => {
               this.loading = false;
               if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
@@ -360,7 +414,7 @@ export default {
 
       this.loading = true;
       axios
-        .delete(this.apiUrl + "/" + this.modelName + "/" + id)
+        .delete(this.buildApiEndpoint(this.modelName, id))
         .then((response) => {
           this.items.splice(index, 1);
           this.toastSuccess("Elemento eliminado.");
@@ -398,7 +452,7 @@ export default {
       if (this.vuexLocalforage) {
         await this.model.$delete(id);
       } else {
-        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName + '/' + id, {
+        let result = await this.model.api().delete(this.buildApiEndpoint(this.modelName, id), {
           delete: 1
         });
 
@@ -428,7 +482,7 @@ export default {
 
       this.loading = true;
       axios
-        .delete(this.apiUrl + "/" + this.modelName + "/bulk-destroy", { params: { ids: ids }, })
+        .delete(this.buildApiEndpoint(this.modelName, "bulk-destroy"), { params: { ids: ids }, })
         .then((response) => {
           this.toastSuccess("Elemento/s eliminado.");
           this.$emit("itemDeleted", {});
@@ -458,7 +512,7 @@ export default {
       if (this.vuexLocalforage) {
         await this.model.$delete(ids);
       } else {
-        let result = await this.model.api().delete(this.apiUrl + "/" + this.modelName + '/bulk-destroy', {
+        let result = await this.model.api().delete(this.buildApiEndpoint(this.modelName, "bulk-destroy"), {
           params: { ids: ids },
           delete: ids
         });
@@ -496,7 +550,7 @@ export default {
           return;
         }
         axios
-          .post(this.apiUrl + "/" + this.modelName + "/sort", {
+          .post(this.buildApiEndpoint(this.modelName, "sort"), {
             order: order,
           })
           .then((response) => {
@@ -532,7 +586,7 @@ export default {
       params.format = this.exportFormatReactive.value;
       this.loading = true;
       axios
-        .get(this.apiUrl + "/" + this.modelName + "/export", { params: params, responseType: "blob", })
+        .get(this.buildApiEndpoint(this.modelName, "export"), { params: params, responseType: "blob", })
         .then((response) => {
           this.downloadBlobResponse(response);
           this.loading = false;
@@ -547,7 +601,7 @@ export default {
       let formData = new FormData();
       formData.append("file", this.fileImport);
       axios
-        .post(this.apiUrl + "/" + this.modelName + "/import", formData, {
+        .post(this.buildApiEndpoint(this.modelName, "import"), formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

@@ -245,6 +245,8 @@ export default {
 | `title` | Título del componente | `String` | `""` |
 | `ajax` | Habilitar llamadas AJAX | `Boolean` | `true` |
 | `apiUrl` | URL base de la API | `String` | `"/api"` |
+| `autoApiPrefix` | Agrega `apiPrefix` automáticamente a `apiUrl` cuando no existe | `Boolean` | `true` |
+| `apiPrefix` | Prefijo API usado por `autoApiPrefix` | `String` | `"/api"` |
 | `useVuexORM` | Usar Vuex ORM | `Boolean` | `false` |
 | `models` | Lista de modelos (cuando `ajax=false`) | `Array` | `[]` |
 
@@ -272,6 +274,27 @@ export default {
 | `orderable` | Habilitar reordenamiento drag & drop | `Boolean` | `false` |
 | `orderProp` | Propiedad para ordenamiento | `String` | `"order"` |
 | `infiniteScroll` | Habilitar scroll infinito | `Boolean` | `false` |
+
+### Construcción de URLs de API
+
+El endpoint final se construye como:
+
+`{baseNormalizada}/{modelName}`
+
+Con `autoApiPrefix=true` (por defecto), el componente agrega `apiPrefix` solo si no está ya presente en `apiUrl`, evitando duplicados como `/api/api/users`.
+
+Ejemplos:
+
+```vue
+<!-- Usa /api/users -->
+<vue-laravel-crud :apiUrl="''" :apiPrefix="'/api'" :autoApiPrefix="true" />
+
+<!-- Mantiene /api/v1/users (no duplica /api) -->
+<vue-laravel-crud :apiUrl="'/api/v1'" :apiPrefix="'/api'" :autoApiPrefix="true" />
+
+<!-- Desactiva prefijo automático -->
+<vue-laravel-crud :apiUrl="'/backend'" :autoApiPrefix="false" />
+```
 
 ### Props Opcionales - Comportamiento
 

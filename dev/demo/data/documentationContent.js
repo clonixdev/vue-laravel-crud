@@ -72,10 +72,30 @@ Este documento contiene la referencia completa de todas las props y configuracio
 - **Tipo:** \`String\`
 - **Requerido:** Sí (si \`ajax=true\`)
 - **Default:** \`"/api"\`
-- **Descripción:** URL base de la API. Las peticiones se harán a: \`{apiUrl}/{modelName}\`
+- **Descripción:** URL base de la API. Las peticiones se harán a: \`{baseNormalizada}/{modelName}\`. Si \`autoApiPrefix=true\`, se agrega \`apiPrefix\` solo cuando no existe en \`apiUrl\`.
 - **Ejemplo:**
 \`\`\`vue
 <VueLaravelCrud apiUrl="http://localhost:3001/api" />
+\`\`\`
+
+### \`autoApiPrefix\`
+- **Tipo:** \`Boolean\`
+- **Requerido:** No
+- **Default:** \`true\`
+- **Descripción:** Cuando está activo, agrega automáticamente \`apiPrefix\` a \`apiUrl\` si aún no está presente, evitando duplicados como \`/api/api/users\`.
+- **Ejemplo:**
+\`\`\`vue
+<VueLaravelCrud apiUrl="/api/v1" :autoApiPrefix="true" apiPrefix="/api" />
+\`\`\`
+
+### \`apiPrefix\`
+- **Tipo:** \`String\`
+- **Requerido:** No
+- **Default:** \`"/api"\`
+- **Descripción:** Prefijo que usa \`autoApiPrefix\` para normalizar la ruta base de la API.
+- **Ejemplo:**
+\`\`\`vue
+<VueLaravelCrud apiUrl="/backend" :autoApiPrefix="false" />
 \`\`\`
 
 ### \`columns\`
