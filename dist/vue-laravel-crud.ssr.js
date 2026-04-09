@@ -20818,7 +20818,7 @@ axios.default = axios;var crudApi = {
         _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var _allRecords$length, _itemsResult$length, _itemsResult, _result$response$data, _result, _result2;
-        var page, result, allRecords, itemsResult, firstItem, _itemsResult$length2, _itemsResult2, paginationData;
+        var page, result, allRecords, itemsResult, firstJson, _itemsResult$length2, _itemsResult2, paginationData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -20854,18 +20854,23 @@ axios.default = axios;var crudApi = {
               itemsResult = _this2.model.query().withAll().get();
               console.debug("fetchItemsVuex - itemsResult de query().withAll():", (_itemsResult$length = (_itemsResult = itemsResult) === null || _itemsResult === void 0 ? void 0 : _itemsResult.length) !== null && _itemsResult$length !== void 0 ? _itemsResult$length : 0, itemsResult);
               if (itemsResult) {
-                _this2.items = itemsResult;
+                // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
+                _this2.items = itemsResult.map(function (item) {
+                  return item.$toJson ? item.$toJson() : item;
+                });
                 // Debug: ver las propiedades del primer item
                 if (itemsResult.length > 0) {
-                  firstItem = itemsResult[0];
-                  console.debug("fetchItemsVuex - Primer item properties:", Object.keys(firstItem), firstItem.$attributes, firstItem.id, firstItem.name);
+                  firstJson = _this2.items[0];
+                  console.debug("fetchItemsVuex - Primer item convertido:", firstJson);
                 }
               } else {
                 // Fallback: intentar sin withAll
                 console.debug("fetchItemsVuex - probando fallback sin withAll");
                 itemsResult = _this2.model.query().get();
                 if (itemsResult) {
-                  _this2.items = itemsResult;
+                  _this2.items = itemsResult.map(function (item) {
+                    return item.$toJson ? item.$toJson() : item;
+                  });
                   console.debug("fetchItemsVuex - itemsResult de query() sin withAll:", (_itemsResult$length2 = (_itemsResult2 = itemsResult) === null || _itemsResult2 === void 0 ? void 0 : _itemsResult2.length) !== null && _itemsResult$length2 !== void 0 ? _itemsResult$length2 : 0, itemsResult);
                 }
               }
