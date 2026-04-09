@@ -86,18 +86,19 @@ export default {
       console.debug("fetchItemsVuex - itemsResult de query().withAll():", itemsResult?.length ?? 0, itemsResult);
 
       if (itemsResult) {
-        this.items = itemsResult;
+        // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
+        this.items = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
         // Debug: ver las propiedades del primer item
         if (itemsResult.length > 0) {
-          const firstItem = itemsResult[0];
-          console.debug("fetchItemsVuex - Primer item properties:", Object.keys(firstItem), firstItem.$attributes, firstItem.id, firstItem.name);
+          const firstJson = this.items[0];
+          console.debug("fetchItemsVuex - Primer item convertido:", firstJson);
         }
       } else {
         // Fallback: intentar sin withAll
         console.debug("fetchItemsVuex - probando fallback sin withAll");
         itemsResult = this.model.query().get();
         if (itemsResult) {
-          this.items = itemsResult;
+          this.items = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
           console.debug("fetchItemsVuex - itemsResult de query() sin withAll:", itemsResult?.length ?? 0, itemsResult);
         }
       }
