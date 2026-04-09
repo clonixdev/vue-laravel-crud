@@ -1,5 +1,5 @@
 // Contenido de la documentación en formato markdown
-// Este archivo se genera automáticamente desde CONFIGURACIONES.md
+// Este archivo se genera automáticamente desde docs/CONFIGURACIONES.md
 export const documentationContent = `# Documentación Completa de Configuraciones - Vue Laravel CRUD
 
 Este documento contiene la referencia completa de todas las props y configuraciones disponibles en el componente \`vue-laravel-crud\`.
