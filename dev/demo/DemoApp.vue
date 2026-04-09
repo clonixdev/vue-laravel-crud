@@ -101,6 +101,7 @@ import InfiniteScrollExample from './examples/InfiniteScrollExample.vue';
 import CustomMessagesExample from './examples/CustomMessagesExample.vue';
 import DisplayModesExample from './examples/DisplayModesExample.vue';
 import CheckboxSelectionExample from './examples/CheckboxSelectionExample.vue';
+import VuexORMExample from './examples/VuexORMExample.vue';
 import DocumentationViewer from './components/DocumentationViewer.vue';
 
 export default {
@@ -120,6 +121,7 @@ export default {
     CustomMessagesExample,
     DisplayModesExample,
     CheckboxSelectionExample,
+    VuexORMExample,
     DocumentationViewer
   },
   data() {
@@ -282,7 +284,7 @@ export default {
           modelName: 'users',
           ajax: true
         },
-        {
+{
           id: 'display-modes',
           name: 'Modos de Visualización',
           icon: 'layout-split',
@@ -291,6 +293,17 @@ export default {
           mode: 'Todos',
           modelName: 'users',
           ajax: true
+        },
+        {
+          id: 'vuexorm',
+          name: 'VuexORM',
+          icon: 'database',
+          component: 'VuexORMExample',
+          description: 'Ejemplo con VuexORM para gestión de estado',
+          mode: 'Tabla',
+          modelName: 'demo_users',
+          ajax: true,
+          useVuexORM: true
         },
         {
           id: 'documentation',

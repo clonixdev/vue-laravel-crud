@@ -1,5 +1,10 @@
 <template>
   <div :class="['table-responsive', tableContainerClass]" v-if="currentDisplayMode == displayModes.MODE_TABLE">
+    <!-- Debug info -->
+    <div class="debug-info" style="display:none">
+      Table items: {{ items?.length || 0 }} | itemsList: {{ itemsList?.length || 0 }} | loading: {{ loadingValue }} | firstLoad: {{ firstLoadValue }}
+    </div>
+    
     <!-- Spinner durante la carga inicial -->
     <div v-if="loadingValue || !firstLoadValue" class="text-center p-5">
       <b-spinner variant="primary" label="Cargando..."></b-spinner>
@@ -12,7 +17,7 @@
         <TableHeader />
         
         <draggable 
-          :list="items" 
+          :list="items"
           :group="draggableGroup" 
           tag="tbody" 
           :draggable="orderable ? '.item' : '.none'"

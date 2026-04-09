@@ -5,6 +5,7 @@ import { mockUsers, mockTasks, mockProducts, generateMockData } from './mockData
 let users = generateMockData('users', 75);
 let tasks = generateMockData('tasks', 75);
 let products = generateMockData('products', 75);
+let demo_users = generateMockData('users', 50);
 
 // Función para parsear filtros
 function parseFilters(filterString) {
@@ -84,6 +85,8 @@ function getDataByModel(modelName) {
       return tasks;
     case 'products':
       return products;
+    case 'demo_users':
+      return demo_users;
     default:
       return [];
   }
@@ -100,6 +103,9 @@ function updateDataByModel(modelName, newData) {
       break;
     case 'products':
       products = newData;
+      break;
+    case 'demo_users':
+      demo_users = newData;
       break;
   }
 }

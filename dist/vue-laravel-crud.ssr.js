@@ -20817,8 +20817,8 @@ axios.default = axios;var crudApi = {
       var _arguments = arguments,
         _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _allRecords$length, _itemsResult$length, _itemsResult, _result$response$data, _result, _result2;
-        var page, result, allRecords, itemsResult, firstJson, _itemsResult$length2, _itemsResult2, paginationData;
+        var _result$response$data, _result, _result2;
+        var page, result, itemsResult, paginationData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -20848,30 +20848,19 @@ axios.default = axios;var crudApi = {
             case 12:
               result = _context.sent;
             case 13:
-              // Debug: ver qué hay en el store antes de la query
-              allRecords = _this2.model.query().get();
-              console.debug("fetchItemsVuex - Registros en store antes de query:", (_allRecords$length = allRecords === null || allRecords === void 0 ? void 0 : allRecords.length) !== null && _allRecords$length !== void 0 ? _allRecords$length : 0, allRecords);
               itemsResult = _this2.model.query().withAll().get();
-              console.debug("fetchItemsVuex - itemsResult de query().withAll():", (_itemsResult$length = (_itemsResult = itemsResult) === null || _itemsResult === void 0 ? void 0 : _itemsResult.length) !== null && _itemsResult$length !== void 0 ? _itemsResult$length : 0, itemsResult);
               if (itemsResult) {
                 // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
                 _this2.items = itemsResult.map(function (item) {
                   return item.$toJson ? item.$toJson() : item;
                 });
-                // Debug: ver las propiedades del primer item
-                if (itemsResult.length > 0) {
-                  firstJson = _this2.items[0];
-                  console.debug("fetchItemsVuex - Primer item convertido:", firstJson);
-                }
               } else {
                 // Fallback: intentar sin withAll
-                console.debug("fetchItemsVuex - probando fallback sin withAll");
                 itemsResult = _this2.model.query().get();
                 if (itemsResult) {
                   _this2.items = itemsResult.map(function (item) {
                     return item.$toJson ? item.$toJson() : item;
                   });
-                  console.debug("fetchItemsVuex - itemsResult de query() sin withAll:", (_itemsResult$length2 = (_itemsResult2 = itemsResult) === null || _itemsResult2 === void 0 ? void 0 : _itemsResult2.length) !== null && _itemsResult$length2 !== void 0 ? _itemsResult$length2 : 0, itemsResult);
                 }
               }
 
@@ -20883,7 +20872,7 @@ axios.default = axios;var crudApi = {
               console.debug("fetch page vuex ", itemsResult, page, _this2.items, result, "pagination:", _this2.pagination);
               _this2.loading = false;
               _this2.firstLoad = true;
-            case 23:
+            case 20:
             case "end":
               return _context.stop();
           }

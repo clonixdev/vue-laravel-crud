@@ -75,12 +75,7 @@ export default {
     },
 
 itemsList() {
-      // Debug: ver el estado de ajax y pagination
-      console.debug("itemsList - ajax:", this.ajax, "useVuexORM:", this.useVuexORM, "items length:", this.items?.length, "pagination:", this.pagination);
-      
       const items = this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
-      console.debug("itemsList - items después de condición:", items?.length, items);
-      
       if (this.masonrySort && !this.isMobile) {
         return this.rearrangeArray(items, this.masonryColumns);
       }

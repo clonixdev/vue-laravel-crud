@@ -20528,27 +20528,15 @@ var crudApi = {
           }
         });
       }
-
-      // Debug: ver qué hay en el store antes de la query
-      const allRecords = this.model.query().get();
-      console.debug("fetchItemsVuex - Registros en store antes de query:", allRecords?.length ?? 0, allRecords);
       let itemsResult = this.model.query().withAll().get();
-      console.debug("fetchItemsVuex - itemsResult de query().withAll():", itemsResult?.length ?? 0, itemsResult);
       if (itemsResult) {
         // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
         this.items = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
-        // Debug: ver las propiedades del primer item
-        if (itemsResult.length > 0) {
-          const firstJson = this.items[0];
-          console.debug("fetchItemsVuex - Primer item convertido:", firstJson);
-        }
       } else {
         // Fallback: intentar sin withAll
-        console.debug("fetchItemsVuex - probando fallback sin withAll");
         itemsResult = this.model.query().get();
         if (itemsResult) {
           this.items = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
-          console.debug("fetchItemsVuex - itemsResult de query() sin withAll:", itemsResult?.length ?? 0, itemsResult);
         }
       }
 

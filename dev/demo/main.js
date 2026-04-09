@@ -1,5 +1,35 @@
 import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
+import VuexORM from '@vuex-orm/core';
+import VuexORMAxios from '@vuex-orm/plugin-axios';
 import DemoApp from './DemoApp.vue';
+import DemoUser from './models/DemoUser';
+
+// ============================================
+// CONFIGURACIÓN DE VUEX ORM
+// ============================================
+Vue.use(Vuex);
+
+// Configurar VuexORM con Axios
+VuexORM.use(VuexORMAxios, {
+  axios,
+  headers: { 'X-Requested-With': 'XMLHttpRequest' },
+  baseURL: '/api',
+  dataKey: 'data'
+});
+
+// Crear base de datos y registrar modelo
+const database = new VuexORM.Database();
+database.register(DemoUser);
+
+// Crear store
+const store = new Vuex.Store({
+  plugins: [VuexORM.install(database)]
+});
+
+// Exponer store globalmente para que vue-laravel-crud pueda acceder
+window.vuexOrmStore = store;
 
 // ============================================
 // CONFIGURACIÓN DE BOOTSTRAP
@@ -67,6 +97,7 @@ if (BIconComponent) {
 Vue.config.productionTip = false;
 
 new Vue({
+  store,
   render: (h) => h(DemoApp),
 }).$mount('#app');
 
