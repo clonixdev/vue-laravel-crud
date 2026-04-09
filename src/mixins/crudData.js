@@ -75,7 +75,9 @@ export default {
     },
 
 itemsList() {
-      const items = this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
+      // Cuando se usa VuexORM o ajax, usamos los items del servidor directamente
+      // Cuando ajax es false, usamos paginación local
+      const items = (this.ajax || this.useVuexORM) ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
       if (this.masonrySort && !this.isMobile) {
         return this.rearrangeArray(items, this.masonryColumns);
       }

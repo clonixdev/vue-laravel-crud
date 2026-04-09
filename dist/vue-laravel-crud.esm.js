@@ -13438,7 +13438,12 @@ var _sfc_render$a = function render() {
     _c = _vm._self._c;
   return _vm.currentDisplayMode == _vm.displayModes.MODE_TABLE ? _c('div', {
     class: ['table-responsive', _vm.tableContainerClass]
-  }, [_vm.loadingValue || !_vm.firstLoadValue ? _c('div', {
+  }, [_c('div', {
+    staticClass: "debug-info",
+    staticStyle: {
+      "display": "none"
+    }
+  }, [_vm._v(" Table items: " + _vm._s(_vm.items?.length || 0) + " | itemsList: " + _vm._s(_vm.itemsList?.length || 0) + " | loading: " + _vm._s(_vm.loadingValue) + " | firstLoad: " + _vm._s(_vm.firstLoadValue) + " ")]), _vm.loadingValue || !_vm.firstLoadValue ? _c('div', {
     staticClass: "text-center p-5"
   }, [_c('b-spinner', {
     attrs: {
@@ -14938,7 +14943,9 @@ var crudData = {
       return this._displayMode == this.displayModes.MODE_KANBAN;
     },
     itemsList() {
-      const items = this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
+      // Cuando se usa VuexORM o ajax, usamos los items del servidor directamente
+      // Cuando ajax es false, usamos paginación local
+      const items = this.ajax || this.useVuexORM ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
       if (this.masonrySort && !this.isMobile) {
         return this.rearrangeArray(items, this.masonryColumns);
       }
