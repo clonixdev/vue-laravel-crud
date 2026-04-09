@@ -77,10 +77,24 @@ export default {
         });
 }
 
+      // Debug: ver qué hay en el store antes de la query
+      const allRecords = this.model.query().get();
+      console.debug("fetchItemsVuex - Registros en store antes de query:", allRecords?.length ?? 0, allRecords);
+
       let itemsResult = this.model.query().withAll().get();
+
+      console.debug("fetchItemsVuex - itemsResult de query().withAll():", itemsResult?.length ?? 0, itemsResult);
 
       if (itemsResult) {
         this.items = itemsResult;
+      } else {
+        // Fallback: intentar sin withAll
+        console.debug("fetchItemsVuex - probando fallback sin withAll");
+        itemsResult = this.model.query().get();
+        if (itemsResult) {
+          this.items = itemsResult;
+          console.debug("fetchItemsVuex - itemsResult de query() sin withAll:", itemsResult?.length ?? 0, itemsResult);
+        }
       }
 
       // Actualizar paginación con datos del servidor
