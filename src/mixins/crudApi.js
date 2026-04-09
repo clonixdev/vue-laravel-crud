@@ -87,6 +87,11 @@ export default {
 
       if (itemsResult) {
         this.items = itemsResult;
+        // Debug: ver las propiedades del primer item
+        if (itemsResult.length > 0) {
+          const firstItem = itemsResult[0];
+          console.debug("fetchItemsVuex - Primer item properties:", Object.keys(firstItem), firstItem.$attributes, firstItem.id, firstItem.name);
+        }
       } else {
         // Fallback: intentar sin withAll
         console.debug("fetchItemsVuex - probando fallback sin withAll");
