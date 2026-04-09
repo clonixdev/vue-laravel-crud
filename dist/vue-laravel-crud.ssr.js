@@ -20818,7 +20818,7 @@ axios.default = axios;var crudApi = {
         _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var _allRecords$length, _itemsResult$length, _itemsResult, _result$response$data, _result, _result2;
-        var page, result, allRecords, itemsResult, _itemsResult$length2, _itemsResult2, paginationData;
+        var page, result, allRecords, itemsResult, firstItem, _itemsResult$length2, _itemsResult2, paginationData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -20855,6 +20855,11 @@ axios.default = axios;var crudApi = {
               console.debug("fetchItemsVuex - itemsResult de query().withAll():", (_itemsResult$length = (_itemsResult = itemsResult) === null || _itemsResult === void 0 ? void 0 : _itemsResult.length) !== null && _itemsResult$length !== void 0 ? _itemsResult$length : 0, itemsResult);
               if (itemsResult) {
                 _this2.items = itemsResult;
+                // Debug: ver las propiedades del primer item
+                if (itemsResult.length > 0) {
+                  firstItem = itemsResult[0];
+                  console.debug("fetchItemsVuex - Primer item properties:", Object.keys(firstItem), firstItem.$attributes, firstItem.id, firstItem.name);
+                }
               } else {
                 // Fallback: intentar sin withAll
                 console.debug("fetchItemsVuex - probando fallback sin withAll");
