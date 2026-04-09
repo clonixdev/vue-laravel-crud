@@ -15,7 +15,7 @@ Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {
   axios,
   headers: { 'X-Requested-With': 'XMLHttpRequest' },
-  baseURL: '/api',
+  baseURL: 'http://localhost:3001/api',
   dataKey: 'data'
 });
 

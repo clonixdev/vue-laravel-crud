@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import VueLaravelCrud from '../../src/vue-laravel-crud.vue';
+import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 import DemoUser from '../models/DemoUser';
 
 export default {
