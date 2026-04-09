@@ -1169,7 +1169,7 @@ var _sfc_render$f = function render() {
 };
 var _sfc_staticRenderFns$f = [];
 var __component__$f = /*#__PURE__*/normalizeComponent(_sfc_main$f, _sfc_render$f, _sfc_staticRenderFns$f, false, null, null, null, null);
-var CrudFilters = __component__$f.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css$9 = "\n.crud-header[data-v-91117739] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-title[data-v-91117739] {\n  margin: 0;\n}\n.crud-search[data-v-91117739] {\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-91117739] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-91117739] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-91117739] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n";
+var CrudFilters = __component__$f.exports;var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}var css$9 = "\n.crud-header[data-v-ff5c9ed4] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  max-height: 3rem;\n}\n.crud-title[data-v-ff5c9ed4] {\r\n  margin: 0;\n}\n.crud-search[data-v-ff5c9ed4] {\r\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-ff5c9ed4] {\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\r\n  border-top-right-radius: 0.375rem;\r\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-ff5c9ed4] {\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-ff5c9ed4] {\r\n  margin-bottom: 1rem;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-end;\n}\r\n";
 n(css$9, {});var _sfc_main$e = {
   name: 'CrudHeader',
   components: {
@@ -1343,7 +1343,7 @@ var _sfc_render$e = function render() {
   })], 2)], 1)], 1) : _vm._e();
 };
 var _sfc_staticRenderFns$e = [];
-var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "91117739", null, null);
+var __component__$e = /*#__PURE__*/normalizeComponent(_sfc_main$e, _sfc_render$e, _sfc_staticRenderFns$e, false, null, "ff5c9ed4", null, null);
 var CrudHeader = __component__$e.exports;var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function getDefaultExportFromCjs (x) {
@@ -7494,7 +7494,7 @@ Sortable.mount(Remove, Revert);var sortable_esm=/*#__PURE__*/Object.freeze({__pr
 } (vuedraggable_umd, vuedraggable_umd.exports));
 
 var vuedraggable_umdExports = vuedraggable_umd.exports;
-var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);var css$7 = "\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-b3c8c2ac] {\n  width: 1%;\n  white-space: nowrap;\n}\n\n/* Alinear checkbox en el header */\n.checkbox-header[data-v-b3c8c2ac] {\n  vertical-align: middle !important;\n  text-align: center;\n}\n.header-checkbox-wrapper[data-v-b3c8c2ac] {\n  display: inline-flex;\n  align-items: center;\n  vertical-align: middle;\n}\n\n/* Asegurar que el form-check dentro del header esté alineado */\n.checkbox-header[data-v-b3c8c2ac] .form-check {\n  margin: 0 !important;\n  display: inline-flex;\n  align-items: center;\n  min-height: auto;\n  padding: 0;\n  vertical-align: middle;\n}\n.checkbox-header[data-v-b3c8c2ac] .form-check-input {\n  margin: 0 !important;\n  margin-top: 0 !important;\n  margin-right: 0.5rem !important;\n  vertical-align: middle;\n  position: relative;\n  float: none;\n  top: 0;\n  align-self: center;\n}\n.checkbox-header[data-v-b3c8c2ac] .form-check-label {\n  margin-left: 0;\n  margin-bottom: 0;\n  vertical-align: middle;\n  display: inline;\n  align-self: center;\n}\n.sort-filter[data-v-b3c8c2ac] {\n  cursor: pointer;\n  visibility: hidden;\n  display: inline-block;\n}\n.sort-filter-visible[data-v-b3c8c2ac] {\n  visibility: visible;\n}\n";
+var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);var css$7 = "\r\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-85cd99c8] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\r\n\r\n/* Alinear checkbox en el header */\n.checkbox-header[data-v-85cd99c8] {\r\n  vertical-align: middle !important;\r\n  text-align: center;\n}\n.header-checkbox-wrapper[data-v-85cd99c8] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  vertical-align: middle;\n}\r\n\r\n/* Asegurar que el form-check dentro del header esté alineado */\n.checkbox-header[data-v-85cd99c8] .form-check {\r\n  margin: 0 !important;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  min-height: auto;\r\n  padding: 0;\r\n  vertical-align: middle;\n}\n.checkbox-header[data-v-85cd99c8] .form-check-input {\r\n  margin: 0 !important;\r\n  margin-top: 0 !important;\r\n  margin-right: 0.5rem !important;\r\n  vertical-align: middle;\r\n  position: relative;\r\n  float: none;\r\n  top: 0;\r\n  align-self: center;\n}\n.checkbox-header[data-v-85cd99c8] .form-check-label {\r\n  margin-left: 0;\r\n  margin-bottom: 0;\r\n  vertical-align: middle;\r\n  display: inline;\r\n  align-self: center;\n}\n.sort-filter[data-v-85cd99c8] {\r\n  cursor: pointer;\r\n  visibility: hidden;\r\n  display: inline-block;\n}\n.sort-filter-visible[data-v-85cd99c8] {\r\n  visibility: visible;\n}\r\n";
 n(css$7, {});var _sfc_main$d = {
   name: 'TableHeader',
   inject: ['bootstrapFactory', 'columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded', 'isAllSelected'],
@@ -7845,7 +7845,7 @@ var _sfc_render$d = function render() {
   })], 2)]);
 };
 var _sfc_staticRenderFns$d = [];
-var __component__$d = /*#__PURE__*/normalizeComponent(_sfc_main$d, _sfc_render$d, _sfc_staticRenderFns$d, false, null, "b3c8c2ac", null, null);
+var __component__$d = /*#__PURE__*/normalizeComponent(_sfc_main$d, _sfc_render$d, _sfc_staticRenderFns$d, false, null, "85cd99c8", null, null);
 var TableHeader = __component__$d.exports;function commonjsRequire(path) {
 	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }var moment$1 = {exports: {}};moment$1.exports;
@@ -20817,7 +20817,8 @@ axios.default = axios;var crudApi = {
       var _arguments = arguments,
         _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var page, result, itemsResult;
+        var _result$response$data, _result, _result2;
+        var page, result, itemsResult, paginationData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -20851,10 +20852,16 @@ axios.default = axios;var crudApi = {
               if (itemsResult) {
                 _this2.items = itemsResult;
               }
-              console.debug("fetch page vuex ", itemsResult, page, _this2.items, result);
+
+              // Actualizar paginación con datos del servidor
+              paginationData = (_result$response$data = (_result = result) === null || _result === void 0 || (_result = _result.response) === null || _result === void 0 ? void 0 : _result.data) !== null && _result$response$data !== void 0 ? _result$response$data : (_result2 = result) === null || _result2 === void 0 ? void 0 : _result2.data;
+              if (paginationData) {
+                _this2.makePagination(paginationData);
+              }
+              console.debug("fetch page vuex ", itemsResult, page, _this2.items, result, "pagination:", _this2.pagination);
               _this2.loading = false;
               _this2.firstLoad = true;
-            case 18:
+            case 20:
             case "end":
               return _context.stop();
           }
