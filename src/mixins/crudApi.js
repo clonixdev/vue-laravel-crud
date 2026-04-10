@@ -11,6 +11,18 @@ export default {
       const autoApiPrefix = this.autoApiPrefix !== false;
       const normalizedPrefix = this.normalizeApiSegment(this.apiPrefix || '/api');
 
+      // Defensive guard for VuexORM:
+      // if component is using default /api values, let vuex-orm/plugin-axios
+      // baseURL handle the prefix to avoid ending with /api/api/... URLs.
+      if (
+        this.useVuexORM &&
+        autoApiPrefix &&
+        normalizedPrefix === 'api' &&
+        this.normalizeApiSegment(rawApiUrl) === 'api'
+      ) {
+        return '';
+      }
+
       if (!rawApiUrl) {
         return autoApiPrefix && normalizedPrefix ? `/${normalizedPrefix}` : '';
       }
@@ -56,6 +68,13 @@ export default {
       return suffix ? `${base}/${suffix}` : base;
     },
 
+    buildVuexOrmEndpoint(...segments) {
+      const normalizedSegments = segments
+        .filter((segment) => segment !== undefined && segment !== null && segment !== '')
+        .map((segment) => this.normalizeApiSegment(segment));
+      return normalizedSegments.join('/');
+    },
+
     async fetchItemsVuex(page = 1, concat = false) {
       this.loading = true;
       this.$emit("beforeFetch", {});
@@ -67,7 +86,7 @@ export default {
       } else {
         this.model.deleteAll();
 
-        result = await this.model.api().get(this.buildApiEndpoint(this.modelName), {
+        result = await this.model.api().get(this.buildVuexOrmEndpoint(this.modelName), {
           dataKey: 'data',
           params: {
             page: page,
@@ -81,12 +100,16 @@ export default {
 
       if (itemsResult) {
         // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
-        this.items = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
+        const normalizedItems = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
+        // Mantener referencia del array para no romper provide/inject en componentes hijos.
+        this.items.splice(0, this.items.length, ...normalizedItems);
       } else {
         // Fallback: intentar sin withAll
         itemsResult = this.model.query().get();
         if (itemsResult) {
-          this.items = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
+          const normalizedItems = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
+          // Mantener referencia del array para no romper provide/inject en componentes hijos.
+          this.items.splice(0, this.items.length, ...normalizedItems);
         }
       }
 
@@ -241,10 +264,10 @@ export default {
         let jsondata = this.item.$toJson();
         console.debug("save item 2", this.item, jsondata);
         if (this.item.id) {
-          result = await this.model.api().put(this.buildApiEndpoint(this.modelName, this.item.id), jsondata);
+          result = await this.model.api().put(this.buildVuexOrmEndpoint(this.modelName, this.item.id), jsondata);
           create = false;
         } else {
-          result = await this.model.api().post(this.buildApiEndpoint(this.modelName), jsondata);
+          result = await this.model.api().post(this.buildVuexOrmEndpoint(this.modelName), jsondata);
           create = true;
         }
 
@@ -466,7 +489,7 @@ export default {
       if (this.vuexLocalforage) {
         await this.model.$delete(id);
       } else {
-        let result = await this.model.api().delete(this.buildApiEndpoint(this.modelName, id), {
+        let result = await this.model.api().delete(this.buildVuexOrmEndpoint(this.modelName, id), {
           delete: 1
         });
 
@@ -526,7 +549,7 @@ export default {
       if (this.vuexLocalforage) {
         await this.model.$delete(ids);
       } else {
-        let result = await this.model.api().delete(this.buildApiEndpoint(this.modelName, "bulk-destroy"), {
+        let result = await this.model.api().delete(this.buildVuexOrmEndpoint(this.modelName, "bulk-destroy"), {
           params: { ids: ids },
           delete: ids
         });
@@ -544,7 +567,9 @@ export default {
       // Actualizar items desde el store Vuex
       let itemsResult = this.model.query().withAll().get();
       if (itemsResult) {
-        this.items = itemsResult;
+        const normalizedItems = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
+        // Mantener referencia del array para no romper provide/inject en componentes hijos.
+        this.items.splice(0, this.items.length, ...normalizedItems);
       }
 
       this.toastSuccess("Elemento eliminados.");

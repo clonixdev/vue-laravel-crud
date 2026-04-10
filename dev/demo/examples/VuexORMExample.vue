@@ -2,11 +2,12 @@
   <div class="vuexorm-example">
     <VueLaravelCrud
       ref="crud"
-      title="Usuarios (VuexORM)"
+      title="Usuarios (VuexORM) 2"
       modelName="demo_users"
       :model="model"
       :columns="columns"
       :useVuexORM="true"
+      :autoApiPrefix="false"
     >
       <template v-slot:cell(status)="row">
         <b-badge :variant="row.value === 'active' ? 'success' : 'secondary'">
