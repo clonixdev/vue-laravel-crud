@@ -21,6 +21,10 @@ import { getBootstrapComponent, getBootstrapComponents } from "./utils/bootstrap
 // Import toast plugin
 import ToastPlugin from "./utils/toast.js";
 
+function createInstanceUid() {
+  return "vlcrud-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
+}
+
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
   components: {
@@ -39,6 +43,11 @@ export default /*#__PURE__*/ {
     crudValidation,
     crudHelpers
   ],
+  data() {
+    return {
+      instanceUid: createInstanceUid()
+    };
+  },
   computed: {
     normalizedBootstrapVersion() {
       return normalizeBootstrapVersion(this.bootstrapVersion);
@@ -218,6 +227,7 @@ export default /*#__PURE__*/ {
 
       // Data from mixins
       crudUuid: this.crudUuid,
+      instanceUid: this.instanceUid,
       moment: this.moment,
       loading: this.loadingReactive,
       firstLoad: this.firstLoadReactive,

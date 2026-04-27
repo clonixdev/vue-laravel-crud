@@ -21,6 +21,10 @@ export default {
     }
   },
   methods: {
+    getModalId(type) {
+      const modalUidSuffix = this.instanceUid ? "-" + this.instanceUid : "";
+      return "modal-" + type + "-item-" + this.modelName + modalUidSuffix;
+    },
     onRowHover(item, itemIndex) {
       if (this.selectHover) {
         this.item = this.items[itemIndex];
@@ -209,7 +213,7 @@ export default {
       this.onSelect();
       this.$nextTick(() => {
         this.$forceUpdate();
-      this.$bvModal.show("modal-show-item-" + this.modelName);
+      this.$bvModal.show(this.getModalId("show"));
       });
     },
 
@@ -251,7 +255,7 @@ export default {
       this.onSelect();
       this.$nextTick(() => {
         this.$forceUpdate();
-      this.$bvModal.show("modal-form-item-" + this.modelName);
+      this.$bvModal.show(this.getModalId("form"));
       });
     },
 
@@ -305,7 +309,7 @@ export default {
       this.onSelect();
       this.$nextTick(() => {
         this.$forceUpdate();
-      this.$bvModal.show("modal-form-item-" + this.modelName);
+      this.$bvModal.show(this.getModalId("form"));
       });
     },
 

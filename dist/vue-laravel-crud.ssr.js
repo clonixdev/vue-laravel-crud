@@ -20782,6 +20782,13 @@ axios.default = axios;var crudApi = {
       var rawApiUrl = typeof this.apiUrl === 'string' ? this.apiUrl.trim() : '';
       var autoApiPrefix = this.autoApiPrefix !== false;
       var normalizedPrefix = this.normalizeApiSegment(this.apiPrefix || '/api');
+
+      // Defensive guard for VuexORM:
+      // if component is using default /api values, let vuex-orm/plugin-axios
+      // baseURL handle the prefix to avoid ending with /api/api/... URLs.
+      if (this.useVuexORM && autoApiPrefix && normalizedPrefix === 'api' && this.normalizeApiSegment(rawApiUrl) === 'api') {
+        return '';
+      }
       if (!rawApiUrl) {
         return autoApiPrefix && normalizedPrefix ? "/".concat(normalizedPrefix) : '';
       }
@@ -20821,65 +20828,79 @@ axios.default = axios;var crudApi = {
       var suffix = normalizedSegments.join('/');
       return suffix ? "".concat(base, "/").concat(suffix) : base;
     },
+    buildVuexOrmEndpoint: function buildVuexOrmEndpoint() {
+      var _this2 = this;
+      for (var _len2 = arguments.length, segments = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        segments[_key2] = arguments[_key2];
+      }
+      var normalizedSegments = segments.filter(function (segment) {
+        return segment !== undefined && segment !== null && segment !== '';
+      }).map(function (segment) {
+        return _this2.normalizeApiSegment(segment);
+      });
+      return normalizedSegments.join('/');
+    },
     fetchItemsVuex: function fetchItemsVuex() {
       var _arguments = arguments,
-        _this2 = this;
+        _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var _result$response$data, _result, _result2;
-        var page, result, itemsResult, paginationData;
+        var page, result, itemsResult, _this3$items, normalizedItems, _this3$items2, _normalizedItems, paginationData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
-              _this2.loading = true;
-              _this2.$emit("beforeFetch", {});
-              if (!_this2.vuexLocalforage) {
+              _this3.loading = true;
+              _this3.$emit("beforeFetch", {});
+              if (!_this3.vuexLocalforage) {
                 _context.next = 9;
                 break;
               }
               _context.next = 7;
-              return _this2.model.$fetch();
+              return _this3.model.$fetch();
             case 7:
               _context.next = 13;
               break;
             case 9:
-              _this2.model.deleteAll();
+              _this3.model.deleteAll();
               _context.next = 12;
-              return _this2.model.api().get(_this2.buildApiEndpoint(_this2.modelName), {
+              return _this3.model.api().get(_this3.buildVuexOrmEndpoint(_this3.modelName), {
                 dataKey: 'data',
                 params: {
                   page: page,
-                  limit: _this2.pagination.per_page,
-                  filters: JSON.stringify(_this2.finalFilters)
+                  limit: _this3.pagination.per_page,
+                  filters: JSON.stringify(_this3.finalFilters)
                 }
               });
             case 12:
               result = _context.sent;
             case 13:
-              itemsResult = _this2.model.query().withAll().get();
+              itemsResult = _this3.model.query().withAll().get();
               if (itemsResult) {
                 // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
-                _this2.items = itemsResult.map(function (item) {
+                normalizedItems = itemsResult.map(function (item) {
                   return item.$toJson ? item.$toJson() : item;
-                });
+                }); // Mantener referencia del array para no romper provide/inject en componentes hijos.
+                (_this3$items = _this3.items).splice.apply(_this3$items, [0, _this3.items.length].concat(_toConsumableArray$1(normalizedItems)));
               } else {
                 // Fallback: intentar sin withAll
-                itemsResult = _this2.model.query().get();
+                itemsResult = _this3.model.query().get();
                 if (itemsResult) {
-                  _this2.items = itemsResult.map(function (item) {
+                  _normalizedItems = itemsResult.map(function (item) {
                     return item.$toJson ? item.$toJson() : item;
-                  });
+                  }); // Mantener referencia del array para no romper provide/inject en componentes hijos.
+                  (_this3$items2 = _this3.items).splice.apply(_this3$items2, [0, _this3.items.length].concat(_toConsumableArray$1(_normalizedItems)));
                 }
               }
 
               // Actualizar paginación con datos del servidor
               paginationData = (_result$response$data = (_result = result) === null || _result === void 0 || (_result = _result.response) === null || _result === void 0 ? void 0 : _result.data) !== null && _result$response$data !== void 0 ? _result$response$data : (_result2 = result) === null || _result2 === void 0 ? void 0 : _result2.data;
               if (paginationData) {
-                _this2.makePagination(paginationData);
+                _this3.makePagination(paginationData);
               }
-              console.debug("fetch page vuex ", itemsResult, page, _this2.items, result, "pagination:", _this2.pagination);
-              _this2.loading = false;
-              _this2.firstLoad = true;
+              console.debug("fetch page vuex ", itemsResult, page, _this3.items, result, "pagination:", _this3.pagination);
+              _this3.loading = false;
+              _this3.firstLoad = true;
             case 20:
             case "end":
               return _context.stop();
@@ -20897,7 +20918,7 @@ axios.default = axios;var crudApi = {
       this.firstLoad = true;
     },
     fetchItems: function fetchItems() {
-      var _this3 = this;
+      var _this4 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var concat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       this.$emit("beforeFetch", {});
@@ -20916,7 +20937,7 @@ axios.default = axios;var crudApi = {
         }
       }).then(function (response) {
         console.debug("fetchItems - Response recibida:", response.data);
-        _this3.makePagination(response.data);
+        _this4.makePagination(response.data);
 
         // Validar que response.data.data existe y es un array
         var items = response.data.data;
@@ -20928,28 +20949,28 @@ axios.default = axios;var crudApi = {
           items = [];
         }
         console.debug("fetchItems - Items procesados:", items, "Cantidad:", items.length);
-        if (_this3.grouped) {
-          _this3.groupItems(items, concat, _this3.isSplitGroups);
+        if (_this4.grouped) {
+          _this4.groupItems(items, concat, _this4.isSplitGroups);
         } else {
           if (concat) {
-            var _this3$items;
+            var _this4$items;
             // Para concat, agregar items al array existente
-            (_this3$items = _this3.items).push.apply(_this3$items, _toConsumableArray$1(items));
+            (_this4$items = _this4.items).push.apply(_this4$items, _toConsumableArray$1(items));
           } else {
-            var _this3$items2;
+            var _this4$items2;
             // Mutar el array existente en lugar de reemplazarlo para mantener reactividad con provide/inject
-            (_this3$items2 = _this3.items).splice.apply(_this3$items2, [0, _this3.items.length].concat(_toConsumableArray$1(items)));
+            (_this4$items2 = _this4.items).splice.apply(_this4$items2, [0, _this4.items.length].concat(_toConsumableArray$1(items)));
           }
         }
-        console.debug("fetchItems - this.items después de asignar:", _this3.items, "Cantidad:", _this3.items ? _this3.items.length : 0);
-        _this3.loading = false;
-        _this3.firstLoad = true;
-        _this3.$emit("afterFetch", {});
+        console.debug("fetchItems - this.items después de asignar:", _this4.items, "Cantidad:", _this4.items ? _this4.items.length : 0);
+        _this4.loading = false;
+        _this4.firstLoad = true;
+        _this4.$emit("afterFetch", {});
       }).catch(function (error) {
-        _this3.toastError(error);
-        _this3.loading = false;
-        _this3.firstLoad = true;
-        _this3.fetchError = true;
+        _this4.toastError(error);
+        _this4.loading = false;
+        _this4.firstLoad = true;
+        _this4.fetchError = true;
       });
     },
     groupItems: function groupItems(items) {
@@ -21009,56 +21030,56 @@ axios.default = axios;var crudApi = {
       }
     },
     saveItemVuex: function saveItemVuex() {
-      var _this4 = this;
+      var _this5 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var result, create, jsondata;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              console.debug("save item 1", _this4.item);
+              console.debug("save item 1", _this5.item);
               create = false;
-              if (!_this4.vuexLocalforage) {
+              if (!_this5.vuexLocalforage) {
                 _context2.next = 20;
                 break;
               }
-              if (_this4.markDirty) {
-                _this4.item.dirty = true;
+              if (_this5.markDirty) {
+                _this5.item.dirty = true;
               }
-              if (!_this4.item.id) {
+              if (!_this5.item.id) {
                 _context2.next = 13;
                 break;
               }
               _context2.next = 8;
-              return _this4.model.$create({
-                data: _this4.item
+              return _this5.model.$create({
+                data: _this5.item
               });
             case 8:
               result = _context2.sent;
-              console.debug("save item 4", _this4.item, result);
+              console.debug("save item 4", _this5.item, result);
               create = false;
               _context2.next = 18;
               break;
             case 13:
               _context2.next = 15;
-              return _this4.model.$create({
-                data: _this4.item
+              return _this5.model.$create({
+                data: _this5.item
               });
             case 15:
               result = _context2.sent;
-              console.debug("save item 5", _this4.item, result);
+              console.debug("save item 5", _this5.item, result);
               create = true;
             case 18:
               _context2.next = 39;
               break;
             case 20:
-              jsondata = _this4.item.$toJson();
-              console.debug("save item 2", _this4.item, jsondata);
-              if (!_this4.item.id) {
+              jsondata = _this5.item.$toJson();
+              console.debug("save item 2", _this5.item, jsondata);
+              if (!_this5.item.id) {
                 _context2.next = 29;
                 break;
               }
               _context2.next = 25;
-              return _this4.model.api().put(_this4.buildApiEndpoint(_this4.modelName, _this4.item.id), jsondata);
+              return _this5.model.api().put(_this5.buildVuexOrmEndpoint(_this5.modelName, _this5.item.id), jsondata);
             case 25:
               result = _context2.sent;
               create = false;
@@ -21066,7 +21087,7 @@ axios.default = axios;var crudApi = {
               break;
             case 29:
               _context2.next = 31;
-              return _this4.model.api().post(_this4.buildApiEndpoint(_this4.modelName), jsondata);
+              return _this5.model.api().post(_this5.buildVuexOrmEndpoint(_this5.modelName), jsondata);
             case 31:
               result = _context2.sent;
               create = true;
@@ -21076,17 +21097,17 @@ axios.default = axios;var crudApi = {
                 _context2.next = 38;
                 break;
               }
-              _this4.toastError(result.response.data.error);
-              _this4.loading = false;
+              _this5.toastError(result.response.data.error);
+              _this5.loading = false;
               return _context2.abrupt("return");
             case 38:
               result.save();
             case 39:
-              if (_this4.refreshAfterSave) _this4.refresh();
-              _this4.loading = false;
-              _this4.toastSuccess("Elemento Modificado");
-              if (_this4.hideModalAfterSave || create && _this4.hideModalAfterCreate || !create && _this4.hideModalAfterUpdate) {
-                _this4.$bvModal.hide("modal-form-item-" + _this4.modelName);
+              if (_this5.refreshAfterSave) _this5.refresh();
+              _this5.loading = false;
+              _this5.toastSuccess("Elemento Modificado");
+              if (_this5.hideModalAfterSave || create && _this5.hideModalAfterCreate || !create && _this5.hideModalAfterUpdate) {
+                _this5.$bvModal.hide("modal-form-item-" + _this5.modelName);
               }
             case 43:
             case "end":
@@ -21096,36 +21117,36 @@ axios.default = axios;var crudApi = {
       }))();
     },
     saveItemLocal: function saveItemLocal() {
-      var _this5 = this;
+      var _this6 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var itemSave, itemIndex;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
-              itemSave = JSON.parse(JSON.stringify(_this5.item));
-              if (_this5.item.id || _this5.item.index) {
-                if (_this5.item.id) {
-                  itemIndex = _this5.items.findIndex(function (item) {
-                    return item.id == _this5.item.id;
+              itemSave = JSON.parse(JSON.stringify(_this6.item));
+              if (_this6.item.id || _this6.item.index) {
+                if (_this6.item.id) {
+                  itemIndex = _this6.items.findIndex(function (item) {
+                    return item.id == _this6.item.id;
                   });
                 } else {
-                  itemIndex = _this5.items.findIndex(function (item) {
-                    return item.index == _this5.item.index;
+                  itemIndex = _this6.items.findIndex(function (item) {
+                    return item.index == _this6.item.index;
                   });
                 }
-                _this5.items[itemIndex] = itemSave;
-                if (_this5.hideModalAfterSave || _this5.hideModalAfterUpdate) {
-                  _this5.$bvModal.hide("modal-form-item-" + _this5.modelName);
+                _this6.items[itemIndex] = itemSave;
+                if (_this6.hideModalAfterSave || _this6.hideModalAfterUpdate) {
+                  _this6.$bvModal.hide("modal-form-item-" + _this6.modelName);
                 }
               } else {
-                itemSave.index = _this5.items.length + 1;
-                _this5.items.push(itemSave);
-                if (_this5.hideModalAfterSave || _this5.hideModalAfterCreate) {
-                  _this5.$bvModal.hide("modal-form-item-" + _this5.modelName);
+                itemSave.index = _this6.items.length + 1;
+                _this6.items.push(itemSave);
+                if (_this6.hideModalAfterSave || _this6.hideModalAfterCreate) {
+                  _this6.$bvModal.hide("modal-form-item-" + _this6.modelName);
                 }
               }
-              _this5.toastSuccess("Elemento Modificado");
-              _this5.loading = false;
+              _this6.toastSuccess("Elemento Modificado");
+              _this6.loading = false;
             case 5:
             case "end":
               return _context3.stop();
@@ -21135,25 +21156,25 @@ axios.default = axios;var crudApi = {
     },
     saveItem: function saveItem() {
       var _arguments4 = arguments,
-        _this6 = this;
+        _this7 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var event, validation_result, validation_error_message, formData;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) switch (_context4.prev = _context4.next) {
             case 0:
               event = _arguments4.length > 0 && _arguments4[0] !== undefined ? _arguments4[0] : null;
-              _this6.loading = true;
-              if (!_this6.validate) {
+              _this7.loading = true;
+              if (!_this7.validate) {
                 _context4.next = 10;
                 break;
               }
               validation_result = true;
-              validation_error_message = _this6.messageDefaultValidationError;
+              validation_error_message = _this7.messageDefaultValidationError;
               if (validation_result) {
                 _context4.next = 8;
                 break;
               }
-              _this6.toastError(validation_error_message);
+              _this7.toastError(validation_error_message);
               return _context4.abrupt("return");
             case 8:
               _context4.next = 11;
@@ -21161,105 +21182,105 @@ axios.default = axios;var crudApi = {
             case 10:
               if (event) event.preventDefault();
             case 11:
-              if (!_this6.useVuexORM) {
+              if (!_this7.useVuexORM) {
                 _context4.next = 13;
                 break;
               }
-              return _context4.abrupt("return", _this6.saveItemVuex(event));
+              return _context4.abrupt("return", _this7.saveItemVuex(event));
             case 13:
-              if (_this6.ajax) {
+              if (_this7.ajax) {
                 _context4.next = 15;
                 break;
               }
-              return _context4.abrupt("return", _this6.saveItemLocal(event));
+              return _context4.abrupt("return", _this7.saveItemLocal(event));
             case 15:
-              if (_this6.item.id) {
-                axios.put(_this6.buildApiEndpoint(_this6.modelName, _this6.item.id), _this6.item).then(function (response) {
-                  if (_this6.hideModalAfterSave || _this6.hideModalAfterUpdate) {
-                    _this6.$bvModal.hide("modal-form-item-" + _this6.modelName);
+              if (_this7.item.id) {
+                axios.put(_this7.buildApiEndpoint(_this7.modelName, _this7.item.id), _this7.item).then(function (response) {
+                  if (_this7.hideModalAfterSave || _this7.hideModalAfterUpdate) {
+                    _this7.$bvModal.hide("modal-form-item-" + _this7.modelName);
                   }
                   var itemSv = response.data;
-                  var itemIndex = _this6.items.findIndex(function (item) {
-                    return item.id == _this6.item.id;
+                  var itemIndex = _this7.items.findIndex(function (item) {
+                    return item.id == _this7.item.id;
                   });
-                  _this6.items[itemIndex] = itemSv;
-                  _this6.item = itemSv;
-                  _this6.loading = false;
-                  if (_this6.refreshAfterSave) _this6.refresh();
-                  _this6.toastSuccess("Elemento Modificado");
-                  _this6.$emit("itemSaved", {
-                    item: _this6.item
+                  _this7.items[itemIndex] = itemSv;
+                  _this7.item = itemSv;
+                  _this7.loading = false;
+                  if (_this7.refreshAfterSave) _this7.refresh();
+                  _this7.toastSuccess("Elemento Modificado");
+                  _this7.$emit("itemSaved", {
+                    item: _this7.item
                   });
-                  _this6.$emit("itemUpdated", {
-                    item: _this6.item
+                  _this7.$emit("itemUpdated", {
+                    item: _this7.item
                   });
                 }).catch(function (error) {
-                  _this6.toastError(error);
-                  _this6.loading = false;
+                  _this7.toastError(error);
+                  _this7.loading = false;
                 });
               } else {
-                if (_this6.createMultipart) {
+                if (_this7.createMultipart) {
                   formData = new FormData();
-                  Object.keys(_this6.item).forEach(function (key) {
-                    if (_this6.item[key][0] && _this6.item[key][0].name) {
-                      var files = _this6.item[key];
+                  Object.keys(_this7.item).forEach(function (key) {
+                    if (_this7.item[key][0] && _this7.item[key][0].name) {
+                      var files = _this7.item[key];
                       for (var x = 0; x < files.length; x++) {
-                        formData.append(key + "[]", _this6.item[key][x], _this6.item[key][x].name);
+                        formData.append(key + "[]", _this7.item[key][x], _this7.item[key][x].name);
                       }
-                    } else formData.append(key, _this6.item[key]);
+                    } else formData.append(key, _this7.item[key]);
                   });
-                  axios.post(_this6.buildApiEndpoint(_this6.modelName), formData).then(function (response) {
-                    _this6.loading = false;
-                    if (_this6.hideModalAfterSave || _this6.hideModalAfterCreate) {
-                      _this6.$bvModal.hide("modal-form-item-" + _this6.modelName);
+                  axios.post(_this7.buildApiEndpoint(_this7.modelName), formData).then(function (response) {
+                    _this7.loading = false;
+                    if (_this7.hideModalAfterSave || _this7.hideModalAfterCreate) {
+                      _this7.$bvModal.hide("modal-form-item-" + _this7.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this6.toastSuccess(response.data.message);
+                        _this7.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this6.items.push(itemSv);
-                    _this6.item = itemSv;
-                    if (_this6.refreshAfterSave) _this6.refresh();
-                    _this6.toastSuccess("Elemento Creado");
-                    _this6.$emit("itemSaved", {
-                      item: _this6.item
+                    _this7.items.push(itemSv);
+                    _this7.item = itemSv;
+                    if (_this7.refreshAfterSave) _this7.refresh();
+                    _this7.toastSuccess("Elemento Creado");
+                    _this7.$emit("itemSaved", {
+                      item: _this7.item
                     });
-                    _this6.$emit("itemCreated", {
-                      item: _this6.item
+                    _this7.$emit("itemCreated", {
+                      item: _this7.item
                     });
                   }).catch(function (error) {
-                    _this6.toastError(error);
-                    _this6.loading = false;
+                    _this7.toastError(error);
+                    _this7.loading = false;
                   });
                 } else {
-                  axios.post(_this6.buildApiEndpoint(_this6.modelName), _this6.item).then(function (response) {
-                    _this6.loading = false;
-                    if (_this6.hideModalAfterSave || _this6.hideModalAfterUpdate) {
-                      _this6.$bvModal.hide("modal-form-item-" + _this6.modelName);
+                  axios.post(_this7.buildApiEndpoint(_this7.modelName), _this7.item).then(function (response) {
+                    _this7.loading = false;
+                    if (_this7.hideModalAfterSave || _this7.hideModalAfterUpdate) {
+                      _this7.$bvModal.hide("modal-form-item-" + _this7.modelName);
                     }
                     if (response.data.success) {
                       if (response.data.message) {
-                        _this6.toastSuccess(response.data.message);
+                        _this7.toastSuccess(response.data.message);
                       }
                       return;
                     }
                     var itemSv = response.data;
-                    _this6.items.push(itemSv);
-                    _this6.item = itemSv;
-                    if (_this6.refreshAfterSave) _this6.refresh();
-                    _this6.toastSuccess("Elemento Creado");
-                    _this6.$emit("itemSaved", {
-                      item: _this6.item
+                    _this7.items.push(itemSv);
+                    _this7.item = itemSv;
+                    if (_this7.refreshAfterSave) _this7.refresh();
+                    _this7.toastSuccess("Elemento Creado");
+                    _this7.$emit("itemSaved", {
+                      item: _this7.item
                     });
-                    _this6.$emit("itemCreated", {
-                      item: _this6.item
+                    _this7.$emit("itemCreated", {
+                      item: _this7.item
                     });
                   }).catch(function (error) {
-                    _this6.toastError(error);
-                    _this6.loading = false;
+                    _this7.toastError(error);
+                    _this7.loading = false;
                   });
                 }
               }
@@ -21272,7 +21293,7 @@ axios.default = axios;var crudApi = {
       }))();
     },
     deleteItem: function deleteItem(id, index) {
-      var _this7 = this;
+      var _this8 = this;
       if (this.useVuexORM) {
         return this.deleteItemVuex(id, index);
       }
@@ -21281,17 +21302,17 @@ axios.default = axios;var crudApi = {
       }
       this.loading = true;
       axios.delete(this.buildApiEndpoint(this.modelName, id)).then(function (response) {
-        _this7.items.splice(index, 1);
-        _this7.toastSuccess("Elemento eliminado.");
-        _this7.$emit("itemDeleted", {});
-        _this7.loading = false;
+        _this8.items.splice(index, 1);
+        _this8.toastSuccess("Elemento eliminado.");
+        _this8.$emit("itemDeleted", {});
+        _this8.loading = false;
       }).catch(function (error) {
-        _this7.toastError(error);
-        _this7.loading = false;
+        _this8.toastError(error);
+        _this8.loading = false;
       });
     },
     deleteItemLocal: function deleteItemLocal(id, index) {
-      var _this8 = this;
+      var _this9 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         var itemIndex;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
@@ -21299,20 +21320,20 @@ axios.default = axios;var crudApi = {
             case 0:
               if (id || index) {
                 if (id) {
-                  itemIndex = _this8.items.findIndex(function (item) {
-                    return item.id == _this8.item.id;
+                  itemIndex = _this9.items.findIndex(function (item) {
+                    return item.id == _this9.item.id;
                   });
                 } else {
                   itemIndex = index;
                 }
-                _this8.items.splice(itemIndex, 1);
-                _this8.item = null;
-                _this8.toastSuccess("Elemento Eliminado");
-                _this8.$emit("itemDeleted", {});
+                _this9.items.splice(itemIndex, 1);
+                _this9.item = null;
+                _this9.toastSuccess("Elemento Eliminado");
+                _this9.$emit("itemDeleted", {});
               } else {
                 console.error("Cannot delete item without ID or index");
               }
-              _this8.loading = false;
+              _this9.loading = false;
             case 2:
             case "end":
               return _context5.stop();
@@ -21321,24 +21342,24 @@ axios.default = axios;var crudApi = {
       }))();
     },
     deleteItemVuex: function deleteItemVuex(id, index) {
-      var _this9 = this;
+      var _this10 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         var result;
         return _regeneratorRuntime().wrap(function _callee6$(_context6) {
           while (1) switch (_context6.prev = _context6.next) {
             case 0:
-              if (!_this9.vuexLocalforage) {
+              if (!_this10.vuexLocalforage) {
                 _context6.next = 5;
                 break;
               }
               _context6.next = 3;
-              return _this9.model.$delete(id);
+              return _this10.model.$delete(id);
             case 3:
               _context6.next = 14;
               break;
             case 5:
               _context6.next = 7;
-              return _this9.model.api().delete(_this9.buildApiEndpoint(_this9.modelName, id), {
+              return _this10.model.api().delete(_this10.buildVuexOrmEndpoint(_this10.modelName, id), {
                 delete: 1
               });
             case 7:
@@ -21349,11 +21370,11 @@ axios.default = axios;var crudApi = {
                 _context6.next = 14;
                 break;
               }
-              _this9.toastError(result.response.data.error);
-              _this9.loading = false;
+              _this10.toastError(result.response.data.error);
+              _this10.loading = false;
               return _context6.abrupt("return");
             case 14:
-              _this9.toastSuccess("Elemento eliminado.");
+              _this10.toastSuccess("Elemento eliminado.");
             case 15:
             case "end":
               return _context6.stop();
@@ -21362,7 +21383,7 @@ axios.default = axios;var crudApi = {
       }))();
     },
     deleteItemBulk: function deleteItemBulk() {
-      var _this10 = this;
+      var _this11 = this;
       if (this.useVuexORM) {
         return this.deleteItemBulkVuex();
       }
@@ -21378,34 +21399,34 @@ axios.default = axios;var crudApi = {
           ids: ids
         }
       }).then(function (response) {
-        _this10.toastSuccess("Elemento/s eliminado.");
-        _this10.$emit("itemDeleted", {});
-        _this10.clearSelection();
-        _this10.refresh();
+        _this11.toastSuccess("Elemento/s eliminado.");
+        _this11.$emit("itemDeleted", {});
+        _this11.clearSelection();
+        _this11.refresh();
       }).catch(function (error) {
-        _this10.toastError(error);
-        _this10.loading = false;
+        _this11.toastError(error);
+        _this11.loading = false;
       });
     },
     deleteItemBulkLocal: function deleteItemBulkLocal() {
-      var _this11 = this;
+      var _this12 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
         var ids;
         return _regeneratorRuntime().wrap(function _callee7$(_context7) {
           while (1) switch (_context7.prev = _context7.next) {
             case 0:
-              ids = _this11.selectedItems.map(function (it) {
+              ids = _this12.selectedItems.map(function (it) {
                 return it.id;
               });
-              _this11.items = _this11.items.filter(function (it) {
+              _this12.items = _this12.items.filter(function (it) {
                 return !ids.includes(it.id);
               });
-              _this11.item = null;
-              _this11.pagination.total = _this11.items.length;
-              _this11.toastSuccess("Elemento Eliminado");
-              _this11.$emit("itemDeleted", {});
-              _this11.clearSelection();
-              _this11.loading = false;
+              _this12.item = null;
+              _this12.pagination.total = _this12.items.length;
+              _this12.toastSuccess("Elemento Eliminado");
+              _this12.$emit("itemDeleted", {});
+              _this12.clearSelection();
+              _this12.loading = false;
             case 8:
             case "end":
               return _context7.stop();
@@ -21414,27 +21435,27 @@ axios.default = axios;var crudApi = {
       }))();
     },
     deleteItemBulkVuex: function deleteItemBulkVuex() {
-      var _this12 = this;
+      var _this13 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
-        var ids, result, itemsResult;
+        var ids, result, itemsResult, _this13$items, normalizedItems;
         return _regeneratorRuntime().wrap(function _callee8$(_context8) {
           while (1) switch (_context8.prev = _context8.next) {
             case 0:
-              ids = _this12.selectedItems.map(function (it) {
+              ids = _this13.selectedItems.map(function (it) {
                 return it.id;
               });
-              if (!_this12.vuexLocalforage) {
+              if (!_this13.vuexLocalforage) {
                 _context8.next = 6;
                 break;
               }
               _context8.next = 4;
-              return _this12.model.$delete(ids);
+              return _this13.model.$delete(ids);
             case 4:
               _context8.next = 15;
               break;
             case 6:
               _context8.next = 8;
-              return _this12.model.api().delete(_this12.buildApiEndpoint(_this12.modelName, "bulk-destroy"), {
+              return _this13.model.api().delete(_this13.buildVuexOrmEndpoint(_this13.modelName, "bulk-destroy"), {
                 params: {
                   ids: ids
                 },
@@ -21448,18 +21469,21 @@ axios.default = axios;var crudApi = {
                 _context8.next = 15;
                 break;
               }
-              _this12.toastError(result.response.data.error);
-              _this12.loading = false;
+              _this13.toastError(result.response.data.error);
+              _this13.loading = false;
               return _context8.abrupt("return");
             case 15:
               // Actualizar items desde el store Vuex
-              itemsResult = _this12.model.query().withAll().get();
+              itemsResult = _this13.model.query().withAll().get();
               if (itemsResult) {
-                _this12.items = itemsResult;
+                normalizedItems = itemsResult.map(function (item) {
+                  return item.$toJson ? item.$toJson() : item;
+                }); // Mantener referencia del array para no romper provide/inject en componentes hijos.
+                (_this13$items = _this13.items).splice.apply(_this13$items, [0, _this13.items.length].concat(_toConsumableArray$1(normalizedItems)));
               }
-              _this12.toastSuccess("Elemento eliminados.");
-              _this12.clearSelection();
-              _this12.loading = false;
+              _this13.toastSuccess("Elemento eliminados.");
+              _this13.clearSelection();
+              _this13.loading = false;
             case 20:
             case "end":
               return _context8.stop();
@@ -21468,14 +21492,14 @@ axios.default = axios;var crudApi = {
       }))();
     },
     saveSort: function saveSort() {
-      var _this13 = this;
+      var _this14 = this;
       if (this.orderable) {
         this.loading = true;
         var order = [];
         this.items.forEach(function (v, k) {
           order.push({
             id: v.id,
-            order: v[_this13.orderProp]
+            order: v[_this14.orderProp]
           });
         });
         if (!this.ajax) {
@@ -21485,17 +21509,17 @@ axios.default = axios;var crudApi = {
           order: order
         }).then(function (response) {
           response.data;
-          _this13.toastSuccess("Orden Actualizado");
-          if (_this13.refreshAfterSave) _this13.refresh();
-          _this13.loading = false;
+          _this14.toastSuccess("Orden Actualizado");
+          if (_this14.refreshAfterSave) _this14.refresh();
+          _this14.loading = false;
         }).catch(function (error) {
-          _this13.toastError(error);
-          _this13.loading = false;
+          _this14.toastError(error);
+          _this14.loading = false;
         });
       }
     },
     exportItems: function exportItems() {
-      var _this14 = this;
+      var _this15 = this;
       if (this.useVuexORM) {
         return;
       }
@@ -21524,15 +21548,15 @@ axios.default = axios;var crudApi = {
         params: params,
         responseType: "blob"
       }).then(function (response) {
-        _this14.downloadBlobResponse(response);
-        _this14.loading = false;
+        _this15.downloadBlobResponse(response);
+        _this15.loading = false;
       }).catch(function (error) {
-        _this14.toastError(error);
-        _this14.loading = false;
+        _this15.toastError(error);
+        _this15.loading = false;
       });
     },
     importItems: function importItems() {
-      var _this15 = this;
+      var _this16 = this;
       var formData = new FormData();
       formData.append("file", this.fileImport);
       axios.post(this.buildApiEndpoint(this.modelName, "import"), formData, {
@@ -21541,19 +21565,19 @@ axios.default = axios;var crudApi = {
         }
       }).then(function (response) {
         if (response && response.data && response.data.success == true) {
-          _this15.$refs["modal-import"].hide();
-          _this15.toastSuccess("Datos Importados con Éxito");
-          _this15.refresh();
+          _this16.$refs["modal-import"].hide();
+          _this16.toastSuccess("Datos Importados con Éxito");
+          _this16.refresh();
         } else {
-          _this15.toastError("No se pudo importar los datos.");
+          _this16.toastError("No se pudo importar los datos.");
         }
       }).catch(function (error) {
         console.error(error);
-        _this15.toastError(error);
+        _this16.toastError(error);
       });
     },
     refresh: function refresh() {
-      var _this16 = this;
+      var _this17 = this;
       this.$emit("refresh", {});
       if (this.infiniteScroll) {
         this.pagination.current_page = 1;
@@ -21563,13 +21587,13 @@ axios.default = axios;var crudApi = {
       if (this.infiniteScroll && fetchPromise) {
         this.refreshing = true;
         fetchPromise.then(function () {
-          var infiniteLoadingRef = _this16.$refs.infiniteLoading;
+          var infiniteLoadingRef = _this17.$refs.infiniteLoading;
           if (infiniteLoadingRef) {
             infiniteLoadingRef.stateChanger.reset();
           } else {
             console.debug("infiniteLoadingRef not set");
           }
-          _this16.refreshing = false;
+          _this17.refreshing = false;
         });
       }
     },

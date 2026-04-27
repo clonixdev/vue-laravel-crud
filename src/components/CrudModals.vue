@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Modal de formulario -->
-    <b-modal :id="'modal-form-item-' + modelName" hide-footer size="xl" :title="title">
+    <b-modal :id="modalFormId" hide-footer size="xl" :title="title">
       <b-overlay :show="loadingValue" rounded="sm">
         <template v-if="validate">
           <form @submit="saveItem">
@@ -33,7 +33,7 @@
     </b-modal>
 
     <!-- Modal de visualización -->
-    <b-modal :id="'modal-show-item-' + modelName" hide-footer size="xl" :title="title">
+    <b-modal :id="modalShowId" hide-footer size="xl" :title="title">
       <template v-if="reactiveItem">
         <slot name="show" v-bind:item="reactiveItem">
           <b-list-group>
@@ -111,6 +111,7 @@ export default {
   inject: [
     'bootstrapFactory',
     'modelName',
+    'instanceUid',
     'title',
     'loading',
     'validate',
@@ -127,6 +128,15 @@ export default {
     'exportItems'
   ],
   computed: {
+    modalUidSuffix() {
+      return this.instanceUid ? "-" + this.instanceUid : "";
+    },
+    modalFormId() {
+      return "modal-form-item-" + this.modelName + this.modalUidSuffix;
+    },
+    modalShowId() {
+      return "modal-show-item-" + this.modelName + this.modalUidSuffix;
+    },
     // Computed property para asegurar reactividad del item inyectado
     reactiveItem() {
       // Si hay una función getItem, usarla para obtener el item actual
