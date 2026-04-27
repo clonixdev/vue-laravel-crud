@@ -2,6 +2,10 @@ import axios from 'axios';
 
 export default {
   methods: {
+    getFormModalId() {
+      const modalUidSuffix = this.instanceUid ? "-" + this.instanceUid : "";
+      return "modal-form-item-" + this.modelName + modalUidSuffix;
+    },
     normalizeApiSegment(value = '') {
       return String(value).trim().replace(/^\/+|\/+$/g, '');
     },
@@ -286,7 +290,7 @@ export default {
       this.toastSuccess("Elemento Modificado");
 
       if (this.hideModalAfterSave || ((create && this.hideModalAfterCreate) || (!create && this.hideModalAfterUpdate))) {
-        this.$bvModal.hide("modal-form-item-" + this.modelName);
+        this.$bvModal.hide(this.getFormModalId());
       }
     },
 
@@ -307,13 +311,13 @@ export default {
 
         this.items[itemIndex] = itemSave;
         if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
+          this.$bvModal.hide(this.getFormModalId());
         }
       } else {
         itemSave.index = this.items.length + 1;
         this.items.push(itemSave);
         if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
+          this.$bvModal.hide(this.getFormModalId());
         }
       }
       this.toastSuccess("Elemento Modificado");
@@ -349,7 +353,7 @@ export default {
           )
           .then((response) => {
             if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-              this.$bvModal.hide("modal-form-item-" + this.modelName);
+              this.$bvModal.hide(this.getFormModalId());
             }
             let itemSv = response.data;
             let itemIndex = this.items.findIndex(
@@ -388,7 +392,7 @@ export default {
             .then((response) => {
               this.loading = false;
               if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-                this.$bvModal.hide("modal-form-item-" + this.modelName);
+                this.$bvModal.hide(this.getFormModalId());
               }
               if (response.data.success) {
                 if (response.data.message) {
@@ -414,7 +418,7 @@ export default {
             .then((response) => {
               this.loading = false;
               if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-                this.$bvModal.hide("modal-form-item-" + this.modelName);
+                this.$bvModal.hide(this.getFormModalId());
               }
               if (response.data.success) {
                 if (response.data.message) {

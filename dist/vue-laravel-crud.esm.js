@@ -14453,13 +14453,22 @@ var _sfc_staticRenderFns$3 = [];
 var __component__$3 = /*#__PURE__*/normalizeComponent(_sfc_main$3, _sfc_render$3, _sfc_staticRenderFns$3, false, null, null, null, null);
 var CrudCustom = __component__$3.exports;
 
-var css$2 = "\n.export-format-options[data-v-eb2621e9] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-eb2621e9] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-eb2621e9]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-eb2621e9] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-eb2621e9] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
+var css$2 = "\n.export-format-options[data-v-1a05e8cb] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-1a05e8cb] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-1a05e8cb]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-1a05e8cb] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-1a05e8cb] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-1a05e8cb] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-1a05e8cb] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-1a05e8cb] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-1a05e8cb] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
 n(css$2, {});
 
 const _sfc_main$2 = {
   name: 'CrudModals',
-  inject: ['bootstrapFactory', 'modelName', 'title', 'loading', 'validate', 'item', 'getItem', 'messageSave', 'showImport', 'showExport', 'fileImport', 'selectedItems', 'exportFormat', 'saveItem', 'importItems', 'exportItems'],
+  inject: ['bootstrapFactory', 'modelName', 'instanceUid', 'title', 'loading', 'validate', 'item', 'getItem', 'messageSave', 'showImport', 'showExport', 'fileImport', 'selectedItems', 'exportFormat', 'saveItem', 'importItems', 'exportItems'],
   computed: {
+    modalUidSuffix() {
+      return this.instanceUid ? "-" + this.instanceUid : "";
+    },
+    modalFormId() {
+      return "modal-form-item-" + this.modelName + this.modalUidSuffix;
+    },
+    modalShowId() {
+      return "modal-show-item-" + this.modelName + this.modalUidSuffix;
+    },
     // Computed property para asegurar reactividad del item inyectado
     reactiveItem() {
       // Si hay una función getItem, usarla para obtener el item actual
@@ -14501,7 +14510,7 @@ var _sfc_render$2 = function render() {
     _c = _vm._self._c;
   return _c('div', [_c('b-modal', {
     attrs: {
-      "id": 'modal-form-item-' + _vm.modelName,
+      "id": _vm.modalFormId,
       "hide-footer": "",
       "size": "xl",
       "title": _vm.title
@@ -14589,7 +14598,7 @@ var _sfc_render$2 = function render() {
     }
   }) : _vm._e(), _vm._v(_vm._s(_vm.messageSave) + " ")], 1)] : _vm._e()], 2)], 1), _c('b-modal', {
     attrs: {
-      "id": 'modal-show-item-' + _vm.modelName,
+      "id": _vm.modalShowId,
       "hide-footer": "",
       "size": "xl",
       "title": _vm.title
@@ -14719,7 +14728,7 @@ var _sfc_render$2 = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns$2 = [];
-var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "eb2621e9", null, null);
+var __component__$2 = /*#__PURE__*/normalizeComponent(_sfc_main$2, _sfc_render$2, _sfc_staticRenderFns$2, false, null, "1a05e8cb", null, null);
 var CrudModals = __component__$2.exports;
 
 var vueInfiniteLoading = {exports: {}};
@@ -20480,6 +20489,10 @@ axios.default = axios;
 
 var crudApi = {
   methods: {
+    getFormModalId() {
+      const modalUidSuffix = this.instanceUid ? "-" + this.instanceUid : "";
+      return "modal-form-item-" + this.modelName + modalUidSuffix;
+    },
     normalizeApiSegment(value = '') {
       return String(value).trim().replace(/^\/+|\/+$/g, '');
     },
@@ -20717,7 +20730,7 @@ var crudApi = {
       this.loading = false;
       this.toastSuccess("Elemento Modificado");
       if (this.hideModalAfterSave || create && this.hideModalAfterCreate || !create && this.hideModalAfterUpdate) {
-        this.$bvModal.hide("modal-form-item-" + this.modelName);
+        this.$bvModal.hide(this.getFormModalId());
       }
     },
     async saveItemLocal(event = null) {
@@ -20731,13 +20744,13 @@ var crudApi = {
         }
         this.items[itemIndex] = itemSave;
         if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
+          this.$bvModal.hide(this.getFormModalId());
         }
       } else {
         itemSave.index = this.items.length + 1;
         this.items.push(itemSave);
         if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
+          this.$bvModal.hide(this.getFormModalId());
         }
       }
       this.toastSuccess("Elemento Modificado");
@@ -20759,7 +20772,7 @@ var crudApi = {
       if (this.item.id) {
         axios.put(this.buildApiEndpoint(this.modelName, this.item.id), this.item).then(response => {
           if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-            this.$bvModal.hide("modal-form-item-" + this.modelName);
+            this.$bvModal.hide(this.getFormModalId());
           }
           let itemSv = response.data;
           let itemIndex = this.items.findIndex(item => item.id == this.item.id);
@@ -20792,7 +20805,7 @@ var crudApi = {
           axios.post(this.buildApiEndpoint(this.modelName), formData).then(response => {
             this.loading = false;
             if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-              this.$bvModal.hide("modal-form-item-" + this.modelName);
+              this.$bvModal.hide(this.getFormModalId());
             }
             if (response.data.success) {
               if (response.data.message) {
@@ -20819,7 +20832,7 @@ var crudApi = {
           axios.post(this.buildApiEndpoint(this.modelName), this.item).then(response => {
             this.loading = false;
             if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-              this.$bvModal.hide("modal-form-item-" + this.modelName);
+              this.$bvModal.hide(this.getFormModalId());
             }
             if (response.data.success) {
               if (response.data.message) {
@@ -21400,6 +21413,10 @@ var crudHelpers = {
     }
   },
   methods: {
+    getModalId(type) {
+      const modalUidSuffix = this.instanceUid ? "-" + this.instanceUid : "";
+      return "modal-" + type + "-item-" + this.modelName + modalUidSuffix;
+    },
     onRowHover(item, itemIndex) {
       if (this.selectHover) {
         this.item = this.items[itemIndex];
@@ -21553,7 +21570,7 @@ var crudHelpers = {
       this.onSelect();
       this.$nextTick(() => {
         this.$forceUpdate();
-        this.$bvModal.show("modal-show-item-" + this.modelName);
+        this.$bvModal.show(this.getModalId("show"));
       });
     },
     createItem() {
@@ -21592,7 +21609,7 @@ var crudHelpers = {
       this.onSelect();
       this.$nextTick(() => {
         this.$forceUpdate();
-        this.$bvModal.show("modal-form-item-" + this.modelName);
+        this.$bvModal.show(this.getModalId("form"));
       });
     },
     updateItem(id, itemIndex = null) {
@@ -21641,7 +21658,7 @@ var crudHelpers = {
       this.onSelect();
       this.$nextTick(() => {
         this.$forceUpdate();
-        this.$bvModal.show("modal-form-item-" + this.modelName);
+        this.$bvModal.show(this.getModalId("form"));
       });
     },
     removeItem(id, index) {
@@ -22389,9 +22406,12 @@ var ToastPlugin = {
   }
 };
 
-var css = "tr td[data-v-fad0bb19]:last-child,\ntr td[data-v-fad0bb19]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-fad0bb19] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-fad0bb19] td[data-v-fad0bb19] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-fad0bb19][data-v-fad0bb19]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-fad0bb19][data-v-fad0bb19]:hover td[data-v-fad0bb19] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(odd) td[data-v-fad0bb19] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-fad0bb19]:nth-of-type(even) td[data-v-fad0bb19] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-fad0bb19] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-fad0bb19] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-fad0bb19] .crud-title[data-v-fad0bb19] {\n    margin: 0; }\n  .crud-header[data-v-fad0bb19] .crud-search[data-v-fad0bb19] {\n    max-width: 15rem; }\n    .crud-header[data-v-fad0bb19] .crud-search[data-v-fad0bb19] .btn[data-v-fad0bb19] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-fad0bb19] .crud-search[data-v-fad0bb19] .btn[data-v-fad0bb19].open[data-v-fad0bb19] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-fad0bb19] .table-options[data-v-fad0bb19] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-fad0bb19] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-fad0bb19] {\n    table-layout: auto; }\n    .table[data-v-fad0bb19] tbody[data-v-fad0bb19] td[data-v-fad0bb19] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-fad0bb19] tbody[data-v-fad0bb19] td[data-v-fad0bb19]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-fad0bb19] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-fad0bb19] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-fad0bb19] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-fad0bb19] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-fad0bb19] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+var css = "tr td[data-v-0ceea366]:last-child,\ntr td[data-v-0ceea366]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-0ceea366] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-0ceea366] td[data-v-0ceea366] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-0ceea366][data-v-0ceea366]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-0ceea366][data-v-0ceea366]:hover td[data-v-0ceea366] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-0ceea366]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-0ceea366]:nth-of-type(odd) td[data-v-0ceea366] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-0ceea366]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-0ceea366]:nth-of-type(even) td[data-v-0ceea366] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-0ceea366] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-0ceea366] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-0ceea366] .crud-title[data-v-0ceea366] {\n    margin: 0; }\n  .crud-header[data-v-0ceea366] .crud-search[data-v-0ceea366] {\n    max-width: 15rem; }\n    .crud-header[data-v-0ceea366] .crud-search[data-v-0ceea366] .btn[data-v-0ceea366] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-0ceea366] .crud-search[data-v-0ceea366] .btn[data-v-0ceea366].open[data-v-0ceea366] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-0ceea366] .table-options[data-v-0ceea366] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-0ceea366] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-0ceea366] {\n    table-layout: auto; }\n    .table[data-v-0ceea366] tbody[data-v-0ceea366] td[data-v-0ceea366] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-0ceea366] tbody[data-v-0ceea366] td[data-v-0ceea366]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-0ceea366] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-0ceea366] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-0ceea366] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-0ceea366] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-0ceea366] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
 n(css, {});
 
+function createInstanceUid() {
+  return "vlcrud-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
+}
 const _sfc_main = {
   name: "VueLaravelCrud",
   components: {
@@ -22404,6 +22424,11 @@ const _sfc_main = {
     CrudPagination
   },
   mixins: [crudData, crudApi, crudFilters, crudValidation, crudHelpers],
+  data() {
+    return {
+      instanceUid: createInstanceUid()
+    };
+  },
   computed: {
     normalizedBootstrapVersion() {
       return normalizeBootstrapVersion(this.bootstrapVersion);
@@ -22578,6 +22603,7 @@ const _sfc_main = {
       markDirty: this.markDirty,
       // Data from mixins
       crudUuid: this.crudUuid,
+      instanceUid: this.instanceUid,
       moment: this.moment,
       loading: this.loadingReactive,
       firstLoad: this.firstLoadReactive,
@@ -23048,7 +23074,7 @@ var _sfc_render = function render() {
   })], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "fad0bb19", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "0ceea366", null, null);
 var component = __component__.exports;
 
 // Import vue component
