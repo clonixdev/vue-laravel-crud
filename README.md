@@ -1,11 +1,19 @@
 # vue-laravel-crud
 
-Componente Vue.js para crear interfaces CRUD (Create, Read, Update, Delete) completas con integración a APIs Laravel o cualquier API REST estándar.
+Componente Vue.js (**Vue 3**, v3.x) para crear interfaces CRUD (Create, Read, Update, Delete) completas con integración a APIs Laravel o cualquier API REST estándar.
+
+**Stack recomendado:** Vue 3 + Bootstrap 5 + bootstrap-icons (sin bootstrap-vue). Bootstrap 4 sigue soportado vía `bootstrapVersion`.
 
 ## Instalación
 
 ```bash
-npm install vue-laravel-crud
+npm install vue-laravel-crud@^3.0.0
+```
+
+Para desarrollo local contra este repo:
+
+```bash
+npm install file:../vue-laravel-crud
 ```
 
 ## Dependencias
@@ -13,20 +21,18 @@ npm install vue-laravel-crud
 Este componente requiere las siguientes dependencias:
 
 ### Dependencias Principales
+* `vue@^3.4` (peer)
 * `axios` - Cliente HTTP para peticiones AJAX
-* `vuedraggable` - Para funcionalidad de drag & drop
+* `vuedraggable@^4` - Para funcionalidad de drag & drop
 * `moment` - Para formateo de fechas
-* `vue-infinite-loading` - Para scroll infinito (opcional)
 
 ### Dependencias de Bootstrap
 
-**Bootstrap 4 o 5 (requerido)**
-* `bootstrap@^4.6.2` o `bootstrap@^5.0.0` - Framework CSS Bootstrap
+**Bootstrap 5 (default recomendado)** o Bootstrap 4
+* `bootstrap@^5.0.0` (preferido) o `bootstrap@^4.6.2`
+* `bootstrap-icons@^1.0.0`
 
-**Bootstrap Icons (recomendado)**
-* `bootstrap-icons@^1.0.0` - Librería de iconos oficial de Bootstrap (compatible con Bootstrap 4 y 5)
-
-> **Nota**: El componente soporta Bootstrap 4 y 5 sin necesidad de `bootstrap-vue`. Los wrappers internos emulan la API de bootstrap-vue pero funcionan directamente con Bootstrap. Bootstrap Icons es compatible con ambas versiones de Bootstrap.
+> **Nota**: No requiere `bootstrap-vue`. Los wrappers internos emulan esa API sobre Bootstrap nativo. Con `bootstrapVersion="auto"` (default) se detecta la versión; si no hay detección, se usa **Bootstrap 5**.
 
 ## ¿Cómo funciona?
 
@@ -236,7 +242,7 @@ export default {
 
 | Propiedad | Descripción | Tipo | Valor por defecto |
 |:----------|:------------|:-----|:------------------|
-| `bootstrapVersion` | Versión de Bootstrap a usar (4, 5, o 'auto') | `Number\|String` | `'auto'` |
+| `bootstrapVersion` | Versión de Bootstrap a usar (4, 5, o 'auto') | `Number\|String` | `5` |
 
 ### Props Opcionales - Configuración General
 
@@ -401,7 +407,7 @@ Para ver más ejemplos y demos completos, visita el directorio `dev/demo/example
 
 ## Bootstrap 4 y 5
 
-Este componente soporta **Bootstrap 4** y **Bootstrap 5** sin necesidad de `bootstrap-vue`. Los componentes internos usan wrappers que emulan la API de bootstrap-vue pero funcionan directamente con Bootstrap.
+Este componente (v3 / Vue 3) soporta **Bootstrap 4** y **Bootstrap 5** sin necesidad de `bootstrap-vue`. El valor por defecto de `bootstrapVersion` es **`5`**. Los componentes internos usan wrappers que emulan la API de bootstrap-vue pero funcionan directamente con Bootstrap.
 
 ### Instalación
 

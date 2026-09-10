@@ -55,7 +55,7 @@ export function isValidBootstrapVersion(version) {
 
 /**
  * Normaliza la versión de Bootstrap
- * Si es 'auto', intenta detectarla, si no puede, retorna 4 como fallback (compatibilidad)
+ * Si es 'auto', intenta detectarla, si no puede, retorna 5 como default (Vue 3 / BS5)
  * @param {number|string} version - Versión a normalizar
  * @returns {number} 4 o 5
  */
@@ -65,16 +65,16 @@ export function normalizeBootstrapVersion(version) {
     if (detected === 4 || detected === 5) {
       return detected;
     }
-    // Fallback a Bootstrap 4 por compatibilidad
-    return 4;
+    // Default Bootstrap 5 (Vue 3 stack)
+    return 5;
   }
   
   if (version === 4 || version === 5) {
     return version;
   }
   
-  // Fallback a Bootstrap 4
-  return 4;
+  // Default Bootstrap 5
+  return 5;
 }
 
 /**

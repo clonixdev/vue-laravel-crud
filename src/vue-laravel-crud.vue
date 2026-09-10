@@ -345,7 +345,7 @@ export default /*#__PURE__*/ {
     
     bootstrapVersion: {
       type: [Number, String],
-      default: 'auto',
+      default: 5,
       validator: (value) => value === 'auto' || value === 4 || value === 5
     },
 
