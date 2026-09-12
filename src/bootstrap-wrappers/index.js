@@ -37,6 +37,7 @@ import BNavbarBrand from './BNavbarBrand.vue';
 import BNavbarNav from './BNavbarNav.vue';
 import BNavItem from './BNavItem.vue';
 import BSidebar from './BSidebar.vue';
+import { registerBootstrapIcons } from '../utils/icons.js';
 
 // Exportar todos los componentes como objeto (similar a bootstrap-vue)
 const BootstrapComponents = {
@@ -93,6 +94,9 @@ const BootstrapPlugin = {
       const prefixedName = 'b-' + key.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
       app.component(prefixedName, BootstrapComponents[key]);
     });
+
+    // Registrar b-icon-* (compatibilidad bootstrap-vue + Bootstrap Icons)
+    registerBootstrapIcons(app, { BIcon: BootstrapComponents.BIcon });
   },
   ...BootstrapComponents,
   ...componentsWithPrefix,
@@ -147,3 +151,11 @@ export {
   BNavItem,
   BSidebar,
 };
+
+export { registerBootstrapIcons, DEFAULT_ICON_NAMES, ICON_NAME_MAP } from '../utils/icons.js';
+export {
+  cleanupModalArtifacts,
+  showBootstrapModal,
+  hideBootstrapModal,
+} from '../utils/modal.js';
+

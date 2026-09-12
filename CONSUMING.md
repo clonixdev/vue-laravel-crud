@@ -32,11 +32,37 @@ app.use(VueLaravelCrud);
 
 `bootstrapVersion` por defecto es **5**.
 
+## Fixes 3.0.3
+
+- `filtersVisible` / `filterSidebarOpen` se proveen como objetos reactivos (mismo patrón que `loading`), para que sidebar, filtros inline y `hideColumn` reaccionen al abrir/cerrar.
+- Cleanup forzado de backdrop al desmontar `BModal`.
+
+## Fixes 3.0.2
+
+- `hideColumn` en columnas de tabla (parche portado desde easy2 / 1.8.4): oculta la columna y mantiene alineación cuando los filtros inline están abiertos.
+
+## Fixes 3.0.1
+
+- Backdrop del modal: limpieza correcta al cerrar (Vue 3 + Bootstrap 5).
+- Iconos: `BootstrapPlugin` registra `b-icon-*` usados por el CRUD (Bootstrap Icons).
+
 ## Build de dist (opcional)
 
 ```bash
 npm install
 npm run build
+```
+
+## Publicar en npm
+
+Desde la rama `vue3` del repo del paquete:
+
+```bash
+cd /ruta/a/vue-laravel-crud
+npm login
+npm run build
+npm version patch   # o minor/major según el cambio
+npm publish --access public
 ```
 
 Publicación npm: versionar como `3.x` desde la rama `vue3`.

@@ -1,6 +1,7 @@
 <template>
   <td :scope="column.prop == 'id' ? 'row' : ''" 
       :class="{ 'actions-cell': column.type == 'actions' }">
+    <template v-if="!column.hideColumn">
     <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
       v-bind:columnindex="columnIndex">
       <span v-if="column.type == 'boolean'">
@@ -109,6 +110,7 @@
         </slot>
       </slot>
     </b-button-group>
+    </template>
   </td>
 </template>
 

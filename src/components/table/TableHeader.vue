@@ -2,7 +2,9 @@
   <thead class="thead-light">
     <tr>
       <slot name="rowHead">
-        <th v-for="(column, indexc) in columns" :key="indexc"
+        <template v-for="(column, indexc) in columns" :key="indexc">
+        <th
+          v-if="isColumnVisibleInTable(column)"
           :style="{ width: column.width ? column.width : (column.type == 'actions' ? '1%' : 'inherit') }" 
           :class="{ 'actions-header': column.type == 'actions', 'checkbox-header': column.type == 'checkbox' || column.type == 'select' }"
           scope="col"
@@ -10,7 +12,7 @@
           @mouseleave="hoveredColumn = null">
           <slot :name="'filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
             v-bind:internalFilterByProp="internalFilterByProp" v-if="enableFilters &&
-              filtersVisible &&
+              filtersVisibleValue &&
               isColumnHasFilter(column) &&
               (internalFilterByProp(column.prop) || internalFilterByProp(column.prop + '_from'))
             ">
@@ -117,6 +119,7 @@
               style="visibility: hidden;"></b-icon-sort-up>
           </span>
         </th>
+        </template>
       </slot>
     </tr>
   </thead>
@@ -131,6 +134,7 @@ export default {
     'enableFilters',
     'filtersVisible',
     'isColumnHasFilter',
+    'isColumnVisibleInTable',
     'internalFilterByProp',
     'onChangeFilter',
     'toggleAll',
@@ -143,6 +147,14 @@ export default {
     return {
       hoveredColumn: null
     };
+  },
+  computed: {
+    filtersVisibleValue() {
+      if (this.filtersVisible && this.filtersVisible.value !== undefined) {
+        return !!this.filtersVisible.value;
+      }
+      return !!this.filtersVisible;
+    }
   },
   methods: {
     isSortableColumn(column) {

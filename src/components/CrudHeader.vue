@@ -95,8 +95,10 @@ export default {
   ],
   computed: {
     sidebarVisible() {
-      // Acceder directamente al componente padre para obtener reactividad
-      return this.$parent ? this.$parent.filterSidebarOpen : this.filterSidebarOpen;
+      if (this.filterSidebarOpen && this.filterSidebarOpen.value !== undefined) {
+        return !!this.filterSidebarOpen.value;
+      }
+      return !!(this.$parent && this.$parent.filterSidebarOpen);
     },
     currentDisplayMode() {
       if (!this.displayMode) return 1;
@@ -115,7 +117,8 @@ export default {
   },
   methods: {
     closeSidebar() {
-      if (this.filterSidebarOpen) {
+      // Usar el estado vivo (reactive provide o padre), no el booleano estático del inject
+      if (this.sidebarVisible) {
         this.toggleFilters();
       }
     }

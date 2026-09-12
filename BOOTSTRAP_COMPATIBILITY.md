@@ -216,14 +216,32 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 ### Los iconos no se muestran
 
-Bootstrap Icons es compatible con Bootstrap 4 y 5. Para mostrar iconos correctamente, instala Bootstrap Icons:
+`app.use(BootstrapPlugin)` registra automáticamente `b-icon` y los `b-icon-*` usados por el paquete (Bootstrap Icons).
 
+1. Instalá e importá Bootstrap Icons:
 ```bash
 npm install bootstrap-icons
 ```
-
-Y luego importa el CSS:
-
 ```javascript
 import 'bootstrap-icons/font/bootstrap-icons.css';
 ```
+
+2. Asegurate de instalar el plugin de wrappers:
+```javascript
+import BootstrapPlugin from 'vue-laravel-crud/src/bootstrap-wrappers';
+app.use(BootstrapPlugin);
+```
+
+3. Para iconos extra, registralos así:
+```javascript
+import { registerBootstrapIcons, BIcon } from 'vue-laravel-crud/src/bootstrap-wrappers';
+registerBootstrapIcons(app, { BIcon, icons: ['database', 'arrows-move'] });
+```
+
+### El backdrop del modal queda negro al cerrar
+
+Desde **3.0.1** el helper `$bvModal` resuelve correctamente la instancia Vue 3 y limpia `.modal-backdrop` / `modal-open`. Si aún ocurre:
+
+1. Verificá que Bootstrap JS esté en `window.bootstrap` (`import * as bootstrap from 'bootstrap'; window.bootstrap = bootstrap`).
+2. No mezcles `data-bs-dismiss` con cierres manuales duplicados sobre el mismo modal.
+3. Tras actualizar el paquete, recargá sin caché / recompilá Vite.

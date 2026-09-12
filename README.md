@@ -366,6 +366,8 @@ columns: [
     type: "number",           // Tipo: text, number, date, boolean, state, actions
     width: "80px",            // Ancho de la columna (opcional)
     format: "DD/MM/YYYY",     // Formato para fechas (opcional)
+    hideColumn: false,        // Oculta la columna en la tabla (sigue filtrable si tiene filtro)
+    hideFilter: false,        // Oculta el filtro de esta columna
     options: [                // Opciones para tipo "state"
       { id: "active", text: "Activo" },
       { id: "inactive", text: "Inactivo" }
@@ -374,6 +376,7 @@ columns: [
 ]
 ```
 
+Si `hideColumn: true`, la columna no se muestra en la tabla. Cuando los filtros inline están abiertos y la columna tiene filtro, se reserva el espacio (header con filtro + celda vacía) para no desalinear el resto.
 ### Tipos de Columna Disponibles:
 
 - `text` - Texto simple

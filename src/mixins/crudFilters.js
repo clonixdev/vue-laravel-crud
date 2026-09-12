@@ -115,6 +115,22 @@ export default {
       return column && !column.hideFilter && column.type != "actions";
     },
 
+    /**
+     * Visible en tabla: columnas normales, o hideColumn solo mientras
+     * los filtros inline estén abiertos y la columna tenga filtro
+     * (para alinear header vacío / celda vacía con el row de filtros).
+     * Parche portado desde easy2 (vue-laravel-crud@1.8.4).
+     */
+    isColumnVisibleInTable(column) {
+      if (!column) return false;
+      if (!column.hideColumn) return true;
+      return !!(
+        this.enableFilters &&
+        this.filtersVisible &&
+        this.isColumnHasFilter(column)
+      );
+    },
+
     isCustomFilterEnabled(customFilter) {
       return customFilter && customFilter.prop && !customFilter.hideFilter && customFilter.type != "actions";
     },

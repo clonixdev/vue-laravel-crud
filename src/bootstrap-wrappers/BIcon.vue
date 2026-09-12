@@ -1,8 +1,15 @@
 <template>
-  <i :class="iconClasses" :aria-label="ariaLabel"></i>
+  <i
+    :class="iconClasses"
+    :style="iconStyle"
+    :aria-label="ariaLabel"
+    :aria-hidden="ariaLabel ? undefined : 'true'"
+  ></i>
 </template>
 
 <script>
+import { resolveBootstrapIconName } from '../utils/icons.js';
+
 export default {
   name: 'BIcon',
   props: {
@@ -41,50 +48,50 @@ export default {
     }
   },
   computed: {
+    resolvedIcon() {
+      return resolveBootstrapIconName(this.icon);
+    },
     iconClasses() {
-      const classes = ['bi'];
-      
-      // Mapear iconos de BootstrapVue a Bootstrap Icons
-      const iconMap = {
-        'eye': 'eye',
-        'pencil': 'pencil',
-        'trash': 'trash',
-        'plus': 'plus',
-        'search': 'search',
-        'arrow-clockwise': 'arrow-clockwise',
-        'card-list': 'grid-3x3-gap',
-        'table': 'table',
-        'cloud-upload': 'cloud-upload',
-        'cloud-download': 'cloud-download',
-        'sort-numeric-down': 'sort-numeric-down',
-        'sort-numeric-up': 'sort-numeric-up',
-        'check-circle': 'check-circle',
-        'check': 'check',
-        'x-circle': 'x-circle',
-        'github': 'github',
-        'grid-3x3-gap': 'grid-3x3-gap',
-        'file-text': 'file-text',
-        'list': 'list',
-        'sort-up': 'arrow-up',
-        'sort-down': 'arrow-down',
-        'clipboard': 'clipboard',
-        'clipboard-check': 'clipboard-check'
-      };
-      
-      const iconName = iconMap[this.icon] || this.icon;
-      classes.push(`bi-${iconName}`);
-      
+      const classes = ['bi', `bi-${this.resolvedIcon}`];
+
       if (this.animation) {
         classes.push(`bi-${this.animation}`);
       }
-      
+
       if (this.variant) {
         classes.push(`text-${this.variant}`);
       }
-      
+
       return classes.join(' ');
+    },
+    iconStyle() {
+      const transforms = [];
+      const scale = Number(this.scale);
+      const rotate = Number(this.rotate);
+
+      if (scale && scale !== 1) {
+        transforms.push(`scale(${scale})`);
+      }
+      if (rotate) {
+        transforms.push(`rotate(${rotate}deg)`);
+      }
+      if (this.flipH) {
+        transforms.push('scaleX(-1)');
+      }
+      if (this.flipV) {
+        transforms.push('scaleY(-1)');
+      }
+
+      if (!transforms.length) {
+        return undefined;
+      }
+
+      return {
+        display: 'inline-block',
+        transform: transforms.join(' '),
+        transformOrigin: 'center',
+      };
     }
   }
 };
 </script>
-

@@ -3,6 +3,14 @@
  * Reemplaza la funcionalidad de bootstrap-vue $bvToast
  */
 
+import {
+  resolveModalElement,
+  resolveVueComponentFromEl,
+  showBootstrapModal,
+  hideBootstrapModal,
+  cleanupModalArtifacts,
+} from './modal.js';
+
 /**
  * Crea y muestra un toast
  * @param {string} message - Mensaje a mostrar
@@ -129,146 +137,56 @@ export function showToast(message, options = {}) {
 
 /**
  * Helper para controlar modales programáticamente
- * Compatible con bootstrap-vue $bvModal API
+ * Compatible con bootstrap-vue $bvModal API (Vue 3 + Bootstrap 5)
  */
 export const modalHelper = {
   show(modalId) {
-    const modalEl = document.getElementById(modalId);
+    const modalEl = resolveModalElement(modalId);
     if (!modalEl) {
       console.warn(`Modal with id "${modalId}" not found`);
       return;
     }
-    
-    // Buscar instancia Vue del componente (puede estar en __vue__ o __vueParentComponent)
-    let vueInstance = modalEl.__vue__;
-    if (!vueInstance && modalEl.__vueParentComponent) {
-      vueInstance = modalEl.__vueParentComponent;
-    }
-    
-    // Si encontramos la instancia Vue y tiene el método show, usarlo
+
+    const vueInstance = resolveVueComponentFromEl(modalEl);
     if (vueInstance && typeof vueInstance.show === 'function') {
       vueInstance.show();
       return;
     }
-    
-    // Si tiene la propiedad visible, actualizarla (Vue 3 no necesita $set)
+
     if (vueInstance && 'visible' in vueInstance) {
       vueInstance.visible = true;
       return;
     }
-    
-    // Fallback: usar Bootstrap JavaScript API directamente
-    if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Modal) {
-      // Bootstrap 5
-      let modal = window.bootstrap.Modal.getInstance(modalEl);
-      if (!modal) {
-        modal = new window.bootstrap.Modal(modalEl);
-      }
-      modal.show();
-    } else if (typeof window !== 'undefined' && window.$ && window.$(modalEl)) {
-      // Bootstrap 4 con jQuery
-      window.$(modalEl).modal('show');
-    } else {
-      // Fallback manual
-      modalEl.classList.add('show', 'd-block');
-      modalEl.style.display = 'block';
-      modalEl.setAttribute('aria-hidden', 'false');
-      modalEl.setAttribute('aria-modal', 'true');
-      document.body.classList.add('modal-open');
-      
-      // Crear backdrop si no existe
-      let backdrop = document.getElementById(`${modalId}-backdrop`);
-      if (!backdrop) {
-        backdrop = document.createElement('div');
-        backdrop.className = 'modal-backdrop fade show';
-        backdrop.id = `${modalId}-backdrop`;
-        document.body.appendChild(backdrop);
-      }
-    }
+
+    showBootstrapModal(modalEl);
   },
-  
+
   hide(modalId) {
-    const modalEl = document.getElementById(modalId);
+    const modalEl = resolveModalElement(modalId);
     if (!modalEl) {
       console.warn(`Modal with id "${modalId}" not found`);
+      cleanupModalArtifacts({ force: true });
       return;
     }
-    
-    // Buscar instancia Vue del componente - buscar recursivamente en el árbol
-    let vueInstance = modalEl.__vue__;
-    if (!vueInstance) {
-      // Buscar en el padre
-      let parent = modalEl.parentElement;
-      while (parent && !vueInstance) {
-        vueInstance = parent.__vue__;
-        parent = parent.parentElement;
-      }
+
+    const vueInstance = resolveVueComponentFromEl(modalEl);
+    if (vueInstance && typeof vueInstance.hide === 'function') {
+      vueInstance.hide();
+      return;
     }
-    
-    // Si encontramos la instancia Vue y tiene el método hide, usarlo
-    if (vueInstance) {
-      // Buscar el método hide en la instancia o en sus componentes
-      if (typeof vueInstance.hide === 'function') {
-        vueInstance.hide();
+
+    if (vueInstance && vueInstance.$refs && vueInstance.$refs[modalId]) {
+      const refComponent = vueInstance.$refs[modalId];
+      if (typeof refComponent.hide === 'function') {
+        refComponent.hide();
         return;
       }
-      // Buscar en $refs si hay un ref con el mismo id
-      if (vueInstance.$refs && vueInstance.$refs[modalId]) {
-        const refComponent = vueInstance.$refs[modalId];
-        if (typeof refComponent.hide === 'function') {
-          refComponent.hide();
-          return;
-        }
-      }
     }
-    
-    // Fallback: usar Bootstrap JavaScript API directamente
-    if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Modal) {
-      // Bootstrap 5
-      const modal = window.bootstrap.Modal.getInstance(modalEl);
-      if (modal) {
-        modal.hide();
-      } else {
-        // Si no hay instancia, ocultar manualmente
-        modalEl.classList.remove('show', 'd-block');
-        modalEl.style.display = 'none';
-        modalEl.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-        
-        // Remover backdrop
-        const backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-          backdrop.remove();
-        }
-      }
-    } else if (typeof window !== 'undefined' && window.$ && window.$(modalEl)) {
-      // Bootstrap 4 con jQuery
-      window.$(modalEl).modal('hide');
-      // Remover backdrop de jQuery si existe
-      window.$('.modal-backdrop').remove();
-      document.body.classList.remove('modal-open');
-    } else {
-      // Fallback manual
-      modalEl.classList.remove('show', 'd-block');
-      modalEl.style.display = 'none';
-      modalEl.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('modal-open');
-      
-      // Remover backdrop
-      const backdrop = document.querySelector('.modal-backdrop');
-      if (backdrop) {
-        backdrop.classList.remove('show');
-        setTimeout(() => {
-          if (backdrop.parentNode) {
-            backdrop.remove();
-          }
-        }, 150);
-      }
-    }
+
+    hideBootstrapModal(modalEl);
   },
-  
+
   msgBoxConfirm(message, options = {}) {
-    // Crear un modal de confirmación simple
     return new Promise((resolve) => {
       const confirmId = 'confirm-modal-' + Date.now();
       const modal = document.createElement('div');
@@ -285,46 +203,48 @@ export const modalHelper = {
               <p>${message}</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">${options.cancelTitle || 'Cancelar'}</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${options.cancelTitle || 'Cancelar'}</button>
               <button type="button" class="btn btn-${options.okVariant || 'primary'}" id="${confirmId}-ok">${options.okTitle || 'Aceptar'}</button>
             </div>
           </div>
         </div>
       `;
-      
+
       document.body.appendChild(modal);
-      
+
+      let settled = false;
+      const finish = (result) => {
+        if (settled) return;
+        settled = true;
+        hideBootstrapModal(modal);
+        setTimeout(() => {
+          if (modal.parentNode) {
+            modal.remove();
+          }
+          cleanupModalArtifacts();
+        }, 200);
+        resolve(result);
+      };
+
       const okButton = document.getElementById(`${confirmId}-ok`);
       const cancelButton = modal.querySelector('.btn-secondary');
-      
-      const cleanup = () => {
+      const closeButton = modal.querySelector('.btn-close');
+
+      okButton?.addEventListener('click', () => finish(true));
+      cancelButton?.addEventListener('click', () => finish(false));
+      closeButton?.addEventListener('click', () => finish(false));
+
+      showBootstrapModal(modal);
+      modal.addEventListener('hidden.bs.modal', () => {
         if (modal.parentNode) {
           modal.remove();
         }
-      };
-      
-      okButton.addEventListener('click', () => {
-        cleanup();
-        resolve(true);
+        cleanupModalArtifacts();
+        if (!settled) {
+          settled = true;
+          resolve(false);
+        }
       });
-      
-      cancelButton.addEventListener('click', () => {
-        cleanup();
-        resolve(false);
-      });
-      
-      // Mostrar modal
-      if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Modal) {
-        const bsModal = new window.bootstrap.Modal(modal);
-        bsModal.show();
-        modal.addEventListener('hidden.bs.modal', cleanup);
-      } else if (typeof window !== 'undefined' && window.$ && window.$(modal)) {
-        window.$(modal).modal('show');
-        window.$(modal).on('hidden.bs.modal', cleanup);
-      } else {
-        modal.classList.add('show', 'd-block');
-        document.body.classList.add('modal-open');
-      }
     });
   }
 };

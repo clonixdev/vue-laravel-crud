@@ -25,6 +25,8 @@ export default {
       filters: [],
       filtersVisible: false,
       filterSidebarOpen: false,
+      filtersVisibleReactive: { value: false },
+      filterSidebarOpenReactive: { value: false },
       internalFilters: [],
       forceRecomputeCounter: 0,
       _displayMode: 1, // Propiedad local para displayMode (se inicializará desde la prop en created())
@@ -291,6 +293,18 @@ export default {
         this.firstLoadReactive.value = newVal;
       },
       immediate: true
+    },
+    filtersVisible: {
+      handler(newVal) {
+        this.filtersVisibleReactive.value = newVal;
+      },
+      immediate: true
+    },
+    filterSidebarOpen: {
+      handler(newVal) {
+        this.filterSidebarOpenReactive.value = newVal;
+      },
+      immediate: true
     }
   },
 
@@ -303,6 +317,8 @@ export default {
     // Inicializar valores reactivos
     this.loadingReactive.value = this.loading;
     this.firstLoadReactive.value = this.firstLoad;
+    this.filtersVisibleReactive.value = this.filtersVisible;
+    this.filterSidebarOpenReactive.value = this.filterSidebarOpen;
   },
 
   mounted() {

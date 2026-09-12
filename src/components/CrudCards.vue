@@ -60,16 +60,29 @@
 </template>
 
 <script>
+import { h } from 'vue'
 import draggable from "vuedraggable";
-import { VueMasonry } from 'vue-masonry-css';
 import ItemCard from '../ItemCard.vue';
+
+// vue-masonry-css only ships a Vue 2-style plugin (default export). Use a light layout wrapper.
+const MasonryLayout = {
+  name: 'MasonryLayout',
+  props: {
+    cols: { type: [Object, Number, String], default: 2 },
+    gutter: { type: [Object, Number, String], default: 0 },
+    tag: { type: String, default: 'div' },
+  },
+  render() {
+    return h(this.tag, { class: 'vlc-masonry-layout' }, this.$slots.default?.())
+  },
+}
 
 export default {
   name: 'CrudCards',
   components: {
     draggable,
     ItemCard,
-    masonry: VueMasonry
+    masonry: MasonryLayout
   },
   inject: [
     'bootstrapFactory',

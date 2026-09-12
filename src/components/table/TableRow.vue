@@ -4,14 +4,14 @@
     @click="onRowClick(item, index)" 
     :class="['item', { 'selected': item.selected }]"
   >
-    <th :colspan="columns.length" v-if="grouped && item.crudgroup">
+    <th :colspan="visibleColumnsCount" v-if="grouped && item.crudgroup">
       <span>{{ item.crudgrouplabel }}</span>
     </th>
 
     <slot name="row" v-bind:item="item" v-else>
+      <template v-for="(column, indexc) in columns" :key="indexc">
       <TableCell 
-        v-for="(column, indexc) in columns" 
-        :key="indexc"
+        v-if="isColumnVisibleInTable(column)"
         :column="column"
         :item="item"
         :index="index"
@@ -21,6 +21,7 @@
           <slot :name="name" v-bind="slotProps" />
         </template>
       </TableCell>
+      </template>
     </slot>
   </tr>
 </template>
@@ -41,7 +42,16 @@ export default {
   inject: [
     'columns',
     'onRowHover',
-    'onRowClick'
-  ]
+    'onRowClick',
+    'isColumnVisibleInTable'
+  ],
+  computed: {
+    visibleColumnsCount() {
+      if (!this.columns || !this.isColumnVisibleInTable) {
+        return (this.columns && this.columns.length) || 1;
+      }
+      return this.columns.filter((column) => this.isColumnVisibleInTable(column)).length || 1;
+    }
+  }
 };
 </script>

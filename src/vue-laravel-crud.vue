@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, h, getCurrentInstance } from 'vue';
+import { getCurrentInstance } from 'vue';
 import CrudHeader from "./components/CrudHeader.vue";
 import CrudTable from "./components/CrudTable.vue";
 import CrudCards from "./components/CrudCards.vue";
@@ -20,6 +20,7 @@ import { normalizeBootstrapVersion } from "./utils/bootstrap-version.js";
 import { getBootstrapComponent, getBootstrapComponents } from "./utils/bootstrap-factory.js";
 // Import toast plugin
 import ToastPlugin from "./utils/toast.js";
+import { registerBootstrapIcons } from "./utils/icons.js";
 
 export default /*#__PURE__*/ {
   name: "VueLaravelCrud",
@@ -102,35 +103,8 @@ export default /*#__PURE__*/ {
       });
       
       // Registrar componente BIcon para iconos dinámicos (b-icon-*)
-      if (components.BIcon && !app._context.components['BIcon']) {
-        app.component('BIcon', components.BIcon);
-        app.component('b-icon', components.BIcon);
-        
-        // Crear componentes dinámicos para iconos comunes
-        const commonIcons = ['clipboard', 'check', 'eye', 'pencil', 'trash', 'plus', 'search'];
-        commonIcons.forEach(iconName => {
-          const iconComponentName = `BIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}`;
-          const iconKebabName = `b-icon-${iconName}`;
-          
-          if (!app._context.components[iconComponentName] && !app._context.components[iconKebabName]) {
-            // Crear componente wrapper para el icono específico usando defineComponent
-            const IconWrapper = defineComponent({
-              name: iconComponentName,
-              props: {
-                icon: {
-                  type: String,
-                  default: iconName
-                }
-              },
-              setup(props, { attrs, slots }) {
-                return () => h(components.BIcon, { ...attrs, icon: props.icon || iconName }, slots);
-              }
-            });
-            
-            app.component(iconComponentName, IconWrapper);
-            app.component(iconKebabName, IconWrapper);
-          }
-        });
+      if (components.BIcon) {
+        registerBootstrapIcons(app, { BIcon: components.BIcon });
       }
       } catch (e) {
         console.warn('Could not register Bootstrap components:', e);
@@ -246,8 +220,8 @@ export default /*#__PURE__*/ {
       displaySearch: this.displaySearch,
       itemDefault: this.itemDefault,
       filters: this.filters,
-      filtersVisible: this.filtersVisible,
-      filterSidebarOpen: this.filterSidebarOpen,
+      filtersVisible: this.filtersVisibleReactive,
+      filterSidebarOpen: this.filterSidebarOpenReactive,
       internalFilters: this.internalFilters,
       forceRecomputeCounter: this.forceRecomputeCounter,
       displayModes: this.displayModes,
@@ -305,6 +279,7 @@ export default /*#__PURE__*/ {
       toggleFilters: this.toggleFilters,
       resetFilters: this.resetFilters,
       isColumnHasFilter: this.isColumnHasFilter,
+      isColumnVisibleInTable: this.isColumnVisibleInTable,
       isCustomFilterEnabled: this.isCustomFilterEnabled,
       setFilter: this.setFilter,
       onChangeFilter: this.onChangeFilter,
