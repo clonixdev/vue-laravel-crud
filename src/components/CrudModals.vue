@@ -1,10 +1,15 @@
 <template>
   <div>
     <!-- Modal de formulario -->
-    <b-modal :id="'modal-form-item-' + modelName" hide-footer size="xl" :title="title">
+    <b-modal
+      ref="formModal"
+      :id="formModalId"
+      size="xl"
+      :title="title"
+    >
       <b-overlay :show="loadingValue" rounded="sm">
         <template v-if="validate">
-          <form @submit="saveItem">
+          <form :id="formId" @submit.prevent="saveItem">
             <template v-if="reactiveItem">
               <slot name="form" v-bind:item="reactiveItem">
                 <b-form-group label="Nombre:" description="Nombre ">
@@ -12,28 +17,47 @@
                 </b-form-group>
               </slot>
             </template>
-            <b-button block type="submit" variant="success" :disabled="loadingValue">
-              <b-spinner small v-if="loadingValue"></b-spinner>{{ messageSave }}
-            </b-button>
           </form>
         </template>
-        <template v-if="!validate">
-          <template v-if="reactiveItem">
-            <slot name="form" v-bind:item="reactiveItem">
-              <b-form-group :label="key" v-for="(value, key) in reactiveItem" :key="key">
-                <b-form-input v-model="reactiveItem[key]" type="text" required></b-form-input>
-              </b-form-group>
-            </slot>
-          </template>
-          <b-button block type="submit" variant="success" :disabled="loadingValue" @click="saveItem()">
-            <b-spinner small v-if="loadingValue"></b-spinner>{{ messageSave }}
-          </b-button>
+        <template v-else>
+          <form :id="formId" @submit.prevent="saveItem">
+            <template v-if="reactiveItem">
+              <slot name="form" v-bind:item="reactiveItem">
+                <b-form-group :label="key" v-for="(value, key) in reactiveItem" :key="key">
+                  <b-form-input v-model="reactiveItem[key]" type="text" required></b-form-input>
+                </b-form-group>
+              </slot>
+            </template>
+          </form>
         </template>
       </b-overlay>
+      <template #modal-footer>
+        <slot name="modal-footer" v-bind="footerSlotProps">
+          <slot name="modal-footer-prepend" v-bind="footerSlotProps" />
+          <b-button variant="secondary" @click="hideFormModal">
+            Cancelar
+          </b-button>
+          <b-button
+            type="submit"
+            :form="formId"
+            variant="success"
+            :disabled="loadingValue"
+            @click="onFooterSaveClick"
+          >
+            <b-spinner small v-if="loadingValue"></b-spinner>{{ messageSave }}
+          </b-button>
+          <slot name="modal-footer-append" v-bind="footerSlotProps" />
+        </slot>
+      </template>
     </b-modal>
 
     <!-- Modal de visualización -->
-    <b-modal :id="'modal-show-item-' + modelName" hide-footer size="xl" :title="title">
+    <b-modal
+      ref="showModal"
+      :id="'modal-show-item-' + modelName"
+      size="xl"
+      :title="title"
+    >
       <template v-if="reactiveItem">
         <slot name="show" v-bind:item="reactiveItem">
           <b-list-group>
@@ -46,29 +70,40 @@
           </b-list-group>
         </slot>
       </template>
+      <template #modal-footer>
+        <slot name="show-modal-footer" v-bind="{ hide: hideShowModal, item: reactiveItem }">
+          <b-button variant="secondary" @click="hideShowModal">
+            Cerrar
+          </b-button>
+        </slot>
+      </template>
     </b-modal>
 
     <!-- Modal de importación -->
-    <b-modal ref="modal-import" title="Importar" hide-footer v-if="showImport">
+    <b-modal ref="modal-import" title="Importar" v-if="showImport">
       <slot name="import" v-bind:item="item" v-if="item">
         <b-overlay :show="loadingValue" rounded="sm">
           <b-form-file v-model="fileImport" :state="Boolean(fileImport)" browse-text="Explorar"
             placeholder="Importar..." drop-placeholder="Arrastrar Archivo aquí..."></b-form-file>
-          <div class="text-center mt-3">
-            <b-button variant="info" v-on:click="importItems()" :disabled="loadingValue">
-              <b-icon-cloud-upload></b-icon-cloud-upload>
-              {{ loadingValue ? "Cargando..." : "Importar" }}
-            </b-button>
-          </div>
         </b-overlay>
       </slot>
+      <template #modal-footer>
+        <slot name="import-modal-footer" v-bind="{ importItems, loading: loadingValue, hide: hideImportModal }">
+          <b-button variant="secondary" @click="hideImportModal">
+            Cancelar
+          </b-button>
+          <b-button variant="info" @click="importItems()" :disabled="loadingValue">
+            <b-icon-cloud-upload></b-icon-cloud-upload>
+            {{ loadingValue ? "Cargando..." : "Importar" }}
+          </b-button>
+        </slot>
+      </template>
     </b-modal>
 
     <!-- Modal de exportación -->
-    <b-modal ref="modal-export" title="Exportar" hide-footer v-if="showExport">
+    <b-modal ref="modal-export" title="Exportar" v-if="showExport">
       <slot name="export" v-bind:item="item" v-if="item">
         <b-overlay :show="loadingValue" rounded="sm">
-
           <p v-if="selectedItems.length">Se exportará {{ selectedItems.length }} elementos.</p>
           <p v-else>Se exportará la consulta actual.</p>
 
@@ -92,15 +127,19 @@
               </b-form-radio>
             </div>
           </b-form-group>
-
-          <div class="text-center mt-3">
-            <b-button variant="info" v-on:click="exportItems()" :disabled="loadingValue">
-              <b-icon-cloud-upload></b-icon-cloud-upload>
-              {{ loadingValue ? "Cargando..." : "Exportar" }}
-            </b-button>
-          </div>
         </b-overlay>
       </slot>
+      <template #modal-footer>
+        <slot name="export-modal-footer" v-bind="{ exportItems, loading: loadingValue, hide: hideExportModal }">
+          <b-button variant="secondary" @click="hideExportModal">
+            Cancelar
+          </b-button>
+          <b-button variant="info" @click="exportItems()" :disabled="loadingValue">
+            <b-icon-cloud-upload></b-icon-cloud-upload>
+            {{ loadingValue ? "Cargando..." : "Exportar" }}
+          </b-button>
+        </slot>
+      </template>
     </b-modal>
   </div>
 </template>
@@ -127,9 +166,13 @@ export default {
     'exportItems'
   ],
   computed: {
-    // Computed property para asegurar reactividad del item inyectado
+    formModalId() {
+      return 'modal-form-item-' + this.modelName;
+    },
+    formId() {
+      return 'crud-form-' + this.modelName;
+    },
     reactiveItem() {
-      // Si hay una función getItem, usarla para obtener el item actual
       if (this.getItem && typeof this.getItem === 'function') {
         try {
           return this.getItem();
@@ -138,14 +181,11 @@ export default {
           return this.item || {};
         }
       }
-      // Si no, usar el item inyectado directamente, con fallback a objeto vacío
       return this.item || {};
     },
-    // Computed property para manejar loading como objeto reactivo o booleano
     loadingValue() {
       return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
     },
-    // Computed property para manejar exportFormat como objeto reactivo
     exportFormatValue: {
       get() {
         return this.exportFormat && this.exportFormat.value !== undefined ? this.exportFormat.value : this.exportFormat;
@@ -155,10 +195,39 @@ export default {
           this.exportFormat.value = value;
         }
       }
+    },
+    footerSlotProps() {
+      return {
+        save: this.saveItem,
+        loading: this.loadingValue,
+        hide: this.hideFormModal,
+        messageSave: this.messageSave,
+        item: this.reactiveItem,
+        formId: this.formId,
+      };
     }
   },
-  // Eliminamos el watcher problemático - Vue 3 maneja la reactividad automáticamente
-  // El computed reactiveItem se actualizará cuando cambie el item inyectado
+  methods: {
+    hideFormModal() {
+      this.$refs.formModal?.hide?.();
+    },
+    hideShowModal() {
+      this.$refs.showModal?.hide?.();
+    },
+    hideImportModal() {
+      this.$refs['modal-import']?.hide?.();
+    },
+    hideExportModal() {
+      this.$refs['modal-export']?.hide?.();
+    },
+    onFooterSaveClick(event) {
+      // Si el botón está fuera del form (p.ej. browsers sin soporte form=), guardar igual.
+      if (!this.validate) {
+        event.preventDefault();
+        this.saveItem();
+      }
+    }
+  }
 };
 </script>
 

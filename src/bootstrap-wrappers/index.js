@@ -152,7 +152,13 @@ export {
   BSidebar,
 };
 
-export { registerBootstrapIcons, DEFAULT_ICON_NAMES, ICON_NAME_MAP } from '../utils/icons.js';
+export {
+  registerBootstrapIcons,
+  ensureIconRegistered,
+  installOnDemandIconResolver,
+  DEFAULT_ICON_NAMES,
+  ICON_NAME_MAP,
+} from '../utils/icons.js';
 export {
   cleanupModalArtifacts,
   showBootstrapModal,
