@@ -109,7 +109,8 @@
             v-if="isSortableColumn(column)"
             class="sort-filter ml-1"
             :class="{ 'sort-filter-visible': shouldShowSortIcon(column) }"
-            @click="toggleSortFilter(column)">
+            @click.stop="toggleSortFilter(column)">
+            <span v-if="sortPriorityFor(column)" class="sort-priority">{{ sortPriorityFor(column) }}</span>
             <b-icon-sort-up
               v-if="getSortIconDirection(column) === 'up'"></b-icon-sort-up>
             <b-icon-sort-down
@@ -139,6 +140,7 @@ export default {
     'onChangeFilter',
     'toggleAll',
     'toggleSortFilter',
+    'getSortPriority',
     'sortable',
     'optionsLoaded',
     'isAllSelected'
@@ -169,7 +171,7 @@ export default {
     },
     getSortIconDirection(column) {
       const sortFilter = this.internalFilterByProp(column.prop + '_sort');
-      const sortValue = sortFilter.value;
+      const sortValue = sortFilter && sortFilter.value;
       
       if (sortValue === 'DESC') {
         return 'down';
@@ -177,6 +179,12 @@ export default {
         return 'up';
       } else if (this.hoveredColumn === column.prop) {
         return 'up';
+      }
+      return null;
+    },
+    sortPriorityFor(column) {
+      if (typeof this.getSortPriority === 'function') {
+        return this.getSortPriority(column);
       }
       return null;
     }
@@ -235,10 +243,28 @@ export default {
 .sort-filter {
   cursor: pointer;
   visibility: hidden;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  vertical-align: middle;
 }
 
 .sort-filter-visible {
   visibility: visible;
+}
+
+.sort-priority {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.2rem;
+  border-radius: 999px;
+  background: #5f76e8;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1;
 }
 </style>

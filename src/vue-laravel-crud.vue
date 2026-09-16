@@ -7,6 +7,7 @@ import CrudKanban from "./components/CrudKanban.vue";
 import CrudCustom from "./components/CrudCustom.vue";
 import CrudModals from "./components/CrudModals.vue";
 import CrudPagination from "./components/CrudPagination.vue";
+import CrudDetailView from "./components/CrudDetailView.vue";
 
 // Import mixins
 import crudData from "./mixins/crudData.js";
@@ -14,6 +15,7 @@ import crudApi from "./mixins/crudApi.js";
 import crudFilters from "./mixins/crudFilters.js";
 import crudValidation from "./mixins/crudValidation.js";
 import crudHelpers from "./mixins/crudHelpers.js";
+import crudUrlSync from "./mixins/crudUrlSync.js";
 
 // Import Bootstrap version utilities
 import { normalizeBootstrapVersion } from "./utils/bootstrap-version.js";
@@ -31,14 +33,16 @@ export default /*#__PURE__*/ {
     CrudKanban,
     CrudCustom,
     CrudModals,
-    CrudPagination
+    CrudPagination,
+    CrudDetailView,
   },
   mixins: [
     crudData,
     crudApi,
     crudFilters,
     crudValidation,
-    crudHelpers
+    crudHelpers,
+    crudUrlSync,
   ],
   computed: {
     normalizedBootstrapVersion() {
@@ -50,7 +54,10 @@ export default /*#__PURE__*/ {
         getComponents: () => getBootstrapComponents(this.normalizedBootstrapVersion),
         version: this.normalizedBootstrapVersion
       };
-    }
+    },
+    effectiveCrudItemId() {
+      return this.crudItemId != null ? this.crudItemId : this.id;
+    },
   },
   created() {
     // Instalar plugin de toasts si no está instalado
@@ -125,6 +132,7 @@ export default /*#__PURE__*/ {
     });
   },
   provide() {
+    const vm = this;
     return {
       // Bootstrap version and factory
       bootstrapVersion: this.normalizedBootstrapVersion,
@@ -143,6 +151,13 @@ export default /*#__PURE__*/ {
       filter: this.filter,
       customFilters: this.customFilters,
       enableFilters: this.enableFilters,
+      quickFilters: this.quickFilters,
+      quickFiltersPlacement: this.quickFiltersPlacement,
+      quickFiltersVariant: this.quickFiltersVariant,
+      quickFiltersClass: this.quickFiltersClass,
+      quickFiltersAriaLabel: this.quickFiltersAriaLabel,
+      activeQuickFilterKey: this.activeQuickFilterKeyReactive,
+      selectQuickFilter: this.selectQuickFilter,
       infiniteScroll: this.infiniteScroll,
       sortable: this.sortable,
       orderable: this.orderable,
@@ -150,7 +165,8 @@ export default /*#__PURE__*/ {
       orderProp: this.orderProp,
       createMultipart: this.createMultipart,
       apiUrl: this.apiUrl,
-      search: this.search,
+      search: this.searchReactive,
+      displaySearch: this.displaySearchReactive,
       hideModalAfterSave: this.hideModalAfterSave,
       hideModalAfterCreate: this.hideModalAfterCreate,
       hideModalAfterUpdate: this.hideModalAfterUpdate,
@@ -162,7 +178,9 @@ export default /*#__PURE__*/ {
       showHeader: this.showHeader,
       showTitle: this.showTitle,
       limit: this.limit,
+      // Objeto reactivo mutable (no ComputedRef) para inject Options API
       displayMode: this.displayModeReactive,
+      getDisplayMode: () => vm._displayMode,
       displayModeToggler: this.displayModeToggler,
       colXs: this.colXs,
       colSm: this.colSm,
@@ -217,11 +235,18 @@ export default /*#__PURE__*/ {
       items: this.items,
       selectedItems: this.selectedItems,
       pagination: this.pagination,
-      displaySearch: this.displaySearch,
       itemDefault: this.itemDefault,
       filters: this.filters,
       filtersVisible: this.filtersVisibleReactive,
       filterSidebarOpen: this.filterSidebarOpenReactive,
+      setFilterSidebarOpen: (val) => {
+        const open = !!val;
+        vm.filtersVisible = open;
+        vm.filterSidebarOpen = open;
+        if (open && (!vm.internalFilters || vm.internalFilters.length === 0)) {
+          vm.setupFilters();
+        }
+      },
       internalFilters: this.internalFilters,
       forceRecomputeCounter: this.forceRecomputeCounter,
       displayModes: this.displayModes,
@@ -276,6 +301,7 @@ export default /*#__PURE__*/ {
       infiniteHandler: this.infiniteHandler,
       setupFilters: this.setupFilters,
       toggleSortFilter: this.toggleSortFilter,
+      getSortPriority: this.getSortPriority,
       toggleFilters: this.toggleFilters,
       resetFilters: this.resetFilters,
       isColumnHasFilter: this.isColumnHasFilter,
@@ -305,6 +331,11 @@ export default /*#__PURE__*/ {
       removeItem: this.removeItem,
       confirmBulkDelete: this.confirmBulkDelete,
       toggleDisplayMode: this.toggleDisplayMode,
+      closeUi: this.closeUi,
+      openUi: this.openUi,
+      uiMode: this.uiModeReactive,
+      isPageViewMode: () => this.isPageViewMode,
+      isModalViewMode: () => this.isModalViewMode,
       showExportModal: this.showExportModal,
       showImportModal: this.showImportModal,
       onDraggableAdded: this.onDraggableAdded,
@@ -370,6 +401,37 @@ export default /*#__PURE__*/ {
     enableFilters: {
       type: Boolean,
       default: false,
+    },
+    /**
+     * Filtros rápidos (pills/tabs) junto al título u otras ubicaciones.
+     * [{ key, label, icon?, variant?, count?, filter?, apply?, default?, disabled?, class? }]
+     */
+    quickFilters: {
+      type: Array,
+      default: () => [],
+    },
+    /** v-model:quickFilter — key activa */
+    quickFilter: {
+      type: [String, Number],
+      default: null,
+    },
+    /** title | toolbar | below */
+    quickFiltersPlacement: {
+      type: String,
+      default: 'title',
+    },
+    /** pills | tabs | segmented */
+    quickFiltersVariant: {
+      type: String,
+      default: 'pills',
+    },
+    quickFiltersClass: {
+      type: String,
+      default: '',
+    },
+    quickFiltersAriaLabel: {
+      type: String,
+      default: 'Filtros rápidos',
     },
 
     infiniteScroll: {
@@ -633,7 +695,41 @@ export default /*#__PURE__*/ {
     markDirty: {
       type: Boolean,
       default: true,
-    }
+    },
+    /**
+     * Cómo mostrar create/show/edit:
+     * - modal: comportamiento clásico (default)
+     * - page: vista dedicada reutilizando slots form/show
+     */
+    viewMode: {
+      type: String,
+      default: 'modal',
+      validator: (v) => ['modal', 'page'].includes(String(v || '').toLowerCase()),
+    },
+    /**
+     * Sincronizar create/show/edit con la URL.
+     * true => path (/resource/create, /resource/:id, /resource/:id/edit)
+     * o { strategy: 'query'|'path', ... }
+     */
+    urlSync: {
+      type: [Boolean, Object],
+      default: false,
+    },
+    /** Acción inicial desde props de ruta (create|show|edit) */
+    crudAction: {
+      type: String,
+      default: null,
+    },
+    /** Id inicial desde props de ruta */
+    crudItemId: {
+      type: [String, Number],
+      default: null,
+    },
+    /** Alias conveniente: id de ruta */
+    id: {
+      type: [String, Number],
+      default: null,
+    },
   },
 
 };
@@ -641,29 +737,42 @@ export default /*#__PURE__*/ {
 
 <template>
   <div class="crud">
-    <CrudHeader />
-    
-    <CrudTable>
+    <CrudDetailView v-if="isPageViewMode && isDetailOpen">
       <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
         <slot :name="name" v-bind="slotProps" />
       </template>
-    </CrudTable>
-    <CrudCards>
-      <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
-        <slot :name="name" v-bind="slotProps" />
-      </template>
-    </CrudCards>
-    <CrudKanban>
-      <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
-        <slot :name="name" v-bind="slotProps" />
-      </template>
-    </CrudKanban>
-    <CrudCustom />
-    
-    <b-overlay :show="loading" rounded="sm"></b-overlay>
-    
-    <CrudPagination />
-    <CrudModals ref="crudModals">
+    </CrudDetailView>
+
+    <template v-if="listVisible">
+      <CrudHeader>
+        <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
+          <slot :name="name" v-bind="slotProps" />
+        </template>
+      </CrudHeader>
+
+      <div class="crud-body">
+        <CrudTable>
+          <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
+            <slot :name="name" v-bind="slotProps" />
+          </template>
+        </CrudTable>
+        <CrudCards>
+          <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
+            <slot :name="name" v-bind="slotProps" />
+          </template>
+        </CrudCards>
+        <CrudKanban>
+          <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
+            <slot :name="name" v-bind="slotProps" />
+          </template>
+        </CrudKanban>
+        <CrudCustom />
+      </div>
+
+      <CrudPagination />
+    </template>
+
+    <CrudModals v-if="isModalViewMode" ref="crudModals">
       <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
         <slot :name="name" v-bind="slotProps" />
       </template>
@@ -672,6 +781,33 @@ export default /*#__PURE__*/ {
 </template>
 
 <style lang="scss" scoped>
+.crud {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+}
+
+.crud-body {
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.crud :deep(.table-responsive) {
+  margin: 0;
+}
+
+.crud :deep(.table) {
+  margin-bottom: 0;
+}
+
+.crud :deep(.paginator-container) {
+  margin-top: 0;
+  padding-top: 0.25rem;
+}
+
 tr td:last-child,
 tr td:first-child {
   width: 1%;
@@ -715,39 +851,30 @@ tbody tr.selected {
   align-items: center;
   width: 100%;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 0;
 }
 
 .crud-header {
   display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-between;
-  max-height: 3rem;
+  gap: 0.75rem 1rem;
+  margin: 0;
+  padding: 0;
 
   .crud-title {
     margin: 0;
-  }
-
-  .crud-search {
-    max-width: 15rem;
-
-    .btn {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-top-right-radius: 0.375rem;
-      border-bottom-right-radius: 0.375rem;
-
-      &.open {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-    }
+    padding: 0.25rem 0;
   }
 
   .table-options {
-    margin-bottom: 1rem;
+    margin: 0;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    width: 100%;
   }
 }
 

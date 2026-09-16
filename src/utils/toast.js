@@ -1,6 +1,6 @@
 /**
- * Sistema de toasts simple compatible con Bootstrap 4 y 5
- * Reemplaza la funcionalidad de bootstrap-vue $bvToast
+ * Sistema de toasts unificado (Bootstrap 5 toast API)
+ * Compatible con bootstrap-vue $bvToast
  */
 
 import {
@@ -11,117 +11,147 @@ import {
   cleanupModalArtifacts,
 } from './modal.js';
 
-/**
- * Crea y muestra un toast
- * @param {string} message - Mensaje a mostrar
- * @param {Object} options - Opciones del toast
- * @param {string} options.title - Título del toast
- * @param {string} options.variant - Variante (success, danger, warning, info)
- * @param {string} options.toaster - Posición (no usado, mantenido por compatibilidad)
- * @param {boolean} options.solid - Si es true, usa fondo sólido
- * @param {boolean} options.appendToast - Si es true, agrega al contenedor existente
- */
-export function showToast(message, options = {}) {
-  const {
-    title = '',
-    variant = 'info',
-    toaster = 'b-toaster-bottom-right',
-    solid = false,
-    appendToast = true
-  } = options;
+const DEDUPE_WINDOW_MS = 1800;
+const recentToasts = new Map();
 
-  // Crear contenedor de toasts si no existe
+function toastFingerprint(message, title, variant) {
+  return `${variant}::${title}::${String(message)}`.slice(0, 500);
+}
+
+function shouldSkipDuplicate(fingerprint) {
+  const now = Date.now();
+  for (const [key, ts] of recentToasts.entries()) {
+    if (now - ts > DEDUPE_WINDOW_MS) {
+      recentToasts.delete(key);
+    }
+  }
+  const last = recentToasts.get(fingerprint);
+  if (last && now - last < DEDUPE_WINDOW_MS) {
+    return true;
+  }
+  recentToasts.set(fingerprint, now);
+  return false;
+}
+
+function ensureToasterContainer(toaster = 'b-toaster-bottom-right') {
+  // Unificar contenedores legacy (app-toast-container / vue-laravel-crud-toaster)
+  const legacy = document.getElementById('app-toast-container');
+  if (legacy && legacy.id !== 'vue-laravel-crud-toaster') {
+    legacy.remove();
+  }
+
   let toasterContainer = document.getElementById('vue-laravel-crud-toaster');
   if (!toasterContainer) {
     toasterContainer = document.createElement('div');
     toasterContainer.id = 'vue-laravel-crud-toaster';
-    toasterContainer.className = 'vue-laravel-crud-toaster';
-    
-    // Determinar posición basada en toaster
-    if (toaster.includes('bottom-right')) {
-      toasterContainer.style.cssText = 'position: fixed; bottom: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
-    } else if (toaster.includes('bottom-left')) {
-      toasterContainer.style.cssText = 'position: fixed; bottom: 0; left: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+    toasterContainer.className = 'toast-container position-fixed p-3 vue-laravel-crud-toaster';
+
+    if (toaster.includes('bottom-left')) {
+      toasterContainer.classList.add('bottom-0', 'start-0');
     } else if (toaster.includes('top-right')) {
-      toasterContainer.style.cssText = 'position: fixed; top: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+      toasterContainer.classList.add('top-0', 'end-0');
     } else if (toaster.includes('top-left')) {
-      toasterContainer.style.cssText = 'position: fixed; top: 0; left: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+      toasterContainer.classList.add('top-0', 'start-0');
     } else {
-      // Default: bottom-right
-      toasterContainer.style.cssText = 'position: fixed; bottom: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
+      toasterContainer.classList.add('bottom-0', 'end-0');
     }
-    
+
+    toasterContainer.style.zIndex = '1090';
+    toasterContainer.style.maxWidth = '360px';
     document.body.appendChild(toasterContainer);
   }
 
-  // Crear elemento toast
-  const toastId = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  return toasterContainer;
+}
+
+/**
+ * Crea y muestra un toast
+ * @param {string} message - Mensaje a mostrar
+ * @param {Object} options - Opciones del toast
+ */
+export function showToast(message, options = {}) {
+  // Compat: showToast(message, title, variant) desde mixins legacy
+  if (typeof options === 'string') {
+    const title = options;
+    const variant = arguments[2] || 'info';
+    options = { title, variant, solid: true };
+  }
+
+  const {
+    title = '',
+    variant = 'info',
+    toaster = 'b-toaster-bottom-right',
+    solid = true,
+    appendToast = true,
+    delay = 5000,
+  } = options;
+
+  const fingerprint = toastFingerprint(message, title, variant);
+  if (shouldSkipDuplicate(fingerprint)) {
+    return null;
+  }
+
+  const toasterContainer = ensureToasterContainer(toaster);
+
+  if (!appendToast) {
+    toasterContainer.innerHTML = '';
+  }
+
+  const toastId = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
   const toast = document.createElement('div');
   toast.id = toastId;
-  toast.className = 'toast';
+  toast.className = 'toast align-items-center border-0 shadow mb-2';
   toast.setAttribute('role', 'alert');
   toast.setAttribute('aria-live', 'assertive');
   toast.setAttribute('aria-atomic', 'true');
-  
-  // Determinar clases según variant
-  let bgClass = '';
-  let textClass = '';
+  toast.dataset.fingerprint = fingerprint;
+
+  let bgClass = 'bg-secondary';
+  let textClass = 'text-white';
   if (variant === 'success') {
-    bgClass = solid ? 'bg-success' : 'border-success';
-    textClass = solid ? 'text-white' : 'text-success';
+    bgClass = 'bg-success';
   } else if (variant === 'danger') {
-    bgClass = solid ? 'bg-danger' : 'border-danger';
-    textClass = solid ? 'text-white' : 'text-danger';
+    bgClass = 'bg-danger';
   } else if (variant === 'warning') {
-    bgClass = solid ? 'bg-warning' : 'border-warning';
-    textClass = solid ? 'text-white' : 'text-warning';
+    bgClass = 'bg-warning';
+    textClass = 'text-dark';
   } else if (variant === 'info') {
-    bgClass = solid ? 'bg-info' : 'border-info';
-    textClass = solid ? 'text-white' : 'text-info';
-  } else {
-    bgClass = solid ? 'bg-secondary' : 'border-secondary';
-    textClass = solid ? 'text-white' : 'text-secondary';
+    bgClass = 'bg-info';
+    textClass = 'text-dark';
   }
 
-  // Construir HTML del toast
+  if (solid) {
+    toast.classList.add(bgClass, textClass);
+  } else {
+    toast.classList.add(`border-${variant || 'secondary'}`);
+  }
+
   toast.innerHTML = `
-    <div class="toast-header ${solid ? bgClass + ' ' + textClass : ''}" style="${solid ? '' : 'border-bottom-color: inherit;'}">
-      ${title ? `<strong class="me-auto">${title}</strong>` : ''}
-      <button type="button" class="btn-close ${solid ? '' : 'btn-close-white'}" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body ${solid ? bgClass + ' ' + textClass : textClass}">
-      ${message}
+    <div class="d-flex">
+      <div class="toast-body">
+        ${title ? `<strong class="d-block mb-1">${title}</strong>` : ''}
+        <div>${message}</div>
+      </div>
+      <button type="button" class="btn-close ${textClass === 'text-white' ? 'btn-close-white' : ''} me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   `;
 
-  // Agregar clases adicionales
-  if (!solid) {
-    toast.classList.add('border');
-  }
-
-  // Agregar al contenedor
   toasterContainer.appendChild(toast);
 
-  // Inicializar y mostrar toast
-  // Bootstrap 5
   if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Toast) {
     const bsToast = new window.bootstrap.Toast(toast, {
       autohide: true,
-      delay: 5000
+      delay,
     });
     bsToast.show();
-    
-    // Remover del DOM cuando se oculte
+
     toast.addEventListener('hidden.bs.toast', () => {
       if (toast.parentNode) {
         toast.remove();
       }
     });
   } else {
-    // Bootstrap 4 o fallback manual
     toast.classList.add('show');
-    
-    // Auto-ocultar después de 5 segundos
     setTimeout(() => {
       toast.classList.remove('show');
       setTimeout(() => {
@@ -129,7 +159,7 @@ export function showToast(message, options = {}) {
           toast.remove();
         }
       }, 300);
-    }, 5000);
+    }, delay);
   }
 
   return toast;
@@ -255,13 +285,11 @@ export const modalHelper = {
 export default {
   install(app) {
     app.config.globalProperties.$toast = showToast;
-    
-    // Compatibilidad con bootstrap-vue API
+
     app.config.globalProperties.$bvToast = {
       toast: showToast
     };
-    
-    // Helper para modales
+
     app.config.globalProperties.$bvModal = modalHelper;
   }
 };

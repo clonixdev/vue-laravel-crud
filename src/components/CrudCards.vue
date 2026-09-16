@@ -1,130 +1,100 @@
 <template>
-  <div v-if="currentDisplayMode == displayModes.MODE_CARDS">
-    <!-- Spinner durante la carga inicial -->
-    <div v-if="loadingValue || !firstLoadValue" class="text-center p-5">
-      <b-spinner variant="primary" label="Cargando..."></b-spinner>
-      <p class="mt-2">{{ messageLoading }}</p>
-    </div>
+  <div v-if="currentDisplayMode == displayModes.MODE_CARDS" class="crud-cards">
+    <CrudSkeleton
+      v-if="isInitialLoading"
+      :columns="columnsList"
+      :message="messageLoading"
+      show-table
+      :row-count="4"
+    />
 
-    <!-- Cards con datos -->
     <template v-else>
-      <masonry
-        :cols="{ default: 12 / colLg, 1400: 12 / colXl, 1200: 12 / colLg, 1000: 12 / colMd, 700: 12 / colSm, 400: 12 / colXs }"
-        :gutter="{ default: '15px', 700: '15px' }"
-      >
-        <draggable 
-          :list="items" 
-          :group="draggableGroup" 
-          :draggable="orderable ? '.item' : '.none'" 
-          @start="drag = true"
-          @end="drag = false" 
-          @sort="onSort()" 
-          @add="onDraggableAdded($event)" 
-          @change="onDraggableChange($event)"
-          :options="draggableOptions"
-          item-key="id"
+      <div class="row g-3">
+        <div
+          v-for="(element, index) in cardItems"
+          :key="element.id || index"
+          class="item"
+          :class="colClasses"
         >
-          <template #item="{ element, index }">
-            <div class="item">
-              <slot name="card" v-bind:item="element">
-                <ItemCard 
-                  :item="element" 
-                  :columns="columns" 
-                  :index="index"
-                  :cardClass="cardClass" 
-                  :cardHideFooter="cardHideFooter" 
-                  :itemValue="itemValue"
-                  :getStateValue="getStateValue"
-                  :getStateOptions="getStateOptions"
-                  :getStateBadgeVariant="getStateBadgeVariant"
-                  :getArrayValue="getArrayValue" 
-                  :showItem="showItem"
-                  :updateItem="updateItem" 
-                  :removeItem="removeItem"
-                >
-                  <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
-                    <slot :name="name" v-bind="slotProps" />
-                  </template>
-                </ItemCard>
-              </slot>
-            </div>
-          </template>
-        </draggable>
-      </masonry>
+          <slot name="card" v-bind:item="element">
+            <ItemCard
+              :item="element"
+              :columns="columns"
+              :index="index"
+              :cardClass="cardClass"
+              :cardHideFooter="cardHideFooter"
+              :itemValue="itemValue"
+              :getStateValue="getStateValue"
+              :getStateOptions="getStateOptions"
+              :getStateBadgeVariant="getStateBadgeVariant"
+              :getArrayValue="getArrayValue"
+              :showItem="showItem"
+              :updateItem="updateItem"
+              :removeItem="removeItem"
+            >
+              <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
+                <slot :name="name" v-bind="slotProps" />
+              </template>
+            </ItemCard>
+          </slot>
+        </div>
+      </div>
 
-      <p v-if="firstLoadValue && itemsList && itemsList.length == 0 && !infiniteScroll" class="p-3">
-        {{ messageEmptyResults }}
-      </p>
+      <CrudEmptyState
+        v-if="firstLoadValue && itemsList && itemsList.length == 0 && !infiniteScroll"
+        :message="messageEmptyResults"
+        icon="inbox"
+      />
     </template>
   </div>
 </template>
 
 <script>
-import { h } from 'vue'
-import draggable from "vuedraggable";
 import ItemCard from '../ItemCard.vue';
-
-// vue-masonry-css only ships a Vue 2-style plugin (default export). Use a light layout wrapper.
-const MasonryLayout = {
-  name: 'MasonryLayout',
-  props: {
-    cols: { type: [Object, Number, String], default: 2 },
-    gutter: { type: [Object, Number, String], default: 0 },
-    tag: { type: String, default: 'div' },
-  },
-  render() {
-    return h(this.tag, { class: 'vlc-masonry-layout' }, this.$slots.default?.())
-  },
-}
+import CrudSkeleton from './CrudSkeleton.vue';
+import CrudEmptyState from './CrudEmptyState.vue';
 
 export default {
   name: 'CrudCards',
   components: {
-    draggable,
     ItemCard,
-    masonry: MasonryLayout
+    CrudSkeleton,
+    CrudEmptyState,
   },
-  inject: [
-    'bootstrapFactory',
-    'displayMode',
-    'displayModes',
-    'items',
-    'draggableGroup',
-    'orderable',
-    'draggableOptions',
-    'itemsList',
-    'colLg',
-    'colXl',
-    'colMd',
-    'colSm',
-    'colXs',
-    'columns',
-    'cardClass',
-    'cardHideFooter',
-    'itemValue',
-    'getStateValue',
-    'getStateOptions',
-    'getStateBadgeVariant',
-    'getArrayValue',
-    'showItem',
-    'updateItem',
-    'removeItem',
-    'loading',
-    'firstLoad',
-    'infiniteScroll',
-    'messageEmptyResults',
-    'messageLoading',
-    'onSort',
-    'onDraggableAdded',
-    'onDraggableChange'
-  ],
-  data() {
-    return {
-      drag: false
-    };
+  inject: {
+    bootstrapFactory: { default: null },
+    displayMode: { default: null },
+    getDisplayMode: { default: null },
+    displayModes: { default: () => ({ MODE_TABLE: 1, MODE_CARDS: 2 }) },
+    columns: { default: () => [] },
+    items: { default: () => [] },
+    itemsList: { default: () => [] },
+    loading: { default: null },
+    firstLoad: { default: null },
+    infiniteScroll: { default: false },
+    messageEmptyResults: { default: '' },
+    messageLoading: { default: '' },
+    colXs: { default: 12 },
+    colSm: { default: 6 },
+    colMd: { default: 4 },
+    colLg: { default: 3 },
+    colXl: { default: 3 },
+    cardClass: { default: '' },
+    cardHideFooter: { default: false },
+    itemValue: { default: null },
+    getStateValue: { default: null },
+    getStateOptions: { default: null },
+    getStateBadgeVariant: { default: null },
+    getArrayValue: { default: null },
+    showItem: { default: () => {} },
+    updateItem: { default: () => {} },
+    removeItem: { default: () => {} },
   },
   computed: {
     currentDisplayMode() {
+      if (typeof this.getDisplayMode === 'function') {
+        return this.getDisplayMode();
+      }
       if (!this.displayMode) return 1;
       if (this.displayMode.value !== undefined) {
         return this.displayMode.value;
@@ -134,12 +104,38 @@ export default {
       }
       return this.displayMode;
     },
+    colClasses() {
+      const xs = this.colXs || 12;
+      const sm = this.colSm || 6;
+      const md = this.colMd || 4;
+      const lg = this.colLg || 3;
+      const xl = this.colXl || lg;
+      return [
+        `col-${xs}`,
+        `col-sm-${sm}`,
+        `col-md-${md}`,
+        `col-lg-${lg}`,
+        `col-xl-${xl}`,
+      ];
+    },
     loadingValue() {
       return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
     },
     firstLoadValue() {
       return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
-    }
-  }
+    },
+    isInitialLoading() {
+      return this.loadingValue && !this.firstLoadValue;
+    },
+    columnsList() {
+      return Array.isArray(this.columns) ? this.columns : [];
+    },
+    cardItems() {
+      if (Array.isArray(this.itemsList) && this.itemsList.length) {
+        return this.itemsList;
+      }
+      return Array.isArray(this.items) ? this.items : [];
+    },
+  },
 };
 </script>

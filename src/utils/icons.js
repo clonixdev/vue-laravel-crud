@@ -18,6 +18,7 @@ export const DEFAULT_ICON_NAMES = [
   'bar-chart',
   'card-list',
   'cart-check',
+  'cart',
   'check',
   'check-all',
   'check-circle',
@@ -55,6 +56,7 @@ export const DEFAULT_ICON_NAMES = [
   'telephone',
   'tools',
   'trash',
+  'x',
   'x-circle',
 ];
 
@@ -85,6 +87,9 @@ export const ICON_NAME_MAP = {
   'sort-down': 'arrow-down',
   clipboard: 'clipboard',
   'clipboard-check': 'clipboard-check',
+  cart: 'cart',
+  'cart-check': 'cart-check',
+  x: 'x',
 };
 
 const ICON_RESOLVER_INSTALLED = new WeakMap();

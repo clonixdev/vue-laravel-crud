@@ -44,6 +44,49 @@ export default {
       this.firstLoad = true;
     },
 
+    async fetchItem(id) {
+      if (id == null || id === '') {
+        return null;
+      }
+      this.loading = true;
+      try {
+        if (this.useVuexORM && this.model?.api) {
+          const result = await this.model.api().get(`${this.apiUrl}/${this.modelName}/${id}`, {
+            dataKey: null,
+          });
+          const entities = result?.entities || result?.response?.data;
+          const row = Array.isArray(entities)
+            ? entities[0]
+            : entities?.data || result?.response?.data || null;
+          this.loading = false;
+          return row;
+        }
+
+        const response = await axios.get(`${this.apiUrl}/${this.modelName}/${id}`);
+        this.loading = false;
+        return response.data?.data || response.data || null;
+      } catch (error) {
+        this.loading = false;
+        this.toastError(error);
+        return null;
+      }
+    },
+
+    closeDetailAfterSave(create) {
+      const shouldClose =
+        this.hideModalAfterSave ||
+        (create && this.hideModalAfterCreate) ||
+        (!create && this.hideModalAfterUpdate);
+      if (!shouldClose) {
+        return;
+      }
+      if (typeof this.closeUi === 'function') {
+        this.closeUi();
+      } else {
+        this.$bvModal.hide('modal-form-item-' + this.modelName);
+      }
+    },
+
     fetchItems(page = 1, concat = false) {
       this.$emit("beforeFetch", {});
       if (this.useVuexORM) {
@@ -194,9 +237,7 @@ export default {
       this.loading = false;
       this.toastSuccess("Elemento Modificado");
 
-      if (this.hideModalAfterSave || ((create && this.hideModalAfterCreate) || (!create && this.hideModalAfterUpdate))) {
-        this.$bvModal.hide("modal-form-item-" + this.modelName);
-      }
+      this.closeDetailAfterSave(create);
     },
 
     async saveItemLocal(event = null) {
@@ -215,15 +256,11 @@ export default {
         }
 
         this.items[itemIndex] = itemSave;
-        if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
-        }
+        this.closeDetailAfterSave(false);
       } else {
         itemSave.index = this.items.length + 1;
         this.items.push(itemSave);
-        if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
-        }
+        this.closeDetailAfterSave(true);
       }
       this.toastSuccess("Elemento Modificado");
       this.loading = false;
@@ -257,9 +294,7 @@ export default {
             this.item
           )
           .then((response) => {
-            if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-              this.$bvModal.hide("modal-form-item-" + this.modelName);
-            }
+            this.closeDetailAfterSave(false);
             let itemSv = response.data;
             let itemIndex = this.items.findIndex(
               (item) => item.id == this.item.id
@@ -296,9 +331,7 @@ export default {
             .post(this.apiUrl + "/" + this.modelName, formData)
             .then((response) => {
               this.loading = false;
-              if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-                this.$bvModal.hide("modal-form-item-" + this.modelName);
-              }
+              this.closeDetailAfterSave(true);
               if (response.data.success) {
                 if (response.data.message) {
                   this.toastSuccess(response.data.message);
@@ -322,9 +355,7 @@ export default {
             .post(this.apiUrl + "/" + this.modelName, this.item)
             .then((response) => {
               this.loading = false;
-              if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-                this.$bvModal.hide("modal-form-item-" + this.modelName);
-              }
+              this.closeDetailAfterSave(true);
               if (response.data.success) {
                 if (response.data.message) {
                   this.toastSuccess(response.data.message);

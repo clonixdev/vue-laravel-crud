@@ -13,7 +13,12 @@
             "import": "./src/entry.esm.js",
             "require": "./dist/vue-laravel-crud.ssr.js",
             "default": "./src/entry.esm.js"
-        }
+        },
+        "./UsersCrud": "./src/components/UsersCrud.vue",
+        "./RolesCrud": "./src/components/RolesCrud.vue",
+        "./PermissionTreeEditor": "./src/components/PermissionTreeEditor.vue",
+        "./crudRoutes": "./src/mixins/crudUrlSync.js",
+        "./src/*": "./src/*"
     },
     "files": [
         "dist/*",

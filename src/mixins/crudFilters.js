@@ -23,11 +23,12 @@ export default {
             });
           }
         }
-        if (this.sortable) {
+        if (this.sortable && column.type != 'actions' && column.type != 'checkbox' && column.type != 'select') {
           this.internalFilters.push({
             column: column.prop + "_sort",
             op: column.filterOp ? column.filterOp : "=",
             value: null,
+            sortPriority: null,
           });
         }
       });
@@ -75,18 +76,53 @@ export default {
     },
 
     toggleSortFilter(column) {
-      let value = this.internalFilterByProp(column.prop + "_sort").value;
+      const sortEntry = this.internalFilterByProp(column.prop + '_sort');
+      if (!sortEntry) {
+        return;
+      }
+
+      let value = sortEntry.value;
       if (!value) {
-        this.internalFilterByProp(column.prop + "_sort").value = "ASC";
-      } else if (value == "ASC") {
-        this.internalFilterByProp(column.prop + "_sort").value = "DESC";
-      } else if (value == "DESC") {
-        this.internalFilterByProp(column.prop + "_sort").value = null;
+        sortEntry.value = 'ASC';
+        sortEntry.sortPriority = this.nextSortPriority();
+      } else if (value == 'ASC') {
+        sortEntry.value = 'DESC';
+        if (!sortEntry.sortPriority) {
+          sortEntry.sortPriority = this.nextSortPriority();
+        }
+      } else if (value == 'DESC') {
+        sortEntry.value = null;
+        sortEntry.sortPriority = null;
+        this.normalizeSortPriorities();
       }
       this.forceRecomputeCounter++;
       setTimeout(() => {
         this.refresh();
       }, 1);
+    },
+
+    nextSortPriority() {
+      const priorities = this.internalFilters
+        .filter((f) => f.column.endsWith('_sort') && f.value && f.sortPriority)
+        .map((f) => f.sortPriority);
+      return priorities.length ? Math.max(...priorities) + 1 : 1;
+    },
+
+    normalizeSortPriorities() {
+      const active = this.internalFilters
+        .filter((f) => f.column.endsWith('_sort') && f.value)
+        .sort((a, b) => (a.sortPriority || 0) - (b.sortPriority || 0));
+      active.forEach((f, idx) => {
+        f.sortPriority = idx + 1;
+      });
+    },
+
+    getSortPriority(column) {
+      const sortEntry = this.internalFilterByProp(column.prop + '_sort');
+      if (!sortEntry || !sortEntry.value) {
+        return null;
+      }
+      return sortEntry.sortPriority || null;
     },
 
     toggleFilters() {
@@ -112,7 +148,13 @@ export default {
     },
 
     isColumnHasFilter(column) {
-      return column && !column.hideFilter && column.type != "actions";
+      return (
+        column &&
+        !column.hideFilter &&
+        column.type != 'actions' &&
+        column.type != 'checkbox' &&
+        column.type != 'select'
+      );
     },
 
     /**
@@ -157,6 +199,112 @@ export default {
       setTimeout(() => {
         this.refresh();
       }, 1);
-    }
-  }
+    },
+
+    initQuickFilterState() {
+      const fromProp = this.quickFilter != null && this.quickFilter !== ''
+        ? String(this.quickFilter)
+        : null;
+      if (fromProp) {
+        this.activeQuickFilterKey = fromProp;
+        this.activeQuickFilterKeyReactive.value = fromProp;
+        return;
+      }
+      this.ensureActiveQuickFilter();
+    },
+
+    ensureActiveQuickFilter() {
+      const items = Array.isArray(this.quickFilters) ? this.quickFilters : [];
+      if (!items.length) {
+        this.activeQuickFilterKey = null;
+        this.activeQuickFilterKeyReactive.value = null;
+        return;
+      }
+      if (this.activeQuickFilterKey && this.findQuickFilterItem(this.activeQuickFilterKey)) {
+        return;
+      }
+      const preferred = items.find((item) => item && item.default)
+        || items.find((item) => item && (item.filter == null || (Array.isArray(item.filter) && item.filter.length === 0)))
+        || items[0];
+      const key = this.normalizeQuickFilterKey(preferred);
+      this.activeQuickFilterKey = key;
+      this.activeQuickFilterKeyReactive.value = key;
+    },
+
+    normalizeQuickFilterKey(item) {
+      if (!item) return null;
+      if (item.key != null) return String(item.key);
+      if (item.value != null) return String(item.value);
+      if (item.id != null) return String(item.id);
+      return null;
+    },
+
+    findQuickFilterItem(key) {
+      if (key == null || key === '') return null;
+      const list = Array.isArray(this.quickFilters) ? this.quickFilters : [];
+      return list.find((item) => this.normalizeQuickFilterKey(item) === String(key)) || null;
+    },
+
+    resolveQuickFilterPayload(item) {
+      if (!item) return [];
+      if (typeof item.apply === 'function') {
+        try {
+          const result = item.apply(item, this);
+          return Array.isArray(result) ? result : [];
+        } catch (e) {
+          console.warn('quickFilter.apply failed', e);
+          return [];
+        }
+      }
+      if (item.filter == null) return [];
+      if (typeof item.filter === 'function') {
+        try {
+          const result = item.filter(item, this);
+          return Array.isArray(result) ? result : [];
+        } catch (e) {
+          console.warn('quickFilter.filter failed', e);
+          return [];
+        }
+      }
+      return Array.isArray(item.filter) ? item.filter : [];
+    },
+
+    selectQuickFilter(key, item = null) {
+      const resolved = item || this.findQuickFilterItem(key);
+      const normalizedKey = resolved
+        ? this.normalizeQuickFilterKey(resolved)
+        : (key != null ? String(key) : null);
+
+      if (!normalizedKey) {
+        return;
+      }
+
+      if (this.activeQuickFilterKey === normalizedKey) {
+        this.$emit('quick-filter-click', {
+          key: normalizedKey,
+          item: resolved,
+          filter: this.resolveQuickFilterPayload(resolved),
+        });
+        return;
+      }
+
+      this.activeQuickFilterKey = normalizedKey;
+      this.activeQuickFilterKeyReactive.value = normalizedKey;
+      this.forceRecomputeCounter++;
+
+      const payload = {
+        key: normalizedKey,
+        item: resolved,
+        filter: this.resolveQuickFilterPayload(resolved),
+      };
+
+      this.$emit('update:quickFilter', normalizedKey);
+      this.$emit('quick-filter-change', payload);
+      this.$emit('quick-filter-click', payload);
+
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
+    },
+  },
 };

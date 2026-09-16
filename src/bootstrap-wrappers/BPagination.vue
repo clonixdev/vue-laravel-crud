@@ -1,5 +1,5 @@
 <template>
-  <nav :aria-label="ariaLabel">
+  <nav v-if="shouldRender" :aria-label="ariaLabel">
     <ul :class="paginationClasses">
       <li v-if="showFirst" class="page-item" :class="{ disabled: currentPage === 1 }">
         <a class="page-link" href="#" @click.prevent="goToPage(1)">{{ firstText }}</a>
@@ -7,7 +7,7 @@
       <li class="page-item" :class="{ disabled: currentPage === 1 }">
         <a class="page-link" href="#" @click.prevent="goToPage(currentPage - 1)">{{ prevText }}</a>
       </li>
-      
+
       <li
         v-for="page in pages"
         :key="page"
@@ -24,7 +24,7 @@
         </a>
         <span v-else class="page-link">{{ page }}</span>
       </li>
-      
+
       <li class="page-item" :class="{ disabled: currentPage === totalPages }">
         <a class="page-link" href="#" @click.prevent="goToPage(currentPage + 1)">{{ nextText }}</a>
       </li>
@@ -39,87 +39,101 @@
 export default {
   name: 'BPagination',
   props: {
+    modelValue: {
+      type: Number,
+      default: undefined,
+    },
     value: {
       type: Number,
-      default: 1
+      default: 1,
     },
     totalRows: {
       type: Number,
-      required: true
+      required: true,
     },
     perPage: {
       type: Number,
-      default: 10
+      default: 10,
     },
     limit: {
       type: Number,
-      default: 5
+      default: 5,
     },
     firstText: {
       type: String,
-      default: 'First'
+      default: 'First',
     },
     prevText: {
       type: String,
-      default: 'Prev'
+      default: 'Anterior',
     },
     nextText: {
       type: String,
-      default: 'Next'
+      default: 'Siguiente',
     },
     lastText: {
       type: String,
-      default: 'Last'
+      default: 'Last',
     },
     showFirst: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showLast: {
       type: Boolean,
-      default: false
+      default: false,
     },
     ariaLabel: {
       type: String,
-      default: 'Pagination'
+      default: 'Pagination',
     },
     size: {
       type: String,
       default: null,
-      validator: (value) => !value || ['sm', 'lg'].includes(value)
+      validator: (value) => !value || ['sm', 'lg'].includes(value),
     },
     align: {
       type: String,
       default: null,
-      validator: (value) => !value || ['left', 'center', 'right'].includes(value)
-    }
+      validator: (value) => !value || ['left', 'center', 'right'].includes(value),
+    },
   },
   computed: {
+    shouldRender() {
+      return this.totalRows > 0 && this.totalPages > 0;
+    },
     currentPage: {
       get() {
+        if (this.modelValue !== undefined) {
+          return this.modelValue;
+        }
         return this.value;
       },
       set(val) {
+        this.$emit('update:modelValue', val);
         this.$emit('input', val);
         this.$emit('change', val);
-      }
+      },
     },
     totalPages() {
+      if (!this.totalRows || !this.perPage) {
+        return 0;
+      }
       return Math.ceil(this.totalRows / this.perPage);
     },
     paginationClasses() {
       const classes = ['pagination'];
-      
+
       if (this.size) {
         classes.push(`pagination-${this.size}`);
       }
-      
+
       if (this.align === 'center') {
         classes.push('justify-content-center');
       } else if (this.align === 'right') {
         classes.push('justify-content-end');
       }
-      
+
       return classes.join(' ');
     },
     pages() {
@@ -127,7 +141,11 @@ export default {
       const total = this.totalPages;
       const current = this.currentPage;
       const limit = this.limit;
-      
+
+      if (total <= 0) {
+        return pages;
+      }
+
       if (total <= limit) {
         for (let i = 1; i <= total; i++) {
           pages.push(i);
@@ -135,22 +153,22 @@ export default {
       } else {
         let start = Math.max(1, current - Math.floor(limit / 2));
         let end = Math.min(total, start + limit - 1);
-        
+
         if (end - start < limit - 1) {
           start = Math.max(1, end - limit + 1);
         }
-        
+
         if (start > 1) {
           pages.push(1);
           if (start > 2) {
             pages.push('...');
           }
         }
-        
+
         for (let i = start; i <= end; i++) {
           pages.push(i);
         }
-        
+
         if (end < total) {
           if (end < total - 1) {
             pages.push('...');
@@ -158,16 +176,16 @@ export default {
           pages.push(total);
         }
       }
-      
+
       return pages;
-    }
+    },
   },
   methods: {
     goToPage(page) {
       if (page >= 1 && page <= this.totalPages && page !== this.currentPage) {
         this.currentPage = page;
       }
-    }
-  }
+    },
+  },
 };
 </script>

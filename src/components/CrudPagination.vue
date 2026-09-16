@@ -1,7 +1,6 @@
 <template>
   <div>
-    <!-- Infinite Loading -->
-    <div 
+    <div
       v-if="infiniteScroll"
       ref="infiniteLoadingTrigger"
       class="infinite-loading-trigger"
@@ -11,27 +10,36 @@
         <b-spinner variant="primary" label="Cargando..."></b-spinner>
         <div class="mt-2">{{ messageLoading }}</div>
       </div>
-      <div v-else-if="!hasMorePages && firstLoadValue" class="text-center p-3">
-        <div v-if="items.length == 0">{{ messageEmptyResults }}</div>
-        <div v-else>{{ messageNoMore }}</div>
+      <CrudEmptyState
+        v-else-if="!hasMorePages && firstLoadValue && items.length == 0"
+        :message="messageEmptyResults"
+        icon="inbox"
+      />
+      <div v-else-if="!hasMorePages && firstLoadValue" class="text-center p-3 text-muted">
+        {{ messageNoMore }}
       </div>
     </div>
 
-    <!-- Paginador -->
-    <div class="paginator-container" v-if="!infiniteScroll">
+    <CrudSkeleton
+      v-if="!infiniteScroll && isInitialLoading"
+      :show-table="false"
+      show-paginator
+    />
+
+    <div class="paginator-container" v-else-if="!infiniteScroll && firstLoadValue">
       <div class="paginator-data">
         <span class="paginator-badge">
           <span class="paginator-label">Filas:</span>
           <span class="paginator-value">{{ pagination.total }}</span>
         </span>
-        <b-dropdown 
-          variant="outline-secondary" 
-          size="sm" 
+        <b-dropdown
+          variant="outline-secondary"
+          size="sm"
           class="paginator-dropdown"
           :text="`xPág: ${pagination.per_page}`"
         >
-          <b-dropdown-item 
-            v-for="option in perPageOptions" 
+          <b-dropdown-item
+            v-for="option in perPageOptions"
             :key="option"
             @click="onPerPageChange(option)"
             :active="pagination.per_page === option"
@@ -39,10 +47,10 @@
             {{ option }}
           </b-dropdown-item>
         </b-dropdown>
-        <b-dropdown 
+        <b-dropdown
           v-if="selectedItemsCount > 0"
-          variant="outline-secondary" 
-          size="sm" 
+          variant="outline-secondary"
+          size="sm"
           class="paginator-dropdown paginator-badge-dropdown"
           :text="`Seleccionados: ${selectedItemsCount}`"
         >
@@ -52,13 +60,14 @@
           </b-dropdown-item>
         </b-dropdown>
       </div>
-      
-      <div class="crud-paginator">
-        <b-pagination 
-          v-if="showPaginator" 
-          v-model="pagination.current_page" 
+
+      <div class="crud-paginator" v-if="showPaginator && pagination.total > 0">
+        <b-pagination
+          v-model="pagination.current_page"
           :total-rows="pagination.total"
-          :per-page="pagination.per_page" 
+          :per-page="pagination.per_page"
+          prev-text="Anterior"
+          next-text="Siguiente"
           @change="onPaginationChange($event)"
         ></b-pagination>
       </div>
@@ -67,8 +76,15 @@
 </template>
 
 <script>
+import CrudSkeleton from './CrudSkeleton.vue';
+import CrudEmptyState from './CrudEmptyState.vue';
+
 export default {
   name: 'CrudPagination',
+  components: {
+    CrudSkeleton,
+    CrudEmptyState,
+  },
   inject: [
     'bootstrapFactory',
     'infiniteScroll',
@@ -85,17 +101,16 @@ export default {
     'infiniteHandler',
     'onPaginationChange',
     'onPerPageChange',
-    'clearSelection'
+    'clearSelection',
   ],
   data() {
     return {
       perPageOptions: [10, 20, 50, 100],
-      observer: null
+      observer: null,
     };
   },
   computed: {
     selectedItemsCount() {
-      // Computed para forzar reactividad del contador
       return this.selectedItems ? this.selectedItems.length : 0;
     },
     loadingValue() {
@@ -104,10 +119,13 @@ export default {
     firstLoadValue() {
       return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
     },
+    isInitialLoading() {
+      return this.loadingValue && !this.firstLoadValue;
+    },
     hasMorePages() {
       if (!this.firstLoadValue) return true;
       return (this.pagination.current_page * this.pagination.per_page) < this.pagination.total;
-    }
+    },
   },
   mounted() {
     if (this.infiniteScroll) {
@@ -126,11 +144,9 @@ export default {
         this.$nextTick(() => {
           this.setupInfiniteScroll();
         });
-      } else {
-        if (this.observer) {
-          this.observer.disconnect();
-          this.observer = null;
-        }
+      } else if (this.observer) {
+        this.observer.disconnect();
+        this.observer = null;
       }
     },
     infiniteScrollKey() {
@@ -139,31 +155,28 @@ export default {
           this.setupInfiniteScroll();
         });
       }
-    }
+    },
   },
   methods: {
     setupInfiniteScroll() {
       if (!this.infiniteScroll) return;
-      
-      // Limpiar observer anterior si existe
+
       if (this.observer) {
         this.observer.disconnect();
         this.observer = null;
       }
-      
+
       this.$nextTick(() => {
         const trigger = this.$refs.infiniteLoadingTrigger;
         if (!trigger) return;
-        
-        // Crear IntersectionObserver
+
         this.observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
             if (entry.isIntersecting && !this.loadingValue && this.hasMorePages) {
-              // Simular el objeto $state para compatibilidad con infiniteHandler
               const $state = {
                 loaded: () => {},
                 complete: () => {},
-                error: () => {}
+                error: () => {},
               };
               this.infiniteHandler($state);
             }
@@ -171,13 +184,13 @@ export default {
         }, {
           root: null,
           rootMargin: '100px',
-          threshold: 0.1
+          threshold: 0.1,
         });
-        
+
         this.observer.observe(trigger);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -187,8 +200,8 @@ export default {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   width: 100%;
-  margin-top: 1rem;
-  gap: 1rem;
+  margin-top: 0;
+  gap: 0.75rem;
 }
 
 .paginator-data {
@@ -232,7 +245,7 @@ export default {
   font-size: 0.875rem;
 }
 
-.paginator-dropdown >>> .btn {
+.paginator-dropdown :deep(.btn) {
   padding: 0.375rem 0.625rem;
   font-size: 0.875rem;
   background-color: #f8f9fa;
@@ -240,7 +253,7 @@ export default {
   color: #495057;
 }
 
-.paginator-dropdown >>> .btn:hover {
+.paginator-dropdown :deep(.btn:hover) {
   background-color: #e9ecef;
   border-color: #ced4da;
 }
@@ -257,7 +270,7 @@ export default {
   position: relative;
 }
 
-.paginator-badge-dropdown >>> .btn {
+.paginator-badge-dropdown :deep(.btn) {
   padding: 0.375rem 0.625rem;
   font-size: 0.875rem;
   background-color: #f8f9fa;
@@ -268,7 +281,7 @@ export default {
   gap: 0.25rem;
 }
 
-.paginator-badge-dropdown >>> .btn:hover {
+.paginator-badge-dropdown :deep(.btn:hover) {
   background-color: #e9ecef;
   border-color: #ced4da;
 }

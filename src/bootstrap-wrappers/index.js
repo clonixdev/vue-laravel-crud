@@ -29,6 +29,7 @@ import BInputGroupPrepend from './BInputGroupPrepend.vue';
 import BOverlay from './BOverlay.vue';
 import BFormFile from './BFormFile.vue';
 import BFormRadio from './BFormRadio.vue';
+import BFormRadioGroup from './BFormRadioGroup.vue';
 import BFormCheckbox from './BFormCheckbox.vue';
 import BFormDatepicker from './BFormDatepicker.vue';
 import BIcon from './BIcon.vue';
@@ -37,6 +38,8 @@ import BNavbarBrand from './BNavbarBrand.vue';
 import BNavbarNav from './BNavbarNav.vue';
 import BNavItem from './BNavItem.vue';
 import BSidebar from './BSidebar.vue';
+import BCollapse from './BCollapse.vue';
+import VBToggle from './vb-toggle.js';
 import { registerBootstrapIcons } from '../utils/icons.js';
 
 // Exportar todos los componentes como objeto (similar a bootstrap-vue)
@@ -67,6 +70,7 @@ const BootstrapComponents = {
   BOverlay,
   BFormFile,
   BFormRadio,
+  BFormRadioGroup,
   BFormCheckbox,
   BFormDatepicker,
   BIcon,
@@ -75,6 +79,7 @@ const BootstrapComponents = {
   BNavbarNav,
   BNavItem,
   BSidebar,
+  BCollapse,
 };
 
 // También exportar con prefijo 'b-' para compatibilidad
@@ -97,6 +102,9 @@ const BootstrapPlugin = {
 
     // Registrar b-icon-* (compatibilidad bootstrap-vue + Bootstrap Icons)
     registerBootstrapIcons(app, { BIcon: BootstrapComponents.BIcon });
+
+    // Directiva v-b-toggle (compatibilidad bootstrap-vue)
+    app.directive('b-toggle', VBToggle);
   },
   ...BootstrapComponents,
   ...componentsWithPrefix,
@@ -142,6 +150,7 @@ export {
   BOverlay,
   BFormFile,
   BFormRadio,
+  BFormRadioGroup,
   BFormCheckbox,
   BFormDatepicker,
   BIcon,
@@ -150,6 +159,8 @@ export {
   BNavbarNav,
   BNavItem,
   BSidebar,
+  BCollapse,
+  VBToggle,
 };
 
 export {

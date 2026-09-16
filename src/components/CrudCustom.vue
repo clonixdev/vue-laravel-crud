@@ -23,22 +23,26 @@
 <script>
 export default {
   name: 'CrudCustom',
-  inject: [
-    'bootstrapFactory',
-    'displayMode',
-    'displayModes',
-    'listContainerClass',
-    'listItemClass',
-    'loading',
-    'firstLoad',
-    'items',
-    'infiniteScroll',
-    'messageEmptyResults',
-    'messageLoading',
-    'itemsList'
-  ],
+  inject: {
+    bootstrapFactory: { default: null },
+    displayMode: { default: null },
+    getDisplayMode: { default: null },
+    displayModes: { default: () => ({ MODE_TABLE: 1, MODE_CARDS: 2, MODE_KANBAN: 3, MODE_CUSTOM: 4 }) },
+    listContainerClass: { default: '' },
+    listItemClass: { default: '' },
+    loading: { default: null },
+    firstLoad: { default: null },
+    items: { default: () => [] },
+    infiniteScroll: { default: false },
+    messageEmptyResults: { default: '' },
+    messageLoading: { default: '' },
+    itemsList: { default: () => [] },
+  },
   computed: {
     currentDisplayMode() {
+      if (typeof this.getDisplayMode === 'function') {
+        return this.getDisplayMode();
+      }
       if (!this.displayMode) return 1;
       if (this.displayMode.value !== undefined) {
         return this.displayMode.value;

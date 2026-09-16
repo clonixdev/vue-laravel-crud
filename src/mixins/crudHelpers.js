@@ -151,149 +151,137 @@ export default {
       this.$emit("selectItems", this.selectedItems);
     },
 
-    showItem(id, itemIndex = null) {
-      let item;
-      if (itemIndex == null) {
-        item = this.items.find((it) => it.id == id);
-      } else {
-        item = this.items[itemIndex];
+    assignWorkingItem(source) {
+      const itemCopy = JSON.parse(JSON.stringify(source || {}));
+
+      if (this.useVuexORM && !this.vuexLocalforage && this.model) {
+        const modelInstance = new this.model(itemCopy);
+        Object.keys(modelInstance).forEach((key) => {
+          this.item[key] = modelInstance[key];
+        });
+        Object.keys(this.item).forEach((key) => {
+          if (!(key in modelInstance)) {
+            delete this.item[key];
+          }
+        });
+        return;
       }
-      
+
+      Object.keys(itemCopy).forEach((key) => {
+        this.item[key] = itemCopy[key];
+      });
+      Object.keys(this.item).forEach((key) => {
+        if (!(key in itemCopy)) {
+          delete this.item[key];
+        }
+      });
+    },
+
+    openUi(mode, options = {}) {
+      this.uiMode = mode;
+      if (this.uiModeReactive) {
+        this.uiModeReactive.value = mode;
+      }
+      this.onSelect();
+
+      if (!options.skipUrl) {
+        this.syncUrlFromUi?.(mode, this.item?.id);
+      }
+
+      this.$nextTick(() => {
+        if (this.isModalViewMode) {
+          if (mode === 'show') {
+            this.$bvModal.show('modal-show-item-' + this.modelName);
+          } else {
+            this.$bvModal.show('modal-form-item-' + this.modelName);
+          }
+        }
+      });
+    },
+
+    closeUi(options = {}) {
+      const previous = this.uiMode;
+      if (!previous && options.skipUrl) {
+        return;
+      }
+      this.uiMode = null;
+      if (this.uiModeReactive) {
+        this.uiModeReactive.value = null;
+      }
+
+      if (this.isModalViewMode && previous) {
+        if (previous === 'show') {
+          this.$bvModal.hide('modal-show-item-' + this.modelName);
+        } else {
+          this.$bvModal.hide('modal-form-item-' + this.modelName);
+        }
+      }
+
+      if (!options.skipUrl) {
+        this.syncUrlFromUi?.(null, null);
+      }
+
+      if (previous) {
+        this.$emit('ui-closed', { previous });
+      }
+    },
+
+    findItemLocal(id, itemIndex = null) {
+      if (itemIndex != null && this.items[itemIndex]) {
+        return this.items[itemIndex];
+      }
+      if (id == null) {
+        return null;
+      }
+      return this.items.find((it) => String(it.id) === String(id)) || null;
+    },
+
+    async resolveItem(id, itemIndex = null, options = {}) {
+      let item = this.findItemLocal(id, itemIndex);
+      if (item) {
+        return item;
+      }
+      if (options.fetchIfMissing && id != null && typeof this.fetchItem === 'function') {
+        item = await this.fetchItem(id);
+      }
+      return item;
+    },
+
+    async showItem(id, itemIndex = null, options = {}) {
+      const item = await this.resolveItem(id, itemIndex, options);
       if (!item) {
         console.warn('Item not found for showItem');
         return;
       }
-      
-      // Hacer copia profunda del objeto para asegurar reactividad
-      const itemCopy = JSON.parse(JSON.stringify(item));
-      
-      if (this.useVuexORM && !this.vuexLocalforage) {
-        const modelInstance = new this.model(itemCopy);
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(modelInstance).forEach(key => {
-          this.item[key] = modelInstance[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in modelInstance)) {
-            delete this.item[key];
-          }
-        });
-      } else {
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(itemCopy).forEach(key => {
-          this.item[key] = itemCopy[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in itemCopy)) {
-            delete this.item[key];
-          }
-        });
-      }
-      
-      this.onSelect();
-      this.$nextTick(() => {
-        this.$bvModal.show("modal-show-item-" + this.modelName);
-      });
+      this.assignWorkingItem(item);
+      this.openUi('show', options);
     },
 
-    createItem() {
-      // Asegurar que loading esté en false al abrir el modal
+    createItem(options = {}) {
       this.loading = false;
-      
-      // Hacer copia profunda del objeto para asegurar reactividad
-      const itemCopy = JSON.parse(JSON.stringify(this.itemDefault));
-      
-      if (this.useVuexORM && !this.vuexLocalforage) {
-        const modelInstance = new this.model(itemCopy);
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(modelInstance).forEach(key => {
-          this.item[key] = modelInstance[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in modelInstance)) {
-            delete this.item[key];
-          }
-        });
-      } else {
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(itemCopy).forEach(key => {
-          this.item[key] = itemCopy[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in itemCopy)) {
-            delete this.item[key];
-          }
-        });
-      }
-      
-      this.onSelect();
-      this.$nextTick(() => {
-        this.$bvModal.show("modal-form-item-" + this.modelName);
-      });
+      this.assignWorkingItem(this.itemDefault || { id: null });
+      this.openUi('create', options);
     },
 
-    updateItem(id, itemIndex = null) {
-      // Asegurar que loading esté en false al abrir el modal
+    async updateItem(id, itemIndex = null, options = {}) {
       this.loading = false;
-      
-      let item;
-      if (itemIndex == null) {
-        item = this.items.find((it) => it.id == id);
-      } else {
-        item = this.items[itemIndex];
-      }
-      
+      const item = await this.resolveItem(id, itemIndex, options);
       if (!item) {
         console.warn('Item not found for updateItem');
         return;
       }
-      
-      // Hacer copia profunda del objeto para asegurar reactividad
-      const itemCopy = JSON.parse(JSON.stringify(item));
-      
-      if (this.useVuexORM && !this.vuexLocalforage) {
-        const modelInstance = new this.model(itemCopy);
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(modelInstance).forEach(key => {
-          this.item[key] = modelInstance[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in modelInstance)) {
-            delete this.item[key];
-          }
-        });
-      } else {
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(itemCopy).forEach(key => {
-          this.item[key] = itemCopy[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in itemCopy)) {
-            delete this.item[key];
-          }
-        });
-      }
-      
-      this.onSelect();
-      this.$nextTick(() => {
-        this.$bvModal.show("modal-form-item-" + this.modelName);
-      });
+      this.assignWorkingItem(item);
+      this.openUi('edit', options);
     },
 
     removeItem(id, index) {
       this.$bvModal
         .msgBoxConfirm(this.messageRemoveConfirm, {
-          size: "sm",
-          buttonSize: "sm",
-          okVariant: "danger",
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'danger',
           okTitle: this.messageRemove,
-          cancelTitle: "NO",
+          cancelTitle: 'NO',
           centered: true,
         })
         .then((value) => {
@@ -310,11 +298,11 @@ export default {
     confirmBulkDelete() {
       this.$bvModal
         .msgBoxConfirm(this.messageRemoveBulkConfirm, {
-          size: "sm",
-          buttonSize: "sm",
-          okVariant: "danger",
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'danger',
           okTitle: this.messageRemove,
-          cancelTitle: "NO",
+          cancelTitle: 'NO',
           centered: true,
         })
         .then((value) => {
@@ -329,25 +317,22 @@ export default {
     },
 
     toggleDisplayMode() {
-      // Mutar la propiedad local _displayMode y el objeto reactivo
-      if (this._displayMode == this.displayModes.MODE_TABLE) {
-        this._displayMode = this.displayModes.MODE_CARDS;
-        if (this.displayModeReactive) {
-          this.displayModeReactive.value = this.displayModes.MODE_CARDS;
-        }
-      } else if (this._displayMode == this.displayModes.MODE_CARDS) {
-        this._displayMode = this.displayModes.MODE_TABLE;
-        if (this.displayModeReactive) {
-          this.displayModeReactive.value = this.displayModes.MODE_TABLE;
-        }
+      const next =
+        this._displayMode == this.displayModes.MODE_TABLE
+          ? this.displayModes.MODE_CARDS
+          : this.displayModes.MODE_TABLE;
+      this._displayMode = next;
+      if (this.displayModeReactive) {
+        this.displayModeReactive.value = next;
       }
+      this.forceRecomputeCounter++;
     },
 
     showExportModal() {
       // Asegurar que loading esté en false al abrir el modal
       this.loading = false;
-      if (this.$refs.crudModals && this.$refs.crudModals.$refs["modal-export"]) {
-        this.$refs.crudModals.$refs["modal-export"].show();
+      if (this.$refs.crudModals && this.$refs.crudModals.$refs['modal-export']) {
+        this.$refs.crudModals.$refs['modal-export'].show();
       }
     },
 
@@ -425,7 +410,7 @@ export default {
         error_message = error.message;
       }
 
-      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
+      // Sistema unificado: $toast / $bvToast apuntan al mismo helper (con dedupe)
       if (this.$toast) {
         this.$toast(error_message, {
           title: `Error`,
@@ -434,22 +419,12 @@ export default {
           solid: true,
           appendToast: true,
         });
-      } else if (this.$bvToast && this.$bvToast.toast) {
-        this.$bvToast.toast(error_message, {
-          title: `Error`,
-          toaster: "b-toaster-bottom-right",
-          variant: "danger",
-          solid: true,
-          appendToast: true,
-        });
       } else {
-        // Fallback: usar console.error
         console.error('Error:', error_message);
       }
     },
 
     toastSuccess(message) {
-      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
       if (this.$toast) {
         this.$toast(message, {
           title: `Listo`,
@@ -458,16 +433,7 @@ export default {
           solid: true,
           appendToast: true,
         });
-      } else if (this.$bvToast && this.$bvToast.toast) {
-        this.$bvToast.toast(message, {
-          title: `Listo`,
-          toaster: "b-toaster-bottom-right",
-          variant: "success",
-          solid: true,
-          appendToast: true,
-        });
       } else {
-        // Fallback: usar console.log
         console.log('Success:', message);
       }
     },

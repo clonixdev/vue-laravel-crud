@@ -33,6 +33,8 @@ export default {
       displayModeReactive: { value: 1 }, // Objeto reactivo para provide/inject
       loadingReactive: { value: false }, // Objeto reactivo para loading
       firstLoadReactive: { value: false }, // Objeto reactivo para firstLoad
+      searchReactive: { value: '' },
+      displaySearchReactive: { value: false },
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -48,6 +50,8 @@ export default {
       principalSort: false,
       exportFormatReactive: { value: 'JSON' }, // Objeto reactivo para exportFormat
       fileImport: null,
+      activeQuickFilterKey: null,
+      activeQuickFilterKeyReactive: { value: null },
     };
   },
   computed: {
@@ -95,10 +99,17 @@ export default {
       return [
         ...this.filters,
         ...this.filter,
+        ...this.quickFilterApplied,
         ...this.internalFilter,
         ...this.sortFilter,
         ...this.groupFilter
       ];
+    },
+
+    quickFilterApplied() {
+      this.forceRecomputeCounter;
+      const item = this.findQuickFilterItem(this.activeQuickFilterKey);
+      return this.resolveQuickFilterPayload(item);
     },
 
     sortFilter() {
@@ -124,7 +135,16 @@ export default {
     internalFilter() {
       let filter = [];
       this.forceRecomputeCounter;
-      this.internalFilters.forEach((f) => {
+      const entries = [...this.internalFilters].sort((a, b) => {
+        const aSort = a.column.endsWith('_sort');
+        const bSort = b.column.endsWith('_sort');
+        if (aSort && bSort) {
+          return (a.sortPriority || 999) - (b.sortPriority || 999);
+        }
+        return 0;
+      });
+
+      entries.forEach((f) => {
         if (f.value) {
           let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
           let op = f.op;
@@ -169,6 +189,12 @@ export default {
 
   watch: {
     search(val) {
+      if (this.searchReactive.value !== val) {
+        this.searchReactive.value = val || '';
+      }
+    },
+
+    'searchReactive.value'(val) {
       if (val && val != "") {
         this.filters = [];
         this.filters.push(["search", "LIKE", val]);
@@ -177,6 +203,14 @@ export default {
         this.filters = [];
         this.fetchItems();
       }
+    },
+
+    displaySearch(val) {
+      this.displaySearchReactive.value = !!val;
+    },
+
+    'displaySearchReactive.value'(val) {
+      this.displaySearch = !!val;
     },
 
     models(val) {
@@ -305,7 +339,26 @@ export default {
         this.filterSidebarOpenReactive.value = newVal;
       },
       immediate: true
-    }
+    },
+    quickFilter: {
+      handler(newVal) {
+        if (newVal == null || newVal === '') {
+          return;
+        }
+        const key = String(newVal);
+        if (this.activeQuickFilterKey !== key) {
+          this.activeQuickFilterKey = key;
+          this.activeQuickFilterKeyReactive.value = key;
+        }
+      },
+      immediate: true,
+    },
+    quickFilters: {
+      handler() {
+        this.ensureActiveQuickFilter();
+      },
+      deep: false,
+    },
   },
 
   created() {
@@ -319,6 +372,9 @@ export default {
     this.firstLoadReactive.value = this.firstLoad;
     this.filtersVisibleReactive.value = this.filtersVisible;
     this.filterSidebarOpenReactive.value = this.filterSidebarOpen;
+    this.searchReactive.value = this.search || '';
+    this.displaySearchReactive.value = !!this.displaySearch;
+    this.initQuickFilterState();
   },
 
   mounted() {

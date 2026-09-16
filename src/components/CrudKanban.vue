@@ -16,12 +16,16 @@ export default {
   components: {
     KanbanBoard
   },
-  inject: [
-    'displayMode',
-    'displayModes'
-  ],
+  inject: {
+    displayMode: { default: null },
+    getDisplayMode: { default: null },
+    displayModes: { default: () => ({ MODE_TABLE: 1, MODE_CARDS: 2, MODE_KANBAN: 3, MODE_CUSTOM: 4 }) },
+  },
   computed: {
     currentDisplayMode() {
+      if (typeof this.getDisplayMode === 'function') {
+        return this.getDisplayMode();
+      }
       if (!this.displayMode) return 1;
       if (this.displayMode.value !== undefined) {
         return this.displayMode.value;

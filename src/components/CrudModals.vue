@@ -6,6 +6,7 @@
       :id="formModalId"
       size="xl"
       :title="title"
+      @hidden="onFormHidden"
     >
       <b-overlay :show="loadingValue" rounded="sm">
         <template v-if="validate">
@@ -57,6 +58,7 @@
       :id="'modal-show-item-' + modelName"
       size="xl"
       :title="title"
+      @hidden="onShowHidden"
     >
       <template v-if="reactiveItem">
         <slot name="show" v-bind:item="reactiveItem">
@@ -163,7 +165,9 @@ export default {
     'exportFormat',
     'saveItem',
     'importItems',
-    'exportItems'
+    'exportItems',
+    'closeUi',
+    'uiMode',
   ],
   computed: {
     formModalId() {
@@ -209,10 +213,30 @@ export default {
   },
   methods: {
     hideFormModal() {
+      if (typeof this.closeUi === 'function') {
+        this.closeUi();
+        return;
+      }
       this.$refs.formModal?.hide?.();
     },
     hideShowModal() {
+      if (typeof this.closeUi === 'function') {
+        this.closeUi();
+        return;
+      }
       this.$refs.showModal?.hide?.();
+    },
+    onFormHidden() {
+      const mode = this.uiMode && this.uiMode.value !== undefined ? this.uiMode.value : this.uiMode;
+      if (mode === 'create' || mode === 'edit') {
+        this.closeUi?.();
+      }
+    },
+    onShowHidden() {
+      const mode = this.uiMode && this.uiMode.value !== undefined ? this.uiMode.value : this.uiMode;
+      if (mode === 'show') {
+        this.closeUi?.();
+      }
     },
     hideImportModal() {
       this.$refs['modal-import']?.hide?.();
