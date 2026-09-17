@@ -23,6 +23,7 @@
 <script>
 export default {
   name: 'BFormCheckbox',
+  emits: ['input', 'change', 'update:modelValue'],
   props: {
     id: {
       type: String,
@@ -35,6 +36,10 @@ export default {
     value: {
       type: [String, Number, Boolean],
       default: true
+    },
+    modelValue: {
+      type: [String, Number, Boolean, Array],
+      default: undefined
     },
     checked: {
       type: Boolean,
@@ -112,6 +117,12 @@ export default {
       return classes.join(' ');
     },
     isChecked() {
+      if (this.modelValue !== undefined) {
+        if (Array.isArray(this.modelValue)) {
+          return this.modelValue.includes(this.value);
+        }
+        return !!this.modelValue;
+      }
       return this.checked;
     }
   },
@@ -128,14 +139,29 @@ export default {
     }
   },
   methods: {
+    emitModelValue(checked) {
+      if (Array.isArray(this.modelValue)) {
+        const next = this.modelValue.slice();
+        const index = next.indexOf(this.value);
+        if (checked && index === -1) {
+          next.push(this.value);
+        } else if (!checked && index !== -1) {
+          next.splice(index, 1);
+        }
+        return next;
+      }
+      return checked;
+    },
     handleChange(event) {
       const checked = event.target.checked;
       this.$emit('change', checked ? this.value : null);
       this.$emit('input', checked ? this.value : null);
+      this.$emit('update:modelValue', this.emitModelValue(checked));
     },
     handleInput(event) {
       const checked = event.target.checked;
       this.$emit('input', checked ? this.value : null);
+      this.$emit('update:modelValue', this.emitModelValue(checked));
     }
   }
 };

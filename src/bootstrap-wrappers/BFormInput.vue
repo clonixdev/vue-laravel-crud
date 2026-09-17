@@ -4,7 +4,7 @@
     :class="inputClasses"
     :id="id"
     :name="name"
-    :value="value"
+    :value="localValue"
     :placeholder="placeholder"
     :required="required"
     :disabled="disabled"
@@ -14,7 +14,7 @@
     :step="step"
     :size="size"
     :state="state"
-    @input="$emit('input', $event.target.value)"
+    @input="handleInput"
     @change="$emit('change', $event)"
     @blur="$emit('blur', $event)"
     @focus="$emit('focus', $event)"
@@ -24,6 +24,7 @@
 <script>
 export default {
   name: 'BFormInput',
+  emits: ['input', 'change', 'blur', 'focus', 'update:modelValue'],
   props: {
     id: {
       type: String,
@@ -40,6 +41,10 @@ export default {
     value: {
       type: [String, Number],
       default: null
+    },
+    modelValue: {
+      type: [String, Number],
+      default: undefined
     },
     placeholder: {
       type: String,
@@ -85,6 +90,9 @@ export default {
     }
   },
   computed: {
+    localValue() {
+      return this.modelValue !== undefined ? this.modelValue : this.value;
+    },
     inputClasses() {
       const classes = ['form-control'];
       
@@ -99,6 +107,13 @@ export default {
       }
       
       return classes.join(' ');
+    }
+  },
+  methods: {
+    handleInput(event) {
+      const value = event.target.value;
+      this.$emit('input', value);
+      this.$emit('update:modelValue', value);
     }
   }
 };

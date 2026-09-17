@@ -20,6 +20,7 @@
 <script>
 export default {
   name: 'BFormRadio',
+  emits: ['input', 'change', 'update:modelValue'],
   props: {
     id: {
       type: String,
@@ -32,6 +33,10 @@ export default {
     value: {
       type: [String, Number, Boolean],
       required: true
+    },
+    modelValue: {
+      type: [String, Number, Boolean, Array],
+      default: undefined
     },
     checked: {
       type: Boolean,
@@ -92,6 +97,12 @@ export default {
       return classes.join(' ');
     },
     isChecked() {
+      if (this.modelValue !== undefined) {
+        if (Array.isArray(this.modelValue)) {
+          return this.modelValue.includes(this.value);
+        }
+        return this.modelValue === this.value;
+      }
       return this.checked;
     }
   },
@@ -99,6 +110,7 @@ export default {
     handleChange(event) {
       this.$emit('change', event);
       this.$emit('input', this.value);
+      this.$emit('update:modelValue', this.value);
     }
   }
 };

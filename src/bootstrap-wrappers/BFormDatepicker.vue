@@ -23,6 +23,7 @@
 <script>
 export default {
   name: 'BFormDatepicker',
+  emits: ['input', 'change', 'update:modelValue'],
   props: {
     id: {
       type: String,
@@ -39,6 +40,10 @@ export default {
     value: {
       type: [String, Date],
       default: null
+    },
+    modelValue: {
+      type: [String, Date],
+      default: undefined
     },
     disabled: {
       type: Boolean,
@@ -82,6 +87,9 @@ export default {
     }
   },
   computed: {
+    localValue() {
+      return this.modelValue !== undefined ? this.modelValue : this.value;
+    },
     inputClasses() {
       const classes = ['form-control'];
       
@@ -94,24 +102,25 @@ export default {
       return classes.join(' ');
     },
     formattedValue() {
-      if (!this.value) return '';
+      if (!this.localValue) return '';
       
-      if (this.value instanceof Date) {
-        return this.value.toISOString().split('T')[0];
+      if (this.localValue instanceof Date) {
+        return this.localValue.toISOString().split('T')[0];
       }
       
       // Si es string, intentar parsearlo
-      const date = new Date(this.value);
+      const date = new Date(this.localValue);
       if (!isNaN(date.getTime())) {
         return date.toISOString().split('T')[0];
       }
       
-      return this.value;
+      return this.localValue;
     }
   },
   methods: {
     handleInput(event) {
       this.$emit('input', event.target.value);
+      this.$emit('update:modelValue', event.target.value);
     },
     handleChange(event) {
       this.$emit('change', event.target.value);

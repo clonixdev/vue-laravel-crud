@@ -4,6 +4,7 @@
       {{ label }}
     </label>
     <input
+      ref="fileInput"
       :type="'file'"
       :class="inputClasses"
       :id="id"
@@ -26,6 +27,7 @@
 <script>
 export default {
   name: 'BFormFile',
+  emits: ['input', 'change', 'update:modelValue'],
   props: {
     id: {
       type: String,
@@ -34,6 +36,10 @@ export default {
     name: {
       type: String,
       default: null
+    },
+    modelValue: {
+      type: [Object, Array],
+      default: undefined
     },
     label: {
       type: String,
@@ -110,10 +116,19 @@ export default {
       return classes.join(' ');
     }
   },
+  watch: {
+    modelValue(value) {
+      if ((value === null || value === undefined) && this.$refs.fileInput) {
+        this.$refs.fileInput.value = '';
+        this.file = null;
+      }
+    }
+  },
   methods: {
     handleChange(event) {
       this.file = event.target.files[0] || (this.multiple ? event.target.files : null);
       this.$emit('input', this.file);
+      this.$emit('update:modelValue', this.file);
       this.$emit('change', event);
     }
   }

@@ -7,8 +7,8 @@
     :required="required"
     :multiple="multiple"
     :size="size"
-    @change="$emit('change', $event)"
-    @input="$emit('input', $event.target.value)"
+    @change="handleChange"
+    @input="handleInput"
   >
     <option v-if="placeholder" value="" disabled>{{ placeholder }}</option>
     <slot>
@@ -27,6 +27,7 @@
 <script>
 export default {
   name: 'BFormSelect',
+  emits: ['input', 'change', 'update:modelValue'],
   props: {
     id: {
       type: String,
@@ -37,8 +38,12 @@ export default {
       default: null
     },
     value: {
-      type: [String, Number, Array],
+      type: [String, Number, Array, Boolean],
       default: null
+    },
+    modelValue: {
+      type: [String, Number, Array, Boolean],
+      default: undefined
     },
     options: {
       type: Array,
@@ -71,6 +76,9 @@ export default {
     }
   },
   computed: {
+    localValue() {
+      return this.modelValue !== undefined ? this.modelValue : this.value;
+    },
     selectClasses() {
       const classes = ['form-select']; // Bootstrap 5 usa form-select
       
@@ -94,10 +102,27 @@ export default {
   methods: {
     isSelected(option) {
       const optionValue = option.value !== undefined ? option.value : option;
-      if (this.multiple && Array.isArray(this.value)) {
-        return this.value.includes(optionValue);
+      if (this.multiple && Array.isArray(this.localValue)) {
+        return this.localValue.includes(optionValue);
       }
-      return this.value === optionValue;
+      return this.localValue === optionValue;
+    },
+    optionValue(option) {
+      return option && '_value' in option ? option._value : option.value;
+    },
+    currentValue(event) {
+      if (this.multiple) {
+        return Array.from(event.target.selectedOptions || []).map((option) => this.optionValue(option));
+      }
+      return this.optionValue(event.target.options ? event.target.options[event.target.selectedIndex] : null);
+    },
+    handleInput(event) {
+      const value = this.currentValue(event);
+      this.$emit('input', value);
+      this.$emit('update:modelValue', value);
+    },
+    handleChange(event) {
+      this.$emit('change', event);
     }
   }
 };
