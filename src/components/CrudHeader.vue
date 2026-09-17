@@ -290,12 +290,14 @@ export default {
   gap: 0.65rem 0.85rem;
   min-width: 0;
   flex: 1 1 auto;
+  margin-right: auto;
 }
 
 .crud-title {
   margin: 0;
   flex: 0 1 auto;
   min-width: 0;
+  white-space: nowrap;
   padding: 0.25rem 0;
 }
 
@@ -308,13 +310,13 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin: 0;
+  margin: 0 0 0 auto;
   padding: 0;
 }
 
 @media (min-width: 768px) {
   .table-options {
-    flex: 0 1 auto;
+    flex: 0 0 auto;
     max-width: 100%;
   }
 }
