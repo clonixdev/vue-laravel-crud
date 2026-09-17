@@ -5,9 +5,16 @@
 
 import BButton from './BButton.vue';
 import BButtonGroup from './BButtonGroup.vue';
+import BForm from './BForm.vue';
 import BFormGroup from './BFormGroup.vue';
 import BFormInput from './BFormInput.vue';
+import BFormTextarea from './BFormTextarea.vue';
 import BFormSelect from './BFormSelect.vue';
+import BFormSelectOption from './BFormSelectOption.vue';
+import BFormTags from './BFormTags.vue';
+import BTabs from './BTabs.vue';
+import BTab from './BTab.vue';
+import BAlert from './BAlert.vue';
 import BModal from './BModal.vue';
 import BDropdown from './BDropdown.vue';
 import BDropdownItem from './BDropdownItem.vue';
@@ -47,9 +54,16 @@ const BootstrapComponents = {
   BButton,
   BButtonGroup,
   BContainer,
+  BForm,
   BFormGroup,
   BFormInput,
+  BFormTextarea,
   BFormSelect,
+  BFormSelectOption,
+  BFormTags,
+  BTabs,
+  BTab,
+  BAlert,
   BModal,
   BDropdown,
   BDropdownItem,
@@ -127,9 +141,16 @@ export {
   BButton,
   BButtonGroup,
   BContainer,
+  BForm,
   BFormGroup,
   BFormInput,
+  BFormTextarea,
   BFormSelect,
+  BFormSelectOption,
+  BFormTags,
+  BTabs,
+  BTab,
+  BAlert,
   BModal,
   BDropdown,
   BDropdownItem,
