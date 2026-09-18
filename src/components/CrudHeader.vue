@@ -41,12 +41,12 @@
                 <b-icon-plus></b-icon-plus>{{ messageNew }}
               </b-button>
               <b-button variant="info" v-if="enableFilters" @click="toggleFilters()" :disabled="loadingValue">Filtros</b-button>
-              <b-button variant="info" @click="refresh()" :disabled="loadingValue">
-                <b-icon-arrow-clockwise></b-icon-arrow-clockwise>
-              </b-button>
               <b-button variant="info" @click="toggleDisplayMode()" :disabled="loadingValue" v-if="displayModeToggler">
                 <b-icon-card-list v-if="currentDisplayMode == displayModes.MODE_TABLE"></b-icon-card-list>
                 <b-icon-table v-else></b-icon-table>
+              </b-button>
+              <b-button variant="info" @click="refresh()" :disabled="loadingValue">
+                <b-icon-arrow-clockwise></b-icon-arrow-clockwise>
               </b-button>
             </div>
 
