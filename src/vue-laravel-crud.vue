@@ -523,16 +523,27 @@ export default /*#__PURE__*/ {
       ];
     },
     sortFilter() {
-      if (this.showPrincipalSortBtn) {
-        if (this.principalSort) {
-          return [[this.principalSortColumn, 'SORTASC', '']];
-        } else {
-          return [[this.principalSortColumn, 'SORTDESC', '']];
-        }
-      } else {
+      if (!this.showPrincipalSortBtn) {
         return [];
       }
-
+      // No mezclar sort principal con sort de columna (pisa el ORDER BY)
+      const hasColumnSort = (this.internalFilters || []).some(
+        (f) =>
+          f &&
+          f.column &&
+          String(f.column).endsWith("_sort") &&
+          f.value !== null &&
+          f.value !== undefined &&
+          f.value !== ""
+      );
+      if (hasColumnSort) {
+        return [];
+      }
+      if (this.principalSort) {
+        return [[this.principalSortColumn, 'SORTASC', '']];
+      } else {
+        return [[this.principalSortColumn, 'SORTDESC', '']];
+      }
     },
 
     groupFilter() {
