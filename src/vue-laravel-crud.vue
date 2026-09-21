@@ -55,6 +55,8 @@ export default /*#__PURE__*/ {
       isMobile: false,
       refreshing: false,
       fetchError: false,
+      fetchSeq: 0,
+      internalDisplayMode: 1,
       principalSort: false,
       exportFormat: 'JSON',
     };
@@ -74,6 +76,12 @@ export default /*#__PURE__*/ {
     models(val) {
       if (!this.ajax) {
         this.items = val;
+      }
+    },
+
+    displayMode(val) {
+      if (val !== this.internalDisplayMode) {
+        this.internalDisplayMode = val;
       }
     },
   },
@@ -362,6 +370,10 @@ export default /*#__PURE__*/ {
       type: Number,
       default: 3,
     },
+    masonryBreakpoints: {
+      type: Object,
+      default: null,
+    },
 
     principalSortColumn: {
       type: String,
@@ -391,6 +403,7 @@ export default /*#__PURE__*/ {
   mounted() {
     const now = Math.floor(Date.now() / 1000);
     this.crudUuid = '' + now;
+    this.internalDisplayMode = this.displayMode;
     this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
 
     // Agregar un oyente de eventos para actualizar isMobile cuando cambia el tamaño de la pantalla
@@ -497,8 +510,23 @@ export default /*#__PURE__*/ {
       if(this.groupedSplit){
         return true;
       }
-      return this.displayMode == this.displayModes.MODE_KANBAN;
+      return this.internalDisplayMode == this.displayModes.MODE_KANBAN;
 
+    },
+    masonryColsConfig() {
+      if (this.masonryBreakpoints) {
+        return this.masonryBreakpoints;
+      }
+      const colsFromSpan = (span) => Math.max(1, Math.round(12 / (span || 12)));
+      // Keys = max-width. default aplica por encima del mayor breakpoint.
+      return {
+        default: colsFromSpan(this.colXl),
+        1600: colsFromSpan(this.colXl),
+        1400: colsFromSpan(this.colLg),
+        992: colsFromSpan(this.colMd),
+        768: colsFromSpan(this.colSm),
+        576: colsFromSpan(this.colXs),
+      };
     },
     itemsList() {
       const items = this.ajax ? this.items : this.items.slice(this.paginationIndexStart, this.paginationIndexEnd);
@@ -754,7 +782,13 @@ export default /*#__PURE__*/ {
             });
           }
         }
-        if (this.sortable) {
+        if (
+          this.sortable &&
+          column.prop &&
+          column.type != "actions" &&
+          column.type != "select" &&
+          column.type != "checkbox"
+        ) {
           this.internalFilters.push({
             column: column.prop + "_sort",
             op: column.filterOp ? column.filterOp : "=",
@@ -764,11 +798,35 @@ export default /*#__PURE__*/ {
       });
     },
 
+    isColumnSortable(column) {
+      return !!(
+        this.sortable &&
+        column &&
+        column.prop &&
+        column.type != "actions" &&
+        column.type != "select" &&
+        column.type != "checkbox" &&
+        this.internalFilterByProp(column.prop + "_sort")
+      );
+    },
+
+    getColumnSortValue(column) {
+      const sortFilter = this.internalFilterByProp(column.prop + "_sort");
+      return sortFilter && sortFilter.value ? sortFilter.value : null;
+    },
+
     toggleSortFilter(column) {
+      if (!this.isColumnSortable(column)) return;
       let sortFilter = this.internalFilterByProp(column.prop + "_sort");
       if (!sortFilter) return;
       let value = sortFilter.value;
       if (!value) {
+        // Un solo sort de columna activo a la vez
+        (this.internalFilters || []).forEach((f) => {
+          if (f && f.column && String(f.column).endsWith("_sort")) {
+            f.value = null;
+          }
+        });
         sortFilter.value = "ASC";
       } else if (value == "ASC") {
         sortFilter.value = "DESC";
@@ -800,10 +858,10 @@ export default /*#__PURE__*/ {
 
     },
     toggleDisplayMode() {
-      if (this.displayMode == this.displayModes.MODE_TABLE)
-        this.displayMode = this.displayModes.MODE_CARDS;
-      else if (this.displayMode == this.displayModes.MODE_CARDS)
-        this.displayMode = this.displayModes.MODE_TABLE;
+      if (this.internalDisplayMode == this.displayModes.MODE_TABLE)
+        this.internalDisplayMode = this.displayModes.MODE_CARDS;
+      else if (this.internalDisplayMode == this.displayModes.MODE_CARDS)
+        this.internalDisplayMode = this.displayModes.MODE_TABLE;
     },
     onRowHover(item, itemIndex) {
       if (this.selectHover) {
@@ -1005,37 +1063,47 @@ export default /*#__PURE__*/ {
       }, 1);
     },
     async fetchItemsVuex(page = 1, concat = false) {
+      const seq = ++this.fetchSeq;
       this.loading = true;
       this.$emit("beforeFetch", {});
 
-      let result;
+      try {
+        let result;
 
-      if (this.vuexLocalforage) {
-        await this.model.$fetch();
+        if (this.vuexLocalforage) {
+          await this.model.$fetch();
+        } else {
+          this.model.deleteAll();
 
-      } else {
-        this.model.deleteAll();
+          result = await this.model.api().get(this.apiUrl + "/" + this.modelName, {
+            dataKey: 'data',
+            params: {
+              page: page,
+              limit: this.pagination.perPage,
+              filters: JSON.stringify(this.finalFilters),
+            }
+          });
+        }
 
-        result = await this.model.api().get(this.apiUrl + "/" + this.modelName, {
-          dataKey: 'data',
-          params: {
-            page: page,
-            limit: this.pagination.perPage,
-            filters: JSON.stringify(this.finalFilters),
-          }
-        });
+        if (seq !== this.fetchSeq) return;
 
+        let itemsResult = this.model.query().withAll().get();
+
+        if (itemsResult) {
+          this.items = itemsResult;
+        }
+        console.debug("fetch page vuex ", itemsResult, page, this.items, result);
+        this.firstLoad = true;
+      } catch (error) {
+        if (seq !== this.fetchSeq) return;
+        this.toastError(error);
+        this.fetchError = true;
+        this.firstLoad = true;
+      } finally {
+        if (seq === this.fetchSeq) {
+          this.loading = false;
+        }
       }
-
-      let itemsResult = this.model.query().withAll().get();
-      //let itemsResult = result.entities[this.model.entity];
-
-      if (itemsResult) {
-        this.items = itemsResult;
-      }
-      console.debug("fetch page vuex ", itemsResult, page, this.items, result);
-      this.loading = false;
-      this.firstLoad = true;
     },
     fetchItemsLocal() {
       if (this.grouped) {
@@ -1061,6 +1129,7 @@ export default /*#__PURE__*/ {
         return this.fetchItemsLocal(page, concat);
       }
 
+      const seq = ++this.fetchSeq;
       this.loading = true;
       return axios
         .get(this.apiUrl + "/" + this.modelName, {
@@ -1071,6 +1140,7 @@ export default /*#__PURE__*/ {
           },
         })
         .then((response) => {
+          if (seq !== this.fetchSeq) return;
           this.makePagination(response.data);
           let items = response.data.data;
           if (this.grouped) {
@@ -1084,16 +1154,20 @@ export default /*#__PURE__*/ {
             }
           }
 
-          this.loading = false;
           this.firstLoad = true;
           this.$emit("afterFetch", {});
         })
         .catch((error) => {
+          if (seq !== this.fetchSeq) return;
           //console.debug(error);
           this.toastError(error);
-          this.loading = false;
           this.firstLoad = true;
           this.fetchError = true;
+        })
+        .finally(() => {
+          if (seq === this.fetchSeq) {
+            this.loading = false;
+          }
         });
     },
     groupItems(items, concat = false, splitGroups = false) {
@@ -1936,8 +2010,8 @@ export default /*#__PURE__*/ {
             <b-button variant="info" v-if="enableFilters" @click="toggleFilters()">Filtros</b-button>
             <b-button variant="info" @click="refresh()"><b-icon-arrow-clockwise></b-icon-arrow-clockwise></b-button>
             <b-button variant="info" @click="toggleDisplayMode()" :disabled="loading" v-if="displayModeToggler">
-              <b-icon-card-list v-if="displayMode == displayModes.MODE_TABLE"></b-icon-card-list>
-              <b-icon-table v-else-if="displayMode == displayModes.MODE_CARDS"></b-icon-table>
+              <b-icon-card-list v-if="internalDisplayMode == displayModes.MODE_TABLE"></b-icon-card-list>
+              <b-icon-table v-else-if="internalDisplayMode == displayModes.MODE_CARDS"></b-icon-table>
             </b-button>
 
             <div class="crud-search m-0" v-if="showSearch">
@@ -1962,40 +2036,41 @@ export default /*#__PURE__*/ {
         <b-icon-funnel class="mr-1"></b-icon-funnel>
         Filtros activos:
       </span>
-      <b-badge v-for="af in activeFilters" :key="af.key" variant="primary" class="crud-active-filter-badge mr-1 mb-1">
-        <strong>{{ af.label }}:</strong> {{ af.displayValue }}
-        <button type="button" class="crud-active-filter-remove ml-1" aria-label="Quitar filtro"
-          @click="clearActiveFilter(af.key)">&times;</button>
-      </b-badge>
-      <b-button v-if="activeFilters.length > 1" variant="link" size="sm" class="text-danger p-0 ml-1"
-        @click="resetFilters()">
-        Limpiar todos
-      </b-button>
+      <div class="crud-active-filters-list">
+        <b-badge v-for="af in activeFilters" :key="af.key" variant="primary" class="crud-active-filter-badge">
+          <strong>{{ af.label }}:</strong> {{ af.displayValue }}
+          <button type="button" class="crud-active-filter-remove ml-1" aria-label="Quitar filtro"
+            @click="clearActiveFilter(af.key)">&times;</button>
+        </b-badge>
+        <b-button v-if="activeFilters.length > 1" variant="link" size="sm" class="text-danger p-0"
+          @click="resetFilters()">
+          Limpiar todos
+        </b-button>
+      </div>
     </div>
 
-    <div :class="['table-responsive', tableContainerClass]" v-if="displayMode == displayModes.MODE_TABLE">
+    <div :class="['table-responsive', tableContainerClass]" v-if="internalDisplayMode == displayModes.MODE_TABLE">
       <table :class="['table table-hover table-striped w-100', tableClass]">
         <thead class="thead-light">
           <tr>
             <slot name="rowHead">
               <th v-for="(column, indexc) in columns" :key="indexc" v-if="isColumnVisibleInTable(column)"
-                :style="{ width: column.width ? column.width : 'inherit' }" scope="col">
-                <div class="th-label-wrap">
+                :style="{ width: column.width ? column.width : (column.type == 'actions' ? '1%' : 'inherit') }"
+                :class="{ 'th-actions': column.type == 'actions' }"
+                scope="col">
+                <div class="th-label-wrap" :class="{ 'th-sortable': isColumnSortable(column) }"
+                  @click="isColumnSortable(column) && toggleSortFilter(column)">
                   <span v-if="column.type == 'select'">
-                    <b-form-checkbox name="select-all" @change="toggleAll($event)"></b-form-checkbox>
+                    <b-form-checkbox name="select-all" @click.native.stop @change="toggleAll($event)"></b-form-checkbox>
                   </span>
                   <span v-else-if="column.type == 'checkbox'">
-                    <b-form-checkbox name="select-all" @change="toggleAll($event)"></b-form-checkbox>
+                    <b-form-checkbox name="select-all" @click.native.stop @change="toggleAll($event)"></b-form-checkbox>
                   </span>
                   <span v-else class="th-label">{{ column.label }}</span>
 
-                  <span
-                    v-if="sortable && column.type != 'select' && column.type != 'checkbox' && internalFilterByProp(column.prop + '_sort')"
-                    class="sort-filter" @click="toggleSortFilter(column)"><b-icon-sort-down
-                      v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
-                      v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
-                    <b-icon-sort-down
-                      v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
+                  <span v-if="isColumnSortable(column) && getColumnSortValue(column)" class="sort-filter">
+                    <b-icon-sort-up v-if="getColumnSortValue(column) == 'ASC'"></b-icon-sort-up>
+                    <b-icon-sort-down v-else-if="getColumnSortValue(column) == 'DESC'"></b-icon-sort-down>
                   </span>
                 </div>
               </th>
@@ -2087,13 +2162,13 @@ export default /*#__PURE__*/ {
       </p>
     </div>
 
-    <div v-else-if="displayMode == displayModes.MODE_CARDS">
+    <div v-else-if="internalDisplayMode == displayModes.MODE_CARDS">
       <draggable v-model="items" :group="draggableGroup" :draggable="orderable ? '.item' : '.none'" @start="drag = true"
         @end="drag = false" @sort="onSort()" @add="onDraggableAdded($event)" @change="onDraggableChange($event)"
         :options="draggableOptions">
         <masonry
-          :cols="{ default: 12 / colLg, 1400: 12 / colXl, 1200: 12 / colLg, 1000: 12 / colMd, 700: 12 / colSm, 400: 12 / colXs }"
-          :gutter="{ default: '15px', 700: '15px' }">
+          :cols="masonryColsConfig"
+          :gutter="{ default: '16px', 768: '12px', 576: '10px' }">
           <div v-for="(item, itemIndex) in itemsList" v-bind:key="itemIndex" class="item">
             <slot name="card" v-bind:item="item">
               <ItemCard :item="item" :columns="columns" :index="itemIndex"
@@ -2111,7 +2186,7 @@ export default /*#__PURE__*/ {
 
     </div>
 
-    <div v-else-if="displayMode == displayModes.MODE_KANBAN">
+    <div v-else-if="internalDisplayMode == displayModes.MODE_KANBAN">
       {{ JSON.stringify(items) }}
 
       <div v-for="(column, colIndex) in items" :key="colIndex" class="kanban-column">
@@ -2139,7 +2214,7 @@ export default /*#__PURE__*/ {
 
     </div>
 
-    <div v-else-if="displayMode == displayModes.MODE_CUSTOM">
+    <div v-else-if="internalDisplayMode == displayModes.MODE_CUSTOM">
       <div :class="listContainerClass">
         <p v-if="!loading && items && items.length == 0 && !infiniteScroll" class="p-3">
           {{ messageEmptyResults }}
@@ -2269,7 +2344,11 @@ tr td:first-child {
 .crud-header {
   display: flex;
   justify-content: space-between;
-  max-height: 3rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-height: none;
+  margin-bottom: 0.35rem;
 
   .crud-title {
     margin: 0;
@@ -2292,10 +2371,28 @@ tr td:first-child {
   }
 
   .table-options {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .crud-header {
+    .crud-search {
+      max-width: 100%;
+      width: 100%;
+      order: 2;
+    }
+
+    .table-options {
+      width: 100%;
+      justify-content: flex-start;
+      order: 1;
+    }
   }
 }
 
@@ -2306,37 +2403,61 @@ tr td:first-child {
 .th-label-wrap {
   display: inline-flex;
   align-items: center;
-  flex-wrap: nowrap;
-  white-space: nowrap;
+  flex-wrap: wrap;
   gap: 0.25rem;
   max-width: 100%;
 }
 
+.th-label-wrap.th-sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.th-label-wrap.th-sortable:hover .th-label {
+  text-decoration: underline;
+}
+
 .th-label {
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.25;
 }
 
 .sort-filter {
   display: inline-flex;
   align-items: center;
-  cursor: pointer;
   flex-shrink: 0;
   vertical-align: middle;
+  opacity: 0.9;
 }
 
 .crud-active-filters {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.4rem 0.5rem;
+  width: 100%;
   padding: 0.5rem 0 0.75rem;
   margin-bottom: 0.25rem;
 }
 
 .crud-active-filters-label {
+  flex: 0 0 auto;
   font-size: 0.875rem;
   font-weight: 600;
-  margin-right: 0.25rem;
+  margin: 0;
+}
+
+.crud-active-filters-list {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  flex: 0 1 auto;
+  margin: 0;
 }
 
 .crud-active-filter-badge {
@@ -2345,6 +2466,7 @@ tr td:first-child {
   font-size: 0.875rem;
   font-weight: 400;
   padding: 0.35rem 0.5rem;
+  margin: 0;
 }
 
 .crud-active-filter-remove {
@@ -2362,23 +2484,30 @@ tr td:first-child {
   opacity: 1;
 }
 
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
 
 @media (min-width: 992px) {
   .table {
+    width: 100%;
     table-layout: auto;
 
     tbody {
       td {
-        overflow: scroll;
-        -ms-overflow-style: none;
-        /* IE and Edge */
-        scrollbar-width: none;
-        /* Firefox */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: break-word;
       }
+    }
 
-      td::-webkit-scrollbar {
-        display: none;
-      }
+    thead th {
+      white-space: normal;
+      word-break: break-word;
     }
   }
 }
