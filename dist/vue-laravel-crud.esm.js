@@ -12311,7 +12311,7 @@ var ItemCard = __component__$1.exports;
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "tr td[data-v-77ea2533]:last-child,\ntr td[data-v-77ea2533]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\n.crud-pagination[data-v-77ea2533] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-77ea2533] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-77ea2533] .crud-title[data-v-77ea2533] {\n    margin: 0; }\n  .crud-header[data-v-77ea2533] .crud-search[data-v-77ea2533] {\n    max-width: 15rem; }\n    .crud-header[data-v-77ea2533] .crud-search[data-v-77ea2533] .btn[data-v-77ea2533] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-77ea2533] .crud-search[data-v-77ea2533] .btn[data-v-77ea2533].open[data-v-77ea2533] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-77ea2533] .table-options[data-v-77ea2533] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-77ea2533] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-77ea2533] {\n    table-layout: auto; }\n    .table[data-v-77ea2533] tbody[data-v-77ea2533] td[data-v-77ea2533] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-77ea2533] tbody[data-v-77ea2533] td[data-v-77ea2533]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-77ea2533] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-77ea2533] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-77ea2533] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-77ea2533] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-77ea2533] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+var css = "tr td[data-v-b1cdd3b2]:last-child,\ntr td[data-v-b1cdd3b2]:first-child {\n  width: 1%;\n  white-space: nowrap;\n}\n\n.crud-pagination[data-v-b1cdd3b2] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem;\n}\n\n.crud-header[data-v-b1cdd3b2] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-header[data-v-b1cdd3b2] .crud-title[data-v-b1cdd3b2] {\n  margin: 0;\n}\n.crud-header[data-v-b1cdd3b2] .crud-search[data-v-b1cdd3b2] {\n  max-width: 15rem;\n}\n.crud-header[data-v-b1cdd3b2] .crud-search[data-v-b1cdd3b2] .btn[data-v-b1cdd3b2] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-header[data-v-b1cdd3b2] .crud-search[data-v-b1cdd3b2] .btn[data-v-b1cdd3b2].open[data-v-b1cdd3b2] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.crud-header[data-v-b1cdd3b2] .table-options[data-v-b1cdd3b2] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n\n.custom-control[data-v-b1cdd3b2] {\n  position: relative;\n}\n\n.th-label-wrap[data-v-b1cdd3b2] {\n  display: inline-flex;\n  align-items: center;\n  flex-wrap: nowrap;\n  white-space: nowrap;\n  gap: 0.25rem;\n  max-width: 100%;\n}\n\n.th-label[data-v-b1cdd3b2] {\n  white-space: nowrap;\n}\n\n.sort-filter[data-v-b1cdd3b2] {\n  display: inline-flex;\n  align-items: center;\n  cursor: pointer;\n  flex-shrink: 0;\n  vertical-align: middle;\n}\n\n.crud-active-filters[data-v-b1cdd3b2] {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 0.35rem;\n  padding: 0.5rem 0 0.75rem;\n  margin-bottom: 0.25rem;\n}\n\n.crud-active-filters-label[data-v-b1cdd3b2] {\n  font-size: 0.875rem;\n  font-weight: 600;\n  margin-right: 0.25rem;\n}\n\n.crud-active-filter-badge[data-v-b1cdd3b2] {\n  display: inline-flex;\n  align-items: center;\n  font-size: 0.875rem;\n  font-weight: 400;\n  padding: 0.35rem 0.5rem;\n}\n\n.crud-active-filter-remove[data-v-b1cdd3b2] {\n  background: transparent;\n  border: 0;\n  color: inherit;\n  opacity: 0.75;\n  font-size: 1rem;\n  line-height: 1;\n  padding: 0;\n  cursor: pointer;\n}\n\n.crud-active-filter-remove[data-v-b1cdd3b2]:hover {\n  opacity: 1;\n}\n\n@media (min-width: 992px) {\n  .table[data-v-b1cdd3b2] {\n    table-layout: auto;\n  }\n  .table[data-v-b1cdd3b2] tbody[data-v-b1cdd3b2] td[data-v-b1cdd3b2] {\n    overflow: scroll;\n    -ms-overflow-style: none;\n    /* IE and Edge */\n    scrollbar-width: none;\n    /* Firefox */\n  }\n  .table[data-v-b1cdd3b2] tbody[data-v-b1cdd3b2] td[data-v-b1cdd3b2]::-webkit-scrollbar {\n    display: none;\n  }\n}\n.kanban-board[data-v-b1cdd3b2] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem;\n}\n\n.kanban-column[data-v-b1cdd3b2] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.kanban-column-header[data-v-b1cdd3b2] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center;\n}\n\n.kanban-column-body[data-v-b1cdd3b2] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n}\n\n.kanban-card[data-v-b1cdd3b2] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab;\n}";
 n(css, {});
 
 const _sfc_main = {
@@ -12720,7 +12720,7 @@ const _sfc_main = {
               break;
             // Agrega más casos según los tipos de campos que uses en tu modelo
             default:
-               console.debug("Undefined constructor ",fieldName,field.constructor.name);
+                console.debug("Undefined constructor ",fieldName,field.constructor.name);
               // Tipo de campo no reconocido, puedes manejarlo de acuerdo a tus necesidades
               itemDefault[fieldName] = null;
           }*/
@@ -12799,9 +12799,21 @@ const _sfc_main = {
       let filter = [];
       this.forceRecomputeCounter;
       this.internalFilters.forEach(f => {
-        if (f.value) {
+        if (this.hasFilterValue(f.value)) {
           let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
-          filter.push([colname, f.op, f.value]);
+          let op = f.op;
+          if (f.column.endsWith("_from")) {
+            op = ">=";
+          } else if (f.column.endsWith("_to")) {
+            op = "<=";
+          } else if (f.column.endsWith("_sort")) {
+            if (f.value === "ASC") {
+              op = "SORTASC";
+            } else if (f.value === "DESC") {
+              op = "SORTDESC";
+            }
+          }
+          filter.push([colname, op, f.value]);
         }
       });
       return filter;
@@ -12811,11 +12823,100 @@ const _sfc_main = {
         return this.internalFilters.find(inf => inf.column == prop);
       };
     },
+    activeFilters() {
+      this.forceRecomputeCounter;
+      const result = [];
+      this.columns.forEach(column => {
+        if (!this.isColumnHasFilter(column)) return;
+        if (this.isRangeFilterColumn(column)) {
+          const from = this.internalFilterByProp(column.prop + "_from");
+          const to = this.internalFilterByProp(column.prop + "_to");
+          const fromVal = from ? from.value : null;
+          const toVal = to ? to.value : null;
+          if (this.hasFilterValue(fromVal) || this.hasFilterValue(toVal)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatRangeDisplayValue(column, fromVal, toVal)
+            });
+          }
+        } else {
+          const f = this.internalFilterByProp(column.prop);
+          if (f && this.hasFilterValue(f.value)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatFilterDisplayValue(column, f.value)
+            });
+          }
+        }
+      });
+      return result;
+    },
     columnOptions() {
       return column => {};
     }
   },
   methods: {
+    hasFilterValue(value) {
+      return value !== null && value !== undefined && value !== "";
+    },
+    isRangeFilterColumn(column) {
+      return column && (column.type == "date" || column.type == "number" || column.type == "money" || column.type == "price");
+    },
+    isColumnVisibleInTable(column) {
+      if (!column) return false;
+      if (!column.hideColumn) return true;
+      return false;
+    },
+    formatFilterDisplayValue(column, value) {
+      if (column.type == "boolean") {
+        return value == 1 || value == "1" || value === true ? "Sí" : "No";
+      }
+      if ((column.type == "state" || column.type == "array") && column.options) {
+        const option = column.options.find(o => String(o.id !== undefined ? o.id : o.value) === String(value));
+        if (option) {
+          return option.text || option.label || String(value);
+        }
+      }
+      return String(value);
+    },
+    formatRangeDisplayValue(column, fromVal, toVal) {
+      const hasFrom = this.hasFilterValue(fromVal);
+      const hasTo = this.hasFilterValue(toVal);
+      const formatOne = v => {
+        if (column.type == "date" && v) {
+          return this.moment(v).format(column.format ? column.format : "L");
+        }
+        return String(v);
+      };
+      if (hasFrom && hasTo) {
+        return formatOne(fromVal) + " – " + formatOne(toVal);
+      }
+      if (hasFrom) {
+        return "Desde: " + formatOne(fromVal);
+      }
+      if (hasTo) {
+        return "Hasta: " + formatOne(toVal);
+      }
+      return "";
+    },
+    clearActiveFilter(key) {
+      const column = this.columns.find(c => c.prop === key);
+      if (column && this.isRangeFilterColumn(column)) {
+        const from = this.internalFilterByProp(key + "_from");
+        const to = this.internalFilterByProp(key + "_to");
+        if (from) from.value = null;
+        if (to) to.value = null;
+      } else {
+        const f = this.internalFilterByProp(key);
+        if (f) f.value = null;
+      }
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
+    },
     handleResize() {
       // Actualizar isMobile cuando cambia el tamaño de la pantalla
       this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
@@ -12860,15 +12961,15 @@ const _sfc_main = {
     setupFilters() {
       this.columns.forEach(column => {
         if (this.isColumnHasFilter(column)) {
-          if (column.type == "date") {
+          if (this.isRangeFilterColumn(column)) {
             this.internalFilters.push({
               column: column.prop + "_from",
-              op: column.filterOp ? column.filterOp : "=",
+              op: ">=",
               value: null
             });
             this.internalFilters.push({
               column: column.prop + "_to",
-              op: column.filterOp ? column.filterOp : "=",
+              op: "<=",
               value: null
             });
           } else {
@@ -12889,21 +12990,26 @@ const _sfc_main = {
       });
     },
     toggleSortFilter(column) {
-      let value = this.internalFilterByProp(column.prop + "_sort").value;
+      let sortFilter = this.internalFilterByProp(column.prop + "_sort");
+      if (!sortFilter) return;
+      let value = sortFilter.value;
       if (!value) {
-        this.internalFilterByProp(column.prop + "_sort").value = "ASC";
+        sortFilter.value = "ASC";
       } else if (value == "ASC") {
-        this.internalFilterByProp(column.prop + "_sort").value = "DESC";
+        sortFilter.value = "DESC";
       } else if (value == "DESC") {
-        this.internalFilterByProp(column.prop + "_sort").value = null;
+        sortFilter.value = null;
       }
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
     },
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
-      if (this.displayMode == this.displayModes.MODE_CARDS) {
-        this.filterSidebarOpen = this.filtersVisible;
-      } else {
-        this.filterSidebarOpen = false;
+      this.filterSidebarOpen = this.filtersVisible;
+      if (this.filtersVisible && this.internalFilters.length === 0) {
+        this.setupFilters();
       }
     },
     resetFilters(refresh = true) {
@@ -13072,7 +13178,7 @@ const _sfc_main = {
       }
     },
     isColumnHasFilter(column) {
-      return column && !column.hideFilter && column.type != "actions";
+      return column && !column.hideFilter && column.type != "actions" && column.type != "checkbox" && column.type != "select";
     },
     setFilter(column, value) {
       let filter = this.filter.find(f => f.column == column);
@@ -13778,7 +13884,7 @@ var _sfc_render = function render() {
     }, [_vm._l(_vm.columns, function (column, indexc) {
       return _c('div', {
         key: indexc
-      }, [_vm.isColumnHasFilter(column) ? _c('div', [_vm.internalFilterByProp(column.prop) ? _vm._t('sidebar-filter-' + column.prop, function () {
+      }, [_vm.isColumnHasFilter(column) ? _c('div', [_vm.internalFilterByProp(column.prop) || _vm.internalFilterByProp(column.prop + '_from') ? _vm._t('sidebar-filter-' + column.prop, function () {
         return [column.type == 'boolean' ? _c('div', {
           staticClass: "form-group"
         }, [_c('label', [_vm._v(_vm._s(column.label))]), _c('select', {
@@ -13816,11 +13922,13 @@ var _sfc_render = function render() {
           }
         }, [_vm._v("No")])])]) : column.type == 'date' ? _c('div', {
           staticClass: "form-group"
-        }, [_c('div', {
+        }, [_c('label', [_vm._v(_vm._s(column.label))]), _c('div', {
           staticClass: "row"
         }, [_c('div', {
           staticClass: "col-6"
-        }, [_c('b-form-datepicker', {
+        }, [_c('small', {
+          staticClass: "text-muted d-block mb-1"
+        }, [_vm._v("Desde")]), _c('b-form-datepicker', {
           attrs: {
             "today-button": "",
             "reset-button": "",
@@ -13836,7 +13944,9 @@ var _sfc_render = function render() {
           }
         })], 1), _c('div', {
           staticClass: "col-6"
-        }, [_c('b-form-datepicker', {
+        }, [_c('small', {
+          staticClass: "text-muted d-block mb-1"
+        }, [_vm._v("Hasta")]), _c('b-form-datepicker', {
           attrs: {
             "today-button": "",
             "reset-button": "",
@@ -13850,7 +13960,77 @@ var _sfc_render = function render() {
             },
             expression: "internalFilterByProp(column.prop + '_to').value\n                        "
           }
-        })], 1)])]) : column.type == 'state' ? _c('div', {
+        })], 1)])]) : column.type == 'number' || column.type == 'money' || column.type == 'price' ? _c('div', {
+          staticClass: "form-group"
+        }, [_c('label', [_vm._v(_vm._s(column.label))]), _c('div', {
+          staticClass: "row"
+        }, [_c('div', {
+          staticClass: "col-6"
+        }, [_c('input', {
+          directives: [{
+            name: "model",
+            rawName: "v-model.number",
+            value: _vm.internalFilterByProp(column.prop + '_from').value,
+            expression: "internalFilterByProp(column.prop + '_from').value",
+            modifiers: {
+              "number": true
+            }
+          }],
+          staticClass: "form-control",
+          attrs: {
+            "type": "number",
+            "step": column.type == 'money' || column.type == 'price' ? '0.01' : '1',
+            "placeholder": "Min"
+          },
+          domProps: {
+            "value": _vm.internalFilterByProp(column.prop + '_from').value
+          },
+          on: {
+            "change": function ($event) {
+              return _vm.onChangeFilter($event);
+            },
+            "input": function ($event) {
+              if ($event.target.composing) return;
+              _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", _vm._n($event.target.value));
+            },
+            "blur": function ($event) {
+              return _vm.$forceUpdate();
+            }
+          }
+        })]), _c('div', {
+          staticClass: "col-6"
+        }, [_c('input', {
+          directives: [{
+            name: "model",
+            rawName: "v-model.number",
+            value: _vm.internalFilterByProp(column.prop + '_to').value,
+            expression: "internalFilterByProp(column.prop + '_to').value",
+            modifiers: {
+              "number": true
+            }
+          }],
+          staticClass: "form-control",
+          attrs: {
+            "type": "number",
+            "step": column.type == 'money' || column.type == 'price' ? '0.01' : '1',
+            "placeholder": "Max"
+          },
+          domProps: {
+            "value": _vm.internalFilterByProp(column.prop + '_to').value
+          },
+          on: {
+            "change": function ($event) {
+              return _vm.onChangeFilter($event);
+            },
+            "input": function ($event) {
+              if ($event.target.composing) return;
+              _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", _vm._n($event.target.value));
+            },
+            "blur": function ($event) {
+              return _vm.$forceUpdate();
+            }
+          }
+        })])])]) : column.type == 'state' ? _c('div', {
           staticClass: "form-group"
         }, [_c('label', [_vm._v(_vm._s(column.label))]), _vm.optionsLoaded ? _c('select', {
           directives: [{
@@ -14088,7 +14268,43 @@ var _sfc_render = function render() {
     "createItem": _vm.createItem,
     "toggleDisplayMode": _vm.toggleDisplayMode,
     "loading": _vm.loading
-  })], 2)], 1)], 1) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('div', {
+  })], 2)], 1)], 1) : _vm._e(), _vm.enableFilters && _vm.activeFilters.length > 0 ? _c('div', {
+    staticClass: "crud-active-filters"
+  }, [_c('span', {
+    staticClass: "crud-active-filters-label text-muted"
+  }, [_c('b-icon-funnel', {
+    staticClass: "mr-1"
+  }), _vm._v(" Filtros activos: ")], 1), _vm._l(_vm.activeFilters, function (af) {
+    return _c('b-badge', {
+      key: af.key,
+      staticClass: "crud-active-filter-badge mr-1 mb-1",
+      attrs: {
+        "variant": "primary"
+      }
+    }, [_c('strong', [_vm._v(_vm._s(af.label) + ":")]), _vm._v(" " + _vm._s(af.displayValue) + " "), _c('button', {
+      staticClass: "crud-active-filter-remove ml-1",
+      attrs: {
+        "type": "button",
+        "aria-label": "Quitar filtro"
+      },
+      on: {
+        "click": function ($event) {
+          return _vm.clearActiveFilter(af.key);
+        }
+      }
+    }, [_vm._v("×")])]);
+  }), _vm.activeFilters.length > 1 ? _c('b-button', {
+    staticClass: "text-danger p-0 ml-1",
+    attrs: {
+      "variant": "link",
+      "size": "sm"
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.resetFilters();
+      }
+    }
+  }, [_vm._v(" Limpiar todos ")]) : _vm._e()], 2) : _vm._e(), _vm.displayMode == _vm.displayModes.MODE_TABLE ? _c('div', {
     class: ['table-responsive', _vm.tableContainerClass]
   }, [_c('table', {
     class: ['table table-hover table-striped w-100', _vm.tableClass]
@@ -14096,7 +14312,7 @@ var _sfc_render = function render() {
     staticClass: "thead-light"
   }, [_c('tr', [_vm._t("rowHead", function () {
     return _vm._l(_vm.columns, function (column, indexc) {
-      return _c('th', {
+      return _vm.isColumnVisibleInTable(column) ? _c('th', {
         key: indexc,
         style: {
           width: column.width ? column.width : 'inherit'
@@ -14104,195 +14320,9 @@ var _sfc_render = function render() {
         attrs: {
           "scope": "col"
         }
-      }, [_vm.enableFilters && _vm.filtersVisible && _vm.isColumnHasFilter(column) && _vm.internalFilterByProp(column.prop) ? _vm._t('filter-' + column.prop, function () {
-        return [_c('div', {
-          staticClass: "form-group"
-        }, [column.type == 'boolean' ? _c('select', {
-          directives: [{
-            name: "model",
-            rawName: "v-model",
-            value: _vm.internalFilterByProp(column.prop).value,
-            expression: "internalFilterByProp(column.prop).value"
-          }],
-          staticClass: "form-control form-control-md p-2",
-          on: {
-            "change": [function ($event) {
-              var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-                return o.selected;
-              }).map(function (o) {
-                var val = "_value" in o ? o._value : o.value;
-                return val;
-              });
-              _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-            }, function ($event) {
-              return _vm.onChangeFilter($event);
-            }]
-          }
-        }, [_c('option', {
-          attrs: {
-            "value": ""
-          }
-        }, [_vm._v(_vm._s(column.label))]), _c('option', {
-          attrs: {
-            "value": "1"
-          }
-        }, [_vm._v("Sí")]), _c('option', {
-          attrs: {
-            "value": "0"
-          }
-        }, [_vm._v("No")])]) : column.type == 'date' ? _c('div', {
-          staticClass: "row"
-        }, [_c('div', {
-          staticClass: "col-6"
-        }, [_c('b-form-datepicker', {
-          staticClass: "form-control-md p-2",
-          attrs: {
-            "today-button": "",
-            "reset-button": "",
-            "close-button": "",
-            "locale": "es"
-          },
-          model: {
-            value: _vm.internalFilterByProp(column.prop + '_from').value,
-            callback: function ($$v) {
-              _vm.$set(_vm.internalFilterByProp(column.prop + '_from'), "value", $$v);
-            },
-            expression: "internalFilterByProp(column.prop + '_from').value\n                        "
-          }
-        })], 1), _c('div', {
-          staticClass: "col-6"
-        }, [_c('b-form-datepicker', {
-          staticClass: "form-control-md p-2",
-          attrs: {
-            "today-button": "",
-            "reset-button": "",
-            "close-button": "",
-            "locale": "es"
-          },
-          model: {
-            value: _vm.internalFilterByProp(column.prop + '_to').value,
-            callback: function ($$v) {
-              _vm.$set(_vm.internalFilterByProp(column.prop + '_to'), "value", $$v);
-            },
-            expression: "internalFilterByProp(column.prop + '_to').value\n                        "
-          }
-        })], 1)]) : column.type == 'state' && _vm.optionsLoaded ? _c('select', {
-          directives: [{
-            name: "model",
-            rawName: "v-model",
-            value: _vm.internalFilterByProp(column.prop).value,
-            expression: "internalFilterByProp(column.prop).value"
-          }],
-          staticClass: "form-control form-control-md p-2",
-          attrs: {
-            "placeholder": column.label
-          },
-          on: {
-            "change": [function ($event) {
-              var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-                return o.selected;
-              }).map(function (o) {
-                var val = "_value" in o ? o._value : o.value;
-                return val;
-              });
-              _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-            }, function ($event) {
-              return _vm.onChangeFilter($event);
-            }]
-          }
-        }, [_c('option', {
-          attrs: {
-            "value": ""
-          }
-        }, [_vm._v(_vm._s(column.label))]), _vm._l(column.options, function (option, indexo) {
-          return _c('option', {
-            key: indexo,
-            domProps: {
-              "value": option.id
-            }
-          }, [_vm._v(" " + _vm._s(option.text ? option.text : option.label ? option.label : "") + " ")]);
-        })], 2) : column.type == 'array' && _vm.optionsLoaded ? _c('select', {
-          directives: [{
-            name: "model",
-            rawName: "v-model",
-            value: _vm.internalFilterByProp(column.prop).value,
-            expression: "internalFilterByProp(column.prop).value"
-          }],
-          staticClass: "form-control form-control-md p-2",
-          attrs: {
-            "placeholder": column.label
-          },
-          on: {
-            "change": [function ($event) {
-              var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-                return o.selected;
-              }).map(function (o) {
-                var val = "_value" in o ? o._value : o.value;
-                return val;
-              });
-              _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-            }, function ($event) {
-              return _vm.onChangeFilter($event);
-            }]
-          }
-        }, [_c('option', {
-          attrs: {
-            "value": ""
-          }
-        }, [_vm._v(_vm._s(column.label))]), _vm._l(column.options, function (option, indexo) {
-          return _c('option', {
-            key: indexo,
-            domProps: {
-              "value": option.id
-            }
-          }, [_vm._v(" " + _vm._s(option.text ? option.text : option.label ? option.label : "") + " ")]);
-        })], 2) : column.type == 'checkbox' ? _c('b-form-checkbox', {
-          attrs: {
-            "name": "select-all"
-          },
-          on: {
-            "change": function ($event) {
-              return _vm.toggleAll($event);
-            }
-          }
-        }) : column.type == 'select' ? _c('b-form-checkbox', {
-          attrs: {
-            "name": "select-all"
-          },
-          on: {
-            "change": function ($event) {
-              return _vm.toggleAll($event);
-            }
-          }
-        }) : _c('input', {
-          directives: [{
-            name: "model",
-            rawName: "v-model",
-            value: _vm.internalFilterByProp(column.prop).value,
-            expression: "internalFilterByProp(column.prop).value"
-          }],
-          staticClass: "form-control form-control-md p-2",
-          attrs: {
-            "placeholder": column.label
-          },
-          domProps: {
-            "value": _vm.internalFilterByProp(column.prop).value
-          },
-          on: {
-            "change": function ($event) {
-              return _vm.onChangeFilter($event);
-            },
-            "input": function ($event) {
-              if ($event.target.composing) return;
-              _vm.$set(_vm.internalFilterByProp(column.prop), "value", $event.target.value);
-            }
-          }
-        })], 1)];
-      }, {
-        "column": column,
-        "filter": _vm.filter,
-        "internalFilterByProp": _vm.internalFilterByProp
-      }) : column.type == 'select' ? _c('span', [_c('b-form-checkbox', {
+      }, [_c('div', {
+        staticClass: "th-label-wrap"
+      }, [column.type == 'select' ? _c('span', [_c('b-form-checkbox', {
         attrs: {
           "name": "select-all"
         },
@@ -14301,14 +14331,25 @@ var _sfc_render = function render() {
             return _vm.toggleAll($event);
           }
         }
-      })], 1) : _c('span', [_vm._v(_vm._s(column.label))]), _vm.sortable && column.type != 'select' && column.type != 'checkbox' && _vm.internalFilterByProp(column.prop + '_sort') ? _c('span', {
+      })], 1) : column.type == 'checkbox' ? _c('span', [_c('b-form-checkbox', {
+        attrs: {
+          "name": "select-all"
+        },
+        on: {
+          "change": function ($event) {
+            return _vm.toggleAll($event);
+          }
+        }
+      })], 1) : _c('span', {
+        staticClass: "th-label"
+      }, [_vm._v(_vm._s(column.label))]), _vm.sortable && column.type != 'select' && column.type != 'checkbox' && _vm.internalFilterByProp(column.prop + '_sort') ? _c('span', {
         staticClass: "sort-filter",
         on: {
           "click": function ($event) {
             return _vm.toggleSortFilter(column);
           }
         }
-      }, [!_vm.internalFilterByProp(column.prop + '_sort').value ? _c('b-icon-sort-down') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'ASC' ? _c('b-icon-sort-up') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'DESC' ? _c('b-icon-sort-down') : _vm._e()], 1) : _vm._e()], 2);
+      }, [!_vm.internalFilterByProp(column.prop + '_sort').value ? _c('b-icon-sort-down') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'ASC' ? _c('b-icon-sort-up') : _vm._e(), _vm.internalFilterByProp(column.prop + '_sort').value == 'DESC' ? _c('b-icon-sort-down') : _vm._e()], 1) : _vm._e()])]) : _vm._e();
     });
   })], 2)]), _c('draggable', {
     attrs: {
@@ -14359,7 +14400,7 @@ var _sfc_render = function render() {
       }
     }, [_c('span', [_vm._v(_vm._s(item.crudgrouplabel))])]) : _vm._t("row", function () {
       return _vm._l(_vm.columns, function (column, indexc) {
-        return _c('td', {
+        return _vm.isColumnVisibleInTable(column) ? _c('td', {
           key: indexc,
           attrs: {
             "scope": column.prop == 'id' ? 'row' : ''
@@ -14427,7 +14468,7 @@ var _sfc_render = function render() {
           "showItem": _vm.showItem,
           "updateItem": _vm.updateItem,
           "removeItem": _vm.removeItem
-        })], 2) : _vm._e()], 2);
+        })], 2) : _vm._e()], 2) : _vm._e();
       });
     }, {
       "item": item
@@ -14831,7 +14872,7 @@ var _sfc_render = function render() {
   }) : _vm._e()], 2) : _vm._e()], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "77ea2533", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "b1cdd3b2", null, null);
 var component = __component__.exports;
 
 // Import vue component

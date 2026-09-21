@@ -547,9 +547,21 @@ export default /*#__PURE__*/ {
       let filter = [];
       this.forceRecomputeCounter;
       this.internalFilters.forEach((f) => {
-        if (f.value) {
+        if (this.hasFilterValue(f.value)) {
           let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
-          filter.push([colname, f.op, f.value]);
+          let op = f.op;
+          if (f.column.endsWith("_from")) {
+            op = ">=";
+          } else if (f.column.endsWith("_to")) {
+            op = "<=";
+          } else if (f.column.endsWith("_sort")) {
+            if (f.value === "ASC") {
+              op = "SORTASC";
+            } else if (f.value === "DESC") {
+              op = "SORTDESC";
+            }
+          }
+          filter.push([colname, op, f.value]);
         }
       });
       return filter;
@@ -559,6 +571,36 @@ export default /*#__PURE__*/ {
         return this.internalFilters.find((inf) => inf.column == prop);
       };
     },
+    activeFilters() {
+      this.forceRecomputeCounter;
+      const result = [];
+      this.columns.forEach((column) => {
+        if (!this.isColumnHasFilter(column)) return;
+        if (this.isRangeFilterColumn(column)) {
+          const from = this.internalFilterByProp(column.prop + "_from");
+          const to = this.internalFilterByProp(column.prop + "_to");
+          const fromVal = from ? from.value : null;
+          const toVal = to ? to.value : null;
+          if (this.hasFilterValue(fromVal) || this.hasFilterValue(toVal)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatRangeDisplayValue(column, fromVal, toVal),
+            });
+          }
+        } else {
+          const f = this.internalFilterByProp(column.prop);
+          if (f && this.hasFilterValue(f.value)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatFilterDisplayValue(column, f.value),
+            });
+          }
+        }
+      });
+      return result;
+    },
     columnOptions() {
       return (column) => {
 
@@ -566,6 +608,74 @@ export default /*#__PURE__*/ {
     }
   },
   methods: {
+    hasFilterValue(value) {
+      return value !== null && value !== undefined && value !== "";
+    },
+    isRangeFilterColumn(column) {
+      return (
+        column &&
+        (column.type == "date" ||
+          column.type == "number" ||
+          column.type == "money" ||
+          column.type == "price")
+      );
+    },
+    isColumnVisibleInTable(column) {
+      if (!column) return false;
+      if (!column.hideColumn) return true;
+      return false;
+    },
+    formatFilterDisplayValue(column, value) {
+      if (column.type == "boolean") {
+        return value == 1 || value == "1" || value === true ? "Sí" : "No";
+      }
+      if ((column.type == "state" || column.type == "array") && column.options) {
+        const option = column.options.find(
+          (o) =>
+            String(o.id !== undefined ? o.id : o.value) === String(value)
+        );
+        if (option) {
+          return option.text || option.label || String(value);
+        }
+      }
+      return String(value);
+    },
+    formatRangeDisplayValue(column, fromVal, toVal) {
+      const hasFrom = this.hasFilterValue(fromVal);
+      const hasTo = this.hasFilterValue(toVal);
+      const formatOne = (v) => {
+        if (column.type == "date" && v) {
+          return this.moment(v).format(column.format ? column.format : "L");
+        }
+        return String(v);
+      };
+      if (hasFrom && hasTo) {
+        return formatOne(fromVal) + " – " + formatOne(toVal);
+      }
+      if (hasFrom) {
+        return "Desde: " + formatOne(fromVal);
+      }
+      if (hasTo) {
+        return "Hasta: " + formatOne(toVal);
+      }
+      return "";
+    },
+    clearActiveFilter(key) {
+      const column = this.columns.find((c) => c.prop === key);
+      if (column && this.isRangeFilterColumn(column)) {
+        const from = this.internalFilterByProp(key + "_from");
+        const to = this.internalFilterByProp(key + "_to");
+        if (from) from.value = null;
+        if (to) to.value = null;
+      } else {
+        const f = this.internalFilterByProp(key);
+        if (f) f.value = null;
+      }
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
+    },
     handleResize() {
       // Actualizar isMobile cuando cambia el tamaño de la pantalla
       this.isMobile = window.matchMedia("(max-width: 1024px)").matches;
@@ -613,16 +723,16 @@ export default /*#__PURE__*/ {
     setupFilters() {
       this.columns.forEach((column) => {
         if (this.isColumnHasFilter(column)) {
-          if (column.type == "date") {
+          if (this.isRangeFilterColumn(column)) {
             this.internalFilters.push({
               column: column.prop + "_from",
-              op: column.filterOp ? column.filterOp : "=",
+              op: ">=",
               value: null,
             });
 
             this.internalFilters.push({
               column: column.prop + "_to",
-              op: column.filterOp ? column.filterOp : "=",
+              op: "<=",
               value: null,
             });
           } else {
@@ -644,21 +754,26 @@ export default /*#__PURE__*/ {
     },
 
     toggleSortFilter(column) {
-      let value = this.internalFilterByProp(column.prop + "_sort").value;
+      let sortFilter = this.internalFilterByProp(column.prop + "_sort");
+      if (!sortFilter) return;
+      let value = sortFilter.value;
       if (!value) {
-        this.internalFilterByProp(column.prop + "_sort").value = "ASC";
+        sortFilter.value = "ASC";
       } else if (value == "ASC") {
-        this.internalFilterByProp(column.prop + "_sort").value = "DESC";
+        sortFilter.value = "DESC";
       } else if (value == "DESC") {
-        this.internalFilterByProp(column.prop + "_sort").value = null;
+        sortFilter.value = null;
       }
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
     },
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
-      if (this.displayMode == this.displayModes.MODE_CARDS) {
-        this.filterSidebarOpen = this.filtersVisible;
-      } else {
-        this.filterSidebarOpen = false;
+      this.filterSidebarOpen = this.filtersVisible;
+      if (this.filtersVisible && this.internalFilters.length === 0) {
+        this.setupFilters();
       }
     },
     resetFilters(refresh = true) {
@@ -862,7 +977,13 @@ export default /*#__PURE__*/ {
       }
     },
     isColumnHasFilter(column) {
-      return column && !column.hideFilter && column.type != "actions";
+      return (
+        column &&
+        !column.hideFilter &&
+        column.type != "actions" &&
+        column.type != "checkbox" &&
+        column.type != "select"
+      );
     },
     setFilter(column, value) {
       let filter = this.filter.find((f) => f.column == column);
@@ -1670,7 +1791,8 @@ export default /*#__PURE__*/ {
             <div v-for="(column, indexc) in columns" :key="indexc">
               <div v-if="isColumnHasFilter(column)">
                 <slot :name="'sidebar-filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
-                  v-bind:internalFilterByProp="internalFilterByProp" v-if="internalFilterByProp(column.prop)">
+                  v-bind:internalFilterByProp="internalFilterByProp"
+                  v-if="internalFilterByProp(column.prop) || internalFilterByProp(column.prop + '_from')">
                   <div class="form-group" v-if="column.type == 'boolean'">
                     <label>{{ column.label }}</label>
 
@@ -1682,14 +1804,36 @@ export default /*#__PURE__*/ {
                     </select>
                   </div>
                   <div class="form-group" v-else-if="column.type == 'date'">
+                    <label>{{ column.label }}</label>
                     <div class="row">
                       <div class="col-6">
+                        <small class="text-muted d-block mb-1">Desde</small>
                         <b-form-datepicker v-model="internalFilterByProp(column.prop + '_from').value
                           " today-button reset-button close-button locale="es"></b-form-datepicker>
                       </div>
                       <div class="col-6">
+                        <small class="text-muted d-block mb-1">Hasta</small>
                         <b-form-datepicker v-model="internalFilterByProp(column.prop + '_to').value
                           " today-button reset-button close-button locale="es"></b-form-datepicker>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group"
+                    v-else-if="column.type == 'number' || column.type == 'money' || column.type == 'price'">
+                    <label>{{ column.label }}</label>
+                    <div class="row">
+                      <div class="col-6">
+                        <input type="number" class="form-control"
+                          v-model.number="internalFilterByProp(column.prop + '_from').value"
+                          :step="column.type == 'money' || column.type == 'price' ? '0.01' : '1'"
+                          placeholder="Min" @change="onChangeFilter($event)" />
+                      </div>
+                      <div class="col-6">
+                        <input type="number" class="form-control"
+                          v-model.number="internalFilterByProp(column.prop + '_to').value"
+                          :step="column.type == 'money' || column.type == 'price' ? '0.01' : '1'"
+                          placeholder="Max" @change="onChangeFilter($event)" />
                       </div>
                     </div>
                   </div>
@@ -1802,98 +1946,47 @@ export default /*#__PURE__*/ {
       </div>
     </div>
 
+    <div class="crud-active-filters" v-if="enableFilters && activeFilters.length > 0">
+      <span class="crud-active-filters-label text-muted">
+        <b-icon-funnel class="mr-1"></b-icon-funnel>
+        Filtros activos:
+      </span>
+      <b-badge v-for="af in activeFilters" :key="af.key" variant="primary" class="crud-active-filter-badge mr-1 mb-1">
+        <strong>{{ af.label }}:</strong> {{ af.displayValue }}
+        <button type="button" class="crud-active-filter-remove ml-1" aria-label="Quitar filtro"
+          @click="clearActiveFilter(af.key)">&times;</button>
+      </b-badge>
+      <b-button v-if="activeFilters.length > 1" variant="link" size="sm" class="text-danger p-0 ml-1"
+        @click="resetFilters()">
+        Limpiar todos
+      </b-button>
+    </div>
+
     <div :class="['table-responsive', tableContainerClass]" v-if="displayMode == displayModes.MODE_TABLE">
       <table :class="['table table-hover table-striped w-100', tableClass]">
         <thead class="thead-light">
           <tr>
             <slot name="rowHead">
-              <th v-for="(column, indexc) in columns" :key="indexc"
+              <th v-for="(column, indexc) in columns" :key="indexc" v-if="isColumnVisibleInTable(column)"
                 :style="{ width: column.width ? column.width : 'inherit' }" scope="col">
-                <slot :name="'filter-' + column.prop" v-bind:column="column" v-bind:filter="filter"
-                  v-bind:internalFilterByProp="internalFilterByProp" v-if="enableFilters &&
-                    filtersVisible &&
-                    isColumnHasFilter(column) &&
-                    internalFilterByProp(column.prop)
-                  ">
+                <div class="th-label-wrap">
+                  <span v-if="column.type == 'select'">
+                    <b-form-checkbox name="select-all" @change="toggleAll($event)"></b-form-checkbox>
+                  </span>
+                  <span v-else-if="column.type == 'checkbox'">
+                    <b-form-checkbox name="select-all" @change="toggleAll($event)"></b-form-checkbox>
+                  </span>
+                  <span v-else class="th-label">{{ column.label }}</span>
 
-                  <div class="form-group">
-                    <select v-if="column.type == 'boolean'" class="form-control form-control-md p-2"
-                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)">
-                      <option value="">{{ column.label }}</option>
-                      <option value="1">Sí</option>
-                      <option value="0">No</option>
-                    </select>
-
-                    <div class="row" v-else-if="column.type == 'date'">
-                      <div class="col-6">
-                        <b-form-datepicker v-model="internalFilterByProp(column.prop + '_from').value
-                          " today-button reset-button close-button locale="es"
-                          class="form-control-md p-2"></b-form-datepicker>
-                      </div>
-                      <div class="col-6">
-                        <b-form-datepicker v-model="internalFilterByProp(column.prop + '_to').value
-                          " today-button reset-button close-button locale="es"
-                          class="form-control-md p-2"></b-form-datepicker>
-                      </div>
-                    </div>
-
-                    <select v-else-if="column.type == 'state' && optionsLoaded" class="form-control form-control-md p-2"
-                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"
-                      :placeholder="column.label">
-                      <option value="">{{ column.label }}</option>
-                      <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
-                        {{
-                          option.text
-                            ? option.text
-                            : option.label
-                              ? option.label
-                              : ""
-                        }}
-                      </option>
-                    </select>
-
-                    <select v-else-if="column.type == 'array' && optionsLoaded" class="form-control form-control-md p-2"
-                      v-model="internalFilterByProp(column.prop).value" @change="onChangeFilter($event)"
-                      :placeholder="column.label">
-                      <option value="">{{ column.label }}</option>
-                      <option :value="option.id" v-for="(option, indexo) in column.options" :key="indexo">
-                        {{
-                          option.text
-                            ? option.text
-                            : option.label
-                              ? option.label
-                              : ""
-                        }}
-                      </option>
-                    </select>
-
-                    <b-form-checkbox v-else-if="column.type == 'checkbox'" name="select-all"
-                      @change="toggleAll($event)">
-                    </b-form-checkbox>
-
-                    <b-form-checkbox v-else-if="column.type == 'select'" name="select-all" @change="toggleAll($event)">
-                    </b-form-checkbox>
-
-                    <input v-else class="form-control form-control-md p-2"
-                      v-model="internalFilterByProp(column.prop).value" :placeholder="column.label"
-                      @change="onChangeFilter($event)" />
-
-                  </div>
-                </slot>
-                <span v-else-if="column.type == 'select'">
-                  <b-form-checkbox name="select-all" @change="toggleAll($event)"></b-form-checkbox>
-                </span>
-                <span v-else>{{ column.label }}</span>
-
-
-                <span
-                  v-if="sortable && column.type != 'select' && column.type != 'checkbox' && internalFilterByProp(column.prop + '_sort')"
-                  class="sort-filter" @click="toggleSortFilter(column)"><b-icon-sort-down
-                    v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
-                    v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
-                  <b-icon-sort-down
-                    v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
-                </span>
+                  <span
+                    v-if="sortable && column.type != 'select' && column.type != 'checkbox' && internalFilterByProp(column.prop + '_sort')"
+                    class="sort-filter" @click="toggleSortFilter(column)"><b-icon-sort-down
+                      v-if="!internalFilterByProp(column.prop + '_sort').value"></b-icon-sort-down><b-icon-sort-up
+                      v-if="internalFilterByProp(column.prop + '_sort').value == 'ASC'"></b-icon-sort-up>
+                    <b-icon-sort-down
+                      v-if="internalFilterByProp(column.prop + '_sort').value == 'DESC'"></b-icon-sort-down>
+                  </span>
+                </div>
               </th>
             </slot>
           </tr>
@@ -1910,7 +2003,8 @@ export default /*#__PURE__*/ {
             </th>
 
             <slot name="row" v-bind:item="item" v-else>
-              <td v-for="(column, indexc) in columns" :key="indexc" :scope="column.prop == 'id' ? 'row' : ''">
+              <td v-for="(column, indexc) in columns" :key="indexc" v-if="isColumnVisibleInTable(column)"
+                :scope="column.prop == 'id' ? 'row' : ''">
                 <slot :name="'cell-' + column.prop" v-bind:item="item" v-bind:index="index" v-bind:itemindex="index"
                   v-bind:columnindex="indexc">
                   <span v-if="column.type == 'boolean'">
@@ -2196,6 +2290,65 @@ tr td:first-child {
 
 .custom-control {
   position: relative;
+}
+
+.th-label-wrap {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0.25rem;
+  max-width: 100%;
+}
+
+.th-label {
+  white-space: nowrap;
+}
+
+.sort-filter {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.crud-active-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.5rem 0 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.crud-active-filters-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+
+.crud-active-filter-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 400;
+  padding: 0.35rem 0.5rem;
+}
+
+.crud-active-filter-remove {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  opacity: 0.75;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+}
+
+.crud-active-filter-remove:hover {
+  opacity: 1;
 }
 
 
