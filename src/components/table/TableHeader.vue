@@ -2,9 +2,10 @@
   <thead class="thead-light">
     <tr>
       <slot name="rowHead">
-        <template v-for="(column, indexc) in columns" :key="indexc">
+        <template v-for="(column, indexc) in columns">
         <th
           v-if="isColumnVisibleInTable(column)"
+          :key="'th-' + (column.prop || indexc)"
           :style="{ width: column.width ? column.width : (column.type == 'actions' ? '1%' : 'inherit') }" 
           :class="{ 'actions-header': column.type == 'actions', 'checkbox-header': column.type == 'checkbox' || column.type == 'select' }"
           scope="col"

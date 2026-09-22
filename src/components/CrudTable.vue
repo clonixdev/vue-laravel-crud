@@ -22,7 +22,7 @@
           @sort="onSort()"
           @add="onDraggableAdded($event)"
           @change="onDraggableChange($event)"
-          :options="draggableOptions"
+          v-bind="draggableOptions"
           item-key="id"
         >
           <template #item="{ element, index }">

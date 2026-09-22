@@ -9,9 +9,10 @@
     </th>
 
     <slot name="row" v-bind:item="item" v-else>
-      <template v-for="(column, indexc) in columns" :key="indexc">
+      <template v-for="(column, indexc) in columns">
       <TableCell 
         v-if="isColumnVisibleInTable(column)"
+        :key="'td-' + (column.prop || indexc)"
         :column="column"
         :item="item"
         :index="index"
