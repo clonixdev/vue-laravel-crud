@@ -80,52 +80,65 @@ export default {
     },
 
     async fetchItemsVuex(page = 1, concat = false) {
+      const seq = ++this.fetchSeq;
       this.loading = true;
       this.$emit("beforeFetch", {});
 
-      let result;
+      try {
+        let result;
 
-      if (this.vuexLocalforage) {
-        await this.model.$fetch();
-      } else {
-        this.model.deleteAll();
+        if (this.vuexLocalforage) {
+          await this.model.$fetch();
+        } else {
+          this.model.deleteAll();
 
-        result = await this.model.api().get(this.buildVuexOrmEndpoint(this.modelName), {
-          dataKey: 'data',
-          params: {
-            page: page,
-            limit: this.pagination.per_page,
-            filters: JSON.stringify(this.finalFilters),
-          }
-        });
-}
+          result = await this.model.api().get(this.buildVuexOrmEndpoint(this.modelName), {
+            dataKey: 'data',
+            params: {
+              page: page,
+              limit: this.pagination.per_page,
+              filters: JSON.stringify(this.finalFilters),
+            }
+          });
+        }
 
-      let itemsResult = this.model.query().withAll().get();
+        if (seq !== this.fetchSeq) return;
 
-      if (itemsResult) {
-        // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
-        const normalizedItems = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
-        // Mantener referencia del array para no romper provide/inject en componentes hijos.
-        this.items.splice(0, this.items.length, ...normalizedItems);
-      } else {
-        // Fallback: intentar sin withAll
-        itemsResult = this.model.query().get();
+        let itemsResult = this.model.query().withAll().get();
+
         if (itemsResult) {
+          // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
           const normalizedItems = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
           // Mantener referencia del array para no romper provide/inject en componentes hijos.
           this.items.splice(0, this.items.length, ...normalizedItems);
+        } else {
+          // Fallback: intentar sin withAll
+          itemsResult = this.model.query().get();
+          if (itemsResult) {
+            const normalizedItems = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
+            // Mantener referencia del array para no romper provide/inject en componentes hijos.
+            this.items.splice(0, this.items.length, ...normalizedItems);
+          }
+        }
+
+        // Actualizar paginación con datos del servidor
+        const paginationData = result?.response?.data ?? result?.data;
+        if (paginationData) {
+          this.makePagination(paginationData);
+        }
+
+        console.debug("fetch page vuex ", itemsResult, page, this.items, result, "pagination:", this.pagination);
+        this.firstLoad = true;
+      } catch (error) {
+        if (seq !== this.fetchSeq) return;
+        this.toastError(error);
+        this.fetchError = true;
+        this.firstLoad = true;
+      } finally {
+        if (seq === this.fetchSeq) {
+          this.loading = false;
         }
       }
-
-      // Actualizar paginación con datos del servidor
-      const paginationData = result?.response?.data ?? result?.data;
-      if (paginationData) {
-        this.makePagination(paginationData);
-      }
-
-      console.debug("fetch page vuex ", itemsResult, page, this.items, result, "pagination:", this.pagination);
-      this.loading = false;
-      this.firstLoad = true;
     },
 
     fetchItemsLocal() {
@@ -149,6 +162,7 @@ export default {
         return this.fetchItemsLocal(page, concat);
       }
 
+      const seq = ++this.fetchSeq;
       this.loading = true;
       return axios
         .get(this.buildApiEndpoint(this.modelName), {
@@ -159,6 +173,7 @@ export default {
           },
         })
         .then((response) => {
+          if (seq !== this.fetchSeq) return;
           console.debug("fetchItems - Response recibida:", response.data);
           this.makePagination(response.data);
           
@@ -188,15 +203,19 @@ export default {
           
           console.debug("fetchItems - this.items después de asignar:", this.items, "Cantidad:", this.items ? this.items.length : 0);
 
-          this.loading = false;
           this.firstLoad = true;
           this.$emit("afterFetch", {});
         })
         .catch((error) => {
+          if (seq !== this.fetchSeq) return;
           this.toastError(error);
-          this.loading = false;
           this.firstLoad = true;
           this.fetchError = true;
+        })
+        .finally(() => {
+          if (seq === this.fetchSeq) {
+            this.loading = false;
+          }
         });
     },
 

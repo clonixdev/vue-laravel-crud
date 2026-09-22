@@ -27,7 +27,7 @@
             </div>
           </div>
 
-          <div class="form-group" v-else-if="column.type == 'number' || column.type == 'money'">
+          <div class="form-group" v-else-if="column.type == 'number' || column.type == 'money' || column.type == 'price'">
             <label>{{ column.label }}</label>
             <div class="row">
               <div class="col-6">
@@ -35,7 +35,7 @@
                   type="number" 
                   class="form-control" 
                   v-model.number="getFilterForDateFrom(column).value"
-                  :step="column.type == 'money' ? '0.01' : '1'"
+                  :step="column.type == 'money' || column.type == 'price' ? '0.01' : '1'"
                   @change="onChangeFilter($event)"
                   placeholder="Desde" />
               </div>
@@ -44,7 +44,7 @@
                   type="number" 
                   class="form-control" 
                   v-model.number="getFilterForDateTo(column).value"
-                  :step="column.type == 'money' ? '0.01' : '1'"
+                  :step="column.type == 'money' || column.type == 'price' ? '0.01' : '1'"
                   @change="onChangeFilter($event)"
                   placeholder="Hasta" />
               </div>
@@ -132,7 +132,7 @@
               </div>
             </div>
 
-            <div class="form-group" v-else-if="customFilter.type == 'number' || customFilter.type == 'money'">
+            <div class="form-group" v-else-if="customFilter.type == 'number' || customFilter.type == 'money' || customFilter.type == 'price'">
               <label>{{ customFilter.label }}</label>
               <div class="row">
                 <div class="col-6">
@@ -140,7 +140,7 @@
                     type="number" 
                     class="form-control" 
                     v-model.number="getFilterForDateFrom(customFilter).value"
-                    :step="customFilter.type == 'money' ? '0.01' : '1'"
+                    :step="customFilter.type == 'money' || customFilter.type == 'price' ? '0.01' : '1'"
                     @change="onChangeFilter($event)"
                     placeholder="Desde" />
                 </div>
@@ -149,7 +149,7 @@
                     type="number" 
                     class="form-control" 
                     v-model.number="getFilterForDateTo(customFilter).value"
-                    :step="customFilter.type == 'money' ? '0.01' : '1'"
+                    :step="customFilter.type == 'money' || customFilter.type == 'price' ? '0.01' : '1'"
                     @change="onChangeFilter($event)"
                     placeholder="Hasta" />
                 </div>
