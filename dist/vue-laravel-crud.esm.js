@@ -283,7 +283,7 @@ var _sfc_render$f = function render() {
           },
           expression: "getFilterForDateTo(column).value\n                "
         }
-      })], 1)])]) : column.type == 'number' || column.type == 'money' ? _c('div', {
+      })], 1)])]) : column.type == 'number' || column.type == 'money' || column.type == 'price' ? _c('div', {
         staticClass: "form-group"
       }, [_c('label', [_vm._v(_vm._s(column.label))]), _c('div', {
         staticClass: "row"
@@ -302,7 +302,7 @@ var _sfc_render$f = function render() {
         staticClass: "form-control",
         attrs: {
           "type": "number",
-          "step": column.type == 'money' ? '0.01' : '1',
+          "step": column.type == 'money' || column.type == 'price' ? '0.01' : '1',
           "placeholder": "Desde"
         },
         domProps: {
@@ -335,7 +335,7 @@ var _sfc_render$f = function render() {
         staticClass: "form-control",
         attrs: {
           "type": "number",
-          "step": column.type == 'money' ? '0.01' : '1',
+          "step": column.type == 'money' || column.type == 'price' ? '0.01' : '1',
           "placeholder": "Hasta"
         },
         domProps: {
@@ -535,7 +535,7 @@ var _sfc_render$f = function render() {
           },
           expression: "getFilterForDateTo(customFilter).value\n                  "
         }
-      })], 1)])]) : customFilter.type == 'number' || customFilter.type == 'money' ? _c('div', {
+      })], 1)])]) : customFilter.type == 'number' || customFilter.type == 'money' || customFilter.type == 'price' ? _c('div', {
         staticClass: "form-group"
       }, [_c('label', [_vm._v(_vm._s(customFilter.label))]), _c('div', {
         staticClass: "row"
@@ -554,7 +554,7 @@ var _sfc_render$f = function render() {
         staticClass: "form-control",
         attrs: {
           "type": "number",
-          "step": customFilter.type == 'money' ? '0.01' : '1',
+          "step": customFilter.type == 'money' || customFilter.type == 'price' ? '0.01' : '1',
           "placeholder": "Desde"
         },
         domProps: {
@@ -587,7 +587,7 @@ var _sfc_render$f = function render() {
         staticClass: "form-control",
         attrs: {
           "type": "number",
-          "step": customFilter.type == 'money' ? '0.01' : '1',
+          "step": customFilter.type == 'money' || customFilter.type == 'price' ? '0.01' : '1',
           "placeholder": "Hasta"
         },
         domProps: {
@@ -14927,6 +14927,7 @@ var crudData = {
       isMobile: false,
       refreshing: false,
       fetchError: false,
+      fetchSeq: 0,
       principalSort: false,
       exportFormatReactive: Vue.observable({
         value: 'JSON'
@@ -14970,15 +14971,48 @@ var crudData = {
       return [...this.filters, ...this.filter, ...this.internalFilter, ...this.sortFilter, ...this.groupFilter];
     },
     sortFilter() {
-      if (this.showPrincipalSortBtn) {
-        if (this.principalSort) {
-          return [[this.principalSortColumn, 'SORTASC', '']];
-        } else {
-          return [[this.principalSortColumn, 'SORTDESC', '']];
-        }
-      } else {
+      if (!this.showPrincipalSortBtn) {
         return [];
       }
+      // No mezclar sort principal con sort de columna (pisa el ORDER BY)
+      const hasColumnSort = (this.internalFilters || []).some(f => f && f.column && String(f.column).endsWith('_sort') && f.value !== null && f.value !== undefined && f.value !== '');
+      if (hasColumnSort) {
+        return [];
+      }
+      if (this.principalSort) {
+        return [[this.principalSortColumn, 'SORTASC', '']];
+      }
+      return [[this.principalSortColumn, 'SORTDESC', '']];
+    },
+    activeFilters() {
+      this.forceRecomputeCounter;
+      const result = [];
+      (this.columns || []).forEach(column => {
+        if (!this.isColumnHasFilter(column)) return;
+        if (this.isRangeFilterColumn(column)) {
+          const from = this.internalFilterByProp(column.prop + '_from');
+          const to = this.internalFilterByProp(column.prop + '_to');
+          const fromVal = from ? from.value : null;
+          const toVal = to ? to.value : null;
+          if (this.hasFilterValue(fromVal) || this.hasFilterValue(toVal)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatRangeDisplayValue(column, fromVal, toVal)
+            });
+          }
+        } else {
+          const f = this.internalFilterByProp(column.prop);
+          if (f && this.hasFilterValue(f.value)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatFilterDisplayValue(column, f.value)
+            });
+          }
+        }
+      });
+      return result;
     },
     groupFilter() {
       if (this.grouped && this.groupedAttribute) {
@@ -14991,7 +15025,7 @@ var crudData = {
       let filter = [];
       this.forceRecomputeCounter;
       this.internalFilters.forEach(f => {
-        if (f.value) {
+        if (this.hasFilterValue(f.value)) {
           let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
           let op = f.op;
 
@@ -20543,46 +20577,58 @@ var crudApi = {
       return normalizedSegments.join('/');
     },
     async fetchItemsVuex(page = 1, concat = false) {
+      const seq = ++this.fetchSeq;
       this.loading = true;
       this.$emit("beforeFetch", {});
-      let result;
-      if (this.vuexLocalforage) {
-        await this.model.$fetch();
-      } else {
-        this.model.deleteAll();
-        result = await this.model.api().get(this.buildVuexOrmEndpoint(this.modelName), {
-          dataKey: 'data',
-          params: {
-            page: page,
-            limit: this.pagination.per_page,
-            filters: JSON.stringify(this.finalFilters)
-          }
-        });
-      }
-      let itemsResult = this.model.query().withAll().get();
-      if (itemsResult) {
-        // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
-        const normalizedItems = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
-        // Mantener referencia del array para no romper provide/inject en componentes hijos.
-        this.items.splice(0, this.items.length, ...normalizedItems);
-      } else {
-        // Fallback: intentar sin withAll
-        itemsResult = this.model.query().get();
+      try {
+        let result;
+        if (this.vuexLocalforage) {
+          await this.model.$fetch();
+        } else {
+          this.model.deleteAll();
+          result = await this.model.api().get(this.buildVuexOrmEndpoint(this.modelName), {
+            dataKey: 'data',
+            params: {
+              page: page,
+              limit: this.pagination.per_page,
+              filters: JSON.stringify(this.finalFilters)
+            }
+          });
+        }
+        if (seq !== this.fetchSeq) return;
+        let itemsResult = this.model.query().withAll().get();
         if (itemsResult) {
+          // Convertir modelos VuexORM a objetos planos para que la tabla pueda renderizarlos
           const normalizedItems = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
           // Mantener referencia del array para no romper provide/inject en componentes hijos.
           this.items.splice(0, this.items.length, ...normalizedItems);
+        } else {
+          // Fallback: intentar sin withAll
+          itemsResult = this.model.query().get();
+          if (itemsResult) {
+            const normalizedItems = itemsResult.map(item => item.$toJson ? item.$toJson() : item);
+            // Mantener referencia del array para no romper provide/inject en componentes hijos.
+            this.items.splice(0, this.items.length, ...normalizedItems);
+          }
+        }
+
+        // Actualizar paginación con datos del servidor
+        const paginationData = result?.response?.data ?? result?.data;
+        if (paginationData) {
+          this.makePagination(paginationData);
+        }
+        console.debug("fetch page vuex ", itemsResult, page, this.items, result, "pagination:", this.pagination);
+        this.firstLoad = true;
+      } catch (error) {
+        if (seq !== this.fetchSeq) return;
+        this.toastError(error);
+        this.fetchError = true;
+        this.firstLoad = true;
+      } finally {
+        if (seq === this.fetchSeq) {
+          this.loading = false;
         }
       }
-
-      // Actualizar paginación con datos del servidor
-      const paginationData = result?.response?.data ?? result?.data;
-      if (paginationData) {
-        this.makePagination(paginationData);
-      }
-      console.debug("fetch page vuex ", itemsResult, page, this.items, result, "pagination:", this.pagination);
-      this.loading = false;
-      this.firstLoad = true;
     },
     fetchItemsLocal() {
       if (this.grouped) {
@@ -20601,6 +20647,7 @@ var crudApi = {
       if (!this.ajax) {
         return this.fetchItemsLocal(page, concat);
       }
+      const seq = ++this.fetchSeq;
       this.loading = true;
       return axios.get(this.buildApiEndpoint(this.modelName), {
         params: {
@@ -20609,6 +20656,7 @@ var crudApi = {
           filters: JSON.stringify(this.finalFilters)
         }
       }).then(response => {
+        if (seq !== this.fetchSeq) return;
         console.debug("fetchItems - Response recibida:", response.data);
         this.makePagination(response.data);
 
@@ -20634,14 +20682,17 @@ var crudApi = {
           }
         }
         console.debug("fetchItems - this.items después de asignar:", this.items, "Cantidad:", this.items ? this.items.length : 0);
-        this.loading = false;
         this.firstLoad = true;
         this.$emit("afterFetch", {});
       }).catch(error => {
+        if (seq !== this.fetchSeq) return;
         this.toastError(error);
-        this.loading = false;
         this.firstLoad = true;
         this.fetchError = true;
+      }).finally(() => {
+        if (seq === this.fetchSeq) {
+          this.loading = false;
+        }
       });
     },
     groupItems(items, concat = false, splitGroups = false) {
@@ -21104,10 +21155,64 @@ var crudApi = {
 
 var crudFilters = {
   methods: {
+    hasFilterValue(value) {
+      return value !== null && value !== undefined && value !== '';
+    },
+    isRangeFilterColumn(column) {
+      return column && (column.type == 'date' || column.type == 'number' || column.type == 'money' || column.type == 'price');
+    },
+    formatFilterDisplayValue(column, value) {
+      if (column.type == 'boolean') {
+        return value == 1 || value == '1' || value === true ? 'Sí' : 'No';
+      }
+      if ((column.type == 'state' || column.type == 'array') && column.options) {
+        const option = column.options.find(o => String(o.id !== undefined ? o.id : o.value) === String(value));
+        if (option) {
+          return option.text || option.label || String(value);
+        }
+      }
+      return String(value);
+    },
+    formatRangeDisplayValue(column, fromVal, toVal) {
+      const hasFrom = this.hasFilterValue(fromVal);
+      const hasTo = this.hasFilterValue(toVal);
+      const formatOne = v => {
+        if (column.type == 'date' && v) {
+          return this.moment(v).format(column.format ? column.format : 'L');
+        }
+        return String(v);
+      };
+      if (hasFrom && hasTo) {
+        return formatOne(fromVal) + ' – ' + formatOne(toVal);
+      }
+      if (hasFrom) {
+        return 'Desde: ' + formatOne(fromVal);
+      }
+      if (hasTo) {
+        return 'Hasta: ' + formatOne(toVal);
+      }
+      return '';
+    },
+    clearActiveFilter(key) {
+      const column = (this.columns || []).find(c => c.prop === key);
+      if (column && this.isRangeFilterColumn(column)) {
+        const from = this.internalFilterByProp(key + '_from');
+        const to = this.internalFilterByProp(key + '_to');
+        if (from) from.value = null;
+        if (to) to.value = null;
+      } else {
+        const f = this.internalFilterByProp(key);
+        if (f) f.value = null;
+      }
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
+    },
     setupFilters() {
       this.columns.forEach(column => {
         if (this.isColumnHasFilter(column)) {
-          if (column.type == "date" || column.type == "number" || column.type == "money") {
+          if (this.isRangeFilterColumn(column)) {
             this.internalFilters.push({
               column: column.prop + "_from",
               op: ">=",
@@ -21142,7 +21247,7 @@ var crudFilters = {
             // Si el tipo es función (callback), no procesamos automáticamente
             // El callback se encargará del renderizado y gestión del filtro
             if (typeof customFilter.type === 'string') {
-              if (customFilter.type == "date" || customFilter.type == "number" || customFilter.type == "money") {
+              if (this.isRangeFilterColumn(customFilter)) {
                 this.internalFilters.push({
                   column: customFilter.prop + "_from",
                   op: ">=",
@@ -21176,13 +21281,17 @@ var crudFilters = {
       }
     },
     toggleSortFilter(column) {
-      let value = this.internalFilterByProp(column.prop + "_sort").value;
+      const sortEntry = this.internalFilterByProp(column.prop + "_sort");
+      if (!sortEntry) {
+        return;
+      }
+      let value = sortEntry.value;
       if (!value) {
-        this.internalFilterByProp(column.prop + "_sort").value = "ASC";
+        sortEntry.value = "ASC";
       } else if (value == "ASC") {
-        this.internalFilterByProp(column.prop + "_sort").value = "DESC";
+        sortEntry.value = "DESC";
       } else if (value == "DESC") {
-        this.internalFilterByProp(column.prop + "_sort").value = null;
+        sortEntry.value = null;
       }
       this.forceRecomputeCounter++;
       setTimeout(() => {
@@ -22406,7 +22515,7 @@ var ToastPlugin = {
   }
 };
 
-var css = "tr td[data-v-0ceea366]:last-child,\ntr td[data-v-0ceea366]:first-child {\n  width: 1%;\n  white-space: nowrap; }\n\ntbody tr.selected[data-v-0ceea366] {\n  background-color: #e3f2fd !important; }\n  tbody tr.selected[data-v-0ceea366] td[data-v-0ceea366] {\n    background-color: transparent !important; }\n  tbody tr.selected[data-v-0ceea366][data-v-0ceea366]:hover {\n    background-color: #bbdefb !important; }\n    tbody tr.selected[data-v-0ceea366][data-v-0ceea366]:hover td[data-v-0ceea366] {\n      background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-0ceea366]:nth-of-type(odd) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-0ceea366]:nth-of-type(odd) td[data-v-0ceea366] {\n    background-color: transparent !important; }\n\n.table-striped tbody tr.selected[data-v-0ceea366]:nth-of-type(even) {\n  background-color: #e3f2fd !important; }\n  .table-striped tbody tr.selected[data-v-0ceea366]:nth-of-type(even) td[data-v-0ceea366] {\n    background-color: transparent !important; }\n\n.crud-pagination[data-v-0ceea366] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem; }\n\n.crud-header[data-v-0ceea366] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem; }\n  .crud-header[data-v-0ceea366] .crud-title[data-v-0ceea366] {\n    margin: 0; }\n  .crud-header[data-v-0ceea366] .crud-search[data-v-0ceea366] {\n    max-width: 15rem; }\n    .crud-header[data-v-0ceea366] .crud-search[data-v-0ceea366] .btn[data-v-0ceea366] {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0;\n      border-top-right-radius: 0.375rem;\n      border-bottom-right-radius: 0.375rem; }\n      .crud-header[data-v-0ceea366] .crud-search[data-v-0ceea366] .btn[data-v-0ceea366].open[data-v-0ceea366] {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n  .crud-header[data-v-0ceea366] .table-options[data-v-0ceea366] {\n    margin-bottom: 1rem;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end; }\n\n.custom-control[data-v-0ceea366] {\n  position: relative; }\n\n@media (min-width: 992px) {\n  .table[data-v-0ceea366] {\n    table-layout: auto; }\n    .table[data-v-0ceea366] tbody[data-v-0ceea366] td[data-v-0ceea366] {\n      overflow: scroll;\n      -ms-overflow-style: none;\n      /* IE and Edge */\n      scrollbar-width: none;\n      /* Firefox */ }\n    .table[data-v-0ceea366] tbody[data-v-0ceea366] td[data-v-0ceea366]::-webkit-scrollbar {\n      display: none; } }\n\n.kanban-board[data-v-0ceea366] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem; }\n\n.kanban-column[data-v-0ceea366] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }\n\n.kanban-column-header[data-v-0ceea366] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center; }\n\n.kanban-column-body[data-v-0ceea366] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem; }\n\n.kanban-card[data-v-0ceea366] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab; }\n";
+var css = ".crud-active-filters[data-v-c0809f52] {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 0.4rem 0.5rem;\n  width: 100%;\n  padding: 0.5rem 0 0.75rem;\n  margin-bottom: 0.25rem;\n}\n\n.crud-active-filters-label[data-v-c0809f52] {\n  flex: 0 0 auto;\n  font-size: 0.875rem;\n  font-weight: 600;\n  margin: 0;\n}\n\n.crud-active-filters-list[data-v-c0809f52] {\n  display: inline-flex;\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 0.35rem;\n  flex: 0 1 auto;\n  margin: 0;\n}\n\n.crud-active-filter-badge[data-v-c0809f52] {\n  display: inline-flex;\n  align-items: center;\n  font-size: 0.875rem;\n  font-weight: 400;\n  padding: 0.35rem 0.5rem;\n  margin: 0;\n}\n\n.crud-active-filter-remove[data-v-c0809f52] {\n  background: transparent;\n  border: 0;\n  color: inherit;\n  opacity: 0.75;\n  font-size: 1rem;\n  line-height: 1;\n  padding: 0;\n  cursor: pointer;\n}\n\n.crud-active-filter-remove[data-v-c0809f52]:hover {\n  opacity: 1;\n}\n\ntr td[data-v-c0809f52]:last-child,\ntr td[data-v-c0809f52]:first-child {\n  width: 1%;\n  white-space: nowrap;\n}\n\ntbody tr.selected[data-v-c0809f52] {\n  background-color: #e3f2fd !important;\n}\ntbody tr.selected[data-v-c0809f52] td[data-v-c0809f52] {\n  background-color: transparent !important;\n}\ntbody tr.selected[data-v-c0809f52][data-v-c0809f52]:hover {\n  background-color: #bbdefb !important;\n}\ntbody tr.selected[data-v-c0809f52][data-v-c0809f52]:hover td[data-v-c0809f52] {\n  background-color: transparent !important;\n}\n\n.table-striped tbody tr.selected[data-v-c0809f52]:nth-of-type(odd) {\n  background-color: #e3f2fd !important;\n}\n.table-striped tbody tr.selected[data-v-c0809f52]:nth-of-type(odd) td[data-v-c0809f52] {\n  background-color: transparent !important;\n}\n\n.table-striped tbody tr.selected[data-v-c0809f52]:nth-of-type(even) {\n  background-color: #e3f2fd !important;\n}\n.table-striped tbody tr.selected[data-v-c0809f52]:nth-of-type(even) td[data-v-c0809f52] {\n  background-color: transparent !important;\n}\n\n.crud-pagination[data-v-c0809f52] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem;\n}\n\n.crud-header[data-v-c0809f52] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-header[data-v-c0809f52] .crud-title[data-v-c0809f52] {\n  margin: 0;\n}\n.crud-header[data-v-c0809f52] .crud-search[data-v-c0809f52] {\n  max-width: 15rem;\n}\n.crud-header[data-v-c0809f52] .crud-search[data-v-c0809f52] .btn[data-v-c0809f52] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-header[data-v-c0809f52] .crud-search[data-v-c0809f52] .btn[data-v-c0809f52].open[data-v-c0809f52] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.crud-header[data-v-c0809f52] .table-options[data-v-c0809f52] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n\n.custom-control[data-v-c0809f52] {\n  position: relative;\n}\n\n@media (min-width: 992px) {\n  .table[data-v-c0809f52] {\n    table-layout: auto;\n  }\n  .table[data-v-c0809f52] tbody[data-v-c0809f52] td[data-v-c0809f52] {\n    overflow: scroll;\n    -ms-overflow-style: none;\n    /* IE and Edge */\n    scrollbar-width: none;\n    /* Firefox */\n  }\n  .table[data-v-c0809f52] tbody[data-v-c0809f52] td[data-v-c0809f52]::-webkit-scrollbar {\n    display: none;\n  }\n}\n.kanban-board[data-v-c0809f52] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem;\n}\n\n.kanban-column[data-v-c0809f52] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.kanban-column-header[data-v-c0809f52] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center;\n}\n\n.kanban-column-body[data-v-c0809f52] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n}\n\n.kanban-card[data-v-c0809f52] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab;\n}";
 n(css, {});
 
 function createInstanceUid() {
@@ -22672,6 +22781,8 @@ const _sfc_main = {
       toggleSortFilter: this.toggleSortFilter,
       toggleFilters: this.toggleFilters,
       resetFilters: this.resetFilters,
+      activeFilters: this.activeFilters,
+      clearActiveFilter: this.clearActiveFilter,
       isColumnHasFilter: this.isColumnHasFilter,
       isCustomFilterEnabled: this.isCustomFilterEnabled,
       setFilter: this.setFilter,
@@ -23029,7 +23140,45 @@ var _sfc_render = function render() {
     _c = _vm._self._c;
   return _c('div', {
     staticClass: "crud"
-  }, [_c('CrudHeader'), _c('CrudTable', {
+  }, [_c('CrudHeader'), _vm.enableFilters && _vm.activeFilters.length > 0 ? _c('div', {
+    staticClass: "crud-active-filters"
+  }, [_c('span', {
+    staticClass: "crud-active-filters-label text-muted"
+  }, [_c('b-icon-funnel', {
+    staticClass: "mr-1"
+  }), _vm._v(" Filtros activos: ")], 1), _c('div', {
+    staticClass: "crud-active-filters-list"
+  }, [_vm._l(_vm.activeFilters, function (af) {
+    return _c('b-badge', {
+      key: af.key,
+      staticClass: "crud-active-filter-badge",
+      attrs: {
+        "variant": "primary"
+      }
+    }, [_c('strong', [_vm._v(_vm._s(af.label) + ":")]), _vm._v(" " + _vm._s(af.displayValue) + " "), _c('button', {
+      staticClass: "crud-active-filter-remove ml-1",
+      attrs: {
+        "type": "button",
+        "aria-label": "Quitar filtro"
+      },
+      on: {
+        "click": function ($event) {
+          return _vm.clearActiveFilter(af.key);
+        }
+      }
+    }, [_vm._v("×")])]);
+  }), _vm.activeFilters.length > 1 ? _c('b-button', {
+    staticClass: "text-danger p-0",
+    attrs: {
+      "variant": "link",
+      "size": "sm"
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.resetFilters();
+      }
+    }
+  }, [_vm._v(" Limpiar todos ")]) : _vm._e()], 2)]) : _vm._e(), _c('CrudTable', {
     scopedSlots: _vm._u([_vm._l(_vm.$scopedSlots, function (slot, name) {
       return {
         key: name,
@@ -23074,7 +23223,7 @@ var _sfc_render = function render() {
   })], 1);
 };
 var _sfc_staticRenderFns = [];
-var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "0ceea366", null, null);
+var __component__ = /*#__PURE__*/normalizeComponent(_sfc_main, _sfc_render, _sfc_staticRenderFns, false, null, "c0809f52", null, null);
 var component = __component__.exports;
 
 // Import vue component
