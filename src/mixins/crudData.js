@@ -47,6 +47,7 @@ export default {
       isMobile: false,
       refreshing: false,
       fetchError: false,
+      fetchSeq: 0,
       principalSort: false,
       exportFormatReactive: { value: 'JSON' }, // Objeto reactivo para exportFormat
       fileImport: null,
@@ -113,15 +114,57 @@ export default {
     },
 
     sortFilter() {
-      if (this.showPrincipalSortBtn) {
-        if (this.principalSort) {
-          return [[this.principalSortColumn, 'SORTASC', '']];
-        } else {
-          return [[this.principalSortColumn, 'SORTDESC', '']];
-        }
-      } else {
+      if (!this.showPrincipalSortBtn) {
         return [];
       }
+      // No mezclar sort principal con sort de columna (pisa el ORDER BY)
+      const hasColumnSort = (this.internalFilters || []).some(
+        (f) =>
+          f &&
+          f.column &&
+          String(f.column).endsWith('_sort') &&
+          f.value !== null &&
+          f.value !== undefined &&
+          f.value !== ''
+      );
+      if (hasColumnSort) {
+        return [];
+      }
+      if (this.principalSort) {
+        return [[this.principalSortColumn, 'SORTASC', '']];
+      }
+      return [[this.principalSortColumn, 'SORTDESC', '']];
+    },
+
+    activeFilters() {
+      this.forceRecomputeCounter;
+      const result = [];
+      (this.columns || []).forEach((column) => {
+        if (!this.isColumnHasFilter(column)) return;
+        if (this.isRangeFilterColumn(column)) {
+          const from = this.internalFilterByProp(column.prop + '_from');
+          const to = this.internalFilterByProp(column.prop + '_to');
+          const fromVal = from ? from.value : null;
+          const toVal = to ? to.value : null;
+          if (this.hasFilterValue(fromVal) || this.hasFilterValue(toVal)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatRangeDisplayValue(column, fromVal, toVal),
+            });
+          }
+        } else {
+          const f = this.internalFilterByProp(column.prop);
+          if (f && this.hasFilterValue(f.value)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatFilterDisplayValue(column, f.value),
+            });
+          }
+        }
+      });
+      return result;
     },
 
     groupFilter() {
@@ -145,7 +188,7 @@ export default {
       });
 
       entries.forEach((f) => {
-        if (f.value) {
+        if (this.hasFilterValue(f.value)) {
           let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
           let op = f.op;
           

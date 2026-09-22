@@ -1,9 +1,76 @@
 export default {
   methods: {
+    hasFilterValue(value) {
+      return value !== null && value !== undefined && value !== '';
+    },
+
+    isRangeFilterColumn(column) {
+      return (
+        column &&
+        (column.type == 'date' ||
+          column.type == 'number' ||
+          column.type == 'money' ||
+          column.type == 'price')
+      );
+    },
+
+    formatFilterDisplayValue(column, value) {
+      if (column.type == 'boolean') {
+        return value == 1 || value == '1' || value === true ? 'Sí' : 'No';
+      }
+      if ((column.type == 'state' || column.type == 'array') && column.options) {
+        const option = column.options.find(
+          (o) => String(o.id !== undefined ? o.id : o.value) === String(value)
+        );
+        if (option) {
+          return option.text || option.label || String(value);
+        }
+      }
+      return String(value);
+    },
+
+    formatRangeDisplayValue(column, fromVal, toVal) {
+      const hasFrom = this.hasFilterValue(fromVal);
+      const hasTo = this.hasFilterValue(toVal);
+      const formatOne = (v) => {
+        if (column.type == 'date' && v) {
+          return this.moment(v).format(column.format ? column.format : 'L');
+        }
+        return String(v);
+      };
+      if (hasFrom && hasTo) {
+        return formatOne(fromVal) + ' – ' + formatOne(toVal);
+      }
+      if (hasFrom) {
+        return 'Desde: ' + formatOne(fromVal);
+      }
+      if (hasTo) {
+        return 'Hasta: ' + formatOne(toVal);
+      }
+      return '';
+    },
+
+    clearActiveFilter(key) {
+      const column = (this.columns || []).find((c) => c.prop === key);
+      if (column && this.isRangeFilterColumn(column)) {
+        const from = this.internalFilterByProp(key + '_from');
+        const to = this.internalFilterByProp(key + '_to');
+        if (from) from.value = null;
+        if (to) to.value = null;
+      } else {
+        const f = this.internalFilterByProp(key);
+        if (f) f.value = null;
+      }
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
+    },
+
     setupFilters() {
       this.columns.forEach((column) => {
         if (this.isColumnHasFilter(column)) {
-          if (column.type == "date" || column.type == "number" || column.type == "money") {
+          if (this.isRangeFilterColumn(column)) {
             this.internalFilters.push({
               column: column.prop + "_from",
               op: ">=",
@@ -40,7 +107,7 @@ export default {
             // Si el tipo es función (callback), no procesamos automáticamente
             // El callback se encargará del renderizado y gestión del filtro
             if (typeof customFilter.type === 'string') {
-              if (customFilter.type == "date" || customFilter.type == "number" || customFilter.type == "money") {
+              if (this.isRangeFilterColumn(customFilter)) {
                 this.internalFilters.push({
                   column: customFilter.prop + "_from",
                   op: ">=",

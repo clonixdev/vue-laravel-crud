@@ -304,6 +304,8 @@ export default /*#__PURE__*/ {
       getSortPriority: this.getSortPriority,
       toggleFilters: this.toggleFilters,
       resetFilters: this.resetFilters,
+      activeFilters: this.activeFilters,
+      clearActiveFilter: this.clearActiveFilter,
       isColumnHasFilter: this.isColumnHasFilter,
       isColumnVisibleInTable: this.isColumnVisibleInTable,
       isCustomFilterEnabled: this.isCustomFilterEnabled,
@@ -750,6 +752,38 @@ export default /*#__PURE__*/ {
         </template>
       </CrudHeader>
 
+      <div class="crud-active-filters" v-if="enableFilters && activeFilters.length > 0">
+        <span class="crud-active-filters-label text-muted">
+          <b-icon-funnel class="me-1"></b-icon-funnel>
+          Filtros activos:
+        </span>
+        <div class="crud-active-filters-list">
+          <b-badge
+            v-for="af in activeFilters"
+            :key="af.key"
+            variant="primary"
+            class="crud-active-filter-badge"
+          >
+            <strong>{{ af.label }}:</strong> {{ af.displayValue }}
+            <button
+              type="button"
+              class="crud-active-filter-remove ms-1"
+              aria-label="Quitar filtro"
+              @click="clearActiveFilter(af.key)"
+            >&times;</button>
+          </b-badge>
+          <b-button
+            v-if="activeFilters.length > 1"
+            variant="link"
+            size="sm"
+            class="text-danger p-0"
+            @click="resetFilters()"
+          >
+            Limpiar todos
+          </b-button>
+        </div>
+      </div>
+
       <div class="crud-body">
         <CrudTable>
           <template v-for="(_, name) in $slots" v-slot:[name]="slotProps">
@@ -793,6 +827,57 @@ export default /*#__PURE__*/ {
   margin: 0;
   padding: 0;
   min-width: 0;
+}
+
+.crud-active-filters {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  width: 100%;
+  padding: 0.15rem 0 0.35rem;
+}
+
+.crud-active-filters-label {
+  flex: 0 0 auto;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.crud-active-filters-list {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  flex: 0 1 auto;
+  margin: 0;
+}
+
+.crud-active-filter-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 400;
+  padding: 0.35rem 0.5rem;
+  margin: 0;
+}
+
+.crud-active-filter-remove {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  opacity: 0.75;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+}
+
+.crud-active-filter-remove:hover {
+  opacity: 1;
 }
 
 .crud :deep(.table-responsive) {
