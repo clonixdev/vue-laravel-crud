@@ -1,4 +1,4 @@
-import require$$0, { defineComponent, h, resolveComponent, openBlock, createElementBlock, Fragment, renderList, renderSlot, createElementVNode, toDisplayString, withDirectives, vModelSelect, createVNode, vModelText, createCommentVNode, createBlock, withCtx, createTextVNode, normalizeClass, normalizeStyle, createSlots, mergeProps, normalizeProps, guardReactiveProps, getCurrentInstance } from 'vue';
+import require$$0, { defineComponent, h, resolveComponent, openBlock, createElementBlock, Fragment, renderList, renderSlot, createElementVNode, toDisplayString, withDirectives, vModelSelect, createVNode, vModelText, createCommentVNode, createBlock, normalizeClass, normalizeProps, guardReactiveProps, mergeProps, createSlots, withCtx, createTextVNode, normalizeStyle, withModifiers, getCurrentInstance } from 'vue';
 
 var _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -67,7 +67,7 @@ const RenderCustomFilter = defineComponent({
     };
   }
 });
-const _sfc_main$f = {
+const _sfc_main$k = {
   name: 'CrudFilters',
   components: {
     RenderCustomFilter
@@ -130,38 +130,38 @@ const _sfc_main$f = {
     }
   }
 };
-const _hoisted_1$f = {
+const _hoisted_1$j = {
   class: "px-3 py-2"
 };
-const _hoisted_2$b = {
+const _hoisted_2$g = {
   key: 0
 };
-const _hoisted_3$b = {
+const _hoisted_3$f = {
   key: 0,
   class: "form-group"
 };
-const _hoisted_4$a = ["onUpdate:modelValue"];
-const _hoisted_5$7 = {
+const _hoisted_4$f = ["onUpdate:modelValue"];
+const _hoisted_5$b = {
   key: 1,
   class: "form-group"
 };
-const _hoisted_6$5 = {
+const _hoisted_6$a = {
   class: "row"
 };
-const _hoisted_7$5 = {
+const _hoisted_7$9 = {
   class: "col-6"
 };
-const _hoisted_8$5 = {
+const _hoisted_8$9 = {
   class: "col-6"
 };
-const _hoisted_9$4 = {
+const _hoisted_9$6 = {
   key: 2,
   class: "form-group"
 };
-const _hoisted_10$4 = {
+const _hoisted_10$5 = {
   class: "row"
 };
-const _hoisted_11$3 = {
+const _hoisted_11$4 = {
   class: "col-6"
 };
 const _hoisted_12$1 = ["onUpdate:modelValue", "step"];
@@ -193,7 +193,7 @@ const _hoisted_24$1 = {
   key: 0,
   class: "form-group"
 };
-const _hoisted_25 = ["onUpdate:modelValue"];
+const _hoisted_25$1 = ["onUpdate:modelValue"];
 const _hoisted_26 = {
   key: 1,
   class: "form-group"
@@ -242,18 +242,18 @@ const _hoisted_43 = ["onUpdate:modelValue"];
 const _hoisted_44 = {
   class: "mt-3 d-flex justify-content-center"
 };
-function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_form_datepicker = resolveComponent("b-form-datepicker");
   const _component_RenderCustomFilter = resolveComponent("RenderCustomFilter");
-  return openBlock(), createElementBlock("div", _hoisted_1$f, [(openBlock(true), createElementBlock(Fragment, null, renderList($options.columns, (column, indexc) => {
+  return openBlock(), createElementBlock("div", _hoisted_1$j, [(openBlock(true), createElementBlock(Fragment, null, renderList($options.columns, (column, indexc) => {
     return openBlock(), createElementBlock("div", {
       key: indexc
-    }, [$options.isColumnHasFilter(column) ? (openBlock(), createElementBlock("div", _hoisted_2$b, [renderSlot(_ctx.$slots, 'sidebar-filter-' + column.prop, {
+    }, [$options.isColumnHasFilter(column) ? (openBlock(), createElementBlock("div", _hoisted_2$g, [renderSlot(_ctx.$slots, 'sidebar-filter-' + column.prop, {
       column: column,
       filter: $options.filter,
       internalFilterByProp: $options.internalFilterByProp,
       getFilterForColumn: $options.getFilterForColumn
-    }, () => [column.type == 'boolean' ? (openBlock(), createElementBlock("div", _hoisted_3$b, [createElementVNode("label", null, toDisplayString(column.label), 1 /* TEXT */), withDirectives(createElementVNode("select", {
+    }, () => [column.type == 'boolean' ? (openBlock(), createElementBlock("div", _hoisted_3$f, [createElementVNode("label", null, toDisplayString(column.label), 1 /* TEXT */), withDirectives(createElementVNode("select", {
       class: "form-control",
       "onUpdate:modelValue": $event => $options.getFilterForColumn(column).value = $event,
       onChange: _cache[0] || (_cache[0] = $event => $options.onChangeFilter($event))
@@ -263,25 +263,25 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
       value: "1"
     }, "Sí", -1 /* CACHED */), createElementVNode("option", {
       value: "0"
-    }, "No", -1 /* CACHED */)]))], 40 /* PROPS, NEED_HYDRATION */, _hoisted_4$a), [[vModelSelect, $options.getFilterForColumn(column).value]])])) : column.type == 'date' ? (openBlock(), createElementBlock("div", _hoisted_5$7, [createElementVNode("div", _hoisted_6$5, [createElementVNode("div", _hoisted_7$5, [createVNode(_component_b_form_datepicker, {
+    }, "No", -1 /* CACHED */)]))], 40 /* PROPS, NEED_HYDRATION */, _hoisted_4$f), [[vModelSelect, $options.getFilterForColumn(column).value]])])) : column.type == 'date' ? (openBlock(), createElementBlock("div", _hoisted_5$b, [createElementVNode("div", _hoisted_6$a, [createElementVNode("div", _hoisted_7$9, [createVNode(_component_b_form_datepicker, {
       modelValue: $options.getFilterForDateFrom(column).value,
       "onUpdate:modelValue": $event => $options.getFilterForDateFrom(column).value = $event,
       "today-button": "",
       "reset-button": "",
       "close-button": "",
       locale: "es"
-    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])]), createElementVNode("div", _hoisted_8$5, [createVNode(_component_b_form_datepicker, {
+    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])]), createElementVNode("div", _hoisted_8$9, [createVNode(_component_b_form_datepicker, {
       modelValue: $options.getFilterForDateTo(column).value,
       "onUpdate:modelValue": $event => $options.getFilterForDateTo(column).value = $event,
       "today-button": "",
       "reset-button": "",
       "close-button": "",
       locale: "es"
-    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])])])])) : column.type == 'number' || column.type == 'money' ? (openBlock(), createElementBlock("div", _hoisted_9$4, [createElementVNode("label", null, toDisplayString(column.label), 1 /* TEXT */), createElementVNode("div", _hoisted_10$4, [createElementVNode("div", _hoisted_11$3, [withDirectives(createElementVNode("input", {
+    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])])])])) : column.type == 'number' || column.type == 'money' || column.type == 'price' ? (openBlock(), createElementBlock("div", _hoisted_9$6, [createElementVNode("label", null, toDisplayString(column.label), 1 /* TEXT */), createElementVNode("div", _hoisted_10$5, [createElementVNode("div", _hoisted_11$4, [withDirectives(createElementVNode("input", {
       type: "number",
       class: "form-control",
       "onUpdate:modelValue": $event => $options.getFilterForDateFrom(column).value = $event,
-      step: column.type == 'money' ? '0.01' : '1',
+      step: column.type == 'money' || column.type == 'price' ? '0.01' : '1',
       onChange: _cache[1] || (_cache[1] = $event => $options.onChangeFilter($event)),
       placeholder: "Desde"
     }, null, 40 /* PROPS, NEED_HYDRATION */, _hoisted_12$1), [[vModelText, $options.getFilterForDateFrom(column).value, void 0, {
@@ -290,7 +290,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
       type: "number",
       class: "form-control",
       "onUpdate:modelValue": $event => $options.getFilterForDateTo(column).value = $event,
-      step: column.type == 'money' ? '0.01' : '1',
+      step: column.type == 'money' || column.type == 'price' ? '0.01' : '1',
       onChange: _cache[2] || (_cache[2] = $event => $options.onChangeFilter($event)),
       placeholder: "Hasta"
     }, null, 40 /* PROPS, NEED_HYDRATION */, _hoisted_14$1), [[vModelText, $options.getFilterForDateTo(column).value, void 0, {
@@ -354,7 +354,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
       value: "1"
     }, "Sí", -1 /* CACHED */), createElementVNode("option", {
       value: "0"
-    }, "No", -1 /* CACHED */)]))], 40 /* PROPS, NEED_HYDRATION */, _hoisted_25), [[vModelSelect, $options.getFilterForColumn(customFilter).value]])])) : customFilter.type == 'date' ? (openBlock(), createElementBlock("div", _hoisted_26, [createElementVNode("label", null, toDisplayString(customFilter.label), 1 /* TEXT */), createElementVNode("div", _hoisted_27, [createElementVNode("div", _hoisted_28, [createVNode(_component_b_form_datepicker, {
+    }, "No", -1 /* CACHED */)]))], 40 /* PROPS, NEED_HYDRATION */, _hoisted_25$1), [[vModelSelect, $options.getFilterForColumn(customFilter).value]])])) : customFilter.type == 'date' ? (openBlock(), createElementBlock("div", _hoisted_26, [createElementVNode("label", null, toDisplayString(customFilter.label), 1 /* TEXT */), createElementVNode("div", _hoisted_27, [createElementVNode("div", _hoisted_28, [createVNode(_component_b_form_datepicker, {
       modelValue: $options.getFilterForDateFrom(customFilter).value,
       "onUpdate:modelValue": $event => $options.getFilterForDateFrom(customFilter).value = $event,
       "today-button": "",
@@ -368,11 +368,11 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
       "reset-button": "",
       "close-button": "",
       locale: "es"
-    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])])])])) : customFilter.type == 'number' || customFilter.type == 'money' ? (openBlock(), createElementBlock("div", _hoisted_30, [createElementVNode("label", null, toDisplayString(customFilter.label), 1 /* TEXT */), createElementVNode("div", _hoisted_31, [createElementVNode("div", _hoisted_32, [withDirectives(createElementVNode("input", {
+    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])])])])) : customFilter.type == 'number' || customFilter.type == 'money' || customFilter.type == 'price' ? (openBlock(), createElementBlock("div", _hoisted_30, [createElementVNode("label", null, toDisplayString(customFilter.label), 1 /* TEXT */), createElementVNode("div", _hoisted_31, [createElementVNode("div", _hoisted_32, [withDirectives(createElementVNode("input", {
       type: "number",
       class: "form-control",
       "onUpdate:modelValue": $event => $options.getFilterForDateFrom(customFilter).value = $event,
-      step: customFilter.type == 'money' ? '0.01' : '1',
+      step: customFilter.type == 'money' || customFilter.type == 'price' ? '0.01' : '1',
       onChange: _cache[7] || (_cache[7] = $event => $options.onChangeFilter($event)),
       placeholder: "Desde"
     }, null, 40 /* PROPS, NEED_HYDRATION */, _hoisted_33), [[vModelText, $options.getFilterForDateFrom(customFilter).value, void 0, {
@@ -381,7 +381,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
       type: "number",
       class: "form-control",
       "onUpdate:modelValue": $event => $options.getFilterForDateTo(customFilter).value = $event,
-      step: customFilter.type == 'money' ? '0.01' : '1',
+      step: customFilter.type == 'money' || customFilter.type == 'price' ? '0.01' : '1',
       onChange: _cache[8] || (_cache[8] = $event => $options.onChangeFilter($event)),
       placeholder: "Hasta"
     }, null, 40 /* PROPS, NEED_HYDRATION */, _hoisted_35), [[vModelText, $options.getFilterForDateTo(customFilter).value, void 0, {
@@ -425,27 +425,315 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[13] || (_cache[13] = $event => $options.onChangeFilter($event))
   }, " Filtrar ")])]);
 }
-var CrudFilters = /*#__PURE__*/_export_sfc(_sfc_main$f, [['render', _sfc_render$f]]);
+var CrudFilters = /*#__PURE__*/_export_sfc(_sfc_main$k, [['render', _sfc_render$k]]);
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css$9 = "\n.crud-header[data-v-b1534978] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  max-height: 3rem;\n}\n.crud-title[data-v-b1534978] {\r\n  margin: 0;\n}\n.crud-search[data-v-b1534978] {\r\n  max-width: 15rem;\n}\n.crud-search .btn[data-v-b1534978] {\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\r\n  border-top-right-radius: 0.375rem;\r\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-search .btn.open[data-v-b1534978] {\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.table-options[data-v-b1534978] {\r\n  margin-bottom: 1rem;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-end;\n}\r\n";
-n(css$9, {});
+var css$e = "\n.crud-quick-filters[data-v-86f1c0de] {\r\n  display: inline-flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  gap: 0.35rem;\r\n  min-width: 0;\n}\n.crud-quick-filters--segmented[data-v-86f1c0de] {\r\n  gap: 0;\r\n  padding: 0.2rem;\r\n  border-radius: 999px;\r\n  background: rgba(15, 23, 42, 0.05);\n}\n.crud-quick-filters--segmented .crud-quick-filter[data-v-86f1c0de] {\r\n  border-radius: 999px;\r\n  border-color: transparent;\r\n  background: transparent;\n}\n.crud-quick-filters--tabs[data-v-86f1c0de] {\r\n  gap: 0;\r\n  border-bottom: 1px solid rgba(15, 23, 42, 0.08);\r\n  padding-bottom: 0;\n}\n.crud-quick-filters--tabs .crud-quick-filter[data-v-86f1c0de] {\r\n  border: 0;\r\n  border-bottom: 2px solid transparent;\r\n  border-radius: 0;\r\n  background: transparent;\r\n  padding: 0.35rem 0.75rem;\n}\n.crud-quick-filter[data-v-86f1c0de] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.35rem;\r\n  margin: 0;\r\n  padding: 0.3rem 0.75rem;\r\n  border: 1px solid rgba(15, 23, 42, 0.12);\r\n  border-radius: 999px;\r\n  background: #fff;\r\n  color: #334155;\r\n  font-size: 0.8125rem;\r\n  font-weight: 500;\r\n  line-height: 1.2;\r\n  white-space: nowrap;\r\n  cursor: pointer;\r\n  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;\n}\n.crud-quick-filter[data-v-86f1c0de]:hover:not(:disabled):not(.is-active) {\r\n  background: rgba(15, 23, 42, 0.04);\r\n  border-color: rgba(15, 23, 42, 0.2);\n}\n.crud-quick-filter[data-v-86f1c0de]:focus-visible {\r\n  outline: 2px solid rgba(13, 110, 253, 0.45);\r\n  outline-offset: 1px;\n}\n.crud-quick-filter[data-v-86f1c0de]:disabled,\r\n.crud-quick-filter.is-disabled[data-v-86f1c0de] {\r\n  opacity: 0.55;\r\n  cursor: not-allowed;\n}\n.crud-quick-filter__icon[data-v-86f1c0de] {\r\n  font-size: 0.95em;\r\n  opacity: 0.9;\n}\n.crud-quick-filter__count[data-v-86f1c0de] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  min-width: 1.25rem;\r\n  padding: 0.05rem 0.35rem;\r\n  border-radius: 999px;\r\n  background: rgba(15, 23, 42, 0.08);\r\n  font-size: 0.75em;\r\n  font-weight: 600;\n}\n.crud-quick-filter.is-active[data-v-86f1c0de] {\r\n  color: #fff;\r\n  border-color: transparent;\r\n  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);\n}\n.crud-quick-filter.is-active .crud-quick-filter__count[data-v-86f1c0de] {\r\n  background: rgba(255, 255, 255, 0.22);\n}\n.crud-quick-filter--secondary.is-active[data-v-86f1c0de],\r\n.crud-quick-filter--default.is-active[data-v-86f1c0de] {\r\n  background: #475569;\n}\n.crud-quick-filter--primary.is-active[data-v-86f1c0de] {\r\n  background: #0d6efd;\n}\n.crud-quick-filter--info.is-active[data-v-86f1c0de] {\r\n  background: #0dcaf0;\r\n  color: #053b4a;\n}\n.crud-quick-filter--success.is-active[data-v-86f1c0de] {\r\n  background: #198754;\n}\n.crud-quick-filter--warning.is-active[data-v-86f1c0de] {\r\n  background: #ffc107;\r\n  color: #5c4400;\n}\n.crud-quick-filter--danger.is-active[data-v-86f1c0de] {\r\n  background: #dc3545;\n}\n.crud-quick-filters--tabs .crud-quick-filter.is-active[data-v-86f1c0de] {\r\n  background: transparent;\r\n  color: #0d6efd;\r\n  border-bottom-color: #0d6efd;\r\n  box-shadow: none;\n}\n.crud-quick-filters--tabs .crud-quick-filter--success.is-active[data-v-86f1c0de] {\r\n  color: #198754;\r\n  border-bottom-color: #198754;\n}\n.crud-quick-filters--tabs .crud-quick-filter--warning.is-active[data-v-86f1c0de] {\r\n  color: #b58100;\r\n  border-bottom-color: #ffc107;\n}\n.crud-quick-filters--tabs .crud-quick-filter--danger.is-active[data-v-86f1c0de] {\r\n  color: #dc3545;\r\n  border-bottom-color: #dc3545;\n}\n.crud-quick-filters--tabs .crud-quick-filter--info.is-active[data-v-86f1c0de] {\r\n  color: #087990;\r\n  border-bottom-color: #0dcaf0;\n}\r\n";
+n(css$e, {});
 
-const _sfc_main$e = {
+const _sfc_main$j = {
+  name: 'CrudQuickFilters',
+  inject: {
+    quickFilters: {
+      default: () => []
+    },
+    quickFiltersVariant: {
+      default: 'pills'
+    },
+    quickFiltersAriaLabel: {
+      default: 'Filtros rápidos'
+    },
+    quickFiltersClass: {
+      default: ''
+    },
+    activeQuickFilterKey: {
+      default: null
+    },
+    selectQuickFilter: {
+      default: () => {}
+    },
+    loading: {
+      default: null
+    }
+  },
+  computed: {
+    items() {
+      const list = this.quickFilters;
+      return Array.isArray(list) ? list : [];
+    },
+    hasItems() {
+      return this.normalizedItems.length > 0;
+    },
+    normalizedVariant() {
+      const v = String(this.quickFiltersVariant || 'pills').toLowerCase();
+      return ['pills', 'tabs', 'segmented'].includes(v) ? v : 'pills';
+    },
+    ariaLabel() {
+      return this.quickFiltersAriaLabel || 'Filtros rápidos';
+    },
+    rootClass() {
+      return this.quickFiltersClass || '';
+    },
+    activeKey() {
+      if (this.activeQuickFilterKey && this.activeQuickFilterKey.value !== undefined) {
+        return this.activeQuickFilterKey.value;
+      }
+      return this.activeQuickFilterKey;
+    },
+    loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    normalizedItems() {
+      return this.items.filter(item => item && (item.key != null || item.value != null || item.id != null)).map(item => {
+        const key = String(item.key != null ? item.key : item.value != null ? item.value : item.id);
+        return {
+          ...item,
+          key,
+          label: item.label != null ? String(item.label) : key,
+          icon: item.icon || null,
+          tone: String(item.variant || item.tone || 'secondary').toLowerCase(),
+          count: item.count,
+          disabled: !!item.disabled,
+          class: item.class || '',
+          filter: item.filter
+        };
+      });
+    },
+    slotScope() {
+      return {
+        items: this.normalizedItems,
+        active: this.activeKey,
+        select: this.select,
+        loading: this.loadingValue
+      };
+    }
+  },
+  methods: {
+    select(item) {
+      if (!item || item.disabled || this.loadingValue) {
+        return;
+      }
+      if (typeof this.selectQuickFilter === 'function') {
+        this.selectQuickFilter(item.key, item);
+      }
+    }
+  }
+};
+const _hoisted_1$i = ["aria-label"];
+const _hoisted_2$f = ["aria-selected", "disabled", "onClick"];
+const _hoisted_3$e = {
+  class: "crud-quick-filter__label"
+};
+const _hoisted_4$e = {
+  key: 1,
+  class: "crud-quick-filter__count"
+};
+function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_b_icon = resolveComponent("b-icon");
+  return $options.hasItems ? (openBlock(), createElementBlock("div", {
+    key: 0,
+    class: normalizeClass(["crud-quick-filters", [$options.rootClass, `crud-quick-filters--${$options.normalizedVariant}`]]),
+    role: "tablist",
+    "aria-label": $options.ariaLabel
+  }, [renderSlot(_ctx.$slots, "quickFilters", normalizeProps(guardReactiveProps($options.slotScope)), () => [(openBlock(true), createElementBlock(Fragment, null, renderList($options.normalizedItems, item => {
+    return openBlock(), createElementBlock("button", {
+      key: item.key,
+      type: "button",
+      role: "tab",
+      class: normalizeClass(["crud-quick-filter", [item.class, `crud-quick-filter--${item.tone}`, {
+        'is-active': item.key === $options.activeKey,
+        'is-disabled': item.disabled
+      }]]),
+      "aria-selected": item.key === $options.activeKey,
+      disabled: item.disabled || $options.loadingValue,
+      onClick: $event => $options.select(item)
+    }, [renderSlot(_ctx.$slots, "quickFilterItem", mergeProps({
+      ref_for: true
+    }, {
+      item,
+      active: item.key === $options.activeKey,
+      select: () => $options.select(item)
+    }), () => [item.icon ? (openBlock(), createBlock(_component_b_icon, {
+      key: 0,
+      icon: item.icon,
+      class: "crud-quick-filter__icon"
+    }, null, 8 /* PROPS */, ["icon"])) : createCommentVNode("v-if", true), createElementVNode("span", _hoisted_3$e, toDisplayString(item.label), 1 /* TEXT */), item.count != null ? (openBlock(), createElementBlock("span", _hoisted_4$e, toDisplayString(item.count), 1 /* TEXT */)) : createCommentVNode("v-if", true)], true)], 10 /* CLASS, PROPS */, _hoisted_2$f);
+  }), 128 /* KEYED_FRAGMENT */))], true)], 10 /* CLASS, PROPS */, _hoisted_1$i)) : createCommentVNode("v-if", true);
+}
+var CrudQuickFilters = /*#__PURE__*/_export_sfc(_sfc_main$j, [['render', _sfc_render$j], ['__scopeId', "data-v-86f1c0de"]]);
+
+var css$d = "\n.crud-header[data-v-b1534978] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem;\r\n  margin: 0 0 0.25rem;\r\n  padding: 0;\n}\n.crud-header__main[data-v-b1534978] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-start;\r\n  justify-content: space-between;\r\n  gap: 0.75rem 1rem;\n}\n.crud-header__heading[data-v-b1534978] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  gap: 0.65rem 0.85rem;\r\n  min-width: 0;\r\n  flex: 1 1 auto;\r\n  margin-right: auto;\n}\n.crud-title[data-v-b1534978] {\r\n  margin: 0;\r\n  flex: 0 1 auto;\r\n  min-width: 0;\r\n  white-space: nowrap;\r\n  padding: 0.25rem 0;\n}\n.crud-header__quick-filters-row[data-v-b1534978] {\r\n  width: 100%;\n}\n.table-options[data-v-b1534978] {\r\n  flex: 1 1 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-end;\r\n  margin: 0 0 0 auto;\r\n  padding: 0;\n}\n@media (min-width: 768px) {\n.table-options[data-v-b1534978] {\r\n    flex: 0 0 auto;\r\n    max-width: 100%;\n}\n}\n.crud-toolbar[data-v-b1534978] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  justify-content: flex-end;\r\n  gap: 0.5rem;\r\n  width: 100%;\n}\n.crud-toolbar__prepend[data-v-b1534978],\r\n.crud-toolbar__append[data-v-b1534978] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  gap: 0.5rem;\n}\n.crud-toolbar__actions[data-v-b1534978] {\r\n  flex-wrap: wrap;\n}\n.crud-search[data-v-b1534978] {\r\n  width: auto;\r\n  flex: 0 0 auto;\n}\n.crud-search.is-open[data-v-b1534978] {\r\n  width: min(100%, 16rem);\r\n  flex: 0 1 16rem;\n}\n.crud-search__toggle.open[data-v-b1534978] {\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.crud-search__input[data-v-b1534978] {\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\n}\r\n";
+n(css$d, {});
+
+const _sfc_main$i = {
   name: 'CrudHeader',
   components: {
-    CrudFilters
+    CrudFilters,
+    CrudQuickFilters
   },
-  inject: ['bootstrapFactory', 'showHeader', 'showTitle', 'title', 'filterSidebarOpen', 'showImport', 'showExport', 'showPrincipalSortBtn', 'principalSort', 'bulkDelete', 'showCreateBtn', 'enableFilters', 'displayModeToggler', 'displayMode', 'displayModes', 'showSearch', 'displaySearch', 'search', 'searchPlaceholder', 'loading', 'messageImport', 'messageExport', 'messageNew', 'createItem', 'toggleDisplayMode', 'togglePrincipalSort', 'confirmBulkDelete', 'toggleFilters', 'refresh', 'showImportModal', 'showExportModal'],
+  data() {
+    return {
+      searchInput: '',
+      searchTimer: null
+    };
+  },
+  inject: {
+    bootstrapFactory: {
+      default: null
+    },
+    showHeader: {
+      default: true
+    },
+    showTitle: {
+      default: true
+    },
+    title: {
+      default: ''
+    },
+    filterSidebarOpen: {
+      default: null
+    },
+    setFilterSidebarOpen: {
+      default: null
+    },
+    crudUuid: {
+      default: 'default'
+    },
+    showImport: {
+      default: false
+    },
+    showExport: {
+      default: false
+    },
+    showPrincipalSortBtn: {
+      default: false
+    },
+    principalSort: {
+      default: false
+    },
+    bulkDelete: {
+      default: false
+    },
+    showCreateBtn: {
+      default: true
+    },
+    enableFilters: {
+      default: false
+    },
+    displayModeToggler: {
+      default: false
+    },
+    displayMode: {
+      default: null
+    },
+    getDisplayMode: {
+      default: null
+    },
+    displayModes: {
+      default: () => ({
+        MODE_TABLE: 1,
+        MODE_CARDS: 2
+      })
+    },
+    showSearch: {
+      default: true
+    },
+    displaySearch: {
+      default: null
+    },
+    search: {
+      default: null
+    },
+    searchPlaceholder: {
+      default: 'Buscar...'
+    },
+    loading: {
+      default: null
+    },
+    firstLoad: {
+      default: null
+    },
+    messageImport: {
+      default: 'Importar'
+    },
+    messageExport: {
+      default: 'Exportar'
+    },
+    messageNew: {
+      default: 'Nuevo'
+    },
+    createItem: {
+      default: () => {}
+    },
+    toggleDisplayMode: {
+      default: () => {}
+    },
+    togglePrincipalSort: {
+      default: () => {}
+    },
+    confirmBulkDelete: {
+      default: () => {}
+    },
+    toggleFilters: {
+      default: () => {}
+    },
+    refresh: {
+      default: () => {}
+    },
+    showImportModal: {
+      default: () => {}
+    },
+    showExportModal: {
+      default: () => {}
+    },
+    quickFilters: {
+      default: () => []
+    },
+    quickFiltersPlacement: {
+      default: 'title'
+    }
+  },
   computed: {
-    sidebarVisible() {
-      if (this.filterSidebarOpen && this.filterSidebarOpen.value !== undefined) {
-        return !!this.filterSidebarOpen.value;
+    filtersSidebarId() {
+      return `crud-filters-sidebar-${this.crudUuid || 'default'}`;
+    },
+    quickFiltersPlacementValue() {
+      return String(this.quickFiltersPlacement || 'title').toLowerCase();
+    },
+    hasQuickFilters() {
+      return Array.isArray(this.quickFilters) && this.quickFilters.length > 0;
+    },
+    showQuickFiltersWithTitle() {
+      return this.hasQuickFilters && ['title', 'with-title', 'heading'].includes(this.quickFiltersPlacementValue);
+    },
+    showQuickFiltersInToolbar() {
+      return this.hasQuickFilters && ['toolbar', 'actions'].includes(this.quickFiltersPlacementValue);
+    },
+    showQuickFiltersBelowTitle() {
+      return this.hasQuickFilters && ['below', 'below-title', 'row'].includes(this.quickFiltersPlacementValue);
+    },
+    sidebarOpen: {
+      get() {
+        if (this.filterSidebarOpen && this.filterSidebarOpen.value !== undefined) {
+          return !!this.filterSidebarOpen.value;
+        }
+        return false;
+      },
+      set(val) {
+        if (typeof this.setFilterSidebarOpen === 'function') {
+          this.setFilterSidebarOpen(!!val);
+          return;
+        }
+        if (this.filterSidebarOpen && this.filterSidebarOpen.value !== undefined) {
+          this.filterSidebarOpen.value = !!val;
+        }
       }
-      return !!(this.$parent && this.$parent.filterSidebarOpen);
     },
     currentDisplayMode() {
+      if (typeof this.getDisplayMode === 'function') {
+        return this.getDisplayMode();
+      }
       if (!this.displayMode) return 1;
       if (this.displayMode.value !== undefined) {
         return this.displayMode.value;
@@ -455,38 +743,99 @@ const _sfc_main$e = {
       }
       return this.displayMode;
     },
-    // Computed property para manejar loading como objeto reactivo o booleano
     loadingValue() {
       return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    firstLoadValue() {
+      return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
+    },
+    isInitialLoading() {
+      return this.loadingValue && !this.firstLoadValue;
+    },
+    displaySearchValue() {
+      if (this.displaySearch && this.displaySearch.value !== undefined) {
+        return !!this.displaySearch.value;
+      }
+      return !!this.displaySearch;
+    },
+    searchReactiveValue() {
+      if (this.search && this.search.value !== undefined) {
+        return this.search.value;
+      }
+      return this.search || '';
     }
   },
-  methods: {
-    closeSidebar() {
-      // Usar el estado vivo (reactive provide o padre), no el booleano estático del inject
-      if (this.sidebarVisible) {
-        this.toggleFilters();
+  watch: {
+    searchInput(val) {
+      if (this.searchTimer) {
+        clearTimeout(this.searchTimer);
       }
+      this.searchTimer = setTimeout(() => {
+        if (this.search && typeof this.search === 'object' && 'value' in this.search) {
+          this.search.value = val;
+        }
+      }, 500);
+    },
+    searchReactiveValue(val) {
+      if (val !== this.searchInput) {
+        this.searchInput = val || '';
+      }
+    }
+  },
+  mounted() {
+    this.searchInput = this.searchReactiveValue || '';
+  },
+  methods: {
+    toggleSearchField() {
+      if (this.displaySearch && typeof this.displaySearch === 'object' && 'value' in this.displaySearch) {
+        this.displaySearch.value = !this.displaySearch.value;
+        return;
+      }
+      if (this.$parent && this.$parent.displaySearch !== undefined) {
+        this.$parent.displaySearch = !this.$parent.displaySearch;
+      }
+    }
+  },
+  beforeUnmount() {
+    if (this.searchTimer) {
+      clearTimeout(this.searchTimer);
     }
   }
 };
-const _hoisted_1$e = {
+const _hoisted_1$h = {
   key: 0,
   class: "crud-header"
 };
-const _hoisted_2$a = {
+const _hoisted_2$e = {
+  class: "crud-header__main"
+};
+const _hoisted_3$d = {
+  class: "crud-header__heading"
+};
+const _hoisted_4$d = {
   key: 0,
   class: "crud-title"
 };
-const _hoisted_3$a = {
+const _hoisted_5$a = {
   class: "table-options"
 };
-const _hoisted_4$9 = {
-  key: 7,
-  class: "crud-search m-0"
+const _hoisted_6$9 = {
+  class: "crud-toolbar"
 };
-function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_CrudFilters = resolveComponent("CrudFilters");
-  const _component_b_sidebar = resolveComponent("b-sidebar");
+const _hoisted_7$8 = {
+  class: "crud-toolbar__prepend"
+};
+const _hoisted_8$8 = {
+  class: "btn-group crud-toolbar__actions",
+  role: "group"
+};
+const _hoisted_9$5 = ["disabled"];
+const _hoisted_10$4 = ["placeholder", "disabled"];
+const _hoisted_11$3 = {
+  class: "crud-toolbar__append"
+};
+function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_CrudQuickFilters = resolveComponent("CrudQuickFilters");
   const _component_b_icon_cloud_upload = resolveComponent("b-icon-cloud-upload");
   const _component_b_button = resolveComponent("b-button");
   const _component_b_icon_cloud_download = resolveComponent("b-icon-cloud-download");
@@ -494,130 +843,152 @@ function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_icon_sort_numeric_up = resolveComponent("b-icon-sort-numeric-up");
   const _component_b_icon_trash = resolveComponent("b-icon-trash");
   const _component_b_icon_plus = resolveComponent("b-icon-plus");
-  const _component_b_icon_arrow_clockwise = resolveComponent("b-icon-arrow-clockwise");
   const _component_b_icon_card_list = resolveComponent("b-icon-card-list");
   const _component_b_icon_table = resolveComponent("b-icon-table");
+  const _component_b_icon_arrow_clockwise = resolveComponent("b-icon-arrow-clockwise");
   const _component_b_icon_search = resolveComponent("b-icon-search");
-  const _component_b_input_group_prepend = resolveComponent("b-input-group-prepend");
-  const _component_b_form_input = resolveComponent("b-form-input");
-  const _component_b_input_group = resolveComponent("b-input-group");
-  const _component_b_button_group = resolveComponent("b-button-group");
-  return $options.showHeader ? (openBlock(), createElementBlock("div", _hoisted_1$e, [$options.showTitle ? (openBlock(), createElementBlock("h4", _hoisted_2$a, toDisplayString($options.title), 1 /* TEXT */)) : createCommentVNode("v-if", true), createVNode(_component_b_sidebar, {
-    id: "crud-filters-sidebar",
-    visible: $options.sidebarVisible,
-    onHidden: $options.closeSidebar,
+  const _component_CrudFilters = resolveComponent("CrudFilters");
+  const _component_b_sidebar = resolveComponent("b-sidebar");
+  return $options.showHeader ? (openBlock(), createElementBlock("div", _hoisted_1$h, [createElementVNode("div", _hoisted_2$e, [createElementVNode("div", _hoisted_3$d, [$options.showTitle ? (openBlock(), createElementBlock("h4", _hoisted_4$d, toDisplayString($options.title), 1 /* TEXT */)) : createCommentVNode("v-if", true), $options.showQuickFiltersWithTitle ? (openBlock(), createBlock(_component_CrudQuickFilters, {
+    key: 1
+  }, createSlots({
+    _: 2 /* DYNAMIC */
+  }, [renderList(_ctx.$slots, (_, name) => {
+    return {
+      name: name,
+      fn: withCtx(slotProps => [renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), undefined, true)])
+    };
+  })]), 1024 /* DYNAMIC_SLOTS */)) : createCommentVNode("v-if", true)]), createElementVNode("div", _hoisted_5$a, [renderSlot(_ctx.$slots, "tableActions", {
+    createItem: $options.createItem,
+    toggleDisplayMode: $options.toggleDisplayMode,
+    loading: $options.loading
+  }, () => [createElementVNode("div", _hoisted_6$9, [createElementVNode("div", _hoisted_7$8, [renderSlot(_ctx.$slots, "tableActionsPrepend", {
+    loading: $options.loading
+  }, undefined, true), $options.showQuickFiltersInToolbar ? (openBlock(), createBlock(_component_CrudQuickFilters, {
+    key: 0
+  }, createSlots({
+    _: 2 /* DYNAMIC */
+  }, [renderList(_ctx.$slots, (_, name) => {
+    return {
+      name: name,
+      fn: withCtx(slotProps => [renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), undefined, true)])
+    };
+  })]), 1024 /* DYNAMIC_SLOTS */)) : createCommentVNode("v-if", true)]), createElementVNode("div", _hoisted_8$8, [$options.showImport ? (openBlock(), createBlock(_component_b_button, {
+    key: 0,
+    variant: "info",
+    onClick: _cache[0] || (_cache[0] = $event => $options.showImportModal()),
+    disabled: $options.loadingValue
+  }, {
+    default: withCtx(() => [createVNode(_component_b_icon_cloud_upload), createTextVNode(toDisplayString($options.messageImport), 1 /* TEXT */)]),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), $options.showExport ? (openBlock(), createBlock(_component_b_button, {
+    key: 1,
+    variant: "info",
+    onClick: _cache[1] || (_cache[1] = $event => $options.showExportModal()),
+    disabled: $options.loadingValue
+  }, {
+    default: withCtx(() => [createVNode(_component_b_icon_cloud_download), createTextVNode(toDisplayString($options.messageExport), 1 /* TEXT */)]),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), $options.showPrincipalSortBtn ? (openBlock(), createBlock(_component_b_button, {
+    key: 2,
+    variant: "info",
+    onClick: _cache[2] || (_cache[2] = $event => $options.togglePrincipalSort()),
+    disabled: $options.loadingValue
+  }, {
+    default: withCtx(() => [$options.principalSort ? (openBlock(), createBlock(_component_b_icon_sort_numeric_down, {
+      key: 0
+    })) : (openBlock(), createBlock(_component_b_icon_sort_numeric_up, {
+      key: 1
+    }))]),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), $options.bulkDelete ? (openBlock(), createBlock(_component_b_button, {
+    key: 3,
+    variant: "danger",
+    onClick: _cache[3] || (_cache[3] = $event => $options.confirmBulkDelete()),
+    disabled: $options.loadingValue
+  }, {
+    default: withCtx(() => [createVNode(_component_b_icon_trash)]),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), $options.showCreateBtn ? (openBlock(), createBlock(_component_b_button, {
+    key: 4,
+    variant: "success",
+    onClick: _cache[4] || (_cache[4] = $event => $options.createItem()),
+    disabled: $options.loadingValue
+  }, {
+    default: withCtx(() => [createVNode(_component_b_icon_plus), createTextVNode(toDisplayString($options.messageNew), 1 /* TEXT */)]),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), $options.enableFilters ? (openBlock(), createBlock(_component_b_button, {
+    key: 5,
+    variant: "info",
+    onClick: _cache[5] || (_cache[5] = $event => $options.toggleFilters()),
+    disabled: $options.loadingValue
+  }, {
+    default: withCtx(() => [...(_cache[11] || (_cache[11] = [createTextVNode("Filtros", -1 /* CACHED */)]))]),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), $options.displayModeToggler ? (openBlock(), createBlock(_component_b_button, {
+    key: 6,
+    variant: "info",
+    onClick: _cache[6] || (_cache[6] = $event => $options.toggleDisplayMode()),
+    disabled: $options.loadingValue
+  }, {
+    default: withCtx(() => [$options.currentDisplayMode == $options.displayModes.MODE_TABLE ? (openBlock(), createBlock(_component_b_icon_card_list, {
+      key: 0
+    })) : (openBlock(), createBlock(_component_b_icon_table, {
+      key: 1
+    }))]),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), createVNode(_component_b_button, {
+    variant: "info",
+    onClick: _cache[7] || (_cache[7] = $event => $options.refresh()),
+    disabled: $options.loadingValue
+  }, {
+    default: withCtx(() => [createVNode(_component_b_icon_arrow_clockwise)]),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["disabled"])]), $options.showSearch ? (openBlock(), createElementBlock("div", {
+    key: 0,
+    class: normalizeClass(["crud-search input-group", {
+      'is-open': $options.displaySearchValue
+    }])
+  }, [createElementVNode("button", {
+    type: "button",
+    class: normalizeClass(["btn btn-info crud-search__toggle", {
+      open: $options.displaySearchValue
+    }]),
+    onClick: _cache[8] || (_cache[8] = (...args) => $options.toggleSearchField && $options.toggleSearchField(...args)),
+    "aria-label": "Buscar",
+    disabled: $options.loadingValue
+  }, [createVNode(_component_b_icon_search)], 10 /* CLASS, PROPS */, _hoisted_9$5), $options.displaySearchValue ? withDirectives((openBlock(), createElementBlock("input", {
+    key: 0,
+    "onUpdate:modelValue": _cache[9] || (_cache[9] = $event => $data.searchInput = $event),
+    class: "form-control crud-search__input",
+    type: "search",
+    placeholder: $options.searchPlaceholder,
+    disabled: $options.loadingValue
+  }, null, 8 /* PROPS */, _hoisted_10$4)), [[vModelText, $data.searchInput]]) : createCommentVNode("v-if", true)], 2 /* CLASS */)) : createCommentVNode("v-if", true), createElementVNode("div", _hoisted_11$3, [renderSlot(_ctx.$slots, "tableActionsAppend", {
+    loading: $options.loading
+  }, undefined, true)])])], true)])]), $options.showQuickFiltersBelowTitle ? (openBlock(), createBlock(_component_CrudQuickFilters, {
+    key: 0,
+    class: "crud-header__quick-filters-row"
+  }, createSlots({
+    _: 2 /* DYNAMIC */
+  }, [renderList(_ctx.$slots, (_, name) => {
+    return {
+      name: name,
+      fn: withCtx(slotProps => [renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), undefined, true)])
+    };
+  })]), 1024 /* DYNAMIC_SLOTS */)) : createCommentVNode("v-if", true), createVNode(_component_b_sidebar, {
+    id: $options.filtersSidebarId,
+    modelValue: $options.sidebarOpen,
+    "onUpdate:modelValue": _cache[10] || (_cache[10] = $event => $options.sidebarOpen = $event),
     title: "Filtrar",
     right: "",
     shadow: ""
   }, {
     default: withCtx(() => [createVNode(_component_CrudFilters)]),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["visible", "onHidden"]), createElementVNode("div", _hoisted_3$a, [createVNode(_component_b_button_group, {
-    class: "mr-1"
-  }, {
-    default: withCtx(() => [renderSlot(_ctx.$slots, "tableActions", {
-      createItem: $options.createItem,
-      toggleDisplayMode: $options.toggleDisplayMode,
-      loading: $options.loading
-    }, () => [renderSlot(_ctx.$slots, "tableActionsPrepend", {
-      loading: $options.loading
-    }, undefined, true), $options.showImport ? (openBlock(), createBlock(_component_b_button, {
-      key: 0,
-      variant: "info",
-      onClick: _cache[0] || (_cache[0] = $event => $options.showImportModal())
-    }, {
-      default: withCtx(() => [createVNode(_component_b_icon_cloud_upload), createTextVNode(toDisplayString($options.messageImport), 1 /* TEXT */)]),
-      _: 1 /* STABLE */
-    })) : createCommentVNode("v-if", true), $options.showExport ? (openBlock(), createBlock(_component_b_button, {
-      key: 1,
-      variant: "info",
-      onClick: _cache[1] || (_cache[1] = $event => $options.showExportModal())
-    }, {
-      default: withCtx(() => [createVNode(_component_b_icon_cloud_download), createTextVNode(toDisplayString($options.messageExport), 1 /* TEXT */)]),
-      _: 1 /* STABLE */
-    })) : createCommentVNode("v-if", true), $options.showPrincipalSortBtn ? (openBlock(), createBlock(_component_b_button, {
-      key: 2,
-      variant: "info",
-      onClick: _cache[2] || (_cache[2] = $event => $options.togglePrincipalSort()),
-      disabled: $options.loadingValue
-    }, {
-      default: withCtx(() => [$options.principalSort ? (openBlock(), createBlock(_component_b_icon_sort_numeric_down, {
-        key: 0
-      })) : (openBlock(), createBlock(_component_b_icon_sort_numeric_up, {
-        key: 1
-      }))]),
-      _: 1 /* STABLE */
-    }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), $options.bulkDelete ? (openBlock(), createBlock(_component_b_button, {
-      key: 3,
-      variant: "danger",
-      onClick: _cache[3] || (_cache[3] = $event => $options.confirmBulkDelete())
-    }, {
-      default: withCtx(() => [createVNode(_component_b_icon_trash)]),
-      _: 1 /* STABLE */
-    })) : createCommentVNode("v-if", true), $options.showCreateBtn ? (openBlock(), createBlock(_component_b_button, {
-      key: 4,
-      variant: "success",
-      onClick: _cache[4] || (_cache[4] = $event => $options.createItem()),
-      disabled: $options.loadingValue
-    }, {
-      default: withCtx(() => [createVNode(_component_b_icon_plus), createTextVNode(toDisplayString($options.messageNew), 1 /* TEXT */)]),
-      _: 1 /* STABLE */
-    }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), $options.enableFilters ? (openBlock(), createBlock(_component_b_button, {
-      key: 5,
-      variant: "info",
-      onClick: _cache[5] || (_cache[5] = $event => $options.toggleFilters())
-    }, {
-      default: withCtx(() => [...(_cache[10] || (_cache[10] = [createTextVNode("Filtros", -1 /* CACHED */)]))]),
-      _: 1 /* STABLE */
-    })) : createCommentVNode("v-if", true), createVNode(_component_b_button, {
-      variant: "info",
-      onClick: _cache[6] || (_cache[6] = $event => $options.refresh())
-    }, {
-      default: withCtx(() => [createVNode(_component_b_icon_arrow_clockwise)]),
-      _: 1 /* STABLE */
-    }), $options.displayModeToggler ? (openBlock(), createBlock(_component_b_button, {
-      key: 6,
-      variant: "info",
-      onClick: _cache[7] || (_cache[7] = $event => $options.toggleDisplayMode()),
-      disabled: $options.loadingValue
-    }, {
-      default: withCtx(() => [$options.currentDisplayMode == $options.displayModes.MODE_TABLE ? (openBlock(), createBlock(_component_b_icon_card_list, {
-        key: 0
-      })) : $options.currentDisplayMode == $options.displayModes.MODE_CARDS ? (openBlock(), createBlock(_component_b_icon_table, {
-        key: 1
-      })) : createCommentVNode("v-if", true)]),
-      _: 1 /* STABLE */
-    }, 8 /* PROPS */, ["disabled"])) : createCommentVNode("v-if", true), $options.showSearch ? (openBlock(), createElementBlock("div", _hoisted_4$9, [createVNode(_component_b_input_group, null, {
-      default: withCtx(() => [createVNode(_component_b_input_group_prepend, null, {
-        default: withCtx(() => [createVNode(_component_b_button, {
-          variant: "info",
-          onClick: _cache[8] || (_cache[8] = $event => $options.displaySearch = !$options.displaySearch),
-          class: normalizeClass({
-            open: $options.displaySearch
-          })
-        }, {
-          default: withCtx(() => [createVNode(_component_b_icon_search)]),
-          _: 1 /* STABLE */
-        }, 8 /* PROPS */, ["class"])]),
-        _: 1 /* STABLE */
-      }), $options.displaySearch ? (openBlock(), createBlock(_component_b_form_input, {
-        key: 0,
-        modelValue: $options.search,
-        "onUpdate:modelValue": _cache[9] || (_cache[9] = $event => $options.search = $event),
-        class: "pl-2",
-        type: "search",
-        required: "",
-        placeholder: $options.searchPlaceholder,
-        debounce: "500"
-      }, null, 8 /* PROPS */, ["modelValue", "placeholder"])) : createCommentVNode("v-if", true)]),
-      _: 1 /* STABLE */
-    }), renderSlot(_ctx.$slots, "tableActionsAppend", {
-      loading: $options.loading
-    }, undefined, true)])) : createCommentVNode("v-if", true)], true)]),
-    _: 3 /* FORWARDED */
-  })])])) : createCommentVNode("v-if", true);
+  }, 8 /* PROPS */, ["id", "modelValue"])])) : createCommentVNode("v-if", true);
 }
-var CrudHeader = /*#__PURE__*/_export_sfc(_sfc_main$e, [['render', _sfc_render$e], ['__scopeId', "data-v-b1534978"]]);
+var CrudHeader = /*#__PURE__*/_export_sfc(_sfc_main$i, [['render', _sfc_render$i], ['__scopeId', "data-v-b1534978"]]);
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -910,7 +1281,7 @@ function toggleClass(el, name, state) {
   }
 }
 
-function css$8(el, prop, val) {
+function css$c(el, prop, val) {
   var style = el && el.style;
 
   if (style) {
@@ -939,7 +1310,7 @@ function matrix(el, selfOnly) {
     appliedTransforms = el;
   } else {
     do {
-      var transform = css$8(el, 'transform');
+      var transform = css$c(el, 'transform');
 
       if (transform && transform !== 'none') {
         appliedTransforms = transform + ' ' + appliedTransforms;
@@ -1021,11 +1392,11 @@ function getRect(el, relativeToContainingBlock, relativeToNonStaticParent, undoS
 
     if (!IE11OrLess) {
       do {
-        if (container && container.getBoundingClientRect && (css$8(container, 'transform') !== 'none' || relativeToNonStaticParent && css$8(container, 'position') !== 'static')) {
+        if (container && container.getBoundingClientRect && (css$c(container, 'transform') !== 'none' || relativeToNonStaticParent && css$c(container, 'position') !== 'static')) {
           var containerRect = container.getBoundingClientRect(); // Set relative to edges of padding box of container
 
-          top -= containerRect.top + parseInt(css$8(container, 'border-top-width'));
-          left -= containerRect.left + parseInt(css$8(container, 'border-left-width'));
+          top -= containerRect.top + parseInt(css$c(container, 'border-top-width'));
+          left -= containerRect.left + parseInt(css$c(container, 'border-left-width'));
           bottom = top + elRect.height;
           right = left + elRect.width;
           break;
@@ -1132,7 +1503,7 @@ function getChild(el, childNum, options, includeDragEl) {
 function lastChild(el, selector) {
   var last = el.lastElementChild;
 
-  while (last && (last === Sortable.ghost || css$8(last, 'display') === 'none' || selector && !matches(last, selector))) {
+  while (last && (last === Sortable.ghost || css$c(last, 'display') === 'none' || selector && !matches(last, selector))) {
     last = last.previousElementSibling;
   }
 
@@ -1218,7 +1589,7 @@ function getParentAutoScrollElement(el, includeSelf) {
   do {
     // we don't need to get elem css if it isn't even overflowing in the first place (performance)
     if (elem.clientWidth < elem.scrollWidth || elem.clientHeight < elem.scrollHeight) {
-      var elemCSS = css$8(elem);
+      var elemCSS = css$c(elem);
 
       if (elem.clientWidth < elem.scrollWidth && (elemCSS.overflowX == 'auto' || elemCSS.overflowX == 'scroll') || elem.clientHeight < elem.scrollHeight && (elemCSS.overflowY == 'auto' || elemCSS.overflowY == 'scroll')) {
         if (!elem.getBoundingClientRect || elem === document.body) return getWindowScrollingElement();
@@ -1294,19 +1665,19 @@ function clone(el) {
 }
 
 function setRect(el, rect) {
-  css$8(el, 'position', 'absolute');
-  css$8(el, 'top', rect.top);
-  css$8(el, 'left', rect.left);
-  css$8(el, 'width', rect.width);
-  css$8(el, 'height', rect.height);
+  css$c(el, 'position', 'absolute');
+  css$c(el, 'top', rect.top);
+  css$c(el, 'left', rect.left);
+  css$c(el, 'width', rect.width);
+  css$c(el, 'height', rect.height);
 }
 
 function unsetRect(el) {
-  css$8(el, 'position', '');
-  css$8(el, 'top', '');
-  css$8(el, 'left', '');
-  css$8(el, 'width', '');
-  css$8(el, 'height', '');
+  css$c(el, 'position', '');
+  css$c(el, 'top', '');
+  css$c(el, 'left', '');
+  css$c(el, 'width', '');
+  css$c(el, 'height', '');
 }
 
 var expando = 'Sortable' + new Date().getTime();
@@ -1320,7 +1691,7 @@ function AnimationStateManager() {
       if (!this.options.animation) return;
       var children = [].slice.call(this.el.children);
       children.forEach(function (child) {
-        if (css$8(child, 'display') === 'none' || child === Sortable.ghost) return;
+        if (css$c(child, 'display') === 'none' || child === Sortable.ghost) return;
         animationStates.push({
           target: child,
           rect: getRect(child)
@@ -1427,8 +1798,8 @@ function AnimationStateManager() {
     },
     animate: function animate(target, currentRect, toRect, duration) {
       if (duration) {
-        css$8(target, 'transition', '');
-        css$8(target, 'transform', '');
+        css$c(target, 'transition', '');
+        css$c(target, 'transform', '');
         var elMatrix = matrix(this.el),
             scaleX = elMatrix && elMatrix.a,
             scaleY = elMatrix && elMatrix.d,
@@ -1436,15 +1807,15 @@ function AnimationStateManager() {
             translateY = (currentRect.top - toRect.top) / (scaleY || 1);
         target.animatingX = !!translateX;
         target.animatingY = !!translateY;
-        css$8(target, 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)');
+        css$c(target, 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)');
         this.forRepaintDummy = repaint(target); // repaint
 
-        css$8(target, 'transition', 'transform ' + duration + 'ms' + (this.options.easing ? ' ' + this.options.easing : ''));
-        css$8(target, 'transform', 'translate3d(0,0,0)');
+        css$c(target, 'transition', 'transform ' + duration + 'ms' + (this.options.easing ? ' ' + this.options.easing : ''));
+        css$c(target, 'transform', 'translate3d(0,0,0)');
         typeof target.animated === 'number' && clearTimeout(target.animated);
         target.animated = setTimeout(function () {
-          css$8(target, 'transition', '');
-          css$8(target, 'transform', '');
+          css$c(target, 'transition', '');
+          css$c(target, 'transform', '');
           target.animated = false;
           target.animatingX = false;
           target.animatingY = false;
@@ -1720,12 +2091,12 @@ supportDraggable = documentExists && !ChromeForAndroid && !IOS && 'draggable' in
   return el.style.pointerEvents === 'auto';
 }(),
     _detectDirection = function _detectDirection(el, options) {
-  var elCSS = css$8(el),
+  var elCSS = css$c(el),
       elWidth = parseInt(elCSS.width) - parseInt(elCSS.paddingLeft) - parseInt(elCSS.paddingRight) - parseInt(elCSS.borderLeftWidth) - parseInt(elCSS.borderRightWidth),
       child1 = getChild(el, 0, options),
       child2 = getChild(el, 1, options),
-      firstChildCSS = child1 && css$8(child1),
-      secondChildCSS = child2 && css$8(child2),
+      firstChildCSS = child1 && css$c(child1),
+      secondChildCSS = child2 && css$c(child2),
       firstChildWidth = firstChildCSS && parseInt(firstChildCSS.marginLeft) + parseInt(firstChildCSS.marginRight) + getRect(child1).width,
       secondChildWidth = secondChildCSS && parseInt(secondChildCSS.marginLeft) + parseInt(secondChildCSS.marginRight) + getRect(child2).width;
 
@@ -1814,12 +2185,12 @@ _detectNearestEmptySortable = function _detectNearestEmptySortable(x, y) {
 },
     _hideGhostForTarget = function _hideGhostForTarget() {
   if (!supportCssPointerEvents && ghostEl) {
-    css$8(ghostEl, 'display', 'none');
+    css$c(ghostEl, 'display', 'none');
   }
 },
     _unhideGhostForTarget = function _unhideGhostForTarget() {
   if (!supportCssPointerEvents && ghostEl) {
-    css$8(ghostEl, 'display', '');
+    css$c(ghostEl, 'display', '');
   }
 }; // #1184 fix - Prevent click event on fallback if dragged but item not changed position
 
@@ -2359,10 +2730,10 @@ Sortable.prototype =
         }
 
         var cssMatrix = "matrix(".concat(ghostMatrix.a, ",").concat(ghostMatrix.b, ",").concat(ghostMatrix.c, ",").concat(ghostMatrix.d, ",").concat(ghostMatrix.e, ",").concat(ghostMatrix.f, ")");
-        css$8(ghostEl, 'webkitTransform', cssMatrix);
-        css$8(ghostEl, 'mozTransform', cssMatrix);
-        css$8(ghostEl, 'msTransform', cssMatrix);
-        css$8(ghostEl, 'transform', cssMatrix);
+        css$c(ghostEl, 'webkitTransform', cssMatrix);
+        css$c(ghostEl, 'mozTransform', cssMatrix);
+        css$c(ghostEl, 'msTransform', cssMatrix);
+        css$c(ghostEl, 'transform', cssMatrix);
         lastDx = dx;
         lastDy = dy;
         touchEvt = touch;
@@ -2383,7 +2754,7 @@ Sortable.prototype =
         // Get relatively positioned parent
         ghostRelativeParent = container;
 
-        while (css$8(ghostRelativeParent, 'position') === 'static' && css$8(ghostRelativeParent, 'transform') === 'none' && ghostRelativeParent !== document) {
+        while (css$c(ghostRelativeParent, 'position') === 'static' && css$c(ghostRelativeParent, 'transform') === 'none' && ghostRelativeParent !== document) {
           ghostRelativeParent = ghostRelativeParent.parentNode;
         }
 
@@ -2402,22 +2773,22 @@ Sortable.prototype =
       toggleClass(ghostEl, options.ghostClass, false);
       toggleClass(ghostEl, options.fallbackClass, true);
       toggleClass(ghostEl, options.dragClass, true);
-      css$8(ghostEl, 'transition', '');
-      css$8(ghostEl, 'transform', '');
-      css$8(ghostEl, 'box-sizing', 'border-box');
-      css$8(ghostEl, 'margin', 0);
-      css$8(ghostEl, 'top', rect.top);
-      css$8(ghostEl, 'left', rect.left);
-      css$8(ghostEl, 'width', rect.width);
-      css$8(ghostEl, 'height', rect.height);
-      css$8(ghostEl, 'opacity', '0.8');
-      css$8(ghostEl, 'position', PositionGhostAbsolutely ? 'absolute' : 'fixed');
-      css$8(ghostEl, 'zIndex', '100000');
-      css$8(ghostEl, 'pointerEvents', 'none');
+      css$c(ghostEl, 'transition', '');
+      css$c(ghostEl, 'transform', '');
+      css$c(ghostEl, 'box-sizing', 'border-box');
+      css$c(ghostEl, 'margin', 0);
+      css$c(ghostEl, 'top', rect.top);
+      css$c(ghostEl, 'left', rect.left);
+      css$c(ghostEl, 'width', rect.width);
+      css$c(ghostEl, 'height', rect.height);
+      css$c(ghostEl, 'opacity', '0.8');
+      css$c(ghostEl, 'position', PositionGhostAbsolutely ? 'absolute' : 'fixed');
+      css$c(ghostEl, 'zIndex', '100000');
+      css$c(ghostEl, 'pointerEvents', 'none');
       Sortable.ghost = ghostEl;
       container.appendChild(ghostEl); // Set transform-origin
 
-      css$8(ghostEl, 'transform-origin', tapDistanceLeft / parseInt(ghostEl.style.width) * 100 + '% ' + tapDistanceTop / parseInt(ghostEl.style.height) * 100 + '%');
+      css$c(ghostEl, 'transform-origin', tapDistanceLeft / parseInt(ghostEl.style.width) * 100 + '% ' + tapDistanceTop / parseInt(ghostEl.style.height) * 100 + '%');
     }
   },
   _onDragStart: function _onDragStart(
@@ -2486,7 +2857,7 @@ Sortable.prototype =
 
       on$1(document, 'drop', _this); // #1276 fix:
 
-      css$8(dragEl, 'transform', 'translateZ(0)');
+      css$c(dragEl, 'transform', 'translateZ(0)');
     }
 
     awaitingDragStarted = true;
@@ -2495,7 +2866,7 @@ Sortable.prototype =
     moved = true;
 
     if (Safari) {
-      css$8(document.body, 'user-select', 'none');
+      css$c(document.body, 'user-select', 'none');
     }
   },
   // Returns true - if no further action is needed (either inserted or another condition)
@@ -2735,7 +3106,7 @@ Sortable.prototype =
           do {
             dragIndex -= direction;
             sibling = parentEl.children[dragIndex];
-          } while (sibling && (css$8(sibling, 'display') === 'none' || sibling === ghostEl));
+          } while (sibling && (css$c(sibling, 'display') === 'none' || sibling === ghostEl));
         } // If dragEl is already beside target: Do not insert
 
 
@@ -2850,10 +3221,10 @@ Sortable.prototype =
     this._offUpEvents();
 
     if (Safari) {
-      css$8(document.body, 'user-select', '');
+      css$c(document.body, 'user-select', '');
     }
 
-    css$8(dragEl, 'transform', '');
+    css$c(dragEl, 'transform', '');
 
     if (evt) {
       if (moved) {
@@ -3130,7 +3501,7 @@ Sortable.prototype =
     if (!cloneHidden) {
       pluginEvent('hideClone', this);
       if (Sortable.eventCanceled) return;
-      css$8(cloneEl, 'display', 'none');
+      css$c(cloneEl, 'display', 'none');
 
       if (this.options.removeCloneOnHide && cloneEl.parentNode) {
         cloneEl.parentNode.removeChild(cloneEl);
@@ -3162,7 +3533,7 @@ Sortable.prototype =
         this.animate(dragEl, cloneEl);
       }
 
-      css$8(cloneEl, 'display', '');
+      css$c(cloneEl, 'display', '');
       cloneHidden = false;
     }
   }
@@ -3343,7 +3714,7 @@ if (documentExists) {
 Sortable.utils = {
   on: on$1,
   off: off$1,
-  css: css$8,
+  css: css$c,
   find: find,
   is: function is(el, selector) {
     return !!closest(el, selector, el, false);
@@ -3571,7 +3942,7 @@ var autoScroll = throttle$1(function (evt, options, rootEl, isFallback) {
         canScrollY = void 0,
         scrollWidth = el.scrollWidth,
         scrollHeight = el.scrollHeight,
-        elCSS = css$8(el),
+        elCSS = css$c(el),
         scrollPosX = el.scrollLeft,
         scrollPosY = el.scrollTop;
 
@@ -3907,7 +4278,7 @@ function MultiDragPlugin() {
       if (!this.isMultiDrag) return;
       insertMultiDragClones(false, rootEl);
       multiDragClones.forEach(function (clone) {
-        css$8(clone, 'display', '');
+        css$c(clone, 'display', '');
       });
       cloneNowShown();
       clonesHidden = false;
@@ -3921,7 +4292,7 @@ function MultiDragPlugin() {
           cancel = _ref5.cancel;
       if (!this.isMultiDrag) return;
       multiDragClones.forEach(function (clone) {
-        css$8(clone, 'display', 'none');
+        css$c(clone, 'display', 'none');
 
         if (_this.options.removeCloneOnHide && clone.parentNode) {
           clone.parentNode.removeChild(clone);
@@ -3965,7 +4336,7 @@ function MultiDragPlugin() {
         if (this.options.animation) {
           multiDragElements.forEach(function (multiDragElement) {
             if (multiDragElement === dragEl$1) return;
-            css$8(multiDragElement, 'position', 'absolute');
+            css$c(multiDragElement, 'position', 'absolute');
           });
           var dragRect = getRect(dragEl$1, false, true, true);
           multiDragElements.forEach(function (multiDragElement) {
@@ -9535,12 +9906,12 @@ vuedraggable_umd.exports;
 var vuedraggable_umdExports = vuedraggable_umd.exports;
 var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umdExports);
 
-var css$7 = "\r\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-92534bce] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\r\n\r\n/* Alinear checkbox en el header */\n.checkbox-header[data-v-92534bce] {\r\n  vertical-align: middle !important;\r\n  text-align: center;\n}\n.header-checkbox-wrapper[data-v-92534bce] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  vertical-align: middle;\n}\r\n\r\n/* Asegurar que el form-check dentro del header esté alineado */\n.checkbox-header[data-v-92534bce] .form-check {\r\n  margin: 0 !important;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  min-height: auto;\r\n  padding: 0;\r\n  vertical-align: middle;\n}\n.checkbox-header[data-v-92534bce] .form-check-input {\r\n  margin: 0 !important;\r\n  margin-top: 0 !important;\r\n  margin-right: 0.5rem !important;\r\n  vertical-align: middle;\r\n  position: relative;\r\n  float: none;\r\n  top: 0;\r\n  align-self: center;\n}\n.checkbox-header[data-v-92534bce] .form-check-label {\r\n  margin-left: 0;\r\n  margin-bottom: 0;\r\n  vertical-align: middle;\r\n  display: inline;\r\n  align-self: center;\n}\n.sort-filter[data-v-92534bce] {\r\n  cursor: pointer;\r\n  visibility: hidden;\r\n  display: inline-block;\n}\n.sort-filter-visible[data-v-92534bce] {\r\n  visibility: visible;\n}\r\n";
-n(css$7, {});
+var css$b = "\r\n/* Fijar ancho de la columna de acciones en el header */\n.actions-header[data-v-92534bce] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\r\n\r\n/* Alinear checkbox en el header */\n.checkbox-header[data-v-92534bce] {\r\n  vertical-align: middle !important;\r\n  text-align: center;\n}\n.header-checkbox-wrapper[data-v-92534bce] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  vertical-align: middle;\n}\r\n\r\n/* Asegurar que el form-check dentro del header esté alineado */\n.checkbox-header[data-v-92534bce] .form-check {\r\n  margin: 0 !important;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  min-height: auto;\r\n  padding: 0;\r\n  vertical-align: middle;\n}\n.checkbox-header[data-v-92534bce] .form-check-input {\r\n  margin: 0 !important;\r\n  margin-top: 0 !important;\r\n  margin-right: 0.5rem !important;\r\n  vertical-align: middle;\r\n  position: relative;\r\n  float: none;\r\n  top: 0;\r\n  align-self: center;\n}\n.checkbox-header[data-v-92534bce] .form-check-label {\r\n  margin-left: 0;\r\n  margin-bottom: 0;\r\n  vertical-align: middle;\r\n  display: inline;\r\n  align-self: center;\n}\n.sort-filter[data-v-92534bce] {\r\n  cursor: pointer;\r\n  visibility: hidden;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.15rem;\r\n  vertical-align: middle;\n}\n.sort-filter-visible[data-v-92534bce] {\r\n  visibility: visible;\n}\n.sort-priority[data-v-92534bce] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  min-width: 1rem;\r\n  height: 1rem;\r\n  padding: 0 0.2rem;\r\n  border-radius: 999px;\r\n  background: #5f76e8;\r\n  color: #fff;\r\n  font-size: 0.65rem;\r\n  font-weight: 600;\r\n  line-height: 1;\n}\r\n";
+n(css$b, {});
 
-const _sfc_main$d = {
+const _sfc_main$h = {
   name: 'TableHeader',
-  inject: ['bootstrapFactory', 'columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'isColumnVisibleInTable', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'sortable', 'optionsLoaded', 'isAllSelected'],
+  inject: ['bootstrapFactory', 'columns', 'enableFilters', 'filtersVisible', 'isColumnHasFilter', 'isColumnVisibleInTable', 'internalFilterByProp', 'onChangeFilter', 'toggleAll', 'toggleSortFilter', 'getSortPriority', 'sortable', 'optionsLoaded', 'isAllSelected'],
   data() {
     return {
       hoveredColumn: null
@@ -9564,7 +9935,7 @@ const _sfc_main$d = {
     },
     getSortIconDirection(column) {
       const sortFilter = this.internalFilterByProp(column.prop + '_sort');
-      const sortValue = sortFilter.value;
+      const sortValue = sortFilter && sortFilter.value;
       if (sortValue === 'DESC') {
         return 'down';
       } else if (sortValue === 'ASC') {
@@ -9573,31 +9944,37 @@ const _sfc_main$d = {
         return 'up';
       }
       return null;
+    },
+    sortPriorityFor(column) {
+      if (typeof this.getSortPriority === 'function') {
+        return this.getSortPriority(column);
+      }
+      return null;
     }
   }
 };
-const _hoisted_1$d = {
+const _hoisted_1$g = {
   class: "thead-light"
 };
-const _hoisted_2$9 = ["onMouseenter"];
-const _hoisted_3$9 = {
+const _hoisted_2$d = ["onMouseenter"];
+const _hoisted_3$c = {
   class: "form-group"
 };
-const _hoisted_4$8 = ["onUpdate:modelValue"];
-const _hoisted_5$6 = {
+const _hoisted_4$c = ["onUpdate:modelValue"];
+const _hoisted_5$9 = {
   value: ""
 };
-const _hoisted_6$4 = {
+const _hoisted_6$8 = {
   key: 1,
   class: "row"
 };
-const _hoisted_7$4 = {
+const _hoisted_7$7 = {
   class: "col-6"
 };
-const _hoisted_8$4 = {
+const _hoisted_8$7 = {
   class: "col-6"
 };
-const _hoisted_9$3 = {
+const _hoisted_9$4 = {
   key: 2,
   class: "row"
 };
@@ -9632,16 +10009,18 @@ const _hoisted_23 = {
   key: 3
 };
 const _hoisted_24 = ["onClick"];
-function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_25 = {
+  key: 0,
+  class: "sort-priority"
+};
+function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_form_datepicker = resolveComponent("b-form-datepicker");
   const _component_b_form_checkbox = resolveComponent("b-form-checkbox");
   const _component_b_icon_sort_up = resolveComponent("b-icon-sort-up");
   const _component_b_icon_sort_down = resolveComponent("b-icon-sort-down");
-  return openBlock(), createElementBlock("thead", _hoisted_1$d, [createElementVNode("tr", null, [renderSlot(_ctx.$slots, "rowHead", {}, () => [(openBlock(true), createElementBlock(Fragment, null, renderList($options.columns, (column, indexc) => {
-    return openBlock(), createElementBlock(Fragment, {
-      key: indexc
-    }, [$options.isColumnVisibleInTable(column) ? (openBlock(), createElementBlock("th", {
-      key: 0,
+  return openBlock(), createElementBlock("thead", _hoisted_1$g, [createElementVNode("tr", null, [renderSlot(_ctx.$slots, "rowHead", {}, () => [(openBlock(true), createElementBlock(Fragment, null, renderList($options.columns, (column, indexc) => {
+    return openBlock(), createElementBlock(Fragment, null, [$options.isColumnVisibleInTable(column) ? (openBlock(), createElementBlock("th", {
+      key: 'th-' + (column.prop || indexc),
       style: normalizeStyle({
         width: column.width ? column.width : column.type == 'actions' ? '1%' : 'inherit'
       }),
@@ -9657,16 +10036,16 @@ function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
       column: column,
       filter: _ctx.filter,
       internalFilterByProp: $options.internalFilterByProp
-    }, () => [createElementVNode("div", _hoisted_3$9, [column.type == 'boolean' ? withDirectives((openBlock(), createElementBlock("select", {
+    }, () => [createElementVNode("div", _hoisted_3$c, [column.type == 'boolean' ? withDirectives((openBlock(), createElementBlock("select", {
       key: 0,
       class: "form-control form-control-md p-2",
       "onUpdate:modelValue": $event => $options.internalFilterByProp(column.prop).value = $event,
       onChange: _cache[0] || (_cache[0] = $event => $options.onChangeFilter($event))
-    }, [createElementVNode("option", _hoisted_5$6, toDisplayString(column.label), 1 /* TEXT */), _cache[7] || (_cache[7] = createElementVNode("option", {
+    }, [createElementVNode("option", _hoisted_5$9, toDisplayString(column.label), 1 /* TEXT */), _cache[7] || (_cache[7] = createElementVNode("option", {
       value: "1"
     }, "Sí", -1 /* CACHED */)), _cache[8] || (_cache[8] = createElementVNode("option", {
       value: "0"
-    }, "No", -1 /* CACHED */))], 40 /* PROPS, NEED_HYDRATION */, _hoisted_4$8)), [[vModelSelect, $options.internalFilterByProp(column.prop).value]]) : column.type == 'date' ? (openBlock(), createElementBlock("div", _hoisted_6$4, [createElementVNode("div", _hoisted_7$4, [createVNode(_component_b_form_datepicker, {
+    }, "No", -1 /* CACHED */))], 40 /* PROPS, NEED_HYDRATION */, _hoisted_4$c)), [[vModelSelect, $options.internalFilterByProp(column.prop).value]]) : column.type == 'date' ? (openBlock(), createElementBlock("div", _hoisted_6$8, [createElementVNode("div", _hoisted_7$7, [createVNode(_component_b_form_datepicker, {
       modelValue: $options.internalFilterByProp(column.prop + '_from').value,
       "onUpdate:modelValue": $event => $options.internalFilterByProp(column.prop + '_from').value = $event,
       "today-button": "",
@@ -9674,7 +10053,7 @@ function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
       "close-button": "",
       locale: "es",
       class: "form-control-md p-2"
-    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])]), createElementVNode("div", _hoisted_8$4, [createVNode(_component_b_form_datepicker, {
+    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])]), createElementVNode("div", _hoisted_8$7, [createVNode(_component_b_form_datepicker, {
       modelValue: $options.internalFilterByProp(column.prop + '_to').value,
       "onUpdate:modelValue": $event => $options.internalFilterByProp(column.prop + '_to').value = $event,
       "today-button": "",
@@ -9682,7 +10061,7 @@ function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
       "close-button": "",
       locale: "es",
       class: "form-control-md p-2"
-    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])])])) : column.type == 'number' || column.type == 'money' || column.type == 'price' ? (openBlock(), createElementBlock("div", _hoisted_9$3, [createElementVNode("div", _hoisted_10$3, [withDirectives(createElementVNode("input", {
+    }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])])])) : column.type == 'number' || column.type == 'money' || column.type == 'price' ? (openBlock(), createElementBlock("div", _hoisted_9$4, [createElementVNode("div", _hoisted_10$3, [withDirectives(createElementVNode("input", {
       type: "number",
       class: "form-control form-control-md p-2",
       "onUpdate:modelValue": $event => $options.internalFilterByProp(column.prop + '_from').value = $event,
@@ -9751,20 +10130,20 @@ function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
       class: normalizeClass(["sort-filter ml-1", {
         'sort-filter-visible': $options.shouldShowSortIcon(column)
       }]),
-      onClick: $event => $options.toggleSortFilter(column)
-    }, [$options.getSortIconDirection(column) === 'up' ? (openBlock(), createBlock(_component_b_icon_sort_up, {
-      key: 0
-    })) : $options.getSortIconDirection(column) === 'down' ? (openBlock(), createBlock(_component_b_icon_sort_down, {
+      onClick: withModifiers($event => $options.toggleSortFilter(column), ["stop"])
+    }, [$options.sortPriorityFor(column) ? (openBlock(), createElementBlock("span", _hoisted_25, toDisplayString($options.sortPriorityFor(column)), 1 /* TEXT */)) : createCommentVNode("v-if", true), $options.getSortIconDirection(column) === 'up' ? (openBlock(), createBlock(_component_b_icon_sort_up, {
       key: 1
+    })) : $options.getSortIconDirection(column) === 'down' ? (openBlock(), createBlock(_component_b_icon_sort_down, {
+      key: 2
     })) : (openBlock(), createBlock(_component_b_icon_sort_up, {
-      key: 2,
+      key: 3,
       style: {
         "visibility": "hidden"
       }
-    }))], 10 /* CLASS, PROPS */, _hoisted_24)) : createCommentVNode("v-if", true)], 46 /* CLASS, STYLE, PROPS, NEED_HYDRATION */, _hoisted_2$9)) : createCommentVNode("v-if", true)], 64 /* STABLE_FRAGMENT */);
-  }), 128 /* KEYED_FRAGMENT */))], true)])]);
+    }))], 10 /* CLASS, PROPS */, _hoisted_24)) : createCommentVNode("v-if", true)], 46 /* CLASS, STYLE, PROPS, NEED_HYDRATION */, _hoisted_2$d)) : createCommentVNode("v-if", true)], 64 /* STABLE_FRAGMENT */);
+  }), 256 /* UNKEYED_FRAGMENT */))], true)])]);
 }
-var TableHeader = /*#__PURE__*/_export_sfc(_sfc_main$d, [['render', _sfc_render$d], ['__scopeId', "data-v-92534bce"]]);
+var TableHeader = /*#__PURE__*/_export_sfc(_sfc_main$h, [['render', _sfc_render$h], ['__scopeId', "data-v-92534bce"]]);
 
 function commonjsRequire(path) {
 	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
@@ -15459,10 +15838,10 @@ moment$1.exports;
 var momentExports = moment$1.exports;
 var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);
 
-var css$6 = "\r\n/* Fijar ancho de la columna de acciones */\n.actions-cell[data-v-36cccca8] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.actions-button-group[data-v-36cccca8] {\r\n  display: inline-flex;\r\n  flex-wrap: nowrap;\n}\n.actions-dropdown[data-v-36cccca8] {\r\n  display: inline-block;\n}\r\n\r\n/* Asegurar que los botones no se expandan */\n.actions-button-group .btn[data-v-36cccca8] {\r\n  flex-shrink: 0;\n}\r\n";
-n(css$6, {});
+var css$a = "\r\n/* Fijar ancho de la columna de acciones */\n.actions-cell[data-v-36cccca8] {\r\n  width: 1%;\r\n  white-space: nowrap;\n}\n.actions-button-group[data-v-36cccca8] {\r\n  display: inline-flex;\r\n  flex-wrap: nowrap;\n}\n.actions-dropdown[data-v-36cccca8] {\r\n  display: inline-block;\n}\r\n\r\n/* Asegurar que los botones no se expandan */\n.actions-button-group .btn[data-v-36cccca8] {\r\n  flex-shrink: 0;\n}\r\n";
+n(css$a, {});
 
-const _sfc_main$c = {
+const _sfc_main$g = {
   name: 'TableCell',
   props: {
     column: Object,
@@ -15520,29 +15899,29 @@ const _sfc_main$c = {
     }
   }
 };
-const _hoisted_1$c = ["scope"];
-const _hoisted_2$8 = {
+const _hoisted_1$f = ["scope"];
+const _hoisted_2$c = {
   key: 0
 };
-const _hoisted_3$8 = {
+const _hoisted_3$b = {
   key: 1
 };
-const _hoisted_4$7 = {
+const _hoisted_4$b = {
   key: 2
 };
-const _hoisted_5$5 = {
+const _hoisted_5$8 = {
   key: 3
 };
-const _hoisted_6$3 = {
+const _hoisted_6$7 = {
   key: 4
 };
-const _hoisted_7$3 = {
+const _hoisted_7$6 = {
   key: 1
 };
-const _hoisted_8$3 = {
+const _hoisted_8$6 = {
   key: 5
 };
-const _hoisted_9$2 = {
+const _hoisted_9$3 = {
   key: 6
 };
 const _hoisted_10$2 = {
@@ -15551,7 +15930,7 @@ const _hoisted_10$2 = {
 const _hoisted_11$1 = {
   key: 8
 };
-function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_icon_check_circle = resolveComponent("b-icon-check-circle");
   const _component_b_badge = resolveComponent("b-badge");
   const _component_b_icon_x_circle = resolveComponent("b-icon-x-circle");
@@ -15576,7 +15955,7 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     index: $props.index,
     itemindex: $props.index,
     columnindex: $props.columnIndex
-  }, () => [$props.column.type == 'boolean' ? (openBlock(), createElementBlock("span", _hoisted_2$8, [$options.itemValue($props.column, $props.item) == 'true' || $options.itemValue($props.column, $props.item) == 1 || $options.itemValue($props.column, $props.item) == '1' ? (openBlock(), createBlock(_component_b_badge, {
+  }, () => [$props.column.type == 'boolean' ? (openBlock(), createElementBlock("span", _hoisted_2$c, [$options.itemValue($props.column, $props.item) == 'true' || $options.itemValue($props.column, $props.item) == 1 || $options.itemValue($props.column, $props.item) == '1' ? (openBlock(), createBlock(_component_b_badge, {
     key: 0,
     variant: "success"
   }, {
@@ -15588,15 +15967,15 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     default: withCtx(() => [createVNode(_component_b_icon_x_circle)]),
     _: 1 /* STABLE */
-  })) : createCommentVNode("v-if", true)])) : $props.column.type == 'date' ? (openBlock(), createElementBlock("span", _hoisted_3$8, toDisplayString($options.itemValue($props.column, $props.item) ? $data.moment($options.itemValue($props.column, $props.item)).format($props.column.format ? $props.column.format : 'L LT') : $options.itemValue($props.column, $props.item)), 1 /* TEXT */)) : $props.column.type == 'select' ? (openBlock(), createElementBlock("span", _hoisted_4$7, [createVNode(_component_b_form_checkbox, {
+  })) : createCommentVNode("v-if", true)])) : $props.column.type == 'date' ? (openBlock(), createElementBlock("span", _hoisted_3$b, toDisplayString($options.itemValue($props.column, $props.item) ? $data.moment($options.itemValue($props.column, $props.item)).format($props.column.format ? $props.column.format : 'L LT') : $options.itemValue($props.column, $props.item)), 1 /* TEXT */)) : $props.column.type == 'select' ? (openBlock(), createElementBlock("span", _hoisted_4$b, [createVNode(_component_b_form_checkbox, {
     modelValue: $props.item.selected,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => $props.item.selected = $event),
     onChange: _cache[1] || (_cache[1] = $event => $options.onCheckSelect($event, $props.item))
-  }, null, 8 /* PROPS */, ["modelValue"])])) : $props.column.type == 'checkbox' ? (openBlock(), createElementBlock("span", _hoisted_5$5, [createVNode(_component_b_form_checkbox, {
+  }, null, 8 /* PROPS */, ["modelValue"])])) : $props.column.type == 'checkbox' ? (openBlock(), createElementBlock("span", _hoisted_5$8, [createVNode(_component_b_form_checkbox, {
     modelValue: $props.item.selected,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = $event => $props.item.selected = $event),
     onChange: _cache[3] || (_cache[3] = $event => $options.onCheckSelect($event, $props.item))
-  }, null, 8 /* PROPS */, ["modelValue"])])) : $props.column.type == 'state' ? (openBlock(), createElementBlock("span", _hoisted_6$3, [$options.stateOptions.length > 0 ? (openBlock(true), createElementBlock(Fragment, {
+  }, null, 8 /* PROPS */, ["modelValue"])])) : $props.column.type == 'state' ? (openBlock(), createElementBlock("span", _hoisted_6$7, [$options.stateOptions.length > 0 ? (openBlock(true), createElementBlock(Fragment, {
     key: 0
   }, renderList($options.stateOptions, (option, optIndex) => {
     return openBlock(), createBlock(_component_b_badge, {
@@ -15607,7 +15986,7 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
       default: withCtx(() => [createTextVNode(toDisplayString(option.text), 1 /* TEXT */)]),
       _: 2 /* DYNAMIC */
     }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["variant"]);
-  }), 128 /* KEYED_FRAGMENT */)) : (openBlock(), createElementBlock("span", _hoisted_7$3, toDisplayString($options.itemValue($props.column, $props.item)), 1 /* TEXT */))])) : $props.column.type == 'array' && $options.optionsLoaded ? (openBlock(), createElementBlock("span", _hoisted_8$3, toDisplayString($options.getArrayValue($options.itemValue($props.column, $props.item), $props.column.displayProp, $props.column.options)), 1 /* TEXT */)) : $props.column.type == 'money' || $props.column.type == 'price' ? (openBlock(), createElementBlock("span", _hoisted_9$2, toDisplayString($options.formatMoney($options.itemValue($props.column, $props.item), $props.column)), 1 /* TEXT */)) : $props.column.type == 'number' && ($props.column.thousandsSeparator || $props.column.decimalSeparator || $props.column.decimals !== undefined) ? (openBlock(), createElementBlock("span", _hoisted_10$2, toDisplayString($options.formatNumber($options.itemValue($props.column, $props.item), $props.column)), 1 /* TEXT */)) : (openBlock(), createElementBlock("span", _hoisted_11$1, toDisplayString($options.itemValue($props.column, $props.item)), 1 /* TEXT */))], true), createCommentVNode(" Modo dropdown cuando useDropdown está activo "), $props.column.type == 'actions' && $props.column.useDropdown ? (openBlock(), createBlock(_component_b_dropdown, {
+  }), 128 /* KEYED_FRAGMENT */)) : (openBlock(), createElementBlock("span", _hoisted_7$6, toDisplayString($options.itemValue($props.column, $props.item)), 1 /* TEXT */))])) : $props.column.type == 'array' && $options.optionsLoaded ? (openBlock(), createElementBlock("span", _hoisted_8$6, toDisplayString($options.getArrayValue($options.itemValue($props.column, $props.item), $props.column.displayProp, $props.column.options)), 1 /* TEXT */)) : $props.column.type == 'money' || $props.column.type == 'price' ? (openBlock(), createElementBlock("span", _hoisted_9$3, toDisplayString($options.formatMoney($options.itemValue($props.column, $props.item), $props.column)), 1 /* TEXT */)) : $props.column.type == 'number' && ($props.column.thousandsSeparator || $props.column.decimalSeparator || $props.column.decimals !== undefined) ? (openBlock(), createElementBlock("span", _hoisted_10$2, toDisplayString($options.formatNumber($options.itemValue($props.column, $props.item), $props.column)), 1 /* TEXT */)) : (openBlock(), createElementBlock("span", _hoisted_11$1, toDisplayString($options.itemValue($props.column, $props.item)), 1 /* TEXT */))], true), createCommentVNode(" Modo dropdown cuando useDropdown está activo "), $props.column.type == 'actions' && $props.column.useDropdown ? (openBlock(), createBlock(_component_b_dropdown, {
     key: 0,
     variant: "secondary",
     size: "sm",
@@ -15681,11 +16060,11 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
       _: 1 /* STABLE */
     })], true)], true)]),
     _: 3 /* FORWARDED */
-  })], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */)) : createCommentVNode("v-if", true)], 64 /* STABLE_FRAGMENT */)) : createCommentVNode("v-if", true)], 10 /* CLASS, PROPS */, _hoisted_1$c);
+  })], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */)) : createCommentVNode("v-if", true)], 64 /* STABLE_FRAGMENT */)) : createCommentVNode("v-if", true)], 10 /* CLASS, PROPS */, _hoisted_1$f);
 }
-var TableCell = /*#__PURE__*/_export_sfc(_sfc_main$c, [['render', _sfc_render$c], ['__scopeId', "data-v-36cccca8"]]);
+var TableCell = /*#__PURE__*/_export_sfc(_sfc_main$g, [['render', _sfc_render$g], ['__scopeId', "data-v-36cccca8"]]);
 
-const _sfc_main$b = {
+const _sfc_main$f = {
   name: 'TableRow',
   components: {
     TableCell
@@ -15705,8 +16084,8 @@ const _sfc_main$b = {
     }
   }
 };
-const _hoisted_1$b = ["colspan"];
-function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_1$e = ["colspan"];
+function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_TableCell = resolveComponent("TableCell");
   return openBlock(), createElementBlock("tr", {
     onMouseover: _cache[0] || (_cache[0] = $event => $options.onRowHover($props.item, $props.index)),
@@ -15717,14 +16096,12 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
   }, [$props.grouped && $props.item.crudgroup ? (openBlock(), createElementBlock("th", {
     key: 0,
     colspan: $options.visibleColumnsCount
-  }, [createElementVNode("span", null, toDisplayString($props.item.crudgrouplabel), 1 /* TEXT */)], 8 /* PROPS */, _hoisted_1$b)) : renderSlot(_ctx.$slots, "row", {
+  }, [createElementVNode("span", null, toDisplayString($props.item.crudgrouplabel), 1 /* TEXT */)], 8 /* PROPS */, _hoisted_1$e)) : renderSlot(_ctx.$slots, "row", {
     key: 1,
     item: $props.item
   }, () => [(openBlock(true), createElementBlock(Fragment, null, renderList($options.columns, (column, indexc) => {
-    return openBlock(), createElementBlock(Fragment, {
-      key: indexc
-    }, [$options.isColumnVisibleInTable(column) ? (openBlock(), createBlock(_component_TableCell, {
-      key: 0,
+    return openBlock(), createElementBlock(Fragment, null, [$options.isColumnVisibleInTable(column) ? (openBlock(), createBlock(_component_TableCell, {
+      key: 'td-' + (column.prop || indexc),
       column: column,
       item: $props.item,
       index: $props.index,
@@ -15739,18 +16116,259 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
         }, slotProps))])
       };
     })]), 1032 /* PROPS, DYNAMIC_SLOTS */, ["column", "item", "index", "columnIndex"])) : createCommentVNode("v-if", true)], 64 /* STABLE_FRAGMENT */);
-  }), 128 /* KEYED_FRAGMENT */))])], 34 /* CLASS, NEED_HYDRATION */);
+  }), 256 /* UNKEYED_FRAGMENT */))])], 34 /* CLASS, NEED_HYDRATION */);
 }
-var TableRow = /*#__PURE__*/_export_sfc(_sfc_main$b, [['render', _sfc_render$b]]);
+var TableRow = /*#__PURE__*/_export_sfc(_sfc_main$f, [['render', _sfc_render$f]]);
 
-const _sfc_main$a = {
+var css$9 = "\n.crud-skeleton__toolbar[data-v-14f86999] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: flex-end;\r\n  gap: 0.5rem;\r\n  margin-bottom: 1rem;\n}\n.crud-skeleton__bar[data-v-14f86999] {\r\n  display: inline-block;\r\n  height: 2.25rem;\r\n  border-radius: 0.375rem;\r\n  min-width: 4rem;\n}\n.crud-skeleton__table-wrap[data-v-14f86999] {\r\n  position: relative;\r\n  min-height: 14rem;\r\n  border: 1px solid #e9ecef;\r\n  border-radius: 0.375rem;\r\n  overflow: hidden;\r\n  background: #fff;\n}\n.crud-skeleton__table-wrap table[data-v-14f86999] {\r\n  margin-bottom: 0;\n}\n.crud-skeleton__table-wrap th[data-v-14f86999],\r\n.crud-skeleton__table-wrap td[data-v-14f86999] {\r\n  vertical-align: middle;\n}\n.crud-skeleton__overlay[data-v-14f86999] {\r\n  position: absolute;\r\n  inset: 0;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background: rgba(255, 255, 255, 0.72);\r\n  backdrop-filter: blur(1px);\r\n  z-index: 2;\n}\n.crud-skeleton__message[data-v-14f86999] {\r\n  margin: 0.75rem 0 0;\r\n  color: #495057;\r\n  font-size: 0.9rem;\n}\n.crud-skeleton__paginator[data-v-14f86999] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  gap: 1rem;\r\n  margin-top: 1rem;\n}\r\n";
+n(css$9, {});
+
+const _sfc_main$e = {
+  name: 'CrudSkeleton',
+  props: {
+    columns: {
+      type: Array,
+      default: () => []
+    },
+    rowCount: {
+      type: Number,
+      default: 5
+    },
+    showToolbar: {
+      type: Boolean,
+      default: false
+    },
+    showTable: {
+      type: Boolean,
+      default: true
+    },
+    showPaginator: {
+      type: Boolean,
+      default: false
+    },
+    message: {
+      type: String,
+      default: ''
+    },
+    isColumnVisibleInTable: {
+      type: Function,
+      default: null
+    }
+  },
+  computed: {
+    skeletonColumns() {
+      const cols = Array.isArray(this.columns) ? this.columns : [];
+      const visible = cols.filter(col => {
+        if (typeof this.isColumnVisibleInTable === 'function') {
+          return this.isColumnVisibleInTable(col);
+        }
+        return col && col.type !== 'hidden';
+      });
+      const count = visible.length || 4;
+      return Array.from({
+        length: count
+      }, (_, i) => visible[i] || {
+        label: `col-${i}`
+      });
+    }
+  },
+  methods: {
+    cellPlaceholderClass(idx) {
+      if (idx === this.skeletonColumns.length - 1) {
+        return 'col-4';
+      }
+      return idx % 2 === 0 ? 'col-10' : 'col-7';
+    }
+  }
+};
+const _hoisted_1$d = {
+  class: "crud-skeleton",
+  "aria-busy": "true",
+  "aria-live": "polite"
+};
+const _hoisted_2$b = {
+  key: 0,
+  class: "crud-skeleton__toolbar placeholder-glow"
+};
+const _hoisted_3$a = {
+  key: 1,
+  class: "crud-skeleton__table-wrap"
+};
+const _hoisted_4$a = {
+  class: "table table-borderless mb-0"
+};
+const _hoisted_5$7 = {
+  class: "placeholder-glow"
+};
+const _hoisted_6$6 = {
+  class: "crud-skeleton__overlay"
+};
+const _hoisted_7$5 = {
+  key: 0,
+  class: "crud-skeleton__message"
+};
+const _hoisted_8$5 = {
+  key: 2,
+  class: "crud-skeleton__paginator placeholder-glow"
+};
+function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_b_spinner = resolveComponent("b-spinner");
+  return openBlock(), createElementBlock("div", _hoisted_1$d, [$props.showToolbar ? (openBlock(), createElementBlock("div", _hoisted_2$b, [...(_cache[0] || (_cache[0] = [createElementVNode("span", {
+    class: "placeholder col-4 crud-skeleton__bar"
+  }, null, -1 /* CACHED */), createElementVNode("span", {
+    class: "placeholder col-3 crud-skeleton__bar"
+  }, null, -1 /* CACHED */), createElementVNode("span", {
+    class: "placeholder col-2 crud-skeleton__bar"
+  }, null, -1 /* CACHED */)]))])) : createCommentVNode("v-if", true), $props.showTable ? (openBlock(), createElementBlock("div", _hoisted_3$a, [createElementVNode("table", _hoisted_4$a, [createElementVNode("thead", null, [createElementVNode("tr", null, [(openBlock(true), createElementBlock(Fragment, null, renderList($options.skeletonColumns, (col, idx) => {
+    return openBlock(), createElementBlock("th", {
+      key: 'h-' + idx,
+      scope: "col"
+    }, [...(_cache[1] || (_cache[1] = [createElementVNode("span", {
+      class: "placeholder col-8"
+    }, null, -1 /* CACHED */)]))]);
+  }), 128 /* KEYED_FRAGMENT */))])]), createElementVNode("tbody", _hoisted_5$7, [(openBlock(true), createElementBlock(Fragment, null, renderList($props.rowCount, row => {
+    return openBlock(), createElementBlock("tr", {
+      key: 'r-' + row
+    }, [(openBlock(true), createElementBlock(Fragment, null, renderList($options.skeletonColumns, (col, idx) => {
+      return openBlock(), createElementBlock("td", {
+        key: 'c-' + row + '-' + idx
+      }, [createElementVNode("span", {
+        class: normalizeClass(["placeholder", $options.cellPlaceholderClass(idx)])
+      }, null, 2 /* CLASS */)]);
+    }), 128 /* KEYED_FRAGMENT */))]);
+  }), 128 /* KEYED_FRAGMENT */))])]), createElementVNode("div", _hoisted_6$6, [createVNode(_component_b_spinner, {
+    variant: "primary",
+    label: "Cargando"
+  }), $props.message ? (openBlock(), createElementBlock("p", _hoisted_7$5, toDisplayString($props.message), 1 /* TEXT */)) : createCommentVNode("v-if", true)])])) : createCommentVNode("v-if", true), $props.showPaginator ? (openBlock(), createElementBlock("div", _hoisted_8$5, [...(_cache[2] || (_cache[2] = [createElementVNode("span", {
+    class: "placeholder col-2 crud-skeleton__bar"
+  }, null, -1 /* CACHED */), createElementVNode("span", {
+    class: "placeholder col-3 crud-skeleton__bar"
+  }, null, -1 /* CACHED */)]))])) : createCommentVNode("v-if", true)]);
+}
+var CrudSkeleton = /*#__PURE__*/_export_sfc(_sfc_main$e, [['render', _sfc_render$e], ['__scopeId', "data-v-14f86999"]]);
+
+var css$8 = "\n.crud-empty-state[data-v-ad0841aa] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  padding: 2.5rem 1.5rem;\r\n  color: #6c757d;\n}\n.crud-empty-state__icon[data-v-ad0841aa] {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 3.5rem;\r\n  height: 3.5rem;\r\n  margin-bottom: 0.75rem;\r\n  border-radius: 50%;\r\n  background: #f1f3f5;\r\n  color: #868e96;\r\n  font-size: 1.5rem;\n}\n.crud-empty-state__message[data-v-ad0841aa] {\r\n  margin: 0;\r\n  max-width: 28rem;\r\n  font-size: 0.95rem;\r\n  line-height: 1.5;\n}\n.crud-empty-state__actions[data-v-ad0841aa] {\r\n  margin-top: 1rem;\n}\r\n";
+n(css$8, {});
+
+const _sfc_main$d = {
+  name: 'CrudEmptyState',
+  props: {
+    message: {
+      type: String,
+      default: 'No hay resultados'
+    },
+    icon: {
+      type: String,
+      default: 'inbox'
+    }
+  },
+  computed: {
+    iconClass() {
+      return `bi bi-${this.icon}`;
+    }
+  }
+};
+const _hoisted_1$c = {
+  class: "crud-empty-state"
+};
+const _hoisted_2$a = {
+  class: "crud-empty-state__icon",
+  "aria-hidden": "true"
+};
+const _hoisted_3$9 = {
+  class: "crud-empty-state__message"
+};
+const _hoisted_4$9 = {
+  key: 0,
+  class: "crud-empty-state__actions"
+};
+function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$c, [createElementVNode("div", _hoisted_2$a, [createElementVNode("i", {
+    class: normalizeClass($options.iconClass)
+  }, null, 2 /* CLASS */)]), createElementVNode("p", _hoisted_3$9, toDisplayString($props.message), 1 /* TEXT */), _ctx.$slots.default ? (openBlock(), createElementBlock("div", _hoisted_4$9, [renderSlot(_ctx.$slots, "default", {}, undefined, true)])) : createCommentVNode("v-if", true)]);
+}
+var CrudEmptyState = /*#__PURE__*/_export_sfc(_sfc_main$d, [['render', _sfc_render$d], ['__scopeId', "data-v-ad0841aa"]]);
+
+const _sfc_main$c = {
   name: 'CrudTable',
   components: {
     draggable,
     TableHeader,
-    TableRow
+    TableRow,
+    CrudSkeleton,
+    CrudEmptyState
   },
-  inject: ['bootstrapFactory', 'displayMode', 'displayModes', 'tableContainerClass', 'tableClass', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'grouped', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
+  inject: {
+    bootstrapFactory: {
+      default: null
+    },
+    displayMode: {
+      default: null
+    },
+    getDisplayMode: {
+      default: null
+    },
+    displayModes: {
+      default: () => ({
+        MODE_TABLE: 1,
+        MODE_CARDS: 2
+      })
+    },
+    tableContainerClass: {
+      default: ''
+    },
+    tableClass: {
+      default: ''
+    },
+    columns: {
+      default: () => []
+    },
+    items: {
+      default: () => []
+    },
+    draggableGroup: {
+      default: null
+    },
+    orderable: {
+      default: false
+    },
+    draggableOptions: {
+      default: () => ({})
+    },
+    itemsList: {
+      default: () => []
+    },
+    grouped: {
+      default: false
+    },
+    loading: {
+      default: null
+    },
+    firstLoad: {
+      default: null
+    },
+    infiniteScroll: {
+      default: false
+    },
+    messageEmptyResults: {
+      default: ''
+    },
+    messageLoading: {
+      default: ''
+    },
+    isColumnVisibleInTable: {
+      default: null
+    },
+    onSort: {
+      default: () => {}
+    },
+    onDraggableAdded: {
+      default: () => {}
+    },
+    onDraggableChange: {
+      default: () => {}
+    }
+  },
   data() {
     return {
       drag: false
@@ -15758,6 +16376,9 @@ const _sfc_main$a = {
   },
   computed: {
     currentDisplayMode() {
+      if (typeof this.getDisplayMode === 'function') {
+        return this.getDisplayMode();
+      }
       if (!this.displayMode) return 1;
       if (this.displayMode.value !== undefined) {
         return this.displayMode.value;
@@ -15772,36 +16393,38 @@ const _sfc_main$a = {
     },
     firstLoadValue() {
       return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
+    },
+    isInitialLoading() {
+      return this.loadingValue && !this.firstLoadValue;
+    },
+    columnsList() {
+      return Array.isArray(this.columns) ? this.columns : [];
+    },
+    isColumnVisibleInTableFn() {
+      return typeof this.isColumnVisibleInTable === 'function' ? this.isColumnVisibleInTable : null;
     }
   }
 };
-const _hoisted_1$a = {
-  key: 0,
-  class: "text-center p-5"
-};
-const _hoisted_2$7 = {
-  class: "mt-2"
-};
-const _hoisted_3$7 = {
-  key: 0,
-  class: "p-3"
-};
-function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_b_spinner = resolveComponent("b-spinner");
+function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_CrudSkeleton = resolveComponent("CrudSkeleton");
   const _component_TableHeader = resolveComponent("TableHeader");
   const _component_TableRow = resolveComponent("TableRow");
   const _component_draggable = resolveComponent("draggable");
+  const _component_CrudEmptyState = resolveComponent("CrudEmptyState");
   return $options.currentDisplayMode == $options.displayModes.MODE_TABLE ? (openBlock(), createElementBlock("div", {
     key: 0,
     class: normalizeClass(['table-responsive', $options.tableContainerClass])
-  }, [createCommentVNode(" Spinner durante la carga inicial "), $options.loadingValue || !$options.firstLoadValue ? (openBlock(), createElementBlock("div", _hoisted_1$a, [createVNode(_component_b_spinner, {
-    variant: "primary",
-    label: "Cargando..."
-  }), createElementVNode("p", _hoisted_2$7, toDisplayString($options.messageLoading), 1 /* TEXT */)])) : (openBlock(), createElementBlock(Fragment, {
+  }, [$options.isInitialLoading ? (openBlock(), createBlock(_component_CrudSkeleton, {
+    key: 0,
+    columns: $options.columnsList,
+    message: $options.messageLoading,
+    "is-column-visible-in-table": $options.isColumnVisibleInTableFn,
+    "show-table": ""
+  }, null, 8 /* PROPS */, ["columns", "message", "is-column-visible-in-table"])) : (openBlock(), createElementBlock(Fragment, {
     key: 1
-  }, [createCommentVNode(" Tabla con datos "), createElementVNode("table", {
+  }, [createElementVNode("table", {
     class: normalizeClass(['table table-hover table-striped w-100', $options.tableClass])
-  }, [createVNode(_component_TableHeader), createVNode(_component_draggable, {
+  }, [createVNode(_component_TableHeader), createVNode(_component_draggable, mergeProps({
     list: $options.items,
     group: $options.draggableGroup,
     tag: "tbody",
@@ -15810,10 +16433,10 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     onEnd: _cache[1] || (_cache[1] = $event => $data.drag = false),
     onSort: _cache[2] || (_cache[2] = $event => $options.onSort()),
     onAdd: _cache[3] || (_cache[3] = $event => $options.onDraggableAdded($event)),
-    onChange: _cache[4] || (_cache[4] = $event => $options.onDraggableChange($event)),
-    options: $options.draggableOptions,
+    onChange: _cache[4] || (_cache[4] = $event => $options.onDraggableChange($event))
+  }, $options.draggableOptions, {
     "item-key": "id"
-  }, {
+  }), {
     item: withCtx(({
       element,
       index
@@ -15831,11 +16454,15 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
       };
     })]), 1032 /* PROPS, DYNAMIC_SLOTS */, ["item", "index", "grouped"])]),
     _: 3 /* FORWARDED */
-  }, 8 /* PROPS */, ["list", "group", "draggable", "options"])], 2 /* CLASS */), $options.firstLoadValue && $options.itemsList && $options.itemsList.length == 0 && !$options.infiniteScroll ? (openBlock(), createElementBlock("p", _hoisted_3$7, toDisplayString($options.messageEmptyResults), 1 /* TEXT */)) : createCommentVNode("v-if", true)], 64 /* STABLE_FRAGMENT */))], 2 /* CLASS */)) : createCommentVNode("v-if", true);
+  }, 16 /* FULL_PROPS */, ["list", "group", "draggable"])], 2 /* CLASS */), $options.firstLoadValue && $options.itemsList && $options.itemsList.length == 0 && !$options.infiniteScroll ? (openBlock(), createBlock(_component_CrudEmptyState, {
+    key: 0,
+    message: $options.messageEmptyResults,
+    icon: "inbox"
+  }, null, 8 /* PROPS */, ["message"])) : createCommentVNode("v-if", true)], 64 /* STABLE_FRAGMENT */))], 2 /* CLASS */)) : createCommentVNode("v-if", true);
 }
-var CrudTable = /*#__PURE__*/_export_sfc(_sfc_main$a, [['render', _sfc_render$a]]);
+var CrudTable = /*#__PURE__*/_export_sfc(_sfc_main$c, [['render', _sfc_render$c]]);
 
-const _sfc_main$9 = {
+const _sfc_main$b = {
   inject: ['bootstrapFactory'],
   props: {
     item: Object,
@@ -15894,31 +16521,31 @@ const _sfc_main$9 = {
     }
   }
 };
-const _hoisted_1$9 = {
+const _hoisted_1$b = {
   key: 0
 };
-const _hoisted_2$6 = {
+const _hoisted_2$9 = {
   key: 1
 };
-const _hoisted_3$6 = {
+const _hoisted_3$8 = {
   key: 2
 };
-const _hoisted_4$6 = {
+const _hoisted_4$8 = {
   key: 1
 };
-const _hoisted_5$4 = {
+const _hoisted_5$6 = {
   key: 3
 };
-const _hoisted_6$2 = {
+const _hoisted_6$5 = {
   key: 4
 };
-const _hoisted_7$2 = {
+const _hoisted_7$4 = {
   key: 5
 };
-const _hoisted_8$2 = {
+const _hoisted_8$4 = {
   key: 6
 };
-function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_icon_check_circle = resolveComponent("b-icon-check-circle");
   const _component_b_badge = resolveComponent("b-badge");
   const _component_b_icon_x_circle = resolveComponent("b-icon-x-circle");
@@ -15984,7 +16611,7 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
           index: $props.index,
           itemindex: $props.index,
           columnindex: indexc
-        }, () => [column.type === 'boolean' ? (openBlock(), createElementBlock("span", _hoisted_1$9, [$props.itemValue(column, $props.item) ? (openBlock(), createBlock(_component_b_badge, {
+        }, () => [column.type === 'boolean' ? (openBlock(), createElementBlock("span", _hoisted_1$b, [$props.itemValue(column, $props.item) ? (openBlock(), createBlock(_component_b_badge, {
           key: 0,
           variant: "success"
         }, {
@@ -15996,7 +16623,7 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
         }, {
           default: withCtx(() => [createVNode(_component_b_icon_x_circle)]),
           _: 1 /* STABLE */
-        }))])) : column.type === 'date' ? (openBlock(), createElementBlock("span", _hoisted_2$6, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */)) : column.type === 'state' ? (openBlock(), createElementBlock("span", _hoisted_3$6, [$options.getStateOptionsForColumn(column, $props.item).length > 0 ? (openBlock(true), createElementBlock(Fragment, {
+        }))])) : column.type === 'date' ? (openBlock(), createElementBlock("span", _hoisted_2$9, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */)) : column.type === 'state' ? (openBlock(), createElementBlock("span", _hoisted_3$8, [$options.getStateOptionsForColumn(column, $props.item).length > 0 ? (openBlock(true), createElementBlock(Fragment, {
           key: 0
         }, renderList($options.getStateOptionsForColumn(column, $props.item), (option, optIndex) => {
           return openBlock(), createBlock(_component_b_badge, {
@@ -16007,53 +16634,113 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
             default: withCtx(() => [createTextVNode(toDisplayString(option.text), 1 /* TEXT */)]),
             _: 2 /* DYNAMIC */
           }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["variant"]);
-        }), 128 /* KEYED_FRAGMENT */)) : (openBlock(), createElementBlock("span", _hoisted_4$6, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */))])) : column.type === 'array' ? (openBlock(), createElementBlock("span", _hoisted_5$4, toDisplayString($props.getArrayValue($props.itemValue(column, $props.item), column.displayProp, column.options)), 1 /* TEXT */)) : column.type === 'money' || column.type === 'price' ? (openBlock(), createElementBlock("span", _hoisted_6$2, toDisplayString($options.formatMoney($props.itemValue(column, $props.item), column)), 1 /* TEXT */)) : column.type === 'number' && (column.thousandsSeparator || column.decimalSeparator || column.decimals !== undefined) ? (openBlock(), createElementBlock("span", _hoisted_7$2, toDisplayString($options.formatNumber($props.itemValue(column, $props.item), column)), 1 /* TEXT */)) : (openBlock(), createElementBlock("span", _hoisted_8$2, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */))])]),
+        }), 128 /* KEYED_FRAGMENT */)) : (openBlock(), createElementBlock("span", _hoisted_4$8, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */))])) : column.type === 'array' ? (openBlock(), createElementBlock("span", _hoisted_5$6, toDisplayString($props.getArrayValue($props.itemValue(column, $props.item), column.displayProp, column.options)), 1 /* TEXT */)) : column.type === 'money' || column.type === 'price' ? (openBlock(), createElementBlock("span", _hoisted_6$5, toDisplayString($options.formatMoney($props.itemValue(column, $props.item), column)), 1 /* TEXT */)) : column.type === 'number' && (column.thousandsSeparator || column.decimalSeparator || column.decimals !== undefined) ? (openBlock(), createElementBlock("span", _hoisted_7$4, toDisplayString($options.formatNumber($props.itemValue(column, $props.item), column)), 1 /* TEXT */)) : (openBlock(), createElementBlock("span", _hoisted_8$4, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */))])]),
         _: 2 /* DYNAMIC */
       }, 1024 /* DYNAMIC_SLOTS */)) : createCommentVNode("v-if", true)]);
     }), 128 /* KEYED_FRAGMENT */))])]),
     _: 3 /* FORWARDED */
   }, 8 /* PROPS */, ["title", "class", "hide-footer"])], 2 /* CLASS */);
 }
-var ItemCard = /*#__PURE__*/_export_sfc(_sfc_main$9, [['render', _sfc_render$9]]);
+var ItemCard = /*#__PURE__*/_export_sfc(_sfc_main$b, [['render', _sfc_render$b]]);
 
-// vue-masonry-css only ships a Vue 2-style plugin (default export). Use a light layout wrapper.
-const MasonryLayout = {
-  name: 'MasonryLayout',
-  props: {
-    cols: {
-      type: [Object, Number, String],
-      default: 2
-    },
-    gutter: {
-      type: [Object, Number, String],
-      default: 0
-    },
-    tag: {
-      type: String,
-      default: 'div'
-    }
-  },
-  render() {
-    return h(this.tag, {
-      class: 'vlc-masonry-layout'
-    }, this.$slots.default?.());
-  }
-};
-const _sfc_main$8 = {
+const _sfc_main$a = {
   name: 'CrudCards',
   components: {
-    draggable,
     ItemCard,
-    masonry: MasonryLayout
+    CrudSkeleton,
+    CrudEmptyState
   },
-  inject: ['bootstrapFactory', 'displayMode', 'displayModes', 'items', 'draggableGroup', 'orderable', 'draggableOptions', 'itemsList', 'colLg', 'colXl', 'colMd', 'colSm', 'colXs', 'columns', 'cardClass', 'cardHideFooter', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'showItem', 'updateItem', 'removeItem', 'loading', 'firstLoad', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'onSort', 'onDraggableAdded', 'onDraggableChange'],
-  data() {
-    return {
-      drag: false
-    };
+  inject: {
+    bootstrapFactory: {
+      default: null
+    },
+    displayMode: {
+      default: null
+    },
+    getDisplayMode: {
+      default: null
+    },
+    displayModes: {
+      default: () => ({
+        MODE_TABLE: 1,
+        MODE_CARDS: 2
+      })
+    },
+    columns: {
+      default: () => []
+    },
+    items: {
+      default: () => []
+    },
+    itemsList: {
+      default: () => []
+    },
+    loading: {
+      default: null
+    },
+    firstLoad: {
+      default: null
+    },
+    infiniteScroll: {
+      default: false
+    },
+    messageEmptyResults: {
+      default: ''
+    },
+    messageLoading: {
+      default: ''
+    },
+    colXs: {
+      default: 12
+    },
+    colSm: {
+      default: 6
+    },
+    colMd: {
+      default: 4
+    },
+    colLg: {
+      default: 3
+    },
+    colXl: {
+      default: 3
+    },
+    cardClass: {
+      default: ''
+    },
+    cardHideFooter: {
+      default: false
+    },
+    itemValue: {
+      default: null
+    },
+    getStateValue: {
+      default: null
+    },
+    getStateOptions: {
+      default: null
+    },
+    getStateBadgeVariant: {
+      default: null
+    },
+    getArrayValue: {
+      default: null
+    },
+    showItem: {
+      default: () => {}
+    },
+    updateItem: {
+      default: () => {}
+    },
+    removeItem: {
+      default: () => {}
+    }
   },
   computed: {
     currentDisplayMode() {
+      if (typeof this.getDisplayMode === 'function') {
+        return this.getDisplayMode();
+      }
       if (!this.displayMode) return 1;
       if (this.displayMode.value !== undefined) {
         return this.displayMode.value;
@@ -16063,105 +16750,95 @@ const _sfc_main$8 = {
       }
       return this.displayMode;
     },
+    colClasses() {
+      const xs = this.colXs || 12;
+      const sm = this.colSm || 6;
+      const md = this.colMd || 4;
+      const lg = this.colLg || 3;
+      const xl = this.colXl || lg;
+      return [`col-${xs}`, `col-sm-${sm}`, `col-md-${md}`, `col-lg-${lg}`, `col-xl-${xl}`];
+    },
     loadingValue() {
       return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
     },
     firstLoadValue() {
       return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
+    },
+    isInitialLoading() {
+      return this.loadingValue && !this.firstLoadValue;
+    },
+    columnsList() {
+      return Array.isArray(this.columns) ? this.columns : [];
+    },
+    cardItems() {
+      if (Array.isArray(this.itemsList) && this.itemsList.length) {
+        return this.itemsList;
+      }
+      return Array.isArray(this.items) ? this.items : [];
     }
   }
 };
-const _hoisted_1$8 = {
-  key: 0
-};
-const _hoisted_2$5 = {
+const _hoisted_1$a = {
   key: 0,
-  class: "text-center p-5"
+  class: "crud-cards"
 };
-const _hoisted_3$5 = {
-  class: "mt-2"
+const _hoisted_2$8 = {
+  class: "row g-3"
 };
-const _hoisted_4$5 = {
-  class: "item"
-};
-const _hoisted_5$3 = {
-  key: 0,
-  class: "p-3"
-};
-function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_b_spinner = resolveComponent("b-spinner");
+function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_CrudSkeleton = resolveComponent("CrudSkeleton");
   const _component_ItemCard = resolveComponent("ItemCard");
-  const _component_draggable = resolveComponent("draggable");
-  const _component_masonry = resolveComponent("masonry");
-  return $options.currentDisplayMode == $options.displayModes.MODE_CARDS ? (openBlock(), createElementBlock("div", _hoisted_1$8, [createCommentVNode(" Spinner durante la carga inicial "), $options.loadingValue || !$options.firstLoadValue ? (openBlock(), createElementBlock("div", _hoisted_2$5, [createVNode(_component_b_spinner, {
-    variant: "primary",
-    label: "Cargando..."
-  }), createElementVNode("p", _hoisted_3$5, toDisplayString($options.messageLoading), 1 /* TEXT */)])) : (openBlock(), createElementBlock(Fragment, {
+  const _component_CrudEmptyState = resolveComponent("CrudEmptyState");
+  return $options.currentDisplayMode == $options.displayModes.MODE_CARDS ? (openBlock(), createElementBlock("div", _hoisted_1$a, [$options.isInitialLoading ? (openBlock(), createBlock(_component_CrudSkeleton, {
+    key: 0,
+    columns: $options.columnsList,
+    message: $options.messageLoading,
+    "show-table": "",
+    "row-count": 4
+  }, null, 8 /* PROPS */, ["columns", "message"])) : (openBlock(), createElementBlock(Fragment, {
     key: 1
-  }, [createCommentVNode(" Cards con datos "), createVNode(_component_masonry, {
-    cols: {
-      default: 12 / $options.colLg,
-      1400: 12 / $options.colXl,
-      1200: 12 / $options.colLg,
-      1000: 12 / $options.colMd,
-      700: 12 / $options.colSm,
-      400: 12 / $options.colXs
-    },
-    gutter: {
-      default: '15px',
-      700: '15px'
-    }
-  }, {
-    default: withCtx(() => [createVNode(_component_draggable, {
-      list: $options.items,
-      group: $options.draggableGroup,
-      draggable: $options.orderable ? '.item' : '.none',
-      onStart: _cache[0] || (_cache[0] = $event => $data.drag = true),
-      onEnd: _cache[1] || (_cache[1] = $event => $data.drag = false),
-      onSort: _cache[2] || (_cache[2] = $event => $options.onSort()),
-      onAdd: _cache[3] || (_cache[3] = $event => $options.onDraggableAdded($event)),
-      onChange: _cache[4] || (_cache[4] = $event => $options.onDraggableChange($event)),
-      options: $options.draggableOptions,
-      "item-key": "id"
-    }, {
-      item: withCtx(({
-        element,
-        index
-      }) => [createElementVNode("div", _hoisted_4$5, [renderSlot(_ctx.$slots, "card", {
-        item: element
-      }, () => [createVNode(_component_ItemCard, {
-        item: element,
-        columns: $options.columns,
-        index: index,
-        cardClass: $options.cardClass,
-        cardHideFooter: $options.cardHideFooter,
-        itemValue: $options.itemValue,
-        getStateValue: $options.getStateValue,
-        getStateOptions: $options.getStateOptions,
-        getStateBadgeVariant: $options.getStateBadgeVariant,
-        getArrayValue: $options.getArrayValue,
-        showItem: $options.showItem,
-        updateItem: $options.updateItem,
-        removeItem: $options.removeItem
-      }, createSlots({
-        _: 2 /* DYNAMIC */
-      }, [renderList(_ctx.$slots, (_, name) => {
-        return {
-          name: name,
-          fn: withCtx(slotProps => [renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)))])
-        };
-      })]), 1032 /* PROPS, DYNAMIC_SLOTS */, ["item", "columns", "index", "cardClass", "cardHideFooter", "itemValue", "getStateValue", "getStateOptions", "getStateBadgeVariant", "getArrayValue", "showItem", "updateItem", "removeItem"])])])]),
-      _: 3 /* FORWARDED */
-    }, 8 /* PROPS */, ["list", "group", "draggable", "options"])]),
-    _: 3 /* FORWARDED */
-  }, 8 /* PROPS */, ["cols"]), $options.firstLoadValue && $options.itemsList && $options.itemsList.length == 0 && !$options.infiniteScroll ? (openBlock(), createElementBlock("p", _hoisted_5$3, toDisplayString($options.messageEmptyResults), 1 /* TEXT */)) : createCommentVNode("v-if", true)], 64 /* STABLE_FRAGMENT */))])) : createCommentVNode("v-if", true);
+  }, [createElementVNode("div", _hoisted_2$8, [(openBlock(true), createElementBlock(Fragment, null, renderList($options.cardItems, (element, index) => {
+    return openBlock(), createElementBlock("div", {
+      key: element.id || index,
+      class: normalizeClass(["item", $options.colClasses])
+    }, [renderSlot(_ctx.$slots, "card", {
+      item: element
+    }, () => [createVNode(_component_ItemCard, {
+      item: element,
+      columns: $options.columns,
+      index: index,
+      cardClass: $options.cardClass,
+      cardHideFooter: $options.cardHideFooter,
+      itemValue: $options.itemValue,
+      getStateValue: $options.getStateValue,
+      getStateOptions: $options.getStateOptions,
+      getStateBadgeVariant: $options.getStateBadgeVariant,
+      getArrayValue: $options.getArrayValue,
+      showItem: $options.showItem,
+      updateItem: $options.updateItem,
+      removeItem: $options.removeItem
+    }, createSlots({
+      _: 2 /* DYNAMIC */
+    }, [renderList(_ctx.$slots, (_, name) => {
+      return {
+        name: name,
+        fn: withCtx(slotProps => [renderSlot(_ctx.$slots, name, mergeProps({
+          ref_for: true
+        }, slotProps))])
+      };
+    })]), 1032 /* PROPS, DYNAMIC_SLOTS */, ["item", "columns", "index", "cardClass", "cardHideFooter", "itemValue", "getStateValue", "getStateOptions", "getStateBadgeVariant", "getArrayValue", "showItem", "updateItem", "removeItem"])])], 2 /* CLASS */);
+  }), 128 /* KEYED_FRAGMENT */))]), $options.firstLoadValue && $options.itemsList && $options.itemsList.length == 0 && !$options.infiniteScroll ? (openBlock(), createBlock(_component_CrudEmptyState, {
+    key: 0,
+    message: $options.messageEmptyResults,
+    icon: "inbox"
+  }, null, 8 /* PROPS */, ["message"])) : createCommentVNode("v-if", true)], 64 /* STABLE_FRAGMENT */))])) : createCommentVNode("v-if", true);
 }
-var CrudCards = /*#__PURE__*/_export_sfc(_sfc_main$8, [['render', _sfc_render$8]]);
+var CrudCards = /*#__PURE__*/_export_sfc(_sfc_main$a, [['render', _sfc_render$a]]);
 
-var css$5 = "\n.kanban-card[data-v-57f270bd] {\r\n  background: #ffffff;\r\n  border-radius: 4px;\r\n  padding: 0.5rem;\r\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\r\n  cursor: grab;\r\n  transition: box-shadow 0.2s ease;\n}\n.kanban-card[data-v-57f270bd]:hover {\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.kanban-card[data-v-57f270bd]:active {\r\n  cursor: grabbing;\n}\n.card-crud[data-v-57f270bd] {\r\n  border: 1px solid #e1e5e9;\n}\n.card-crud .card-title[data-v-57f270bd] {\r\n  font-size: 0.9rem;\r\n  margin-bottom: 0.5rem;\n}\n.card-crud .card-text[data-v-57f270bd] {\r\n  font-size: 0.8rem;\r\n  margin-bottom: 0.25rem;\n}\r\n";
-n(css$5, {});
+var css$7 = "\n.kanban-card[data-v-57f270bd] {\r\n  background: #ffffff;\r\n  border-radius: 4px;\r\n  padding: 0.5rem;\r\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\r\n  cursor: grab;\r\n  transition: box-shadow 0.2s ease;\n}\n.kanban-card[data-v-57f270bd]:hover {\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.kanban-card[data-v-57f270bd]:active {\r\n  cursor: grabbing;\n}\n.card-crud[data-v-57f270bd] {\r\n  border: 1px solid #e1e5e9;\n}\n.card-crud .card-title[data-v-57f270bd] {\r\n  font-size: 0.9rem;\r\n  margin-bottom: 0.5rem;\n}\n.card-crud .card-text[data-v-57f270bd] {\r\n  font-size: 0.8rem;\r\n  margin-bottom: 0.25rem;\n}\r\n";
+n(css$7, {});
 
-const _sfc_main$7 = {
+const _sfc_main$9 = {
   name: 'KanbanCard',
   inject: ['bootstrapFactory'],
   props: {
@@ -16217,31 +16894,31 @@ const _sfc_main$7 = {
     }
   }
 };
-const _hoisted_1$7 = {
+const _hoisted_1$9 = {
   class: "kanban-card"
 };
-const _hoisted_2$4 = {
+const _hoisted_2$7 = {
   class: "text-muted"
 };
-const _hoisted_3$4 = {
+const _hoisted_3$7 = {
   class: "mb-1"
 };
-const _hoisted_4$4 = {
+const _hoisted_4$7 = {
   key: 0
 };
-const _hoisted_5$2 = {
+const _hoisted_5$5 = {
   key: 1
 };
-const _hoisted_6$1 = {
+const _hoisted_6$4 = {
   key: 2
 };
-const _hoisted_7$1 = {
+const _hoisted_7$3 = {
   key: 1
 };
-const _hoisted_8$1 = {
+const _hoisted_8$3 = {
   key: 3
 };
-const _hoisted_9$1 = {
+const _hoisted_9$2 = {
   key: 4
 };
 const _hoisted_10$1 = {
@@ -16250,7 +16927,7 @@ const _hoisted_10$1 = {
 const _hoisted_11 = {
   key: 6
 };
-function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_icon_check_circle = resolveComponent("b-icon-check-circle");
   const _component_b_badge = resolveComponent("b-badge");
   const _component_b_icon_x_circle = resolveComponent("b-icon-x-circle");
@@ -16261,7 +16938,7 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_icon_trash = resolveComponent("b-icon-trash");
   const _component_b_button_group = resolveComponent("b-button-group");
   const _component_b_card = resolveComponent("b-card");
-  return openBlock(), createElementBlock("div", _hoisted_1$7, [createVNode(_component_b_card, {
+  return openBlock(), createElementBlock("div", _hoisted_1$9, [createVNode(_component_b_card, {
     title: $props.item.title || $props.item.name || `Item ${$props.item.id}`,
     tag: "article",
     class: normalizeClass(["mb-2 card-crud", $props.cardClass]),
@@ -16311,12 +16988,12 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
       }, [column.type !== 'actions' && column.prop !== 'id' ? (openBlock(), createBlock(_component_b_card_text, {
         key: 0
       }, {
-        default: withCtx(() => [createElementVNode("small", _hoisted_2$4, toDisplayString(column.label) + ":", 1 /* TEXT */), createElementVNode("div", _hoisted_3$4, [renderSlot(_ctx.$slots, 'cell-' + column.prop, {
+        default: withCtx(() => [createElementVNode("small", _hoisted_2$7, toDisplayString(column.label) + ":", 1 /* TEXT */), createElementVNode("div", _hoisted_3$7, [renderSlot(_ctx.$slots, 'cell-' + column.prop, {
           item: $props.item,
           index: $props.index,
           itemindex: $props.index,
           columnindex: indexc
-        }, () => [column.type === 'boolean' ? (openBlock(), createElementBlock("span", _hoisted_4$4, [$props.itemValue(column, $props.item) ? (openBlock(), createBlock(_component_b_badge, {
+        }, () => [column.type === 'boolean' ? (openBlock(), createElementBlock("span", _hoisted_4$7, [$props.itemValue(column, $props.item) ? (openBlock(), createBlock(_component_b_badge, {
           key: 0,
           variant: "success"
         }, {
@@ -16328,7 +17005,7 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
         }, {
           default: withCtx(() => [createVNode(_component_b_icon_x_circle)]),
           _: 1 /* STABLE */
-        }))])) : column.type === 'date' ? (openBlock(), createElementBlock("span", _hoisted_5$2, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */)) : column.type === 'state' ? (openBlock(), createElementBlock("span", _hoisted_6$1, [$options.getStateOptionsForColumn(column, $props.item).length > 0 ? (openBlock(true), createElementBlock(Fragment, {
+        }))])) : column.type === 'date' ? (openBlock(), createElementBlock("span", _hoisted_5$5, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */)) : column.type === 'state' ? (openBlock(), createElementBlock("span", _hoisted_6$4, [$options.getStateOptionsForColumn(column, $props.item).length > 0 ? (openBlock(true), createElementBlock(Fragment, {
           key: 0
         }, renderList($options.getStateOptionsForColumn(column, $props.item), (option, optIndex) => {
           return openBlock(), createBlock(_component_b_badge, {
@@ -16339,19 +17016,19 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
             default: withCtx(() => [createTextVNode(toDisplayString(option.text), 1 /* TEXT */)]),
             _: 2 /* DYNAMIC */
           }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["variant"]);
-        }), 128 /* KEYED_FRAGMENT */)) : (openBlock(), createElementBlock("span", _hoisted_7$1, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */))])) : column.type === 'array' ? (openBlock(), createElementBlock("span", _hoisted_8$1, toDisplayString($props.getArrayValue($props.itemValue(column, $props.item), column.displayProp, column.options)), 1 /* TEXT */)) : column.type === 'money' || column.type === 'price' ? (openBlock(), createElementBlock("span", _hoisted_9$1, toDisplayString($options.formatMoney($props.itemValue(column, $props.item), column)), 1 /* TEXT */)) : column.type === 'number' && (column.thousandsSeparator || column.decimalSeparator || column.decimals !== undefined) ? (openBlock(), createElementBlock("span", _hoisted_10$1, toDisplayString($options.formatNumber($props.itemValue(column, $props.item), column)), 1 /* TEXT */)) : (openBlock(), createElementBlock("span", _hoisted_11, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */))], true)])]),
+        }), 128 /* KEYED_FRAGMENT */)) : (openBlock(), createElementBlock("span", _hoisted_7$3, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */))])) : column.type === 'array' ? (openBlock(), createElementBlock("span", _hoisted_8$3, toDisplayString($props.getArrayValue($props.itemValue(column, $props.item), column.displayProp, column.options)), 1 /* TEXT */)) : column.type === 'money' || column.type === 'price' ? (openBlock(), createElementBlock("span", _hoisted_9$2, toDisplayString($options.formatMoney($props.itemValue(column, $props.item), column)), 1 /* TEXT */)) : column.type === 'number' && (column.thousandsSeparator || column.decimalSeparator || column.decimals !== undefined) ? (openBlock(), createElementBlock("span", _hoisted_10$1, toDisplayString($options.formatNumber($props.itemValue(column, $props.item), column)), 1 /* TEXT */)) : (openBlock(), createElementBlock("span", _hoisted_11, toDisplayString($props.itemValue(column, $props.item)), 1 /* TEXT */))], true)])]),
         _: 2 /* DYNAMIC */
       }, 1024 /* DYNAMIC_SLOTS */)) : createCommentVNode("v-if", true)]);
     }), 128 /* KEYED_FRAGMENT */))], true)]),
     _: 3 /* FORWARDED */
   }, 8 /* PROPS */, ["title", "class", "hide-footer"])]);
 }
-var KanbanCard = /*#__PURE__*/_export_sfc(_sfc_main$7, [['render', _sfc_render$7], ['__scopeId', "data-v-57f270bd"]]);
+var KanbanCard = /*#__PURE__*/_export_sfc(_sfc_main$9, [['render', _sfc_render$9], ['__scopeId', "data-v-57f270bd"]]);
 
-var css$4 = "\n.kanban-column[data-v-81291b30] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n.kanban-column-header[data-v-81291b30] {\r\n  font-weight: bold;\r\n  padding: 0.5rem;\r\n  background: #dfe1e6;\r\n  border-radius: 8px 8px 0 0;\r\n  text-align: center;\n}\n.kanban-column-body[data-v-81291b30] {\r\n  padding: 0.5rem;\r\n  min-height: 100px;\r\n  background: #ffffff;\r\n  border-radius: 0 0 8px 8px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem;\n}\r\n";
-n(css$4, {});
+var css$6 = "\n.kanban-column[data-v-81291b30] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n.kanban-column-header[data-v-81291b30] {\r\n  font-weight: bold;\r\n  padding: 0.5rem;\r\n  background: #dfe1e6;\r\n  border-radius: 8px 8px 0 0;\r\n  text-align: center;\n}\n.kanban-column-body[data-v-81291b30] {\r\n  padding: 0.5rem;\r\n  min-height: 100px;\r\n  background: #ffffff;\r\n  border-radius: 0 0 8px 8px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem;\n}\r\n";
+n(css$6, {});
 
-const _sfc_main$6 = {
+const _sfc_main$8 = {
   name: 'KanbanColumn',
   components: {
     draggable,
@@ -16391,23 +17068,23 @@ const _sfc_main$6 = {
     }
   }
 };
-const _hoisted_1$6 = {
+const _hoisted_1$8 = {
   class: "kanban-column"
 };
-const _hoisted_2$3 = {
+const _hoisted_2$6 = {
   class: "kanban-column-header"
 };
-const _hoisted_3$3 = {
+const _hoisted_3$6 = {
   class: "d-flex justify-content-between align-items-center"
 };
-const _hoisted_4$3 = {
+const _hoisted_4$6 = {
   class: "item"
 };
-function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_badge = resolveComponent("b-badge");
   const _component_KanbanCard = resolveComponent("KanbanCard");
   const _component_draggable = resolveComponent("draggable");
-  return openBlock(), createElementBlock("div", _hoisted_1$6, [createElementVNode("div", _hoisted_2$3, [createElementVNode("div", _hoisted_3$3, [createElementVNode("span", null, toDisplayString($props.column.groupLabel), 1 /* TEXT */), createVNode(_component_b_badge, {
+  return openBlock(), createElementBlock("div", _hoisted_1$8, [createElementVNode("div", _hoisted_2$6, [createElementVNode("div", _hoisted_3$6, [createElementVNode("span", null, toDisplayString($props.column.groupLabel), 1 /* TEXT */), createVNode(_component_b_badge, {
     variant: "secondary"
   }, {
     default: withCtx(() => [createTextVNode(toDisplayString($props.column.items.length), 1 /* TEXT */)]),
@@ -16424,7 +17101,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     item: withCtx(({
       element,
       index
-    }) => [createElementVNode("div", _hoisted_4$3, [renderSlot(_ctx.$slots, "card", {
+    }) => [createElementVNode("div", _hoisted_4$6, [renderSlot(_ctx.$slots, "card", {
       item: element
     }, () => [createVNode(_component_KanbanCard, {
       item: element,
@@ -16451,24 +17128,24 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3 /* FORWARDED */
   }, 8 /* PROPS */, ["modelValue", "onEnd", "data-column"])]);
 }
-var KanbanColumn = /*#__PURE__*/_export_sfc(_sfc_main$6, [['render', _sfc_render$6], ['__scopeId', "data-v-81291b30"]]);
+var KanbanColumn = /*#__PURE__*/_export_sfc(_sfc_main$8, [['render', _sfc_render$8], ['__scopeId', "data-v-81291b30"]]);
 
-var css$3 = "\n.kanban-board[data-v-0f90608c] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  overflow-x: auto;\r\n  padding: 1rem;\n}\n.kanban-column[data-v-0f90608c] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n  min-width: 300px;\n}\r\n";
-n(css$3, {});
+var css$5 = "\n.kanban-board[data-v-0f90608c] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  overflow-x: auto;\r\n  padding: 1rem;\n}\n.kanban-column[data-v-0f90608c] {\r\n  background: #f4f5f7;\r\n  border-radius: 8px;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n  min-width: 300px;\n}\r\n";
+n(css$5, {});
 
-const _sfc_main$5 = {
+const _sfc_main$7 = {
   name: 'KanbanBoard',
   components: {
     KanbanColumn
   },
   inject: ['items', 'groupedAttribute', 'columns', 'itemValue', 'getStateValue', 'getStateOptions', 'getStateBadgeVariant', 'getArrayValue', 'showItem', 'updateItem', 'removeItem', 'cardClass', 'cardHideFooter', 'onDraggableChange']
 };
-const _hoisted_1$5 = {
+const _hoisted_1$7 = {
   class: "kanban-board"
 };
-function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_KanbanColumn = resolveComponent("KanbanColumn");
-  return openBlock(), createElementBlock("div", _hoisted_1$5, [(openBlock(true), createElementBlock(Fragment, null, renderList($options.items, (column, colIndex) => {
+  return openBlock(), createElementBlock("div", _hoisted_1$7, [(openBlock(true), createElementBlock(Fragment, null, renderList($options.items, (column, colIndex) => {
     return openBlock(), createElementBlock("div", {
       key: colIndex,
       class: "kanban-column"
@@ -16500,16 +17177,34 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     })]), 1032 /* PROPS, DYNAMIC_SLOTS */, ["column", "colIndex", "groupedAttribute", "columns", "itemValue", "getStateValue", "getStateOptions", "getStateBadgeVariant", "getArrayValue", "showItem", "updateItem", "removeItem", "cardClass", "cardHideFooter", "onDraggableChange"])]);
   }), 128 /* KEYED_FRAGMENT */))]);
 }
-var KanbanBoard = /*#__PURE__*/_export_sfc(_sfc_main$5, [['render', _sfc_render$5], ['__scopeId', "data-v-0f90608c"]]);
+var KanbanBoard = /*#__PURE__*/_export_sfc(_sfc_main$7, [['render', _sfc_render$7], ['__scopeId', "data-v-0f90608c"]]);
 
-const _sfc_main$4 = {
+const _sfc_main$6 = {
   name: 'CrudKanban',
   components: {
     KanbanBoard
   },
-  inject: ['displayMode', 'displayModes'],
+  inject: {
+    displayMode: {
+      default: null
+    },
+    getDisplayMode: {
+      default: null
+    },
+    displayModes: {
+      default: () => ({
+        MODE_TABLE: 1,
+        MODE_CARDS: 2,
+        MODE_KANBAN: 3,
+        MODE_CUSTOM: 4
+      })
+    }
+  },
   computed: {
     currentDisplayMode() {
+      if (typeof this.getDisplayMode === 'function') {
+        return this.getDisplayMode();
+      }
       if (!this.displayMode) return 1;
       if (this.displayMode.value !== undefined) {
         return this.displayMode.value;
@@ -16521,12 +17216,12 @@ const _sfc_main$4 = {
     }
   }
 };
-const _hoisted_1$4 = {
+const _hoisted_1$6 = {
   key: 0
 };
-function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_KanbanBoard = resolveComponent("KanbanBoard");
-  return $options.currentDisplayMode == $options.displayModes.MODE_KANBAN ? (openBlock(), createElementBlock("div", _hoisted_1$4, [createVNode(_component_KanbanBoard, null, createSlots({
+  return $options.currentDisplayMode == $options.displayModes.MODE_KANBAN ? (openBlock(), createElementBlock("div", _hoisted_1$6, [createVNode(_component_KanbanBoard, null, createSlots({
     _: 2 /* DYNAMIC */
   }, [renderList(_ctx.$slots, (_, name) => {
     return {
@@ -16535,13 +17230,61 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     };
   })]), 1024 /* DYNAMIC_SLOTS */)])) : createCommentVNode("v-if", true);
 }
-var CrudKanban = /*#__PURE__*/_export_sfc(_sfc_main$4, [['render', _sfc_render$4]]);
+var CrudKanban = /*#__PURE__*/_export_sfc(_sfc_main$6, [['render', _sfc_render$6]]);
 
-const _sfc_main$3 = {
+const _sfc_main$5 = {
   name: 'CrudCustom',
-  inject: ['bootstrapFactory', 'displayMode', 'displayModes', 'listContainerClass', 'listItemClass', 'loading', 'firstLoad', 'items', 'infiniteScroll', 'messageEmptyResults', 'messageLoading', 'itemsList'],
+  inject: {
+    bootstrapFactory: {
+      default: null
+    },
+    displayMode: {
+      default: null
+    },
+    getDisplayMode: {
+      default: null
+    },
+    displayModes: {
+      default: () => ({
+        MODE_TABLE: 1,
+        MODE_CARDS: 2,
+        MODE_KANBAN: 3,
+        MODE_CUSTOM: 4
+      })
+    },
+    listContainerClass: {
+      default: ''
+    },
+    listItemClass: {
+      default: ''
+    },
+    loading: {
+      default: null
+    },
+    firstLoad: {
+      default: null
+    },
+    items: {
+      default: () => []
+    },
+    infiniteScroll: {
+      default: false
+    },
+    messageEmptyResults: {
+      default: ''
+    },
+    messageLoading: {
+      default: ''
+    },
+    itemsList: {
+      default: () => []
+    }
+  },
   computed: {
     currentDisplayMode() {
+      if (typeof this.getDisplayMode === 'function') {
+        return this.getDisplayMode();
+      }
       if (!this.displayMode) return 1;
       if (this.displayMode.value !== undefined) {
         return this.displayMode.value;
@@ -16559,30 +17302,30 @@ const _sfc_main$3 = {
     }
   }
 };
-const _hoisted_1$3 = {
+const _hoisted_1$5 = {
   key: 0
 };
-const _hoisted_2$2 = {
+const _hoisted_2$5 = {
   key: 0,
   class: "text-center p-5"
 };
-const _hoisted_3$2 = {
+const _hoisted_3$5 = {
   class: "mt-2"
 };
-const _hoisted_4$2 = {
+const _hoisted_4$5 = {
   key: 0,
   class: "p-3"
 };
-function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_spinner = resolveComponent("b-spinner");
-  return $options.currentDisplayMode == $options.displayModes.MODE_CUSTOM ? (openBlock(), createElementBlock("div", _hoisted_1$3, [createElementVNode("div", {
+  return $options.currentDisplayMode == $options.displayModes.MODE_CUSTOM ? (openBlock(), createElementBlock("div", _hoisted_1$5, [createElementVNode("div", {
     class: normalizeClass($options.listContainerClass)
-  }, [createCommentVNode(" Spinner durante la carga inicial "), $options.loadingValue || !$options.firstLoadValue ? (openBlock(), createElementBlock("div", _hoisted_2$2, [createVNode(_component_b_spinner, {
+  }, [createCommentVNode(" Spinner durante la carga inicial "), $options.loadingValue || !$options.firstLoadValue ? (openBlock(), createElementBlock("div", _hoisted_2$5, [createVNode(_component_b_spinner, {
     variant: "primary",
     label: "Cargando..."
-  }), createElementVNode("p", _hoisted_3$2, toDisplayString($options.messageLoading), 1 /* TEXT */)])) : (openBlock(), createElementBlock(Fragment, {
+  }), createElementVNode("p", _hoisted_3$5, toDisplayString($options.messageLoading), 1 /* TEXT */)])) : (openBlock(), createElementBlock(Fragment, {
     key: 1
-  }, [createCommentVNode(" Contenido con datos "), $options.firstLoadValue && $options.itemsList && $options.itemsList.length == 0 && !$options.infiniteScroll ? (openBlock(), createElementBlock("p", _hoisted_4$2, toDisplayString($options.messageEmptyResults), 1 /* TEXT */)) : createCommentVNode("v-if", true), (openBlock(true), createElementBlock(Fragment, null, renderList($options.itemsList, (item, index) => {
+  }, [createCommentVNode(" Contenido con datos "), $options.firstLoadValue && $options.itemsList && $options.itemsList.length == 0 && !$options.infiniteScroll ? (openBlock(), createElementBlock("p", _hoisted_4$5, toDisplayString($options.messageEmptyResults), 1 /* TEXT */)) : createCommentVNode("v-if", true), (openBlock(true), createElementBlock(Fragment, null, renderList($options.itemsList, (item, index) => {
     return openBlock(), createElementBlock("div", {
       class: normalizeClass($options.listItemClass),
       key: index
@@ -16591,18 +17334,22 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     })], 2 /* CLASS */);
   }), 128 /* KEYED_FRAGMENT */))], 64 /* STABLE_FRAGMENT */))], 2 /* CLASS */)])) : createCommentVNode("v-if", true);
 }
-var CrudCustom = /*#__PURE__*/_export_sfc(_sfc_main$3, [['render', _sfc_render$3]]);
+var CrudCustom = /*#__PURE__*/_export_sfc(_sfc_main$5, [['render', _sfc_render$5]]);
 
-var css$2 = "\n.export-format-options[data-v-267d6a56] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-267d6a56] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-267d6a56]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-267d6a56] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-267d6a56] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-267d6a56] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-267d6a56] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-267d6a56] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-267d6a56] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
-n(css$2, {});
+var css$4 = "\n.export-format-options[data-v-267d6a56] {\r\n  display: flex;\r\n  gap: 1rem;\r\n  justify-content: center;\r\n  flex-wrap: wrap;\n}\n.export-format-radio[data-v-267d6a56] {\r\n  flex: 1;\r\n  min-width: 150px;\r\n  padding: 1rem;\r\n  border: 2px solid #dee2e6;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: all 0.3s ease;\r\n  text-align: center;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: #fff;\n}\n.export-format-radio[data-v-267d6a56]:hover {\r\n  border-color: #007bff;\r\n  background-color: #f8f9fa;\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);\n}\n.export-format-radio[data-v-267d6a56] .custom-control-input:checked ~ .custom-control-label {\r\n  color: #007bff;\r\n  font-weight: 600;\n}\n.export-format-radio[data-v-267d6a56] .custom-control-input:checked ~ .custom-control-label::before {\r\n  border-color: #007bff;\r\n  background-color: #007bff;\n}\n.export-format-radio[data-v-267d6a56] .custom-control-label {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  cursor: pointer;\r\n  font-size: 1rem;\n}\n.export-format-radio[data-v-267d6a56] .custom-control-label::before {\r\n  margin-right: 0.5rem;\n}\n.export-format-radio[data-v-267d6a56] svg {\r\n  font-size: 1.5rem;\r\n  color: #495057;\n}\n.export-format-radio[data-v-267d6a56] .custom-control-input:checked ~ .custom-control-label svg {\r\n  color: #007bff;\n}\r\n";
+n(css$4, {});
 
-const _sfc_main$2 = {
+const _sfc_main$4 = {
   name: 'CrudModals',
-  inject: ['bootstrapFactory', 'modelName', 'title', 'loading', 'validate', 'item', 'getItem', 'messageSave', 'showImport', 'showExport', 'fileImport', 'selectedItems', 'exportFormat', 'saveItem', 'importItems', 'exportItems'],
+  inject: ['bootstrapFactory', 'modelName', 'title', 'loading', 'validate', 'item', 'getItem', 'messageSave', 'showImport', 'showExport', 'fileImport', 'selectedItems', 'exportFormat', 'saveItem', 'importItems', 'exportItems', 'closeUi', 'uiMode'],
   computed: {
-    // Computed property para asegurar reactividad del item inyectado
+    formModalId() {
+      return 'modal-form-item-' + this.modelName;
+    },
+    formId() {
+      return 'crud-form-' + this.modelName;
+    },
     reactiveItem() {
-      // Si hay una función getItem, usarla para obtener el item actual
       if (this.getItem && typeof this.getItem === 'function') {
         try {
           return this.getItem();
@@ -16611,14 +17358,11 @@ const _sfc_main$2 = {
           return this.item || {};
         }
       }
-      // Si no, usar el item inyectado directamente, con fallback a objeto vacío
       return this.item || {};
     },
-    // Computed property para manejar loading como objeto reactivo o booleano
     loadingValue() {
       return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
     },
-    // Computed property para manejar exportFormat como objeto reactivo
     exportFormatValue: {
       get() {
         return this.exportFormat && this.exportFormat.value !== undefined ? this.exportFormat.value : this.exportFormat;
@@ -16628,32 +17372,77 @@ const _sfc_main$2 = {
           this.exportFormat.value = value;
         }
       }
+    },
+    footerSlotProps() {
+      return {
+        save: this.saveItem,
+        loading: this.loadingValue,
+        hide: this.hideFormModal,
+        messageSave: this.messageSave,
+        item: this.reactiveItem,
+        formId: this.formId
+      };
+    }
+  },
+  methods: {
+    hideFormModal() {
+      if (typeof this.closeUi === 'function') {
+        this.closeUi();
+        return;
+      }
+      this.$refs.formModal?.hide?.();
+    },
+    hideShowModal() {
+      if (typeof this.closeUi === 'function') {
+        this.closeUi();
+        return;
+      }
+      this.$refs.showModal?.hide?.();
+    },
+    onFormHidden() {
+      const mode = this.uiMode && this.uiMode.value !== undefined ? this.uiMode.value : this.uiMode;
+      if (mode === 'create' || mode === 'edit') {
+        this.closeUi?.();
+      }
+    },
+    onShowHidden() {
+      const mode = this.uiMode && this.uiMode.value !== undefined ? this.uiMode.value : this.uiMode;
+      if (mode === 'show') {
+        this.closeUi?.();
+      }
+    },
+    hideImportModal() {
+      this.$refs['modal-import']?.hide?.();
+    },
+    hideExportModal() {
+      this.$refs['modal-export']?.hide?.();
+    },
+    onFooterSaveClick(event) {
+      // Si el botón está fuera del form (p.ej. browsers sin soporte form=), guardar igual.
+      if (!this.validate) {
+        event.preventDefault();
+        this.saveItem();
+      }
     }
   }
-  // Eliminamos el watcher problemático - Vue 3 maneja la reactividad automáticamente
-  // El computed reactiveItem se actualizará cuando cambie el item inyectado
 };
-const _hoisted_1$2 = {
-  class: "text-center mt-3"
-};
-const _hoisted_2$1 = {
+const _hoisted_1$4 = ["id"];
+const _hoisted_2$4 = ["id"];
+const _hoisted_3$4 = {
   key: 0
 };
-const _hoisted_3$1 = {
+const _hoisted_4$4 = {
   key: 1
 };
-const _hoisted_4$1 = {
+const _hoisted_5$4 = {
   class: "export-format-options"
 };
-const _hoisted_5$1 = {
-  class: "text-center mt-3"
-};
-function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_form_input = resolveComponent("b-form-input");
   const _component_b_form_group = resolveComponent("b-form-group");
-  const _component_b_spinner = resolveComponent("b-spinner");
-  const _component_b_button = resolveComponent("b-button");
   const _component_b_overlay = resolveComponent("b-overlay");
+  const _component_b_button = resolveComponent("b-button");
+  const _component_b_spinner = resolveComponent("b-spinner");
   const _component_b_modal = resolveComponent("b-modal");
   const _component_b_col = resolveComponent("b-col");
   const _component_b_row = resolveComponent("b-row");
@@ -16665,18 +17454,39 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_form_radio = resolveComponent("b-form-radio");
   const _component_b_icon_table = resolveComponent("b-icon-table");
   return openBlock(), createElementBlock("div", null, [createCommentVNode(" Modal de formulario "), createVNode(_component_b_modal, {
-    id: 'modal-form-item-' + $options.modelName,
-    "hide-footer": "",
+    ref: "formModal",
+    id: $options.formModalId,
     size: "xl",
-    title: $options.title
+    title: $options.title,
+    onHidden: $options.onFormHidden
   }, {
+    "modal-footer": withCtx(() => [renderSlot(_ctx.$slots, "modal-footer", normalizeProps(guardReactiveProps($options.footerSlotProps)), () => [renderSlot(_ctx.$slots, "modal-footer-prepend", normalizeProps(guardReactiveProps($options.footerSlotProps)), undefined, true), createVNode(_component_b_button, {
+      variant: "secondary",
+      onClick: $options.hideFormModal
+    }, {
+      default: withCtx(() => [...(_cache[8] || (_cache[8] = [createTextVNode(" Cancelar ", -1 /* CACHED */)]))]),
+      _: 1 /* STABLE */
+    }, 8 /* PROPS */, ["onClick"]), createVNode(_component_b_button, {
+      type: "submit",
+      form: $options.formId,
+      variant: "success",
+      disabled: $options.loadingValue,
+      onClick: $options.onFooterSaveClick
+    }, {
+      default: withCtx(() => [$options.loadingValue ? (openBlock(), createBlock(_component_b_spinner, {
+        key: 0,
+        small: ""
+      })) : createCommentVNode("v-if", true), createTextVNode(toDisplayString($options.messageSave), 1 /* TEXT */)]),
+      _: 1 /* STABLE */
+    }, 8 /* PROPS */, ["form", "disabled", "onClick"]), renderSlot(_ctx.$slots, "modal-footer-append", normalizeProps(guardReactiveProps($options.footerSlotProps)), undefined, true)], true)]),
     default: withCtx(() => [createVNode(_component_b_overlay, {
       show: $options.loadingValue,
       rounded: "sm"
     }, {
       default: withCtx(() => [$options.validate ? (openBlock(), createElementBlock("form", {
         key: 0,
-        onSubmit: _cache[1] || (_cache[1] = (...args) => $options.saveItem && $options.saveItem(...args))
+        id: $options.formId,
+        onSubmit: _cache[1] || (_cache[1] = withModifiers((...args) => $options.saveItem && $options.saveItem(...args), ["prevent"]))
       }, [$options.reactiveItem ? renderSlot(_ctx.$slots, "form", {
         key: 0,
         item: $options.reactiveItem
@@ -16692,19 +17502,10 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
           placeholder: "Nombre"
         }, null, 8 /* PROPS */, ["modelValue"])]),
         _: 1 /* STABLE */
-      })], true) : createCommentVNode("v-if", true), createVNode(_component_b_button, {
-        block: "",
-        type: "submit",
-        variant: "success",
-        disabled: $options.loadingValue
-      }, {
-        default: withCtx(() => [$options.loadingValue ? (openBlock(), createBlock(_component_b_spinner, {
-          key: 0,
-          small: ""
-        })) : createCommentVNode("v-if", true), createTextVNode(toDisplayString($options.messageSave), 1 /* TEXT */)]),
-        _: 1 /* STABLE */
-      }, 8 /* PROPS */, ["disabled"])], 32 /* NEED_HYDRATION */)) : createCommentVNode("v-if", true), !$options.validate ? (openBlock(), createElementBlock(Fragment, {
-        key: 1
+      })], true) : createCommentVNode("v-if", true)], 40 /* PROPS, NEED_HYDRATION */, _hoisted_1$4)) : (openBlock(), createElementBlock("form", {
+        key: 1,
+        id: $options.formId,
+        onSubmit: _cache[2] || (_cache[2] = withModifiers((...args) => $options.saveItem && $options.saveItem(...args), ["prevent"]))
       }, [$options.reactiveItem ? renderSlot(_ctx.$slots, "form", {
         key: 0,
         item: $options.reactiveItem
@@ -16721,28 +17522,27 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])]),
           _: 2 /* DYNAMIC */
         }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["label"]);
-      }), 128 /* KEYED_FRAGMENT */))], true) : createCommentVNode("v-if", true), createVNode(_component_b_button, {
-        block: "",
-        type: "submit",
-        variant: "success",
-        disabled: $options.loadingValue,
-        onClick: _cache[2] || (_cache[2] = $event => $options.saveItem())
-      }, {
-        default: withCtx(() => [$options.loadingValue ? (openBlock(), createBlock(_component_b_spinner, {
-          key: 0,
-          small: ""
-        })) : createCommentVNode("v-if", true), createTextVNode(toDisplayString($options.messageSave), 1 /* TEXT */)]),
-        _: 1 /* STABLE */
-      }, 8 /* PROPS */, ["disabled"])], 64 /* STABLE_FRAGMENT */)) : createCommentVNode("v-if", true)]),
+      }), 128 /* KEYED_FRAGMENT */))], true) : createCommentVNode("v-if", true)], 40 /* PROPS, NEED_HYDRATION */, _hoisted_2$4))]),
       _: 3 /* FORWARDED */
     }, 8 /* PROPS */, ["show"])]),
     _: 3 /* FORWARDED */
-  }, 8 /* PROPS */, ["id", "title"]), createCommentVNode(" Modal de visualización "), createVNode(_component_b_modal, {
+  }, 8 /* PROPS */, ["id", "title", "onHidden"]), createCommentVNode(" Modal de visualización "), createVNode(_component_b_modal, {
+    ref: "showModal",
     id: 'modal-show-item-' + $options.modelName,
-    "hide-footer": "",
     size: "xl",
-    title: $options.title
+    title: $options.title,
+    onHidden: $options.onShowHidden
   }, {
+    "modal-footer": withCtx(() => [renderSlot(_ctx.$slots, "show-modal-footer", normalizeProps(guardReactiveProps({
+      hide: $options.hideShowModal,
+      item: $options.reactiveItem
+    })), () => [createVNode(_component_b_button, {
+      variant: "secondary",
+      onClick: $options.hideShowModal
+    }, {
+      default: withCtx(() => [...(_cache[9] || (_cache[9] = [createTextVNode(" Cerrar ", -1 /* CACHED */)]))]),
+      _: 1 /* STABLE */
+    }, 8 /* PROPS */, ["onClick"])], true)]),
     default: withCtx(() => [$options.reactiveItem ? renderSlot(_ctx.$slots, "show", {
       key: 0,
       item: $options.reactiveItem
@@ -16774,12 +17574,29 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
       _: 1 /* STABLE */
     })], true) : createCommentVNode("v-if", true)]),
     _: 3 /* FORWARDED */
-  }, 8 /* PROPS */, ["id", "title"]), createCommentVNode(" Modal de importación "), $options.showImport ? (openBlock(), createBlock(_component_b_modal, {
+  }, 8 /* PROPS */, ["id", "title", "onHidden"]), createCommentVNode(" Modal de importación "), $options.showImport ? (openBlock(), createBlock(_component_b_modal, {
     key: 0,
     ref: "modal-import",
-    title: "Importar",
-    "hide-footer": ""
+    title: "Importar"
   }, {
+    "modal-footer": withCtx(() => [renderSlot(_ctx.$slots, "import-modal-footer", normalizeProps(guardReactiveProps({
+      importItems: $options.importItems,
+      loading: $options.loadingValue,
+      hide: $options.hideImportModal
+    })), () => [createVNode(_component_b_button, {
+      variant: "secondary",
+      onClick: $options.hideImportModal
+    }, {
+      default: withCtx(() => [...(_cache[10] || (_cache[10] = [createTextVNode(" Cancelar ", -1 /* CACHED */)]))]),
+      _: 1 /* STABLE */
+    }, 8 /* PROPS */, ["onClick"]), createVNode(_component_b_button, {
+      variant: "info",
+      onClick: _cache[4] || (_cache[4] = $event => $options.importItems()),
+      disabled: $options.loadingValue
+    }, {
+      default: withCtx(() => [createVNode(_component_b_icon_cloud_upload), createTextVNode(" " + toDisplayString($options.loadingValue ? "Cargando..." : "Importar"), 1 /* TEXT */)]),
+      _: 1 /* STABLE */
+    }, 8 /* PROPS */, ["disabled"])], true)]),
     default: withCtx(() => [$options.item ? renderSlot(_ctx.$slots, "import", {
       key: 0,
       item: $options.item
@@ -16794,23 +17611,33 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         "browse-text": "Explorar",
         placeholder: "Importar...",
         "drop-placeholder": "Arrastrar Archivo aquí..."
-      }, null, 8 /* PROPS */, ["modelValue", "state"]), createElementVNode("div", _hoisted_1$2, [createVNode(_component_b_button, {
-        variant: "info",
-        onClick: _cache[4] || (_cache[4] = $event => $options.importItems()),
-        disabled: $options.loadingValue
-      }, {
-        default: withCtx(() => [createVNode(_component_b_icon_cloud_upload), createTextVNode(" " + toDisplayString($options.loadingValue ? "Cargando..." : "Importar"), 1 /* TEXT */)]),
-        _: 1 /* STABLE */
-      }, 8 /* PROPS */, ["disabled"])])]),
+      }, null, 8 /* PROPS */, ["modelValue", "state"])]),
       _: 1 /* STABLE */
     }, 8 /* PROPS */, ["show"])], true) : createCommentVNode("v-if", true)]),
     _: 3 /* FORWARDED */
   }, 512 /* NEED_PATCH */)) : createCommentVNode("v-if", true), createCommentVNode(" Modal de exportación "), $options.showExport ? (openBlock(), createBlock(_component_b_modal, {
     key: 1,
     ref: "modal-export",
-    title: "Exportar",
-    "hide-footer": ""
+    title: "Exportar"
   }, {
+    "modal-footer": withCtx(() => [renderSlot(_ctx.$slots, "export-modal-footer", normalizeProps(guardReactiveProps({
+      exportItems: $options.exportItems,
+      loading: $options.loadingValue,
+      hide: $options.hideExportModal
+    })), () => [createVNode(_component_b_button, {
+      variant: "secondary",
+      onClick: $options.hideExportModal
+    }, {
+      default: withCtx(() => [...(_cache[13] || (_cache[13] = [createTextVNode(" Cancelar ", -1 /* CACHED */)]))]),
+      _: 1 /* STABLE */
+    }, 8 /* PROPS */, ["onClick"]), createVNode(_component_b_button, {
+      variant: "info",
+      onClick: _cache[7] || (_cache[7] = $event => $options.exportItems()),
+      disabled: $options.loadingValue
+    }, {
+      default: withCtx(() => [createVNode(_component_b_icon_cloud_upload), createTextVNode(" " + toDisplayString($options.loadingValue ? "Cargando..." : "Exportar"), 1 /* TEXT */)]),
+      _: 1 /* STABLE */
+    }, 8 /* PROPS */, ["disabled"])], true)]),
     default: withCtx(() => [$options.item ? renderSlot(_ctx.$slots, "export", {
       key: 0,
       item: $options.item
@@ -16818,11 +17645,11 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
       show: $options.loadingValue,
       rounded: "sm"
     }, {
-      default: withCtx(() => [$options.selectedItems.length ? (openBlock(), createElementBlock("p", _hoisted_2$1, "Se exportará " + toDisplayString($options.selectedItems.length) + " elementos.", 1 /* TEXT */)) : (openBlock(), createElementBlock("p", _hoisted_3$1, "Se exportará la consulta actual.")), createVNode(_component_b_form_group, {
+      default: withCtx(() => [$options.selectedItems.length ? (openBlock(), createElementBlock("p", _hoisted_3$4, "Se exportará " + toDisplayString($options.selectedItems.length) + " elementos.", 1 /* TEXT */)) : (openBlock(), createElementBlock("p", _hoisted_4$4, "Se exportará la consulta actual.")), createVNode(_component_b_form_group, {
         label: "Seleccione el formato de exportación:",
         class: "mt-3"
       }, {
-        default: withCtx(() => [createElementVNode("div", _hoisted_4$1, [createVNode(_component_b_form_radio, {
+        default: withCtx(() => [createElementVNode("div", _hoisted_5$4, [createVNode(_component_b_form_radio, {
           modelValue: $options.exportFormatValue,
           "onUpdate:modelValue": _cache[5] || (_cache[5] = $event => $options.exportFormatValue = $event),
           value: "JSON",
@@ -16830,7 +17657,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         }, {
           default: withCtx(() => [createVNode(_component_b_icon_file_text, {
             class: "mr-2"
-          }), _cache[8] || (_cache[8] = createTextVNode(" JSON ", -1 /* CACHED */))]),
+          }), _cache[11] || (_cache[11] = createTextVNode(" JSON ", -1 /* CACHED */))]),
           _: 1 /* STABLE */
         }, 8 /* PROPS */, ["modelValue"]), createVNode(_component_b_form_radio, {
           modelValue: $options.exportFormatValue,
@@ -16840,30 +17667,27 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         }, {
           default: withCtx(() => [createVNode(_component_b_icon_table, {
             class: "mr-2"
-          }), _cache[9] || (_cache[9] = createTextVNode(" XLSX ", -1 /* CACHED */))]),
+          }), _cache[12] || (_cache[12] = createTextVNode(" XLSX ", -1 /* CACHED */))]),
           _: 1 /* STABLE */
         }, 8 /* PROPS */, ["modelValue"])])]),
         _: 1 /* STABLE */
-      }), createElementVNode("div", _hoisted_5$1, [createVNode(_component_b_button, {
-        variant: "info",
-        onClick: _cache[7] || (_cache[7] = $event => $options.exportItems()),
-        disabled: $options.loadingValue
-      }, {
-        default: withCtx(() => [createVNode(_component_b_icon_cloud_upload), createTextVNode(" " + toDisplayString($options.loadingValue ? "Cargando..." : "Exportar"), 1 /* TEXT */)]),
-        _: 1 /* STABLE */
-      }, 8 /* PROPS */, ["disabled"])])]),
+      })]),
       _: 1 /* STABLE */
     }, 8 /* PROPS */, ["show"])], true) : createCommentVNode("v-if", true)]),
     _: 3 /* FORWARDED */
   }, 512 /* NEED_PATCH */)) : createCommentVNode("v-if", true)]);
 }
-var CrudModals = /*#__PURE__*/_export_sfc(_sfc_main$2, [['render', _sfc_render$2], ['__scopeId', "data-v-267d6a56"]]);
+var CrudModals = /*#__PURE__*/_export_sfc(_sfc_main$4, [['render', _sfc_render$4], ['__scopeId', "data-v-267d6a56"]]);
 
-var css$1 = "\n.paginator-container[data-v-3be00b06] {\r\n  display: grid;\r\n  grid-template-columns: 1fr auto 1fr;\r\n  align-items: center;\r\n  width: 100%;\r\n  margin-top: 1rem;\r\n  gap: 1rem;\n}\n.paginator-data[data-v-3be00b06] {\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-size: 0.875rem;\r\n  grid-column: 1;\n}\n.paginator-badge[data-v-3be00b06] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\r\n  padding: 0.375rem 0.625rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  border-radius: 0.375rem;\r\n  color: #495057;\r\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-3be00b06]:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.paginator-label[data-v-3be00b06] {\r\n  font-weight: 500;\r\n  color: #6c757d;\n}\n.paginator-value[data-v-3be00b06] {\r\n  font-weight: 600;\r\n  color: #212529;\n}\n.paginator-dropdown[data-v-3be00b06] {\r\n  font-size: 0.875rem;\n}\n.paginator-dropdown[data-v-3be00b06] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\n}\n.paginator-dropdown[data-v-3be00b06] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.crud-paginator[data-v-3be00b06] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  grid-column: 2;\n}\n.paginator-badge-dropdown[data-v-3be00b06] {\r\n  z-index: 1;\r\n  position: relative;\n}\n.paginator-badge-dropdown[data-v-3be00b06] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\n}\n.paginator-badge-dropdown[data-v-3be00b06] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.infinite-loading-trigger[data-v-3be00b06] {\r\n  min-height: 50px;\r\n  margin-top: 1rem;\n}\r\n";
-n(css$1, {});
+var css$3 = "\n.paginator-container[data-v-3be00b06] {\r\n  display: grid;\r\n  grid-template-columns: 1fr auto 1fr;\r\n  align-items: center;\r\n  width: 100%;\r\n  margin-top: 0;\r\n  gap: 0.75rem;\n}\n.paginator-data[data-v-3be00b06] {\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-size: 0.875rem;\r\n  grid-column: 1;\n}\n.paginator-badge[data-v-3be00b06] {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\r\n  padding: 0.375rem 0.625rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  border-radius: 0.375rem;\r\n  color: #495057;\r\n  transition: all 0.2s ease;\n}\n.paginator-badge[data-v-3be00b06]:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.paginator-label[data-v-3be00b06] {\r\n  font-weight: 500;\r\n  color: #6c757d;\n}\n.paginator-value[data-v-3be00b06] {\r\n  font-weight: 600;\r\n  color: #212529;\n}\n.paginator-dropdown[data-v-3be00b06] {\r\n  font-size: 0.875rem;\n}\n.paginator-dropdown[data-v-3be00b06] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\n}\n.paginator-dropdown[data-v-3be00b06] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.crud-paginator[data-v-3be00b06] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  grid-column: 2;\n}\n.paginator-badge-dropdown[data-v-3be00b06] {\r\n  z-index: 1;\r\n  position: relative;\n}\n.paginator-badge-dropdown[data-v-3be00b06] .btn {\r\n  padding: 0.375rem 0.625rem;\r\n  font-size: 0.875rem;\r\n  background-color: #f8f9fa;\r\n  border: 1px solid #dee2e6;\r\n  color: #495057;\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.25rem;\n}\n.paginator-badge-dropdown[data-v-3be00b06] .btn:hover {\r\n  background-color: #e9ecef;\r\n  border-color: #ced4da;\n}\n.infinite-loading-trigger[data-v-3be00b06] {\r\n  min-height: 50px;\r\n  margin-top: 1rem;\n}\r\n";
+n(css$3, {});
 
-const _sfc_main$1 = {
+const _sfc_main$3 = {
   name: 'CrudPagination',
+  components: {
+    CrudSkeleton,
+    CrudEmptyState
+  },
   inject: ['bootstrapFactory', 'infiniteScroll', 'infiniteScrollKey', 'messageLoading', 'messageNoMore', 'messageEmptyResults', 'loading', 'firstLoad', 'items', 'pagination', 'selectedItems', 'showPaginator', 'infiniteHandler', 'onPaginationChange', 'onPerPageChange', 'clearSelection'],
   data() {
     return {
@@ -16873,7 +17697,6 @@ const _sfc_main$1 = {
   },
   computed: {
     selectedItemsCount() {
-      // Computed para forzar reactividad del contador
       return this.selectedItems ? this.selectedItems.length : 0;
     },
     loadingValue() {
@@ -16881,6 +17704,9 @@ const _sfc_main$1 = {
     },
     firstLoadValue() {
       return this.firstLoad && this.firstLoad.value !== undefined ? this.firstLoad.value : this.firstLoad;
+    },
+    isInitialLoading() {
+      return this.loadingValue && !this.firstLoadValue;
     },
     hasMorePages() {
       if (!this.firstLoadValue) return true;
@@ -16904,11 +17730,9 @@ const _sfc_main$1 = {
         this.$nextTick(() => {
           this.setupInfiniteScroll();
         });
-      } else {
-        if (this.observer) {
-          this.observer.disconnect();
-          this.observer = null;
-        }
+      } else if (this.observer) {
+        this.observer.disconnect();
+        this.observer = null;
       }
     },
     infiniteScrollKey() {
@@ -16922,8 +17746,6 @@ const _sfc_main$1 = {
   methods: {
     setupInfiniteScroll() {
       if (!this.infiniteScroll) return;
-
-      // Limpiar observer anterior si existe
       if (this.observer) {
         this.observer.disconnect();
         this.observer = null;
@@ -16931,12 +17753,9 @@ const _sfc_main$1 = {
       this.$nextTick(() => {
         const trigger = this.$refs.infiniteLoadingTrigger;
         if (!trigger) return;
-
-        // Crear IntersectionObserver
         this.observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting && !this.loadingValue && this.hasMorePages) {
-              // Simular el objeto $state para compatibilidad con infiniteHandler
               const $state = {
                 loaded: () => {},
                 complete: () => {},
@@ -16955,55 +17774,60 @@ const _sfc_main$1 = {
     }
   }
 };
-const _hoisted_1$1 = {
+const _hoisted_1$3 = {
   key: 0,
   class: "text-center p-3"
 };
-const _hoisted_2 = {
+const _hoisted_2$3 = {
   class: "mt-2"
 };
-const _hoisted_3 = {
-  key: 1,
-  class: "text-center p-3"
+const _hoisted_3$3 = {
+  key: 2,
+  class: "text-center p-3 text-muted"
 };
-const _hoisted_4 = {
-  key: 0
-};
-const _hoisted_5 = {
-  key: 1
-};
-const _hoisted_6 = {
-  key: 1,
+const _hoisted_4$3 = {
+  key: 2,
   class: "paginator-container"
 };
-const _hoisted_7 = {
+const _hoisted_5$3 = {
   class: "paginator-data"
 };
-const _hoisted_8 = {
+const _hoisted_6$3 = {
   class: "paginator-badge"
 };
-const _hoisted_9 = {
+const _hoisted_7$2 = {
   class: "paginator-value"
 };
-const _hoisted_10 = {
+const _hoisted_8$2 = {
+  key: 0,
   class: "crud-paginator"
 };
-function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_b_spinner = resolveComponent("b-spinner");
+  const _component_CrudEmptyState = resolveComponent("CrudEmptyState");
+  const _component_CrudSkeleton = resolveComponent("CrudSkeleton");
   const _component_b_dropdown_item = resolveComponent("b-dropdown-item");
   const _component_b_dropdown = resolveComponent("b-dropdown");
   const _component_b_icon_x_circle = resolveComponent("b-icon-x-circle");
   const _component_b_pagination = resolveComponent("b-pagination");
-  return openBlock(), createElementBlock("div", null, [createCommentVNode(" Infinite Loading "), $options.infiniteScroll ? (openBlock(), createElementBlock("div", {
+  return openBlock(), createElementBlock("div", null, [$options.infiniteScroll ? (openBlock(), createElementBlock("div", {
     ref: "infiniteLoadingTrigger",
     class: "infinite-loading-trigger",
     key: $options.infiniteScrollKey
-  }, [$options.loadingValue ? (openBlock(), createElementBlock("div", _hoisted_1$1, [createVNode(_component_b_spinner, {
+  }, [$options.loadingValue ? (openBlock(), createElementBlock("div", _hoisted_1$3, [createVNode(_component_b_spinner, {
     variant: "primary",
     label: "Cargando..."
-  }), createElementVNode("div", _hoisted_2, toDisplayString($options.messageLoading), 1 /* TEXT */)])) : !$options.hasMorePages && $options.firstLoadValue ? (openBlock(), createElementBlock("div", _hoisted_3, [$options.items.length == 0 ? (openBlock(), createElementBlock("div", _hoisted_4, toDisplayString($options.messageEmptyResults), 1 /* TEXT */)) : (openBlock(), createElementBlock("div", _hoisted_5, toDisplayString($options.messageNoMore), 1 /* TEXT */))])) : createCommentVNode("v-if", true)])) : createCommentVNode("v-if", true), createCommentVNode(" Paginador "), !$options.infiniteScroll ? (openBlock(), createElementBlock("div", _hoisted_6, [createElementVNode("div", _hoisted_7, [createElementVNode("span", _hoisted_8, [_cache[2] || (_cache[2] = createElementVNode("span", {
+  }), createElementVNode("div", _hoisted_2$3, toDisplayString($options.messageLoading), 1 /* TEXT */)])) : !$options.hasMorePages && $options.firstLoadValue && $options.items.length == 0 ? (openBlock(), createBlock(_component_CrudEmptyState, {
+    key: 1,
+    message: $options.messageEmptyResults,
+    icon: "inbox"
+  }, null, 8 /* PROPS */, ["message"])) : !$options.hasMorePages && $options.firstLoadValue ? (openBlock(), createElementBlock("div", _hoisted_3$3, toDisplayString($options.messageNoMore), 1 /* TEXT */)) : createCommentVNode("v-if", true)])) : createCommentVNode("v-if", true), !$options.infiniteScroll && $options.isInitialLoading ? (openBlock(), createBlock(_component_CrudSkeleton, {
+    key: 1,
+    "show-table": false,
+    "show-paginator": ""
+  })) : !$options.infiniteScroll && $options.firstLoadValue ? (openBlock(), createElementBlock("div", _hoisted_4$3, [createElementVNode("div", _hoisted_5$3, [createElementVNode("span", _hoisted_6$3, [_cache[2] || (_cache[2] = createElementVNode("span", {
     class: "paginator-label"
-  }, "Filas:", -1 /* CACHED */)), createElementVNode("span", _hoisted_9, toDisplayString($options.pagination.total), 1 /* TEXT */)]), createVNode(_component_b_dropdown, {
+  }, "Filas:", -1 /* CACHED */)), createElementVNode("span", _hoisted_7$2, toDisplayString($options.pagination.total), 1 /* TEXT */)]), createVNode(_component_b_dropdown, {
     variant: "outline-secondary",
     size: "sm",
     class: "paginator-dropdown",
@@ -17036,16 +17860,235 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
       _: 1 /* STABLE */
     }, 8 /* PROPS */, ["onClick"])]),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["text"])) : createCommentVNode("v-if", true)]), createElementVNode("div", _hoisted_10, [$options.showPaginator ? (openBlock(), createBlock(_component_b_pagination, {
-    key: 0,
+  }, 8 /* PROPS */, ["text"])) : createCommentVNode("v-if", true)]), $options.showPaginator && $options.pagination.total > 0 ? (openBlock(), createElementBlock("div", _hoisted_8$2, [createVNode(_component_b_pagination, {
     modelValue: $options.pagination.current_page,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => $options.pagination.current_page = $event),
     "total-rows": $options.pagination.total,
     "per-page": $options.pagination.per_page,
+    "prev-text": "Anterior",
+    "next-text": "Siguiente",
     onChange: _cache[1] || (_cache[1] = $event => $options.onPaginationChange($event))
-  }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])) : createCommentVNode("v-if", true)])])) : createCommentVNode("v-if", true)]);
+  }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])])) : createCommentVNode("v-if", true)])) : createCommentVNode("v-if", true)]);
 }
-var CrudPagination = /*#__PURE__*/_export_sfc(_sfc_main$1, [['render', _sfc_render$1], ['__scopeId', "data-v-3be00b06"]]);
+var CrudPagination = /*#__PURE__*/_export_sfc(_sfc_main$3, [['render', _sfc_render$3], ['__scopeId', "data-v-3be00b06"]]);
+
+var css$2 = "\n.crud-detail-view__header[data-v-daa0a46b] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: flex-start;\r\n  gap: 1rem;\r\n  margin-bottom: 1rem;\n}\n.crud-detail-view__body[data-v-daa0a46b] {\r\n  border: 0;\n}\r\n";
+n(css$2, {});
+
+const _sfc_main$2 = {
+  name: 'CrudDetailView',
+  inject: {
+    modelName: {
+      default: ''
+    },
+    title: {
+      default: ''
+    },
+    loading: {
+      default: null
+    },
+    item: {
+      default: () => ({})
+    },
+    getItem: {
+      default: null
+    },
+    messageSave: {
+      default: 'Guardar'
+    },
+    saveItem: {
+      default: () => {}
+    },
+    closeUi: {
+      default: () => {}
+    },
+    updateItem: {
+      default: () => {}
+    },
+    uiMode: {
+      default: null
+    }
+  },
+  computed: {
+    mode() {
+      if (this.uiMode && this.uiMode.value !== undefined) {
+        return this.uiMode.value;
+      }
+      return this.uiMode;
+    },
+    isOpen() {
+      return !!this.mode;
+    },
+    modeLabel() {
+      if (this.mode === 'create') return 'Crear';
+      if (this.mode === 'edit') return 'Editar';
+      if (this.mode === 'show') return 'Detalle';
+      return '';
+    },
+    formId() {
+      return 'crud-form-page-' + this.modelName;
+    },
+    reactiveItem() {
+      if (this.getItem && typeof this.getItem === 'function') {
+        try {
+          return this.getItem() || {};
+        } catch (e) {
+          return this.item || {};
+        }
+      }
+      return this.item || {};
+    },
+    loadingValue() {
+      return this.loading && this.loading.value !== undefined ? this.loading.value : this.loading;
+    },
+    footerSlotProps() {
+      return {
+        save: this.saveItem,
+        loading: this.loadingValue,
+        hide: this.closeUi,
+        messageSave: this.messageSave,
+        item: this.reactiveItem,
+        formId: this.formId
+      };
+    }
+  }
+};
+const _hoisted_1$2 = {
+  key: 0,
+  class: "crud-detail-view"
+};
+const _hoisted_2$2 = {
+  class: "crud-detail-view__header"
+};
+const _hoisted_3$2 = {
+  class: "mb-1"
+};
+const _hoisted_4$2 = {
+  class: "text-muted small"
+};
+const _hoisted_5$2 = {
+  class: "d-flex gap-2"
+};
+const _hoisted_6$2 = {
+  class: "crud-detail-view__body card shadow-sm"
+};
+const _hoisted_7$1 = {
+  class: "card-body"
+};
+const _hoisted_8$1 = ["id"];
+const _hoisted_9$1 = {
+  key: 0,
+  class: "card-footer d-flex justify-content-end gap-2"
+};
+const _hoisted_10 = {
+  key: 1,
+  class: "card-footer d-flex justify-content-end gap-2"
+};
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_b_button = resolveComponent("b-button");
+  const _component_b_col = resolveComponent("b-col");
+  const _component_b_row = resolveComponent("b-row");
+  const _component_b_list_group_item = resolveComponent("b-list-group-item");
+  const _component_b_list_group = resolveComponent("b-list-group");
+  const _component_b_form_input = resolveComponent("b-form-input");
+  const _component_b_form_group = resolveComponent("b-form-group");
+  const _component_b_spinner = resolveComponent("b-spinner");
+  const _component_b_overlay = resolveComponent("b-overlay");
+  return $options.isOpen ? (openBlock(), createElementBlock("div", _hoisted_1$2, [createElementVNode("div", _hoisted_2$2, [createElementVNode("div", null, [createElementVNode("h4", _hoisted_3$2, toDisplayString($options.title), 1 /* TEXT */), createElementVNode("div", _hoisted_4$2, toDisplayString($options.modeLabel), 1 /* TEXT */)]), createElementVNode("div", _hoisted_5$2, [createVNode(_component_b_button, {
+    variant: "outline-secondary",
+    onClick: _cache[0] || (_cache[0] = $event => $options.closeUi())
+  }, {
+    default: withCtx(() => [...(_cache[5] || (_cache[5] = [createTextVNode(" Volver ", -1 /* CACHED */)]))]),
+    _: 1 /* STABLE */
+  }), $options.mode === 'show' && $options.item?.id ? (openBlock(), createBlock(_component_b_button, {
+    key: 0,
+    variant: "secondary",
+    onClick: _cache[1] || (_cache[1] = $event => $options.updateItem($options.item.id))
+  }, {
+    default: withCtx(() => [...(_cache[6] || (_cache[6] = [createTextVNode(" Editar ", -1 /* CACHED */)]))]),
+    _: 1 /* STABLE */
+  })) : createCommentVNode("v-if", true)])]), createVNode(_component_b_overlay, {
+    show: $options.loadingValue,
+    rounded: "sm"
+  }, {
+    default: withCtx(() => [createElementVNode("div", _hoisted_6$2, [createElementVNode("div", _hoisted_7$1, [$options.mode === 'show' ? renderSlot(_ctx.$slots, "show", {
+      key: 0,
+      item: $options.reactiveItem
+    }, () => [createVNode(_component_b_list_group, null, {
+      default: withCtx(() => [(openBlock(true), createElementBlock(Fragment, null, renderList($options.reactiveItem, (value, key) => {
+        return openBlock(), createBlock(_component_b_list_group_item, {
+          key: key
+        }, {
+          default: withCtx(() => [createVNode(_component_b_row, {
+            class: "w-100"
+          }, {
+            default: withCtx(() => [createVNode(_component_b_col, {
+              cols: "4",
+              class: "font-weight-bold"
+            }, {
+              default: withCtx(() => [createTextVNode(toDisplayString(key), 1 /* TEXT */)]),
+              _: 2 /* DYNAMIC */
+            }, 1024 /* DYNAMIC_SLOTS */), createVNode(_component_b_col, {
+              cols: "8"
+            }, {
+              default: withCtx(() => [createTextVNode(toDisplayString(JSON.stringify(value)), 1 /* TEXT */)]),
+              _: 2 /* DYNAMIC */
+            }, 1024 /* DYNAMIC_SLOTS */)]),
+            _: 2 /* DYNAMIC */
+          }, 1024 /* DYNAMIC_SLOTS */)]),
+          _: 2 /* DYNAMIC */
+        }, 1024 /* DYNAMIC_SLOTS */);
+      }), 128 /* KEYED_FRAGMENT */))]),
+      _: 1 /* STABLE */
+    })], true) : (openBlock(), createElementBlock("form", {
+      key: 1,
+      id: $options.formId,
+      onSubmit: _cache[2] || (_cache[2] = withModifiers((...args) => $options.saveItem && $options.saveItem(...args), ["prevent"]))
+    }, [renderSlot(_ctx.$slots, "form", {
+      item: $options.reactiveItem
+    }, () => [(openBlock(true), createElementBlock(Fragment, null, renderList($options.reactiveItem, (value, key) => {
+      return openBlock(), createBlock(_component_b_form_group, {
+        label: key,
+        key: key
+      }, {
+        default: withCtx(() => [createVNode(_component_b_form_input, {
+          modelValue: $options.reactiveItem[key],
+          "onUpdate:modelValue": $event => $options.reactiveItem[key] = $event,
+          type: "text"
+        }, null, 8 /* PROPS */, ["modelValue", "onUpdate:modelValue"])]),
+        _: 2 /* DYNAMIC */
+      }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["label"]);
+    }), 128 /* KEYED_FRAGMENT */))], true)], 40 /* PROPS, NEED_HYDRATION */, _hoisted_8$1))]), $options.mode !== 'show' ? (openBlock(), createElementBlock("div", _hoisted_9$1, [renderSlot(_ctx.$slots, "modal-footer", normalizeProps(guardReactiveProps($options.footerSlotProps)), () => [createVNode(_component_b_button, {
+      variant: "secondary",
+      onClick: _cache[3] || (_cache[3] = $event => $options.closeUi())
+    }, {
+      default: withCtx(() => [...(_cache[7] || (_cache[7] = [createTextVNode("Cancelar", -1 /* CACHED */)]))]),
+      _: 1 /* STABLE */
+    }), createVNode(_component_b_button, {
+      type: "submit",
+      form: $options.formId,
+      variant: "success",
+      disabled: $options.loadingValue
+    }, {
+      default: withCtx(() => [$options.loadingValue ? (openBlock(), createBlock(_component_b_spinner, {
+        key: 0,
+        small: ""
+      })) : createCommentVNode("v-if", true), createTextVNode(toDisplayString($options.messageSave), 1 /* TEXT */)]),
+      _: 1 /* STABLE */
+    }, 8 /* PROPS */, ["form", "disabled"])], true)])) : (openBlock(), createElementBlock("div", _hoisted_10, [renderSlot(_ctx.$slots, "show-modal-footer", normalizeProps(guardReactiveProps({
+      hide: $options.closeUi,
+      item: $options.reactiveItem
+    })), () => [createVNode(_component_b_button, {
+      variant: "secondary",
+      onClick: _cache[4] || (_cache[4] = $event => $options.closeUi())
+    }, {
+      default: withCtx(() => [...(_cache[8] || (_cache[8] = [createTextVNode("Cerrar", -1 /* CACHED */)]))]),
+      _: 1 /* STABLE */
+    })], true)]))])]),
+    _: 3 /* FORWARDED */
+  }, 8 /* PROPS */, ["show"])])) : createCommentVNode("v-if", true);
+}
+var CrudDetailView = /*#__PURE__*/_export_sfc(_sfc_main$2, [['render', _sfc_render$2], ['__scopeId', "data-v-daa0a46b"]]);
 
 var crudData = {
   data() {
@@ -17094,6 +18137,12 @@ var crudData = {
         value: false
       },
       // Objeto reactivo para firstLoad
+      searchReactive: {
+        value: ''
+      },
+      displaySearchReactive: {
+        value: false
+      },
       displayModes: {
         MODE_TABLE: 1,
         MODE_CARDS: 2,
@@ -17106,12 +18155,17 @@ var crudData = {
       isMobile: false,
       refreshing: false,
       fetchError: false,
+      fetchSeq: 0,
       principalSort: false,
       exportFormatReactive: {
         value: 'JSON'
       },
       // Objeto reactivo para exportFormat
-      fileImport: null
+      fileImport: null,
+      activeQuickFilterKey: null,
+      activeQuickFilterKeyReactive: {
+        value: null
+      }
     };
   },
   computed: {
@@ -17144,18 +18198,56 @@ var crudData = {
       return this.paginationIndexStart + this.pagination.per_page;
     },
     finalFilters() {
-      return [...this.filters, ...this.filter, ...this.internalFilter, ...this.sortFilter, ...this.groupFilter];
+      return [...this.filters, ...this.filter, ...this.quickFilterApplied, ...this.internalFilter, ...this.sortFilter, ...this.groupFilter];
+    },
+    quickFilterApplied() {
+      this.forceRecomputeCounter;
+      const item = this.findQuickFilterItem(this.activeQuickFilterKey);
+      return this.resolveQuickFilterPayload(item);
     },
     sortFilter() {
-      if (this.showPrincipalSortBtn) {
-        if (this.principalSort) {
-          return [[this.principalSortColumn, 'SORTASC', '']];
-        } else {
-          return [[this.principalSortColumn, 'SORTDESC', '']];
-        }
-      } else {
+      if (!this.showPrincipalSortBtn) {
         return [];
       }
+      // No mezclar sort principal con sort de columna (pisa el ORDER BY)
+      const hasColumnSort = (this.internalFilters || []).some(f => f && f.column && String(f.column).endsWith('_sort') && f.value !== null && f.value !== undefined && f.value !== '');
+      if (hasColumnSort) {
+        return [];
+      }
+      if (this.principalSort) {
+        return [[this.principalSortColumn, 'SORTASC', '']];
+      }
+      return [[this.principalSortColumn, 'SORTDESC', '']];
+    },
+    activeFilters() {
+      this.forceRecomputeCounter;
+      const result = [];
+      (this.columns || []).forEach(column => {
+        if (!this.isColumnHasFilter(column)) return;
+        if (this.isRangeFilterColumn(column)) {
+          const from = this.internalFilterByProp(column.prop + '_from');
+          const to = this.internalFilterByProp(column.prop + '_to');
+          const fromVal = from ? from.value : null;
+          const toVal = to ? to.value : null;
+          if (this.hasFilterValue(fromVal) || this.hasFilterValue(toVal)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatRangeDisplayValue(column, fromVal, toVal)
+            });
+          }
+        } else {
+          const f = this.internalFilterByProp(column.prop);
+          if (f && this.hasFilterValue(f.value)) {
+            result.push({
+              key: column.prop,
+              label: column.label || column.prop,
+              displayValue: this.formatFilterDisplayValue(column, f.value)
+            });
+          }
+        }
+      });
+      return result;
     },
     groupFilter() {
       if (this.grouped && this.groupedAttribute) {
@@ -17167,8 +18259,16 @@ var crudData = {
     internalFilter() {
       let filter = [];
       this.forceRecomputeCounter;
-      this.internalFilters.forEach(f => {
-        if (f.value) {
+      const entries = [...this.internalFilters].sort((a, b) => {
+        const aSort = a.column.endsWith('_sort');
+        const bSort = b.column.endsWith('_sort');
+        if (aSort && bSort) {
+          return (a.sortPriority || 999) - (b.sortPriority || 999);
+        }
+        return 0;
+      });
+      entries.forEach(f => {
+        if (this.hasFilterValue(f.value)) {
           let colname = f.column.replace("_sort", "").replace("_from", "").replace("_to", "");
           let op = f.op;
 
@@ -17207,6 +18307,11 @@ var crudData = {
   },
   watch: {
     search(val) {
+      if (this.searchReactive.value !== val) {
+        this.searchReactive.value = val || '';
+      }
+    },
+    'searchReactive.value'(val) {
       if (val && val != "") {
         this.filters = [];
         this.filters.push(["search", "LIKE", val]);
@@ -17215,6 +18320,12 @@ var crudData = {
         this.filters = [];
         this.fetchItems();
       }
+    },
+    displaySearch(val) {
+      this.displaySearchReactive.value = !!val;
+    },
+    'displaySearchReactive.value'(val) {
+      this.displaySearch = !!val;
     },
     models(val) {
       if (!this.ajax) {
@@ -17331,6 +18442,25 @@ var crudData = {
         this.filterSidebarOpenReactive.value = newVal;
       },
       immediate: true
+    },
+    quickFilter: {
+      handler(newVal) {
+        if (newVal == null || newVal === '') {
+          return;
+        }
+        const key = String(newVal);
+        if (this.activeQuickFilterKey !== key) {
+          this.activeQuickFilterKey = key;
+          this.activeQuickFilterKeyReactive.value = key;
+        }
+      },
+      immediate: true
+    },
+    quickFilters: {
+      handler() {
+        this.ensureActiveQuickFilter();
+      },
+      deep: false
     }
   },
   created() {
@@ -17344,6 +18474,9 @@ var crudData = {
     this.firstLoadReactive.value = this.firstLoad;
     this.filtersVisibleReactive.value = this.filtersVisible;
     this.filterSidebarOpenReactive.value = this.filterSidebarOpen;
+    this.searchReactive.value = this.search || '';
+    this.displaySearchReactive.value = !!this.displaySearch;
+    this.initQuickFilterState();
   },
   mounted() {
     const now = Math.floor(Date.now() / 1000);
@@ -23530,29 +24663,41 @@ var axios$1 = axios;
 var crudApi = {
   methods: {
     async fetchItemsVuex(page = 1, concat = false) {
+      const seq = ++this.fetchSeq;
       this.loading = true;
       this.$emit("beforeFetch", {});
-      let result;
-      if (this.vuexLocalforage) {
-        await this.model.$fetch();
-      } else {
-        this.model.deleteAll();
-        result = await this.model.api().get(this.apiUrl + "/" + this.modelName, {
-          dataKey: 'data',
-          params: {
-            page: page,
-            limit: this.pagination.per_page,
-            filters: JSON.stringify(this.finalFilters)
-          }
-        });
+      try {
+        let result;
+        if (this.vuexLocalforage) {
+          await this.model.$fetch();
+        } else {
+          this.model.deleteAll();
+          result = await this.model.api().get(this.apiUrl + "/" + this.modelName, {
+            dataKey: 'data',
+            params: {
+              page: page,
+              limit: this.pagination.per_page,
+              filters: JSON.stringify(this.finalFilters)
+            }
+          });
+        }
+        if (seq !== this.fetchSeq) return;
+        let itemsResult = this.model.query().withAll().get();
+        if (itemsResult) {
+          this.items = itemsResult;
+        }
+        console.debug("fetch page vuex ", itemsResult, page, this.items, result);
+        this.firstLoad = true;
+      } catch (error) {
+        if (seq !== this.fetchSeq) return;
+        this.toastError(error);
+        this.fetchError = true;
+        this.firstLoad = true;
+      } finally {
+        if (seq === this.fetchSeq) {
+          this.loading = false;
+        }
       }
-      let itemsResult = this.model.query().withAll().get();
-      if (itemsResult) {
-        this.items = itemsResult;
-      }
-      console.debug("fetch page vuex ", itemsResult, page, this.items, result);
-      this.loading = false;
-      this.firstLoad = true;
     },
     fetchItemsLocal() {
       if (this.grouped) {
@@ -23563,6 +24708,41 @@ var crudApi = {
       this.pagination.total = this.items.length;
       this.firstLoad = true;
     },
+    async fetchItem(id) {
+      if (id == null || id === '') {
+        return null;
+      }
+      this.loading = true;
+      try {
+        if (this.useVuexORM && this.model?.api) {
+          const result = await this.model.api().get(`${this.apiUrl}/${this.modelName}/${id}`, {
+            dataKey: null
+          });
+          const entities = result?.entities || result?.response?.data;
+          const row = Array.isArray(entities) ? entities[0] : entities?.data || result?.response?.data || null;
+          this.loading = false;
+          return row;
+        }
+        const response = await axios$1.get(`${this.apiUrl}/${this.modelName}/${id}`);
+        this.loading = false;
+        return response.data?.data || response.data || null;
+      } catch (error) {
+        this.loading = false;
+        this.toastError(error);
+        return null;
+      }
+    },
+    closeDetailAfterSave(create) {
+      const shouldClose = this.hideModalAfterSave || create && this.hideModalAfterCreate || !create && this.hideModalAfterUpdate;
+      if (!shouldClose) {
+        return;
+      }
+      if (typeof this.closeUi === 'function') {
+        this.closeUi();
+      } else {
+        this.$bvModal.hide('modal-form-item-' + this.modelName);
+      }
+    },
     fetchItems(page = 1, concat = false) {
       this.$emit("beforeFetch", {});
       if (this.useVuexORM) {
@@ -23571,6 +24751,7 @@ var crudApi = {
       if (!this.ajax) {
         return this.fetchItemsLocal(page, concat);
       }
+      const seq = ++this.fetchSeq;
       this.loading = true;
       return axios$1.get(this.apiUrl + "/" + this.modelName, {
         params: {
@@ -23579,6 +24760,7 @@ var crudApi = {
           filters: JSON.stringify(this.finalFilters)
         }
       }).then(response => {
+        if (seq !== this.fetchSeq) return;
         console.debug("fetchItems - Response recibida:", response.data);
         this.makePagination(response.data);
 
@@ -23604,14 +24786,17 @@ var crudApi = {
           }
         }
         console.debug("fetchItems - this.items después de asignar:", this.items, "Cantidad:", this.items ? this.items.length : 0);
-        this.loading = false;
         this.firstLoad = true;
         this.$emit("afterFetch", {});
       }).catch(error => {
+        if (seq !== this.fetchSeq) return;
         this.toastError(error);
-        this.loading = false;
         this.firstLoad = true;
         this.fetchError = true;
+      }).finally(() => {
+        if (seq === this.fetchSeq) {
+          this.loading = false;
+        }
       });
     },
     groupItems(items, concat = false, splitGroups = false) {
@@ -23699,9 +24884,7 @@ var crudApi = {
       if (this.refreshAfterSave) this.refresh();
       this.loading = false;
       this.toastSuccess("Elemento Modificado");
-      if (this.hideModalAfterSave || create && this.hideModalAfterCreate || !create && this.hideModalAfterUpdate) {
-        this.$bvModal.hide("modal-form-item-" + this.modelName);
-      }
+      this.closeDetailAfterSave(create);
     },
     async saveItemLocal(event = null) {
       const itemSave = JSON.parse(JSON.stringify(this.item));
@@ -23713,15 +24896,11 @@ var crudApi = {
           itemIndex = this.items.findIndex(item => item.index == this.item.index);
         }
         this.items[itemIndex] = itemSave;
-        if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
-        }
+        this.closeDetailAfterSave(false);
       } else {
         itemSave.index = this.items.length + 1;
         this.items.push(itemSave);
-        if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-          this.$bvModal.hide("modal-form-item-" + this.modelName);
-        }
+        this.closeDetailAfterSave(true);
       }
       this.toastSuccess("Elemento Modificado");
       this.loading = false;
@@ -23741,9 +24920,7 @@ var crudApi = {
       }
       if (this.item.id) {
         axios$1.put(this.apiUrl + "/" + this.modelName + "/" + this.item.id, this.item).then(response => {
-          if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-            this.$bvModal.hide("modal-form-item-" + this.modelName);
-          }
+          this.closeDetailAfterSave(false);
           let itemSv = response.data;
           let itemIndex = this.items.findIndex(item => item.id == this.item.id);
           this.items[itemIndex] = itemSv;
@@ -23774,9 +24951,7 @@ var crudApi = {
           });
           axios$1.post(this.apiUrl + "/" + this.modelName, formData).then(response => {
             this.loading = false;
-            if (this.hideModalAfterSave || this.hideModalAfterCreate) {
-              this.$bvModal.hide("modal-form-item-" + this.modelName);
-            }
+            this.closeDetailAfterSave(true);
             if (response.data.success) {
               if (response.data.message) {
                 this.toastSuccess(response.data.message);
@@ -23801,9 +24976,7 @@ var crudApi = {
         } else {
           axios$1.post(this.apiUrl + "/" + this.modelName, this.item).then(response => {
             this.loading = false;
-            if (this.hideModalAfterSave || this.hideModalAfterUpdate) {
-              this.$bvModal.hide("modal-form-item-" + this.modelName);
-            }
+            this.closeDetailAfterSave(true);
             if (response.data.success) {
               if (response.data.message) {
                 this.toastSuccess(response.data.message);
@@ -24068,10 +25241,64 @@ var crudApi = {
 
 var crudFilters = {
   methods: {
+    hasFilterValue(value) {
+      return value !== null && value !== undefined && value !== '';
+    },
+    isRangeFilterColumn(column) {
+      return column && (column.type == 'date' || column.type == 'number' || column.type == 'money' || column.type == 'price');
+    },
+    formatFilterDisplayValue(column, value) {
+      if (column.type == 'boolean') {
+        return value == 1 || value == '1' || value === true ? 'Sí' : 'No';
+      }
+      if ((column.type == 'state' || column.type == 'array') && column.options) {
+        const option = column.options.find(o => String(o.id !== undefined ? o.id : o.value) === String(value));
+        if (option) {
+          return option.text || option.label || String(value);
+        }
+      }
+      return String(value);
+    },
+    formatRangeDisplayValue(column, fromVal, toVal) {
+      const hasFrom = this.hasFilterValue(fromVal);
+      const hasTo = this.hasFilterValue(toVal);
+      const formatOne = v => {
+        if (column.type == 'date' && v) {
+          return this.moment(v).format(column.format ? column.format : 'L');
+        }
+        return String(v);
+      };
+      if (hasFrom && hasTo) {
+        return formatOne(fromVal) + ' – ' + formatOne(toVal);
+      }
+      if (hasFrom) {
+        return 'Desde: ' + formatOne(fromVal);
+      }
+      if (hasTo) {
+        return 'Hasta: ' + formatOne(toVal);
+      }
+      return '';
+    },
+    clearActiveFilter(key) {
+      const column = (this.columns || []).find(c => c.prop === key);
+      if (column && this.isRangeFilterColumn(column)) {
+        const from = this.internalFilterByProp(key + '_from');
+        const to = this.internalFilterByProp(key + '_to');
+        if (from) from.value = null;
+        if (to) to.value = null;
+      } else {
+        const f = this.internalFilterByProp(key);
+        if (f) f.value = null;
+      }
+      this.forceRecomputeCounter++;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
+    },
     setupFilters() {
       this.columns.forEach(column => {
         if (this.isColumnHasFilter(column)) {
-          if (column.type == "date" || column.type == "number" || column.type == "money") {
+          if (this.isRangeFilterColumn(column)) {
             this.internalFilters.push({
               column: column.prop + "_from",
               op: ">=",
@@ -24090,11 +25317,12 @@ var crudFilters = {
             });
           }
         }
-        if (this.sortable) {
+        if (this.sortable && column.type != 'actions' && column.type != 'checkbox' && column.type != 'select') {
           this.internalFilters.push({
             column: column.prop + "_sort",
             op: column.filterOp ? column.filterOp : "=",
-            value: null
+            value: null,
+            sortPriority: null
           });
         }
       });
@@ -24106,7 +25334,7 @@ var crudFilters = {
             // Si el tipo es función (callback), no procesamos automáticamente
             // El callback se encargará del renderizado y gestión del filtro
             if (typeof customFilter.type === 'string') {
-              if (customFilter.type == "date" || customFilter.type == "number" || customFilter.type == "money") {
+              if (this.isRangeFilterColumn(customFilter)) {
                 this.internalFilters.push({
                   column: customFilter.prop + "_from",
                   op: ">=",
@@ -24140,18 +25368,45 @@ var crudFilters = {
       }
     },
     toggleSortFilter(column) {
-      let value = this.internalFilterByProp(column.prop + "_sort").value;
+      const sortEntry = this.internalFilterByProp(column.prop + '_sort');
+      if (!sortEntry) {
+        return;
+      }
+      let value = sortEntry.value;
       if (!value) {
-        this.internalFilterByProp(column.prop + "_sort").value = "ASC";
-      } else if (value == "ASC") {
-        this.internalFilterByProp(column.prop + "_sort").value = "DESC";
-      } else if (value == "DESC") {
-        this.internalFilterByProp(column.prop + "_sort").value = null;
+        sortEntry.value = 'ASC';
+        sortEntry.sortPriority = this.nextSortPriority();
+      } else if (value == 'ASC') {
+        sortEntry.value = 'DESC';
+        if (!sortEntry.sortPriority) {
+          sortEntry.sortPriority = this.nextSortPriority();
+        }
+      } else if (value == 'DESC') {
+        sortEntry.value = null;
+        sortEntry.sortPriority = null;
+        this.normalizeSortPriorities();
       }
       this.forceRecomputeCounter++;
       setTimeout(() => {
         this.refresh();
       }, 1);
+    },
+    nextSortPriority() {
+      const priorities = this.internalFilters.filter(f => f.column.endsWith('_sort') && f.value && f.sortPriority).map(f => f.sortPriority);
+      return priorities.length ? Math.max(...priorities) + 1 : 1;
+    },
+    normalizeSortPriorities() {
+      const active = this.internalFilters.filter(f => f.column.endsWith('_sort') && f.value).sort((a, b) => (a.sortPriority || 0) - (b.sortPriority || 0));
+      active.forEach((f, idx) => {
+        f.sortPriority = idx + 1;
+      });
+    },
+    getSortPriority(column) {
+      const sortEntry = this.internalFilterByProp(column.prop + '_sort');
+      if (!sortEntry || !sortEntry.value) {
+        return null;
+      }
+      return sortEntry.sortPriority || null;
     },
     toggleFilters() {
       this.filtersVisible = !this.filtersVisible;
@@ -24173,7 +25428,7 @@ var crudFilters = {
       }
     },
     isColumnHasFilter(column) {
-      return column && !column.hideFilter && column.type != "actions";
+      return column && !column.hideFilter && column.type != 'actions' && column.type != 'checkbox' && column.type != 'select';
     },
     /**
      * Visible en tabla: columnas normales, o hideColumn solo mientras
@@ -24206,6 +25461,94 @@ var crudFilters = {
     },
     togglePrincipalSort() {
       this.principalSort = !this.principalSort;
+      setTimeout(() => {
+        this.refresh();
+      }, 1);
+    },
+    initQuickFilterState() {
+      const fromProp = this.quickFilter != null && this.quickFilter !== '' ? String(this.quickFilter) : null;
+      if (fromProp) {
+        this.activeQuickFilterKey = fromProp;
+        this.activeQuickFilterKeyReactive.value = fromProp;
+        return;
+      }
+      this.ensureActiveQuickFilter();
+    },
+    ensureActiveQuickFilter() {
+      const items = Array.isArray(this.quickFilters) ? this.quickFilters : [];
+      if (!items.length) {
+        this.activeQuickFilterKey = null;
+        this.activeQuickFilterKeyReactive.value = null;
+        return;
+      }
+      if (this.activeQuickFilterKey && this.findQuickFilterItem(this.activeQuickFilterKey)) {
+        return;
+      }
+      const preferred = items.find(item => item && item.default) || items.find(item => item && (item.filter == null || Array.isArray(item.filter) && item.filter.length === 0)) || items[0];
+      const key = this.normalizeQuickFilterKey(preferred);
+      this.activeQuickFilterKey = key;
+      this.activeQuickFilterKeyReactive.value = key;
+    },
+    normalizeQuickFilterKey(item) {
+      if (!item) return null;
+      if (item.key != null) return String(item.key);
+      if (item.value != null) return String(item.value);
+      if (item.id != null) return String(item.id);
+      return null;
+    },
+    findQuickFilterItem(key) {
+      if (key == null || key === '') return null;
+      const list = Array.isArray(this.quickFilters) ? this.quickFilters : [];
+      return list.find(item => this.normalizeQuickFilterKey(item) === String(key)) || null;
+    },
+    resolveQuickFilterPayload(item) {
+      if (!item) return [];
+      if (typeof item.apply === 'function') {
+        try {
+          const result = item.apply(item, this);
+          return Array.isArray(result) ? result : [];
+        } catch (e) {
+          console.warn('quickFilter.apply failed', e);
+          return [];
+        }
+      }
+      if (item.filter == null) return [];
+      if (typeof item.filter === 'function') {
+        try {
+          const result = item.filter(item, this);
+          return Array.isArray(result) ? result : [];
+        } catch (e) {
+          console.warn('quickFilter.filter failed', e);
+          return [];
+        }
+      }
+      return Array.isArray(item.filter) ? item.filter : [];
+    },
+    selectQuickFilter(key, item = null) {
+      const resolved = item || this.findQuickFilterItem(key);
+      const normalizedKey = resolved ? this.normalizeQuickFilterKey(resolved) : key != null ? String(key) : null;
+      if (!normalizedKey) {
+        return;
+      }
+      if (this.activeQuickFilterKey === normalizedKey) {
+        this.$emit('quick-filter-click', {
+          key: normalizedKey,
+          item: resolved,
+          filter: this.resolveQuickFilterPayload(resolved)
+        });
+        return;
+      }
+      this.activeQuickFilterKey = normalizedKey;
+      this.activeQuickFilterKeyReactive.value = normalizedKey;
+      this.forceRecomputeCounter++;
+      const payload = {
+        key: normalizedKey,
+        item: resolved,
+        filter: this.resolveQuickFilterPayload(resolved)
+      };
+      this.$emit('update:quickFilter', normalizedKey);
+      this.$emit('quick-filter-change', payload);
+      this.$emit('quick-filter-click', payload);
       setTimeout(() => {
         this.refresh();
       }, 1);
@@ -24500,136 +25843,125 @@ var crudHelpers = {
       this.$emit("select", this.item);
       this.$emit("selectItems", this.selectedItems);
     },
-    showItem(id, itemIndex = null) {
-      let item;
-      if (itemIndex == null) {
-        item = this.items.find(it => it.id == id);
-      } else {
-        item = this.items[itemIndex];
+    assignWorkingItem(source) {
+      const itemCopy = JSON.parse(JSON.stringify(source || {}));
+      if (this.useVuexORM && !this.vuexLocalforage && this.model) {
+        const modelInstance = new this.model(itemCopy);
+        Object.keys(modelInstance).forEach(key => {
+          this.item[key] = modelInstance[key];
+        });
+        Object.keys(this.item).forEach(key => {
+          if (!(key in modelInstance)) {
+            delete this.item[key];
+          }
+        });
+        return;
       }
+      Object.keys(itemCopy).forEach(key => {
+        this.item[key] = itemCopy[key];
+      });
+      Object.keys(this.item).forEach(key => {
+        if (!(key in itemCopy)) {
+          delete this.item[key];
+        }
+      });
+    },
+    openUi(mode, options = {}) {
+      this.uiMode = mode;
+      if (this.uiModeReactive) {
+        this.uiModeReactive.value = mode;
+      }
+      this.onSelect();
+      if (!options.skipUrl) {
+        this.syncUrlFromUi?.(mode, this.item?.id);
+      }
+      this.$nextTick(() => {
+        if (this.isModalViewMode) {
+          if (mode === 'show') {
+            this.$bvModal.show('modal-show-item-' + this.modelName);
+          } else {
+            this.$bvModal.show('modal-form-item-' + this.modelName);
+          }
+        }
+      });
+    },
+    closeUi(options = {}) {
+      const previous = this.uiMode;
+      if (!previous && options.skipUrl) {
+        return;
+      }
+      this.uiMode = null;
+      if (this.uiModeReactive) {
+        this.uiModeReactive.value = null;
+      }
+      if (this.isModalViewMode && previous) {
+        if (previous === 'show') {
+          this.$bvModal.hide('modal-show-item-' + this.modelName);
+        } else {
+          this.$bvModal.hide('modal-form-item-' + this.modelName);
+        }
+      }
+      if (!options.skipUrl) {
+        this.syncUrlFromUi?.(null, null);
+      }
+      if (previous) {
+        this.$emit('ui-closed', {
+          previous
+        });
+      }
+    },
+    findItemLocal(id, itemIndex = null) {
+      if (itemIndex != null && this.items[itemIndex]) {
+        return this.items[itemIndex];
+      }
+      if (id == null) {
+        return null;
+      }
+      return this.items.find(it => String(it.id) === String(id)) || null;
+    },
+    async resolveItem(id, itemIndex = null, options = {}) {
+      let item = this.findItemLocal(id, itemIndex);
+      if (item) {
+        return item;
+      }
+      if (options.fetchIfMissing && id != null && typeof this.fetchItem === 'function') {
+        item = await this.fetchItem(id);
+      }
+      return item;
+    },
+    async showItem(id, itemIndex = null, options = {}) {
+      const item = await this.resolveItem(id, itemIndex, options);
       if (!item) {
         console.warn('Item not found for showItem');
         return;
       }
-
-      // Hacer copia profunda del objeto para asegurar reactividad
-      const itemCopy = JSON.parse(JSON.stringify(item));
-      if (this.useVuexORM && !this.vuexLocalforage) {
-        const modelInstance = new this.model(itemCopy);
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(modelInstance).forEach(key => {
-          this.item[key] = modelInstance[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in modelInstance)) {
-            delete this.item[key];
-          }
-        });
-      } else {
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(itemCopy).forEach(key => {
-          this.item[key] = itemCopy[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in itemCopy)) {
-            delete this.item[key];
-          }
-        });
-      }
-      this.onSelect();
-      this.$nextTick(() => {
-        this.$bvModal.show("modal-show-item-" + this.modelName);
-      });
+      this.assignWorkingItem(item);
+      this.openUi('show', options);
     },
-    createItem() {
-      // Asegurar que loading esté en false al abrir el modal
+    createItem(options = {}) {
       this.loading = false;
-
-      // Hacer copia profunda del objeto para asegurar reactividad
-      const itemCopy = JSON.parse(JSON.stringify(this.itemDefault));
-      if (this.useVuexORM && !this.vuexLocalforage) {
-        const modelInstance = new this.model(itemCopy);
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(modelInstance).forEach(key => {
-          this.item[key] = modelInstance[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in modelInstance)) {
-            delete this.item[key];
-          }
-        });
-      } else {
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(itemCopy).forEach(key => {
-          this.item[key] = itemCopy[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in itemCopy)) {
-            delete this.item[key];
-          }
-        });
-      }
-      this.onSelect();
-      this.$nextTick(() => {
-        this.$bvModal.show("modal-form-item-" + this.modelName);
+      this.assignWorkingItem(this.itemDefault || {
+        id: null
       });
+      this.openUi('create', options);
     },
-    updateItem(id, itemIndex = null) {
-      // Asegurar que loading esté en false al abrir el modal
+    async updateItem(id, itemIndex = null, options = {}) {
       this.loading = false;
-      let item;
-      if (itemIndex == null) {
-        item = this.items.find(it => it.id == id);
-      } else {
-        item = this.items[itemIndex];
-      }
+      const item = await this.resolveItem(id, itemIndex, options);
       if (!item) {
         console.warn('Item not found for updateItem');
         return;
       }
-
-      // Hacer copia profunda del objeto para asegurar reactividad
-      const itemCopy = JSON.parse(JSON.stringify(item));
-      if (this.useVuexORM && !this.vuexLocalforage) {
-        const modelInstance = new this.model(itemCopy);
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(modelInstance).forEach(key => {
-          this.item[key] = modelInstance[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in modelInstance)) {
-            delete this.item[key];
-          }
-        });
-      } else {
-        // En Vue 3, la asignación directa es reactiva
-        Object.keys(itemCopy).forEach(key => {
-          this.item[key] = itemCopy[key];
-        });
-        // Eliminar propiedades que ya no existen
-        Object.keys(this.item).forEach(key => {
-          if (!(key in itemCopy)) {
-            delete this.item[key];
-          }
-        });
-      }
-      this.onSelect();
-      this.$nextTick(() => {
-        this.$bvModal.show("modal-form-item-" + this.modelName);
-      });
+      this.assignWorkingItem(item);
+      this.openUi('edit', options);
     },
     removeItem(id, index) {
       this.$bvModal.msgBoxConfirm(this.messageRemoveConfirm, {
-        size: "sm",
-        buttonSize: "sm",
-        okVariant: "danger",
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'danger',
         okTitle: this.messageRemove,
-        cancelTitle: "NO",
+        cancelTitle: 'NO',
         centered: true
       }).then(value => {
         if (value) {
@@ -24642,11 +25974,11 @@ var crudHelpers = {
     },
     confirmBulkDelete() {
       this.$bvModal.msgBoxConfirm(this.messageRemoveBulkConfirm, {
-        size: "sm",
-        buttonSize: "sm",
-        okVariant: "danger",
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'danger',
         okTitle: this.messageRemove,
-        cancelTitle: "NO",
+        cancelTitle: 'NO',
         centered: true
       }).then(value => {
         if (value) {
@@ -24658,24 +25990,18 @@ var crudHelpers = {
       });
     },
     toggleDisplayMode() {
-      // Mutar la propiedad local _displayMode y el objeto reactivo
-      if (this._displayMode == this.displayModes.MODE_TABLE) {
-        this._displayMode = this.displayModes.MODE_CARDS;
-        if (this.displayModeReactive) {
-          this.displayModeReactive.value = this.displayModes.MODE_CARDS;
-        }
-      } else if (this._displayMode == this.displayModes.MODE_CARDS) {
-        this._displayMode = this.displayModes.MODE_TABLE;
-        if (this.displayModeReactive) {
-          this.displayModeReactive.value = this.displayModes.MODE_TABLE;
-        }
+      const next = this._displayMode == this.displayModes.MODE_TABLE ? this.displayModes.MODE_CARDS : this.displayModes.MODE_TABLE;
+      this._displayMode = next;
+      if (this.displayModeReactive) {
+        this.displayModeReactive.value = next;
       }
+      this.forceRecomputeCounter++;
     },
     showExportModal() {
       // Asegurar que loading esté en false al abrir el modal
       this.loading = false;
-      if (this.$refs.crudModals && this.$refs.crudModals.$refs["modal-export"]) {
-        this.$refs.crudModals.$refs["modal-export"].show();
+      if (this.$refs.crudModals && this.$refs.crudModals.$refs['modal-export']) {
+        this.$refs.crudModals.$refs['modal-export'].show();
       }
     },
     showImportModal() {
@@ -24744,7 +26070,7 @@ var crudHelpers = {
         error_message = error.message;
       }
 
-      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
+      // Sistema unificado: $toast / $bvToast apuntan al mismo helper (con dedupe)
       if (this.$toast) {
         this.$toast(error_message, {
           title: `Error`,
@@ -24753,21 +26079,11 @@ var crudHelpers = {
           solid: true,
           appendToast: true
         });
-      } else if (this.$bvToast && this.$bvToast.toast) {
-        this.$bvToast.toast(error_message, {
-          title: `Error`,
-          toaster: "b-toaster-bottom-right",
-          variant: "danger",
-          solid: true,
-          appendToast: true
-        });
       } else {
-        // Fallback: usar console.error
         console.error('Error:', error_message);
       }
     },
     toastSuccess(message) {
-      // Usar $toast si está disponible, sino usar $bvToast (compatibilidad)
       if (this.$toast) {
         this.$toast(message, {
           title: `Listo`,
@@ -24776,16 +26092,7 @@ var crudHelpers = {
           solid: true,
           appendToast: true
         });
-      } else if (this.$bvToast && this.$bvToast.toast) {
-        this.$bvToast.toast(message, {
-          title: `Listo`,
-          toaster: "b-toaster-bottom-right",
-          variant: "success",
-          solid: true,
-          appendToast: true
-        });
       } else {
-        // Fallback: usar console.log
         console.log('Success:', message);
       }
     },
@@ -24808,6 +26115,427 @@ var crudHelpers = {
       document.body.appendChild(link);
       link.click();
     }
+  }
+};
+
+/**
+ * Sincronización de create/show/edit con la URL (query o path).
+ * Reutiliza createItem/showItem/updateItem; solo cambia cómo se refleja en el router.
+ */
+function normalizeUrlSync(urlSync) {
+  if (!urlSync) {
+    return null;
+  }
+  const defaults = {
+    strategy: 'path',
+    // 'path' | 'query'
+    paramAction: 'action',
+    paramId: 'id',
+    replace: false,
+    actions: {
+      create: 'create',
+      show: 'show',
+      edit: 'edit'
+    }
+  };
+  if (urlSync === true) {
+    return {
+      ...defaults
+    };
+  }
+  return {
+    ...defaults,
+    ...urlSync,
+    actions: {
+      ...defaults.actions,
+      ...(urlSync.actions || {})
+    }
+  };
+}
+
+/**
+ * Genera rutas Vue Router para deep-link de un CRUD.
+ * Uso: ...crudRoutes('/products', 'products', () => import('...'), { meta })
+ */
+function crudRoutes(basePath, name, component, options = {}) {
+  const meta = options.meta || {};
+  const props = options.props;
+  const base = String(basePath || '').replace(/\/$/, '') || '/';
+  return [{
+    path: base,
+    name,
+    component,
+    props,
+    meta
+  }, {
+    path: `${base}/create`,
+    name: `${name}-create`,
+    component,
+    props: route => ({
+      ...(typeof props === 'function' ? props(route) : props || {}),
+      crudAction: 'create'
+    }),
+    meta: {
+      ...meta,
+      crudAction: 'create'
+    }
+  }, {
+    path: `${base}/:id/edit`,
+    name: `${name}-edit`,
+    component,
+    props: route => ({
+      ...(typeof props === 'function' ? props(route) : props || {}),
+      id: route.params.id,
+      crudAction: 'edit'
+    }),
+    meta: {
+      ...meta,
+      crudAction: 'edit'
+    }
+  }, {
+    path: `${base}/:id`,
+    name: `${name}-show`,
+    component,
+    props: route => ({
+      ...(typeof props === 'function' ? props(route) : props || {}),
+      id: route.params.id,
+      crudAction: 'show'
+    }),
+    meta: {
+      ...meta,
+      crudAction: 'show'
+    }
+  }];
+}
+var crudUrlSync = {
+  data() {
+    return {
+      // null | 'create' | 'show' | 'edit'
+      uiMode: null,
+      uiModeReactive: {
+        value: null
+      },
+      _urlSyncApplying: false,
+      _urlSyncReady: false
+    };
+  },
+  computed: {
+    urlSyncConfig() {
+      return normalizeUrlSync(this.urlSync);
+    },
+    urlSyncEnabled() {
+      return !!this.urlSyncConfig;
+    },
+    isDetailOpen() {
+      return !!this.uiMode;
+    },
+    isPageViewMode() {
+      return String(this.viewMode || 'modal').toLowerCase() === 'page';
+    },
+    isModalViewMode() {
+      return !this.isPageViewMode;
+    },
+    listVisible() {
+      // En modo página, al abrir detalle se oculta el listado
+      if (this.isPageViewMode && this.isDetailOpen) {
+        return false;
+      }
+      return true;
+    }
+  },
+  watch: {
+    uiMode(val) {
+      this.uiModeReactive.value = val;
+    },
+    '$route'(to, from) {
+      if (!this.urlSyncEnabled || this._urlSyncApplying) {
+        return;
+      }
+      this.applyRouteToUi(to);
+    }
+  },
+  methods: {
+    getRouter() {
+      return this.$router || null;
+    },
+    getRoute() {
+      return this.$route || null;
+    },
+    crudIndexPath() {
+      const route = this.getRoute();
+      if (!route) {
+        return null;
+      }
+      const cfg = this.urlSyncConfig;
+      if (!cfg || cfg.strategy !== 'path') {
+        return route.path;
+      }
+      // Quitar /create, /:id, /:id/edit del path actual
+      let path = route.path.replace(/\/$/, '');
+      path = path.replace(/\/create$/i, '');
+      path = path.replace(/\/[^/]+\/edit$/i, '');
+      // si quedó .../123 (show), quitar id
+      const baseFromName = this.resolveCrudBasePath();
+      if (baseFromName) {
+        return baseFromName;
+      }
+      // fallback: parent path segments
+      const parts = path.split('/').filter(Boolean);
+      if (parts.length >= 2 && route.params && route.params.id) {
+        parts.pop();
+        return '/' + parts.join('/');
+      }
+      return path || '/';
+    },
+    resolveCrudBasePath() {
+      const route = this.getRoute();
+      const router = this.getRouter();
+      if (!route || !router) {
+        return null;
+      }
+      // Si la ruta se llama products-show / products-edit / products-create → base name products
+      const name = String(route.name || '');
+      const baseName = name.replace(/-(create|show|edit)$/i, '');
+      if (baseName && baseName !== name) {
+        try {
+          const resolved = router.resolve({
+            name: baseName
+          });
+          if (resolved && resolved.href) {
+            return resolved.path || resolved.href.replace(/^#/, '');
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      }
+      return null;
+    },
+    parseRouteAction(route = this.getRoute()) {
+      if (!route || !this.urlSyncConfig) {
+        return {
+          action: null,
+          id: null
+        };
+      }
+      const cfg = this.urlSyncConfig;
+      if (cfg.strategy === 'query') {
+        const action = route.query[cfg.paramAction] || null;
+        const id = route.query[cfg.paramId] || null;
+        return {
+          action: action ? String(action) : null,
+          id
+        };
+      }
+      // path
+      const name = String(route.name || '');
+      if (name.endsWith('-create') || route.meta?.crudAction === 'create') {
+        return {
+          action: 'create',
+          id: null
+        };
+      }
+      if (name.endsWith('-edit') || route.meta?.crudAction === 'edit') {
+        return {
+          action: 'edit',
+          id: route.params?.id ?? null
+        };
+      }
+      if (name.endsWith('-show') || route.meta?.crudAction === 'show') {
+        return {
+          action: 'show',
+          id: route.params?.id ?? null
+        };
+      }
+      // path heuristics
+      const path = String(route.path || '');
+      if (/\/create\/?$/i.test(path)) {
+        return {
+          action: 'create',
+          id: null
+        };
+      }
+      const editMatch = path.match(/\/([^/]+)\/edit\/?$/i);
+      if (editMatch) {
+        return {
+          action: 'edit',
+          id: editMatch[1]
+        };
+      }
+      if (route.params?.id) {
+        return {
+          action: 'show',
+          id: route.params.id
+        };
+      }
+      return {
+        action: null,
+        id: null
+      };
+    },
+    buildRouteLocation(action, id = null) {
+      const cfg = this.urlSyncConfig;
+      const route = this.getRoute();
+      const router = this.getRouter();
+      if (!cfg || !route || !router) {
+        return null;
+      }
+      if (cfg.strategy === 'query') {
+        const query = {
+          ...route.query
+        };
+        if (!action) {
+          delete query[cfg.paramAction];
+          delete query[cfg.paramId];
+        } else {
+          query[cfg.paramAction] = cfg.actions[action] || action;
+          if (id != null) {
+            query[cfg.paramId] = String(id);
+          } else {
+            delete query[cfg.paramId];
+          }
+        }
+        return {
+          path: route.path,
+          query,
+          hash: route.hash
+        };
+      }
+
+      // path strategy via named routes when possible
+      const baseName = String(route.name || '').replace(/-(create|show|edit)$/i, '') || null;
+      if (baseName) {
+        if (!action) {
+          return {
+            name: baseName
+          };
+        }
+        if (action === 'create') {
+          return {
+            name: `${baseName}-create`
+          };
+        }
+        if (action === 'edit') {
+          return {
+            name: `${baseName}-edit`,
+            params: {
+              id: String(id)
+            }
+          };
+        }
+        if (action === 'show') {
+          return {
+            name: `${baseName}-show`,
+            params: {
+              id: String(id)
+            }
+          };
+        }
+      }
+      const base = this.crudIndexPath() || '/';
+      if (!action) {
+        return {
+          path: base
+        };
+      }
+      if (action === 'create') {
+        return {
+          path: `${base}/create`
+        };
+      }
+      if (action === 'edit') {
+        return {
+          path: `${base}/${id}/edit`
+        };
+      }
+      return {
+        path: `${base}/${id}`
+      };
+    },
+    syncUrlFromUi(action = this.uiMode, id = this.item?.id) {
+      if (!this.urlSyncEnabled || this._urlSyncApplying) {
+        return;
+      }
+      const router = this.getRouter();
+      if (!router) {
+        return;
+      }
+      const location = this.buildRouteLocation(action, id);
+      if (!location) {
+        return;
+      }
+      const current = this.getRoute();
+      const resolved = router.resolve(location);
+      if (current && resolved && resolved.fullPath === current.fullPath) {
+        return;
+      }
+      this._urlSyncApplying = true;
+      const nav = this.urlSyncConfig.replace ? router.replace(location) : router.push(location);
+      Promise.resolve(nav).catch(() => {}).finally(() => {
+        this.$nextTick(() => {
+          this._urlSyncApplying = false;
+        });
+      });
+    },
+    applyRouteToUi(route = this.getRoute()) {
+      if (!this.urlSyncEnabled || !route) {
+        return;
+      }
+      const {
+        action,
+        id
+      } = this.parseRouteAction(route);
+      const normalized = action === this.urlSyncConfig.actions.create ? 'create' : action === this.urlSyncConfig.actions.edit ? 'edit' : action === this.urlSyncConfig.actions.show ? 'show' : action;
+      if (!normalized) {
+        if (this.uiMode) {
+          this.closeUi({
+            skipUrl: true
+          });
+        }
+        return;
+      }
+      if (normalized === 'create') {
+        if (this.uiMode !== 'create') {
+          this.createItem({
+            skipUrl: true
+          });
+        }
+        return;
+      }
+      if (normalized === 'show' || normalized === 'edit') {
+        if (this.uiMode === normalized && String(this.item?.id) === String(id)) {
+          return;
+        }
+        const opener = normalized === 'show' ? this.showItem : this.updateItem;
+        opener.call(this, id, null, {
+          skipUrl: true,
+          fetchIfMissing: true
+        });
+      }
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this._urlSyncReady = true;
+      if (this.urlSyncEnabled) {
+        this.applyRouteToUi(this.getRoute());
+      }
+      // Props externas (crudAction / id) desde rutas con props:true
+      if (this.crudAction) {
+        const action = this.crudAction;
+        const itemId = this.effectiveCrudItemId != null ? this.effectiveCrudItemId : this.id;
+        if (action === 'create') {
+          this.createItem({
+            skipUrl: true
+          });
+        } else if ((action === 'show' || action === 'edit') && itemId != null) {
+          const opener = action === 'show' ? this.showItem : this.updateItem;
+          opener.call(this, itemId, null, {
+            skipUrl: true,
+            fetchIfMissing: true
+          });
+        }
+      }
+    });
   }
 };
 
@@ -25223,120 +26951,136 @@ function hideBootstrapModal(modalRef) {
 }
 
 /**
- * Sistema de toasts simple compatible con Bootstrap 4 y 5
- * Reemplaza la funcionalidad de bootstrap-vue $bvToast
+ * Sistema de toasts unificado (Bootstrap 5 toast API)
+ * Compatible con bootstrap-vue $bvToast
  */
+const DEDUPE_WINDOW_MS = 1800;
+const recentToasts = new Map();
+function toastFingerprint(message, title, variant) {
+  return `${variant}::${title}::${String(message)}`.slice(0, 500);
+}
+function shouldSkipDuplicate(fingerprint) {
+  const now = Date.now();
+  for (const [key, ts] of recentToasts.entries()) {
+    if (now - ts > DEDUPE_WINDOW_MS) {
+      recentToasts.delete(key);
+    }
+  }
+  const last = recentToasts.get(fingerprint);
+  if (last && now - last < DEDUPE_WINDOW_MS) {
+    return true;
+  }
+  recentToasts.set(fingerprint, now);
+  return false;
+}
+function ensureToasterContainer(toaster = 'b-toaster-bottom-right') {
+  // Unificar contenedores legacy (app-toast-container / vue-laravel-crud-toaster)
+  const legacy = document.getElementById('app-toast-container');
+  if (legacy && legacy.id !== 'vue-laravel-crud-toaster') {
+    legacy.remove();
+  }
+  let toasterContainer = document.getElementById('vue-laravel-crud-toaster');
+  if (!toasterContainer) {
+    toasterContainer = document.createElement('div');
+    toasterContainer.id = 'vue-laravel-crud-toaster';
+    toasterContainer.className = 'toast-container position-fixed p-3 vue-laravel-crud-toaster';
+    if (toaster.includes('bottom-left')) {
+      toasterContainer.classList.add('bottom-0', 'start-0');
+    } else if (toaster.includes('top-right')) {
+      toasterContainer.classList.add('top-0', 'end-0');
+    } else if (toaster.includes('top-left')) {
+      toasterContainer.classList.add('top-0', 'start-0');
+    } else {
+      toasterContainer.classList.add('bottom-0', 'end-0');
+    }
+    toasterContainer.style.zIndex = '1090';
+    toasterContainer.style.maxWidth = '360px';
+    document.body.appendChild(toasterContainer);
+  }
+  return toasterContainer;
+}
 
 /**
  * Crea y muestra un toast
  * @param {string} message - Mensaje a mostrar
  * @param {Object} options - Opciones del toast
- * @param {string} options.title - Título del toast
- * @param {string} options.variant - Variante (success, danger, warning, info)
- * @param {string} options.toaster - Posición (no usado, mantenido por compatibilidad)
- * @param {boolean} options.solid - Si es true, usa fondo sólido
- * @param {boolean} options.appendToast - Si es true, agrega al contenedor existente
  */
 function showToast(message, options = {}) {
+  // Compat: showToast(message, title, variant) desde mixins legacy
+  if (typeof options === 'string') {
+    const title = options;
+    const variant = arguments[2] || 'info';
+    options = {
+      title,
+      variant,
+      solid: true
+    };
+  }
   const {
     title = '',
     variant = 'info',
     toaster = 'b-toaster-bottom-right',
-    solid = false,
-    appendToast = true
+    solid = true,
+    appendToast = true,
+    delay = 5000
   } = options;
-
-  // Crear contenedor de toasts si no existe
-  let toasterContainer = document.getElementById('vue-laravel-crud-toaster');
-  if (!toasterContainer) {
-    toasterContainer = document.createElement('div');
-    toasterContainer.id = 'vue-laravel-crud-toaster';
-    toasterContainer.className = 'vue-laravel-crud-toaster';
-
-    // Determinar posición basada en toaster
-    if (toaster.includes('bottom-right')) {
-      toasterContainer.style.cssText = 'position: fixed; bottom: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
-    } else if (toaster.includes('bottom-left')) {
-      toasterContainer.style.cssText = 'position: fixed; bottom: 0; left: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
-    } else if (toaster.includes('top-right')) {
-      toasterContainer.style.cssText = 'position: fixed; top: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
-    } else if (toaster.includes('top-left')) {
-      toasterContainer.style.cssText = 'position: fixed; top: 0; left: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
-    } else {
-      // Default: bottom-right
-      toasterContainer.style.cssText = 'position: fixed; bottom: 0; right: 0; z-index: 9999; padding: 1rem; max-width: 350px;';
-    }
-    document.body.appendChild(toasterContainer);
+  const fingerprint = toastFingerprint(message, title, variant);
+  if (shouldSkipDuplicate(fingerprint)) {
+    return null;
   }
-
-  // Crear elemento toast
-  const toastId = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  const toasterContainer = ensureToasterContainer(toaster);
+  if (!appendToast) {
+    toasterContainer.innerHTML = '';
+  }
+  const toastId = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
   const toast = document.createElement('div');
   toast.id = toastId;
-  toast.className = 'toast';
+  toast.className = 'toast align-items-center border-0 shadow mb-2';
   toast.setAttribute('role', 'alert');
   toast.setAttribute('aria-live', 'assertive');
   toast.setAttribute('aria-atomic', 'true');
-
-  // Determinar clases según variant
-  let bgClass = '';
-  let textClass = '';
+  toast.dataset.fingerprint = fingerprint;
+  let bgClass = 'bg-secondary';
+  let textClass = 'text-white';
   if (variant === 'success') {
-    bgClass = solid ? 'bg-success' : 'border-success';
-    textClass = solid ? 'text-white' : 'text-success';
+    bgClass = 'bg-success';
   } else if (variant === 'danger') {
-    bgClass = solid ? 'bg-danger' : 'border-danger';
-    textClass = solid ? 'text-white' : 'text-danger';
+    bgClass = 'bg-danger';
   } else if (variant === 'warning') {
-    bgClass = solid ? 'bg-warning' : 'border-warning';
-    textClass = solid ? 'text-white' : 'text-warning';
+    bgClass = 'bg-warning';
+    textClass = 'text-dark';
   } else if (variant === 'info') {
-    bgClass = solid ? 'bg-info' : 'border-info';
-    textClass = solid ? 'text-white' : 'text-info';
-  } else {
-    bgClass = solid ? 'bg-secondary' : 'border-secondary';
-    textClass = solid ? 'text-white' : 'text-secondary';
+    bgClass = 'bg-info';
+    textClass = 'text-dark';
   }
-
-  // Construir HTML del toast
+  if (solid) {
+    toast.classList.add(bgClass, textClass);
+  } else {
+    toast.classList.add(`border-${variant || 'secondary'}`);
+  }
   toast.innerHTML = `
-    <div class="toast-header ${solid ? bgClass + ' ' + textClass : ''}" style="${solid ? '' : 'border-bottom-color: inherit;'}">
-      ${title ? `<strong class="me-auto">${title}</strong>` : ''}
-      <button type="button" class="btn-close ${solid ? '' : 'btn-close-white'}" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body ${solid ? bgClass + ' ' + textClass : textClass}">
-      ${message}
+    <div class="d-flex">
+      <div class="toast-body">
+        ${title ? `<strong class="d-block mb-1">${title}</strong>` : ''}
+        <div>${message}</div>
+      </div>
+      <button type="button" class="btn-close ${textClass === 'text-white' ? 'btn-close-white' : ''} me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   `;
-
-  // Agregar clases adicionales
-  if (!solid) {
-    toast.classList.add('border');
-  }
-
-  // Agregar al contenedor
   toasterContainer.appendChild(toast);
-
-  // Inicializar y mostrar toast
-  // Bootstrap 5
   if (typeof window !== 'undefined' && window.bootstrap && window.bootstrap.Toast) {
     const bsToast = new window.bootstrap.Toast(toast, {
       autohide: true,
-      delay: 5000
+      delay
     });
     bsToast.show();
-
-    // Remover del DOM cuando se oculte
     toast.addEventListener('hidden.bs.toast', () => {
       if (toast.parentNode) {
         toast.remove();
       }
     });
   } else {
-    // Bootstrap 4 o fallback manual
     toast.classList.add('show');
-
-    // Auto-ocultar después de 5 segundos
     setTimeout(() => {
       toast.classList.remove('show');
       setTimeout(() => {
@@ -25344,7 +27088,7 @@ function showToast(message, options = {}) {
           toast.remove();
         }
       }, 300);
-    }, 5000);
+    }, delay);
   }
   return toast;
 }
@@ -25458,13 +27202,9 @@ const modalHelper = {
 var ToastPlugin = {
   install(app) {
     app.config.globalProperties.$toast = showToast;
-
-    // Compatibilidad con bootstrap-vue API
     app.config.globalProperties.$bvToast = {
       toast: showToast
     };
-
-    // Helper para modales
     app.config.globalProperties.$bvModal = modalHelper;
   }
 };
@@ -25474,16 +27214,47 @@ var ToastPlugin = {
  */
 
 /**
- * Iconos usados por el paquete + aliases comunes de bootstrap-vue.
- * Cualquier nombre adicional se puede pasar a registerBootstrapIcons(app, { icons: [...] }).
+ * Iconos usados por el paquete + aliases comunes de bootstrap-vue / consumidores.
+ * Cualquier nombre adicional se puede pasar a registerBootstrapIcons(app, { icons: [...] })
+ * o se registra on-demand vía installOnDemandIconResolver.
  */
-const DEFAULT_ICON_NAMES = ['arrow-clockwise', 'arrow-down', 'arrow-left', 'arrow-right', 'arrow-up', 'card-list', 'check', 'check-circle', 'check-square', 'clipboard', 'clipboard-check', 'cloud-download', 'cloud-upload', 'download', 'eye', 'file-earmark', 'file-text', 'funnel', 'gear', 'github', 'grid', 'grid-3x3-gap', 'kanban', 'list', 'pencil', 'plus', 'puzzle', 'search', 'sort-down', 'sort-numeric-down', 'sort-numeric-up', 'sort-up', 'table', 'trash', 'x-circle'];
+const DEFAULT_ICON_NAMES = ['arrow-clockwise', 'arrow-down', 'arrow-left', 'arrow-right', 'arrow-up', 'asterisk', 'bar-chart', 'card-list', 'cart-check', 'cart', 'check', 'check-all', 'check-circle', 'check-square', 'clipboard', 'clipboard-check', 'clock-history', 'cloud-download', 'cloud-upload', 'download', 'eye', 'facebook', 'file-earmark', 'file-text', 'funnel', 'gear', 'github', 'grid', 'grid-3x3-gap', 'info-circle', 'instagram', 'kanban', 'list', 'pencil', 'people-fill', 'person', 'plus', 'puzzle', 'search', 'sort-down', 'sort-numeric-down', 'sort-numeric-up', 'sort-up', 'table', 'telephone', 'tools', 'trash', 'x', 'x-circle'];
+const ICON_RESOLVER_INSTALLED = new WeakMap();
 
 /**
  * Convierte kebab-case a PascalCase: sort-numeric-down → SortNumericDown
  */
 function iconNameToPascal(iconName) {
   return String(iconName).split('-').filter(Boolean).map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('');
+}
+
+/**
+ * Convierte el sufijo Pascal de BIcon* a kebab-case: PeopleFill → people-fill
+ */
+function pascalIconToKebab(pascal) {
+  return String(pascal).replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/([A-Z])([A-Z][a-z])/g, '$1-$2').toLowerCase();
+}
+
+/**
+ * Extrae el nombre kebab del icono desde un nombre de componente Vue.
+ * @returns {string|null}
+ */
+function parseIconComponentName(componentName) {
+  if (typeof componentName !== 'string') {
+    return null;
+  }
+  if (componentName === 'b-icon' || componentName === 'BIcon') {
+    return null;
+  }
+  const kebabMatch = componentName.match(/^b-icon-(.+)$/);
+  if (kebabMatch) {
+    return kebabMatch[1];
+  }
+  const pascalMatch = componentName.match(/^BIcon(.+)$/);
+  if (pascalMatch) {
+    return pascalIconToKebab(pascalMatch[1]);
+  }
+  return null;
 }
 
 /**
@@ -25512,13 +27283,73 @@ function createIconWrapper(BIconComponent, iconName) {
 }
 
 /**
+ * Registra un único b-icon-* / BIcon* si aún no existe.
+ *
+ * @returns {object|null} el wrapper registrado o null
+ */
+function ensureIconRegistered(app, BIconComponent, iconName) {
+  if (!app || !BIconComponent || !iconName) {
+    return null;
+  }
+  const pascal = iconNameToPascal(iconName);
+  const iconComponentName = `BIcon${pascal}`;
+  const iconKebabName = `b-icon-${iconName}`;
+  const registry = app._context.components;
+  if (registry[iconComponentName] || registry[iconKebabName]) {
+    return registry[iconComponentName] || registry[iconKebabName];
+  }
+  const IconWrapper = createIconWrapper(BIconComponent, iconName);
+  app.component(iconComponentName, IconWrapper);
+  app.component(iconKebabName, IconWrapper);
+  return IconWrapper;
+}
+
+/**
+ * Proxy sobre el registro de componentes para crear b-icon-* on-demand.
+ * Así cualquier <b-icon-foo> funciona sin whitelist previa.
+ * Registra directo en el target para evitar recursión del Proxy.
+ */
+function installOnDemandIconResolver(app, BIconComponent) {
+  if (!app || !BIconComponent || ICON_RESOLVER_INSTALLED.get(app)) {
+    return;
+  }
+  const original = app._context.components;
+  app._context.components = new Proxy(original, {
+    get(target, prop, receiver) {
+      if (typeof prop === 'string') {
+        const iconName = parseIconComponentName(prop);
+        if (iconName) {
+          const pascalName = `BIcon${iconNameToPascal(iconName)}`;
+          const kebabName = `b-icon-${iconName}`;
+          if (!Object.prototype.hasOwnProperty.call(target, kebabName) && !Object.prototype.hasOwnProperty.call(target, pascalName)) {
+            const IconWrapper = createIconWrapper(BIconComponent, iconName);
+            target[pascalName] = IconWrapper;
+            target[kebabName] = IconWrapper;
+          }
+        }
+      }
+      return Reflect.get(target, prop, receiver);
+    },
+    has(target, prop) {
+      if (typeof prop === 'string' && parseIconComponentName(prop)) {
+        return true;
+      }
+      return Reflect.has(target, prop);
+    }
+  });
+  ICON_RESOLVER_INSTALLED.set(app, true);
+}
+
+/**
  * Registra BIcon, b-icon y todos los b-icon-* en la app Vue.
  * Idempotente: no sobrescribe componentes ya registrados.
+ * También instala resolución on-demand para cualquier b-icon-* no listado.
  *
  * @param {import('vue').App} app
  * @param {object} options
  * @param {object} options.BIcon - componente BIcon
  * @param {string[]} [options.icons] - lista extra de nombres kebab-case
+ * @param {boolean} [options.onDemand=true] - registrar iconos desconocidos al resolver
  */
 function registerBootstrapIcons(app, options = {}) {
   if (!app || !options.BIcon) {
@@ -25533,22 +27364,17 @@ function registerBootstrapIcons(app, options = {}) {
     app.component('b-icon', BIconComponent);
   }
   icons.forEach(iconName => {
-    const pascal = iconNameToPascal(iconName);
-    const iconComponentName = `BIcon${pascal}`;
-    const iconKebabName = `b-icon-${iconName}`;
-    if (app._context.components[iconComponentName] || app._context.components[iconKebabName]) {
-      return;
-    }
-    const IconWrapper = createIconWrapper(BIconComponent, iconName);
-    app.component(iconComponentName, IconWrapper);
-    app.component(iconKebabName, IconWrapper);
+    ensureIconRegistered(app, BIconComponent, iconName);
   });
+  if (options.onDemand !== false) {
+    installOnDemandIconResolver(app, BIconComponent);
+  }
 }
 
-var css = "tr td[data-v-9cafdc0f]:last-child,\ntr td[data-v-9cafdc0f]:first-child {\n  width: 1%;\n  white-space: nowrap;\n}\n\ntbody tr.selected[data-v-9cafdc0f] {\n  background-color: #e3f2fd !important;\n}\ntbody tr.selected td[data-v-9cafdc0f] {\n  background-color: transparent !important;\n}\ntbody tr.selected:hover[data-v-9cafdc0f] {\n  background-color: #bbdefb !important;\n}\ntbody tr.selected:hover td[data-v-9cafdc0f] {\n  background-color: transparent !important;\n}\n\n.table-striped tbody tr.selected:nth-of-type(odd)[data-v-9cafdc0f] {\n  background-color: #e3f2fd !important;\n}\n.table-striped tbody tr.selected:nth-of-type(odd) td[data-v-9cafdc0f] {\n  background-color: transparent !important;\n}\n\n.table-striped tbody tr.selected:nth-of-type(even)[data-v-9cafdc0f] {\n  background-color: #e3f2fd !important;\n}\n.table-striped tbody tr.selected:nth-of-type(even) td[data-v-9cafdc0f] {\n  background-color: transparent !important;\n}\n\n.crud-pagination[data-v-9cafdc0f] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 1rem;\n}\n\n.crud-header[data-v-9cafdc0f] {\n  display: flex;\n  justify-content: space-between;\n  max-height: 3rem;\n}\n.crud-header .crud-title[data-v-9cafdc0f] {\n  margin: 0;\n}\n.crud-header .crud-search[data-v-9cafdc0f] {\n  max-width: 15rem;\n}\n.crud-header .crud-search .btn[data-v-9cafdc0f] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-top-right-radius: 0.375rem;\n  border-bottom-right-radius: 0.375rem;\n}\n.crud-header .crud-search .btn.open[data-v-9cafdc0f] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.crud-header .table-options[data-v-9cafdc0f] {\n  margin-bottom: 1rem;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n\n.custom-control[data-v-9cafdc0f] {\n  position: relative;\n}\n\n@media (min-width: 992px) {\n  .table[data-v-9cafdc0f] {\n    table-layout: auto;\n  }\n  .table tbody td[data-v-9cafdc0f] {\n    overflow: scroll;\n    -ms-overflow-style: none;\n    /* IE and Edge */\n    scrollbar-width: none;\n    /* Firefox */\n  }\n  .table tbody td[data-v-9cafdc0f]::-webkit-scrollbar {\n    display: none;\n  }\n}\n.kanban-board[data-v-9cafdc0f] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem;\n}\n\n.kanban-column[data-v-9cafdc0f] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.kanban-column-header[data-v-9cafdc0f] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center;\n}\n\n.kanban-column-body[data-v-9cafdc0f] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n}\n\n.kanban-card[data-v-9cafdc0f] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab;\n}";
-n(css, {});
+var css$1 = ".crud[data-v-9cafdc0f] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n  margin: 0;\n  padding: 0;\n}\n\n.crud-body[data-v-9cafdc0f] {\n  margin: 0;\n  padding: 0;\n  min-width: 0;\n}\n\n.crud-active-filters[data-v-9cafdc0f] {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 0.4rem 0.5rem;\n  width: 100%;\n  padding: 0.15rem 0 0.35rem;\n}\n\n.crud-active-filters-label[data-v-9cafdc0f] {\n  flex: 0 0 auto;\n  font-size: 0.875rem;\n  font-weight: 600;\n  margin: 0;\n}\n\n.crud-active-filters-list[data-v-9cafdc0f] {\n  display: inline-flex;\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 0.35rem;\n  flex: 0 1 auto;\n  margin: 0;\n}\n\n.crud-active-filter-badge[data-v-9cafdc0f] {\n  display: inline-flex;\n  align-items: center;\n  font-size: 0.875rem;\n  font-weight: 400;\n  padding: 0.35rem 0.5rem;\n  margin: 0;\n}\n\n.crud-active-filter-remove[data-v-9cafdc0f] {\n  background: transparent;\n  border: 0;\n  color: inherit;\n  opacity: 0.75;\n  font-size: 1rem;\n  line-height: 1;\n  padding: 0;\n  cursor: pointer;\n}\n\n.crud-active-filter-remove[data-v-9cafdc0f]:hover {\n  opacity: 1;\n}\n\n.crud[data-v-9cafdc0f] .table-responsive {\n  margin: 0;\n}\n\n.crud[data-v-9cafdc0f] .table {\n  margin-bottom: 0;\n}\n\n.crud[data-v-9cafdc0f] .paginator-container {\n  margin-top: 0;\n  padding-top: 0.25rem;\n}\n\ntr td[data-v-9cafdc0f]:last-child,\ntr td[data-v-9cafdc0f]:first-child {\n  width: 1%;\n  white-space: nowrap;\n}\n\ntbody tr.selected[data-v-9cafdc0f] {\n  background-color: #e3f2fd !important;\n}\ntbody tr.selected td[data-v-9cafdc0f] {\n  background-color: transparent !important;\n}\ntbody tr.selected:hover[data-v-9cafdc0f] {\n  background-color: #bbdefb !important;\n}\ntbody tr.selected:hover td[data-v-9cafdc0f] {\n  background-color: transparent !important;\n}\n\n.table-striped tbody tr.selected:nth-of-type(odd)[data-v-9cafdc0f] {\n  background-color: #e3f2fd !important;\n}\n.table-striped tbody tr.selected:nth-of-type(odd) td[data-v-9cafdc0f] {\n  background-color: transparent !important;\n}\n\n.table-striped tbody tr.selected:nth-of-type(even)[data-v-9cafdc0f] {\n  background-color: #e3f2fd !important;\n}\n.table-striped tbody tr.selected:nth-of-type(even) td[data-v-9cafdc0f] {\n  background-color: transparent !important;\n}\n\n.crud-pagination[data-v-9cafdc0f] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: center;\n  margin-top: 0;\n}\n\n.crud-header[data-v-9cafdc0f] {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: flex-start;\n  justify-content: space-between;\n  gap: 0.75rem 1rem;\n  margin: 0;\n  padding: 0;\n}\n.crud-header .crud-title[data-v-9cafdc0f] {\n  margin: 0;\n  padding: 0.25rem 0;\n}\n.crud-header .table-options[data-v-9cafdc0f] {\n  margin: 0;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  width: 100%;\n}\n\n.custom-control[data-v-9cafdc0f] {\n  position: relative;\n}\n\n@media (min-width: 992px) {\n  .table[data-v-9cafdc0f] {\n    table-layout: auto;\n  }\n  .table tbody td[data-v-9cafdc0f] {\n    overflow: scroll;\n    -ms-overflow-style: none;\n    /* IE and Edge */\n    scrollbar-width: none;\n    /* Firefox */\n  }\n  .table tbody td[data-v-9cafdc0f]::-webkit-scrollbar {\n    display: none;\n  }\n}\n.kanban-board[data-v-9cafdc0f] {\n  display: flex;\n  gap: 1rem;\n  overflow-x: auto;\n  padding: 1rem;\n}\n\n.kanban-column[data-v-9cafdc0f] {\n  background: #f4f5f7;\n  border-radius: 8px;\n  width: 300px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.kanban-column-header[data-v-9cafdc0f] {\n  font-weight: bold;\n  padding: 0.5rem;\n  background: #dfe1e6;\n  border-radius: 8px 8px 0 0;\n  text-align: center;\n}\n\n.kanban-column-body[data-v-9cafdc0f] {\n  padding: 0.5rem;\n  min-height: 100px;\n  background: #ffffff;\n  border-radius: 0 0 8px 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n}\n\n.kanban-card[data-v-9cafdc0f] {\n  background: #ffffff;\n  border-radius: 4px;\n  padding: 1rem;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: grab;\n}";
+n(css$1, {});
 
-const _sfc_main = {
+const _sfc_main$1 = {
   name: "VueLaravelCrud",
   components: {
     CrudHeader,
@@ -25557,9 +27383,10 @@ const _sfc_main = {
     CrudKanban,
     CrudCustom,
     CrudModals,
-    CrudPagination
+    CrudPagination,
+    CrudDetailView
   },
-  mixins: [crudData, crudApi, crudFilters, crudValidation, crudHelpers],
+  mixins: [crudData, crudApi, crudFilters, crudValidation, crudHelpers, crudUrlSync],
   computed: {
     normalizedBootstrapVersion() {
       return normalizeBootstrapVersion(this.bootstrapVersion);
@@ -25570,6 +27397,9 @@ const _sfc_main = {
         getComponents: () => getBootstrapComponents(this.normalizedBootstrapVersion),
         version: this.normalizedBootstrapVersion
       };
+    },
+    effectiveCrudItemId() {
+      return this.crudItemId != null ? this.crudItemId : this.id;
     }
   },
   created() {
@@ -25645,6 +27475,7 @@ const _sfc_main = {
     });
   },
   provide() {
+    const vm = this;
     return {
       // Bootstrap version and factory
       bootstrapVersion: this.normalizedBootstrapVersion,
@@ -25662,6 +27493,13 @@ const _sfc_main = {
       filter: this.filter,
       customFilters: this.customFilters,
       enableFilters: this.enableFilters,
+      quickFilters: this.quickFilters,
+      quickFiltersPlacement: this.quickFiltersPlacement,
+      quickFiltersVariant: this.quickFiltersVariant,
+      quickFiltersClass: this.quickFiltersClass,
+      quickFiltersAriaLabel: this.quickFiltersAriaLabel,
+      activeQuickFilterKey: this.activeQuickFilterKeyReactive,
+      selectQuickFilter: this.selectQuickFilter,
       infiniteScroll: this.infiniteScroll,
       sortable: this.sortable,
       orderable: this.orderable,
@@ -25669,7 +27507,8 @@ const _sfc_main = {
       orderProp: this.orderProp,
       createMultipart: this.createMultipart,
       apiUrl: this.apiUrl,
-      search: this.search,
+      search: this.searchReactive,
+      displaySearch: this.displaySearchReactive,
       hideModalAfterSave: this.hideModalAfterSave,
       hideModalAfterCreate: this.hideModalAfterCreate,
       hideModalAfterUpdate: this.hideModalAfterUpdate,
@@ -25681,7 +27520,9 @@ const _sfc_main = {
       showHeader: this.showHeader,
       showTitle: this.showTitle,
       limit: this.limit,
+      // Objeto reactivo mutable (no ComputedRef) para inject Options API
       displayMode: this.displayModeReactive,
+      getDisplayMode: () => vm._displayMode,
       displayModeToggler: this.displayModeToggler,
       colXs: this.colXs,
       colSm: this.colSm,
@@ -25735,11 +27576,18 @@ const _sfc_main = {
       items: this.items,
       selectedItems: this.selectedItems,
       pagination: this.pagination,
-      displaySearch: this.displaySearch,
       itemDefault: this.itemDefault,
       filters: this.filters,
       filtersVisible: this.filtersVisibleReactive,
       filterSidebarOpen: this.filterSidebarOpenReactive,
+      setFilterSidebarOpen: val => {
+        const open = !!val;
+        vm.filtersVisible = open;
+        vm.filterSidebarOpen = open;
+        if (open && (!vm.internalFilters || vm.internalFilters.length === 0)) {
+          vm.setupFilters();
+        }
+      },
       internalFilters: this.internalFilters,
       forceRecomputeCounter: this.forceRecomputeCounter,
       displayModes: this.displayModes,
@@ -25792,8 +27640,11 @@ const _sfc_main = {
       infiniteHandler: this.infiniteHandler,
       setupFilters: this.setupFilters,
       toggleSortFilter: this.toggleSortFilter,
+      getSortPriority: this.getSortPriority,
       toggleFilters: this.toggleFilters,
       resetFilters: this.resetFilters,
+      activeFilters: this.activeFilters,
+      clearActiveFilter: this.clearActiveFilter,
       isColumnHasFilter: this.isColumnHasFilter,
       isColumnVisibleInTable: this.isColumnVisibleInTable,
       isCustomFilterEnabled: this.isCustomFilterEnabled,
@@ -25821,6 +27672,11 @@ const _sfc_main = {
       removeItem: this.removeItem,
       confirmBulkDelete: this.confirmBulkDelete,
       toggleDisplayMode: this.toggleDisplayMode,
+      closeUi: this.closeUi,
+      openUi: this.openUi,
+      uiMode: this.uiModeReactive,
+      isPageViewMode: () => this.isPageViewMode,
+      isModalViewMode: () => this.isModalViewMode,
       showExportModal: this.showExportModal,
       showImportModal: this.showImportModal,
       onDraggableAdded: this.onDraggableAdded,
@@ -25888,6 +27744,37 @@ const _sfc_main = {
     enableFilters: {
       type: Boolean,
       default: false
+    },
+    /**
+     * Filtros rápidos (pills/tabs) junto al título u otras ubicaciones.
+     * [{ key, label, icon?, variant?, count?, filter?, apply?, default?, disabled?, class? }]
+     */
+    quickFilters: {
+      type: Array,
+      default: () => []
+    },
+    /** v-model:quickFilter — key activa */
+    quickFilter: {
+      type: [String, Number],
+      default: null
+    },
+    /** title | toolbar | below */
+    quickFiltersPlacement: {
+      type: String,
+      default: 'title'
+    },
+    /** pills | tabs | segmented */
+    quickFiltersVariant: {
+      type: String,
+      default: 'pills'
+    },
+    quickFiltersClass: {
+      type: String,
+      default: ''
+    },
+    quickFiltersAriaLabel: {
+      type: String,
+      default: 'Filtros rápidos'
     },
     infiniteScroll: {
       type: Boolean,
@@ -26136,22 +28023,116 @@ const _sfc_main = {
     markDirty: {
       type: Boolean,
       default: true
+    },
+    /**
+     * Cómo mostrar create/show/edit:
+     * - modal: comportamiento clásico (default)
+     * - page: vista dedicada reutilizando slots form/show
+     */
+    viewMode: {
+      type: String,
+      default: 'modal',
+      validator: v => ['modal', 'page'].includes(String(v || '').toLowerCase())
+    },
+    /**
+     * Sincronizar create/show/edit con la URL.
+     * true => path (/resource/create, /resource/:id, /resource/:id/edit)
+     * o { strategy: 'query'|'path', ... }
+     */
+    urlSync: {
+      type: [Boolean, Object],
+      default: false
+    },
+    /** Acción inicial desde props de ruta (create|show|edit) */
+    crudAction: {
+      type: String,
+      default: null
+    },
+    /** Id inicial desde props de ruta */
+    crudItemId: {
+      type: [String, Number],
+      default: null
+    },
+    /** Alias conveniente: id de ruta */
+    id: {
+      type: [String, Number],
+      default: null
     }
   }
 };
-const _hoisted_1 = {
+const _hoisted_1$1 = {
   class: "crud"
 };
-function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_2$1 = {
+  key: 0,
+  class: "crud-active-filters"
+};
+const _hoisted_3$1 = {
+  class: "crud-active-filters-label text-muted"
+};
+const _hoisted_4$1 = {
+  class: "crud-active-filters-list"
+};
+const _hoisted_5$1 = ["onClick"];
+const _hoisted_6$1 = {
+  class: "crud-body"
+};
+function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_CrudDetailView = resolveComponent("CrudDetailView");
   const _component_CrudHeader = resolveComponent("CrudHeader");
+  const _component_b_icon_funnel = resolveComponent("b-icon-funnel");
+  const _component_b_badge = resolveComponent("b-badge");
+  const _component_b_button = resolveComponent("b-button");
   const _component_CrudTable = resolveComponent("CrudTable");
   const _component_CrudCards = resolveComponent("CrudCards");
   const _component_CrudKanban = resolveComponent("CrudKanban");
   const _component_CrudCustom = resolveComponent("CrudCustom");
-  const _component_b_overlay = resolveComponent("b-overlay");
   const _component_CrudPagination = resolveComponent("CrudPagination");
   const _component_CrudModals = resolveComponent("CrudModals");
-  return openBlock(), createElementBlock("div", _hoisted_1, [createVNode(_component_CrudHeader), createVNode(_component_CrudTable, null, createSlots({
+  return openBlock(), createElementBlock("div", _hoisted_1$1, [_ctx.isPageViewMode && _ctx.isDetailOpen ? (openBlock(), createBlock(_component_CrudDetailView, {
+    key: 0
+  }, createSlots({
+    _: 2 /* DYNAMIC */
+  }, [renderList(_ctx.$slots, (_, name) => {
+    return {
+      name: name,
+      fn: withCtx(slotProps => [renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), undefined, true)])
+    };
+  })]), 1024 /* DYNAMIC_SLOTS */)) : createCommentVNode("v-if", true), _ctx.listVisible ? (openBlock(), createElementBlock(Fragment, {
+    key: 1
+  }, [createVNode(_component_CrudHeader, null, createSlots({
+    _: 2 /* DYNAMIC */
+  }, [renderList(_ctx.$slots, (_, name) => {
+    return {
+      name: name,
+      fn: withCtx(slotProps => [renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), undefined, true)])
+    };
+  })]), 1024 /* DYNAMIC_SLOTS */), $props.enableFilters && _ctx.activeFilters.length > 0 ? (openBlock(), createElementBlock("div", _hoisted_2$1, [createElementVNode("span", _hoisted_3$1, [createVNode(_component_b_icon_funnel, {
+    class: "me-1"
+  }), _cache[1] || (_cache[1] = createTextVNode(" Filtros activos: ", -1 /* CACHED */))]), createElementVNode("div", _hoisted_4$1, [(openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.activeFilters, af => {
+    return openBlock(), createBlock(_component_b_badge, {
+      key: af.key,
+      variant: "primary",
+      class: "crud-active-filter-badge"
+    }, {
+      default: withCtx(() => [createElementVNode("strong", null, toDisplayString(af.label) + ":", 1 /* TEXT */), createTextVNode(" " + toDisplayString(af.displayValue) + " ", 1 /* TEXT */), createElementVNode("button", {
+        type: "button",
+        class: "crud-active-filter-remove ms-1",
+        "aria-label": "Quitar filtro",
+        onClick: $event => _ctx.clearActiveFilter(af.key)
+      }, "×", 8 /* PROPS */, _hoisted_5$1)]),
+      _: 2 /* DYNAMIC */
+    }, 1024 /* DYNAMIC_SLOTS */);
+  }), 128 /* KEYED_FRAGMENT */)), _ctx.activeFilters.length > 1 ? (openBlock(), createBlock(_component_b_button, {
+    key: 0,
+    variant: "link",
+    size: "sm",
+    class: "text-danger p-0",
+    onClick: _cache[0] || (_cache[0] = $event => _ctx.resetFilters())
+  }, {
+    default: withCtx(() => [...(_cache[2] || (_cache[2] = [createTextVNode(" Limpiar todos ", -1 /* CACHED */)]))]),
+    _: 1 /* STABLE */
+  })) : createCommentVNode("v-if", true)])])) : createCommentVNode("v-if", true), createElementVNode("div", _hoisted_6$1, [createVNode(_component_CrudTable, null, createSlots({
     _: 2 /* DYNAMIC */
   }, [renderList(_ctx.$slots, (_, name) => {
     return {
@@ -26172,10 +28153,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       name: name,
       fn: withCtx(slotProps => [renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), undefined, true)])
     };
-  })]), 1024 /* DYNAMIC_SLOTS */), createVNode(_component_CrudCustom), createVNode(_component_b_overlay, {
-    show: _ctx.loading,
-    rounded: "sm"
-  }, null, 8 /* PROPS */, ["show"]), createVNode(_component_CrudPagination), createVNode(_component_CrudModals, {
+  })]), 1024 /* DYNAMIC_SLOTS */), createVNode(_component_CrudCustom)]), createVNode(_component_CrudPagination)], 64 /* STABLE_FRAGMENT */)) : createCommentVNode("v-if", true), _ctx.isModalViewMode ? (openBlock(), createBlock(_component_CrudModals, {
+    key: 2,
     ref: "crudModals"
   }, createSlots({
     _: 2 /* DYNAMIC */
@@ -26184,28 +28163,465 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       name: name,
       fn: withCtx(slotProps => [renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), undefined, true)])
     };
-  })]), 1536 /* NEED_PATCH, DYNAMIC_SLOTS */)]);
+  })]), 1536 /* NEED_PATCH, DYNAMIC_SLOTS */)) : createCommentVNode("v-if", true)]);
 }
-var component = /*#__PURE__*/_export_sfc(_sfc_main, [['render', _sfc_render], ['__scopeId', "data-v-9cafdc0f"]]);
+var component = /*#__PURE__*/_export_sfc(_sfc_main$1, [['render', _sfc_render$1], ['__scopeId', "data-v-9cafdc0f"]]);
+
+var css = "\n.perm-tree-editor[data-v-f074defb] {\r\n  border: 1px solid #e9ecef;\r\n  border-radius: 0.5rem;\r\n  padding: 0.75rem;\r\n  background: #fff;\n}\n.perm-tree-editor__toolbar[data-v-f074defb] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  gap: 0.5rem;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  margin-bottom: 0.75rem;\n}\n.perm-tree-editor__search[data-v-f074defb] {\r\n  max-width: 18rem;\r\n  flex: 1 1 14rem;\n}\n.perm-tree-editor__tree[data-v-f074defb] {\r\n  max-height: 28rem;\r\n  overflow: auto;\r\n  border: 1px solid #f1f3f5;\r\n  border-radius: 0.375rem;\r\n  padding: 0.5rem 0.75rem;\r\n  background: #fafbfc;\n}\n.perm-tree__row[data-v-f074defb] {\r\n  display: flex;\r\n  align-items: center;\r\n  min-height: 1.9rem;\r\n  padding: 0.15rem 0;\n}\n.perm-tree__toggle[data-v-f074defb] {\r\n  width: 1.25rem;\r\n  line-height: 1;\r\n  text-decoration: none;\r\n  color: #495057;\n}\n.perm-tree__label[data-v-f074defb] {\r\n  font-size: 0.875rem;\r\n  word-break: break-word;\n}\r\n";
+n(css, {});
+
+const PermTreeNode = defineComponent({
+  name: 'PermTreeNode',
+  props: {
+    node: {
+      type: Object,
+      required: true
+    },
+    depth: {
+      type: Number,
+      default: 0
+    },
+    expandedMap: {
+      type: Object,
+      required: true
+    },
+    grantedSet: {
+      type: Object,
+      required: true
+    },
+    viaRoleSet: {
+      type: Object,
+      required: true
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
+  emits: ['toggle-expand', 'toggle-permission', 'toggle-group'],
+  computed: {
+    expanded() {
+      return !!this.expandedMap[this.node.path];
+    },
+    hasChildren() {
+      return Array.isArray(this.node.children) && this.node.children.length > 0;
+    },
+    leafNames() {
+      const names = [];
+      const walk = n => {
+        if (n.permission?.name) names.push(n.permission.name);
+        (n.children || []).forEach(walk);
+      };
+      walk(this.node);
+      return names;
+    },
+    grantedLeaves() {
+      return this.leafNames.filter(n => this.grantedSet[n]);
+    },
+    groupState() {
+      const total = this.leafNames.length;
+      const granted = this.grantedLeaves.length;
+      if (!total || granted === 0) return 'none';
+      if (granted === total) return 'all';
+      return 'some';
+    },
+    viaRole() {
+      return this.node.permission?.name ? !!this.viaRoleSet[this.node.permission.name] : false;
+    }
+  },
+  methods: {
+    onGroupChange(event) {
+      this.$emit('toggle-group', {
+        names: this.leafNames,
+        grant: event.target.checked
+      });
+    },
+    onLeafChange(event) {
+      this.$emit('toggle-permission', {
+        name: this.node.permission.name,
+        grant: event.target.checked
+      });
+    }
+  },
+  render() {
+    const pad = {
+      paddingLeft: `${this.depth * 1.1}rem`
+    };
+    const children = [];
+    if (this.hasChildren) {
+      children.push(h('div', {
+        class: 'perm-tree__row perm-tree__row--group',
+        style: pad
+      }, [h('button', {
+        type: 'button',
+        class: 'btn btn-sm btn-link perm-tree__toggle p-0 me-1',
+        onClick: () => this.$emit('toggle-expand', this.node.path)
+      }, this.expanded ? '▾' : '▸'), h('input', {
+        class: 'form-check-input me-2',
+        type: 'checkbox',
+        checked: this.groupState === 'all',
+        disabled: this.readonly,
+        onChange: this.onGroupChange,
+        onVnodeMounted: vnode => {
+          if (vnode.el) vnode.el.indeterminate = this.groupState === 'some';
+        },
+        onVnodeUpdated: vnode => {
+          if (vnode.el) vnode.el.indeterminate = this.groupState === 'some';
+        }
+      }), h('span', {
+        class: 'perm-tree__label fw-semibold'
+      }, this.node.label), h('span', {
+        class: 'badge text-bg-light ms-2'
+      }, `${this.grantedLeaves.length}/${this.leafNames.length}`)]));
+      if (this.expanded) {
+        children.push(h('ul', {
+          class: 'list-unstyled mb-0'
+        }, this.node.children.map(child => h(PermTreeNode, {
+          key: child.path,
+          node: child,
+          depth: this.depth + 1,
+          expandedMap: this.expandedMap,
+          grantedSet: this.grantedSet,
+          viaRoleSet: this.viaRoleSet,
+          readonly: this.readonly,
+          onToggleExpand: p => this.$emit('toggle-expand', p),
+          onTogglePermission: p => this.$emit('toggle-permission', p),
+          onToggleGroup: p => this.$emit('toggle-group', p)
+        }))));
+      }
+    } else if (this.node.permission) {
+      children.push(h('div', {
+        class: 'perm-tree__row',
+        style: pad
+      }, [h('input', {
+        class: 'form-check-input me-2',
+        type: 'checkbox',
+        checked: !!this.grantedSet[this.node.permission.name],
+        disabled: this.readonly,
+        onChange: this.onLeafChange
+      }), h('span', {
+        class: 'perm-tree__label'
+      }, this.node.permission.name), this.viaRole ? h('span', {
+        class: 'badge text-bg-info ms-2'
+      }, 'vía rol') : null]));
+    }
+    return h('li', {
+      class: 'perm-tree__node'
+    }, children);
+  }
+});
+function buildPermissionTree(permissions) {
+  const root = {
+    path: '',
+    label: 'root',
+    children: [],
+    map: {}
+  };
+  const ensure = (parent, segment, path) => {
+    if (!parent.map[segment]) {
+      const node = {
+        path,
+        label: segment,
+        children: [],
+        map: {},
+        permission: null
+      };
+      parent.map[segment] = node;
+      parent.children.push(node);
+    }
+    return parent.map[segment];
+  };
+  (permissions || []).forEach(perm => {
+    const name = typeof perm === 'string' ? perm : perm?.name;
+    if (!name) return;
+    const segments = String(name).split('.').filter(Boolean);
+    if (!segments.length) return;
+    let current = root;
+    let path = '';
+    segments.forEach((segment, idx) => {
+      path = path ? `${path}.${segment}` : segment;
+      current = ensure(current, segment, path);
+      if (idx === segments.length - 1) {
+        current.permission = typeof perm === 'string' ? {
+          name: perm
+        } : perm;
+      }
+    });
+  });
+  const sortNodes = nodes => {
+    nodes.sort((a, b) => a.label.localeCompare(b.label));
+    nodes.forEach(n => sortNodes(n.children || []));
+  };
+  sortNodes(root.children);
+  return root.children;
+}
+function filterTree(nodes, query) {
+  if (!query) return nodes;
+  const q = query.toLowerCase();
+  const walk = list => {
+    const out = [];
+    list.forEach(node => {
+      const childMatches = walk(node.children || []);
+      const selfMatch = node.label && node.label.toLowerCase().includes(q) || node.permission?.name && node.permission.name.toLowerCase().includes(q);
+      if (selfMatch || childMatches.length) {
+        out.push({
+          ...node,
+          children: selfMatch ? node.children : childMatches
+        });
+      }
+    });
+    return out;
+  };
+  return walk(nodes);
+}
+function collectPaths(nodes, acc = []) {
+  nodes.forEach(n => {
+    acc.push(n.path);
+    collectPaths(n.children || [], acc);
+  });
+  return acc;
+}
+function normalizePermissionNames(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map(p => typeof p === 'string' ? p : p?.name).filter(Boolean);
+}
+const _sfc_main = {
+  name: 'PermissionTreeEditor',
+  components: {
+    PermTreeNode
+  },
+  props: {
+    permissions: {
+      type: Array,
+      default: () => []
+    },
+    modelValue: {
+      type: Array,
+      default: () => []
+    },
+    viaRolePermissions: {
+      type: Array,
+      default: () => []
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
+  emits: ['update:modelValue'],
+  data() {
+    return {
+      search: '',
+      expandedMap: {}
+    };
+  },
+  computed: {
+    permissionsList() {
+      return Array.isArray(this.permissions) ? this.permissions : [];
+    },
+    tree() {
+      return buildPermissionTree(this.permissionsList);
+    },
+    filteredTree() {
+      return filterTree(this.tree, this.search.trim());
+    },
+    effectiveExpandedMap() {
+      // Con búsqueda activa, expandir coincidencias para poder trabajar
+      if (this.search.trim()) {
+        const map = {
+          ...this.expandedMap
+        };
+        collectPaths(this.filteredTree).forEach(p => {
+          map[p] = true;
+        });
+        return map;
+      }
+      return this.expandedMap;
+    },
+    grantedNames() {
+      return normalizePermissionNames(this.modelValue);
+    },
+    grantedSet() {
+      const set = {};
+      this.grantedNames.forEach(n => {
+        set[n] = true;
+      });
+      return set;
+    },
+    viaRoleNames() {
+      return normalizePermissionNames(this.viaRolePermissions);
+    },
+    viaRoleSet() {
+      const set = {};
+      this.viaRoleNames.forEach(n => {
+        set[n] = true;
+      });
+      return set;
+    },
+    grantedCount() {
+      return this.grantedNames.length;
+    }
+  },
+  methods: {
+    emitNames(names) {
+      const unique = [...new Set(names)];
+      const byName = {};
+      this.permissionsList.forEach(p => {
+        const name = typeof p === 'string' ? p : p?.name;
+        if (name) byName[name] = typeof p === 'string' ? {
+          name: p
+        } : p;
+      });
+      this.$emit('update:modelValue', unique.map(name => byName[name] || {
+        name
+      }));
+    },
+    toggleExpand(path) {
+      this.expandedMap = {
+        ...this.expandedMap,
+        [path]: !this.expandedMap[path]
+      };
+    },
+    expandAll() {
+      const map = {};
+      collectPaths(this.filteredTree).forEach(p => {
+        map[p] = true;
+      });
+      this.expandedMap = {
+        ...this.expandedMap,
+        ...map
+      };
+    },
+    collapseAll() {
+      this.expandedMap = {};
+    },
+    togglePermission({
+      name,
+      grant
+    }) {
+      const set = new Set(this.grantedNames);
+      if (grant) set.add(name);else set.delete(name);
+      this.emitNames([...set]);
+    },
+    toggleGroup({
+      names,
+      grant
+    }) {
+      const set = new Set(this.grantedNames);
+      names.forEach(n => {
+        if (grant) set.add(n);else set.delete(n);
+      });
+      this.emitNames([...set]);
+    },
+    visibleLeafNames() {
+      const names = [];
+      const walk = nodes => {
+        nodes.forEach(n => {
+          if (n.permission?.name) names.push(n.permission.name);
+          walk(n.children || []);
+        });
+      };
+      walk(this.filteredTree);
+      return names;
+    },
+    grantVisible() {
+      const set = new Set(this.grantedNames);
+      this.visibleLeafNames().forEach(n => set.add(n));
+      this.emitNames([...set]);
+    },
+    denyVisible() {
+      const deny = new Set(this.visibleLeafNames());
+      this.emitNames(this.grantedNames.filter(n => !deny.has(n)));
+    }
+  }
+};
+const _hoisted_1 = {
+  class: "perm-tree-editor"
+};
+const _hoisted_2 = {
+  key: 0,
+  class: "perm-tree-editor__toolbar"
+};
+const _hoisted_3 = {
+  class: "input-group input-group-sm perm-tree-editor__search"
+};
+const _hoisted_4 = {
+  class: "btn-group btn-group-sm"
+};
+const _hoisted_5 = {
+  class: "perm-tree-editor__meta text-muted small mb-2"
+};
+const _hoisted_6 = {
+  key: 0,
+  class: "ms-2"
+};
+const _hoisted_7 = {
+  class: "perm-tree-editor__tree"
+};
+const _hoisted_8 = {
+  key: 0,
+  class: "text-muted text-center py-4"
+};
+const _hoisted_9 = {
+  key: 1,
+  class: "perm-tree list-unstyled mb-0"
+};
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_perm_tree_node = resolveComponent("perm-tree-node");
+  return openBlock(), createElementBlock("div", _hoisted_1, [!$props.readonly ? (openBlock(), createElementBlock("div", _hoisted_2, [createElementVNode("div", _hoisted_3, [_cache[5] || (_cache[5] = createElementVNode("span", {
+    class: "input-group-text"
+  }, [createElementVNode("i", {
+    class: "bi bi-search"
+  })], -1 /* CACHED */)), withDirectives(createElementVNode("input", {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => $data.search = $event),
+    type: "search",
+    class: "form-control",
+    placeholder: "Buscar permiso o grupo..."
+  }, null, 512 /* NEED_PATCH */), [[vModelText, $data.search]])]), createElementVNode("div", _hoisted_4, [createElementVNode("button", {
+    type: "button",
+    class: "btn btn-outline-secondary",
+    onClick: _cache[1] || (_cache[1] = (...args) => $options.expandAll && $options.expandAll(...args))
+  }, "Expandir"), createElementVNode("button", {
+    type: "button",
+    class: "btn btn-outline-secondary",
+    onClick: _cache[2] || (_cache[2] = (...args) => $options.collapseAll && $options.collapseAll(...args))
+  }, "Colapsar"), createElementVNode("button", {
+    type: "button",
+    class: "btn btn-outline-success",
+    onClick: _cache[3] || (_cache[3] = (...args) => $options.grantVisible && $options.grantVisible(...args))
+  }, "Habilitar visibles"), createElementVNode("button", {
+    type: "button",
+    class: "btn btn-outline-danger",
+    onClick: _cache[4] || (_cache[4] = (...args) => $options.denyVisible && $options.denyVisible(...args))
+  }, "Quitar visibles")])])) : createCommentVNode("v-if", true), createElementVNode("div", _hoisted_5, [createElementVNode("span", null, toDisplayString($options.grantedCount) + " habilitados", 1 /* TEXT */), _cache[6] || (_cache[6] = createElementVNode("span", {
+    class: "mx-1"
+  }, "·", -1 /* CACHED */)), createElementVNode("span", null, toDisplayString($options.permissionsList.length) + " totales", 1 /* TEXT */), $options.viaRoleNames.length ? (openBlock(), createElementBlock("span", _hoisted_6, " (" + toDisplayString($options.viaRoleNames.length) + " vía rol) ", 1 /* TEXT */)) : createCommentVNode("v-if", true)]), createElementVNode("div", _hoisted_7, [!$options.filteredTree.length ? (openBlock(), createElementBlock("div", _hoisted_8, " No hay permisos para mostrar ")) : (openBlock(), createElementBlock("ul", _hoisted_9, [(openBlock(true), createElementBlock(Fragment, null, renderList($options.filteredTree, node => {
+    return openBlock(), createBlock(_component_perm_tree_node, {
+      key: node.path,
+      node: node,
+      depth: 0,
+      "expanded-map": $options.effectiveExpandedMap,
+      "granted-set": $options.grantedSet,
+      "via-role-set": $options.viaRoleSet,
+      readonly: $props.readonly,
+      onToggleExpand: $options.toggleExpand,
+      onTogglePermission: $options.togglePermission,
+      onToggleGroup: $options.toggleGroup
+    }, null, 8 /* PROPS */, ["node", "expanded-map", "granted-set", "via-role-set", "readonly", "onToggleExpand", "onTogglePermission", "onToggleGroup"]);
+  }), 128 /* KEYED_FRAGMENT */))]))])]);
+}
+var PermissionTreeEditor = /*#__PURE__*/_export_sfc(_sfc_main, [['render', _sfc_render], ['__scopeId', "data-v-f074defb"]]);
 
 // Import vue component
 
 // Default export is installable instance of component.
-// IIFE injects install function into component, allowing component
-// to be registered via app.use() as well as app.component(),
 var entry_esm = /*#__PURE__*/(() => {
-  // Get component instance
   const installable = component;
-
-  // Attach install function executed by app.use()
   installable.install = app => {
     app.component('VueLaravelCrud', installable);
+    app.component('PermissionTreeEditor', PermissionTreeEditor);
   };
   return installable;
 })();
 
-// It's possible to expose named exports when writing components that can
-// also be used as directives, etc. - eg. import { RollupDemoDirective } from 'rollup-demo';
-// export const RollupDemoDirective = directive;
-
-export { entry_esm as default };
+export { PermissionTreeEditor, crudRoutes, entry_esm as default, normalizeUrlSync };
