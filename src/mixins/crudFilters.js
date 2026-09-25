@@ -34,7 +34,7 @@ export default {
       const hasTo = this.hasFilterValue(toVal);
       const formatOne = (v) => {
         if (column.type == 'date' && v) {
-          return this.moment(v).format(column.format ? column.format : 'L');
+          return this.dayjs(v).format(column.format ? column.format : 'L');
         }
         return String(v);
       };

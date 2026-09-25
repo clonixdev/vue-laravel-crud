@@ -1,10 +1,13 @@
-import moment from "moment";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
+dayjs.extend(localizedFormat);
 
 export default {
   data() {
     return {
       crudUuid: "",
-      moment: moment,
+      dayjs: dayjs,
       loading: false,
       firstLoad: false,
       item: {

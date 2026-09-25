@@ -128,7 +128,7 @@
 <script>
 import VueLaravelCrud from '../../../src/vue-laravel-crud.vue';
 import CodeSnippet from '../components/CodeSnippet.vue';
-import { isStaticMode, getMockDataForModel } from '../utils/staticMode.js';
+import { isStaticMode } from '../utils/staticMode.js';
 import { generateMockData } from '../data/mockData.js';
 
 export default {
@@ -202,7 +202,7 @@ export default {
           label: "Creado", 
           prop: "created_at", 
           type: "date", 
-          format: "DD/MM/YYYY" // Formato de fecha usando moment.js
+          format: "DD/MM/YYYY" // Formato de fecha usando dayjs
         },
         { 
           label: "Acciones", 

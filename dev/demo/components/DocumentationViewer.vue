@@ -128,15 +128,13 @@ export default {
         this.markdownContent = documentationContent;
         
         // Configurar marked con opciones
-        marked.setOptions({
+        marked.use({
           breaks: true,
-          gfm: true,
-          headerIds: true,
-          headerPrefix: ''
+          gfm: true
         });
-        
+
         // Renderizar markdown
-        this.renderedMarkdown = marked(this.markdownContent);
+        this.renderedMarkdown = marked.parse(this.markdownContent, { async: false });
         
         // Esperar a que Vue actualice el DOM
         await this.$nextTick();

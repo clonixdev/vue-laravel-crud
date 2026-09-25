@@ -17,7 +17,7 @@
       <span v-else-if="column.type == 'date'">
         {{
           itemValue(column, item)
-            ? moment(itemValue(column, item)).format(
+            ? dayjs(itemValue(column, item)).format(
               column.format ? column.format : 'L LT'
             )
             : itemValue(column, item)
@@ -115,7 +115,10 @@
 </template>
 
 <script>
-import moment from "moment";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
+dayjs.extend(localizedFormat);
 
 export default {
   name: 'TableCell',
@@ -140,7 +143,7 @@ export default {
   ],
   data() {
     return {
-      moment: moment
+      dayjs: dayjs
     };
   },
   computed: {

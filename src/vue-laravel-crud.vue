@@ -226,7 +226,9 @@ export default /*#__PURE__*/ {
 
       // Data from mixins
       crudUuid: this.crudUuid,
-      moment: this.moment,
+      // dayjs sustituye a moment (mantenemos alias moment por compatibilidad)
+      dayjs: this.dayjs,
+      moment: this.dayjs,
       loading: this.loadingReactive,
       firstLoad: this.firstLoadReactive,
       // Proporcionar item como función getter para reactividad

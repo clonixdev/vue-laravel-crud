@@ -1,17 +1,18 @@
 // rollup.config.js
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import vue from '@vitejs/plugin-vue'
 import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import babel from '@rollup/plugin-babel';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import minimist from 'minimist';
 import json from "@rollup/plugin-json";
 import nodePolyfills from 'rollup-plugin-polyfill-node';
-import styles from 'rollup-plugin-styles';
+import postcss from 'rollup-plugin-postcss';
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs.readFileSync('./.browserslistrc')
@@ -20,6 +21,9 @@ const esbrowserslist = fs.readFileSync('./.browserslistrc')
   .filter((entry) => entry && entry.substring(0, 2) !== 'ie');
 
 const argv = minimist(process.argv.slice(2));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const projectRoot = path.resolve(__dirname, '..');
 
@@ -47,14 +51,14 @@ const baseConfig = {
       },
     },
     postVue: [
-      json(), 
+      json(),
       nodePolyfills(),
-      styles({ mode: 'inject' }),
+      postcss({ inject: true }),
       resolve({
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
-        jsnext: true, preferBuiltins: true, browser: true 
+        jsnext: true, preferBuiltins: true, browser: true
       }),
-      
+
     ],
     babel: {
       exclude: 'node_modules/**',
