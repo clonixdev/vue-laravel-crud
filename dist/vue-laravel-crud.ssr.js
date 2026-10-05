@@ -13391,13 +13391,31 @@ n(css, {});var _sfc_main = {
       }, 1);
     },
     infiniteHandler: function infiniteHandler($state) {
-      var hasNextPage = (this.pagination.total > 0 || !this.firstLoad) && (!this.firstLoad || this.pagination.current_page * this.pagination.per_page <= this.pagination.total);
+      var _this = this;
+      // La carga inicial (y el refresco) ya piden la página 1. Si el scroll
+      // dispara antes de que esa respuesta llegue, pedir la página 2 pisa
+      // la página 1 vía fetchSeq y el listado queda incompleto.
+      if (!this.firstLoad || this.loading) {
+        var unwatch = this.$watch(function () {
+          return _this.firstLoad && !_this.loading;
+        }, function (ready) {
+          if (!ready) return;
+          unwatch();
+          _this.infiniteHandler($state);
+        });
+        return;
+      }
+      var hasNextPage = this.pagination.current_page < this.pagination.last_page;
       console.debug("Has next page", hasNextPage, this.pagination);
       if (hasNextPage) {
         var page = this.pagination.current_page + 1;
         this.fetchItems(page, true).then(function () {
           console.debug("infinite handler then");
-          $state.loaded();
+          if (_this.pagination.current_page < _this.pagination.last_page) {
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
         }).catch(function (error) {
           console.debug("infinite handler error", error);
           $state.error();
@@ -15433,16 +15451,16 @@ var _sfc_render = function render() {
       "slot": "no-more"
     },
     slot: "no-more"
-  }, [!_vm.loading ? _c('div', {
+  }, [!_vm.loading && _vm.items.length === 0 ? _c('div', {
     staticClass: "text-center"
   }, [_vm._v(_vm._s(_vm.messageNoMore))]) : _vm._e()]), _c('div', {
     attrs: {
       "slot": "no-results"
     },
     slot: "no-results"
-  }, [!_vm.loading ? _c('div', {
+  }, [!_vm.loading && _vm.items.length == 0 ? _c('div', {
     staticClass: "text-center"
-  }, [_vm._v(_vm._s(_vm.items.length == 0 ? _vm.messageEmptyResults : _vm.messageNoMore))]) : _vm._e()])]) : _vm._e(), !_vm.infiniteScroll ? _c('div', {
+  }, [_vm._v(_vm._s(_vm.messageEmptyResults))]) : _vm._e()])]) : _vm._e(), !_vm.infiniteScroll ? _c('div', {
     staticClass: "paginator-data"
   }, [_vm._v(" Filas: " + _vm._s(_vm.pagination.total) + " | xPág: " + _vm._s(_vm.pagination.per_page) + " | Pág: " + _vm._s(_vm.pagination.current_page) + " | Seleccionados: " + _vm._s(_vm.selectedItems.length) + " ")]) : _vm._e(), !_vm.infiniteScroll ? _c('div', {
     staticClass: "crud-paginator"

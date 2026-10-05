@@ -727,15 +727,32 @@ export default /*#__PURE__*/ {
       }, 1);
     },
     infiniteHandler($state) {
+      // La carga inicial (y el refresco) ya piden la página 1. Si el scroll
+      // dispara antes de que esa respuesta llegue, pedir la página 2 pisa
+      // la página 1 vía fetchSeq y el listado queda incompleto.
+      if (!this.firstLoad || this.loading) {
+        const unwatch = this.$watch(
+          () => this.firstLoad && !this.loading,
+          (ready) => {
+            if (!ready) return;
+            unwatch();
+            this.infiniteHandler($state);
+          }
+        );
+        return;
+      }
 
-
-      const hasNextPage = (this.pagination.total > 0 || !this.firstLoad) && (!this.firstLoad || (this.pagination.current_page * this.pagination.per_page) <= this.pagination.total);
+      const hasNextPage = this.pagination.current_page < this.pagination.last_page;
       console.debug("Has next page", hasNextPage, this.pagination);
       if (hasNextPage) {
         const page = this.pagination.current_page + 1;
         this.fetchItems(page, true).then(() => {
           console.debug("infinite handler then");
-          $state.loaded();
+          if (this.pagination.current_page < this.pagination.last_page) {
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
         }).catch(error => {
           console.debug("infinite handler error", error);
           $state.error();
@@ -2231,10 +2248,10 @@ export default /*#__PURE__*/ {
         <div class="text-center">{{ messageLoading }}</div>
       </div>
       <div slot="no-more">
-        <div class="text-center" v-if="!loading">{{ messageNoMore }}</div>
+        <div class="text-center" v-if="!loading && items.length === 0">{{ messageNoMore }}</div>
       </div>
       <div slot="no-results">
-        <div class="text-center" v-if="!loading">{{ items.length == 0 ? messageEmptyResults : messageNoMore }}</div>
+        <div class="text-center" v-if="!loading && items.length === 0">{{ messageEmptyResults }}</div>
       </div>
     </infinite-loading>
     <div class="paginator-data" v-if="!infiniteScroll">
